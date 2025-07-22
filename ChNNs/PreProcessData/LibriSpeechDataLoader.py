@@ -93,28 +93,25 @@ class AudioStandardizer:
             )
 
     def process_file(self, input_path, source_identifier, output_root):
-        """处理单个音频文件（新增source_identifier区分数据源）"""
-        # 生成唯一标识（数据源+文件路径），避免不同源文件重名冲突
+        """处理单个音频文件（重点打印dev的处理日志）"""
+        # 生成唯一标识
         unique_id = f"{source_identifier}|{os.path.normpath(input_path)}"
         if unique_id in self.processed_files:
-            logging.info(f"[跳过] 已在日志中处理: {input_path}")
+            # 只打印dev的跳过日志（便于排查）
+            if "dev-clean" in source_identifier:
+                logging.info(f"[dev跳过] 已处理：{input_path}")
             return None
 
-        # 构建输出路径：在输出根目录下按数据源分类（避免路径冲突）
+        # 构建dev的输出路径（明确区分）
+        source_name = os.path.basename(source_identifier)  # 如"dev-clean"
         rel_path = os.path.relpath(input_path, start=source_identifier)
-        output_path = os.path.join(output_root, source_identifier.split(os.sep)[-1],
-                                   rel_path.replace('.flac', f'.{self.output_format}'))
+        output_path = os.path.join(output_root, source_name, rel_path.replace('.flac', f'.{self.output_format}'))
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-        # 读取并统一格式
+        # 读取并保存（重点打印dev的处理结果）
         try:
             y, _ = librosa.load(input_path, sr=self.target_sr, mono=True)
-        except Exception as e:
-            logging.error(f"[错误] 加载音频失败: {input_path} - {str(e)}")
-            return None
-
-        # 保存文件
-        try:
+            # 保存文件
             if self.output_format == 'wav':
                 sf.write(output_path, y, self.target_sr, subtype='PCM_16')
             else:
@@ -122,13 +119,18 @@ class AudioStandardizer:
 
             self.processed_files.add(unique_id)
             self.save_counter += 1
+            # 重点打印dev的成功日志
+            if "dev-clean" in source_identifier:
+                logging.info(f"[dev处理成功] 生成WAV：{output_path}")  # 确认dev的WAV是否生成
             if self.save_counter >= self.save_interval:
                 self.save_progress_json()
                 self.save_counter = 0
             return output_path
 
         except Exception as e:
-            logging.error(f"[错误] 保存音频失败: {output_path} - {str(e)}")
+            # 重点打印dev的错误日志
+            if "dev-clean" in source_identifier:
+                logging.error(f"[dev处理失败] {input_path} -> {output_path}：{str(e)}")
             return None
 
     def process_multiple_corpus(self, corpus_roots, output_root):
@@ -163,20 +165,22 @@ class AudioStandardizer:
 
         # 处理所有收集到的文件（主数据集+dev）
         logging.info(f"总收集到 {len(all_files)} 个FLAC文件（含所有数据源）")
+
+        dev_processed_count = 0  # dev成功处理的文件数
+
         with tqdm(total=len(all_files), desc="处理所有音频文件") as pbar:
             for input_path, source_identifier in all_files:
                 output_path = self.process_file(input_path, source_identifier, output_root)
                 if output_path:
                     file_paths.append(output_path)
                     files_processed += 1
-                    # 打印dev文件的处理结果（用于验证）
+                    # 统计dev处理数量
                     if "dev-clean" in source_identifier:
-                        logging.debug(f"已处理dev文件：{output_path}")  # 调试日志：确认dev文件被处理
+                        dev_processed_count += 1
                 pbar.update(1)
 
-        self.progress_report(files_processed, force_report=True)
-        self.save_progress_json()
-        logging.info(f"[完成] 共处理 {files_processed} 个文件（主数据集+dev）")
+        # 打印dev处理结果（必须>0）
+        logging.info(f"[处理汇总] 主数据集处理：{files_processed - dev_processed_count} 个；dev-clean处理：{dev_processed_count} 个")
         return file_paths
 
 
@@ -246,97 +250,209 @@ class MetadataGenerator:
 
     @classmethod
     def build_metadata(cls, corpus_roots, audio_root, audio_format='wav'):
+        """
+        生成合并元数据（主数据集+dev数据集）
+        :param corpus_roots: 数据源路径列表（主数据集+dev-clean）
+        :param audio_root: 处理后音频的根目录
+        :param audio_format: 处理后的音频格式（wav/flac）
+        :return: 合并后的元数据DataFrame
+        """
         all_metadata = []
         audio_root = os.path.normpath(audio_root)
+        logging.info(f"开始生成元数据（处理后音频根目录：{audio_root}）")
 
         for root in corpus_roots:
             root = os.path.normpath(root)
             if not os.path.exists(root):
-                logging.warning(f"数据源路径不存在，已跳过元数据生成：{root}")
+                logging.warning(f"数据源路径不存在，已跳过：{root}")
                 continue
 
-            # 提取dev数据源名称（如"dev-clean"）
-            source_name = os.path.basename(root)  # 关键：dev的source_name应为"dev-clean"
-            logging.info(f"开始生成数据源 {source_name} 的元数据（原始路径：{root}）")
+            # 1. 识别当前数据源类型（主数据集/ dev-clean）
+            source_name = os.path.basename(root)  # 主数据集为"LibriSpeech"，dev为"dev-clean"
+            logging.info(f"\n===== 开始处理数据源：{source_name}（路径：{root}）=====")
 
-            # 解析SPEAKERS.TXT（dev的在父目录）
-            speakers = cls.parse_speakers_file(os.path.dirname(root))  # dev的SPEAKERS在父目录
-            logging.info(f"数据源 {source_name} 解析到 {len(speakers)} 个说话人信息")
+            # 2. 精确指定SPEAKERS.TXT路径
+            if source_name == "dev-clean":
+                speakers_path = r"P:\PycharmProjects\pythonProject1\devDataset\LibriSpeech\SPEAKERS.txt"
+            else:
+                speakers_path = r"P:\PycharmProjects\pythonProject1\dataset\LibriSpeech\SPEAKERS.txt"
 
-            # 遍历dev的目录结构（子集→说话人→章节）
-            dev_meta_count = 0  # 统计dev生成的元数据数量
-            for subset_dir in os.listdir(root):
-                subset_path = os.path.join(root, subset_dir)
-                if not os.path.isdir(subset_path):
-                    continue
+            # 3. 解析说话人信息
+            speakers = cls.parse_speakers_file(speakers_path)
+            if not speakers:
+                logging.warning(f"数据源 {source_name} 未解析到任何说话人信息（可能影响元数据）")
 
-                for speaker_id in os.listdir(subset_path):
-                    speaker_path = os.path.join(subset_path, speaker_id)
-                    if not os.path.isdir(speaker_path):
+            # 4. 确定目录结构类型（主数据集有子集目录，dev-clean可能没有）
+            # 检查根目录下的一级子目录是否为子集（如train-clean-100）
+            try:
+                first_level_items = os.listdir(root)
+                has_subsets = any(os.path.isdir(os.path.join(root, item)) for item in first_level_items)
+            except Exception as e:
+                logging.error(f"无法读取目录结构: {root} - {str(e)}")
+                continue
+
+            # 5. 处理主数据集（有子集目录）
+            if has_subsets and source_name != "dev-clean":
+                subset_dirs = [d for d in first_level_items if os.path.isdir(os.path.join(root, d))]
+                logging.info(f"数据源 {source_name} 包含 {len(subset_dirs)} 个子集")
+
+                for subset in subset_dirs:
+                    subset_path = os.path.join(root, subset)
+                    logging.info(f"处理子集：{subset}（路径：{subset_path}）")
+
+                    # 遍历说话人目录
+                    speaker_dirs = [d for d in os.listdir(subset_path) if os.path.isdir(os.path.join(subset_path, d))]
+                    subset_speaker_count = len(speaker_dirs)
+                    subset_sample_count = 0
+
+                    for speaker_id in speaker_dirs:
+                        speaker_path = os.path.join(subset_path, speaker_id)
+
+                        # 遍历章节目录
+                        chapter_dirs = [d for d in os.listdir(speaker_path) if
+                                        os.path.isdir(os.path.join(speaker_path, d))]
+                        if not chapter_dirs:
+                            logging.warning(f"说话人 {speaker_id} 无章节目录，已跳过")
+                            continue
+
+                        for chapter_id in chapter_dirs:
+                            chapter_path = os.path.join(speaker_path, chapter_id)
+
+                            # 解析转录文件
+                            trans_file = os.path.join(chapter_path, f"{speaker_id}-{chapter_id}.trans.txt")
+                            if not os.path.exists(trans_file):
+                                logging.warning(f"[转录文件缺失] 预期路径：{trans_file}")
+                                continue
+
+                            transcripts = cls.parse_transcript(trans_file)
+                            if not transcripts:
+                                logging.warning(f"章节目录 {chapter_path} 无有效转录数据，已跳过")
+                                continue
+
+                            # 处理音频文件
+                            for utt_id, text in transcripts.items():
+                                # 构建处理后音频的路径（包含子集目录）
+                                audio_path = os.path.join(
+                                    audio_root,
+                                    source_name,  # 数据源目录（LibriSpeech）
+                                    subset,  # 子集目录（train-clean-100）
+                                    speaker_id,
+                                    chapter_id,
+                                    f"{utt_id}.{audio_format}"
+                                )
+
+                                if not os.path.exists(audio_path):
+                                    logging.warning(f"[样本缺失] 处理后音频不存在：{audio_path}")
+                                    continue
+
+                                try:
+                                    duration = librosa.get_duration(path=audio_path)
+                                except Exception as e:
+                                    logging.error(f"读取音频时长失败: {audio_path} - {str(e)}")
+                                    continue
+
+                                # 收集样本元数据
+                                speaker_info = speakers.get(speaker_id, {})
+                                all_metadata.append({
+                                    'source': source_name,
+                                    'subset': subset,  # 明确标记子集（train-clean-100）
+                                    'speaker_id': speaker_id,
+                                    'chapter_id': chapter_id,
+                                    'utt_id': utt_id,
+                                    'gender': speaker_info.get('SEX'),
+                                    'speaker_minutes': speaker_info.get('MINUTES'),
+                                    'speaker_name': speaker_info.get('NAME'),
+                                    'file_path': audio_path,
+                                    'duration': round(duration, 2),
+                                    'transcript': text
+                                })
+                                subset_sample_count += 1
+
+                    logging.info(f"子集 {subset} 处理完成：{subset_speaker_count} 个说话人，{subset_sample_count} 个样本")
+
+            # 6. 处理dev-clean（无子集目录，直接是说话人目录）
+            else:
+                logging.info(f"数据源 {source_name} 无子集目录，直接处理说话人")
+
+                # 遍历说话人目录
+                speaker_dirs = [d for d in os.listdir(root) if os.path.isdir(os.path.join(root, d))]
+                dev_speaker_count = len(speaker_dirs)
+                dev_sample_count = 0
+
+                for speaker_id in speaker_dirs:
+                    speaker_path = os.path.join(root, speaker_id)
+
+                    # 遍历章节目录
+                    chapter_dirs = [d for d in os.listdir(speaker_path) if os.path.isdir(os.path.join(speaker_path, d))]
+                    if not chapter_dirs:
+                        logging.warning(f"说话人 {speaker_id} 无章节目录，已跳过")
                         continue
 
-                    for chapter_id in os.listdir(speaker_path):
+                    for chapter_id in chapter_dirs:
                         chapter_path = os.path.join(speaker_path, chapter_id)
-                        if not os.path.isdir(chapter_path):
-                            continue
 
-                        # 查找转录文件
+                        # 解析转录文件
                         trans_file = os.path.join(chapter_path, f"{speaker_id}-{chapter_id}.trans.txt")
                         if not os.path.exists(trans_file):
-                            continue
-                        transcripts = cls.parse_transcript(trans_file)
-                        if not transcripts:
+                            logging.warning(f"[转录文件缺失] 预期路径：{trans_file}")
                             continue
 
-                        # 构建dev处理后的音频路径
+                        transcripts = cls.parse_transcript(trans_file)
+                        if not transcripts:
+                            logging.warning(f"章节目录 {chapter_path} 无有效转录数据，已跳过")
+                            continue
+
+                        # 处理音频文件
                         for utt_id, text in transcripts.items():
-                            # 处理后的路径：processed_data/dev-clean/子集/说话人/章节/utt_id.wav
+                            # 构建处理后音频的路径（无子集目录）
                             audio_path = os.path.join(
                                 audio_root,
-                                source_name,  # 用"dev-clean"作为子目录
-                                subset_dir,
+                                source_name,  # 数据源目录（dev-clean）
                                 speaker_id,
                                 chapter_id,
                                 f"{utt_id}.{audio_format}"
                             )
 
-                            # 检查文件是否存在（并打印日志确认）
                             if not os.path.exists(audio_path):
-                                logging.warning(f"[dev缺失] 处理后的音频不存在：{audio_path}（请检查音频处理是否成功）")
+                                logging.warning(f"[样本缺失] 处理后音频不存在：{audio_path}")
                                 continue
 
-                            # 读取时长（修复librosa参数警告）
                             try:
-                                duration = librosa.get_duration(path=audio_path)  # 替换filename为path
+                                duration = librosa.get_duration(path=audio_path)
                             except Exception as e:
-                                logging.error(f"[dev错误] 读取时长失败：{audio_path} - {e}")
+                                logging.error(f"读取音频时长失败: {audio_path} - {str(e)}")
                                 continue
 
-                            # 添加dev的元数据条目
+                            # 收集样本元数据
+                            speaker_info = speakers.get(speaker_id, {})
                             all_metadata.append({
-                                'source': source_name,  # 明确标记为"dev-clean"
+                                'source': source_name,
+                                'subset': 'dev-clean',  # 强制标记为dev-clean
                                 'speaker_id': speaker_id,
-                                'gender': speakers.get(speaker_id, {}).get('SEX'),
-                                'subset': 'dev-clean',  # 强制标记subset为dev-clean（确保后续能筛选）
-                                'minutes': speakers.get(speaker_id, {}).get('MINUTES'),
-                                'name': speakers.get(speaker_id, {}).get('NAME'),
-                                'folder_subset': subset_dir,
+                                'chapter_id': chapter_id,
+                                'utt_id': utt_id,
+                                'gender': speaker_info.get('SEX'),
+                                'speaker_minutes': speaker_info.get('MINUTES'),
+                                'speaker_name': speaker_info.get('NAME'),
                                 'file_path': audio_path,
-                                'duration': duration,
+                                'duration': round(duration, 2),
                                 'transcript': text
                             })
-                            dev_meta_count += 1
+                            dev_sample_count += 1
 
-            # 打印dev生成的元数据数量（必须>0才正常）
-            logging.info(f"数据源 {source_name} 生成 {dev_meta_count} 条元数据（若为0则无有效文件）")
+                logging.info(f"数据源 {source_name} 处理完成：{dev_speaker_count} 个说话人，{dev_sample_count} 个样本")
 
-        # 合并并打印总结果
-        df = pd.DataFrame(all_metadata)
-        logging.info(f"元数据生成：共合并 {len(df)} 条样本（主数据集+dev）")
-        # 打印数据源分布（验证是否有dev-clean）
-        if not df.empty:
-            logging.info(f"数据源分布：\n{df['source'].value_counts()}")
-        return df
+        # 7. 生成并返回DataFrame
+        if not all_metadata:
+            logging.warning("未生成任何元数据（所有样本均无效）")
+            return pd.DataFrame()
+
+        metadata_df = pd.DataFrame(all_metadata)
+        logging.info(f"元数据生成完成：共合并 {len(metadata_df)} 条样本（主数据集+dev数据集）")
+        # 打印数据源分布（验证是否包含dev-clean）
+        logging.info(f"数据源分布：\n{metadata_df['source'].value_counts()}")
+        logging.info(f"子集分布：\n{metadata_df['subset'].value_counts()}")
+        return metadata_df
 
     @staticmethod
     def analyze_metadata(df):
