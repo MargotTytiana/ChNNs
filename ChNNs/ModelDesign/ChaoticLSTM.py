@@ -47,6 +47,9 @@ class ChaoticLSTM(nn.Module):
             nn.MaxPool1d(2)  # 总降采样8倍
         )
 
+        # 添加适配层解决维度不匹配问题
+        self.adapt_layer = nn.Linear(128, input_dim)
+
         # 2. 混沌LSTM层: 处理时序特征
         self.lstm = nn.LSTM(
             input_size=input_dim,  # 输入特征维度
@@ -87,6 +90,8 @@ class ChaoticLSTM(nn.Module):
         - 对初始条件极度敏感，增强模型区分细微差异的能力
         - 非线性变换增强模型表达能力
         """
+        # 添加数值稳定性处理
+        x = torch.clamp(x, 1e-6, 1.0 - 1e-6)  # 防止NaN
         return self.chaos_weight * x * (1 - x)
 
     def forward(self, x):
@@ -109,8 +114,11 @@ class ChaoticLSTM(nn.Module):
         # 调整维度: (batch, channels, reduced_seq) -> (batch, reduced_seq, channels)
         features = features.permute(0, 2, 1)
 
+        # 使用适配层解决维度不匹配问题
+        features = self.adapt_layer(features)  # (batch, reduced_seq, input_dim)
+
         # 2. LSTM时序处理
-        # 输入: (batch, reduced_seq, 128) -> 输出: (batch, reduced_seq, hidden_dim)
+        # 输入: (batch, reduced_seq, input_dim) -> 输出: (batch, reduced_seq, hidden_dim)
         lstm_out, _ = self.lstm(features)
 
         # 3. 应用混沌动力学
@@ -143,7 +151,7 @@ class ChaoticLSTM(nn.Module):
 
         # 在初始值附近添加随机扰动
         self.chaos_weight.data = (
-                torch.randn(self.hidden_dim) * 0.1  # 随机扰动
+                torch.randn(self.hidden_dim, device=self.chaos_weight.device) * 0.1  # 随机扰动
                 + self.chaos_factor  # 基础混沌因子
         )
 
@@ -221,6 +229,9 @@ class ChaoticLSTM(nn.Module):
                 # 加权平方差 (重要性权重)
                 loss += (self.ewc_importance[name] * param_diff.pow(2)).sum()
 
+        # 添加数值稳定性处理
+        if torch.isnan(loss) or torch.isinf(loss):
+            return torch.zeros_like(loss)
         return loss
 
     def adjust_chaos_during_training(self, epoch, total_epochs):

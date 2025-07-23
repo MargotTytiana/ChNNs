@@ -1,173 +1,350 @@
-import librosa
+"""
+特征提取模块 - 从音频中提取MFCC及相关特征
+"""
+import os
 import numpy as np
-from scipy.fftpack import dct
+import librosa
+import pandas as pd
+import logging
+from tqdm import tqdm
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 
-class SpeakerFeatureExtractor:
-    def __init__(self, sample_rate=16000, n_fft=512, n_mels=40, n_mfcc=13,
-                 win_length=0.025, hop_length=0.01, pre_emphasis=0.97):
+# 配置日志
+def setup_logging(log_file='feature_extraction.log'):
+    logging.basicConfig(
+        filename=log_file,
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        filemode='w'
+    )
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(message)s')
+    console.setFormatter(formatter)
+    logging.getLogger('').addHandler(console)
+
+
+class FeatureExtractor:
+    def __init__(self, sample_rate=16000, n_mfcc=13, n_fft=512, hop_length=160,
+                 delta_order=2, feature_dir="features", max_duration=10.0):
         """
-        说话人特征提取器
+        初始化特征提取器
 
         参数:
-        sample_rate: 采样率 (Hz)
+        sample_rate: 音频采样率
+        n_mfcc: 提取的MFCC特征数量
         n_fft: FFT窗口大小
-        n_mels: 梅尔滤波器数量
-        n_mfcc: MFCC系数数量
-        win_length: 窗口长度 (秒)
-        hop_length: 帧移 (秒)
-        pre_emphasis: 预加重系数
+        hop_length: 帧移（样本数）
+        delta_order: 差分阶数（0-2）
+        feature_dir: 特征保存目录
+        max_duration: 最大音频时长（秒），超过此长度的音频将被裁剪
         """
         self.sample_rate = sample_rate
-        self.n_fft = n_fft
-        self.n_mels = n_mels
         self.n_mfcc = n_mfcc
-        self.win_length = int(win_length * sample_rate)  # 转换为样本数
-        self.hop_length = int(hop_length * sample_rate)  # 转换为样本数
-        self.pre_emphasis = pre_emphasis
+        self.n_fft = n_fft
+        self.hop_length = hop_length
+        self.delta_order = delta_order
+        self.feature_dir = feature_dir
+        self.max_duration = max_duration
 
-        # 创建梅尔滤波器组
-        self.mel_filters = librosa.filters.mel(
-            sr=sample_rate,
-            n_fft=n_fft,
-            n_mels=n_mels
-        )
+        # 确保特征目录存在
+        os.makedirs(feature_dir, exist_ok=True)
 
-    def pre_emphasize(self, audio):
-        """预加重处理：增强高频信息，平衡频谱"""
-        return np.append(audio[0], audio[1:] - self.pre_emphasis * audio[:-1])
+        # 计算帧率（帧/秒）
+        self.frame_rate = sample_rate / hop_length
 
-    def framing(self, audio):
-        """分帧：将音频信号分成短时帧"""
-        frames = []
-        n_frames = 1 + (len(audio) - self.win_length) // self.hop_length
+        logging.info(f"特征提取器初始化: MFCC={n_mfcc}, FFT={n_fft}, 帧移={hop_length}")
+        logging.info(f"最大音频时长: {max_duration}秒, 差分阶数: {delta_order}")
 
-        for i in range(n_frames):
-            start = i * self.hop_length
-            end = start + self.win_length
-            frame = audio[start:end]
-
-            # 应用汉明窗减少频谱泄漏
-            frame = frame * np.hamming(self.win_length)
-            frames.append(frame)
-
-        return np.array(frames)
-
-    def compute_power_spectrum(self, frames):
-        """计算功率谱：获取每帧的频率能量分布"""
-        mag_frames = np.absolute(np.fft.rfft(frames, self.n_fft))
-        power_frames = (1.0 / self.n_fft) * (mag_frames ** 2)
-        return power_frames
-
-    def apply_mel_filterbank(self, power_spectrum):
-        """应用梅尔滤波器组：模拟人耳听觉特性"""
-        mel_energy = np.dot(power_spectrum, self.mel_filters.T)
-
-        # 避免log(0)错误
-        mel_energy = np.where(mel_energy == 0, np.finfo(float).eps, mel_energy)
-        return np.log(mel_energy)
-
-    def compute_mfcc(self, mel_energy):
-        """计算MFCC：提取倒谱系数"""
-        # 使用DCT获得倒谱系数
-        mfcc = dct(mel_energy, axis=1, norm='ortho')[:, :self.n_mfcc]
-
-        # 提升高频MFCC系数（倒谱提升）
-        n_coeff = mfcc.shape[1]
-        n = np.arange(n_coeff)
-        cep_lifter = 1 + (22 / 2) * np.sin(np.pi * n / 22)
-        return mfcc * cep_lifter
-
-    def compute_delta(self, features, N=2):
-        """计算动态特征：捕捉特征随时间的变化"""
-        deltas = np.zeros_like(features)
-        padding = np.zeros((N, features.shape[1]))
-        padded = np.vstack((padding, features, padding))
-
-        for t in range(features.shape[0]):
-            # 使用回归方法计算一阶导数
-            numerator = 0
-            for n in range(1, N + 1):
-                numerator += n * (padded[t + N + n] - padded[t + N - n])
-            deltas[t] = numerator / (2 * sum([n ** 2 for n in range(1, N + 1)]))
-
-        return deltas
-
-    def extract_features(self, audio):
+    def extract_features(self, audio_path):
         """
-        完整的特征提取流程
-        返回: (静态MFCC, Delta, Delta-Delta) 的拼接特征
+        从单个音频文件提取特征
+
+        返回:
+        features: 形状为 (n_features, n_frames) 的NumPy数组
         """
-        # 1. 预加重
-        emphasized = self.pre_emphasize(audio)
+        try:
+            # 加载音频（确保采样率匹配）
+            y, sr = librosa.load(audio_path, sr=self.sample_rate, mono=True)
 
-        # 2. 分帧加窗
-        frames = self.framing(emphasized)
+            # 裁剪过长的音频
+            if len(y) > self.max_duration * self.sample_rate:
+                y = y[:int(self.max_duration * self.sample_rate)]
+                logging.debug(f"裁剪音频: {audio_path}")
 
-        # 3. 计算功率谱
-        power_spectrum = self.compute_power_spectrum(frames)
+            # 提取MFCC特征
+            mfcc = librosa.feature.mfcc(
+                y=y,
+                sr=sr,
+                n_mfcc=self.n_mfcc,
+                n_fft=self.n_fft,
+                hop_length=self.hop_length,
+                n_mels=26
+            )
 
-        # 4. 应用梅尔滤波器组
-        mel_energy = self.apply_mel_filterbank(power_spectrum)
+            # 计算动态特征（差分）
+            features = [mfcc]
 
-        # 5. 计算静态MFCC
-        mfcc = self.compute_mfcc(mel_energy)
+            if self.delta_order >= 1:
+                delta = librosa.feature.delta(mfcc, order=1)
+                features.append(delta)
 
-        # 6. 计算动态特征
-        delta = self.compute_delta(mfcc)
-        delta_delta = self.compute_delta(delta)
+            if self.delta_order >= 2:
+                delta2 = librosa.feature.delta(mfcc, order=2)
+                features.append(delta2)
 
-        # 7. 特征归一化 (按帧归一化)
-        normalized_mfcc = (mfcc - np.mean(mfcc, axis=0)) / (np.std(mfcc, axis=0) + 1e-8)
-        normalized_delta = (delta - np.mean(delta, axis=0)) / (np.std(delta, axis=0) + 1e-8)
-        normalized_delta_delta = (delta_delta - np.mean(delta_delta, axis=0)) / (np.std(delta_delta, axis=0) + 1e-8)
+            # 合并所有特征
+            features = np.vstack(features)
 
-        # 8. 特征拼接
-        features = np.hstack((normalized_mfcc, normalized_delta, normalized_delta_delta))
+            return features
 
-        return features
+        except Exception as e:
+            logging.error(f"提取特征失败: {audio_path} - {str(e)}")
+            return None
 
-    def visualize_features(self, audio, features, title="MFCC特征"):
-        """可视化特征提取过程"""
+    def process_dataset(self, metadata_path, output_csv="feature_metadata.csv"):
+        """
+        处理整个数据集的特征提取
+
+        参数:
+        metadata_path: 元数据CSV文件路径
+        output_csv: 输出特征元数据文件名
+        """
+        # 读取元数据
+        metadata = pd.read_csv(metadata_path)
+        logging.info(f"读取元数据: 共 {len(metadata)} 条记录")
+
+        # 准备特征元数据
+        feature_metadata = []
+        skipped_files = []
+
+        # 进度条
+        with tqdm(total=len(metadata), desc="提取特征") as pbar:
+            for idx, row in metadata.iterrows():
+                audio_path = row['file_path']
+
+                # 提取特征
+                features = self.extract_features(audio_path)
+
+                if features is not None:
+                    # 生成特征保存路径
+                    rel_path = os.path.relpath(audio_path, start=os.path.dirname(metadata_path))
+                    feature_path = os.path.join(
+                        self.feature_dir,
+                        os.path.splitext(rel_path)[0] + '.npy'
+                    )
+                    os.makedirs(os.path.dirname(feature_path), exist_ok=True)
+
+                    # 保存特征
+                    np.save(feature_path, features)
+
+                    # 更新元数据
+                    new_row = row.copy()
+                    new_row['feature_path'] = feature_path
+                    new_row['n_frames'] = features.shape[1]
+                    new_row['duration'] = features.shape[1] / self.frame_rate
+                    feature_metadata.append(new_row)
+                else:
+                    skipped_files.append(audio_path)
+
+                pbar.update(1)
+
+        # 创建特征元数据DataFrame
+        feature_df = pd.DataFrame(feature_metadata)
+
+        # 保存特征元数据
+        feature_df.to_csv(os.path.join(self.feature_dir, output_csv), index=False)
+        logging.info(f"特征元数据已保存: 共 {len(feature_df)} 条记录")
+
+        if skipped_files:
+            logging.warning(f"跳过 {len(skipped_files)} 个文件，详情见日志")
+            with open(os.path.join(self.feature_dir, "skipped_files.txt"), 'w') as f:
+                f.write("\n".join(skipped_files))
+
+        return feature_df
+
+    def normalize_features(self, feature_metadata, output_csv="normalized_feature_metadata.csv"):
+        """
+        特征归一化（使用整个数据集的统计信息）
+
+        参数:
+        feature_metadata: 特征元数据DataFrame或文件路径
+        output_csv: 输出归一化特征元数据文件名
+        """
+        if isinstance(feature_metadata, str):
+            feature_metadata = pd.read_csv(feature_metadata)
+
+        # 收集所有特征用于计算统计信息
+        all_features = []
+        logging.info("收集特征用于归一化...")
+
+        for feature_path in tqdm(feature_metadata['feature_path'], desc="加载特征"):
+            features = np.load(feature_path)
+            all_features.append(features.T)  # 转置为 (时间帧, 特征)
+
+        # 合并所有特征
+        all_features = np.vstack(all_features)
+        logging.info(f"合并特征形状: {all_features.shape}")
+
+        # 计算均值和标准差
+        scaler = StandardScaler()
+        scaler.fit(all_features)
+
+        # 保存归一化器
+        import joblib
+        scaler_path = os.path.join(self.feature_dir, "feature_scaler.joblib")
+        joblib.dump(scaler, scaler_path)
+        logging.info(f"特征归一化器已保存: {scaler_path}")
+
+        # 应用归一化并保存新特征
+        normalized_metadata = []
+
+        for idx, row in tqdm(feature_metadata.iterrows(), total=len(feature_metadata), desc="归一化特征"):
+            features = np.load(row['feature_path'])
+
+            # 归一化 (转置->归一化->转置回原始形状)
+            normalized = scaler.transform(features.T).T
+
+            # 保存归一化特征
+            base_path = os.path.splitext(row['feature_path'])[0]
+            normalized_path = base_path + '_normalized.npy'
+            np.save(normalized_path, normalized)
+
+            # 更新元数据
+            new_row = row.copy()
+            new_row['feature_path'] = normalized_path
+            normalized_metadata.append(new_row)
+
+        # 创建归一化特征元数据
+        normalized_df = pd.DataFrame(normalized_metadata)
+        normalized_df.to_csv(os.path.join(self.feature_dir, output_csv), index=False)
+        logging.info(f"归一化特征元数据已保存: {output_csv}")
+
+        return normalized_df
+
+    def visualize_features(self, feature_path, speaker_id, save_dir="feature_plots"):
+        """
+        可视化特征
+
+        参数:
+        feature_path: 特征文件路径
+        speaker_id: 说话人ID（用于标题）
+        save_dir: 保存图像的目录
+        """
+
+        # 设置中文字体（修改部分）
+        import matplotlib.font_manager as fm
+
+        # 尝试查找系统中可用的中文字体
+        chinese_fonts = ['SimHei', 'WenQuanYi Micro Hei', 'Heiti TC', 'Microsoft YaHei']
+        font_path = None
+
+        for font in chinese_fonts:
+            try:
+                font_path = fm.findfont(font, fallback_to_default=False)
+                if font_path:
+                    plt.rcParams['font.family'] = font
+                    break
+            except:
+                continue
+
+        # 如果没有找到中文字体，则使用默认字体，并添加警告
+        if font_path is None:
+            logging.warning("未找到中文字体，图表中的中文可能无法正确显示")
+            plt.rcParams['font.family'] = ['sans-serif']
+            # 添加字体回退选项
+            plt.rcParams['font.sans-serif'] = ['SimHei', 'WenQuanYi Micro Hei', 'Heiti TC'] + plt.rcParams[
+                'font.sans-serif']
+
+        # 确保负号正确显示
+        plt.rcParams['axes.unicode_minus'] = False
+
+
+        os.makedirs(save_dir, exist_ok=True)
+
+        # 加载特征
+        features = np.load(feature_path)
+
+        # 创建图像
         plt.figure(figsize=(15, 10))
 
-        # 原始音频波形
-        plt.subplot(3, 1, 1)
-        plt.plot(np.linspace(0, len(audio) / self.sample_rate, len(audio)), audio)
-        plt.title("原始音频波形")
-        plt.xlabel("时间 (秒)")
-        plt.ylabel("振幅")
-
-        # 频谱图
-        plt.subplot(3, 1, 2)
-        D = librosa.amplitude_to_db(np.abs(librosa.stft(audio)), ref=np.max)
-        librosa.display.specshow(D, sr=self.sample_rate, x_axis='time', y_axis='linear')
-        plt.colorbar(format='%+2.0f dB')
-        plt.title("频谱图")
-
         # MFCC特征
-        plt.subplot(3, 1, 3)
-        librosa.display.specshow(features.T, sr=self.sample_rate, x_axis='time')
-        plt.colorbar()
-        plt.title(title)
+        plt.subplot(3, 1, 1)
+        librosa.display.specshow(
+            features[:self.n_mfcc],
+            x_axis='time',
+            sr=self.sample_rate,
+            hop_length=self.hop_length
+        )
+        plt.colorbar(format='%+2.0f dB')
+        plt.title(f'MFCC特征 - 说话人 {speaker_id}')
+
+        # Delta特征
+        if self.delta_order >= 1:
+            plt.subplot(3, 1, 2)
+            librosa.display.specshow(
+                features[self.n_mfcc:2 * self.n_mfcc],
+                x_axis='time',
+                sr=self.sample_rate,
+                hop_length=self.hop_length
+            )
+            plt.colorbar(format='%+2.0f dB')
+            plt.title(f'Delta特征 - 说话人 {speaker_id}')
+
+        # Delta-Delta特征
+        if self.delta_order >= 2:
+            plt.subplot(3, 1, 3)
+            librosa.display.specshow(
+                features[2 * self.n_mfcc:],
+                x_axis='time',
+                sr=self.sample_rate,
+                hop_length=self.hop_length
+            )
+            plt.colorbar(format='%+2.0f dB')
+            plt.title(f'Delta-Delta特征 - 说话人 {speaker_id}')
+
+        # 保存图像
+        filename = os.path.basename(feature_path).replace('.npy', '.png')
+        save_path = os.path.join(save_dir, filename)
         plt.tight_layout()
-        plt.show()
+        plt.savefig(save_path)
+        plt.close()
+        logging.info(f"特征可视化已保存: {save_path}")
 
 
 # 使用示例
 if __name__ == "__main__":
-    # 加载示例音频
-    audio_path = "path/to/your/audio.wav"  # 替换为实际路径
-    audio, sr = librosa.load(audio_path, sr=16000)
+    # 初始化日志
+    setup_logging()
 
-    # 初始化特征提取器
-    extractor = SpeakerFeatureExtractor(sample_rate=sr)
+    # 配置路径
+    METADATA_PATH = "P:/PycharmProjects/pythonProject1/processed_data/metadata_test.csv"  # 替换为实际路径
+    FEATURE_DIR = "extracted_features"
 
-    # 提取特征
-    features = extractor.extract_features(audio)
+    # 创建特征提取器
+    extractor = FeatureExtractor(
+        n_mfcc=13,
+        hop_length=160,  # 10ms帧移 (16000Hz * 0.01s = 160)
+        n_fft=512,  # 32ms窗口 (16000Hz * 0.032s ≈ 512)
+        delta_order=2,
+        feature_dir=FEATURE_DIR,
+        max_duration=10.0  # 裁剪超过10秒的音频
+    )
 
-    print(f"提取的特征形状: {features.shape} (帧数 x 特征维度)")
+    # 处理数据集
+    feature_metadata = extractor.process_dataset(METADATA_PATH)
 
-    # 可视化特征
-    extractor.visualize_features(audio, features[:, :extractor.n_mfcc], "静态MFCC特征")
+    # 特征归一化
+    normalized_metadata = extractor.normalize_features(feature_metadata)
+
+    # 可视化示例特征
+    sample_row = normalized_metadata.iloc[0]
+    extractor.visualize_features(
+        sample_row['feature_path'],
+        sample_row['speaker_id'],
+        save_dir=os.path.join(FEATURE_DIR, "visualizations")
+    )
+
+    logging.info("特征提取完成！")
