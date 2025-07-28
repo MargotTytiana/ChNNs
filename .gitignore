@@ -1,0 +1,39 @@
+# =========================
+# Project-specific ignores
+# =========================
+
+# Root-level data folders
+dataset/
+devDataset/
+processed_data/
+testDataset/
+backgroundNoise/
+
+# Subdirectory data folders
+ChNNs/FeatureExtraction/extracted_features/
+ChNNs/archive/
+
+# =========================
+# Python-specific ignores
+# =========================
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE/editor files
+.idea/
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db

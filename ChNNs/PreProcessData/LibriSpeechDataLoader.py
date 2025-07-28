@@ -70,27 +70,30 @@ class AudioStandardizer:
         return process.memory_info().rss / 1024 / 1024  # MB
 
     def progress_report(self, files_processed, force_report=False):
-        """进度报告函数"""
-        current_time = time.time()
-        elapsed = current_time - self.start_time
+        """进度报告函数 - 添加异常处理"""
+        try:
+            current_time = time.time()
+            elapsed = current_time - self.start_time
 
-        if force_report or (current_time - self.last_time_report > 3600):
-            mem_usage = self.get_memory_usage()
-            logging.info(
-                f"[进度报告] 运行时间: {elapsed / 60:.2f}分钟 | "
-                f"已处理文件夹: {self.folder_count} | "
-                f"总文件数: {files_processed} | "
-                f"内存使用: {mem_usage:.2f}MB"
-            )
-            self.last_time_report = current_time
+            if force_report or (current_time - self.last_time_report > 3600):
+                mem_usage = self.get_memory_usage()
+                logging.info(
+                    f"[进度报告] 运行时间: {elapsed / 60:.2f}分钟 | "
+                    f"已处理文件夹: {self.folder_count} | "
+                    f"总文件数: {files_processed} | "
+                    f"内存使用: {mem_usage:.2f}MB"
+                )
+                self.last_time_report = current_time
 
-        if self.folder_count % 50 == 0 and self.folder_count > 0:
-            mem_usage = self.get_memory_usage()
-            logging.info(
-                f"[文件夹里程碑] 已处理 {self.folder_count} 个文件夹 | "
-                f"当前文件数: {files_processed} | "
-                f"内存使用: {mem_usage:.2f}MB"
-            )
+            if self.folder_count % 50 == 0 and self.folder_count > 0:
+                mem_usage = self.get_memory_usage()
+                logging.info(
+                    f"[文件夹里程碑] 已处理 {self.folder_count} 个文件夹 | "
+                    f"当前文件数: {files_processed} | "
+                    f"内存使用: {mem_usage:.2f}MB"
+                )
+        except Exception as e:
+            logging.error(f"进度报告出错: {str(e)}")
 
     def process_file(self, input_path, source_identifier, output_root):
         """处理单个音频文件（重点打印dev的处理日志）"""
@@ -271,11 +274,17 @@ class MetadataGenerator:
             source_name = os.path.basename(root)  # 主数据集为"LibriSpeech"，dev为"dev-clean"
             logging.info(f"\n===== 开始处理数据源：{source_name}（路径：{root}）=====")
 
-            # 2. 精确指定SPEAKERS.TXT路径
-            if source_name == "dev-clean":
-                speakers_path = r"P:\PycharmProjects\pythonProject1\devDataset\LibriSpeech\SPEAKERS.txt"
-            else:
-                speakers_path = r"P:\PycharmProjects\pythonProject1\dataset\LibriSpeech\SPEAKERS.txt"
+            # 2. 自动定位SPEAKERS.TXT文件（移除硬编码路径）
+            # 尝试在数据源根目录的父目录中查找
+            parent_dir = os.path.dirname(root)
+            speakers_path = os.path.join(parent_dir, "SPEAKERS.TXT")
+
+            # 如果父目录中不存在，尝试在数据源根目录查找
+            if not os.path.exists(speakers_path):
+                speakers_path = os.path.join(root, "SPEAKERS.TXT")
+                if not os.path.exists(speakers_path):
+                    logging.warning(f"在数据源 {source_name} 的路径中未找到SPEAKERS.TXT文件: {parent_dir} 和 {root}")
+                    speakers = {}
 
             # 3. 解析说话人信息
             speakers = cls.parse_speakers_file(speakers_path)
@@ -547,10 +556,9 @@ class AudioAugmenter:
     def __init__(self, sample_rate=16000, background_paths=None):
         self.sample_rate = sample_rate
 
-        # 背景噪声路径（默认值仅为示例，需替换为实际路径）
+        # 背景噪声路径
         if background_paths is None:
-            background_paths = ["backgroundNoise/musan/noise/free-sound"]
-            logging.warning("使用默认背景噪声路径，建议替换为实际路径")
+            background_paths = ["P:/PycharmProjects/pythonProject1/backgroundNoise/musan/noise/free-sound"]
 
         self.transform = Compose([
             AddBackgroundNoise(
@@ -588,6 +596,21 @@ class LibriSpeechDataset(Dataset):
             augment: 是否启用数据增强
             background_paths: 背景噪声路径列表
         """
+        # if 'audio_length_samples' in metadata.columns:
+        #     # 过滤样本数 >= chunk_size 的音频
+        #     valid_mask = metadata['audio_length_samples'] >= chunk_size
+        #     self.metadata = metadata[valid_mask].reset_index(drop=True)
+        #
+        #     if len(self.metadata) == 0:
+        #         # 若所有音频都短，强制补零（不抛出错误）
+        #         self.metadata = metadata
+        #         self.force_pad = True
+        #         logging.warning(f"所有音频均短于 {chunk_size} 样本，将启用补零")
+        #     else:
+        #         self.force_pad = False
+        # else:
+        #     raise KeyError("缺少 'audio_length_samples' 列，请先转换样本数")
+
         # 筛选子集（支持多源数据）
         self.metadata = metadata.copy()
         if subset is not None:
@@ -614,13 +637,14 @@ class LibriSpeechDataset(Dataset):
             logging.error(f"加载音频失败: {row['file_path']} - {str(e)}")
             audio = np.zeros(self.chunk_size if self.chunk_size else 16000)  # 静音替代
 
-        # 随机裁剪或补零
-        if self.chunk_size is not None:
-            if len(audio) >= self.chunk_size:
-                start = np.random.randint(0, len(audio) - self.chunk_size)
-                audio = audio[start:start + self.chunk_size]
-            else:
-                audio = np.pad(audio, (0, self.chunk_size - len(audio)), 'constant')
+        # 截取或补零
+        if len(audio) < self.chunk_size:
+            # 短音频：补零至 chunk_size
+            audio = np.pad(audio, (0, self.chunk_size - len(audio)), mode='constant')
+        else:
+            # 长音频：随机截取 chunk_size 样本
+            start = np.random.randint(0, len(audio) - self.chunk_size)
+            audio = audio[start:start + self.chunk_size]
 
         # 数据增强
         if self.augment and self.augmenter:

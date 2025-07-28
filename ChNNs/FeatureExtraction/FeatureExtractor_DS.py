@@ -168,6 +168,7 @@ class FeatureExtractor:
     def normalize_features(self, feature_metadata, output_csv="normalized_feature_metadata.csv"):
         """
         特征归一化（使用整个数据集的统计信息）
+        使用部分拟合(partial_fit)避免内存溢出
 
         参数:
         feature_metadata: 特征元数据DataFrame或文件路径
@@ -176,21 +177,14 @@ class FeatureExtractor:
         if isinstance(feature_metadata, str):
             feature_metadata = pd.read_csv(feature_metadata)
 
-        # 收集所有特征用于计算统计信息
-        all_features = []
-        logging.info("收集特征用于归一化...")
-
-        for feature_path in tqdm(feature_metadata['feature_path'], desc="加载特征"):
-            features = np.load(feature_path)
-            all_features.append(features.T)  # 转置为 (时间帧, 特征)
-
-        # 合并所有特征
-        all_features = np.vstack(all_features)
-        logging.info(f"合并特征形状: {all_features.shape}")
-
-        # 计算均值和标准差
+        # 使用部分拟合计算统计信息，避免内存溢出
         scaler = StandardScaler()
-        scaler.fit(all_features)
+        logging.info("使用部分拟合计算归一化统计信息...")
+
+        # 分批次处理特征数据
+        for feature_path in tqdm(feature_metadata['feature_path'], desc="计算归一化参数"):
+            features = np.load(feature_path)
+            scaler.partial_fit(features.T)  # 转置为 (时间帧, 特征)
 
         # 保存归一化器
         import joblib
@@ -226,41 +220,16 @@ class FeatureExtractor:
 
     def visualize_features(self, feature_path, speaker_id, save_dir="feature_plots"):
         """
-        可视化特征
+        可视化特征 - 简化字体处理
 
         参数:
         feature_path: 特征文件路径
         speaker_id: 说话人ID（用于标题）
         save_dir: 保存图像的目录
         """
-
-        # 设置中文字体（修改部分）
-        import matplotlib.font_manager as fm
-
-        # 尝试查找系统中可用的中文字体
-        chinese_fonts = ['SimHei', 'WenQuanYi Micro Hei', 'Heiti TC', 'Microsoft YaHei']
-        font_path = None
-
-        for font in chinese_fonts:
-            try:
-                font_path = fm.findfont(font, fallback_to_default=False)
-                if font_path:
-                    plt.rcParams['font.family'] = font
-                    break
-            except:
-                continue
-
-        # 如果没有找到中文字体，则使用默认字体，并添加警告
-        if font_path is None:
-            logging.warning("未找到中文字体，图表中的中文可能无法正确显示")
-            plt.rcParams['font.family'] = ['sans-serif']
-            # 添加字体回退选项
-            plt.rcParams['font.sans-serif'] = ['SimHei', 'WenQuanYi Micro Hei', 'Heiti TC'] + plt.rcParams[
-                'font.sans-serif']
-
-        # 确保负号正确显示
-        plt.rcParams['axes.unicode_minus'] = False
-
+        # 简化字体处理
+        plt.rcParams['font.family'] = 'DejaVu Sans'  # 使用通用字体
+        plt.rcParams['axes.unicode_minus'] = False  # 确保负号正确显示
 
         os.makedirs(save_dir, exist_ok=True)
 

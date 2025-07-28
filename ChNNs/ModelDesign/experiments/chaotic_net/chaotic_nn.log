@@ -1,0 +1,26 @@
+2025-07-22 16:21:06,340 - INFO - \u4f7f\u7528\u8bbe\u5907: cpu
+2025-07-22 16:21:06,519 - INFO - \u6570\u636e\u96c6\u521d\u59cb\u5316: \u5171 10183 \u4e2a\u6837\u672c, 131 \u4e2a\u8bf4\u8bdd\u4eba
+2025-07-22 16:21:06,520 - INFO - \u6570\u636e\u96c6\u521d\u59cb\u5316: \u5171 2546 \u4e2a\u6837\u672c, 131 \u4e2a\u8bf4\u8bdd\u4eba
+2025-07-22 16:21:06,676 - INFO - \u521d\u59cb\u5316\u6df7\u6c8c\u795e\u7ecf\u7f51\u7edc: \u8f93\u5165\u7ef4\u5ea6=39, \u8f93\u51fa\u7ef4\u5ea6=131
+2025-07-22 16:21:06,678 - INFO - \u9690\u85cf\u5c42\u7ed3\u6784: [512, 256, 128]
+2025-07-22 16:21:06,679 - INFO - \u6df7\u6c8c\u53c2\u6570r: [3.9, 3.9, 3.9]
+2025-07-22 16:21:18,737 - INFO - \u8bad\u7ec3\u5668\u521d\u59cb\u5316: \u8bbe\u5907=cpu, \u4fdd\u5b58\u76ee\u5f55=chaotic_model_results
+2025-07-22 16:21:18,738 - INFO - \u5f00\u59cb\u8bad\u7ec3\uff0c\u5171 50 \u4e2aepochs
+2025-07-22 16:26:08,610 - INFO - Epoch 1/50 | \u8bad\u7ec3\u635f\u5931: 5.0637 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.96% | \u9a8c\u8bc1\u635f\u5931: 5.0029 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.79%
+2025-07-22 16:26:08,784 - INFO - \u4fdd\u5b58\u6700\u4f73\u6a21\u578b\uff0c\u9a8c\u8bc1\u51c6\u786e\u7387: 0.79%
+2025-07-22 16:30:41,845 - INFO - Epoch 2/50 | \u8bad\u7ec3\u635f\u5931: 4.9856 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.89% | \u9a8c\u8bc1\u635f\u5931: 5.0023 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.71%
+2025-07-22 16:35:29,088 - INFO - Epoch 3/50 | \u8bad\u7ec3\u635f\u5931: 4.9794 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.68% | \u9a8c\u8bc1\u635f\u5931: 5.0038 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.63%
+2025-07-22 16:40:29,653 - INFO - Epoch 4/50 | \u8bad\u7ec3\u635f\u5931: 4.9571 | \u8bad\u7ec3\u51c6\u786e\u7387: 1.06% | \u9a8c\u8bc1\u635f\u5931: 4.9662 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.94%
+2025-07-22 16:40:29,746 - INFO - \u4fdd\u5b58\u6700\u4f73\u6a21\u578b\uff0c\u9a8c\u8bc1\u51c6\u786e\u7387: 0.94%
+2025-07-22 16:44:47,852 - INFO - Epoch 5/50 | \u8bad\u7ec3\u635f\u5931: 4.9494 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.78% | \u9a8c\u8bc1\u635f\u5931: 4.9749 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.59%
+2025-07-22 16:49:04,577 - INFO - Epoch 6/50 | \u8bad\u7ec3\u635f\u5931: 4.9323 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.81% | \u9a8c\u8bc1\u635f\u5931: 4.9584 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.94%
+2025-07-22 16:53:44,876 - INFO - Epoch 7/50 | \u8bad\u7ec3\u635f\u5931: 4.9215 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.86% | \u9a8c\u8bc1\u635f\u5931: 4.9610 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.67%
+2025-07-22 16:58:12,193 - INFO - Epoch 8/50 | \u8bad\u7ec3\u635f\u5931: 4.9128 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.87% | \u9a8c\u8bc1\u635f\u5931: 4.9351 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.63%
+2025-07-22 17:02:39,810 - INFO - Epoch 9/50 | \u8bad\u7ec3\u635f\u5931: 4.9010 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.87% | \u9a8c\u8bc1\u635f\u5931: 4.9467 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.71%
+2025-07-22 17:07:11,634 - INFO - Epoch 10/50 | \u8bad\u7ec3\u635f\u5931: 4.8893 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.99% | \u9a8c\u8bc1\u635f\u5931: 4.9289 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.94%
+2025-07-22 17:11:31,504 - INFO - Epoch 11/50 | \u8bad\u7ec3\u635f\u5931: 4.8761 | \u8bad\u7ec3\u51c6\u786e\u7387: 1.08% | \u9a8c\u8bc1\u635f\u5931: 4.9255 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.67%
+2025-07-22 17:15:46,944 - INFO - Epoch 12/50 | \u8bad\u7ec3\u635f\u5931: 4.8729 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.86% | \u9a8c\u8bc1\u635f\u5931: 4.9284 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.59%
+2025-07-22 17:20:36,633 - INFO - Epoch 13/50 | \u8bad\u7ec3\u635f\u5931: 4.8659 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.98% | \u9a8c\u8bc1\u635f\u5931: 4.9231 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.63%
+2025-07-22 17:24:46,203 - INFO - Epoch 14/50 | \u8bad\u7ec3\u635f\u5931: 4.8658 | \u8bad\u7ec3\u51c6\u786e\u7387: 0.72% | \u9a8c\u8bc1\u635f\u5931: 4.9211 | \u9a8c\u8bc1\u51c6\u786e\u7387: 0.71%
+2025-07-22 17:24:46,207 - INFO - \u65e9\u505c\u89e6\u53d1\uff0c\u9a8c\u8bc1\u51c6\u786e\u7387\u8fde\u7eed 10 \u4e2aepoch\u672a\u63d0\u5347
+2025-07-22 17:24:46,302 - INFO - \u4fdd\u5b58\u6700\u7ec8\u6a21\u578b: chaotic_model_results\final_model.pth

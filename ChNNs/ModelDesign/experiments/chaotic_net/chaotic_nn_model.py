@@ -1,581 +1,540 @@
-"""
-混沌神经网络模型 - 用于说话人识别
-基于混沌动力学原理设计，增强模型对说话人特征的捕捉能力
-"""
-
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+import torch.optim as optim
+from torch.utils.data import DataLoader, Subset
+from torch.cuda.amp import GradScaler, autocast
 import numpy as np
+import pandas as pd
+import time
+import os
 import logging
-from sklearn.model_selection import train_test_split
-from torch.utils.data import Dataset, DataLoader
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-import os
-import json
-import pandas as pd
+import torch.nn.functional as F
+import copy
+import random
 
 
-# 配置日志
-def setup_logging(log_file='chaotic_nn.log'):
-    logging.basicConfig(
-        filename=log_file,
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        filemode='w'
-    )
-    console = logging.StreamHandler()
-    console.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s - %(message)s')
-    console.setFormatter(formatter)
-    logging.getLogger('').addHandler(console)
+# # 导入自定义模块
+# from ChaoticLSTM import ChaoticLSTM
+# from EWC import ElasticWeightConsolidation
+from ChNNs.PreProcessData.LibriSpeechDataLoader import LibriSpeechDataset, setup_logging
+
+# 设置日志
+setup_logging('training.log')
+logger = logging.getLogger(__name__)
 
 
-class ChaoticActivation(nn.Module):
+class ChaoticTrainer:
     """
-    混沌激活函数 - 基于Logistic映射
-    数学原理：x_{n+1} = r * x_n * (1 - x_n)
-    其中r是控制参数，当r≈4时系统呈现混沌行为
-    """
+    混沌神经网络训练框架
+    支持持续学习和说话人识别任务
 
-    def __init__(self, r=3.9, iterations=3, learnable_r=True):
-        """
-        r: Logistic映射参数
-        iterations: 混沌迭代次数
-        learnable_r: 是否允许r作为可学习参数
-        """
-        super(ChaoticActivation, self).__init__()
-        self.iterations = iterations
-
-        # 初始化r参数
-        if learnable_r:
-            self.r = nn.Parameter(torch.tensor(float(r)))
-        else:
-            self.r = r
-
-        # 初始化固定噪声（增强混沌特性）
-        self.noise_scale = 0.01
-
-    def forward(self, x):
-        """
-        前向传播：应用混沌变换
-
-        参数:
-        x: 输入张量 (batch_size, features)
-
-        返回:
-        混沌激活后的张量
-        """
-        # 将输入归一化到(0,1)区间
-        x_norm = torch.sigmoid(x)
-
-        # 应用Logistic映射
-        for _ in range(self.iterations):
-            # 添加少量噪声增强混沌特性
-            noise = self.noise_scale * torch.randn_like(x_norm)
-            x_norm = self.r * (x_norm + noise) * (1 - x_norm)
-
-        # 重新缩放回(-1,1)区间
-        return 2 * x_norm - 1
-
-    def lyapunov_exponent(self, num_points=1000):
-        """
-        计算Lyapunov指数（混沌程度度量）
-        正Lyapunov指数表示系统处于混沌状态
-        """
-        x = np.linspace(0.001, 0.999, num_points)
-        r_val = self.r.item() if isinstance(self.r, torch.Tensor) else self.r
-        lyap = 0.0
-
-        for _ in range(100):  # 忽略前100次迭代
-            x = r_val * x * (1 - x)
-
-        for _ in range(num_points):
-            x = r_val * x * (1 - x)
-            lyap += np.log(np.abs(r_val * (1 - 2 * x)))
-
-        return lyap / num_points
-
-
-class ChaoticNeuralNetwork(nn.Module):
-    """
-    混沌神经网络模型架构
-    设计理念：结合传统DNN的表示能力和混沌系统的动态特性
+    核心功能：
+    1. 混沌LSTM模型的训练与验证
+    2. 弹性权重巩固(EWC)防止灾难性遗忘
+    3. 动态添加新说话人
+    4. 混沌参数自适应调整
+    5. 混合精度训练加速
     """
 
-    def __init__(self, input_dim, num_classes,
-                 hidden_dims=[512, 256, 128],
-                 r_params=[3.9, 3.9, 3.9],
-                 dropout_rate=0.3,
-                 use_batch_norm=True):
-        """
-        初始化混沌神经网络
-
-        参数:
-        input_dim: 输入特征维度
-        num_classes: 说话人数量
-        hidden_dims: 隐藏层维度列表
-        r_params: 各混沌层的r参数
-        dropout_rate: Dropout概率
-        use_batch_norm: 是否使用批归一化
-        """
-        super(ChaoticNeuralNetwork, self).__init__()
-
-        # 验证参数
-        assert len(hidden_dims) == len(r_params), "隐藏层和r参数数量必须匹配"
-
-        # 构建网络层
-        layers = []
-        prev_dim = input_dim
-
-        for i, (h_dim, r_val) in enumerate(zip(hidden_dims, r_params)):
-            # 全连接层
-            layers.append(nn.Linear(prev_dim, h_dim))
-
-            # 批归一化
-            if use_batch_norm:
-                layers.append(nn.BatchNorm1d(h_dim))
-
-            # 混沌激活函数
-            layers.append(ChaoticActivation(r=r_val, learnable_r=True))
-
-            # Dropout
-            layers.append(nn.Dropout(dropout_rate))
-
-            prev_dim = h_dim
-
-        # 输出层
-        self.output_layer = nn.Linear(prev_dim, num_classes)
-
-        # 组合所有层
-        self.layers = nn.Sequential(*layers)
-
-        # 初始化权重
-        self._init_weights()
-
-        logging.info(f"初始化混沌神经网络: 输入维度={input_dim}, 输出维度={num_classes}")
-        logging.info(f"隐藏层结构: {hidden_dims}")
-        logging.info(f"混沌参数r: {r_params}")
-
-    def _init_weights(self):
-        """使用Xavier初始化权重"""
-        for layer in self.layers:
-            if isinstance(layer, nn.Linear):
-                nn.init.xavier_uniform_(layer.weight)
-                nn.init.constant_(layer.bias, 0.1)
-
-        nn.init.xavier_uniform_(self.output_layer.weight)
-        nn.init.constant_(self.output_layer.bias, 0.1)
-
-    def forward(self, x):
-        """前向传播"""
-        features = self.layers(x)
-        logits = self.output_layer(features)
-        return logits
-
-    def get_chaotic_params(self):
-        """获取当前混沌参数"""
-        chaotic_params = []
-        for layer in self.layers:
-            if isinstance(layer, ChaoticActivation):
-                chaotic_params.append({
-                    'r': layer.r.item(),
-                    'lyapunov': layer.lyapunov_exponent()
-                })
-        return chaotic_params
-
-
-class SpeakerDataset(Dataset):
-    """
-    说话人特征数据集
-    适配特征提取模块的输出
-    """
-
-    def __init__(self, feature_metadata, max_frames=300, feature_dim=39):
-        """
-        初始化数据集
-
-        参数:
-        feature_metadata: 特征元数据DataFrame或文件路径
-        max_frames: 最大帧数（填充/截断）
-        feature_dim: 特征维度（MFCC+Delta+DeltaDelta）
-        """
-        if isinstance(feature_metadata, str):
-            self.metadata = pd.read_csv(feature_metadata)
-        else:
-            self.metadata = feature_metadata
-
-        self.max_frames = max_frames
-        self.feature_dim = feature_dim
-
-        # 构建说话人到标签的映射
-        self.speaker_to_idx = {sp: i for i, sp in enumerate(self.metadata['speaker_id'].unique())}
-        self.metadata['label'] = self.metadata['speaker_id'].map(self.speaker_to_idx)
-
-        logging.info(f"数据集初始化: 共 {len(self)} 个样本, {len(self.speaker_to_idx)} 个说话人")
-
-    def __len__(self):
-        return len(self.metadata)
-
-    def __getitem__(self, idx):
-        row = self.metadata.iloc[idx]
-
-        try:
-            feature_path = row['feature_path']
-            print(f"[DEBUG] 正在加载特征文件: {feature_path}")  # <-- 添加调试输出
-            features = np.load(feature_path)
-
-            # 时间轴处理 (截断或填充)
-            if features.shape[1] > self.max_frames:
-                # 随机裁剪
-                start = np.random.randint(0, features.shape[1] - self.max_frames)
-                features = features[:, start:start + self.max_frames]
-            elif features.shape[1] < self.max_frames:
-                # 填充
-                pad_width = ((0, 0), (0, self.max_frames - features.shape[1]))
-                features = np.pad(features, pad_width, mode='constant')
-
-            # 转换为张量 (特征维度, 时间帧)
-            features = torch.FloatTensor(features)
-
-            return {
-                'features': features,
-                'label': row['label'],
-                'speaker_id': row['speaker_id'],
-                'file_path': row['file_path']
-            }
-        except Exception as e:
-            logging.error(f"加载特征失败: {row['feature_path']} - {str(e)}")
-            # 返回空特征
-            return {
-                'features': torch.zeros((self.feature_dim, self.max_frames)),
-                'label': -1,
-                'speaker_id': 'unknown',
-                'file_path': 'error'
-            }
-
-
-class ChaoticModelTrainer:
-    """
-    混沌神经网络训练器
-    包含训练、评估和模型保存功能
-    """
-
-    def __init__(self, model, train_loader, val_loader,
-                 optimizer, device, save_dir="chaotic_model"):
+    def __init__(self, config):
         """
         初始化训练器
 
         参数:
-        model: 混沌神经网络模型
-        train_loader: 训练数据加载器
-        val_loader: 验证数据加载器
-        optimizer: 优化器
-        device: 训练设备 (cuda/cpu)
-        save_dir: 模型保存目录
+        config: 配置字典，包含所有训练参数
         """
-        self.model = model.to(device)
-        self.train_loader = train_loader
-        self.val_loader = val_loader
-        self.optimizer = optimizer
-        self.device = device
-        self.save_dir = save_dir
+        self.config = config
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = None
+        self.ewc = None
+        self.current_task = 0
 
-        # 创建保存目录
-        os.makedirs(save_dir, exist_ok=True)
+        # 创建输出目录
+        os.makedirs(config['output_dir'], exist_ok=True)
 
-        # 训练历史
-        self.history = {
-            'train_loss': [],
-            'val_loss': [],
-            'train_acc': [],
-            'val_acc': [],
-            'chaotic_params': []
-        }
+        # 初始化数据
+        self._load_data()
 
-        # 损失函数
-        self.criterion = nn.CrossEntropyLoss()
+        logger.info(f"训练器初始化完成，使用设备: {self.device}")
 
-        logging.info(f"训练器初始化: 设备={device}, 保存目录={save_dir}")
+    def _load_data(self):
+        """加载预处理好的数据集"""
+        # 读取元数据
+        metadata_path = os.path.join(self.config['data_root'], 'metadata.csv')
+        if not os.path.exists(metadata_path):
+            raise FileNotFoundError(f"元数据文件不存在: {metadata_path}")
+
+        self.metadata = pd.read_csv(metadata_path)
+        logger.info(f"加载元数据: 共 {len(self.metadata)} 条记录")
+
+        # 创建初始训练集和验证集
+        self.train_set = LibriSpeechDataset(
+            self.metadata,
+            subset=self.config['initial_subset'],
+            chunk_size=self.config['chunk_size'],
+            augment=True
+        )
+
+        # 创建验证集 (使用开发集)
+        val_subsets = ['dev-clean', 'dev-other']
+        # 修正列名错误：使用'subset'而不是'folder_subset'
+        val_meta = self.metadata[self.metadata['subset'].isin(val_subsets)]
+
+        # 处理验证集为空的情况
+        if len(val_meta) == 0:
+            logger.warning("验证集为空，使用部分训练数据作为验证集")
+            val_indices = np.random.choice(len(self.train_set), min(1000, len(self.train_set)), replace=False)
+            self.val_set = Subset(self.train_set, val_indices)
+        else:
+            self.val_set = LibriSpeechDataset(
+                val_meta,
+                chunk_size=self.config['chunk_size'],
+                augment=False
+            )
+
+        # 采样部分验证数据加速评估
+        if len(self.val_set) > 5000:
+            val_indices = np.random.choice(len(self.val_set), 5000, replace=False)
+            self.val_set = Subset(self.val_set, val_indices)
+
+        logger.info(f"数据加载: 训练集 {len(self.train_set)} 样本, 验证集 {len(self.val_set)} 样本")
+
+    def _init_model(self):
+        """初始化混沌LSTM模型"""
+        self.model = ChaoticLSTM(
+            input_dim=self.config['input_dim'],
+            hidden_dim=self.config['hidden_dim'],
+            num_speakers=len(self.train_set.speaker_to_idx),
+            chaos_factor=self.config['chaos_factor']
+        ).to(self.device)
+
+        # 打印模型结构
+        logger.info(f"模型初始化:\n{self.model}")
+        logger.info(f"可训练参数: {sum(p.numel() for p in self.model.parameters() if p.requires_grad):,}")
+
+    def _create_data_loaders(self):
+        """创建数据加载器"""
+        # 检查数据集是否为空
+        if len(self.train_set) == 0:
+            raise ValueError("训练集为空，无法创建数据加载器")
+        if len(self.val_set) == 0:
+            raise ValueError("验证集为空，无法创建数据加载器")
+
+        self.train_loader = DataLoader(
+            self.train_set,
+            batch_size=self.config['batch_size'],
+            shuffle=True,
+            num_workers=self.config['num_workers'],
+            pin_memory=True,
+            drop_last=True  # 确保批次完整
+        )
+
+        self.val_loader = DataLoader(
+            self.val_set,
+            batch_size=self.config['batch_size'] * 2,
+            shuffle=False,
+            num_workers=self.config['num_workers'],
+            pin_memory=True
+        )
+
+        logger.info(f"数据加载器创建: 训练批次数 {len(self.train_loader)}, 验证批次数 {len(self.val_loader)}")
+
+    def _init_optimizer(self):
+        """初始化优化器和学习率调度器"""
+        self.optimizer = optim.AdamW(
+            self.model.parameters(),
+            lr=self.config['lr'],
+            weight_decay=self.config['weight_decay']
+        )
+
+        # 学习率调度器
+        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+            self.optimizer,
+            mode='max',
+            factor=0.5,
+            patience=3,
+            verbose=True
+        )
+
+        # 混合精度训练
+        self.scaler = GradScaler(enabled=self.config['use_amp'])
+        logger.info(f"优化器初始化: 学习率 {self.config['lr']}, 权重衰减 {self.config['weight_decay']}")
 
     def train_epoch(self, epoch):
-        """训练一个epoch"""
+        """
+        训练单个epoch
+
+        返回:
+        train_loss: 平均训练损失
+        train_acc: 训练准确率
+        """
         self.model.train()
-        total_loss = 0.0
+        total_loss = 0
         correct = 0
         total = 0
+        start_time = time.time()
 
-        pbar = tqdm(self.train_loader, desc=f"训练 Epoch {epoch}")
-        for batch in pbar:
-            features = batch['features'].to(self.device)
-            labels = batch['label'].to(self.device)
+        # 进度条
+        pbar = tqdm(self.train_loader, desc=f"训练 Epoch {epoch + 1}/{self.config['epochs']}")
 
-            # 时间平均池化 (特征维度, 时间帧) -> (特征维度)
-            features_pooled = torch.mean(features, dim=2)
+        for batch_idx, batch in enumerate(pbar):
+            audio = batch['audio'].to(self.device, non_blocking=True)
+            labels = batch['label'].to(self.device, non_blocking=True)
 
-            # 前向传播
-            outputs = self.model(features_pooled)
-            loss = self.criterion(outputs, labels)
+            # 混合精度训练
+            with autocast(enabled=self.config['use_amp']):
+                # 前向传播
+                outputs = self.model(audio)
 
-            # 反向传播
+                # 计算损失
+                ce_loss = F.cross_entropy(outputs, labels)
+
+                # 添加EWC正则化
+                if self.ewc is not None and self.config['lambda_ewc'] > 0:
+                    ewc_loss = self.ewc.penalty(self.model)
+                    loss = ce_loss + self.config['lambda_ewc'] * ewc_loss
+                else:
+                    loss = ce_loss
+                    ewc_loss = torch.tensor(0.0)
+
+            # 反向传播和优化
             self.optimizer.zero_grad()
-            loss.backward()
-            self.optimizer.step()
+            self.scaler.scale(loss).backward()
+
+            # 梯度裁剪
+            if self.config['grad_clip'] > 0:
+                self.scaler.unscale_(self.optimizer)
+                nn.utils.clip_grad_norm_(self.model.parameters(), self.config['grad_clip'])
+
+            self.scaler.step(self.optimizer)
+            self.scaler.update()
+
+            # 更新混沌参数
+            if batch_idx % self.config['chaos_reset_interval'] == 0:
+                self.model.reset_chaos()
 
             # 统计
             total_loss += loss.item()
-            _, predicted = torch.max(outputs.data, 1)
+            _, predicted = outputs.max(1)
             total += labels.size(0)
-            correct += (predicted == labels).sum().item()
+            correct += predicted.eq(labels).sum().item()
 
             # 更新进度条
-            pbar.set_postfix({
-                'loss': loss.item(),
-                'acc': f"{100 * correct / total:.2f}%"
-            })
+            avg_loss = total_loss / (batch_idx + 1)
+            acc = 100. * correct / total
+            pbar.set_postfix(loss=f"{avg_loss:.4f}", acc=f"{acc:.2f}%")
 
-        # 计算epoch指标
-        epoch_loss = total_loss / len(self.train_loader)
-        epoch_acc = 100 * correct / total
+        # 计算本epoch指标
+        train_loss = total_loss / len(self.train_loader)
+        train_acc = 100. * correct / total
+        epoch_time = time.time() - start_time
 
-        # 记录训练指标
-        self.history['train_loss'].append(epoch_loss)
-        self.history['train_acc'].append(epoch_acc)
+        logger.info(
+            f"训练 Epoch {epoch + 1} | 耗时: {epoch_time:.1f}s | 损失: {train_loss:.4f} | 准确率: {train_acc:.2f}%")
 
-        # 记录混沌参数
-        self.history['chaotic_params'].append(self.model.get_chaotic_params())
-
-        return epoch_loss, epoch_acc
+        return train_loss, train_acc
 
     def validate(self):
-        """验证模型性能"""
+        """
+        在验证集上评估模型
+
+        返回:
+        val_loss: 验证损失
+        val_acc: 验证准确率
+        """
         self.model.eval()
-        total_loss = 0.0
+        total_loss = 0
         correct = 0
         total = 0
 
         with torch.no_grad():
-            for batch in self.val_loader:
-                features = batch['features'].to(self.device)
+            for batch in tqdm(self.val_loader, desc="验证"):
+                audio = batch['audio'].to(self.device)
                 labels = batch['label'].to(self.device)
 
-                # 时间平均池化
-                features_pooled = torch.mean(features, dim=2)
+                outputs = self.model(audio)
+                loss = F.cross_entropy(outputs, labels)
 
-                # 前向传播
-                outputs = self.model(features_pooled)
-                loss = self.criterion(outputs, labels)
-
-                # 统计
                 total_loss += loss.item()
-                _, predicted = torch.max(outputs.data, 1)
+                _, predicted = outputs.max(1)
                 total += labels.size(0)
-                correct += (predicted == labels).sum().item()
+                correct += predicted.eq(labels).sum().item()
 
-        # 计算验证指标
         val_loss = total_loss / len(self.val_loader)
-        val_acc = 100 * correct / total
+        val_acc = 100. * correct / total
 
-        # 记录验证指标
-        self.history['val_loss'].append(val_loss)
-        self.history['val_acc'].append(val_acc)
-
+        logger.info(f"验证结果 | 损失: {val_loss:.4f} | 准确率: {val_acc:.2f}%")
         return val_loss, val_acc
 
-    def train(self, epochs, early_stopping=5):
-        """
-        训练模型
+    def train(self):
+        """训练主循环"""
+        # 初始化模型和优化器
+        self._init_model()
+        self._create_data_loaders()
+        self._init_optimizer()
 
-        参数:
-        epochs: 训练轮数
-        early_stopping: 早停耐心值
-        """
-        best_val_acc = 0.0
+        # 训练历史记录
+        history = {
+            'train_loss': [], 'train_acc': [],
+            'val_loss': [], 'val_acc': [],
+            'lr': [], 'chaos_factor': []
+        }
+
+        best_acc = 0.0
         epochs_no_improve = 0
-        best_model_path = os.path.join(self.save_dir, "best_model.pth")
 
-        logging.info(f"开始训练，共 {epochs} 个epochs")
+        for epoch in range(self.config['epochs']):
+            # 动态调整混沌参数
+            self.model.adjust_chaos_during_training(epoch, self.config['epochs'])
+            history['chaos_factor'].append(self.model.chaos_factor)
 
-        for epoch in range(1, epochs + 1):
-            # 训练
+            # 训练和验证
             train_loss, train_acc = self.train_epoch(epoch)
-
-            # 验证
             val_loss, val_acc = self.validate()
 
-            # 打印epoch结果
-            logging.info(f"Epoch {epoch}/{epochs} | "
-                         f"训练损失: {train_loss:.4f} | 训练准确率: {train_acc:.2f}% | "
-                         f"验证损失: {val_loss:.4f} | 验证准确率: {val_acc:.2f}%")
+            # 更新学习率
+            self.scheduler.step(val_acc)
+            current_lr = self.optimizer.param_groups[0]['lr']
+            history['lr'].append(current_lr)
+            logger.info(f"当前学习率: {current_lr:.6f}")
+
+            # 记录历史
+            history['train_loss'].append(train_loss)
+            history['train_acc'].append(train_acc)
+            history['val_loss'].append(val_loss)
+            history['val_acc'].append(val_acc)
 
             # 保存最佳模型
-            if val_acc > best_val_acc:
-                best_val_acc = val_acc
-                torch.save({
-                    'epoch': epoch,
-                    'model_state_dict': self.model.state_dict(),
-                    'optimizer_state_dict': self.optimizer.state_dict(),
-                    'val_acc': val_acc,
-                    'history': self.history
-                }, best_model_path)
-                logging.info(f"保存最佳模型，验证准确率: {val_acc:.2f}%")
+            if val_acc > best_acc:
+                best_acc = val_acc
+                self.save_model(f"best_model_task{self.current_task}.pth")
                 epochs_no_improve = 0
+                logger.info(f"发现新的最佳模型，准确率: {best_acc:.2f}%")
             else:
                 epochs_no_improve += 1
-                if epochs_no_improve >= early_stopping:
-                    logging.info(f"早停触发，验证准确率连续 {early_stopping} 个epoch未提升")
-                    break
+                logger.info(f"验证准确率未提升，连续 {epochs_no_improve} 个epoch")
+
+            # 提前停止检查
+            if epochs_no_improve >= self.config['early_stop_patience']:
+                logger.info(f"提前停止! {self.config['early_stop_patience']} 个epoch验证准确率未提升")
+                break
 
         # 保存最终模型
-        final_model_path = os.path.join(self.save_dir, "final_model.pth")
+        self.save_model(f"final_model_task{self.current_task}.pth")
+        self.plot_training_history(history)
+
+        return history
+
+    def add_new_speakers(self, new_subset='dev-clean', sample_size=500):
+        """
+        添加新说话人到模型 (持续学习)
+
+        步骤:
+        1. 添加新说话人到数据集
+        2. 扩展模型分类层
+        3. 初始化EWC防止遗忘
+        """
+        # 保存旧模型状态
+        old_model_state = copy.deepcopy(self.model.state_dict())
+        logger.info("保存旧模型状态用于EWC初始化")
+
+        # 筛选新说话人数据
+        new_meta = self.metadata[self.metadata['subset'] == new_subset]
+
+        # 采样部分数据 (如果数据集很大)
+        if len(new_meta) > sample_size:
+            new_meta = new_meta.sample(sample_size)
+            logger.info(f"采样 {sample_size} 个样本用于新说话人")
+
+        # 添加新说话人到训练集
+        old_speaker_count = len(self.train_set.speaker_to_idx)
+        self.train_set.add_new_speakers(new_meta)
+        new_speaker_count = len(self.train_set.speaker_to_idx) - old_speaker_count
+
+        logger.info(f"添加 {new_speaker_count} 个新说话人，总说话人数: {len(self.train_set.speaker_to_idx)}")
+
+        # 扩展模型
+        self.model.expand_for_new_speakers(new_speaker_count)
+        self.model = self.model.to(self.device)
+
+        # 恢复旧模型参数
+        self.model.load_state_dict(old_model_state)
+        logger.info("恢复旧模型参数")
+
+        # 初始化EWC
+        self.ewc = ElasticWeightConsolidation(
+            model=self.model,
+            dataset=self.train_set,
+            device=self.device,
+            num_samples=self.config['ewc_samples']
+        )
+
+        # 更新任务计数器
+        self.current_task += 1
+        self._create_data_loaders()  # 重新创建数据加载器
+
+        logger.info(f"准备学习任务 {self.current_task}，EWC {'已启用' if self.ewc else '未启用'}")
+
+    def save_model(self, filename):
+        """保存模型和训练状态"""
+        save_path = os.path.join(self.config['output_dir'], filename)
         torch.save({
-            'epoch': epochs,
             'model_state_dict': self.model.state_dict(),
-            'optimizer_state_dict': self.optimizer.state_dict(),
-            'val_acc': val_acc,
-            'history': self.history
-        }, final_model_path)
-        logging.info(f"保存最终模型: {final_model_path}")
+            'optimizer_state_dict': self.optimizer.state_dict() if hasattr(self, 'optimizer') else None,
+            'scheduler_state_dict': self.scheduler.state_dict() if hasattr(self, 'scheduler') else None,
+            'scaler_state_dict': self.scaler.state_dict() if hasattr(self, 'scaler') else None,
+            'speaker_mapping': self.train_set.speaker_to_idx,
+            'config': self.config,
+            'task_id': self.current_task  # 保存当前任务ID
+        }, save_path)
+        logger.info(f"模型保存到 {save_path}")
 
-        # 保存训练历史
-        history_path = os.path.join(self.save_dir, "training_history.json")
-        with open(history_path, 'w') as f:
-            json.dump(self.history, f, indent=2)
+    def load_model(self, filename):
+        """加载模型和训练状态"""
+        load_path = os.path.join(self.config['output_dir'], filename)
+        if not os.path.exists(load_path):
+            raise FileNotFoundError(f"模型文件不存在: {load_path}")
 
-        # 转换numpy.ndarray为列表
-        for key in self.history:
-            if isinstance(self.history[key], list):
-                for i, item in enumerate(self.history[key]):
-                    if isinstance(item, np.ndarray):
-                        self.history[key][i] = item.tolist()
+        checkpoint = torch.load(load_path, map_location=self.device)
 
-        # 可视化训练过程
-        self.plot_training_history()
+        # 初始化模型
+        self._init_model()
+        self.model.load_state_dict(checkpoint['model_state_dict'])
 
-        return best_val_acc
+        # 恢复优化器状态
+        if 'optimizer_state_dict' in checkpoint and checkpoint['optimizer_state_dict'] is not None:
+            self._init_optimizer()
+            self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
-    def plot_training_history(self):
+        if 'scheduler_state_dict' in checkpoint and checkpoint['scheduler_state_dict'] is not None:
+            self.scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+
+        if 'scaler_state_dict' in checkpoint and checkpoint['scaler_state_dict'] is not None:
+            self.scaler.load_state_dict(checkpoint['scaler_state_dict'])
+
+        # 恢复说话人映射
+        self.train_set.speaker_to_idx = checkpoint['speaker_mapping']
+
+        # 恢复任务ID
+        self.current_task = checkpoint.get('task_id', 0)
+
+        logger.info(f"从 {load_path} 加载模型 (任务 {self.current_task})")
+
+    def plot_training_history(self, history):
         """可视化训练历史"""
         plt.figure(figsize=(15, 10))
 
-        # 损失曲线
+        # 1. 准确率曲线
         plt.subplot(2, 2, 1)
-        plt.plot(self.history['train_loss'], label='训练损失')
-        plt.plot(self.history['val_loss'], label='验证损失')
-        plt.title('训练和验证损失')
-        plt.xlabel('Epoch')
-        plt.ylabel('损失')
-        plt.legend()
-
-        # 准确率曲线
-        plt.subplot(2, 2, 2)
-        plt.plot(self.history['train_acc'], label='训练准确率')
-        plt.plot(self.history['val_acc'], label='验证准确率')
-        plt.title('训练和验证准确率')
+        plt.plot(history['train_acc'], label='训练准确率')
+        plt.plot(history['val_acc'], label='验证准确率')
+        plt.title('准确率')
         plt.xlabel('Epoch')
         plt.ylabel('准确率 (%)')
         plt.legend()
+        plt.grid(True)
 
-        # 混沌参数变化
-        plt.subplot(2, 1, 2)
-        chaotic_r = [[p['r'] for p in cp] for cp in self.history['chaotic_params']]
-        chaotic_lyap = [[p['lyapunov'] for p in cp] for cp in self.history['chaotic_params']]
-
-        # 转置以便绘图
-        chaotic_r = np.array(chaotic_r).T
-        chaotic_lyap = np.array(chaotic_lyap).T
-
-        for i, (r_vals, lyap_vals) in enumerate(zip(chaotic_r, chaotic_lyap)):
-            plt.plot(r_vals, label=f'层{i + 1} r参数')
-            plt.plot(lyap_vals, '--', label=f'层{i + 1} Lyapunov指数')
-
-        plt.title('混沌参数变化')
+        # 2. 损失曲线
+        plt.subplot(2, 2, 2)
+        plt.plot(history['train_loss'], label='训练损失')
+        plt.plot(history['val_loss'], label='验证损失')
+        plt.title('损失')
         plt.xlabel('Epoch')
-        plt.ylabel('值')
+        plt.ylabel('损失')
         plt.legend()
-        plt.tight_layout()
+        plt.grid(True)
 
-        # 保存图像
-        plot_path = os.path.join(self.save_dir, "training_history.png")
+        # 3. 学习率变化
+        plt.subplot(2, 2, 3)
+        plt.plot(history['lr'])
+        plt.title('学习率')
+        plt.xlabel('Epoch')
+        plt.ylabel('学习率')
+        plt.grid(True)
+        plt.yscale('log')
+
+        # 4. 混沌因子变化
+        plt.subplot(2, 2, 4)
+        plt.plot(history['chaos_factor'])
+        plt.title('混沌因子')
+        plt.xlabel('Epoch')
+        plt.ylabel('混沌因子')
+        plt.grid(True)
+
+        plt.tight_layout()
+        plot_path = os.path.join(self.config['output_dir'], f'training_history_task{self.current_task}.png')
         plt.savefig(plot_path)
         plt.close()
-        logging.info(f"训练历史图已保存: {plot_path}")
+        logger.info(f"训练历史图保存到 {plot_path}")
 
 
-# 使用示例
-if __name__ == "__main__":
-    # 初始化日志
-    setup_logging()
-
-    # 配置参数
-    FEATURE_METADATA = "P:/PycharmProjects/pythonProject1/ChNNs/FeatureExtraction/extracted_features/feature_metadata.csv"  # 替换为实际路径
-    SAVE_DIR = "chaotic_model_results"
-    BATCH_SIZE = 64
-    EPOCHS = 50
-    MAX_FRAMES = 300  # 对应3秒音频 (10ms/帧 * 300帧 = 3秒)
-    FEATURE_DIM = 39  # 13 MFCC + 13 Delta + 13 DeltaDelta
-
-    # 设置设备
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    logging.info(f"使用设备: {device}")
-
-    # 加载特征元数据
-    metadata = pd.read_csv(FEATURE_METADATA)
-    # 补全绝对路径（适用于 Windows）
-    FEATURE_ROOT_DIR = "P:/PycharmProjects/pythonProject1/ChNNs/FeatureExtraction"
-
-
-    def fix_path(p):
-        # 如果已有绝对路径就直接返回
-        if os.path.isabs(p):
-            return p
-        # 替换分隔符并拼接
-        return os.path.join(FEATURE_ROOT_DIR, p.replace("\\", os.sep).replace("/", os.sep))
+def get_default_config():
+    """获取默认训练配置"""
+    return {
+        'data_root': 'P:/PycharmProjects/pythonProject1/processed_data',  # 预处理数据路径
+        'output_dir': 'experiments/chaotic_net',  # 输出目录
+        'initial_subset': 'train-clean-100',  # 初始训练子集
+        'input_dim': 128,  # 输入特征维度
+        'hidden_dim': 256,  # LSTM隐藏层维度
+        'chaos_factor': 3.85,  # 初始混沌因子
+        'batch_size': 64,  # 批大小
+        'epochs': 30,  # 训练轮数
+        'lr': 0.001,  # 初始学习率
+        'weight_decay': 1e-4,  # 权重衰减
+        'grad_clip': 1.0,  # 梯度裁剪阈值
+        'num_workers': 4,  # 数据加载线程数
+        'use_amp': True,  # 启用混合精度训练
+        'chunk_size': 48000,  # 音频块大小 (3秒@16kHz)
+        'chaos_reset_interval': 100,  # 重置混沌参数的步数间隔
+        'lambda_ewc': 1000.0,  # EWC正则化强度
+        'ewc_samples': 500,  # EWC使用的样本数
+        'early_stop_patience': 5,  # 提前停止耐心值
+    }
 
 
-    metadata['feature_path'] = metadata['feature_path'].apply(fix_path)
+def continual_learning_example():
+    """持续学习示例流程"""
+    # 加载配置
+    config = get_default_config()
 
-    # 分割训练集和验证集 (80%训练, 20%验证)
-    train_metadata, val_metadata = train_test_split(
-        metadata, test_size=0.2, stratify=metadata['speaker_id'], random_state=42
-    )
-
-    # 创建数据集
-    train_dataset = SpeakerDataset(train_metadata, MAX_FRAMES, FEATURE_DIM)
-    val_dataset = SpeakerDataset(val_metadata, MAX_FRAMES, FEATURE_DIM)
-
-    # 创建数据加载器
-    train_loader = DataLoader(
-        train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4
-    )
-    val_loader = DataLoader(
-        val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=4
-    )
-
-    # 初始化模型
-    num_classes = len(train_dataset.speaker_to_idx)
-    model = ChaoticNeuralNetwork(
-        input_dim=FEATURE_DIM,  # 输入特征维度
-        num_classes=num_classes,
-        hidden_dims=[512, 256, 128],  # 隐藏层维度
-        r_params=[3.9, 3.9, 3.9],  # 各层混沌参数
-        dropout_rate=0.3
-    )
-
-    # 优化器
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
+    # 设置随机种子确保可复现性
+    torch.manual_seed(42)
+    np.random.seed(42)
+    random.seed(42)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(42)
 
     # 初始化训练器
-    trainer = ChaoticModelTrainer(
-        model=model,
-        train_loader=train_loader,
-        val_loader=val_loader,
-        optimizer=optimizer,
-        device=device,
-        save_dir=SAVE_DIR
-    )
+    trainer = ChaoticTrainer(config)
 
-    # 开始训练
-    best_val_acc = trainer.train(epochs=EPOCHS, early_stopping=10)
-    logging.info(f"训练完成，最佳验证准确率: {best_val_acc:.2f}%")
+    # ===== 第一阶段：初始训练 =====
+    logger.info("===== 开始初始训练 =====")
+    trainer.train()
+
+    # ===== 第二阶段：添加新说话人 =====
+    logger.info("\n===== 添加新说话人 =====")
+    trainer.add_new_speakers(new_subset='dev-clean', sample_size=1000)
+
+    # 更新配置用于新任务
+    config['lr'] = 0.0005  # 降低学习率
+    config['epochs'] = 20  # 减少训练轮数
+
+    # 训练新任务
+    logger.info("\n===== 训练新任务 =====")
+    trainer.train()
+
+    # ===== 第三阶段：添加更多说话人 =====
+    logger.info("\n===== 添加更多说话人 =====")
+    trainer.add_new_speakers(new_subset='test-clean', sample_size=1500)
+
+    # 训练最终任务
+    logger.info("\n===== 训练最终任务 =====")
+    trainer.train()
+
+    logger.info("\n===== 持续学习完成 =====")
+
+
+if __name__ == "__main__":
+    continual_learning_example()

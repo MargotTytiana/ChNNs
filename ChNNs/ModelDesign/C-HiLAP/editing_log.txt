@@ -1,0 +1,17 @@
+2025年7月28日 -- 修改C-HiLAP模型代码
+11点02分 --- 重写data_loader.py
+1. 删除 VoxCeleb 逻辑及路径配置项
+2. 添加对 LibriSpeech（.flac）的完整支持
+3. 保持接口不变，支持训练、验证、测试划分和噪声增强
+
+12点45分 -- 修改chaos_features.py
+1. pyts.image.RecurrencePlot 的 fit_transform(X) 方法要求 X.shape = (n_samples, n_timestamps)，即二维数组，不能是三维
+2. 为耗时计算（如李雅普诺夫指数）添加缓存机制
+
+14点30分 -- 修改chaos_features.py
+1. 所有耗时计算函数都用 @cache_to_file 装饰器缓存，避免重复计算。
+2. 测试代码中去除重复调用多尺度分析。
+
+17点00分 -- 运行c_hilap_model.py
+1. 完成chaos_features.py
+2. 备份文件，明天任务：修改并测试c_hilap_model.py

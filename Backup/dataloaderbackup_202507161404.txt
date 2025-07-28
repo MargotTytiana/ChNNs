@@ -1,0 +1,506 @@
+import os
+import pandas as pd
+import soundfile as sf
+import librosa
+import numpy as np
+import logging
+import psutil
+import time
+from tqdm import tqdm
+import matplotlib.pyplot as plt
+from torch.utils.data import Dataset, DataLoader
+from torch_audiomentations import Compose, AddBackgroundNoise, PitchShift
+import torch
+import json
+import IPython
+
+
+def setup_logging(log_file='processing.log'):
+    """配置日志系统"""
+    logging.basicConfig(
+        filename=log_file,
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        filemode='w'  # 'w'表示覆盖，'a'表示追加
+    )
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(message)s')
+    console.setFormatter(formatter)
+    logging.getLogger('').addHandler(console)
+
+
+# ======================
+# 1. 数据格式统一化模块
+# ======================
+class AudioStandardizer:
+    def __init__(self, target_sr=16000, output_format='wav', log_file='processing.log',
+                 json_state_file='processed_files.json', save_interval=100):
+        self.target_sr = target_sr
+        self.output_format = output_format.lower()
+        assert self.output_format in ('wav', 'flac'), "仅支持WAV/FLAC格式"
+        self.start_time = time.time()
+        self.last_time_report = self.start_time
+        self.folder_count = 0
+        self.log_file = log_file
+        self.json_state_file = json_state_file
+        self.save_interval = save_interval
+        self.save_counter = 0
+        self.processed_files = set()
+
+        if os.path.exists(self.json_state_file):
+            try:
+                with open(self.json_state_file, 'r', encoding='utf-8') as f:
+                    self.processed_files = set(json.load(f))
+                logging.info(f"从JSON状态文件恢复了 {len(self.processed_files)} 个已处理文件")
+            except Exception as e:
+                logging.warning(f"无法读取JSON状态文件: {e}")
+
+    def save_progress_json(self):
+        try:
+            with open(self.json_state_file, 'w', encoding='utf-8') as f:
+                json.dump(list(self.processed_files), f)
+            logging.info(f"[状态保存] 已保存 {len(self.processed_files)} 个文件到JSON")
+        except Exception as e:
+            logging.error(f"[错误] 保存JSON状态失败: {str(e)}")
+
+    def get_memory_usage(self):
+        """获取当前内存使用情况"""
+        process = psutil.Process(os.getpid())
+        return process.memory_info().rss / 1024 / 1024  # MB
+
+    def progress_report(self, files_processed, force_report=False):
+        """进度报告函数"""
+        current_time = time.time()
+        elapsed = current_time - self.start_time
+
+        # 每小时或强制报告
+        if force_report or (current_time - self.last_time_report > 3600):
+            mem_usage = self.get_memory_usage()
+            logging.info(
+                f"[进度报告] 运行时间: {elapsed / 60:.2f}分钟 | "
+                f"已处理文件夹: {self.folder_count} | "
+                f"总文件数: {files_processed} | "
+                f"内存使用: {mem_usage:.2f}MB"
+            )
+            self.last_time_report = current_time
+
+        # 每50个文件夹报告
+        if self.folder_count % 50 == 0 and self.folder_count > 0:
+            mem_usage = self.get_memory_usage()
+            logging.info(
+                f"[文件夹里程碑] 已处理 {self.folder_count} 个文件夹 | "
+                f"当前文件数: {files_processed} | "
+                f"内存使用: {mem_usage:.2f}MB"
+            )
+
+    def process_file(self, input_path, output_dir):
+        """处理单个音频文件"""
+        # === 跳过日志中已处理的文件 ===
+        if os.path.normpath(input_path) in self.processed_files:
+            logging.info(f"[跳过] 已在日志中处理: {input_path}")
+            return None
+
+        # 构建输出路径
+        rel_path = os.path.relpath(input_path, start=os.path.dirname(os.path.dirname(input_path)))
+        output_path = os.path.join(output_dir, rel_path.replace('.flac', f'.{self.output_format}'))
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+        # 读取并统一格式
+        try:
+            y, _ = librosa.load(input_path, sr=self.target_sr, mono=True)
+        except Exception as e:
+            logging.error(f"[错误] 加载音频失败: {input_path} - {str(e)}")
+            return None
+
+        # 保存文件
+        try:
+            if self.output_format == 'wav':
+                sf.write(output_path, y, self.target_sr, subtype='PCM_16')
+            else:
+                sf.write(output_path, y, self.target_sr)
+
+            self.processed_files.add(os.path.normpath(input_path))
+            self.save_counter += 1
+            if self.save_counter >= self.save_interval:
+                self.save_progress_json()
+                self.save_counter = 0
+            return output_path
+
+        except Exception as e:
+            logging.error(f"[错误] 保存音频失败: {output_path} - {str(e)}")
+            return None
+
+    def process_corpus(self, corpus_root, output_root):
+        """批量处理整个语料库（带进度监控）"""
+        file_paths = []
+        self.folder_count = 0
+        files_processed = 0
+
+        # 获取所有FLAC文件
+        all_files = []
+
+        for root, _, files in os.walk(corpus_root):
+            all_files.extend([os.path.join(root, f) for f in files if f.endswith('.flac')])
+
+        # 创建进度条
+        with tqdm(total=len(all_files), desc="处理音频文件") as pbar:
+            for input_path in all_files:
+                output_path = self.process_file(input_path, output_root)
+                if output_path:
+                    file_paths.append(output_path)
+                    files_processed += 1
+
+                # 文件夹进度更新
+                current_folder = os.path.dirname(input_path)
+                if not hasattr(self, 'last_folder') or current_folder != self.last_folder:
+                    self.folder_count += 1
+                    self.last_folder = current_folder
+
+                if files_processed % 100 == 0:
+                    self.progress_report(files_processed)
+
+                pbar.update(1)
+
+        self.progress_report(files_processed, force_report=True)
+        self.save_progress_json()
+
+        logging.info(f"[完成] 共处理 {self.folder_count} 个文件夹、{files_processed} 个文件")
+
+        return file_paths
+
+
+# ======================
+# 2. 元数据生成模块
+# ======================
+class MetadataGenerator:
+    @staticmethod
+    def parse_speakers_file(corpus_root):
+        """解析SPEAKERS.TXT文件"""
+        speakers = {}
+        speakers_file = os.path.join(corpus_root + "//SPEAKERS.TXT")
+
+        if not os.path.exists(speakers_file):
+            logging.warning(f"未找到SPEAKERS.TXT文件: {speakers_file}")
+            return speakers
+
+        try:
+            with open(speakers_file, encoding="utf-8") as f:  # 推荐显式指定编码
+                for line in f:
+                    if not line.startswith(';') and '|' in line:
+                        parts = [p.strip() for p in line.strip().split('|')]
+                        if len(parts) >= 5:
+                            speaker_id = parts[0]
+                            speakers[speaker_id] = {
+                                'SEX': parts[1],
+                                'SUBSET': parts[2],
+                                'MINUTES': float(parts[3]) if parts[3].replace('.', '', 1).isdigit() else None,
+                                'NAME': parts[4]
+                            }
+            return speakers
+        except Exception as e:
+            logging.error(f"解析SPEAKERS.TXT失败: {str(e)}")
+            return {}
+
+    @staticmethod
+    def parse_transcript(file_path):
+        """解析.trans.txt文件"""
+        try:
+            with open(file_path) as f:
+                return {line.split(' ', 1)[0]: line.split(' ', 1)[1].strip() for line in f}
+        except Exception as e:
+            logging.error(f"解析转录文件失败: {file_path} - {str(e)}")
+            return {}
+
+    @classmethod
+    def build_metadata(cls, corpus_root, audio_root=None, audio_format='wav'):
+        """
+        构建完整元数据DataFrame（支持双路径）
+
+        Args:
+            corpus_root: 原始语料库路径（用于读取转录和SPEAKERS.TXT）
+            audio_root: 处理后的音频路径（用于查找.wav文件）
+            audio_format: 音频格式（默认'wav'）
+        """
+        if audio_root is None:
+            audio_root = corpus_root
+
+        speakers = cls.parse_speakers_file(corpus_root)
+        metadata = []
+        folder_count = 0
+        files_processed = 0
+        start_time = time.time()
+        last_report_time = start_time
+
+        all_folders = []
+        for root, dirs, files in os.walk(corpus_root):
+            if any(sub in root for sub in ['train-', 'dev-', 'test-']):
+                all_folders.append(root)
+
+        with tqdm(total=len(all_folders), desc="构建元数据") as pbar:
+            for root in all_folders:
+                folder_count += 1
+                subset = os.path.basename(root)
+
+                for file in os.listdir(root):
+                    if file.endswith('.trans.txt'):
+                        trans_path = os.path.join(root, file)
+                        transcripts = cls.parse_transcript(trans_path)
+
+                        for utt_id, text in transcripts.items():
+                            audio_file = f"{utt_id}.{audio_format}"
+
+                            # 新增：构建在 audio_root 中的实际音频路径
+                            speaker_dir = utt_id.split('-')[0]
+                            chapter_dir = utt_id.split('-')[1]
+
+                            # 允许两种结构：audio_root/speaker/chapter/xxx.wav 或 audio_root/speaker/xxx.wav
+                            audio_path = os.path.join(audio_root, speaker_dir, chapter_dir, audio_file)
+                            if not os.path.exists(audio_path):
+                                # 回退：LibriSpeech_processed/1240/103-1240-0000.wav
+                                audio_path = os.path.join(audio_root, speaker_dir, audio_file)
+
+                            if os.path.exists(audio_path):
+                                try:
+                                    with sf.SoundFile(audio_path) as f:
+                                        duration = round(f.frames / f.samplerate, 2)
+                                except Exception as e:
+                                    logging.error(f"读取音频时长失败: {audio_path} - {str(e)}")
+                                    duration = 0.0
+
+                                speaker_id = utt_id.split('-')[0]
+                                speaker_info = speakers.get(speaker_id, {})
+                                metadata.append({
+                                    'speaker_id': speaker_id,
+                                    'gender': speaker_info.get('SEX'),
+                                    'subset': speaker_info.get('SUBSET'),
+                                    'minutes': speaker_info.get('MINUTES'),
+                                    'name': speaker_info.get('NAME'),
+                                    'folder_subset': subset,
+                                    'file_path': audio_path,
+                                    'duration': duration,
+                                    'transcript': text
+                                })
+                                files_processed += 1
+
+                current_time = time.time()
+                if folder_count % 50 == 0 or current_time - last_report_time > 300:
+                    mem_usage = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024
+                    logging.info(
+                        f"[元数据处理] 已扫描 {folder_count} 文件夹 | "
+                        f"找到 {files_processed} 个有效样本 | "
+                        f"内存使用: {mem_usage:.2f}MB"
+                    )
+                    last_report_time = current_time
+
+                pbar.update(1)
+
+        logging.info(f"元数据构建完成！总共处理了 {folder_count} 个文件夹和 {files_processed} 个样本")
+        return pd.DataFrame(metadata)
+
+    @staticmethod
+    def analyze_metadata(df):
+        """分析元数据统计信息"""
+        if df.empty:
+            logging.warning("元数据为空，无法进行分析")
+            return
+
+        print("\n=== 数据集统计 ===")
+        print(f"总样本数: {len(df)}")
+        print(f"说话人数: {df['speaker_id'].nunique()}")
+
+        # 新增：SPEAKERS.TXT 的子集信息
+        print("\n说话人子集（来自 SPEAKERS.TXT）分布:")
+        print(df[['speaker_id', 'subset']].drop_duplicates()['subset'].value_counts())
+
+        # 原来的文件结构子集（train/dev/test）
+        print("\n数据目录子集分布 (folder_subset):")
+        print(df['folder_subset'].value_counts())
+
+        print("\n性别分布:")
+        print(df.groupby(['subset', 'gender']).size())
+
+        # 新增：说话人总语音时长（来自SPEAKERS.TXT）的统计分析
+        if 'minutes' in df.columns:
+            print("\n说话人语音总时长分布（SPEAKERS.TXT中的MINUTES）:")
+            print(df[['speaker_id', 'minutes']].drop_duplicates()['minutes'].describe())
+
+        # 可视化
+        plt.figure(figsize=(14, 4))
+
+        plt.subplot(131)
+        df['duration'].hist(bins=50)
+        plt.title("Clip Duration Distribution")
+        plt.xlabel("Seconds")
+
+        plt.subplot(132)
+        df['speaker_id'].value_counts().hist(bins=30)
+        plt.title("Samples per Speaker")
+        plt.xlabel("Number of samples")
+
+        if 'minutes' in df.columns:
+            plt.subplot(133)
+            df[['speaker_id', 'minutes']].drop_duplicates()['minutes'].hist(bins=30)
+            plt.title("Total Minutes per Speaker")
+            plt.xlabel("Minutes")
+
+        plt.tight_layout()
+        plt.savefig("metadata_analysis.png")  # 保存为图像文件
+        plt.close()
+
+
+# ======================
+# 3. 数据增强模块
+# ======================
+class AudioAugmenter:
+    def __init__(self, sample_rate=16000):
+        self.sample_rate = sample_rate
+        self.transform = Compose([
+            AddBackgroundNoise(
+                min_snr_in_db=3.0,
+                max_snr_in_db=30.0,
+                p=0.5,
+                sample_rate=sample_rate
+            ),
+            PitchShift(
+                min_semitones=-2,
+                max_semitones=2,
+                p=0.3,
+                sample_rate=sample_rate
+            ),
+        ])
+
+    def __call__(self, audio):
+        # 输入audio应为torch.Tensor形状为(1, samples)
+        if isinstance(audio, np.ndarray):
+            audio = torch.from_numpy(audio).unsqueeze(0)
+        return self.transform(audio, sample_rate=self.sample_rate).squeeze(0)
+
+
+# ======================
+# 4. 数据集类 (兼容持续学习)
+# ======================
+class LibriSpeechDataset(Dataset):
+    def __init__(self, metadata, subset='train-clean-100', chunk_size=48000, augment=False):
+        """
+        Args:
+            metadata: 元数据DataFrame
+            subset: 数据子集名称
+            chunk_size: 裁剪长度(样本数), None表示使用完整音频
+            augment: 是否启用数据增强
+        """
+        self.metadata = metadata[metadata['subset'] == subset].copy()
+        self.chunk_size = chunk_size
+        self.augment = augment
+        self.augmenter = AudioAugmenter() if augment else None
+
+        # 为持续学习准备
+        self.speaker_to_idx = {sp: i for i, sp in enumerate(self.metadata['speaker_id'].unique())}
+        self.metadata['label'] = self.metadata['speaker_id'].map(self.speaker_to_idx)
+
+    def __len__(self):
+        return len(self.metadata)
+
+    def __getitem__(self, idx):
+        row = self.metadata.iloc[idx]
+        try:
+            audio, _ = librosa.load(row['file_path'], sr=16000, mono=True)
+        except Exception as e:
+            logging.error(f"加载音频失败: {row['file_path']} - {str(e)}")
+            # 返回静音作为替代
+            audio = np.zeros(self.chunk_size if self.chunk_size else 16000)
+            label = row['label']  # 即使音频坏了，也返回正确的标签
+
+        # 随机裁剪
+        if self.chunk_size is not None:
+            if len(audio) >= self.chunk_size:
+                start = np.random.randint(0, len(audio) - self.chunk_size)
+                audio = audio[start:start + self.chunk_size]
+            else:
+                audio = np.pad(audio, (0, self.chunk_size - len(audio)), 'constant')
+
+        # 数据增强
+        if self.augment and self.augmenter:
+            audio = self.augmenter(audio)
+
+        return {
+            'audio': torch.FloatTensor(audio),
+            'label': row['label'],
+            'speaker_id': row['speaker_id'],
+            'duration': row['duration']
+        }
+
+    def add_new_speakers(self, new_metadata):
+        """持续学习：添加新说话人"""
+        old_speakers = set(self.speaker_to_idx.keys())
+        new_speakers = set(new_metadata['speaker_id'].unique()) - old_speakers
+
+        # 更新speaker_to_idx映射
+        max_idx = max(self.speaker_to_idx.values()) if self.speaker_to_idx else -1
+        for i, sp in enumerate(new_speakers, start=max_idx + 1):
+            self.speaker_to_idx[sp] = i
+
+        # 合并元数据
+        new_metadata = new_metadata.copy()
+        new_metadata['label'] = new_metadata['speaker_id'].map(self.speaker_to_idx)
+        self.metadata = pd.concat([self.metadata, new_metadata], ignore_index=True)
+
+
+# ======================
+# 5. 使用示例 (修复版)
+# ======================
+if __name__ == "__main__":
+    # 配置路径
+    CORPUS_ROOT = "P://PycharmProjects//pythonProject1//dataset//LibriSpeech"
+    OUTPUT_ROOT = "P://PycharmProjects//pythonProject1//dataset//LibriSpeech_processed"
+
+    # 确保输出目录存在
+    os.makedirs(OUTPUT_ROOT, exist_ok=True)
+
+    # 初始化日志
+    setup_logging(os.path.join(OUTPUT_ROOT, "processing.log"))
+    logging.info("=== 开始处理LibriSpeech数据集 ===")
+
+    try:
+        # 1. 数据标准化
+        logging.info("开始统一音频格式...")
+        standardizer = AudioStandardizer(output_format='wav')
+        processed_files = standardizer.process_corpus(CORPUS_ROOT, OUTPUT_ROOT)
+        logging.info(f"成功处理 {len(processed_files)} 个音频文件")
+
+        # 2. 生成元数据
+        logging.info("开始生成元数据...")
+        metadata = MetadataGenerator.build_metadata(CORPUS_ROOT, audio_root=OUTPUT_ROOT)
+
+        metadata_path = os.path.join(OUTPUT_ROOT, "metadata.csv")
+        metadata.to_csv(metadata_path, index=False)
+        logging.info(f"元数据已保存到 {metadata_path}")
+
+        # 3. 分析元数据
+        logging.info("开始分析元数据统计信息...")
+        MetadataGenerator.analyze_metadata(metadata)
+
+        # 4. 创建数据集
+        logging.info("创建训练数据集...")
+        train_set = LibriSpeechDataset(metadata, subset='train-clean-100', augment=True)
+        logging.info(f"训练集包含 {len(train_set)} 个样本")
+
+        # 示例：播放增强后的音频
+        if len(train_set) > 0:
+            sample = train_set[0]
+            logging.info(f"\n示例音频: 说话人 {sample['speaker_id']}, 时长 {sample['duration']:.2f}s")
+            # 实际运行时可能需要移除IPython.display
+            # IPython.display.display(IPython.display.Audio(sample['audio'].numpy(), rate=16000))
+
+        # 5. 持续学习示例
+        logging.info("\n模拟持续学习场景...")
+        if 'dev-clean' in metadata['subset'].unique():
+            new_speakers_meta = metadata[metadata['subset'] == 'dev-clean'].sample(min(100, len(metadata)))
+            train_set.add_new_speakers(new_speakers_meta)
+            logging.info(f"新增说话人后总类别数: {len(train_set.speaker_to_idx)}")
+
+        logging.info("=== 处理完成 ===")
+
+    except Exception as e:
+        logging.error(f"处理过程中发生错误: {str(e)}", exc_info=True)
+        raise
