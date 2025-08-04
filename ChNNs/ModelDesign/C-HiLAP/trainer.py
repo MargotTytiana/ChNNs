@@ -6,15 +6,22 @@ from tqdm import tqdm
 import numpy as np
 import os
 from sklearn.metrics import roc_curve
-from .data_loader import SpeakerRecognitionDataset, get_dataloaders
-from .c_hilap_model import CHiLAPModel, PhaseSynchronizationLoss
-from .chaos_features import ChaosFeatureExtractor
+import gc  # 垃圾回收
+
+# 导入模块（假设在同一目录下）
+try:
+    from data_loader import SpeakerRecognitionDataset, get_dataloaders
+    from c_hilap_model import CHiLAPModel, PhaseSynchronizationLoss
+    from chaos_features import ChaosFeatureExtractor, ChaoticFeatureExtractor, MLSAAnalyzer
+except ImportError as e:
+    print(f"导入错误: {e}")
+    print("请确保所有模块文件在同一目录下")
 
 
 # 配置参数
 class Config:
     # 训练参数
-    EPOCHS = 100
+    EPOCHS = 50  # 减少训练轮数
     LR = 0.001
     WEIGHT_DECAY = 1e-5
     SAVE_INTERVAL = 10
@@ -23,12 +30,20 @@ class Config:
 
     # 损失函数权重
     CE_WEIGHT = 1.0  # 交叉熵损失权重
-    SYNC_WEIGHT = 0.5  # 相位同步损失权重
-    LYAPUNOV_WEIGHT = 0.1  # 李雅普诺夫稳定性损失权重
+    SYNC_WEIGHT = 0.0  # 减少相位同步损失权重 # 暂时禁用
+    LYAPUNOV_WEIGHT = 0.0  # 减少李雅普诺夫稳定性损失权重 # 暂时禁用
 
     # 早停参数
     PATIENCE = 10
     MIN_DELTA = 0.001
+
+    # 混沌特征参数
+    CHAOS_FEATURE_TYPE = 'mle'  # 使用更简单的特征类型
+
+    # 内存优化参数
+    GRADIENT_ACCUMULATION_STEPS = 2  # 梯度累积步数
+    MAX_BATCH_SIZE = 16  # 减少批次大小
+    ENABLE_MIXED_PRECISION = False  # 启用混合精度训练
 
 
 # 训练器类
@@ -37,9 +52,15 @@ class Trainer:
         """初始化训练器"""
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print(f"使用设备: {self.device}")
 
         # 创建模型
         self.model = CHiLAPModel().to(self.device)
+
+        # 创建混沌特征提取器（使用更简单的特征类型）
+        self.chaos_feature_extractor = ChaoticFeatureExtractor(
+            feature_type=config.CHAOS_FEATURE_TYPE
+        ).to(self.device)
 
         # 定义损失函数
         self.ce_loss = nn.CrossEntropyLoss()
@@ -47,7 +68,10 @@ class Trainer:
 
         # 定义优化器
         self.optimizer = optim.Adam(
-            self.model.parameters(),
+            [
+                {'params': self.model.parameters()},
+                {'params': self.chaos_feature_extractor.parameters()}
+            ],
             lr=config.LR,
             weight_decay=config.WEIGHT_DECAY
         )
@@ -58,11 +82,15 @@ class Trainer:
             mode='min',
             factor=0.5,
             patience=5,
-            verbose=True
+            # verbose=True
         )
 
-        # 初始化混沌特征提取器（用于计算李雅普诺夫稳定性）
-        self.chaos_extractor = ChaosFeatureExtractor()
+        # 混合精度训练
+        if config.ENABLE_MIXED_PRECISION and torch.cuda.is_available():
+            self.scaler = torch.cuda.amp.GradScaler()
+            print("启用混合精度训练")
+        else:
+            self.scaler = None
 
         # 创建检查点目录
         os.makedirs(config.CHECKPOINT_DIR, exist_ok=True)
@@ -77,58 +105,15 @@ class Trainer:
         :param embeddings: 模型生成的嵌入向量 [batch_size, embedding_dim]
         :return: 李雅普诺夫稳定性损失
         """
-        # 将嵌入向量视为动力系统的状态
-        # 计算相邻批次之间的李雅普诺夫指数近似值
-
-        # 计算微小扰动
-        epsilon = 1e-6
-        perturbed_embeddings = embeddings + epsilon * torch.randn_like(embeddings)
-
-        # 计算扰动前后的距离
-        original_norm = torch.norm(embeddings, dim=1)
-        perturbed_norm = torch.norm(perturbed_embeddings, dim=1)
-
-        # 计算李雅普诺夫指数近似值
-        lyapunov_exponents = torch.log(perturbed_norm / original_norm) / epsilon
-
-        # 李雅普诺夫稳定性损失：鼓励负的李雅普诺夫指数（稳定系统）
-        loss = torch.mean(torch.relu(lyapunov_exponents))
-
-        return loss
-
-    def adversarial_chaos_injection(self, inputs, epsilon=0.01):
-        """
-        对抗混沌注入 - 在输入中添加混沌扰动，增强模型鲁棒性
-        :param inputs: 输入音频 [batch_size, seq_len, feature_dim]
-        :param epsilon: 扰动强度
-        :return: 扰动后的输入
-        """
-        # 确保输入需要梯度
-        inputs.requires_grad = True
-
-        # 前向传播
-        embeddings, _ = self.model(inputs)
-
-        # 计算损失（使用相位同步损失）
-        # 这里假设我们有一些参考吸引子状态
-        batch_size, seq_len, _ = inputs.size()
-        reference_attractors = torch.randn(batch_size, seq_len, 3).to(self.device)
-        loss = self.sync_loss(inputs, reference_attractors)
-
-        # 计算梯度
-        self.model.zero_grad()
-        loss.backward()
-
-        # 生成对抗扰动（符号梯度）
-        perturbation = epsilon * torch.sign(inputs.grad)
-
-        # 应用扰动
-        perturbed_inputs = inputs + perturbation
-
-        # 清除梯度
-        inputs.requires_grad = False
-
-        return perturbed_inputs.detach()
+        try:
+            # 简化版本：直接使用嵌入向量的方差作为稳定性度量
+            # 高方差意味着不稳定
+            variance = torch.var(embeddings, dim=1)  # [batch_size]
+            loss = torch.mean(variance)
+            return loss
+        except Exception as e:
+            print(f"李雅普诺夫损失计算错误: {e}")
+            return torch.tensor(0.0, device=embeddings.device)
 
     def train_one_epoch(self, dataloader, epoch):
         """
@@ -138,46 +123,113 @@ class Trainer:
         :return: 平均训练损失
         """
         self.model.train()
+        self.chaos_feature_extractor.train()
         total_loss = 0.0
         correct = 0
         total = 0
 
+        # 梯度累积
+        accumulation_steps = self.config.GRADIENT_ACCUMULATION_STEPS
+        self.optimizer.zero_grad()
+
         progress_bar = tqdm(enumerate(dataloader), total=len(dataloader))
         for i, (inputs, labels) in progress_bar:
-            inputs, labels = inputs.to(self.device), labels.to(self.device)
+            try:
+                inputs, labels = inputs.to(self.device), labels.to(self.device)
 
-            # 应用对抗混沌注入
-            if epoch > 5:  # 前5个epoch不使用，让模型先学习基本特征
-                inputs = self.adversarial_chaos_injection(inputs)
+                # 添加特征维度 [batch_size, seq_len, 1]
+                inputs = inputs.unsqueeze(2)
 
-            # 前向传播
-            self.optimizer.zero_grad()
-            embeddings, logits = self.model(inputs)
+                # 使用混合精度训练
+                if self.scaler is not None:
+                    with torch.cuda.amp.autocast():
+                        # 前向传播
+                        embeddings, logits = self.model(inputs)
 
-            # 计算损失
-            ce = self.ce_loss(logits, labels)
-            sync = self.sync_loss(inputs, self.model.chaos_layer.attractor_positions)
-            lyapunov = self.lyapunov_stability_loss(embeddings)
+                        # 计算损失
+                        ce = self.ce_loss(logits, labels)
 
-            # 联合损失
-            loss = (self.config.CE_WEIGHT * ce +
-                    self.config.SYNC_WEIGHT * sync +
-                    self.config.LYAPUNOV_WEIGHT * lyapunov)
+                        # 简化的相位同步损失
+                        sync_loss_val = torch.tensor(0.0, device=inputs.device)
+                        if epoch > 10:  # 后期再加入相位同步损失
+                            try:
+                                # 创建简化的参考吸引子
+                                batch_size, seq_len, _ = inputs.size()
+                                # 使用前100个时间步计算损失以节省内存
+                                limited_seq_len = min(seq_len, 100)
+                                limited_inputs = inputs[:, :limited_seq_len, :]
+                                reference_attractors = torch.randn(batch_size, limited_seq_len, 3, device=inputs.device)
+                                sync_loss_val = self.sync_loss(limited_inputs, reference_attractors)
+                            except Exception as e:
+                                print(f"相位同步损失计算错误: {e}")
+                                sync_loss_val = torch.tensor(0.0, device=inputs.device)
 
-            # 反向传播
-            loss.backward()
-            self.optimizer.step()
+                        lyapunov_loss_val = self.lyapunov_stability_loss(embeddings)
 
-            # 统计
-            total_loss += loss.item()
-            _, predicted = logits.max(1)
-            total += labels.size(0)
-            correct += predicted.eq(labels).sum().item()
+                        # 联合损失
+                        loss = (self.config.CE_WEIGHT * ce +
+                                self.config.SYNC_WEIGHT * sync_loss_val +
+                                self.config.LYAPUNOV_WEIGHT * lyapunov_loss_val)
 
-            # 更新进度条
-            progress_bar.set_description(
-                f"Epoch {epoch}, Loss: {total_loss / (i + 1):.4f}, Acc: {100. * correct / total:.2f}%"
-            )
+                        # 梯度累积
+                        loss = loss / accumulation_steps
+
+                    # 反向传播
+                    self.scaler.scale(loss).backward()
+
+                    if (i + 1) % accumulation_steps == 0:
+                        self.scaler.step(self.optimizer)
+                        self.scaler.update()
+                        self.optimizer.zero_grad()
+
+                else:
+                    # 标准训练（不使用混合精度）
+                    embeddings, logits = self.model(inputs)
+
+                    # 计算损失
+                    ce = self.ce_loss(logits, labels)
+
+                    # 简化的损失计算
+                    sync_loss_val = torch.tensor(0.0, device=inputs.device)
+                    lyapunov_loss_val = self.lyapunov_stability_loss(embeddings)
+
+                    # 联合损失
+                    loss = (self.config.CE_WEIGHT * ce +
+                            self.config.LYAPUNOV_WEIGHT * lyapunov_loss_val)
+
+                    # 梯度累积
+                    loss = loss / accumulation_steps
+                    loss.backward()
+
+                    if (i + 1) % accumulation_steps == 0:
+                        self.optimizer.step()
+                        self.optimizer.zero_grad()
+
+                # 统计
+                total_loss += loss.item() * accumulation_steps
+                _, predicted = logits.max(1)
+                total += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+
+                # 更新进度条
+                if i % 10 == 0:  # 减少更新频率
+                    progress_bar.set_description(
+                        f"Epoch {epoch}, Loss: {total_loss / (i + 1):.4f}, Acc: {100. * correct / total:.2f}%"
+                    )
+
+                # 手动垃圾回收
+                if i % 50 == 0:
+                    torch.cuda.empty_cache()
+                    gc.collect()
+
+            except RuntimeError as e:
+                if "out of memory" in str(e):
+                    print(f"内存不足错误在批次 {i}: {e}")
+                    torch.cuda.empty_cache()
+                    gc.collect()
+                    continue
+                else:
+                    raise e
 
         return total_loss / len(dataloader)
 
@@ -185,44 +237,55 @@ class Trainer:
         """
         验证模型性能
         :param dataloader: 验证数据加载器
-        :return: 验证损失和EER
+        :return: 验证损失和准确率
         """
         self.model.eval()
+        self.chaos_feature_extractor.eval()
         total_loss = 0.0
-        all_embeddings = []
-        all_labels = []
+        correct = 0
+        total = 0
 
         with torch.no_grad():
-            for inputs, labels in dataloader:
-                inputs, labels = inputs.to(self.device), labels.to(self.device)
+            for i, (inputs, labels) in enumerate(dataloader):
+                try:
+                    inputs, labels = inputs.to(self.device), labels.to(self.device)
 
-                # 前向传播
-                embeddings, logits = self.model(inputs)
+                    # 添加特征维度 [batch_size, seq_len, 1]
+                    inputs = inputs.unsqueeze(2)
 
-                # 计算损失
-                ce = self.ce_loss(logits, labels)
-                sync = self.sync_loss(inputs, self.model.chaos_layer.attractor_positions)
-                lyapunov = self.lyapunov_stability_loss(embeddings)
+                    # 前向传播
+                    embeddings, logits = self.model(inputs)
 
-                loss = (self.config.CE_WEIGHT * ce +
-                        self.config.SYNC_WEIGHT * sync +
-                        self.config.LYAPUNOV_WEIGHT * lyapunov)
+                    # 计算损失
+                    ce = self.ce_loss(logits, labels)
+                    lyapunov_loss_val = self.lyapunov_stability_loss(embeddings)
 
-                total_loss += loss.item()
+                    loss = (self.config.CE_WEIGHT * ce +
+                            self.config.LYAPUNOV_WEIGHT * lyapunov_loss_val)
 
-                # 收集嵌入向量和标签用于EER计算
-                all_embeddings.append(embeddings.cpu())
-                all_labels.append(labels.cpu())
+                    total_loss += loss.item()
 
-        # 计算EER
-        all_embeddings = torch.cat(all_embeddings, dim=0).numpy()
-        all_labels = torch.cat(all_labels, dim=0).numpy()
+                    # 统计准确率
+                    _, predicted = logits.max(1)
+                    total += labels.size(0)
+                    correct += predicted.eq(labels).sum().item()
 
-        # 简化版EER计算（实际应用中需要真实的验证对）
-        # 这里仅作示例，返回一个随机值
-        eer = np.random.uniform(0.05, 0.15)
+                    # 内存管理
+                    if i % 20 == 0:
+                        torch.cuda.empty_cache()
+                        gc.collect()
 
-        return total_loss / len(dataloader), eer
+                except RuntimeError as e:
+                    if "out of memory" in str(e):
+                        print(f"验证时内存不足: {e}")
+                        torch.cuda.empty_cache()
+                        gc.collect()
+                        continue
+                    else:
+                        raise e
+
+        accuracy = 100. * correct / total
+        return total_loss / len(dataloader), accuracy
 
     def train(self, train_dataloader, val_dataloader):
         """
@@ -230,44 +293,64 @@ class Trainer:
         :param train_dataloader: 训练数据加载器
         :param val_dataloader: 验证数据加载器
         """
+        print("开始训练...")
+
         for epoch in range(1, self.config.EPOCHS + 1):
-            # 训练一个epoch
-            train_loss = self.train_one_epoch(train_dataloader, epoch)
+            try:
+                # 训练一个epoch
+                train_loss = self.train_one_epoch(train_dataloader, epoch)
+                print(f"Epoch {epoch}/{self.config.EPOCHS}, Train Loss: {train_loss:.4f}")
 
-            # 验证
-            if epoch % self.config.VAL_INTERVAL == 0:
-                val_loss, eer = self.validate(val_dataloader)
-                print(f"Epoch {epoch}, Val Loss: {val_loss:.4f}, EER: {eer:.4f}")
+                # 验证
+                if epoch % self.config.VAL_INTERVAL == 0:
+                    val_loss, accuracy = self.validate(val_dataloader)
+                    print(f"Epoch {epoch}, Val Loss: {val_loss:.4f}, Accuracy: {accuracy:.2f}%")
 
-                # 更新学习率
-                self.scheduler.step(val_loss)
+                    # 更新学习率
+                    self.scheduler.step(val_loss)
 
-                # 早停检查
-                if val_loss < self.best_val_loss - self.config.MIN_DELTA:
-                    self.best_val_loss = val_loss
-                    self.early_stop_counter = 0
-                    # 保存最佳模型
+                    # 早停检查
+                    if val_loss < self.best_val_loss - self.config.MIN_DELTA:
+                        self.best_val_loss = val_loss
+                        self.early_stop_counter = 0
+                        # 保存最佳模型
+                        torch.save({
+                            'epoch': epoch,
+                            'model_state_dict': self.model.state_dict(),
+                            'chaos_feature_state_dict': self.chaos_feature_extractor.state_dict(),
+                            'optimizer_state_dict': self.optimizer.state_dict(),
+                            'val_loss': val_loss,
+                            'accuracy': accuracy
+                        }, os.path.join(self.config.CHECKPOINT_DIR, 'best_model.pth'))
+                        print(f"保存最佳模型，验证损失: {val_loss:.4f}")
+                    else:
+                        self.early_stop_counter += 1
+                        if self.early_stop_counter >= self.config.PATIENCE:
+                            print(f"早停于第 {epoch} 轮")
+                            break
+
+                # 定期保存模型
+                if epoch % self.config.SAVE_INTERVAL == 0:
                     torch.save({
                         'epoch': epoch,
                         'model_state_dict': self.model.state_dict(),
+                        'chaos_feature_state_dict': self.chaos_feature_extractor.state_dict(),
                         'optimizer_state_dict': self.optimizer.state_dict(),
-                        'val_loss': val_loss,
-                        'eer': eer
-                    }, os.path.join(self.config.CHECKPOINT_DIR, 'best_model.pth'))
-                else:
-                    self.early_stop_counter += 1
-                    if self.early_stop_counter >= self.config.PATIENCE:
-                        print(f"Early stopping after {epoch} epochs")
-                        break
+                        'train_loss': train_loss
+                    }, os.path.join(self.config.CHECKPOINT_DIR, f'model_epoch_{epoch}.pth'))
 
-            # 定期保存模型
-            if epoch % self.config.SAVE_INTERVAL == 0:
-                torch.save({
-                    'epoch': epoch,
-                    'model_state_dict': self.model.state_dict(),
-                    'optimizer_state_dict': self.optimizer.state_dict(),
-                    'train_loss': train_loss
-                }, os.path.join(self.config.CHECKPOINT_DIR, f'model_epoch_{epoch}.pth'))
+                # 清理内存
+                torch.cuda.empty_cache()
+                gc.collect()
+
+            except KeyboardInterrupt:
+                print("训练被用户中断")
+                break
+            except Exception as e:
+                print(f"训练错误: {e}")
+                torch.cuda.empty_cache()
+                gc.collect()
+                continue
 
     def load_checkpoint(self, checkpoint_path):
         """
@@ -276,132 +359,141 @@ class Trainer:
         """
         checkpoint = torch.load(checkpoint_path, map_location=self.device)
         self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.chaos_feature_extractor.load_state_dict(checkpoint['chaos_feature_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         epoch = checkpoint.get('epoch', 0)
-        print(f"Loaded checkpoint from epoch {epoch}")
+        print(f"从第 {epoch} 轮加载检查点")
         return epoch
 
 
-# 评估器类
-class Evaluator:
-    def __init__(self, model, config=Config):
+# 简化的评估器类
+class SimpleEvaluator:
+    def __init__(self, model, chaos_feature_extractor, config=Config):
         """初始化评估器"""
         self.model = model
+        self.chaos_feature_extractor = chaos_feature_extractor
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
+        self.chaos_feature_extractor.to(self.device)
         self.model.eval()
+        self.chaos_feature_extractor.eval()
 
-    def compute_eer(self, scores, labels):
+    def evaluate_accuracy(self, dataloader):
         """
-        计算等错误率(EER)
-        :param scores: 相似度分数
-        :param labels: 真实标签(1为匹配，0为不匹配)
-        :return: EER值
+        评估模型准确率
+        :param dataloader: 数据加载器
+        :return: 准确率
         """
-        fpr, tpr, thresholds = roc_curve(labels, scores, pos_label=1)
-        fnr = 1 - tpr
-        eer = fpr[np.nanargmin(np.abs(fnr - fpr))]
-        return eer
-
-    def evaluate_noise_robustness(self, dataloaders, noise_types=['white', 'babble'],
-                                  snr_levels=[-5, 0, 5, 10, 15, 20]):
-        """
-        评估模型在不同噪声条件下的鲁棒性
-        :param dataloaders: 数据加载器字典
-        :param noise_types: 噪声类型列表
-        :param snr_levels: 信噪比水平列表
-        :return: 不同条件下的EER
-        """
-        results = {}
+        correct = 0
+        total = 0
 
         with torch.no_grad():
-            for noise_type in noise_types:
-                results[noise_type] = {}
-                for snr in snr_levels:
-                    # 创建噪声测试集
-                    noisy_dataset = SpeakerRecognitionDataset(
-                        "voxceleb1", split="test",
-                        add_noise=True, noise_type=noise_type, snr_db=snr
-                    )
+            for i, (inputs, labels) in enumerate(dataloader):
+                try:
+                    inputs, labels = inputs.to(self.device), labels.to(self.device)
 
-                    noisy_dataloader = DataLoader(
-                        noisy_dataset, batch_size=self.config.BATCH_SIZE,
-                        shuffle=False, num_workers=self.config.NUM_WORKERS
-                    )
+                    # 添加特征维度 [batch_size, seq_len, 1]
+                    inputs = inputs.unsqueeze(2)
 
-                    # 评估
-                    eer = self.evaluate_eer(noisy_dataloader)
-                    results[noise_type][snr] = eer
-                    print(f"Noise: {noise_type}, SNR: {snr}dB, EER: {eer:.4f}")
+                    _, logits = self.model(inputs)
+                    _, predicted = logits.max(1)
+                    total += labels.size(0)
+                    correct += predicted.eq(labels).sum().item()
 
-        return results
+                    # 内存管理
+                    if i % 20 == 0:
+                        torch.cuda.empty_cache()
+                        gc.collect()
 
-    def evaluate_eer(self, dataloader):
-        """
-        评估模型的EER
-        :param dataloader: 数据加载器
-        :return: EER值
-        """
-        all_embeddings = []
-        all_labels = []
+                except RuntimeError as e:
+                    if "out of memory" in str(e):
+                        print(f"评估时内存不足: {e}")
+                        torch.cuda.empty_cache()
+                        gc.collect()
+                        continue
+                    else:
+                        raise e
 
-        with torch.no_grad():
-            for inputs, labels in dataloader:
-                inputs, labels = inputs.to(self.device), labels.to(self.device)
-                embeddings, _ = self.model(inputs)
-                all_embeddings.append(embeddings.cpu())
-                all_labels.append(labels.cpu())
+        accuracy = 100. * correct / total
+        return accuracy
 
-        all_embeddings = torch.cat(all_embeddings, dim=0).numpy()
-        all_labels = torch.cat(all_labels, dim=0).numpy()
 
-        # 简化版EER计算（实际应用中需要构建真实的验证对）
-        # 这里仅作示例，返回一个随机值
-        eer = np.random.uniform(0.05, 0.15)
-        return eer
+# 内存友好的数据加载器创建函数
+def create_small_dataloaders(dataset_name, batch_size=4):
+    """创建小批次的数据加载器以节省内存"""
+    try:
+        train_dataset = SpeakerRecognitionDataset(dataset_name, split="train")
+        val_dataset = SpeakerRecognitionDataset(dataset_name, split="val")
+        test_dataset = SpeakerRecognitionDataset(dataset_name, split="test")
 
-    def evaluate_adversarial_robustness(self, dataloader, attack_types=['fgsm', 'pgd'],
-                                        epsilons=[0.01, 0.02, 0.05, 0.1]):
-        """
-        评估模型对抗攻击的鲁棒性
-        :param dataloader: 数据加载器
-        :param attack_types: 攻击类型列表
-        :param epsilons: 扰动强度列表
-        :return: 不同条件下的EER
-        """
-        results = {}
-
-        for attack_type in attack_types:
-            results[attack_type] = {}
-            for epsilon in epsilons:
-                # 针对每种攻击类型和强度评估EER
-                # 简化版实现，实际需要实现FGSM/PGD攻击
-                eer = np.random.uniform(0.05, 0.2)  # 随机值示例
-                results[attack_type][epsilon] = eer
-                print(f"Attack: {attack_type}, Epsilon: {epsilon}, EER: {eer:.4f}")
-
-        return results
+        return {
+            "train": DataLoader(train_dataset, batch_size=batch_size, shuffle=True,
+                                num_workers=0, pin_memory=False),  # 减少工作线程和禁用pin_memory
+            "val": DataLoader(val_dataset, batch_size=batch_size, shuffle=False,
+                              num_workers=0, pin_memory=False),
+            "test": DataLoader(test_dataset, batch_size=batch_size, shuffle=False,
+                               num_workers=0, pin_memory=False),
+        }
+    except Exception as e:
+        print(f"数据加载器创建错误: {e}")
+        return None
 
 
 # 测试代码
 if __name__ == "__main__":
-    # 加载数据
-    dataloaders = get_dataloaders("voxceleb1")
+    # 设置较小的批次大小
+    batch_size = 4
 
-    # 创建训练器
-    trainer = Trainer()
+    print("创建数据加载器...")
+    try:
+        # 使用内存友好的数据加载器
+        dataloaders = create_small_dataloaders("librispeech", batch_size=batch_size)
 
-    # 训练模型
-    trainer.train(dataloaders["train"], dataloaders["val"])
+        if dataloaders is None:
+            print("无法创建数据加载器，退出")
+            exit(1)
 
-    # 创建评估器
-    evaluator = Evaluator(trainer.model)
+        print(f"训练集批次数: {len(dataloaders['train'])}")
+        print(f"验证集批次数: {len(dataloaders['val'])}")
+        print(f"测试集批次数: {len(dataloaders['test'])}")
 
-    # 评估模型
-    eer = evaluator.evaluate_eer(dataloaders["test"])
-    print(f"测试集EER: {eer:.4f}")
+        # 创建训练器
+        print("创建训练器...")
+        trainer = Trainer(Config)
 
-    # 评估噪声鲁棒性
-    noise_results = evaluator.evaluate_noise_robustness(dataloaders)
-    print("噪声鲁棒性结果:", noise_results)
+        # 测试一个批次
+        print("测试前向传播...")
+        try:
+            x, y = next(iter(dataloaders["train"]))
+            print(f"输入形状: {x.shape}, 标签形状: {y.shape}")
+
+            x = x.to(trainer.device).unsqueeze(2)
+            y = y.to(trainer.device)
+
+            with torch.no_grad():
+                embeddings, logits = trainer.model(x)
+                print(f"嵌入形状: {embeddings.shape}, 输出形状: {logits.shape}")
+                print("前向传播测试成功!")
+        except Exception as e:
+            print(f"前向传播测试失败: {e}")
+            exit(1)
+
+        # 开始训练
+        print("开始训练...")
+        trainer.train(dataloaders["train"], dataloaders["val"])
+
+        # 创建评估器
+        print("创建评估器...")
+        evaluator = SimpleEvaluator(trainer.model, trainer.chaos_feature_extractor)
+
+        # 评估模型
+        print("评估模型...")
+        test_accuracy = evaluator.evaluate_accuracy(dataloaders["test"])
+        print(f"测试集准确率: {test_accuracy:.2f}%")
+
+    except Exception as e:
+        print(f"程序执行错误: {e}")
+        import traceback
+
+        traceback.print_exc()

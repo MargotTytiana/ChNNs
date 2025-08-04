@@ -15,3 +15,30 @@
 17点00分 -- 运行c_hilap_model.py
 1. 完成chaos_features.py
 2. 备份文件，明天任务：修改并测试c_hilap_model.py
+
+2025年7月30日
+10点10分 --- 运行c_hilap_model.py成功
+
+10点33分 --- 
+1. 修改trainer.py的数据的通道数
+
+11点04分
+1. 使用Claude模型修复代码，修改的代码有：
+	1）trainer.py
+	2) memory_efficient_data_loader.py
+	3) c_hilap_model.py
+	4) main.py
+	5）README.md
+2. 11点06分开始运行trainer代码
+
+2025年8月1日
+09点41分 --- acc低 + 模型训练慢
+1. 修改：
+	data_loader.py
+	c_hilap_model.py
+	trainer.py
+	|______simplified版本
+
+	
+
+

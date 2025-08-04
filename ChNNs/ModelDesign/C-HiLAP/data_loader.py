@@ -11,9 +11,13 @@ from tqdm import tqdm
 
 # 配置参数
 class Config:
-    LIBRISPEECH_PATH = r"P:/PycharmProjects/pythonProject1/dataset/LibriSpeech"
-    CHIME6_PATH = r"P:/PycharmProjects/pythonProject1/devDataset/CHiME6_dev/CHiME6/audio/dev"
-    RAVDESS_PATH = r"P:/PycharmProjects/pythonProject1/devDataset/ravdess"
+    DEBUG_MODE = True  # 添加调试模式
+    DEBUG_SAMPLE_SIZE = 1000  # 只使用1000个样本
+
+    # 使用os.path.join确保跨平台兼容性
+    LIBRISPEECH_PATH = r"P:\PycharmProjects\pythonProject1\dataset\LibriSpeech"
+    CHIME6_PATH = r"P:\PycharmProjects\pythonProject1\devDataset\CHiME6_dev\CHiME6\audio\dev"
+    RAVDESS_PATH = r"P:\PycharmProjects\pythonProject1\devDataset\ravdess"
 
     SAMPLE_RATE = 16000
     DURATION = 3
@@ -76,6 +80,46 @@ class SpeakerRecognitionDataset(Dataset):
         self.snr_db = snr_db
         self.audio_paths, self.labels = self._load_dataset()
         self.speaker_to_idx = self._build_speaker_map()
+        self._validate_dataset()
+
+        if Config.DEBUG_MODE and split == "train":
+            self.audio_paths = self.audio_paths[:Config.DEBUG_SAMPLE_SIZE]
+            self.labels = self.labels[:Config.DEBUG_SAMPLE_SIZE]
+
+    def _validate_dataset(self):
+        """验证数据集完整性"""
+        print(f"验证{self.split}数据集...")
+        valid_count = 0
+        invalid_files = []
+
+        for i in tqdm(range(len(self.audio_paths))):
+            path = self.audio_paths[i]
+            try:
+                # 检查文件大小
+                if os.path.getsize(path) < 1024:  # 小于1KB的文件可能是损坏的
+                    raise ValueError("文件太小可能已损坏")
+
+                # 尝试读取文件
+                signal, sr = librosa.load(path, sr=Config.SAMPLE_RATE, mono=True)
+                if len(signal) == 0:
+                    raise ValueError("空音频文件")
+
+                # 检查信号是否全为零
+                if np.max(np.abs(signal)) < 1e-5:
+                    raise ValueError("信号幅度太小（接近静音）")
+
+                valid_count += 1
+            except Exception as e:
+                invalid_files.append((path, str(e)))
+                # 立即移除损坏文件
+                self.audio_paths.pop(i)
+                self.labels.pop(i)
+
+        print(f"有效文件: {valid_count}/{len(self.audio_paths)}")
+        if invalid_files:
+            print(f"无效文件 ({len(invalid_files)}个):")
+            for path, error in invalid_files[:5]:  # 最多显示5个错误
+                print(f" - {path}: {error}")
 
     def _load_dataset(self):
         audio_paths = []
@@ -90,7 +134,7 @@ class SpeakerRecognitionDataset(Dataset):
                 for file in filenames:
                     if file.endswith(".flac"):
                         full_path = os.path.join(dirpath, file)
-                        speaker_id = os.path.normpath(full_path).split(os.sep)[-3]
+                        speaker_id = os.path.basename(os.path.dirname(os.path.dirname(full_path)))
                         audio_paths.append(full_path)
                         labels.append(speaker_id)
 
@@ -116,7 +160,7 @@ class SpeakerRecognitionDataset(Dataset):
             for file in os.listdir(root):
                 if file.endswith(".wav"):
                     full_path = os.path.join(root, file)
-                    speaker_id = file.split("_")[6]  # RAVDESS 特定格式
+                    speaker_id = file.split("-")[0]  # RAVDESS 特定格式
                     audio_paths.append(full_path)
                     labels.append(speaker_id)
 
@@ -148,7 +192,22 @@ class SpeakerRecognitionDataset(Dataset):
         speaker_id = self.labels[idx]
         label = self.speaker_to_idx[speaker_id]
 
-        signal, sr = librosa.load(path, sr=Config.SAMPLE_RATE)
+        try:
+            # 优先使用 soundfile 加载 FLAC
+            if path.endswith('.flac'):
+                try:
+                    signal, sr = sf.read(path)
+                    if sr != Config.SAMPLE_RATE:
+                        signal = librosa.resample(signal, orig_sr=sr, target_sr=Config.SAMPLE_RATE)
+                except Exception as e:
+                    print(f"SoundFile加载失败 {path}: {e}, 尝试Librosa")
+                    signal, sr = librosa.load(path, sr=Config.SAMPLE_RATE, mono=True)
+            else:
+                signal, sr = librosa.load(path, sr=Config.SAMPLE_RATE, mono=True)
+        except Exception as e:
+            print(f"加载音频错误 {path}: {str(e)}")
+            signal = np.zeros(Config.MAX_SAMPLES, dtype=np.float32)
+            sr = Config.SAMPLE_RATE
 
         if len(signal) > Config.MAX_SAMPLES:
             signal = signal[:Config.MAX_SAMPLES]
@@ -165,6 +224,17 @@ class SpeakerRecognitionDataset(Dataset):
 
 # 数据加载器构造函数
 def get_dataloaders(dataset_name, batch_size=Config.BATCH_SIZE):
+    # 创建小规模测试数据集
+    if os.environ.get("DEBUG_MODE", "0") == "1":
+        print("使用小型调试数据集")
+        train_dataset = torch.utils.data.Subset(
+            SpeakerRecognitionDataset(dataset_name, split="train"),
+            indices=range(100)  # 仅使用100个样本
+        )
+        # 类似地创建验证和测试子集
+    else:
+        train_dataset = SpeakerRecognitionDataset(dataset_name, split="train")
+
     train_dataset = SpeakerRecognitionDataset(dataset_name, split="train")
     val_dataset = SpeakerRecognitionDataset(dataset_name, split="val")
     test_dataset = SpeakerRecognitionDataset(dataset_name, split="test")
@@ -177,13 +247,28 @@ def get_dataloaders(dataset_name, batch_size=Config.BATCH_SIZE):
         "train": DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=Config.NUM_WORKERS),
         "val": DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=Config.NUM_WORKERS),
         "test": DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=Config.NUM_WORKERS),
-        "noisy_test": DataLoader(noisy_test_dataset, batch_size=batch_size, shuffle=False, num_workers=Config.NUM_WORKERS),
+        "noisy_test": DataLoader(noisy_test_dataset, batch_size=batch_size, shuffle=False,
+                                 num_workers=Config.NUM_WORKERS),
     }
 
 
 # 测试加载
 if __name__ == "__main__":
     dataloaders = get_dataloaders("librispeech")
+
+    print("验证训练集...")
+    train_dataset = SpeakerRecognitionDataset("librispeech", split="train")
+
+    print("\n验证测试集...")
+    test_dataset = SpeakerRecognitionDataset("librispeech", split="test")
+
+    # 在__main__添加
+    sample_idx = 0
+    signal, label = train_dataset[sample_idx]
+    print(f"样本{sample_idx} - 标签: {label}")
+    print(f"信号长度: {len(signal)} 采样点")
+    print(f"信号范围: {signal.min()} 到 {signal.max()}")
+
     print(f"训练集批次：{len(dataloaders['train'])}，说话人数量：{len(dataloaders['train'].dataset.speaker_to_idx)}")
     x, y = next(iter(dataloaders["train"]))
     print(f"音频形状：{x.shape}，标签形状：{y.shape}")
