@@ -20,7 +20,7 @@ except ImportError as e:
 # 配置参数
 class Config:
     # 训练参数
-    EPOCHS = 50  # 减少训练轮数
+    EPOCHS = 500  # 减少训练轮数
     LR = 0.01  # 初始较大学习率
     LR_DECAY = 0.95  # 学习率衰减因子
     WEIGHT_DECAY = 1e-5
@@ -48,14 +48,16 @@ class Config:
 
 # 训练器类
 class Trainer:
-    def __init__(self, config=Config):
+    def __init__(self, config=Config, model=None):
         """初始化训练器"""
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"使用设备: {self.device}")
 
         # 创建模型
-        self.model = CHiLAPModel().to(self.device)
+        if model is None:
+            raise ValueError("初始化Trainer时必须传入model参数")
+        self.model = model.to(self.device)  # 使用传入的模型
 
         # 定义损失函数
         self.ce_loss = nn.CrossEntropyLoss()
@@ -150,8 +152,11 @@ class Trainer:
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.config.GRAD_CLIP)
 
                     if (i + 1) % accumulation_steps == 0:
-                        self.scaler.step(self.optimizer)
+                        self.scaler.step(self.optimizer)  # 优化器步骤
                         self.scaler.update()
+                        # 2. 再调用预热调度器
+                        if epoch <= self.config.WARMUP_EPOCHS:
+                            self.warmup_scheduler.step()
                         self.optimizer.zero_grad()
 
                 else:
@@ -170,7 +175,11 @@ class Trainer:
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.config.GRAD_CLIP)
 
                     if (i + 1) % accumulation_steps == 0:
+                        # 1. 先更新参数
                         self.optimizer.step()
+                        # 2. 再调用学习率预热调度器（仅在预热阶段）
+                        if epoch <= self.config.WARMUP_EPOCHS:
+                            self.warmup_scheduler.step()  # 移动到optimizer.step()之后
                         self.optimizer.zero_grad()
 
                 # 统计
@@ -443,9 +452,18 @@ if __name__ == "__main__":
         print(f"验证集批次数: {len(dataloaders['val'])}")
         print(f"测试集批次数: {len(dataloaders['test'])}")
 
-        # 创建训练器
-        print("创建训练器...")
-        trainer = Trainer(Config)
+        # 关键修改：从训练集中获取实际说话人数量（类别数）
+        num_speakers = len(dataloaders["train"].dataset.speaker_to_idx)
+        print(f"数据集中实际说话人数量（类别数）: {num_speakers}")
+
+        # 创建训练器前，先初始化模型并传入正确的num_classes
+        print("创建模型和训练器...")
+        # 关键修改：确保在创建Trainer时使用正确的num_classes初始化模型
+        config = Config()
+        # 1. 初始化模型（传入正确的num_classes）
+        model = CHiLAPModel(num_classes=num_speakers)
+        # 2. 将模型传入Trainer，确保优化器初始化时模型已存在
+        trainer = Trainer(config=config, model=model)  # 传入model参数
 
         # 测试一个批次
         print("测试前向传播...")

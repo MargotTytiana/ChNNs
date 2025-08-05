@@ -10,7 +10,6 @@ class Config:
     INPUT_DIM = 1  # 输入特征维度
     HIDDEN_DIM = 256  # 减少隐藏层维度
     EMBEDDING_DIM = 128  # 减少嵌入层维度
-    NUM_CLASSES = 1211  # VoxCeleb1说话人数量
 
     # 简化混沌模块参数
     CHAOS_DIM = 64  # 减少混沌系统维度
@@ -111,11 +110,15 @@ class StatisticalPooling(nn.Module):
 # 完整的C-HiLAP模型（简化版）
 class CHiLAPModel(nn.Module):
     def __init__(self, input_dim=Config.INPUT_DIM, hidden_dim=Config.HIDDEN_DIM,
-                 embedding_dim=Config.EMBEDDING_DIM, num_classes=Config.NUM_CLASSES):
+                 embedding_dim=Config.EMBEDDING_DIM, num_classes=None):
         """
         混沌层次吸引子传播(C-HiLAP)模型 - 简化版
         """
         super().__init__()
+
+        # 若未传入num_classes，可设置一个默认值（但实际使用时必须从数据集获取后传入）
+        if num_classes is None:
+            raise ValueError("必须指定num_classes（说话人数量），请从数据集获取后传入")
 
         # 特征提取层
         self.feature_extractor = nn.Sequential(

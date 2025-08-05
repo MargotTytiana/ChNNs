@@ -13,7 +13,7 @@ import gc
 # 配置参数
 class Config:
     DEBUG_MODE = True  # 调试模式，使用小规模数据集
-    DEBUG_SAMPLE_SIZE = 500  # 调试模式下使用的样本数量
+    DEBUG_SAMPLE_SIZE = 5000  # 调试模式下使用的样本数量
 
     # 使用os.path.join确保跨平台兼容性
     BASE_DIR = "P:/"
