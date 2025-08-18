@@ -1,0 +1,67 @@
+# 数据配置
+data:
+  root_dir: "/path/to/librispeech"  # LibriSpeech数据集根目录
+  test_split: "test-clean"          # 测试集分割
+  sample_rate: 16000                # 采样率
+  feature_type: "fbank"             # 特征类型 ('mfcc', 'fbank', 'chaotic', 'combined')
+  feature_dim: 80                   # 特征维度
+  max_duration: 10.0                # 最大音频时长（秒）
+  cache_dir: "./cache"              # 缓存目录
+
+# 模型配置
+model:
+  type: "c_hilap"                   # 模型类型 ('c_hilap', 'variant_a', 'variant_b', 'ecapa_tdnn', 'xvector')
+  checkpoint: "./outputs/best_model.pth"  # 模型检查点路径
+  input_dim: 80                     # 输入特征维度
+  embed_dim: 512                    # 嵌入向量维度
+  num_layers: 4                     # C-HiLAP层数
+  chaos_type: "lorenz"              # 混沌系统类型 ('lorenz', 'rossler', 'chen', 'chua')
+  ks_entropy: 0.5                   # 目标Kolmogorov-Sinai熵
+  bifurcation_factor: 1.0           # 分岔因子
+  # 变体A特有参数
+  chaotic_dim: 12                   # 混沌特征维度
+  backbone_type: "ecapa_tdnn"       # 骨干网络类型
+  fusion_type: "attention"          # 融合类型
+
+# 评估配置
+evaluation:
+  batch_size: 32                    # 批次大小
+  num_workers: 4                    # 数据加载工作进程数
+  output_dir: "./evaluation_results"  # 输出目录
+  trials_path: "./trials/test_trials.json"  # 试验对路径（如果不存在将生成新的）
+  num_trials: 1000                  # 生成的试验对数量
+  genuine_ratio: 0.5                # 合法配对比例
+
+  # 鲁棒性评估选项
+  evaluate_noise: true              # 是否评估噪声鲁棒性
+  snr_levels: [0, 5, 10, 15, 20]    # 信噪比水平（dB）
+  noise_types: ["gaussian", "babble"]  # 噪声类型
+
+  evaluate_duration: true           # 是否评估时长鲁棒性
+  durations: [1.0, 2.0, 3.0, 5.0]   # 语音时长（秒）
+
+  evaluate_adversarial: true        # 是否评估对抗鲁棒性
+  epsilon_values: [0.01, 0.05, 0.1]  # 扰动大小
+
+  # 可视化选项
+  visualize_embeddings: true        # 是否可视化嵌入向量
+  max_samples: 1000                 # 可视化的最大样本数
+
+  # 混沌特性分析
+  analyze_chaotic: true             # 是否分析混沌特性
+
+  # 模型比较
+  comparison_models:                # 用于比较的其他模型
+    ecapa_tdnn:                     # 模型名称
+      type: "ecapa_tdnn"            # 模型类型
+      checkpoint: "./baselines/ecapa_tdnn.pth"  # 检查点路径
+      input_dim: 80                 # 输入维度
+      embed_dim: 192                # 嵌入维度
+      feature_type: "fbank"         # 特征类型
+
+    xvector:                        # 另一个比较模型
+      type: "xvector"               # 模型类型
+      checkpoint: "./baselines/xvector.pth"  # 检查点路径
+      input_dim: 40                 # 输入维度
+      embed_dim: 512                # 嵌入维度
+      feature_type: "mfcc"          # 特征类型

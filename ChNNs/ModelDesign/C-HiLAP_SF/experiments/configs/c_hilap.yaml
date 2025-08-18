@@ -1,0 +1,53 @@
+# 数据配置
+data:
+  root_dir: "/path/to/librispeech"  # LibriSpeech数据集根目录
+  train_split: "train-clean-100"    # 训练集分割
+  val_split: "dev-clean"            # 验证集分割
+  sample_rate: 16000                # 采样率
+  feature_type: "fbank"             # 特征类型 ('mfcc', 'fbank', 'chaotic', 'combined')
+  feature_dim: 80                   # 特征维度
+  max_duration: 10.0                # 最大音频时长（秒）
+  cache_dir: "./cache"              # 缓存目录
+
+# 模型配置
+model:
+  input_dim: 80                     # 输入特征维度
+  embed_dim: 512                    # 嵌入向量维度
+  num_layers: 4                     # C-HiLAP层数
+  chaos_type: "lorenz"              # 混沌系统类型 ('lorenz', 'rossler', 'chen', 'chua')
+  ks_entropy: 0.5                   # 目标Kolmogorov-Sinai熵
+  bifurcation_factor: 1.0           # 分岔因子
+
+# 损失函数配置
+loss:
+  sync_weight: 0.1                  # 相位同步损失权重
+  lyap_weight: 0.01                 # 李雅普诺夫正则化损失权重
+
+# 训练配置
+train:
+  seed: 42                          # 随机种子
+  batch_size: 32                    # 批次大小
+  num_epochs: 50                    # 训练轮数
+  num_workers: 4                    # 数据加载工作进程数
+  save_interval: 5                  # 保存检查点间隔（轮）
+  grad_clip: 1.0                    # 梯度裁剪阈值
+  output_dir: "./outputs"           # 输出目录
+  resume: ""                        # 恢复训练的检查点路径（可选）
+
+# 优化器配置
+optimizer:
+  lr: 0.001                         # 学习率
+  weight_decay: 0.0001              # 权重衰减
+  beta1: 0.9                        # Adam beta1参数
+  beta2: 0.999                      # Adam beta2参数
+
+# 学习率调度器配置
+scheduler:
+  type: "cosine"                    # 调度器类型 ('cosine', 'cyclic')
+  # 余弦退火调度器参数
+  min_lr: 0.00001                   # 最小学习率
+  # 循环学习率调度器参数
+  base_lr: 0.0001                   # 基础学习率
+  max_lr: 0.001                     # 最大学习率
+  step_size_up: 2                   # 上升步数（轮）
+  mode: "triangular2"               # 循环模式
