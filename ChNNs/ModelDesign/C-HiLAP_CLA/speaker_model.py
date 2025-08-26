@@ -646,7 +646,7 @@ def evaluate_speaker_recognition(
 
     # Calculate confusion matrix
     # 计算混淆矩阵
-    num_classes = len(np.unique(all_labels))
+    num_classes = model.num_speakers
     confusion_matrix = np.zeros((num_classes, num_classes), dtype=np.int64)
 
     for i in range(len(all_labels)):

@@ -1,0 +1,9 @@
+# data_loader.log
+
+Loaded 10026 audio files from 91 speakers
+Loaded 2703 audio files from 40 speakers
+Loaded 1211 audio files from 18 speakers
+Number of speakers: 149
+Number of training batches: 314
+Number of development batches: 85
+Number of test batches: 38

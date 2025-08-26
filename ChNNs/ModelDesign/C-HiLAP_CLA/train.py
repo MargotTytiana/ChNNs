@@ -211,6 +211,17 @@ def train_epoch(
         losses = criterion(outputs, labels)
         loss = losses['total_loss']
 
+        # ======== 🔎 调试打印，只在第一个 epoch 的第一个 batch 打印 ========
+        if epoch == 0 and batch_idx == 0:
+            print("\n=== DEBUG INFO (First Batch) ===")
+            print("Output logits shape:", outputs['logits'].shape)  # 应该是 [batch_size, num_speakers]
+            print("Labels min/max:", labels.min().item(), labels.max().item())  # 应该在 0..num_speakers-1
+            print("Loss (total):", loss.item())
+            print("Predictions (first 10):", torch.argmax(outputs['logits'], dim=1)[:10].cpu().numpy())
+            print("Labels      (first 10):", labels[:10].cpu().numpy())
+            print("===============================\n")
+        # ============================================================
+
         # Backward pass and optimize
         # 反向传播和优化
         loss.backward()

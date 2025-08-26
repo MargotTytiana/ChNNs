@@ -4,7 +4,35 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import librosa
 import glob
+import pickle
 from typing import Dict, List, Tuple, Optional, Union
+
+
+def create_global_speaker_mapping(train_dir, dev_dir, test_dir):
+    """创建全局说话人ID到数字标签的映射"""
+    all_speakers = set()
+
+    # 遍历所有目录
+    for data_dir in [train_dir, dev_dir, test_dir]:
+        if not os.path.exists(data_dir):
+            continue
+
+        # 获取该目录下的所有说话人ID
+        audio_files = glob.glob(os.path.join(data_dir, "**", "*.flac"), recursive=True)
+        speaker_ids = [os.path.basename(os.path.dirname(os.path.dirname(f))) for f in audio_files]
+        all_speakers.update(speaker_ids)
+
+    # 创建映射字典
+    speaker_to_label = {speaker: idx for idx, speaker in enumerate(sorted(all_speakers))}
+
+    # 保存映射以便将来使用
+    mapping_dir = os.path.dirname(train_dir) if train_dir else "."
+    mapping_path = os.path.join(mapping_dir, 'speaker_mapping.pkl')
+    with open(mapping_path, 'wb') as f:
+        pickle.dump(speaker_to_label, f)
+
+    print(f"创建了全局说话人映射，共 {len(speaker_to_label)} 个说话人")
+    return speaker_to_label
 
 
 class LibriSpeechDataset(Dataset):
@@ -17,13 +45,14 @@ class LibriSpeechDataset(Dataset):
             root_dir: str,
             segment_length: float = 3.0,
             sampling_rate: int = 16000,
-            transform=None
+            transform=None,
+            speaker_to_label: Optional[Dict[str, int]] = None
     ):
         """
         Initialize the LibriSpeech dataset
-      
+
         初始化LibriSpeech数据集
-      
+
         Args:
             root_dir (str): Root directory of the dataset
                            数据集的根目录
@@ -33,6 +62,8 @@ class LibriSpeechDataset(Dataset):
                                音频采样率
             transform: Optional transform to be applied on a sample
                       可选的样本转换函数
+            speaker_to_label: Global speaker to label mapping
+                             全局说话人到标签的映射
         """
         self.root_dir = root_dir
         self.segment_length = segment_length
@@ -47,22 +78,36 @@ class LibriSpeechDataset(Dataset):
         # 从文件路径中提取说话人ID
         self.speaker_ids = [os.path.basename(os.path.dirname(os.path.dirname(f))) for f in self.audio_files]
 
-        # Create a mapping from speaker ID to integer label
-        # 创建从说话人ID到整数标签的映射
-        self.unique_speakers = sorted(list(set(self.speaker_ids)))
-        self.speaker_to_idx = {speaker: idx for idx, speaker in enumerate(self.unique_speakers)}
+        # Create or use global speaker mapping
+        # 创建或使用全局说话人映射
+        if speaker_to_label is not None:
+            self.speaker_to_idx = speaker_to_label
+        else:
+            # Try to load existing mapping
+            # 尝试加载现有的映射
+            mapping_path = os.path.join(os.path.dirname(root_dir), 'speaker_mapping.pkl')
+            if os.path.exists(mapping_path):
+                with open(mapping_path, 'rb') as f:
+                    self.speaker_to_idx = pickle.load(f)
+            else:
+                # Create new mapping based on this dataset only
+                # 仅基于此数据集创建新映射
+                self.unique_speakers = sorted(list(set(self.speaker_ids)))
+                self.speaker_to_idx = {speaker: idx for idx, speaker in enumerate(self.unique_speakers)}
+
         self.idx_to_speaker = {idx: speaker for speaker, idx in self.speaker_to_idx.items()}  # Add reverse mapping
 
         # Map each file to its integer label
         # 将每个文件映射到其整数标签
         self.labels = [self.speaker_to_idx[speaker] for speaker in self.speaker_ids]
+        self.preprocessed_data = []  # 用于缓存预处理后的数据
 
-        print(f"Loaded {len(self.audio_files)} audio files from {len(self.unique_speakers)} speakers")
+        print(f"Loaded {len(self.audio_files)} audio files from {len(set(self.speaker_ids))} speakers")
 
     def __len__(self) -> int:
         """
         Return the number of samples in the dataset
-      
+
         返回数据集中的样本数量
         """
         return len(self.audio_files)
@@ -70,19 +115,25 @@ class LibriSpeechDataset(Dataset):
     def __getitem__(self, idx: int) -> Dict[str, torch.Tensor]:
         """
         Get a sample from the dataset
-      
+
         从数据集中获取一个样本
-      
+
         Args:
             idx (int): Index of the sample
                       样本索引
-                    
+
         Returns:
             dict: Dictionary containing audio data and label
                  包含音频数据和标签的字典
         """
+        # 检查是否已经预处理过
+        if idx < len(self.preprocessed_data) and self.preprocessed_data[idx] is not None:
+            return self.preprocessed_data[idx]
+
+        # 原有的处理逻辑
         audio_file = self.audio_files[idx]
-        label = self.labels[idx]
+        speaker_id = os.path.basename(os.path.dirname(os.path.dirname(audio_file)))
+        label = self.speaker_to_idx[speaker_id]
 
         # Load audio with librosa
         # 使用librosa加载音频
@@ -97,23 +148,31 @@ class LibriSpeechDataset(Dataset):
         if self.transform:
             audio = self.transform(audio)
 
-        return {
+        # 创建结果字典
+        result = {
             'audio': torch.FloatTensor(audio),
             'label': torch.LongTensor([label])[0],
-            'speaker_id': self.idx_to_speaker[label],  # Use reverse mapping
+            'speaker_id': speaker_id,
             'file_path': audio_file
         }
+
+        # 缓存结果
+        if idx >= len(self.preprocessed_data):
+            self.preprocessed_data.extend([None] * (idx - len(self.preprocessed_data) + 1))
+        self.preprocessed_data[idx] = result
+
+        return result
 
     def _process_audio(self, audio: np.ndarray) -> np.ndarray:
         """
         Process audio: segment, remove silence, etc.
-      
+
         处理音频：分段、去除静音等
-      
+
         Args:
             audio (np.ndarray): Audio signal
                               音频信号
-                            
+
         Returns:
             np.ndarray: Processed audio signal
                        处理后的音频信号
@@ -147,9 +206,9 @@ class LibriSpeechDataset(Dataset):
     def _remove_silence(self, audio: np.ndarray, threshold: float = 0.03, min_duration: int = 320) -> np.ndarray:
         """
         Remove silence from audio using energy-based VAD
-      
+
         使用基于能量的VAD从音频中去除静音
-      
+
         Args:
             audio (np.ndarray): Audio signal
                               音频信号
@@ -157,7 +216,7 @@ class LibriSpeechDataset(Dataset):
                              静音检测的能量阈值
             min_duration (int): Minimum duration of non-silence segments (in samples)
                               非静音片段的最小持续时间（样本数）
-                            
+
         Returns:
             np.ndarray: Audio with silence removed
                        去除静音后的音频
@@ -187,15 +246,15 @@ class LibriSpeechDataset(Dataset):
     def _apply_min_duration(self, mask: np.ndarray, min_duration: int) -> np.ndarray:
         """
         Apply minimum duration constraint to mask
-      
+
         将最小持续时间约束应用于掩码
-      
+
         Args:
             mask (np.ndarray): Binary mask
                              二值掩码
             min_duration (int): Minimum duration in samples
                               最小持续时间（样本数）
-                            
+
         Returns:
             np.ndarray: Processed mask
                        处理后的掩码
@@ -230,9 +289,9 @@ def create_dataloaders(
 ) -> Tuple[DataLoader, DataLoader, DataLoader, Dict[str, int]]:
     """
     Create DataLoader objects for train, dev, and test sets
-  
+
     为训练集、开发集和测试集创建DataLoader对象
-  
+
     Args:
         train_dir (str): Directory containing training data
                         包含训练数据的目录
@@ -248,41 +307,34 @@ def create_dataloaders(
                            音频采样率
         num_workers (int): Number of worker processes for data loading
                          用于数据加载的工作进程数
-                       
+
     Returns:
         tuple: Train, dev, and test DataLoaders, and speaker mapping dictionary
                训练、开发和测试DataLoader，以及说话人映射字典
     """
-    # Create datasets
-    # 创建数据集
-    train_dataset = LibriSpeechDataset(train_dir, segment_length, sampling_rate)
-    dev_dataset = LibriSpeechDataset(dev_dir, segment_length, sampling_rate)
-    test_dataset = LibriSpeechDataset(test_dir, segment_length, sampling_rate)
+    # 创建全局说话人映射
+    speaker_to_idx = create_global_speaker_mapping(train_dir, dev_dir, test_dir)
 
-    # Ensure consistent speaker mapping across datasets
-    # 确保数据集之间的说话人映射一致
-    all_speakers = sorted(list(set(train_dataset.unique_speakers +
-                                   dev_dataset.unique_speakers +
-                                   test_dataset.unique_speakers)))
-
-    speaker_to_idx = {speaker: idx for idx, speaker in enumerate(all_speakers)}
-
-    # Update speaker mappings in all datasets
-    # 更新所有数据集中的说话人映射
-    for dataset in [train_dataset, dev_dataset, test_dataset]:
-        dataset.speaker_to_idx = speaker_to_idx
-        dataset.idx_to_speaker = {idx: speaker for speaker, idx in speaker_to_idx.items()}  # Update reverse mapping
-        dataset.labels = [speaker_to_idx[speaker] for speaker in dataset.speaker_ids]
+    # 创建数据集，使用全局说话人映射
+    train_dataset = LibriSpeechDataset(
+        train_dir, segment_length, sampling_rate, speaker_to_label=speaker_to_idx
+    )
+    dev_dataset = LibriSpeechDataset(
+        dev_dir, segment_length, sampling_rate, speaker_to_label=speaker_to_idx
+    )
+    test_dataset = LibriSpeechDataset(
+        test_dir, segment_length, sampling_rate, speaker_to_label=speaker_to_idx
+    )
 
     pin_memory = torch.cuda.is_available()
-    # Create dataloaders
+
     # 创建数据加载器
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
         shuffle=True,
         num_workers=num_workers,
-        pin_memory=pin_memory  # Will be True only if GPU is available
+        pin_memory=pin_memory
     )
 
     dev_loader = DataLoader(
@@ -301,21 +353,69 @@ def create_dataloaders(
         pin_memory=pin_memory
     )
 
+    # 验证数据集一致性
+    print("Validating dataset consistency...")
+    print(f"Global speakers: {len(speaker_to_idx)}")
+
+    # 检查训练集说话人数量
+    train_speakers = set()
+    for batch in train_loader:
+        for label in batch['label']:
+            train_speakers.add(label.item())
+    print(f"Training speakers: {len(train_speakers)}")
+
+    # 检查开发集说话人数量
+    dev_speakers = set()
+    for batch in dev_loader:
+        for label in batch['label']:
+            dev_speakers.add(label.item())
+    print(f"Development speakers: {len(dev_speakers)}")
+
+    # 检查测试集说话人数量
+    test_speakers = set()
+    for batch in test_loader:
+        for label in batch['label']:
+            test_speakers.add(label.item())
+    print(f"Test speakers: {len(test_speakers)}")
+
+    # 检查标签范围
+    train_labels = set()
+    for batch in train_loader:
+        train_labels.update(batch['label'].numpy())
+    print(f"Training labels range: {min(train_labels)} - {max(train_labels)}")
+
+    dev_labels = set()
+    for batch in dev_loader:
+        dev_labels.update(batch['label'].numpy())
+    print(f"Development labels range: {min(dev_labels)} - {max(dev_labels)}")
+
+    test_labels = set()
+    for batch in test_loader:
+        test_labels.update(batch['label'].numpy())
+    print(f"Test labels range: {min(test_labels)} - {max(test_labels)}")
+
+    # 确保所有标签都在模型输出范围内
+    max_label = max(max(train_labels), max(dev_labels), max(test_labels))
+    if max_label >= len(speaker_to_idx):
+        print(f"WARNING: Label {max_label} exceeds model output dimension {len(speaker_to_idx)}")
+    else:
+        print("Dataset validation passed - all labels are within model output range")
+
     return train_loader, dev_loader, test_loader, speaker_to_idx
 
 
 def extract_features(audio: np.ndarray, sampling_rate: int = 16000) -> np.ndarray:
     """
     Extract acoustic features from audio
-  
+
     从音频中提取声学特征
-  
+
     Args:
         audio (np.ndarray): Audio signal
                           音频信号
         sampling_rate (int): Sampling rate of audio
                            音频采样率
-                         
+
     Returns:
         np.ndarray: Extracted features
                    提取的特征
