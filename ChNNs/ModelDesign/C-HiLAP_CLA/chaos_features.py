@@ -1,716 +1,759 @@
-"""
-混沌特征提取算法 - 混沌神经网络说话人识别项目
-实现最大李雅普诺夫指数(MLE)、递归量化分析(RQA)、分形维数等混沌特征
-"""
-
 import numpy as np
-import torch
-import torch.nn as nn
-import librosa
-from scipy.spatial.distance import pdist, squareform
-from scipy import signal
+from scipy import stats
+import matplotlib.pyplot as plt
+from typing import Dict, List, Tuple, Optional, Union
 from sklearn.neighbors import NearestNeighbors
-from typing import Tuple, List, Dict, Optional
 import warnings
 
-warnings.filterwarnings('ignore')
+class MLSAFeatureExtractor:
+    """
+    Multi-scale Lyapunov Spectrum Analysis (MLSA) feature extractor
 
-
-class ChaosFeatureExtractor(nn.Module):
-    """混沌特征提取器主类"""
-
-    def __init__(self,
-                 sample_rate: int = 16000,
-                 frame_length: int = 512,
-                 hop_length: int = 256,
-                 embedding_dim: int = 3,
-                 delay: int = 10):
+    多尺度李雅普诺夫谱分析(MLSA)特征提取器
+    """
+    def __init__(
+        self,
+        scales: List[int] = [1, 2, 4, 8, 16],
+        embedding_dim: int = 3,
+        delay: int = 1,
+        n_exponents: int = 2
+    ):
         """
+        Initialize the MLSA feature extractor
+
+        初始化MLSA特征提取器
+
+        Args:
+            scales (List[int]): List of scales for multi-scale analysis
+                               多尺度分析的尺度列表
+            embedding_dim (int): Embedding dimension for phase space reconstruction
+                               相空间重构的嵌入维度
+            delay (int): Time delay for phase space reconstruction
+                        相空间重构的时间延迟
+            n_exponents (int): Number of Lyapunov exponents to compute
+                              要计算的李雅普诺夫指数数量
+        """
+        self.scales = scales
+        self.embedding_dim = embedding_dim
+        self.delay = delay
+        self.n_exponents = n_exponents
+
+    def extract(self, time_series: np.ndarray) -> np.ndarray:
+        """
+        Extract MLSA features from time series
+
+        从时间序列中提取MLSA特征
+
+        Args:
+            time_series (np.ndarray): Input time series
+                                     输入时间序列
+
+        Returns:
+            np.ndarray: MLSA features
+                       MLSA特征
+        """
+        # Ensure time series is 1D
+        # 确保时间序列是一维的
+        time_series = time_series.flatten()
+
+        # Initialize feature vector
+        # 初始化特征向量
+        features = []
+
+        # Extract features at different scales
+        # 在不同尺度上提取特征
+        for scale in self.scales:
+            # Downsample the time series
+            # 对时间序列进行降采样
+            downsampled = time_series[::scale]
+
+            # Skip if downsampled series is too short
+            # 如果降采样后的序列太短，则跳过
+            if len(downsampled) < (self.embedding_dim - 1) * self.delay + 100:
+                warnings.warn(f"Skipping scale {scale}: downsampled series too short")
+                # Pad with zeros to maintain feature vector length
+                # 用零填充以保持特征向量长度
+                features.extend([0.0] * self.n_exponents)
+                continue
+
+            # Reconstruct phase space
+            # 重构相空间
+            phase_space = self._delay_embedding(downsampled, self.embedding_dim, self.delay)
+
+            # Calculate Lyapunov exponents
+            # 计算李雅普诺夫指数
+            exponents = self._calculate_lyapunov_spectrum(phase_space, n_exponents=self.n_exponents)
+
+            # Add exponents to feature vector
+            # 将指数添加到特征向量
+            features.extend(exponents)
+
+        return np.array(features)
+
+    def _delay_embedding(self, time_series: np.ndarray, embedding_dim: int, delay: int) -> np.ndarray:
+        """
+        Perform time delay embedding
+
+        执行时间延迟嵌入
+
+        Args:
+            time_series (np.ndarray): Input time series
+                                     输入时间序列
+            embedding_dim (int): Embedding dimension
+                               嵌入维度
+            delay (int): Time delay
+                        时间延迟
+
+        Returns:
+            np.ndarray: Reconstructed phase space
+                       重构的相空间
+        """
+        n_points = len(time_series) - (embedding_dim - 1) * delay
+
+        if n_points <= 0:
+            raise ValueError("Time series too short for the given delay and embedding dimension")
+
+        # Initialize the reconstructed phase space
+        # 初始化重构的相空间
+        phase_space = np.zeros((n_points, embedding_dim))
+
+        # Fill the phase space with delayed values
+        # 用延迟值填充相空间
+        for i in range(embedding_dim):
+            phase_space[:, i] = time_series[i*delay:i*delay + n_points]
+
+        return phase_space
+
+    def _calculate_lyapunov_spectrum(self, phase_space: np.ndarray, n_exponents: int = 2,
+                                    min_neighbors: int = 20, trajectory_len: int = 20) -> List[float]:
+        """
+        Calculate the Lyapunov spectrum using the method of Sano and Sawada
+
+        使用Sano和Sawada的方法计算李雅普诺夫谱
+
+        Args:
+            phase_space (np.ndarray): Reconstructed phase space
+                                     重构的相空间
+            n_exponents (int): Number of Lyapunov exponents to compute
+                              要计算的李雅普诺夫指数数量
+            min_neighbors (int): Minimum number of neighbors for local linear fit
+                                局部线性拟合的最小邻居数
+            trajectory_len (int): Length of trajectory for exponent estimation
+                                用于指数估计的轨迹长度
+
+        Returns:
+            List[float]: Lyapunov exponents
+                        李雅普诺夫指数
+        """
+        n_points, dim = phase_space.shape
+
+        # Ensure we don't try to compute more exponents than dimensions
+        # 确保我们不尝试计算比维度更多的指数
+        n_exponents = min(n_exponents, dim)
+
+        # Initialize exponents
+        # 初始化指数
+        exponents = np.zeros(n_exponents)
+
+        # Number of reference points to use
+        # 要使用的参考点数量
+        n_refs = min(100, n_points // 10)
+
+        # Randomly select reference points
+        # 随机选择参考点
+        ref_indices = np.random.choice(n_points - trajectory_len, n_refs, replace=False)
+
+        # For each reference point
+        # 对于每个参考点
+        for ref_idx in ref_indices:
+            ref_point = phase_space[ref_idx]
+
+            # Find nearest neighbors
+            # 寻找最近邻
+            nbrs = NearestNeighbors(n_neighbors=min_neighbors + 1, algorithm='ball_tree').fit(phase_space)
+            distances, indices = nbrs.kneighbors([ref_point])
+
+            # Remove the reference point itself
+            # 移除参考点本身
+            neighbors = indices[0][1:]
+
+            # Calculate local Jacobian matrix
+            # 计算局部雅可比矩阵
+            for t in range(trajectory_len):
+                if ref_idx + t >= n_points:
+                    break
+
+                # Current state and next state of reference trajectory
+                # 参考轨迹的当前状态和下一状态
+                x_t = phase_space[ref_idx + t]
+                x_t1 = phase_space[ref_idx + t + 1] if ref_idx + t + 1 < n_points else None
+
+                if x_t1 is None:
+                    break
+
+                # Collect neighbor states at time t and t+1
+                # 收集时间t和t+1的邻居状态
+                neighbor_states_t = []
+                neighbor_states_t1 = []
+
+                for neighbor_idx in neighbors:
+                    if neighbor_idx + t < n_points and neighbor_idx + t + 1 < n_points:
+                        neighbor_states_t.append(phase_space[neighbor_idx + t])
+                        neighbor_states_t1.append(phase_space[neighbor_idx + t + 1])
+
+                if len(neighbor_states_t) < dim:
+                    continue
+
+                # Convert to numpy arrays
+                # 转换为numpy数组
+                neighbor_states_t = np.array(neighbor_states_t)
+                neighbor_states_t1 = np.array(neighbor_states_t1)
+
+                # Calculate displacement vectors
+                # 计算位移向量
+                dx_t = neighbor_states_t - x_t
+                dx_t1 = neighbor_states_t1 - x_t1
+
+                try:
+                    # Estimate local Jacobian matrix using least squares
+                    # 使用最小二乘法估计局部雅可比矩阵
+                    J, _, _, _ = np.linalg.lstsq(dx_t, dx_t1, rcond=None)
+
+                    # Perform QR decomposition
+                    # 执行QR分解
+                    Q, R = np.linalg.qr(J)
+
+                    # Update exponents with log of diagonal elements of R
+                    # 用R的对角元素的对数更新指数
+                    for i in range(n_exponents):
+                        if i < len(np.diag(R)):
+                            exponents[i] += np.log(abs(np.diag(R)[i]))
+                except np.linalg.LinAlgError:
+                    # Skip if linear algebra error occurs
+                    # 如果发生线性代数错误，则跳过
+                    continue
+
+        # Normalize exponents
+        # 归一化指数
+        if n_refs > 0 and trajectory_len > 0:
+            exponents = exponents / (n_refs * trajectory_len)
+
+        # Sort exponents in descending order
+        # 按降序排列指数
+        exponents = np.sort(exponents)[::-1]
+
+        return exponents.tolist()
+
+class RQAFeatureExtractor:
+    """
+    Recurrence Quantification Analysis (RQA) feature extractor
+
+    递归定量分析(RQA)特征提取器
+    """
+    def __init__(
+        self,
+        embedding_dim: int = 3,
+        delay: int = 1,
+        threshold: Optional[float] = None,
+        lmin: int = 2
+    ):
+        """
+        Initialize the RQA feature extractor
+
+        初始化RQA特征提取器
+
+        Args:
+            embedding_dim (int): Embedding dimension for phase space reconstruction
+                               相空间重构的嵌入维度
+            delay (int): Time delay for phase space reconstruction
+                        相空间重构的时间延迟
+            threshold (float, optional): Threshold for recurrence plot. If None, it will be estimated
+                                        递归图的阈值。如果为None，将进行估计
+            lmin (int): Minimum length of diagonal and vertical lines
+                       对角线和垂直线的最小长度
+        """
+        self.embedding_dim = embedding_dim
+        self.delay = delay
+        self.threshold = threshold
+        self.lmin = lmin
+
+    def extract(self, time_series: np.ndarray) -> Dict[str, float]:
+        """
+        Extract RQA features from time series
+
+        从时间序列中提取RQA特征
+
+        Args:
+            time_series (np.ndarray): Input time series
+                                     输入时间序列
+
+        Returns:
+            Dict[str, float]: Dictionary of RQA features
+                             RQA特征字典
+        """
+        # Ensure time series is 1D
+        # 确保时间序列是一维的
+        time_series = time_series.flatten()
+
+        # Reconstruct phase space
+        # 重构相空间
+        phase_space = self._delay_embedding(time_series, self.embedding_dim, self.delay)
+
+        # Calculate distance matrix
+        # 计算距离矩阵
+        dist_matrix = self._calculate_distance_matrix(phase_space)
+
+        # Determine threshold if not provided
+        # 如果未提供阈值，则确定阈值
+        threshold = self.threshold
+        if threshold is None:
+            # Use a percentage of the maximum distance
+            # 使用最大距离的百分比
+            threshold = 0.1 * np.max(dist_matrix)
+
+        # Create recurrence plot
+        # 创建递归图
+        recurrence_plot = dist_matrix < threshold
+
+        # Calculate RQA features
+        # 计算RQA特征
+        features = self._calculate_rqa_features(recurrence_plot)
+
+        return features
+
+    def _delay_embedding(self, time_series: np.ndarray, embedding_dim: int, delay: int) -> np.ndarray:
+        """
+        Perform time delay embedding
+
+        执行时间延迟嵌入
+
+        Args:
+            time_series (np.ndarray): Input time series
+                                     输入时间序列
+            embedding_dim (int): Embedding dimension
+                               嵌入维度
+            delay (int): Time delay
+                        时间延迟
+
+        Returns:
+            np.ndarray: Reconstructed phase space
+                       重构的相空间
+        """
+        n_points = len(time_series) - (embedding_dim - 1) * delay
+
+        if n_points <= 0:
+            raise ValueError("Time series too short for the given delay and embedding dimension")
+
+        # Initialize the reconstructed phase space
+        # 初始化重构的相空间
+        phase_space = np.zeros((n_points, embedding_dim))
+
+        # Fill the phase space with delayed values
+        # 用延迟值填充相空间
+        for i in range(embedding_dim):
+            phase_space[:, i] = time_series[i*delay:i*delay + n_points]
+
+        return phase_space
+
+    def _calculate_distance_matrix(self, phase_space: np.ndarray) -> np.ndarray:
+        """
+        Calculate the distance matrix between all points in phase space
+
+        计算相空间中所有点之间的距离矩阵
+
+        Args:
+            phase_space (np.ndarray): Reconstructed phase space
+                                     重构的相空间
+
+        Returns:
+            np.ndarray: Distance matrix
+                       距离矩阵
+        """
+        n_points = phase_space.shape[0]
+        dist_matrix = np.zeros((n_points, n_points))
+
+        # Calculate Euclidean distance between all pairs of points
+        # 计算所有点对之间的欧几里得距离
+        for i in range(n_points):
+            for j in range(i, n_points):
+                dist = np.linalg.norm(phase_space[i] - phase_space[j])
+                dist_matrix[i, j] = dist_matrix[j, i] = dist
+
+        return dist_matrix
+
+    def _calculate_rqa_features(self, recurrence_plot: np.ndarray) -> Dict[str, float]:
+        """
+        Calculate RQA features from recurrence plot
+
+        从递归图计算RQA特征
+
+        Args:
+            recurrence_plot (np.ndarray): Recurrence plot (binary matrix)
+                                         递归图（二值矩阵）
+
+        Returns:
+            Dict[str, float]: Dictionary of RQA features
+                             RQA特征字典
+        """
+        n = recurrence_plot.shape[0]
+
+        # Recurrence Rate (RR): Percentage of recurrence points
+        # 递归率(RR)：递归点的百分比
+        rr = np.sum(recurrence_plot) / (n * n)
+
+        # Find diagonal lines
+        # 寻找对角线
+        diag_lengths = []
+        for i in range(-(n-self.lmin), n-self.lmin+1):
+            if i == 0:  # Skip the main diagonal
+                continue
+            diag = np.diag(recurrence_plot, k=i)
+            # Count consecutive True values
+            # 计算连续的True值
+            if len(diag) > 0:
+                count = 0
+                for val in diag:
+                    if val:
+                        count += 1
+                    else:
+                        if count >= self.lmin:
+                            diag_lengths.append(count)
+                        count = 0
+                if count >= self.lmin:
+                    diag_lengths.append(count)
+
+        # Find vertical lines
+        # 寻找垂直线
+        vert_lengths = []
+        for i in range(n):
+            col = recurrence_plot[:, i]
+            # Count consecutive True values
+            # 计算连续的True值
+            count = 0
+            for val in col:
+                if val:
+                    count += 1
+                else:
+                    if count >= self.lmin:
+                        vert_lengths.append(count)
+                    count = 0
+            if count >= self.lmin:
+                vert_lengths.append(count)
+
+        # Convert to numpy arrays for easier calculation
+        # 转换为numpy数组以便于计算
+        diag_lengths = np.array(diag_lengths) if diag_lengths else np.array([0])
+        vert_lengths = np.array(vert_lengths) if vert_lengths else np.array([0])
+
+        # Determinism (DET): Percentage of recurrence points forming diagonal lines
+        # 确定性(DET)：形成对角线的递归点的百分比
+        det = np.sum(diag_lengths) / np.sum(recurrence_plot) if np.sum(recurrence_plot) > 0 else 0
+
+        # Average Diagonal Line Length (L)
+        # 平均对角线长度(L)
+        avg_diag_length = np.mean(diag_lengths) if len(diag_lengths) > 0 and diag_lengths[0] > 0 else 0
+
+        # Maximum Diagonal Line Length (Lmax)
+        # 最大对角线长度(Lmax)
+        max_diag_length = np.max(diag_lengths) if len(diag_lengths) > 0 and diag_lengths[0] > 0 else 0
+
+        # Divergence (DIV): Inverse of Lmax
+        # 发散(DIV)：Lmax的倒数
+        div = 1.0 / max_diag_length if max_diag_length > 0 else float('inf')
+
+        # Entropy of diagonal line lengths (ENTR)
+        # 对角线长度的熵(ENTR)
+        if len(diag_lengths) > 0 and diag_lengths[0] > 0:
+            # Calculate histogram of diagonal lengths
+            # 计算对角线长度的直方图
+            hist, _ = np.histogram(diag_lengths, bins=range(1, int(max_diag_length) + 2))
+            # Normalize histogram to get probability
+            # 归一化直方图以获得概率
+            prob = hist / np.sum(hist)
+            # Calculate entropy
+            # 计算熵
+            entr = -np.sum(prob * np.log(prob + 1e-10))
+        else:
+            entr = 0
+
+        # Laminarity (LAM): Percentage of recurrence points forming vertical lines
+        # 层流性(LAM)：形成垂直线的递归点的百分比
+        lam = np.sum(vert_lengths) / np.sum(recurrence_plot) if np.sum(recurrence_plot) > 0 else 0
+
+        # Trapping Time (TT): Average vertical line length
+        # 捕获时间(TT)：平均垂直线长度
+        tt = np.mean(vert_lengths) if len(vert_lengths) > 0 and vert_lengths[0] > 0 else 0
+
+        # Return all features
+        # 返回所有特征
+        return {
+            'RR': rr,
+            'DET': det,
+            'L': avg_diag_length,
+            'Lmax': max_diag_length,
+            'DIV': div,
+            'ENTR': entr,
+            'LAM': lam,
+            'TT': tt
+        }
+
+    def plot_recurrence_plot(self, time_series: np.ndarray, title: str = "Recurrence Plot") -> None:
+        """
+        Plot the recurrence plot for a time series
+
+        绘制时间序列的递归图
+
+        Args:
+            time_series (np.ndarray): Input time series
+                                     输入时间序列
+            title (str): Plot title
+                        图表标题
+        """
+        # Reconstruct phase space
+        # 重构相空间
+        phase_space = self._delay_embedding(time_series, self.embedding_dim, self.delay)
+
+        # Calculate distance matrix
+        # 计算距离矩阵
+        dist_matrix = self._calculate_distance_matrix(phase_space)
+
+        # Determine threshold if not provided
+        # 如果未提供阈值，则确定阈值
+        threshold = self.threshold
+        if threshold is None:
+            threshold = 0.1 * np.max(dist_matrix)
+
+        # Create recurrence plot
+        # 创建递归图
+        recurrence_plot = dist_matrix < threshold
+
+        # Plot
+        # 绘图
+        plt.figure(figsize=(10, 8))
+        plt.imshow(recurrence_plot, cmap='binary', origin='lower')
+        plt.colorbar(label='Recurrence')
+        plt.title(title)
+        plt.xlabel('Time Index')
+        plt.ylabel('Time Index')
+        plt.tight_layout()
+        plt.show()
+
+class ChaoticFeatureExtractor:
+    """
+    Combined chaotic feature extractor using MLSA and RQA
+
+    使用MLSA和RQA的组合混沌特征提取器
+    """
+    def __init__(
+        self,
+        embedding_dim: int = 3,
+        delay: int = 1,
+        scales: List[int] = [1, 2, 4, 8, 16],
+        n_lyapunov_exponents: int = 2,
+        rqa_threshold: Optional[float] = None
+    ):
+        """
+        Initialize the chaotic feature extractor
+
         初始化混沌特征提取器
 
         Args:
-            sample_rate: 音频采样率
-            frame_length: 帧长度
-            hop_length: 跳跃长度
-            embedding_dim: 相空间嵌入维度
-            delay: 时间延迟参数τ
+            embedding_dim (int): Embedding dimension for phase space reconstruction
+                               相空间重构的嵌入维度
+            delay (int): Time delay for phase space reconstruction
+                        相空间重构的时间延迟
+            scales (List[int]): List of scales for multi-scale analysis
+                               多尺度分析的尺度列表
+            n_lyapunov_exponents (int): Number of Lyapunov exponents to compute
+                                       要计算的李雅普诺夫指数数量
+            rqa_threshold (float, optional): Threshold for recurrence plot. If None, it will be estimated
+                                           递归图的阈值。如果为None，将进行估计
         """
-        super(ChaosFeatureExtractor, self).__init__()
-        self.sample_rate = sample_rate
-        self.frame_length = frame_length
-        self.hop_length = hop_length
         self.embedding_dim = embedding_dim
         self.delay = delay
 
-        # 初始化传统特征提取器
-        self.mel_transform = librosa.filters.mel(
-            sr=sample_rate,
-            n_fft=frame_length,
-            n_mels=80
+        # Initialize MLSA feature extractor
+        # 初始化MLSA特征提取器
+        self.mlsa_extractor = MLSAFeatureExtractor(
+            scales=scales,
+            embedding_dim=embedding_dim,
+            delay=delay,
+            n_exponents=n_lyapunov_exponents
         )
 
-    def forward(self, audio: torch.Tensor) -> Dict[str, torch.Tensor]:
-        """
-        前向传播，提取所有混沌特征
-
-        Args:
-            audio: 音频张量 [batch_size, 1, samples]
-
-        Returns:
-            包含所有特征的字典
-        """
-        batch_size = audio.shape[0]
-        features_dict = {}
-
-        # 处理每个样本
-        for i in range(batch_size):
-            audio_sample = audio[i, 0].cpu().numpy()  # [samples]
-
-            # 提取传统特征作为基准
-            mfcc_feat = self._extract_mfcc(audio_sample)
-            mel_feat = self._extract_mel_spectrogram(audio_sample)
-
-            # 提取混沌特征
-            mle_feat = self._extract_maximum_lyapunov_exponent(audio_sample)
-            rqa_feat = self._extract_recurrence_quantification(audio_sample)
-            fractal_feat = self._extract_fractal_dimension(audio_sample)
-            phase_space_feat = self._extract_phase_space_features(audio_sample)
-
-            # 组合特征
-            if i == 0:
-                features_dict['mfcc'] = torch.zeros(batch_size, mfcc_feat.shape[0], mfcc_feat.shape[1])
-                features_dict['mel'] = torch.zeros(batch_size, mel_feat.shape[0], mel_feat.shape[1])
-                features_dict['mle'] = torch.zeros(batch_size, len(mle_feat))
-                features_dict['rqa'] = torch.zeros(batch_size, len(rqa_feat))
-                features_dict['fractal'] = torch.zeros(batch_size, len(fractal_feat))
-                features_dict['phase_space'] = torch.zeros(batch_size, len(phase_space_feat))
-
-            features_dict['mfcc'][i] = torch.from_numpy(mfcc_feat).float()
-            features_dict['mel'][i] = torch.from_numpy(mel_feat).float()
-            features_dict['mle'][i] = torch.from_numpy(np.array(mle_feat)).float()
-            features_dict['rqa'][i] = torch.from_numpy(np.array(rqa_feat)).float()
-            features_dict['fractal'][i] = torch.from_numpy(np.array(fractal_feat)).float()
-            features_dict['phase_space'][i] = torch.from_numpy(np.array(phase_space_feat)).float()
-
-        return features_dict
-
-    def _extract_mfcc(self, audio: np.ndarray) -> np.ndarray:
-        """提取MFCC特征"""
-        mfcc = librosa.feature.mfcc(
-            y=audio,
-            sr=self.sample_rate,
-            n_mfcc=13,
-            n_fft=self.frame_length,
-            hop_length=self.hop_length
+        # Initialize RQA feature extractor
+        # 初始化RQA特征提取器
+        self.rqa_extractor = RQAFeatureExtractor(
+            embedding_dim=embedding_dim,
+            delay=delay,
+            threshold=rqa_threshold
         )
-        return mfcc
 
-    def _extract_mel_spectrogram(self, audio: np.ndarray) -> np.ndarray:
-        """提取Mel频谱图"""
-        stft = librosa.stft(
-            audio,
-            n_fft=self.frame_length,
-            hop_length=self.hop_length
-        )
-        magnitude = np.abs(stft)
-        mel_spec = np.dot(self.mel_transform, magnitude)
-        log_mel_spec = librosa.power_to_db(mel_spec)
-        return log_mel_spec
-
-    def _extract_maximum_lyapunov_exponent(self, audio: np.ndarray) -> List[float]:
+    def extract(self, time_series: np.ndarray) -> np.ndarray:
         """
-        提取最大李雅普诺夫指数 (MLE)
-        使用Wolf算法计算混沌系统的李雅普诺夫指数
-        """
-        try:
-            # 相空间重构
-            embedded = self._phase_space_reconstruction(audio)
+        Extract combined chaotic features from time series
 
-            # 计算李雅普诺夫指数的多个尺度版本
-            mle_features = []
-
-            # 不同时间尺度的MLE
-            scales = [1, 5, 10, 20]
-            for scale in scales:
-                mle = self._compute_lyapunov_exponent(embedded, scale)
-                mle_features.append(mle)
-
-            # 添加统计特征
-            mle_features.extend([
-                np.mean(mle_features),
-                np.std(mle_features),
-                np.max(mle_features),
-                np.min(mle_features)
-            ])
-
-            return mle_features
-
-        except Exception as e:
-            print(f"MLE计算错误: {e}")
-            return [0.0] * 8  # 返回零值作为fallback
-
-    def _phase_space_reconstruction(self, signal: np.ndarray) -> np.ndarray:
-        """
-        相空间重构 - Takens嵌入定理
+        从时间序列中提取组合混沌特征
 
         Args:
-            signal: 一维时间序列
+            time_series (np.ndarray): Input time series
+                                     输入时间序列
 
         Returns:
-            重构的相空间矩阵 [n_points, embedding_dim]
+            np.ndarray: Combined chaotic features
+                       组合混沌特征
         """
-        n = len(signal)
-        m = self.embedding_dim
-        tau = self.delay
+        # Extract MLSA features
+        # 提取MLSA特征
+        mlsa_features = self.mlsa_extractor.extract(time_series)
 
-        # 计算嵌入向量的数量
-        n_vectors = n - (m - 1) * tau
+        # Extract RQA features
+        # 提取RQA特征
+        rqa_features_dict = self.rqa_extractor.extract(time_series)
 
-        if n_vectors <= 0:
-            raise ValueError("信号长度不足以进行相空间重构")
+        # Convert RQA features dictionary to array
+        # 将RQA特征字典转换为数组
+        rqa_features = np.array(list(rqa_features_dict.values()))
 
-        # 构建嵌入矩阵
-        embedded = np.zeros((n_vectors, m))
+        # Combine features
+        # 组合特征
+        combined_features = np.concatenate([mlsa_features, rqa_features])
 
-        for i in range(m):
-            embedded[:, i] = signal[i * tau:i * tau + n_vectors]
+        return combined_features
 
-        return embedded
-
-    def _compute_lyapunov_exponent(self, embedded: np.ndarray, evolution_time: int = 10) -> float:
+    def extract_with_names(self, time_series: np.ndarray) -> Dict[str, float]:
         """
-        计算李雅普诺夫指数
+        Extract combined chaotic features with feature names
+
+        提取带有特征名称的组合混沌特征
 
         Args:
-            embedded: 相空间重构后的轨迹
-            evolution_time: 轨迹演化时间
+            time_series (np.ndarray): Input time series
+                                     输入时间序列
 
         Returns:
-            最大李雅普诺夫指数
+            Dict[str, float]: Dictionary of named features
+                             命名特征的字典
         """
-        try:
-            n_points, dim = embedded.shape
-
-            if n_points < evolution_time + 10:
-                return 0.0
-
-            # 寻找最近邻点
-            nbrs = NearestNeighbors(n_neighbors=2, metric='euclidean').fit(embedded)
-            distances, indices = nbrs.kneighbors(embedded[:-evolution_time])
-
-            # 计算初始距离
-            initial_distances = distances[:, 1]  # 排除自己，取最近邻
-
-            # 计算演化后的距离
-            evolved_distances = np.zeros_like(initial_distances)
-
-            for i in range(len(initial_distances)):
-                if i + evolution_time < n_points and indices[i, 1] + evolution_time < n_points:
-                    evolved_distances[i] = np.linalg.norm(
-                        embedded[i + evolution_time] - embedded[indices[i, 1] + evolution_time]
-                    )
-                else:
-                    evolved_distances[i] = initial_distances[i]  # fallback
-
-            # 避免除零和对数为负
-            valid_mask = (initial_distances > 1e-8) & (evolved_distances > 1e-8)
-
-            if np.sum(valid_mask) == 0:
-                return 0.0
-
-            # 计算李雅普诺夫指数
-            lyap = np.mean(np.log(evolved_distances[valid_mask] / initial_distances[valid_mask])) / evolution_time
-
-            return float(lyap)
-
-        except Exception as e:
-            print(f"李雅普诺夫指数计算错误: {e}")
-            return 0.0
-
-    def _extract_recurrence_quantification(self, audio: np.ndarray) -> List[float]:
-        """
-        递归量化分析 (RQA)
-        分析信号的递归结构和周期性
-        """
-        try:
-            # 相空间重构
-            embedded = self._phase_space_reconstruction(audio)
-
-            # 计算递归矩阵
-            recurrence_matrix = self._compute_recurrence_matrix(embedded)
-
-            # 提取RQA特征
-            rqa_features = []
-
-            # 递归率 (Recurrence Rate)
-            rr = np.sum(recurrence_matrix) / (recurrence_matrix.shape[0] ** 2)
-            rqa_features.append(rr)
-
-            # 确定性 (Determinism)
-            det = self._compute_determinism(recurrence_matrix)
-            rqa_features.append(det)
-
-            # 平均对角线长度
-            avg_diag_length = self._compute_average_diagonal_length(recurrence_matrix)
-            rqa_features.append(avg_diag_length)
-
-            # 最大对角线长度
-            max_diag_length = self._compute_max_diagonal_length(recurrence_matrix)
-            rqa_features.append(max_diag_length)
-
-            # 熵 (Entropy)
-            entropy = self._compute_recurrence_entropy(recurrence_matrix)
-            rqa_features.append(entropy)
-
-            # 层流性 (Laminarity)
-            lam = self._compute_laminarity(recurrence_matrix)
-            rqa_features.append(lam)
-
-            return rqa_features
-
-        except Exception as e:
-            print(f"RQA计算错误: {e}")
-            return [0.0] * 6  # 返回零值作为fallback
-
-    def _compute_recurrence_matrix(self, embedded: np.ndarray, threshold: float = 0.1) -> np.ndarray:
-        """计算递归矩阵"""
-        distances = squareform(pdist(embedded))
-        threshold_value = threshold * np.std(distances)
-        recurrence_matrix = (distances < threshold_value).astype(int)
-        return recurrence_matrix
-
-    def _compute_determinism(self, recurrence_matrix: np.ndarray, min_length: int = 2) -> float:
-        """计算确定性指标"""
-        n = recurrence_matrix.shape[0]
-        diagonal_lengths = []
-
-        # 计算所有对角线长度
-        for offset in range(1 - n, n):
-            diagonal = np.diag(recurrence_matrix, k=offset)
-            length = 0
-            current_length = 0
-
-            for val in diagonal:
-                if val == 1:
-                    current_length += 1
-                else:
-                    if current_length >= min_length:
-                        diagonal_lengths.append(current_length)
-                    current_length = 0
-
-            if current_length >= min_length:
-                diagonal_lengths.append(current_length)
-
-        if len(diagonal_lengths) == 0:
-            return 0.0
-
-        total_recurrence_points = np.sum(recurrence_matrix)
-        diagonal_points = sum(diagonal_lengths)
-
-        return diagonal_points / max(total_recurrence_points, 1)
-
-    def _compute_average_diagonal_length(self, recurrence_matrix: np.ndarray) -> float:
-        """计算平均对角线长度"""
-        diagonal_lengths = []
-        n = recurrence_matrix.shape[0]
-
-        for offset in range(1 - n, n):
-            diagonal = np.diag(recurrence_matrix, k=offset)
-            current_length = 0
-
-            for val in diagonal:
-                if val == 1:
-                    current_length += 1
-                else:
-                    if current_length >= 2:
-                        diagonal_lengths.append(current_length)
-                    current_length = 0
-
-            if current_length >= 2:
-                diagonal_lengths.append(current_length)
-
-        return np.mean(diagonal_lengths) if diagonal_lengths else 0.0
-
-    def _compute_max_diagonal_length(self, recurrence_matrix: np.ndarray) -> float:
-        """计算最大对角线长度"""
-        max_length = 0
-        n = recurrence_matrix.shape[0]
-
-        for offset in range(1 - n, n):
-            diagonal = np.diag(recurrence_matrix, k=offset)
-            current_length = 0
-
-            for val in diagonal:
-                if val == 1:
-                    current_length += 1
-                    max_length = max(max_length, current_length)
-                else:
-                    current_length = 0
-
-        return float(max_length)
-
-    def _compute_recurrence_entropy(self, recurrence_matrix: np.ndarray) -> float:
-        """计算递归熵"""
-        diagonal_lengths = []
-        n = recurrence_matrix.shape[0]
-
-        for offset in range(1 - n, n):
-            diagonal = np.diag(recurrence_matrix, k=offset)
-            current_length = 0
-
-            for val in diagonal:
-                if val == 1:
-                    current_length += 1
-                else:
-                    if current_length >= 2:
-                        diagonal_lengths.append(current_length)
-                    current_length = 0
-
-            if current_length >= 2:
-                diagonal_lengths.append(current_length)
-
-        if not diagonal_lengths:
-            return 0.0
-
-        # 计算长度分布的熵
-        unique_lengths, counts = np.unique(diagonal_lengths, return_counts=True)
-        probabilities = counts / len(diagonal_lengths)
-        entropy = -np.sum(probabilities * np.log2(probabilities + 1e-10))
-
-        return entropy
-
-    def _compute_laminarity(self, recurrence_matrix: np.ndarray, min_length: int = 2) -> float:
-        """计算层流性"""
-        n = recurrence_matrix.shape[0]
-        vertical_lengths = []
-
-        # 计算垂直线长度
-        for col in range(n):
-            current_length = 0
-            for row in range(n):
-                if recurrence_matrix[row, col] == 1:
-                    current_length += 1
-                else:
-                    if current_length >= min_length:
-                        vertical_lengths.append(current_length)
-                    current_length = 0
-
-            if current_length >= min_length:
-                vertical_lengths.append(current_length)
-
-        if not vertical_lengths:
-            return 0.0
-
-        total_vertical_points = sum(vertical_lengths)
-        total_recurrence_points = np.sum(recurrence_matrix)
-
-        return total_vertical_points / max(total_recurrence_points, 1)
-
-    def _extract_fractal_dimension(self, audio: np.ndarray) -> List[float]:
-        """
-        提取分形维数特征
-        使用盒计数法和关联维数
-        """
-        try:
-            # 相空间重构
-            embedded = self._phase_space_reconstruction(audio)
-
-            fractal_features = []
-
-            # 关联维数 (Correlation Dimension)
-            corr_dim = self._compute_correlation_dimension(embedded)
-            fractal_features.append(corr_dim)
-
-            # 盒计数维数 (Box-counting Dimension)
-            box_dim = self._compute_box_counting_dimension(audio)
-            fractal_features.append(box_dim)
-
-            # Higuchi分形维数
-            higuchi_dim = self._compute_higuchi_dimension(audio)
-            fractal_features.append(higuchi_dim)
-
-            # Katz分形维数
-            katz_dim = self._compute_katz_dimension(audio)
-            fractal_features.append(katz_dim)
-
-            return fractal_features
-
-        except Exception as e:
-            print(f"分形维数计算错误: {e}")
-            return [0.0] * 4
-
-    def _compute_correlation_dimension(self, embedded: np.ndarray) -> float:
-        """计算关联维数"""
-        try:
-            n_points = embedded.shape[0]
-
-            if n_points < 100:
-                return 1.0
-
-            # 计算距离矩阵
-            distances = pdist(embedded)
-
-            # 设置半径范围
-            r_min = np.percentile(distances, 1)
-            r_max = np.percentile(distances, 50)
-
-            if r_min >= r_max or r_min <= 0:
-                return 1.0
-
-            # 对数尺度的半径
-            radii = np.logspace(np.log10(r_min), np.log10(r_max), 20)
-            correlations = []
-
-            for r in radii:
-                # 计算关联积分
-                correlation = np.mean(distances < r)
-                correlations.append(correlation + 1e-10)  # 避免对数为负
-
-            # 线性回归计算维数
-            log_r = np.log10(radii)
-            log_c = np.log10(correlations)
-
-            # 去除无效值
-            valid_mask = np.isfinite(log_r) & np.isfinite(log_c)
-            if np.sum(valid_mask) < 5:
-                return 1.0
-
-            slope = np.polyfit(log_r[valid_mask], log_c[valid_mask], 1)[0]
-
-            return max(0.1, min(slope, 10.0))  # 限制在合理范围内
-
-        except Exception as e:
-            print(f"关联维数计算错误: {e}")
-            return 1.0
-
-    def _compute_box_counting_dimension(self, signal: np.ndarray) -> float:
-        """计算盒计数维数"""
-        try:
-            # 将信号映射到2D网格
-            n = len(signal)
-            if n < 100:
-                return 1.0
-
-            # 归一化信号
-            signal_norm = (signal - np.min(signal)) / (np.max(signal) - np.min(signal) + 1e-10)
-
-            # 不同的盒子大小
-            box_sizes = [2 ** i for i in range(3, 8)]
-            counts = []
-
-            for box_size in box_sizes:
-                # 创建网格
-                grid_x = np.floor(np.arange(n) / (n / box_size)).astype(int)
-                grid_y = np.floor(signal_norm * box_size).astype(int)
-
-                # 计算非空盒子数
-                boxes = set(zip(grid_x, grid_y))
-                counts.append(len(boxes))
-
-            if len(counts) < 3:
-                return 1.0
-
-            # 线性回归计算维数
-            log_sizes = np.log10(box_sizes)
-            log_counts = np.log10(counts)
-
-            slope = -np.polyfit(log_sizes, log_counts, 1)[0]
-
-            return max(0.1, min(slope, 3.0))
-
-        except Exception as e:
-            print(f"盒计数维数计算错误: {e}")
-            return 1.0
-
-    def _compute_higuchi_dimension(self, signal: np.ndarray, k_max: int = 10) -> float:
-        """计算Higuchi分形维数"""
-        try:
-            n = len(signal)
-            if n < 100:
-                return 1.0
-
-            lengths = []
-
-            for k in range(1, k_max + 1):
-                length_k = []
-
-                for m in range(k):
-                    indices = np.arange(m, n, k)
-                    if len(indices) < 2:
-                        continue
-
-                    length_m = np.sum(np.abs(np.diff(signal[indices]))) * (n - 1) / (len(indices) - 1) / k
-                    length_k.append(length_m)
-
-                if length_k:
-                    lengths.append(np.mean(length_k))
-                else:
-                    lengths.append(1.0)
-
-            if len(lengths) < 3:
-                return 1.0
-
-            # 线性回归
-            k_values = np.arange(1, len(lengths) + 1)
-            log_k = np.log10(k_values)
-            log_lengths = np.log10(np.array(lengths) + 1e-10)
-
-            slope = -np.polyfit(log_k, log_lengths, 1)[0]
-
-            return max(0.1, min(slope, 3.0))
-
-        except Exception as e:
-            print(f"Higuchi维数计算错误: {e}")
-            return 1.0
-
-    def _compute_katz_dimension(self, signal: np.ndarray) -> float:
-        """计算Katz分形维数"""
-        try:
-            n = len(signal)
-            if n < 2:
-                return 1.0
-
-            # 计算累积长度
-            diffs = np.diff(signal)
-            lengths = np.sqrt(1 + diffs ** 2)
-            total_length = np.sum(lengths)
-
-            # 计算最大距离
-            max_distance = np.sqrt((n - 1) ** 2 + (signal[-1] - signal[0]) ** 2)
-
-            if max_distance == 0 or total_length == 0:
-                return 1.0
-
-            # Katz维数公式
-            katz_dim = np.log10(total_length / max_distance) / (
-                        np.log10(total_length / max_distance) + np.log10(max_distance / total_length))
-
-            return max(0.1, min(katz_dim, 3.0))
-
-        except Exception as e:
-            print(f"Katz维数计算错误: {e}")
-            return 1.0
-
-    def _extract_phase_space_features(self, audio: np.ndarray) -> List[float]:
-        """
-        提取相空间特征
-        包括吸引子几何特征和轨迹统计量
-        """
-        try:
-            # 相空间重构
-            embedded = self._phase_space_reconstruction(audio)
-
-            phase_features = []
-
-            # 轨迹长度
-            trajectory_length = self._compute_trajectory_length(embedded)
-            phase_features.append(trajectory_length)
-
-            # 轨迹曲率统计
-            curvatures = self._compute_trajectory_curvature(embedded)
-            phase_features.extend([
-                np.mean(curvatures),
-                np.std(curvatures),
-                np.max(curvatures),
-                np.min(curvatures)
-            ])
-
-            # 相空间体积
-            volume = self._compute_phase_space_volume(embedded)
-            phase_features.append(volume)
-
-            # 重心和散布特征
-            centroid = np.mean(embedded, axis=0)
-            phase_features.extend(centroid.tolist())
-
-            # 协方差矩阵的特征值
-            cov_matrix = np.cov(embedded.T)
-            eigenvalues = np.linalg.eigvals(cov_matrix)
-            eigenvalues = np.sort(eigenvalues)[::-1]  # 降序排列
-            phase_features.extend(eigenvalues.tolist())
-
-            return phase_features
-
-        except Exception as e:
-            print(f"相空间特征计算错误: {e}")
-            return [0.0] * (3 + 4 + 1 + self.embedding_dim + self.embedding_dim)
-
-    def _compute_trajectory_length(self, embedded: np.ndarray) -> float:
-        """计算轨迹总长度"""
-        distances = np.linalg.norm(np.diff(embedded, axis=0), axis=1)
-        return np.sum(distances)
-
-    def _compute_trajectory_curvature(self, embedded: np.ndarray) -> np.ndarray:
-        """计算轨迹曲率"""
-        if embedded.shape[0] < 3:
-            return np.array([0.0])
-
-        # 计算一阶和二阶导数
-        first_derivative = np.diff(embedded, axis=0)
-        second_derivative = np.diff(first_derivative, axis=0)
-
-        # 计算曲率
-        curvatures = []
-        for i in range(len(second_derivative)):
-            v1 = first_derivative[i]
-            v2 = second_derivative[i]
-
-            cross_product = np.linalg.norm(np.cross(v1, v2)) if embedded.shape[1] == 2 else np.linalg.norm(v2)
-            velocity_magnitude = np.linalg.norm(v1)
-
-            if velocity_magnitude > 1e-8:
-                curvature = cross_product / (velocity_magnitude ** 3)
-            else:
-                curvature = 0.0
-
-            curvatures.append(curvature)
-
-        return np.array(curvatures)
-
-    def _compute_phase_space_volume(self, embedded: np.ndarray) -> float:
-        """计算相空间占据体积"""
-        try:
-            # 使用凸包体积作为近似
-            from scipy.spatial import ConvexHull
-
-            if embedded.shape[0] < embedded.shape[1] + 1:
-                return 0.0
-
-            hull = ConvexHull(embedded)
-            return hull.volume
-
-        except Exception as e:
-            # 使用简单的边界框体积作为fallback
-            ranges = np.ptp(embedded, axis=0)
-            return np.prod(ranges)
-
-
-# 使用示例和测试
-if __name__ == "__main__":
-    # 创建测试音频信号
-    duration = 5.0  # 5秒
-    sample_rate = 16000
-    t = np.linspace(0, duration, int(duration * sample_rate))
-
-    # 生成混沌信号（Lorenz系统的简化版本）
-    test_signal = np.sin(2 * np.pi * 440 * t) + 0.3 * np.sin(2 * np.pi * 880 * t) + 0.1 * np.random.randn(len(t))
-    test_audio = torch.tensor(test_signal).float().unsqueeze(0).unsqueeze(0)  # [1, 1, samples]
-
+        # Extract MLSA features
+        # 提取MLSA特征
+        mlsa_features = self.mlsa_extractor.extract(time_series)
+
+        # Extract RQA features
+        # 提取RQA特征
+        rqa_features = self.rqa_extractor.extract(time_series)
+
+        # Create named feature dictionary
+        # 创建命名特征字典
+        named_features = {}
+
+        # Add MLSA features with names
+        # 添加带有名称的MLSA特征
+        for i, scale in enumerate(self.mlsa_extractor.scales):
+            for j in range(self.mlsa_extractor.n_exponents):
+                feature_idx = i * self.mlsa_extractor.n_exponents + j
+                if feature_idx < len(mlsa_features):
+                    named_features[f'MLSA_scale{scale}_exp{j+1}'] = mlsa_features[feature_idx]
+
+        # Add RQA features
+        # 添加RQA特征
+        for name, value in rqa_features.items():
+            named_features[f'RQA_{name}'] = value
+
+        return named_features
+
+def extract_chaotic_features_batch(audio_batch: np.ndarray, **kwargs) -> np.ndarray:
+    """
+    Extract chaotic features from a batch of audio signals
+
+    从一批音频信号中提取混沌特征
+
+    Args:
+        audio_batch (np.ndarray): Batch of audio signals [batch_size, signal_length]
+                                 一批音频信号 [batch_size, signal_length]
+        **kwargs: Additional arguments for ChaoticFeatureExtractor
+                 ChaoticFeatureExtractor的其他参数
+
+    Returns:
+        np.ndarray: Batch of chaotic features [batch_size, n_features]
+                   一批混沌特征 [batch_size, n_features]
+    """
+    batch_size = audio_batch.shape[0]
+
+    # Initialize feature extractor
     # 初始化特征提取器
-    chaos_extractor = ChaosFeatureExtractor(
-        sample_rate=sample_rate,
-        embedding_dim=3,
-        delay=10
-    )
+    extractor = ChaoticFeatureExtractor(**kwargs)
 
-    print("开始混沌特征提取测试...")
+    # Initialize output array
+    # 初始化输出数组
+    # Extract features for the first sample to determine feature dimension
+    # 提取第一个样本的特征以确定特征维度
+    first_features = extractor.extract(audio_batch[0])
+    n_features = len(first_features)
 
+    # Initialize output array with the correct shape
+    # 用正确的形状初始化输出数组
+    features_batch = np.zeros((batch_size, n_features))
+    features_batch[0] = first_features
+
+    # Extract features for the rest of the batch
+    # 提取批次其余部分的特征
+    for i in range(1, batch_size):
+        features_batch[i] = extractor.extract(audio_batch[i])
+
+    return features_batch
+
+if __name__ == "__main__":
+    # Generate a test signal (Lorenz system)
+    # 生成测试信号（洛伦兹系统）
+    def lorenz_system(t, xyz, sigma=10, beta=8/3, rho=28):
+        x, y, z = xyz
+        dxdt = sigma * (y - x)
+        dydt = x * (rho - z) - y
+        dzdt = x * y - beta * z
+        return [dxdt, dydt, dzdt]
+
+    from scipy.integrate import solve_ivp
+
+    # Initial conditions
+    # 初始条件
+    xyz0 = [1.0, 1.0, 1.0]
+
+    # Time points
+    # 时间点
+    t = np.linspace(0, 50, 5000)
+
+    # Solve the differential equations
+    # 求解微分方程
+    solution = solve_ivp(lorenz_system, [0, 50], xyz0, t_eval=t)
+
+    # Extract x-coordinate time series
+    # 提取x坐标时间序列
+    x_series = solution.y[0]
+
+    # Create feature extractors
+    # 创建特征提取器
+    mlsa_extractor = MLSAFeatureExtractor()
+    rqa_extractor = RQAFeatureExtractor()
+    combined_extractor = ChaoticFeatureExtractor()
+
+    # Extract features
     # 提取特征
-    features = chaos_extractor(test_audio)
+    mlsa_features = mlsa_extractor.extract(x_series)
+    rqa_features = rqa_extractor.extract(x_series)
+    combined_features = combined_extractor.extract(x_series)
+    named_features = combined_extractor.extract_with_names(x_series)
 
-    # 打印特征统计
-    print("\n提取的混沌特征:")
-    for feature_name, feature_tensor in features.items():
-        print(f"{feature_name}: 形状={feature_tensor.shape}, 均值={feature_tensor.mean().item():.4f}")
+    print("MLSA Features:")
+    print(mlsa_features)
+    print("\nRQA Features:")
+    for name, value in rqa_features.items():
+        print(f"{name}: {value:.4f}")
+    print("\nCombined Features Shape:", combined_features.shape)
+    print("\nNamed Features:")
+    for name, value in named_features.items():
+        print(f"{name}: {value:.4f}")
 
-    print("\n混沌特征提取测试完成！")
+    # Plot recurrence plot
+    # 绘制递归图
+    rqa_extractor.plot_recurrence_plot(x_series, "Lorenz System Recurrence Plot")

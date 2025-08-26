@@ -2,12 +2,8 @@ project/
 ├── data/                      # 数据集存储目录
 │   ├── librispeech/           # LibriSpeech数据集
 │   │   ├── train_clean_100/   # 训练集
-│   │   ├── train_clean_360/   # 训练集
-│   │   ├── train_other_500/   # 训练集（噪声更多）
 │   │   ├── dev_clean/         # 验证集
-│   │   ├── dev_other/         # 验证集
 │   │   ├── test_clean/        # 测试集
-│   │   └── test_other/        # 测试集
 │   ├── noise/                 # 用于鲁棒性测试的噪声
 │   └── ravdess/               # 用于情感鲁棒性测试（可选）
 ├── src/                      # 源代码目录
