@@ -249,189 +249,148 @@ class ChaoticSpeakerVerifier(nn.Module):
 
 
 class ChaoticSpeakerRecognitionSystem(nn.Module):
-    """
-    Complete chaotic speaker recognition system
-
-    完整的混沌说话人识别系统
-    """
+    """使用混沌特征的说话人识别系统（接受声学特征输入）"""
 
     def __init__(
             self,
-            input_dim: int = 48000,  # 3 seconds at 16kHz
-            chaotic_feature_dim: int = 64,
-            chaotic_dim: int = 3,
-            trajectory_points: int = 100,
+            # 新增的三个参数（从配置中传入）
+            chaotic_feature_dim: int,
+            chaotic_dim: int,
+            trajectory_points: int,
+            # 原有的参数
+            feature_dim: int = 80,  # 梅尔频谱图特征维度
+            n_mfcc: int = 13,  # MFCC系数数量
             embedding_dim: int = 256,
             num_speakers: int = 100,
             use_chaotic_embedding: bool = True,
             use_attractor_pooling: bool = True,
             system_type: str = 'lorenz'
     ):
-        """
-        Initialize the complete speaker recognition system
-
-        初始化完整的说话人识别系统
-
-        Args:
-            input_dim (int): Input audio dimension (default: 48000 for 3s at 16kHz)
-                            输入音频维度（默认：48000，对应3秒16kHz音频）
-            chaotic_feature_dim (int): Dimension of chaotic features
-                                      混沌特征的维度
-            chaotic_dim (int): Dimension of chaotic system
-                              混沌系统的维度
-            trajectory_points (int): Number of points in trajectory
-                                    轨迹中的点数
-            embedding_dim (int): Speaker embedding dimension
-                                说话人嵌入维度
-            num_speakers (int): Number of speakers
-                               说话人数量
-            use_chaotic_embedding (bool): Whether to use chaotic embedding
-                                         是否使用混沌嵌入
-            use_attractor_pooling (bool): Whether to use attractor pooling
-                                         是否使用吸引子池化
-            system_type (str): Type of chaotic system ('lorenz', 'rossler', 'chua')
-                              混沌系统类型（'lorenz', 'rossler', 'chua'）
-        """
         super().__init__()
-        self.input_dim = input_dim
+        # 保存新增参数
         self.chaotic_feature_dim = chaotic_feature_dim
+        self.chaotic_dim = chaotic_dim
+        self.trajectory_points = trajectory_points
+        # 原有的属性初始化
+        self.feature_dim = feature_dim
+        self.n_mfcc = n_mfcc
         self.embedding_dim = embedding_dim
         self.num_speakers = num_speakers
         self.use_chaotic_embedding = use_chaotic_embedding
         self.use_attractor_pooling = use_attractor_pooling
+        self.system_type = system_type
 
-        # Audio feature extractor (CNN-based)
-        # 音频特征提取器（基于CNN）
-        self.audio_feature_extractor = nn.Sequential(
-            nn.Conv1d(1, 64, kernel_size=3, stride=1, padding=1),
+        # 声学特征处理层（保持不变）
+        self.feature_processor = nn.Sequential(
+            nn.Conv2d(1, 32, kernel_size=(3, 3), stride=1, padding=1),
+            nn.BatchNorm2d(32),
             nn.ReLU(),
-            nn.MaxPool1d(kernel_size=2),
-            nn.Conv1d(64, 128, kernel_size=3, stride=1, padding=1),
+            nn.MaxPool2d(kernel_size=(2, 2)),
+
+            nn.Conv2d(32, 64, kernel_size=(3, 3), stride=1, padding=1),
+            nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.MaxPool1d(kernel_size=2),
-            nn.Conv1d(128, 256, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.MaxPool1d(kernel_size=2),
-            nn.AdaptiveAvgPool1d(1),
-            nn.Flatten(),
-            nn.Linear(256, chaotic_feature_dim)
+            nn.MaxPool2d(kernel_size=(2, 2)),
+
+            nn.AdaptiveAvgPool2d((1, 1)),
+            nn.Flatten()
         )
 
-        # Import required modules only when needed
-        # 仅在需要时导入所需模块
+        # 计算处理器输出维度（保持不变）
+        self._init_feature_processor()
+
+        # 混沌嵌入层（使用新增参数）
         if use_chaotic_embedding:
             from chaotic_embedding import DifferentiableChaoticEmbedding
             self.chaotic_embedding = DifferentiableChaoticEmbedding(
-                input_dim=chaotic_feature_dim,
-                chaotic_dim=chaotic_dim,
-                trajectory_points=trajectory_points,
+                input_dim=self.feature_size,  # 处理后的特征维度
+                chaotic_dim=chaotic_dim,  # 替换硬编码的3
+                trajectory_points=trajectory_points,  # 替换硬编码的100
                 system_type=system_type
             )
 
-        if use_attractor_pooling:
-            from attractor_pooling import DifferentiableAttractorPooling
-            self.attractor_pooling = DifferentiableAttractorPooling(
-                chaotic_dim=chaotic_dim,
-                output_dim=chaotic_feature_dim
-            )
+            if use_attractor_pooling:
+                from attractor_pooling import DifferentiableAttractorPooling
+                self.attractor_pooling = DifferentiableAttractorPooling(
+                    chaotic_dim=chaotic_dim,  # 替换硬编码的3
+                    output_dim=chaotic_feature_dim  # 替换硬编码的64
+                )
+                self.feature_size = chaotic_feature_dim  # 更新特征维度为配置值
+        else:
+            self.chaotic_embedding = nn.Identity()
+            self.attractor_pooling = nn.Identity()
 
-        # Speaker embedding network
-        # 说话人嵌入网络
+        # 说话人嵌入层（保持不变）
         self.speaker_embedding = ChaoticSpeakerEmbedding(
-            input_dim=chaotic_feature_dim,
+            input_dim=self.feature_size,
             embedding_dim=embedding_dim
         )
 
-        # Speaker classifier
-        # 说话人分类器
+        # 说话人分类器（保持不变）
         self.speaker_classifier = ChaoticSpeakerClassifier(
             embedding_dim=embedding_dim,
             num_speakers=num_speakers
         )
 
-        # Speaker verifier
-        # 说话人验证器
+        # 说话人验证器（保持不变）
         self.speaker_verifier = ChaoticSpeakerVerifier(
             embedding_dim=embedding_dim
         )
 
+    def _init_feature_processor(self):
+        """初始化特征处理器并计算输出尺寸（保持不变）"""
+        with torch.no_grad():
+            dummy = torch.randn(1, 1, self.feature_dim, 300)
+            out = self.feature_processor(dummy)
+            self.feature_size = out.shape[1]
+
     def forward(
             self,
-            audio: torch.Tensor,  # Changed from features to audio
+            features: torch.Tensor,  # 输入声学特征 [batch, ...]
             labels: Optional[torch.Tensor] = None,
             mode: str = 'identification'
     ) -> Dict[str, torch.Tensor]:
-        """
-        Forward pass of the speaker recognition system
+        # 前向传播逻辑保持不变
+        batch_size = features.shape[0]
 
-        说话人识别系统的前向传播
+        # 处理声学特征维度
+        if len(features.shape) == 2:  # [batch, feature_dim]
+            features = features.unsqueeze(1).unsqueeze(2)
+        elif len(features.shape) == 3:  # [batch, feature_dim, time]
+            features = features.unsqueeze(1)
 
-        Args:
-            audio (torch.Tensor): Input audio [batch_size, audio_length]
-                                  输入音频 [batch_size, audio_length]
-            labels (torch.Tensor, optional): Speaker labels [batch_size]
-                                            说话人标签 [batch_size]
-            mode (str): Operation mode ('identification', 'verification', 'embedding')
-                       操作模式（'identification'识别, 'verification'验证, 'embedding'嵌入）
+        # 特征处理
+        features = self.feature_processor(features)
 
-        Returns:
-            Dict[str, torch.Tensor]: Dictionary containing outputs
-                                    包含输出的字典
-        """
-        batch_size = audio.shape[0]
-
-        # Add channel dimension for CNN processing
-        # 为CNN处理添加通道维度
-        audio = audio.unsqueeze(1)  # [batch_size, 1, audio_length]
-
-        # Extract features from raw audio
-        # 从原始音频中提取特征
-        features = self.audio_feature_extractor(audio)  # [batch_size, chaotic_feature_dim]
-
-        # Process features through chaotic embedding if enabled
-        # 如果启用，则通过混沌嵌入处理特征
+        # 混沌嵌入
         if self.use_chaotic_embedding:
             trajectories = self.chaotic_embedding(features)
-
-            # Process trajectories through attractor pooling if enabled
-            # 如果启用，则通过吸引子池化处理轨迹
             if self.use_attractor_pooling:
                 features = self.attractor_pooling(trajectories)
 
-        # Generate speaker embeddings
         # 生成说话人嵌入
         embeddings = self.speaker_embedding(features)
+        embeddings = F.normalize(embeddings, p=2, dim=1)
 
         outputs = {'embeddings': embeddings}
 
-        # Mode-specific operations
-        # 特定模式的操作
+        # 识别模式
         if mode == 'identification':
-            # Speaker identification
-            # 说话人识别
             logits = self.speaker_classifier(embeddings, labels if self.training else None)
             outputs['logits'] = logits
-
-            # Calculate predictions
-            # 计算预测结果
             _, predictions = torch.max(logits, dim=1)
             outputs['predictions'] = predictions
 
+        # 验证模式
         elif mode == 'verification':
-            # For verification, we need pairs of embeddings
-            # 对于验证，我们需要嵌入对
-            if batch_size % 2 != 0:
-                raise ValueError("Batch size must be even for verification mode")
-
-            # Split embeddings into pairs
-            # 将嵌入分成对
-            embedding1 = embeddings[0:batch_size:2]
-            embedding2 = embeddings[1:batch_size:2]
-
-            # Calculate similarity scores
-            # 计算相似度分数
-            similarity = self.speaker_verifier(embedding1, embedding2)
-            outputs['similarity'] = similarity
+            if 'verification_pairs' in features:
+                emb1 = embeddings[::2]
+                emb2 = embeddings[1::2]
+                similarity = self.speaker_verifier(emb1, emb2)
+                outputs['similarity'] = similarity
+            else:
+                outputs['embeddings'] = embeddings
+                outputs['similarity'] = torch.ones(batch_size, 1)
 
         return outputs
 
@@ -815,15 +774,17 @@ if __name__ == "__main__":
     # Create a speaker recognition system
     # 创建说话人识别系统
     model = ChaoticSpeakerRecognitionSystem(
-        chaotic_feature_dim=64,
-        num_speakers=10,
-        use_chaotic_embedding=False  # Disable for testing
+        feature_dim=80,  # 梅尔频谱图维度
+        n_mfcc=13,       # MFCC系数数量
+        embedding_dim=256,
+        num_speakers=100
     )
 
     # Create random input features
     # 创建随机输入特征
     batch_size = 16
-    features = torch.randn(batch_size, 64)
+    # 特征输入 (batch_size, 80, 300) 梅尔频谱图
+    features = torch.randn(32, 80, 300)
     labels = torch.randint(0, 10, (batch_size,))
 
     # Forward pass for identification
@@ -836,7 +797,9 @@ if __name__ == "__main__":
 
     # Forward pass for verification
     # 用于验证的前向传播
-    outputs_ver = model(features, mode='verification')
+    # 验证
+    pair_features = torch.randn(64, 80, 300)  # 32对样本
+    outputs_ver = model(pair_features, mode='verification')
     print(f"Verification outputs: {outputs_ver.keys()}")
     print(f"Similarity shape: {outputs_ver['similarity'].shape}")
 

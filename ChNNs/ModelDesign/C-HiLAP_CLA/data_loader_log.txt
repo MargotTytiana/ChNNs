@@ -7,3 +7,18 @@ Number of speakers: 149
 Number of training batches: 314
 Number of development batches: 85
 Number of test batches: 38
+
+-------------------
+
+Loaded 10026 audio files from 91 speakers
+Loaded 2703 audio files from 40 speakers
+Loaded 1211 audio files from 18 speakers
+Validating dataset consistency...
+Global speakers: 149
+Training speakers: 91
+Development speakers: 40
+Test speakers: 18
+Training labels range: 0 - 148
+Development labels range: 7 - 145
+Test labels range: 8 - 142
+Dataset validation passed - all labels are within model output range

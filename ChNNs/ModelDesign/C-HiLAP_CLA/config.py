@@ -32,9 +32,9 @@ def get_default_config() -> Dict[str, Any]:
 
         # Model settings
         # 模型设置
-        "chaotic_feature_dim": 64,
-        "chaotic_dim": 3,
-        "trajectory_points": 100,
+        "chaotic_feature_dim": 64,  # 新增参数：混沌特征维度
+        "chaotic_dim": 3,  # 新增参数：混沌系统维度
+        "trajectory_points": 100,  # 新增参数：轨迹点数量
         "embedding_dim": 256,
         "use_chaotic_embedding": True,
         "use_attractor_pooling": True,
@@ -233,8 +233,7 @@ def parse_args() -> Dict[str, Any]:
 
 def create_experiment_config(
         experiment_name: str,
-        base_config: Optional[Dict[str, Any]] = None,
-        **kwargs
+        base_config: Optional[Dict[str, Any]] = None,** kwargs
 ) -> Dict[str, Any]:
     """
     Create configuration for a specific experiment
@@ -352,5 +351,5 @@ if __name__ == "__main__":
         system_type="lorenz"
     )
 
-    save_config(custom_config, "configs/ver_0.0.json")
-    print("Saved custom experiment configuration to configs/ver_0.0.json")
+    save_config(custom_config, "configs/ver_0.1.json")
+    print("Saved custom experiment configuration to configs/ver_0.1.json")

@@ -12,6 +12,9 @@ backgroundNoise/
 # Subdirectory data folders
 ChNNs/FeatureExtraction/extracted_features/
 ChNNs/archive/
+ChNNs/ModelDesign/C-HiLAP_CLA/plots/
+ChNNs/ModelDesign/C-HiLAP_CLA/checkpoints/
+
 
 # =========================
 # Python-specific ignores
