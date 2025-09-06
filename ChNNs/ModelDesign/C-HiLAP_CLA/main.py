@@ -13,7 +13,7 @@ from datetime import datetime
 # 导入自定义模块
 from data_loader import create_dataloaders
 from phase_space import PhaseSpaceReconstructor
-from chaotic_features import ChaoticFeatureExtractor
+from chaos_features import ChaoticFeatureExtractor
 from chaotic_embedding import ChaoticEmbeddingLayer, DifferentiableChaoticEmbedding
 from attractor_pooling import AttractorPooling, DifferentiableAttractorPooling
 from speaker_model import (

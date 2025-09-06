@@ -262,8 +262,8 @@ class ChaoticSpeakerRecognitionSystem(nn.Module):
             n_mfcc: int = 13,  # MFCC系数数量
             embedding_dim: int = 256,
             num_speakers: int = 100,
-            use_chaotic_embedding: bool = True,
-            use_attractor_pooling: bool = True,
+            use_chaotic_embedding: bool = False,
+            use_attractor_pooling: bool = False,
             system_type: str = 'lorenz'
     ):
         super().__init__()
@@ -466,11 +466,11 @@ class SpeakerRecognitionLoss(nn.Module):
 
         # Calculate total loss
         # 计算总损失
-        total_loss = 0
-        if 'ce_loss' in losses:
-            total_loss += self.ce_weight * losses['ce_loss']
-        if 'triplet_loss' in losses:
-            total_loss += self.triplet_weight * losses['triplet_loss']
+        total_loss = self.ce_weight * losses['ce_loss']
+        # if 'ce_loss' in losses:
+        #     total_loss += self.ce_weight * losses['ce_loss']
+        # if 'triplet_loss' in losses:
+        #     total_loss += self.triplet_weight * losses['triplet_loss']
 
         losses['total_loss'] = total_loss
 

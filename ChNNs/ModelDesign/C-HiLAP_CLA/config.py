@@ -32,7 +32,7 @@ def get_default_config() -> Dict[str, Any]:
 
         # Model settings
         # 模型设置
-        "chaotic_feature_dim": 64,  # 新增参数：混沌特征维度
+        "chaotic_feature_dim": 120,  # 新增参数：混沌特征维度
         "chaotic_dim": 3,  # 新增参数：混沌系统维度
         "trajectory_points": 100,  # 新增参数：轨迹点数量
         "embedding_dim": 256,
@@ -43,11 +43,11 @@ def get_default_config() -> Dict[str, Any]:
         # Training settings
         # 训练设置
         "num_epochs": 100,
-        "learning_rate": 0.001,
+        "learning_rate": 0.0001,
         "weight_decay": 1e-5,
         "lr_patience": 5,  # Patience for learning rate scheduler
         "ce_weight": 1.0,  # Cross-entropy loss weight
-        "triplet_weight": 0.1,  # Triplet loss weight
+        "triplet_weight": 0.0,  # Triplet loss weight
         "triplet_margin": 0.2,  # Margin for triplet loss
 
         # Logging and checkpoint settings

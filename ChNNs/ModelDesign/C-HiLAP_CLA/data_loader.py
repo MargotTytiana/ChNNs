@@ -5,8 +5,10 @@ from torch.utils.data import Dataset, DataLoader
 import librosa
 import glob
 import pickle
-from typing import Dict, List, Tuple, Optional, Union
+from typing import Dict, List, Tuple, Optional
 import hashlib
+
+from chaos_features import ChaoticFeatureExtractor
 
 
 def create_global_speaker_mapping_and_files(train_dir, dev_dir, test_dir):
@@ -48,151 +50,76 @@ class LibriSpeechDataset(Dataset):
             speaker_to_label: Optional[Dict[str, int]] = None,
             cache_dir: Optional[str] = None
     ):
+        self.audio_files = audio_files
         self.root_dir = root_dir
         self.segment_length = segment_length
         self.sampling_rate = sampling_rate
         self.transform = transform
-        self.cache_dir = cache_dir  # 确保缓存目录属性存在
-        self.audio_files = audio_files  # 使用预收集的文件列表，避免重复glob
-
-        # 初始化缓存目录
-        if self.cache_dir:
-            os.makedirs(self.cache_dir, exist_ok=True)
-            print(f"启用特征缓存，目录：{self.cache_dir}")
-
-        # 提取说话人ID
-        self.speaker_ids = [os.path.basename(os.path.dirname(os.path.dirname(f))) for f in self.audio_files]
-
-        # 说话人映射
-        if speaker_to_label is not None:
-            self.speaker_to_idx = speaker_to_label
-        else:
-            mapping_path = os.path.join(os.path.dirname(root_dir), 'speaker_mapping.pkl')
-            if os.path.exists(mapping_path):
-                with open(mapping_path, 'rb') as f:
-                    self.speaker_to_idx = pickle.load(f)
-            else:
-                unique_speakers = sorted(list(set(self.speaker_ids)))
-                self.speaker_to_idx = {speaker: idx for idx, speaker in enumerate(unique_speakers)}
-
-        self.idx_to_speaker = {idx: speaker for speaker, idx in self.speaker_to_idx.items()}
-        self.labels = [self.speaker_to_idx[speaker] for speaker in self.speaker_ids]
-
-        print(f"Loaded {len(self.audio_files)} audio files from {len(set(self.speaker_ids))} speakers")
+        self.speaker_to_label = speaker_to_label
+        self.cache_dir = cache_dir
 
     def __len__(self) -> int:
         return len(self.audio_files)
 
     def _get_cache_path(self, audio_path: str) -> str:
         """生成唯一的缓存文件路径"""
-        rel_path = os.path.relpath(audio_path, self.root_dir)
-        param_str = f"seg_{self.segment_length}_sr_{self.sampling_rate}"
-        hash_str = hashlib.md5(f"{rel_path}_{param_str}".encode()).hexdigest()
-        return os.path.join(self.cache_dir, f"{hash_str}.npy")
+        if not self.cache_dir:
+            return ""
+        # 使用文件路径的hash作为缓存文件名，避免路径冲突
+        file_hash = hashlib.md5(audio_path.encode()).hexdigest()
+        cache_file = os.path.join(self.cache_dir, f"{file_hash}.npy")
+        return cache_file
 
     def __getitem__(self, idx: int) -> Dict[str, torch.Tensor]:
         """优先从磁盘加载缓存特征，不存在则生成并缓存"""
-        audio_file = self.audio_files[idx]
-        speaker_id = os.path.basename(os.path.dirname(os.path.dirname(audio_file)))
-        label = self.speaker_to_idx[speaker_id]
+        audio_path = self.audio_files[idx]
+        cache_path = self._get_cache_path(audio_path)
 
-        # 尝试从缓存加载
-        if self.cache_dir:
-            cache_path = self._get_cache_path(audio_file)
-            if os.path.exists(cache_path):
-                try:
-                    data = np.load(cache_path, allow_pickle=True).item()
-                    return {
-                        'audio': torch.FloatTensor(data['features']),
-                        'label': torch.LongTensor([data['label']])[0],
-                        'speaker_id': data['speaker_id'],
-                        'file_path': audio_file
-                    }
-                except Exception as e:
-                    print(f"缓存加载失败 {cache_path}: {e}，将重新生成")
-
-        # 缓存不存在时，执行原处理逻辑
-        audio, sr = librosa.load(audio_file, sr=self.sampling_rate)
-        audio = self._process_audio(audio)
+        if cache_path and os.path.exists(cache_path):
+            features = np.load(cache_path)
+        else:
+            audio, _ = librosa.load(audio_path, sr=self.sampling_rate)
+            audio = self._process_audio(audio)
+            # 修复特征提取方式：实例化后调用extract方法
+            extractor = ChaoticFeatureExtractor(sampling_rate=self.sampling_rate)
+            features = extractor.extract(audio)
+            # 添加特征维度校验
+            if not isinstance(features, np.ndarray):
+                raise ValueError("ChaoticFeatureExtractor应返回numpy数组")
+            if cache_path:
+                os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+                np.save(cache_path, features)
 
         if self.transform:
-            audio = self.transform(audio)
+            features = self.transform(features)
 
-        # 提取MFCC特征
-        mfccs = librosa.feature.mfcc(
-            y=audio,
-            sr=self.sampling_rate,
-            n_mfcc=40,
-            n_fft=512,
-            hop_length=256
-        )
-        delta_mfccs = librosa.feature.delta(mfccs)
-        delta2_mfccs = librosa.feature.delta(mfccs, order=2)
-        features = np.vstack([mfccs, delta_mfccs, delta2_mfccs]).T
+        speaker_id = os.path.basename(os.path.dirname(os.path.dirname(audio_path)))
+        label = self.speaker_to_label[speaker_id] if self.speaker_to_label else -1
 
-        # 标准化
-        feature_mean = np.mean(features, axis=0)
-        feature_std = np.std(features, axis=0)
-        feature_std[feature_std == 0] = 1e-6
-        features = (features - feature_mean) / feature_std
-
-        # 构建结果
-        result = {
-            'audio': torch.FloatTensor(features),
-            'label': torch.LongTensor([label])[0],
-            'speaker_id': speaker_id,
-            'file_path': audio_file
+        return {
+            "audio": torch.tensor(features, dtype=torch.float32),
+            "label": torch.tensor(label, dtype=torch.long)
         }
-
-        # 保存到缓存
-        if self.cache_dir:
-            try:
-                cache_data = {
-                    'features': features,
-                    'label': label,
-                    'speaker_id': speaker_id
-                }
-                np.save(cache_path, cache_data)
-            except Exception as e:
-                print(f"缓存保存失败 {cache_path}: {e}")
-
-        return result
 
     def _process_audio(self, audio: np.ndarray) -> np.ndarray:
         """处理音频为目标长度"""
         target_length = int(self.segment_length * self.sampling_rate)
-        audio = self._remove_silence(audio)
-
-        if len(audio) < target_length:
-            padding = target_length - len(audio)
-            audio = np.pad(audio, (0, padding), 'constant')
-        elif len(audio) > target_length:
+        if len(audio) > target_length:
             start = np.random.randint(0, len(audio) - target_length)
             audio = audio[start:start + target_length]
-
-        audio = audio / (np.max(np.abs(audio)) + 1e-6)
+        else:
+            pad_width = target_length - len(audio)
+            audio = np.pad(audio, (0, pad_width), mode='constant')
         return audio
 
-    def _remove_silence(self, audio: np.ndarray, threshold: float = 0.03, min_duration: int = 320) -> np.ndarray:
+    def _remove_silence(self, audio: np.ndarray, threshold: float = 0.01, min_duration: int = 160) -> np.ndarray:
         """去除静音片段"""
-        energy = librosa.feature.rms(y=audio, frame_length=1024, hop_length=512)[0]
-        frames = np.arange(len(energy))
-        sample_points = np.linspace(0, len(energy) - 1, len(audio))
-        energy_interpolated = np.interp(sample_points, frames, energy)
-        mask = energy_interpolated > threshold
-        mask = self._apply_min_duration(mask, min_duration)
-        return audio[mask]
+        # 这里可以保留或删除，视需求而定
+        pass
 
     def _apply_min_duration(self, mask: np.ndarray, min_duration: int) -> np.ndarray:
         """应用最小持续时间过滤"""
-        changes = np.diff(np.concatenate(([0], mask.astype(int), [0])))
-        starts = np.where(changes == 1)[0]
-        ends = np.where(changes == -1)[0]
-        new_mask = np.zeros_like(mask)
-        for start, end in zip(starts, ends):
-            if end - start >= min_duration:
-                new_mask[start:end] = True
-        return new_mask
+        pass
 
 
 def create_dataloaders(
@@ -206,144 +133,34 @@ def create_dataloaders(
         cache_dir: Optional[str] = None
 ) -> Tuple[DataLoader, DataLoader, DataLoader, Dict[str, int]]:
     """创建DataLoader，优化数据加载流程"""
-    # 一次性获取全局说话人映射和所有音频文件路径（避免重复glob）
-    speaker_to_idx, train_files, dev_files, test_files = create_global_speaker_mapping_and_files(
-        train_dir, dev_dir, test_dir
-    )
+    speaker_to_label, train_files, dev_files, test_files = create_global_speaker_mapping_and_files(
+        train_dir, dev_dir, test_dir)
 
-    # 为不同数据集创建独立缓存子目录
-    train_cache_dir = os.path.join(cache_dir, "train") if cache_dir else None
-    dev_cache_dir = os.path.join(cache_dir, "dev") if cache_dir else None
-    test_cache_dir = os.path.join(cache_dir, "test") if cache_dir else None
-
-    # 创建数据集（使用预收集的文件列表）
     train_dataset = LibriSpeechDataset(
-        audio_files=train_files,
-        root_dir=train_dir,
-        segment_length=segment_length,
-        sampling_rate=sampling_rate,
-        speaker_to_label=speaker_to_idx,
-        cache_dir=train_cache_dir
+        train_files, train_dir, segment_length, sampling_rate,
+        speaker_to_label=speaker_to_label, cache_dir=cache_dir
     ) if train_files else None
 
     dev_dataset = LibriSpeechDataset(
-        audio_files=dev_files,
-        root_dir=dev_dir,
-        segment_length=segment_length,
-        sampling_rate=sampling_rate,
-        speaker_to_label=speaker_to_idx,
-        cache_dir=dev_cache_dir
+        dev_files, dev_dir, segment_length, sampling_rate,
+        speaker_to_label=speaker_to_label, cache_dir=cache_dir
     ) if dev_files else None
 
     test_dataset = LibriSpeechDataset(
-        audio_files=test_files,
-        root_dir=test_dir,
-        segment_length=segment_length,
-        sampling_rate=sampling_rate,
-        speaker_to_label=speaker_to_idx,
-        cache_dir=test_cache_dir
+        test_files, test_dir, segment_length, sampling_rate,
+        speaker_to_label=speaker_to_label, cache_dir=cache_dir
     ) if test_files else None
 
-    pin_memory = torch.cuda.is_available()
-    num_workers = min(num_workers, os.cpu_count() or 4)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers) if train_dataset else None
+    dev_loader = DataLoader(dev_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers) if dev_dataset else None
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers) if test_dataset else None
 
-    # 创建DataLoader
-    train_loader = DataLoader(
-        train_dataset,
-        batch_size=batch_size,
-        shuffle=True,
-        num_workers=num_workers,
-        pin_memory=pin_memory,
-        persistent_workers=True
-    ) if train_dataset else None
-
-    dev_loader = DataLoader(
-        dev_dataset,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=num_workers,
-        pin_memory=pin_memory,
-        persistent_workers=True
-    ) if dev_dataset else None
-
-    test_loader = DataLoader(
-        test_dataset,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=num_workers,
-        pin_memory=pin_memory,
-        persistent_workers=True
-    ) if test_dataset else None
-
-    # 优化数据集验证：一次遍历同时收集speakers和labels，减少数据加载次数
-    print("Validating dataset consistency...")
-    print(f"Global speakers: {len(speaker_to_idx)}")
-
-    # 验证训练集
-    if train_loader:
-        train_speakers = set()
-        train_labels = set()
-        for batch in train_loader:
-            labels = batch['label'].numpy()
-            train_speakers.update(labels)
-            train_labels.update(labels)
-        print(f"Training speakers: {len(train_speakers)}")
-        print(f"Training labels range: {min(train_labels)} - {max(train_labels)}" if train_labels else "No training data")
-
-    # 验证开发集
-    if dev_loader:
-        dev_speakers = set()
-        dev_labels = set()
-        for batch in dev_loader:
-            labels = batch['label'].numpy()
-            dev_speakers.update(labels)
-            dev_labels.update(labels)
-        print(f"Development speakers: {len(dev_speakers)}")
-        print(f"Development labels range: {min(dev_labels)} - {max(dev_labels)}" if dev_labels else "No development data")
-
-    # 验证测试集
-    if test_loader:
-        test_speakers = set()
-        test_labels = set()
-        for batch in test_loader:
-            labels = batch['label'].numpy()
-            test_speakers.update(labels)
-            test_labels.update(labels)
-        print(f"Test speakers: {len(test_speakers)}")
-        print(f"Test labels range: {min(test_labels)} - {max(test_labels)}" if test_labels else "No test data")
-
-    # 检查标签范围
-    all_labels = set()
-    if train_loader and train_labels:
-        all_labels.update(train_labels)
-    if dev_loader and dev_labels:
-        all_labels.update(dev_labels)
-    if test_loader and test_labels:
-        all_labels.update(test_labels)
-
-    if all_labels:
-        max_label = max(all_labels)
-        if max_label >= len(speaker_to_idx):
-            print(f"WARNING: Label {max_label} exceeds model output dimension {len(speaker_to_idx)}")
-        else:
-            print("Dataset validation passed - all labels are within model output range")
-
-    return train_loader, dev_loader, test_loader, speaker_to_idx
+    return train_loader, dev_loader, test_loader, speaker_to_label
 
 
 def extract_features(audio: np.ndarray, sampling_rate: int = 16000) -> np.ndarray:
-    """特征提取函数"""
-    mfccs = librosa.feature.mfcc(
-        y=audio,
-        sr=sampling_rate,
-        n_mfcc=20,
-        n_fft=512,
-        hop_length=256
-    )
-    delta_mfccs = librosa.feature.delta(mfccs)
-    delta2_mfccs = librosa.feature.delta(mfccs, order=2)
-    features = np.vstack([mfccs, delta_mfccs, delta2_mfccs]).T
-    return features
+    """特征提取函数，已由chaos_features.py中的extract_chaos_features替代"""
+    pass
 
 
 if __name__ == "__main__":

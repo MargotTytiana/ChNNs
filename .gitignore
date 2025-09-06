@@ -14,6 +14,8 @@ ChNNs/FeatureExtraction/extracted_features/
 ChNNs/archive/
 ChNNs/ModelDesign/C-HiLAP_CLA/plots/
 ChNNs/ModelDesign/C-HiLAP_CLA/checkpoints/
+ChNNs/ModelDesign/C-HiLAP_CLA/output/
+
 
 
 # =========================
@@ -25,6 +27,11 @@ __pycache__/
 *.pyd
 *.egg-info/
 *.egg
+*.json
+*.log
+*.npy
+*.pth
+*.pt
 
 # Virtual environments
 venv/

@@ -3,7 +3,9 @@ from scipy import stats
 import matplotlib.pyplot as plt
 from typing import Dict, List, Tuple, Optional, Union
 from sklearn.neighbors import NearestNeighbors
+from scipy.spatial.distance import cdist
 import warnings
+
 
 class MLSAFeatureExtractor:
     """
@@ -11,12 +13,13 @@ class MLSAFeatureExtractor:
 
     多尺度李雅普诺夫谱分析(MLSA)特征提取器
     """
+
     def __init__(
-        self,
-        scales: List[int] = [1, 2, 4, 8, 16],
-        embedding_dim: int = 3,
-        delay: int = 1,
-        n_exponents: int = 2
+            self,
+            scales: List[int] = [1, 2, 4, 8, 16],
+            embedding_dim: int = 3,
+            delay: int = 1,
+            n_exponents: int = 2
     ):
         """
         Initialize the MLSA feature extractor
@@ -120,12 +123,12 @@ class MLSAFeatureExtractor:
         # Fill the phase space with delayed values
         # 用延迟值填充相空间
         for i in range(embedding_dim):
-            phase_space[:, i] = time_series[i*delay:i*delay + n_points]
+            phase_space[:, i] = time_series[i * delay:i * delay + n_points]
 
         return phase_space
 
     def _calculate_lyapunov_spectrum(self, phase_space: np.ndarray, n_exponents: int = 2,
-                                    min_neighbors: int = 20, trajectory_len: int = 20) -> List[float]:
+                                     min_neighbors: int = 20, trajectory_len: int = 20) -> List[float]:
         """
         Calculate the Lyapunov spectrum using the method of Sano and Sawada
 
@@ -146,6 +149,14 @@ class MLSAFeatureExtractor:
                         李雅普诺夫指数
         """
         n_points, dim = phase_space.shape
+
+        # 限制相空间点数以避免内存问题
+        max_phase_points = 10000
+        if n_points > max_phase_points:
+            indices = np.random.choice(n_points, max_phase_points, replace=False)
+            phase_space = phase_space[indices]
+            n_points = max_phase_points
+            warnings.warn(f"Phase space size reduced to {max_phase_points} points for Lyapunov calculation")
 
         # Ensure we don't try to compute more exponents than dimensions
         # 确保我们不尝试计算比维度更多的指数
@@ -244,18 +255,21 @@ class MLSAFeatureExtractor:
 
         return exponents.tolist()
 
+
 class RQAFeatureExtractor:
     """
     Recurrence Quantification Analysis (RQA) feature extractor
 
     递归定量分析(RQA)特征提取器
     """
+
     def __init__(
-        self,
-        embedding_dim: int = 3,
-        delay: int = 1,
-        threshold: Optional[float] = None,
-        lmin: int = 2
+            self,
+            embedding_dim: int = 3,
+            delay: int = 1,
+            threshold: Optional[float] = None,
+            lmin: int = 2,
+            max_points: int = 10000  # 新增：最大相空间点数，控制内存使用
     ):
         """
         Initialize the RQA feature extractor
@@ -271,11 +285,14 @@ class RQAFeatureExtractor:
                                         递归图的阈值。如果为None，将进行估计
             lmin (int): Minimum length of diagonal and vertical lines
                        对角线和垂直线的最小长度
+            max_points (int): Maximum number of points in phase space to prevent memory issues
+                             相空间最大点数，防止内存问题
         """
         self.embedding_dim = embedding_dim
         self.delay = delay
         self.threshold = threshold
         self.lmin = lmin
+        self.max_points = max_points  # 存储最大点数参数
 
     def extract(self, time_series: np.ndarray) -> Dict[str, float]:
         """
@@ -299,6 +316,12 @@ class RQAFeatureExtractor:
         # 重构相空间
         phase_space = self._delay_embedding(time_series, self.embedding_dim, self.delay)
 
+        # 对相空间进行子采样以控制计算规模
+        if phase_space.shape[0] > self.max_points:
+            indices = np.random.choice(phase_space.shape[0], self.max_points, replace=False)
+            phase_space = phase_space[indices]
+            warnings.warn(f"Phase space size reduced from {phase_space.shape[0]} to {self.max_points} points for RQA")
+
         # Calculate distance matrix
         # 计算距离矩阵
         dist_matrix = self._calculate_distance_matrix(phase_space)
@@ -307,9 +330,9 @@ class RQAFeatureExtractor:
         # 如果未提供阈值，则确定阈值
         threshold = self.threshold
         if threshold is None:
-            # Use a percentage of the maximum distance
-            # 使用最大距离的百分比
-            threshold = 0.1 * np.max(dist_matrix)
+            # 使用最大距离的百分比，增加容错处理
+            max_dist = np.max(dist_matrix) if dist_matrix.size > 0 else 0
+            threshold = 0.1 * max_dist if max_dist > 0 else 1e-6
 
         # Create recurrence plot
         # 创建递归图
@@ -351,15 +374,15 @@ class RQAFeatureExtractor:
         # Fill the phase space with delayed values
         # 用延迟值填充相空间
         for i in range(embedding_dim):
-            phase_space[:, i] = time_series[i*delay:i*delay + n_points]
+            phase_space[:, i] = time_series[i * delay:i * delay + n_points]
 
         return phase_space
 
     def _calculate_distance_matrix(self, phase_space: np.ndarray) -> np.ndarray:
         """
-        Calculate the distance matrix between all points in phase space
+        Calculate the distance matrix between all points in phase space using efficient methods
 
-        计算相空间中所有点之间的距离矩阵
+        用高效方法计算相空间中所有点之间的距离矩阵
 
         Args:
             phase_space (np.ndarray): Reconstructed phase space
@@ -370,16 +393,17 @@ class RQAFeatureExtractor:
                        距离矩阵
         """
         n_points = phase_space.shape[0]
-        dist_matrix = np.zeros((n_points, n_points))
 
-        # Calculate Euclidean distance between all pairs of points
-        # 计算所有点对之间的欧几里得距离
-        for i in range(n_points):
-            for j in range(i, n_points):
-                dist = np.linalg.norm(phase_space[i] - phase_space[j])
-                dist_matrix[i, j] = dist_matrix[j, i] = dist
-
-        return dist_matrix
+        # 使用scipy的cdist高效计算欧氏距离，替代双重循环
+        try:
+            return cdist(phase_space, phase_space, metric='euclidean')
+        except MemoryError:
+            # 双重保险：如果仍然内存不足，进一步减少点数
+            reduced_points = max(1000, n_points // 2)
+            warnings.warn(f"Memory error calculating distance matrix, reducing to {reduced_points} points")
+            indices = np.random.choice(n_points, reduced_points, replace=False)
+            reduced_space = phase_space[indices]
+            return cdist(reduced_space, reduced_space, metric='euclidean')
 
     def _calculate_rqa_features(self, recurrence_plot: np.ndarray) -> Dict[str, float]:
         """
@@ -397,30 +421,33 @@ class RQAFeatureExtractor:
         """
         n = recurrence_plot.shape[0]
 
+        # 处理空矩阵情况
+        if n == 0:
+            return {k: 0.0 for k in ['RR', 'DET', 'L', 'Lmax', 'DIV', 'ENTR', 'LAM', 'TT']}
+
         # Recurrence Rate (RR): Percentage of recurrence points
         # 递归率(RR)：递归点的百分比
-        rr = np.sum(recurrence_plot) / (n * n)
+        total_points = n * n
+        rr = np.sum(recurrence_plot) / total_points if total_points > 0 else 0
 
-        # Find diagonal lines
-        # 寻找对角线
+        # Find diagonal lines (excluding main diagonal)
+        # 寻找对角线（排除主对角线）
         diag_lengths = []
-        for i in range(-(n-self.lmin), n-self.lmin+1):
+        for i in range(-(n - self.lmin), n - self.lmin + 1):
             if i == 0:  # Skip the main diagonal
                 continue
             diag = np.diag(recurrence_plot, k=i)
             # Count consecutive True values
-            # 计算连续的True值
-            if len(diag) > 0:
-                count = 0
-                for val in diag:
-                    if val:
-                        count += 1
-                    else:
-                        if count >= self.lmin:
-                            diag_lengths.append(count)
-                        count = 0
-                if count >= self.lmin:
-                    diag_lengths.append(count)
+            count = 0
+            for val in diag:
+                if val:
+                    count += 1
+                else:
+                    if count >= self.lmin:
+                        diag_lengths.append(count)
+                    count = 0
+            if count >= self.lmin:
+                diag_lengths.append(count)
 
         # Find vertical lines
         # 寻找垂直线
@@ -428,7 +455,6 @@ class RQAFeatureExtractor:
         for i in range(n):
             col = recurrence_plot[:, i]
             # Count consecutive True values
-            # 计算连续的True值
             count = 0
             for val in col:
                 if val:
@@ -441,51 +467,37 @@ class RQAFeatureExtractor:
                 vert_lengths.append(count)
 
         # Convert to numpy arrays for easier calculation
-        # 转换为numpy数组以便于计算
-        diag_lengths = np.array(diag_lengths) if diag_lengths else np.array([0])
-        vert_lengths = np.array(vert_lengths) if vert_lengths else np.array([0])
+        diag_lengths = np.array(diag_lengths) if diag_lengths else np.array([])
+        vert_lengths = np.array(vert_lengths) if vert_lengths else np.array([])
 
-        # Determinism (DET): Percentage of recurrence points forming diagonal lines
-        # 确定性(DET)：形成对角线的递归点的百分比
-        det = np.sum(diag_lengths) / np.sum(recurrence_plot) if np.sum(recurrence_plot) > 0 else 0
+        # Determinism (DET)
+        det_numerator = np.sum(diag_lengths) if len(diag_lengths) > 0 else 0
+        det_denominator = np.sum(recurrence_plot) - n  # 减去主对角线
+        det = det_numerator / det_denominator if det_denominator > 0 else 0
 
         # Average Diagonal Line Length (L)
-        # 平均对角线长度(L)
-        avg_diag_length = np.mean(diag_lengths) if len(diag_lengths) > 0 and diag_lengths[0] > 0 else 0
+        avg_diag_length = np.mean(diag_lengths) if len(diag_lengths) > 0 else 0
 
         # Maximum Diagonal Line Length (Lmax)
-        # 最大对角线长度(Lmax)
-        max_diag_length = np.max(diag_lengths) if len(diag_lengths) > 0 and diag_lengths[0] > 0 else 0
+        max_diag_length = np.max(diag_lengths) if len(diag_lengths) > 0 else 0
 
-        # Divergence (DIV): Inverse of Lmax
-        # 发散(DIV)：Lmax的倒数
+        # Divergence (DIV)
         div = 1.0 / max_diag_length if max_diag_length > 0 else float('inf')
 
         # Entropy of diagonal line lengths (ENTR)
-        # 对角线长度的熵(ENTR)
-        if len(diag_lengths) > 0 and diag_lengths[0] > 0:
-            # Calculate histogram of diagonal lengths
-            # 计算对角线长度的直方图
+        entr = 0.0
+        if len(diag_lengths) > 0 and max_diag_length > 0:
             hist, _ = np.histogram(diag_lengths, bins=range(1, int(max_diag_length) + 2))
-            # Normalize histogram to get probability
-            # 归一化直方图以获得概率
-            prob = hist / np.sum(hist)
-            # Calculate entropy
-            # 计算熵
-            entr = -np.sum(prob * np.log(prob + 1e-10))
-        else:
-            entr = 0
+            prob = hist / np.sum(hist) if np.sum(hist) > 0 else 0
+            entr = -np.sum(prob * np.log(prob + 1e-10)) if np.any(prob > 0) else 0
 
-        # Laminarity (LAM): Percentage of recurrence points forming vertical lines
-        # 层流性(LAM)：形成垂直线的递归点的百分比
-        lam = np.sum(vert_lengths) / np.sum(recurrence_plot) if np.sum(recurrence_plot) > 0 else 0
+        # Laminarity (LAM)
+        lam_numerator = np.sum(vert_lengths) if len(vert_lengths) > 0 else 0
+        lam = lam_numerator / np.sum(recurrence_plot) if np.sum(recurrence_plot) > 0 else 0
 
-        # Trapping Time (TT): Average vertical line length
-        # 捕获时间(TT)：平均垂直线长度
-        tt = np.mean(vert_lengths) if len(vert_lengths) > 0 and vert_lengths[0] > 0 else 0
+        # Trapping Time (TT)
+        tt = np.mean(vert_lengths) if len(vert_lengths) > 0 else 0
 
-        # Return all features
-        # 返回所有特征
         return {
             'RR': rr,
             'DET': det,
@@ -510,25 +522,27 @@ class RQAFeatureExtractor:
                         图表标题
         """
         # Reconstruct phase space
-        # 重构相空间
         phase_space = self._delay_embedding(time_series, self.embedding_dim, self.delay)
 
+        # 控制绘图用的相空间点数，避免可视化时内存溢出
+        plot_points = min(self.max_points, 2000)  # 可视化用更少的点
+        if phase_space.shape[0] > plot_points:
+            indices = np.random.choice(phase_space.shape[0], plot_points, replace=False)
+            phase_space = phase_space[indices]
+
         # Calculate distance matrix
-        # 计算距离矩阵
         dist_matrix = self._calculate_distance_matrix(phase_space)
 
         # Determine threshold if not provided
-        # 如果未提供阈值，则确定阈值
         threshold = self.threshold
         if threshold is None:
-            threshold = 0.1 * np.max(dist_matrix)
+            max_dist = np.max(dist_matrix) if dist_matrix.size > 0 else 0
+            threshold = 0.1 * max_dist if max_dist > 0 else 1e-6
 
         # Create recurrence plot
-        # 创建递归图
         recurrence_plot = dist_matrix < threshold
 
         # Plot
-        # 绘图
         plt.figure(figsize=(10, 8))
         plt.imshow(recurrence_plot, cmap='binary', origin='lower')
         plt.colorbar(label='Recurrence')
@@ -536,7 +550,6 @@ class RQAFeatureExtractor:
         plt.xlabel('Time Index')
         plt.ylabel('Time Index')
         plt.tight_layout()
-        plt.show()
 
 class ChaoticFeatureExtractor:
     """
@@ -704,9 +717,12 @@ def extract_chaotic_features_batch(audio_batch: np.ndarray, **kwargs) -> np.ndar
     return features_batch
 
 if __name__ == "__main__":
+    # Example usage
+    # 示例用法
+
     # Generate a test signal (Lorenz system)
     # 生成测试信号（洛伦兹系统）
-    def lorenz_system(t, xyz, sigma=10, beta=8/3, rho=28):
+    def lorenz_system(xyz, t, sigma=10, beta=8/3, rho=28):
         x, y, z = xyz
         dxdt = sigma * (y - x)
         dydt = x * (rho - z) - y
@@ -757,3 +773,4 @@ if __name__ == "__main__":
     # Plot recurrence plot
     # 绘制递归图
     rqa_extractor.plot_recurrence_plot(x_series, "Lorenz System Recurrence Plot")
+
