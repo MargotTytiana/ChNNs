@@ -1,0 +1,79 @@
+# Comparison Experiment Configuration
+# experiments/configs/comparison_config.yaml
+
+experiment:
+  name: "comprehensive_comparison"
+  description: "Compare all four approaches: Mel+Chaotic, Mel+MLP, Chaotic+MLP, Chaotic+Chaotic"
+
+base_config: "base_config.yaml"
+
+# Define all comparison experiments
+comparison_experiments:
+  - name: "mel_chaotic_network"
+    description: "Mel features with chaotic network"
+    features:
+      feature_type: "traditional"
+      traditional_type: "mel_spectrogram"
+    model:
+      type: "chaotic_network"
+      
+  - name: "mel_mlp_classifier" 
+    description: "Mel features with MLP"
+    features:
+      feature_type: "traditional"
+      traditional_type: "mel_spectrogram"
+    model:
+      type: "mlp_classifier"
+      
+  - name: "mfcc_mlp_classifier"
+    description: "MFCC features with MLP"  
+    features:
+      feature_type: "traditional"
+      traditional_type: "mfcc"
+    model:
+      type: "mlp_classifier"
+      
+  - name: "chaotic_mlp_classifier"
+    description: "Chaotic features with MLP"
+    features:
+      feature_type: "chaotic"
+    model:
+      type: "mlp_classifier"
+      
+  - name: "chaotic_chaotic_network"
+    description: "Chaotic features with chaotic network (full model)"
+    features:
+      feature_type: "chaotic"
+    model:
+      type: "chaotic_network"
+
+# Shared training configuration for fair comparison
+training:
+  batch_size: 32
+  num_epochs: 100
+  
+  # Same optimization strategy for all
+  optimizer:
+    type: "adam"
+    adam:
+      betas: [0.9, 0.999]
+  
+  scheduler:
+    type: "cosine_annealing"
+
+# Evaluation configuration for comparison
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision" 
+    - "recall"
+    - "f1_score"
+    - "inference_time"
+    - "model_size"
+    - "flops"
+  
+  # Statistical significance testing
+  statistical_tests:
+    enabled: true
+    confidence_level: 0.95
+    num_bootstrap_samples: 1000

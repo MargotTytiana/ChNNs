@@ -1,0 +1,56 @@
+
+# Chaotic Network Specific Configuration Template
+# experiments/configs/chaotic_config.yaml
+
+experiment:
+  name: "chaotic_network_experiment"
+  description: "Full chaotic neural network for speaker recognition"
+  
+# Inherit from base config and override specific values
+base_config: "base_config.yaml"
+
+# Override model configuration for chaotic network
+model:
+  type: "chaotic_network"
+  
+  chaotic_network:
+    embedding:
+      system_type: "lorenz"
+      evolution_time: 1.0  # Longer evolution for better chaos
+      coupling_strength: 2.0  # Stronger coupling
+      
+    attractor_pooling:
+      correlation_dimension:
+        num_radii: 100  # More detailed analysis
+        
+    speaker_embedding:
+      embedding_dim: 512  # Larger embedding
+      hidden_dims: [1024, 512, 256]
+
+# Training adjustments for chaotic network
+training:
+  batch_size: 16  # Smaller batch for stability
+  learning_rate: 0.0005  # Lower learning rate
+  num_epochs: 200  # More epochs needed
+  
+  # Specialized optimizer for chaotic systems
+  optimizer:
+    type: "adamw"
+    adamw:
+      weight_decay: 1e-4
+  
+  # Careful scheduling for chaotic dynamics
+  scheduler:
+    type: "plateau"
+    plateau:
+      patience: 15
+      factor: 0.7
+
+# Feature configuration for chaotic approach
+features:
+  chaotic:
+    mlsa:
+      scales: [1, 2, 4, 8, 16, 32]  # More scales
+      max_lyapunov_steps: 2000  # More accurate computation
+
+

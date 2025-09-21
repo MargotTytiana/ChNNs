@@ -1,0 +1,6 @@
+2025-09-14 20:57:06 | ERROR    | chaotic_sr | logger.py:153 | This is an error message
+2025-09-14 20:57:06 | ERROR    | chaotic_sr | logger.py:161 | Caught an exception during testing
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/utils/logger.py", line 319, in <module>
+    raise ValueError("Test exception")
+ValueError: Test exception

@@ -1,0 +1,54 @@
+
+# Development/Debug Configuration
+# experiments/configs/debug_config.yaml
+
+experiment:
+  name: "debug_experiment"
+  description: "Quick debugging and development"
+
+base_config: "base_config.yaml"
+
+# Minimal dataset for quick testing
+data:
+  # Use subset of data
+  max_samples_per_speaker: 10
+  max_speakers: 5
+
+# Small model for quick training
+model:
+  type: "chaotic_network"
+  
+  chaotic_network:
+    embedding:
+      evolution_time: 0.1  # Very short for speed
+      
+    speaker_embedding:
+      embedding_dim: 64
+      hidden_dims: [128, 64]
+      
+    classifier:
+      hidden_dims: [32]
+
+# Fast training settings
+training:
+  batch_size: 8
+  num_epochs: 5
+  learning_rate: 0.01
+  
+# Minimal features for speed
+features:
+  chaotic:
+    mlsa:
+      scales: [1, 2]
+      max_lyapunov_steps: 100
+      
+    rqa:
+      min_diagonal_length: 2
+
+# Frequent logging for debugging
+logging:
+  log_frequency: 1
+  visualize_features: true
+  
+checkpointing:
+  save_frequency: 1

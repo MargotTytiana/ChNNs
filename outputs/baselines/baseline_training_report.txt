@@ -1,0 +1,57 @@
+BASELINE MODELS TRAINING REPORT
+==================================================
+Generated: 2025-09-21 12:45:52
+Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/Model/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+
+SUMMARY STATISTICS
+--------------------
+Total experiments: 0
+Successful experiments: 0
+Failed experiments: 1
+Total training time: 0.0s (0.00h)
+
+METHOD RESULTS
+---------------
+
+BEST METHODS
+------------
+FAILED EXPERIMENTS
+------------------
+Method: mel_mlp, Run: 0
+Error: 未找到LibriSpeech数据集，检查过的路径: [PosixPath('/scratch/project_2003370/yueyao/Model/dataset/train-clean-100/LibriSpeech/train-clean-100'), PosixPath('/scratch/project_2003370/yueyao/Model/dataset/train-clean-100/dataset/train-clean-100/LibriSpeech/train-clean-100'), PosixPath('/dataset/train-clean-100/LibriSpeech/train-clean-100')]
+Time: 2025-09-21T12:45:52.108375
+

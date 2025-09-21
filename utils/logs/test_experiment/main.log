@@ -1,0 +1,31 @@
+2025-09-14 20:57:04 | INFO     | chaotic_sr | logger.py:145 | Experiment logger initialized: test_experiment
+2025-09-14 20:57:04 | INFO     | chaotic_sr | logger.py:145 | Log directory: logs/test_experiment
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System information logged
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System platform: Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System python_version: 3.12.10
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System cpu_count: 256
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System memory_total: 503.18 GB
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System torch_version: 2.7.1+cu126
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System cuda_available: True
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System cuda_device_count: 1
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System timestamp: 2025-09-14T20:57:06.467288
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System cuda_version: 12.6
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | System gpu_names: ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']
+2025-09-14 20:57:06 | DEBUG    | chaotic_sr | logger.py:141 | This is a debug message
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | This is an info message
+2025-09-14 20:57:06 | WARNING  | chaotic_sr | logger.py:149 | This is a warning message
+2025-09-14 20:57:06 | ERROR    | chaotic_sr | logger.py:153 | This is an error message
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | Experiment configuration saved
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | Config: {
+  "model_type": "chaotic_network",
+  "learning_rate": 0.001,
+  "batch_size": 32,
+  "epochs": 100
+}
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | Epoch 1 | Metrics: train_loss: 0.123, val_loss: 0.456, accuracy: 0.789
+2025-09-14 20:57:06 | ERROR    | chaotic_sr | logger.py:161 | Caught an exception during testing
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/utils/logger.py", line 319, in <module>
+    raise ValueError("Test exception")
+ValueError: Test exception
+2025-09-14 20:57:06 | INFO     | chaotic_sr | logger.py:145 | Logger testing completed

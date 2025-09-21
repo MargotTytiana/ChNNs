@@ -1,0 +1,988 @@
+"""
+Multi-scale Lyapunov Spectrum Analysis (MLSA) Extractor.
+
+This module implements the core innovation of the C-HiLAP project: multi-scale
+Lyapunov spectrum analysis for extracting chaotic features from audio signals
+across different temporal scales.
+
+Author: C-HiLAP Project
+Date: 2025
+"""
+
+import numpy as np
+import warnings
+from typing import Dict, List, Tuple, Optional, Union, Any
+from dataclasses import dataclass, field
+from abc import ABC, abstractmethod
+import scipy.signal as signal
+from scipy.stats import entropy
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+import logging
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Import project modules
+try:
+    from chaos_utils import (
+        largest_lyapunov_from_data, correlation_dimension, 
+        hurst_exponent, kolmogorov_entropy
+    )
+    from phase_space_reconstruction import (
+        PhaseSpaceReconstructor, EmbeddingConfig
+    )
+    from utils.numerical_stability import (
+        NumericalConfig, PrecisionManager, OutlierDetector, 
+        NumericalValidator, safe_divide, safe_log
+    )
+except ImportError as e:
+    warnings.warn(f"Failed to import required modules: {e}")
+
+
+@dataclass
+class MLSAConfig:
+    """Configuration for Multi-scale Lyapunov Spectrum Analysis."""
+    
+    # Scale decomposition parameters
+    n_scales: int = 5
+    scale_factors: List[float] = field(default_factory=lambda: [1, 2, 4, 8, 16])
+    decomposition_method: str = 'wavelet'  # 'wavelet', 'emd', 'fourier'
+    wavelet_name: str = 'db4'
+    
+    # Lyapunov analysis parameters
+    min_segment_length: int = 100
+    max_segment_length: int = 2000
+    overlap_ratio: float = 0.5
+    lyapunov_method: str = 'rosenstein'  # 'rosenstein', 'wolf', 'kantz'
+    
+    # Phase space parameters
+    embedding_config: EmbeddingConfig = field(default_factory=EmbeddingConfig)
+    auto_embedding: bool = True
+    
+    # Feature extraction parameters
+    spectral_bins: int = 50
+    entropy_bins: int = 20
+    correlation_r_points: int = 30
+    
+    # Quality control
+    min_positive_lyapunov_ratio: float = 0.1
+    max_condition_number: float = 1e10
+    outlier_threshold: float = 3.0
+    
+    # Numerical stability
+    numerical_config: NumericalConfig = field(default_factory=NumericalConfig)
+    enable_validation: bool = True
+
+
+class ScaleDecomposer(ABC):
+    """Abstract base class for multi-scale decomposition."""
+    
+    @abstractmethod
+    def decompose(self, signal: np.ndarray, scales: List[float]) -> Dict[float, np.ndarray]:
+        """Decompose signal into multiple scales."""
+        pass
+    
+    @abstractmethod
+    def get_scale_info(self, scale: float) -> Dict[str, Any]:
+        """Get information about a specific scale."""
+        pass
+
+
+class WaveletScaleDecomposer(ScaleDecomposer):
+    """Wavelet-based multi-scale decomposition."""
+    
+    def __init__(self, wavelet_name: str = 'db4'):
+        self.wavelet_name = wavelet_name
+        try:
+            import pywt
+            self.pywt = pywt
+            self.available = True
+        except ImportError:
+            warnings.warn("PyWavelets not available, using Fourier fallback")
+            self.available = False
+    
+    def decompose(self, signal: np.ndarray, scales: List[float]) -> Dict[float, np.ndarray]:
+        """Decompose signal using wavelet transform."""
+        if not self.available:
+            return self._fourier_fallback(signal, scales)
+        
+        decomposed = {}
+        
+        for scale in scales:
+            try:
+                # Use continuous wavelet transform
+                coeffs, freqs = self.pywt.cwt(
+                    signal, 
+                    np.array([scale]), 
+                    self.wavelet_name,
+                    sampling_period=1.0
+                )
+                
+                # Extract the real part and flatten
+                decomposed[scale] = np.real(coeffs[0])
+                
+            except Exception as e:
+                warnings.warn(f"Wavelet decomposition failed for scale {scale}: {e}")
+                # Fallback to simple downsampling
+                decomposed[scale] = self._simple_scale_extraction(signal, scale)
+        
+        return decomposed
+    
+    def _fourier_fallback(self, signal: np.ndarray, scales: List[float]) -> Dict[float, np.ndarray]:
+        """Fourier-based fallback decomposition."""
+        decomposed = {}
+        
+        # Get frequency domain representation
+        fft_signal = np.fft.fft(signal)
+        freqs = np.fft.fftfreq(len(signal))
+        
+        for scale in scales:
+            # Create bandpass filter around scale frequency
+            center_freq = 1.0 / scale
+            bandwidth = center_freq * 0.5
+            
+            # Filter in frequency domain
+            filtered_fft = fft_signal.copy()
+            mask = (np.abs(freqs - center_freq) > bandwidth) & (np.abs(freqs + center_freq) > bandwidth)
+            filtered_fft[mask] = 0
+            
+            # Convert back to time domain
+            filtered_signal = np.real(np.fft.ifft(filtered_fft))
+            decomposed[scale] = filtered_signal
+        
+        return decomposed
+    
+    def _simple_scale_extraction(self, signal: np.ndarray, scale: float) -> np.ndarray:
+        """Simple scale extraction by downsampling."""
+        downsample_factor = max(1, int(scale))
+        if downsample_factor == 1:
+            return signal
+        
+        # Downsample and upsample to maintain length
+        downsampled = signal[::downsample_factor]
+        
+        # Interpolate back to original length
+        original_indices = np.arange(len(signal))
+        downsampled_indices = np.arange(0, len(signal), downsample_factor)
+        
+        if len(downsampled_indices) > 1:
+            upsampled = np.interp(original_indices, downsampled_indices, downsampled)
+        else:
+            upsampled = np.full(len(signal), downsampled[0])
+        
+        return upsampled
+    
+    def get_scale_info(self, scale: float) -> Dict[str, Any]:
+        """Get information about wavelet scale."""
+        return {
+            'scale_factor': scale,
+            'wavelet': self.wavelet_name,
+            'equivalent_frequency': 1.0 / scale,
+            'time_resolution': scale,
+            'method': 'wavelet'
+        }
+
+
+class FourierScaleDecomposer(ScaleDecomposer):
+    """Fourier-based multi-scale decomposition."""
+    
+    def decompose(self, signal: np.ndarray, scales: List[float]) -> Dict[float, np.ndarray]:
+        """Decompose signal using Fourier filtering."""
+        decomposed = {}
+        
+        # Compute FFT
+        fft_signal = np.fft.fft(signal)
+        freqs = np.fft.fftfreq(len(signal))
+        
+        for scale in scales:
+            # Define frequency band for this scale
+            center_freq = 1.0 / scale
+            bandwidth = center_freq * 0.8  # Adjustable bandwidth
+            
+            # Create bandpass filter
+            low_freq = max(center_freq - bandwidth/2, 0)
+            high_freq = center_freq + bandwidth/2
+            
+            # Apply filter
+            filtered_fft = fft_signal.copy()
+            freq_mask = (np.abs(freqs) < low_freq) | (np.abs(freqs) > high_freq)
+            filtered_fft[freq_mask] = 0
+            
+            # Convert back to time domain
+            filtered_signal = np.real(np.fft.ifft(filtered_fft))
+            decomposed[scale] = filtered_signal
+        
+        return decomposed
+    
+    def get_scale_info(self, scale: float) -> Dict[str, Any]:
+        """Get information about Fourier scale."""
+        return {
+            'scale_factor': scale,
+            'center_frequency': 1.0 / scale,
+            'bandwidth': 0.8 / scale,
+            'method': 'fourier'
+        }
+
+
+class LyapunovSpectrumCalculator:
+    """Calculate Lyapunov spectrum for a single scale."""
+    
+    def __init__(self, config: MLSAConfig):
+        self.config = config
+        self.reconstructor = PhaseSpaceReconstructor(config.embedding_config)
+        self.outlier_detector = OutlierDetector(config.numerical_config)
+        self.validator = NumericalValidator(config.numerical_config)
+    
+    def calculate_spectrum(self, signal: np.ndarray, 
+                          scale: float) -> Dict[str, Any]:
+        """
+        Calculate Lyapunov spectrum for signal at given scale.
+        
+        Args:
+            signal: Input signal
+            scale: Time scale factor
+            
+        Returns:
+            Dictionary containing spectrum and related features
+        """
+        results = {
+            'scale': scale,
+            'signal_length': len(signal),
+            'success': False,
+            'error': None
+        }
+        
+        try:
+            # Validate input signal
+            if self.config.enable_validation:
+                validation = self.validator.validate_array(signal, f"scale_{scale}_signal")
+                if not validation['is_valid']:
+                    results['error'] = f"Invalid input signal: {validation['issues']}"
+                    return results
+            
+            # Remove outliers if needed
+            clean_signal, outlier_indices = self.outlier_detector.remove_outliers(
+                signal, method='zscore'
+            )
+            
+            if len(clean_signal) < self.config.min_segment_length:
+                results['error'] = f"Signal too short after outlier removal: {len(clean_signal)}"
+                return results
+            
+            results['outliers_removed'] = len(outlier_indices)
+            
+            # Perform phase space reconstruction
+            if self.config.auto_embedding:
+                # Automatic parameter estimation
+                reconstruction = self.reconstructor.reconstruct(
+                    clean_signal,
+                    delay=None,
+                    dimension=None
+                )
+            else:
+                # Use fixed parameters
+                reconstruction = self.reconstructor.reconstruct(
+                    clean_signal,
+                    delay=1,
+                    dimension=3
+                )
+            
+            if not reconstruction['embedding_success']:
+                results['error'] = f"Phase space reconstruction failed: {reconstruction.get('error', 'Unknown')}"
+                return results
+            
+            results['embedding_info'] = {
+                'delay': reconstruction['delay'],
+                'dimension': reconstruction['dimension'],
+                'embedded_points': reconstruction['n_embedded_points']
+            }
+            
+            # Calculate various Lyapunov-related measures
+            lyapunov_features = self._extract_lyapunov_features(
+                clean_signal, reconstruction['embedded_data'], scale
+            )
+            
+            results.update(lyapunov_features)
+            results['success'] = True
+            
+        except Exception as e:
+            results['error'] = str(e)
+            warnings.warn(f"Lyapunov calculation failed for scale {scale}: {e}")
+        
+        return results
+    
+    def _extract_lyapunov_features(self, signal: np.ndarray, 
+                                 embedded_data: np.ndarray,
+                                 scale: float) -> Dict[str, Any]:
+        """Extract comprehensive Lyapunov-based features."""
+        features = {}
+        
+        # 1. Largest Lyapunov exponent from time series
+        try:
+            dt = 1.0 / scale  # Effective sampling time
+            largest_lyap = largest_lyapunov_from_data(
+                signal, dt=dt, tau=1, min_neighbors=10
+            )
+            features['largest_lyapunov'] = largest_lyap
+        except:
+            features['largest_lyapunov'] = np.nan
+        
+        # 2. Correlation dimension
+        try:
+            radii, correlations, corr_dim = correlation_dimension(embedded_data)
+            features['correlation_dimension'] = corr_dim
+            features['correlation_entropy'] = entropy(correlations[correlations > 0])
+        except:
+            features['correlation_dimension'] = np.nan
+            features['correlation_entropy'] = np.nan
+        
+        # 3. Lyapunov spectrum estimation from embedded data
+        lyap_spectrum = self._estimate_lyapunov_spectrum(embedded_data)
+        features['lyapunov_spectrum'] = lyap_spectrum
+        
+        # 4. Spectral Lyapunov features
+        spectral_features = self._calculate_spectral_lyapunov_features(embedded_data)
+        features.update(spectral_features)
+        
+        # 5. Hurst exponent for long-range correlations
+        try:
+            hurst = hurst_exponent(signal)
+            features['hurst_exponent'] = hurst
+        except:
+            features['hurst_exponent'] = 0.5  # Default value
+        
+        # 6. Complexity measures
+        complexity_features = self._calculate_complexity_measures(signal, embedded_data)
+        features.update(complexity_features)
+        
+        return features
+    
+    def _estimate_lyapunov_spectrum(self, embedded_data: np.ndarray) -> np.ndarray:
+        """Estimate Lyapunov spectrum from embedded data."""
+        try:
+            # Use local linear approximation method
+            n_points, dimension = embedded_data.shape
+            
+            if n_points < 50 or dimension < 2:
+                return np.full(dimension, np.nan)
+            
+            # Sample subset for efficiency
+            n_sample = min(n_points, 500)
+            indices = np.random.choice(n_points, n_sample, replace=False)
+            sample_data = embedded_data[indices]
+            
+            # Estimate local Jacobians and calculate spectrum
+            spectrum = self._local_jacobian_spectrum(sample_data)
+            
+            return spectrum
+            
+        except Exception as e:
+            warnings.warn(f"Lyapunov spectrum estimation failed: {e}")
+            return np.full(embedded_data.shape[1], np.nan)
+    
+    def _local_jacobian_spectrum(self, data: np.ndarray) -> np.ndarray:
+        """Estimate Lyapunov spectrum using local Jacobian approximation."""
+        n_points, dimension = data.shape
+        
+        if n_points < dimension + 1:
+            return np.full(dimension, np.nan)
+        
+        lyap_sums = np.zeros(dimension)
+        n_valid = 0
+        
+        # Find neighbors and estimate local Jacobians
+        from sklearn.neighbors import NearestNeighbors
+        
+        try:
+            nbrs = NearestNeighbors(n_neighbors=min(dimension + 2, n_points)).fit(data)
+            
+            for i in range(n_points - 1):
+                # Get neighbors
+                distances, indices = nbrs.kneighbors([data[i]])
+                neighbor_indices = indices[0][1:]  # Exclude self
+                
+                if len(neighbor_indices) < dimension:
+                    continue
+                
+                # Create local coordinate system
+                neighbors = data[neighbor_indices]
+                center = data[i]
+                
+                # Approximate local Jacobian
+                jacobian = self._approximate_jacobian(center, neighbors, data)
+                
+                if jacobian is not None:
+                    # Calculate eigenvalues
+                    try:
+                        eigenvals = np.linalg.eigvals(jacobian)
+                        real_parts = np.real(eigenvals)
+                        
+                        # Sort and accumulate
+                        real_parts = np.sort(real_parts)[::-1]
+                        lyap_sums[:len(real_parts)] += real_parts
+                        n_valid += 1
+                        
+                    except np.linalg.LinAlgError:
+                        continue
+            
+            # Average the results
+            if n_valid > 0:
+                return lyap_sums / n_valid
+            else:
+                return np.full(dimension, np.nan)
+                
+        except Exception as e:
+            warnings.warn(f"Local Jacobian estimation failed: {e}")
+            return np.full(dimension, np.nan)
+    
+    def _approximate_jacobian(self, center: np.ndarray, 
+                            neighbors: np.ndarray, 
+                            data: np.ndarray) -> Optional[np.ndarray]:
+        """Approximate local Jacobian matrix."""
+        try:
+            dimension = len(center)
+            
+            if len(neighbors) < dimension:
+                return None
+            
+            # Use finite differences with neighbors
+            differences = neighbors - center
+            
+            # Remove too similar points
+            norms = np.linalg.norm(differences, axis=1)
+            valid_mask = norms > 1e-10
+            
+            if np.sum(valid_mask) < dimension:
+                return None
+            
+            differences = differences[valid_mask]
+            
+            # Simple finite difference approximation
+            # This is a simplified approach - full implementation would be more sophisticated
+            jacobian = np.cov(differences.T)
+            
+            # Ensure it's square and well-conditioned
+            if jacobian.shape[0] != jacobian.shape[1]:
+                return None
+            
+            # Check condition number
+            try:
+                cond_num = np.linalg.cond(jacobian)
+                if cond_num > self.config.max_condition_number:
+                    return None
+            except:
+                return None
+            
+            return jacobian
+            
+        except Exception:
+            return None
+    
+    def _calculate_spectral_lyapunov_features(self, embedded_data: np.ndarray) -> Dict[str, float]:
+        """Calculate spectral features related to Lyapunov analysis."""
+        features = {}
+        
+        try:
+            # Power spectral density of each dimension
+            n_points, dimension = embedded_data.shape
+            
+            spectral_entropies = []
+            spectral_peaks = []
+            
+            for dim in range(dimension):
+                # Calculate PSD
+                freqs, psd = signal.welch(
+                    embedded_data[:, dim], 
+                    nperseg=min(256, n_points // 4)
+                )
+                
+                # Normalize PSD
+                psd_norm = psd / np.sum(psd)
+                
+                # Spectral entropy
+                spectral_entropy = entropy(psd_norm[psd_norm > 0])
+                spectral_entropies.append(spectral_entropy)
+                
+                # Dominant frequency
+                peak_freq = freqs[np.argmax(psd)]
+                spectral_peaks.append(peak_freq)
+            
+            features['spectral_entropy_mean'] = np.mean(spectral_entropies)
+            features['spectral_entropy_std'] = np.std(spectral_entropies)
+            features['dominant_frequency_mean'] = np.mean(spectral_peaks)
+            features['dominant_frequency_std'] = np.std(spectral_peaks)
+            
+        except Exception as e:
+            warnings.warn(f"Spectral feature calculation failed: {e}")
+            features.update({
+                'spectral_entropy_mean': np.nan,
+                'spectral_entropy_std': np.nan,
+                'dominant_frequency_mean': np.nan,
+                'dominant_frequency_std': np.nan
+            })
+        
+        return features
+    
+    def _calculate_complexity_measures(self, signal: np.ndarray, 
+                                     embedded_data: np.ndarray) -> Dict[str, float]:
+        """Calculate various complexity measures."""
+        features = {}
+        
+        # 1. Sample entropy
+        try:
+            features['sample_entropy'] = self._sample_entropy(signal)
+        except:
+            features['sample_entropy'] = np.nan
+        
+        # 2. Approximate entropy
+        try:
+            features['approximate_entropy'] = self._approximate_entropy(signal)
+        except:
+            features['approximate_entropy'] = np.nan
+        
+        # 3. Embedding dimension complexity
+        try:
+            variances = np.var(embedded_data, axis=0)
+            total_variance = np.sum(variances)
+            if total_variance > 0:
+                entropy_dims = entropy(variances / total_variance)
+                features['dimension_entropy'] = entropy_dims
+                features['effective_dimension'] = np.exp(entropy_dims)
+            else:
+                features['dimension_entropy'] = 0.0
+                features['effective_dimension'] = 1.0
+        except:
+            features['dimension_entropy'] = np.nan
+            features['effective_dimension'] = np.nan
+        
+        # 4. Trajectory complexity
+        try:
+            # Calculate path length in phase space
+            if embedded_data.shape[0] > 1:
+                path_diffs = np.diff(embedded_data, axis=0)
+                path_lengths = np.linalg.norm(path_diffs, axis=1)
+                features['path_length_mean'] = np.mean(path_lengths)
+                features['path_length_std'] = np.std(path_lengths)
+                features['path_complexity'] = np.std(path_lengths) / (np.mean(path_lengths) + 1e-15)
+            else:
+                features.update({
+                    'path_length_mean': 0.0,
+                    'path_length_std': 0.0,
+                    'path_complexity': 0.0
+                })
+        except:
+            features.update({
+                'path_length_mean': np.nan,
+                'path_length_std': np.nan,
+                'path_complexity': np.nan
+            })
+        
+        return features
+    
+    def _sample_entropy(self, signal: np.ndarray, m: int = 2, r: float = 0.2) -> float:
+        """Calculate sample entropy."""
+        N = len(signal)
+        
+        if N < m + 1:
+            return np.nan
+        
+        # Normalize signal
+        signal_norm = (signal - np.mean(signal)) / np.std(signal)
+        
+        def _maxdist(data, i, j, m):
+            return max([abs(ua - va) for ua, va in zip(data[i:i + m], data[j:j + m])])
+        
+        patterns_m = np.zeros(N - m + 1)
+        patterns_m1 = np.zeros(N - m)
+        
+        for i in range(N - m + 1):
+            for j in range(i + 1, N - m + 1):
+                if _maxdist(signal_norm, i, j, m) <= r:
+                    patterns_m[i] += 1
+                    patterns_m[j] += 1
+                    
+                    if j < N - m and _maxdist(signal_norm, i, j, m + 1) <= r:
+                        patterns_m1[i] += 1
+                        patterns_m1[j] += 1
+        
+        phi_m = np.sum(patterns_m) / (N - m + 1)
+        phi_m1 = np.sum(patterns_m1) / (N - m)
+        
+        if phi_m == 0 or phi_m1 == 0:
+            return np.nan
+        
+        return -np.log(phi_m1 / phi_m)
+    
+    def _approximate_entropy(self, signal: np.ndarray, m: int = 2, r: float = 0.2) -> float:
+        """Calculate approximate entropy."""
+        N = len(signal)
+        
+        if N < m + 1:
+            return np.nan
+        
+        signal_norm = (signal - np.mean(signal)) / np.std(signal)
+        
+        def _maxdist(data, i, j, m):
+            return max([abs(ua - va) for ua, va in zip(data[i:i + m], data[j:j + m])])
+        
+        def _phi(m):
+            C = np.zeros(N - m + 1)
+            
+            for i in range(N - m + 1):
+                template_i = signal_norm[i:i + m]
+                for j in range(N - m + 1):
+                    if _maxdist(signal_norm, i, j, m) <= r:
+                        C[i] += 1.0
+                        
+            C = C / (N - m + 1)
+            phi = np.sum(np.log(C[C > 0])) / (N - m + 1)
+            return phi
+        
+        return _phi(m) - _phi(m + 1)
+
+
+class MLSAExtractor:
+    """Main Multi-scale Lyapunov Spectrum Analysis extractor."""
+    
+    def __init__(self, config: MLSAConfig = None):
+        self.config = config or MLSAConfig()
+        
+        # Initialize decomposer
+        if self.config.decomposition_method == 'wavelet':
+            self.decomposer = WaveletScaleDecomposer(self.config.wavelet_name)
+        elif self.config.decomposition_method == 'fourier':
+            self.decomposer = FourierScaleDecomposer()
+        else:
+            warnings.warn(f"Unknown decomposition method {self.config.decomposition_method}, using Fourier")
+            self.decomposer = FourierScaleDecomposer()
+        
+        # Initialize Lyapunov calculator
+        self.lyapunov_calculator = LyapunovSpectrumCalculator(self.config)
+        
+        # Initialize feature scaler
+        self.scaler = StandardScaler()
+        self.feature_names = []
+    
+    def extract_features(self, signal: np.ndarray) -> Dict[str, Any]:
+        """
+        Extract multi-scale Lyapunov features from signal.
+        
+        Args:
+            signal: Input time series signal
+            
+        Returns:
+            Dictionary containing extracted features and metadata
+        """
+        if signal.ndim != 1:
+            raise ValueError("Input signal must be 1-dimensional")
+        
+        if len(signal) < self.config.min_segment_length:
+            raise ValueError(f"Signal too short: {len(signal)} < {self.config.min_segment_length}")
+        
+        results = {
+            'original_length': len(signal),
+            'scales_analyzed': [],
+            'scale_results': {},
+            'aggregated_features': {},
+            'success': False
+        }
+        
+        try:
+            # Step 1: Multi-scale decomposition
+            scale_signals = self.decomposer.decompose(signal, self.config.scale_factors)
+            
+            # Step 2: Analyze each scale
+            valid_scales = []
+            scale_features_list = []
+            
+            for scale in self.config.scale_factors:
+                if scale not in scale_signals:
+                    warnings.warn(f"Scale {scale} not available in decomposition")
+                    continue
+                
+                scale_signal = scale_signals[scale]
+                
+                # Analyze this scale
+                scale_result = self.lyapunov_calculator.calculate_spectrum(
+                    scale_signal, scale
+                )
+                
+                results['scale_results'][scale] = scale_result
+                
+                if scale_result['success']:
+                    valid_scales.append(scale)
+                    scale_features_list.append(scale_result)
+            
+            results['scales_analyzed'] = valid_scales
+            
+            if not valid_scales:
+                results['error'] = "No scales analyzed successfully"
+                return results
+            
+            # Step 3: Aggregate features across scales
+            aggregated_features = self._aggregate_scale_features(scale_features_list, valid_scales)
+            results['aggregated_features'] = aggregated_features
+            
+            # Step 4: Generate final feature vector
+            feature_vector = self._create_feature_vector(aggregated_features)
+            results['feature_vector'] = feature_vector
+            results['feature_names'] = self.feature_names
+            
+            results['success'] = True
+            
+        except Exception as e:
+            results['error'] = str(e)
+            warnings.warn(f"MLSA feature extraction failed: {e}")
+        
+        return results
+    
+    def _aggregate_scale_features(self, scale_features_list: List[Dict], 
+                                scales: List[float]) -> Dict[str, Any]:
+        """Aggregate features across all scales."""
+        aggregated = {}
+        
+        # Define feature keys to aggregate
+        feature_keys = [
+            'largest_lyapunov', 'correlation_dimension', 'correlation_entropy',
+            'hurst_exponent', 'spectral_entropy_mean', 'spectral_entropy_std',
+            'dominant_frequency_mean', 'dominant_frequency_std',
+            'sample_entropy', 'approximate_entropy', 'dimension_entropy',
+            'effective_dimension', 'path_length_mean', 'path_length_std',
+            'path_complexity'
+        ]
+        
+        # Collect values for each feature across scales
+        for feature_key in feature_keys:
+            values = []
+            for scale_result in scale_features_list:
+                if feature_key in scale_result and not np.isnan(scale_result[feature_key]):
+                    values.append(scale_result[feature_key])
+            
+            if values:
+                aggregated[f'{feature_key}_mean'] = np.mean(values)
+                aggregated[f'{feature_key}_std'] = np.std(values)
+                aggregated[f'{feature_key}_min'] = np.min(values)
+                aggregated[f'{feature_key}_max'] = np.max(values)
+                aggregated[f'{feature_key}_range'] = np.max(values) - np.min(values)
+                
+                # Scale-weighted average (higher scales get more weight)
+                if len(values) == len(scales):
+                    weights = np.array(scales) / np.sum(scales)
+                    aggregated[f'{feature_key}_weighted'] = np.average(values, weights=weights)
+                else:
+                    aggregated[f'{feature_key}_weighted'] = np.mean(values)
+            else:
+                # Fill with NaN if no valid values
+                for suffix in ['_mean', '_std', '_min', '_max', '_range', '_weighted']:
+                    aggregated[f'{feature_key}{suffix}'] = np.nan
+        
+        # Scale-specific features
+        aggregated['n_valid_scales'] = len(scales)
+        aggregated['scale_coverage'] = len(scales) / len(self.config.scale_factors)
+        
+        # Lyapunov spectrum aggregation
+        lyap_spectra = []
+        for scale_result in scale_features_list:
+            if 'lyapunov_spectrum' in scale_result:
+                spectrum = scale_result['lyapunov_spectrum']
+                if spectrum is not None and not np.all(np.isnan(spectrum)):
+                    lyap_spectra.append(spectrum)
+        
+        if lyap_spectra:
+            # Pad spectra to same length
+            max_len = max(len(spec) for spec in lyap_spectra)
+            padded_spectra = []
+            for spec in lyap_spectra:
+                padded = np.full(max_len, np.nan)
+                padded[:len(spec)] = spec
+                padded_spectra.append(padded)
+            
+            spectra_array = np.array(padded_spectra)
+            
+            # Aggregate spectrum statistics
+            aggregated['spectrum_mean'] = np.nanmean(spectra_array, axis=0)
+            aggregated['spectrum_std'] = np.nanstd(spectra_array, axis=0)
+            aggregated['spectrum_max_positive'] = np.nanmax(spectra_array[spectra_array > 0]) if np.any(spectra_array > 0) else 0
+            aggregated['spectrum_sum_positive'] = np.nansum(spectra_array[spectra_array > 0]) if np.any(spectra_array > 0) else 0
+            
+            # Kolmogorov entropy approximation
+            positive_spectra = spectra_array[spectra_array > 0]
+            aggregated['kolmogorov_entropy_approx'] = np.nansum(positive_spectra) if len(positive_spectra) > 0 else 0
+        
+        return aggregated
+    
+    def _create_feature_vector(self, aggregated_features: Dict[str, Any]) -> np.ndarray:
+        """Create final feature vector from aggregated features."""
+        # Define feature order for consistent vector creation
+        base_features = [
+            'largest_lyapunov', 'correlation_dimension', 'correlation_entropy',
+            'hurst_exponent', 'spectral_entropy_mean', 'spectral_entropy_std',
+            'dominant_frequency_mean', 'dominant_frequency_std',
+            'sample_entropy', 'approximate_entropy', 'dimension_entropy',
+            'effective_dimension', 'path_length_mean', 'path_length_std',
+            'path_complexity'
+        ]
+        
+        suffixes = ['_mean', '_std', '_min', '_max', '_range', '_weighted']
+        
+        feature_vector = []
+        feature_names = []
+        
+        # Add base features with all suffixes
+        for feature in base_features:
+            for suffix in suffixes:
+                key = f'{feature}{suffix}'
+                value = aggregated_features.get(key, np.nan)
+                feature_vector.append(value)
+                feature_names.append(key)
+        
+        # Add scale-specific features
+        scale_features = [
+            'n_valid_scales', 'scale_coverage', 'spectrum_max_positive',
+            'spectrum_sum_positive', 'kolmogorov_entropy_approx'
+        ]
+        
+        for feature in scale_features:
+            value = aggregated_features.get(feature, np.nan)
+            feature_vector.append(value)
+            feature_names.append(feature)
+        
+        # Add spectrum statistics (first few components)
+        spectrum_mean = aggregated_features.get('spectrum_mean', np.array([]))
+        spectrum_std = aggregated_features.get('spectrum_std', np.array([]))
+        
+        # Include first 5 components of spectrum statistics
+        for i in range(min(5, len(spectrum_mean))):
+            feature_vector.append(spectrum_mean[i])
+            feature_names.append(f'spectrum_mean_{i}')
+        
+        for i in range(min(5, len(spectrum_std))):
+            feature_vector.append(spectrum_std[i])
+            feature_names.append(f'spectrum_std_{i}')
+        
+        # Pad with NaN if spectrum is shorter
+        for i in range(len(spectrum_mean), 5):
+            feature_vector.append(np.nan)
+            feature_names.append(f'spectrum_mean_{i}')
+        
+        for i in range(len(spectrum_std), 5):
+            feature_vector.append(np.nan)
+            feature_names.append(f'spectrum_std_{i}')
+        
+        # Store feature names for later use
+        self.feature_names = feature_names
+        
+        return np.array(feature_vector)
+    
+    def fit_scaler(self, feature_vectors: List[np.ndarray]):
+        """Fit scaler on a collection of feature vectors."""
+        if not feature_vectors:
+            raise ValueError("No feature vectors provided for scaler fitting")
+        
+        # Stack all feature vectors
+        features_matrix = np.vstack(feature_vectors)
+        
+        # Handle NaN values by replacing with column means
+        col_means = np.nanmean(features_matrix, axis=0)
+        for i, mean_val in enumerate(col_means):
+            if np.isnan(mean_val):
+                col_means[i] = 0.0
+        
+        # Fill NaN values
+        for i in range(features_matrix.shape[1]):
+            mask = np.isnan(features_matrix[:, i])
+            features_matrix[mask, i] = col_means[i]
+        
+        # Fit scaler
+        self.scaler.fit(features_matrix)
+    
+    def transform_features(self, feature_vector: np.ndarray) -> np.ndarray:
+        """Transform feature vector using fitted scaler."""
+        # Handle NaN values
+        feature_vector_clean = feature_vector.copy()
+        nan_mask = np.isnan(feature_vector_clean)
+        
+        if hasattr(self.scaler, 'mean_'):
+            # Scaler has been fitted
+            feature_vector_clean[nan_mask] = self.scaler.mean_[nan_mask]
+        else:
+            # Scaler not fitted, use zeros
+            feature_vector_clean[nan_mask] = 0.0
+        
+        # Transform
+        return self.scaler.transform(feature_vector_clean.reshape(1, -1))[0]
+    
+    def get_feature_importance(self) -> Dict[str, float]:
+        """Get feature importance based on variance."""
+        if not hasattr(self.scaler, 'var_'):
+            return {}
+        
+        # Use variance as simple importance measure
+        importance = {}
+        for i, name in enumerate(self.feature_names):
+            importance[name] = self.scaler.var_[i] if i < len(self.scaler.var_) else 0.0
+        
+        # Normalize
+        total_var = sum(importance.values())
+        if total_var > 0:
+            importance = {k: v/total_var for k, v in importance.items()}
+        
+        return importance
+
+
+if __name__ == "__main__":
+    # Example usage and testing
+    print("Testing Multi-scale Lyapunov Spectrum Analysis...")
+    
+    # Generate test signal (chaotic Lorenz system)
+    from scipy.integrate import solve_ivp
+    
+    def lorenz(t, state, sigma=10.0, rho=28.0, beta=8.0/3.0):
+        x, y, z = state
+        return [sigma * (y - x), x * (rho - z) - y, x * y - beta * z]
+    
+    # Generate Lorenz time series
+    t_span = (0, 20)
+    t_eval = np.arange(0, 20, 0.01)
+    initial_state = [1.0, 1.0, 1.0]
+    
+    sol = solve_ivp(lorenz, t_span, initial_state, t_eval=t_eval, method='RK45')
+    test_signal = sol.y[0]  # Use x-component
+    
+    print(f"Generated test signal with {len(test_signal)} points")
+    
+    # Create MLSA extractor
+    config = MLSAConfig(
+        n_scales=3,
+        scale_factors=[1, 2, 4],
+        decomposition_method='fourier',
+        min_segment_length=100
+    )
+    
+    mlsa = MLSAExtractor(config)
+    
+    # Extract features
+    print("Extracting MLSA features...")
+    results = mlsa.extract_features(test_signal)
+    
+    if results['success']:
+        print(f"✓ Feature extraction successful!")
+        print(f"Scales analyzed: {results['scales_analyzed']}")
+        print(f"Feature vector shape: {results['feature_vector'].shape}")
+        print(f"Non-NaN features: {np.sum(~np.isnan(results['feature_vector']))}")
+        
+        # Print some key aggregated features
+        key_features = [
+            'largest_lyapunov_mean', 'correlation_dimension_mean',
+            'hurst_exponent_mean', 'n_valid_scales'
+        ]
+        
+        print("\nKey aggregated features:")
+        for feature in key_features:
+            value = results['aggregated_features'].get(feature, np.nan)
+            print(f"  {feature}: {value:.6f}")
+    
+    else:
+        print(f"✗ Feature extraction failed: {results.get('error', 'Unknown error')}")
+    
+    print("MLSA testing completed!")

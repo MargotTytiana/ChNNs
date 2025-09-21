@@ -1,0 +1,6 @@
+2025-09-21 12:45:52,107 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-21 12:45:52,107 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-21 12:45:52,107 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-21 12:45:52,107 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-21 12:45:52,107 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-21 12:45:52,108 - experiment_baseline_mel_mlp_run_0 - ERROR - 数据路径不存在: /scratch/project_2003370/yueyao/Model/dataset/train-clean-100/LibriSpeech/train-clean-100
