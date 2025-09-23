@@ -1,24 +1,25 @@
-# test_data_path.py
+# test_imports.py
+import sys
 from pathlib import Path
 
-# 从当前脚本位置计算LibriSpeech路径
-script_dir = Path(__file__).parent
-if script_dir.name == "Model":
-    project_root = script_dir.parent
-else:
-    project_root = script_dir  # 如果在project根目录运行
+# 添加项目路径
+project_root = Path(__file__).parent
+model_dir = project_root / "Model"
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(model_dir))
 
-librispeech_path = project_root / "dataset" / "train-clean-100" / "LibriSpeech" / "train-clean-100"
+print("测试导入...")
 
-print(f"脚本目录: {script_dir}")
-print(f"项目根目录: {project_root}")
-print(f"LibriSpeech路径: {librispeech_path}")
-print(f"路径是否存在: {librispeech_path.exists()}")
+try:
+    from data.dataset_loader import create_speaker_dataloaders
+    print(f"✓ create_speaker_dataloaders 导入成功: {create_speaker_dataloaders}")
+except ImportError as e:
+    print(f"✗ create_speaker_dataloaders 导入失败: {e}")
 
-if librispeech_path.exists():
-    flac_files = list(librispeech_path.rglob("*.flac"))
-    print(f"找到 {len(flac_files)} 个FLAC文件")
-    if flac_files:
-        print(f"示例文件: {flac_files[0]}")
-else:
-    print("LibriSpeech数据不存在，请检查数据集是否正确解压到指定位置")
+try:
+    from experiments.baseline_experiment import BaselineExperiment
+    print("✓ BaselineExperiment 导入成功")
+except ImportError as e:
+    print(f"✗ BaselineExperiment 导入失败: {e}")
+
+print("导入测试完成")

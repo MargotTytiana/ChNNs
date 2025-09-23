@@ -5,46 +5,105 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from typing import Dict, Any, Tuple, Optional
 import numpy as np
-
-import os
 import sys
 from pathlib import Path
 
-# 简单添加路径，不调用setup_imports
-project_root = Path(__file__).parent.parent
+# 设置项目根路径
+project_root = Path(__file__).parent.parent  # 从experiments回到Model
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
+
+# 添加调试信息
+print(f"Project root: {project_root}")
+print(f"Current file: {__file__}")
+print(f"Python path includes: {[p for p in sys.path if 'Model' in str(p)]}")
 
 # Import base experiment class
 try:
     from experiments.base_experiment import BaseExperiment
-except ImportError:
-    # Fallback for testing
-    import sys
+    print("Successfully imported BaseExperiment")
+except ImportError as e:
+    print(f"Failed to import BaseExperiment: {e}")
+    # Fallback
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
     from experiments.base_experiment import BaseExperiment
 
-# Import models and components
-try:
-    from models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
-    from models.mlp_classifier import MLPClassifier
-    from features.traditional_features import MelExtractor, MFCCExtractor
-    from data.dataset_loader import SpeakerDataset, create_speaker_dataloaders
+# Import models and components with detailed error handling
+def safe_import():
+    """安全导入所有依赖模块"""
+    imports = {}
     
-    print(f"Successfully imported: {create_speaker_dataloaders}")
-    from data.audio_preprocessor import AudioPreprocessor
-except ImportError:
-    # Mock implementations for testing
-    print("Warning: Some modules not found. Using mock implementations for testing.")
+    # 尝试导入各个模块
+    try:
+        from models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
+        imports['TraditionalMLPBaseline'] = TraditionalMLPBaseline
+        imports['HybridModelManager'] = HybridModelManager
+        print("Successfully imported hybrid_models")
+    except ImportError as e:
+        print(f"Failed to import hybrid_models: {e}")
+        imports['TraditionalMLPBaseline'] = None
+        imports['HybridModelManager'] = None
     
-    TraditionalMLPBaseline = None
-    HybridModelManager = None
-    MLPClassifier = None
-    MelExtractor = None
-    MFCCExtractor = None
-    SpeakerDataset = None
-    create_speaker_dataloaders = None
-    AudioPreprocessor = None
+    try:
+        from models.mlp_classifier import MLPClassifier
+        imports['MLPClassifier'] = MLPClassifier
+        print("Successfully imported MLPClassifier")
+    except ImportError as e:
+        print(f"Failed to import MLPClassifier: {e}")
+        imports['MLPClassifier'] = None
+    
+    try:
+        from features.traditional_features import MelExtractor, MFCCExtractor
+        imports['MelExtractor'] = MelExtractor
+        imports['MFCCExtractor'] = MFCCExtractor
+        print("Successfully imported traditional_features")
+    except ImportError as e:
+        print(f"Failed to import traditional_features: {e}")
+        imports['MelExtractor'] = None
+        imports['MFCCExtractor'] = None
+    
+    # 关键：修复 dataset_loader 导入
+    try:
+        # 尝试多种导入路径
+        from data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
+        imports['create_speaker_dataloaders'] = create_speaker_dataloaders
+        imports['SpeakerDataset'] = LibriSpeechChaoticDataset  # 使用实际存在的类
+        print("Successfully imported dataset_loader from data.dataset_loader")
+    except ImportError:
+        try:
+            from dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
+            imports['create_speaker_dataloaders'] = create_speaker_dataloaders
+            imports['SpeakerDataset'] = LibriSpeechChaoticDataset
+            print("Successfully imported dataset_loader from root")
+        except ImportError as e:
+            print(f"Failed to import dataset_loader: {e}")
+            imports['create_speaker_dataloaders'] = None
+            imports['SpeakerDataset'] = None
+    
+    try:
+        from data.audio_preprocessor import AudioPreprocessor
+        imports['AudioPreprocessor'] = AudioPreprocessor
+        print("Successfully imported AudioPreprocessor")
+    except ImportError as e:
+        print(f"Failed to import AudioPreprocessor: {e}")
+        imports['AudioPreprocessor'] = None
+    
+    return imports
+
+# 执行安全导入
+imported_modules = safe_import()
+TraditionalMLPBaseline = imported_modules['TraditionalMLPBaseline']
+HybridModelManager = imported_modules['HybridModelManager']
+MLPClassifier = imported_modules['MLPClassifier']
+MelExtractor = imported_modules['MelExtractor']
+MFCCExtractor = imported_modules['MFCCExtractor']
+create_speaker_dataloaders = imported_modules['create_speaker_dataloaders']
+SpeakerDataset = imported_modules['SpeakerDataset']
+AudioPreprocessor = imported_modules['AudioPreprocessor']
+
+# 如果导入失败，使用Mock实现
+if create_speaker_dataloaders is None:
+    print("Warning: create_speaker_dataloaders not available. Using mock implementations.")
     
     class MockMLPClassifier(nn.Module):
         def __init__(self, input_dim, output_dim, hidden_dims=[128, 64]):
@@ -356,7 +415,7 @@ class BaselineExperiment(BaseExperiment):
         if create_speaker_dataloaders is not None:
             # Use real data loading
             train_loader, val_loader, test_loader = create_speaker_dataloaders(
-                data_dir=self.config.get('data_dir'),
+                data_dir=self.config['data_dir'],
                 batch_size=self.config['batch_size'],
                 sample_rate=self.config['sample_rate'],
                 max_length=self.config['max_audio_length'],
