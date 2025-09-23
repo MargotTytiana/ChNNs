@@ -1,0 +1,1022 @@
+2025-09-20 21:14:12,041 - baseline_trainer - INFO - ============================================================
+2025-09-20 21:14:12,043 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-20 21:14:12,043 - baseline_trainer - INFO - ============================================================
+2025-09-20 21:14:12,043 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-20 21:14:12,043 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./data",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-20 21:14:12,094 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 485761437696, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-20 21:14:12,094 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-20 21:14:12,094 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-20 21:14:12,094 - baseline_trainer - INFO - 
+==================================================
+2025-09-20 21:14:12,095 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-20 21:14:12,095 - baseline_trainer - INFO - ==================================================
+2025-09-20 21:14:12,095 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-20 21:14:12,101 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): MetricsCalculator.__init__() missing 1 required positional argument: 'num_classes'
+2025-09-20 21:14:12,101 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-20 21:14:12,102 - baseline_trainer - WARNING - No successful runs for mel_mlp
+2025-09-20 21:14:12,102 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-20 21:14:12,102 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-20 21:14:12,121 - baseline_trainer - INFO - Reports saved:
+2025-09-20 21:14:12,121 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-20 21:14:12,121 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-20 21:14:12,121 - baseline_trainer - INFO - Baseline training completed.
+2025-09-20 21:14:12,121 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:16:40,593 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:16:40,610 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 11:16:40,610 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:16:40,610 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 11:16:40,610 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./data",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 11:16:40,632 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 484008632320, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 11:16:40,632 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 11:16:40,632 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 11:16:40,632 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 11:16:40,632 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 11:16:40,633 - baseline_trainer - INFO - ==================================================
+2025-09-21 11:16:40,633 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 11:16:40,638 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): MetricsCalculator.__init__() missing 1 required positional argument: 'num_classes'
+2025-09-21 11:16:40,638 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 11:16:40,638 - baseline_trainer - WARNING - No successful runs for mel_mlp
+2025-09-21 11:16:40,638 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 11:16:40,638 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 11:16:40,656 - baseline_trainer - INFO - Reports saved:
+2025-09-21 11:16:40,656 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 11:16:40,656 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 11:16:40,656 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 11:16:40,656 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:19:21,953 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:19:21,953 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 11:19:21,953 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:19:21,953 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 11:19:21,953 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./data",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 11:19:21,973 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 482419490816, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 11:19:21,973 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 11:19:21,973 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 11:19:21,973 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 11:19:21,973 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 11:19:21,973 - baseline_trainer - INFO - ==================================================
+2025-09-21 11:19:21,973 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 11:19:21,979 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 11:19:24,734 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 11:19:24,734 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 11:19:24,839 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+2025-09-21 11:19:24,839 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 11:19:24,839 - baseline_trainer - WARNING - No successful runs for mel_mlp
+2025-09-21 11:19:24,840 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 11:19:24,840 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 11:19:24,859 - baseline_trainer - INFO - Reports saved:
+2025-09-21 11:19:24,859 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 11:19:24,859 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 11:19:24,859 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 11:19:24,859 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:29:51,172 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:29:51,172 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 11:29:51,172 - baseline_trainer - INFO - ============================================================
+2025-09-21 11:29:51,172 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 11:29:51,172 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./data",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 11:29:51,193 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 474865745920, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 11:29:51,193 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 11:29:51,193 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 11:29:51,193 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 11:29:51,193 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 11:29:51,193 - baseline_trainer - INFO - ==================================================
+2025-09-21 11:29:51,193 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 11:29:51,199 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 11:29:52,443 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 11:29:52,443 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 11:30:01,332 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 11:30:01,377 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 10.1s
+2025-09-21 11:30:01,411 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 11:30:01,411 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 11:30:01,411 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 11:30:01,412 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 11:30:01,432 - baseline_trainer - INFO - Reports saved:
+2025-09-21 11:30:01,432 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 11:30:01,432 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 11:30:01,433 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 11:30:01,433 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:13:10,270 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:13:10,304 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:13:10,304 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:13:10,304 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:13:10,304 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./data",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:13:10,325 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 464203055104, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:13:10,325 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:13:10,325 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:13:10,325 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:13:10,325 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:13:10,325 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:13:10,325 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:13:10,351 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:13:11,605 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:13:11,605 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:13:19,452 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:13:19,497 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.1s
+2025-09-21 12:13:19,532 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:13:19,532 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:13:19,532 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:13:19,533 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:13:19,556 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:13:19,556 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:13:19,556 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:13:19,556 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:13:19,556 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:17:40,921 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:17:40,921 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:17:40,921 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:17:40,921 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:17:40,921 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./data",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:17:40,942 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 467780182016, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:17:40,942 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:17:40,942 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:17:40,942 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:17:40,942 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:17:40,942 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:17:40,942 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:17:40,947 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:17:42,198 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:17:42,198 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:17:50,364 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:17:50,409 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.4s
+2025-09-21 12:17:50,442 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:17:50,442 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:17:50,442 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:17:50,443 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:17:50,464 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:17:50,464 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:17:50,464 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:17:50,464 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:17:50,465 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:22:12,945 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:22:12,945 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:22:12,945 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:22:12,945 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:22:12,945 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "../../dataset/train-clean-100/LibriSpeech/train-clean-100/",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:22:12,964 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 468182630400, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:22:12,964 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:22:12,964 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:22:12,964 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:22:12,964 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:22:12,964 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:22:12,964 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:22:12,969 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:22:14,214 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:22:14,214 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:22:22,314 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:22:22,358 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.3s
+2025-09-21 12:22:22,391 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:22:22,391 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:22:22,391 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:22:22,392 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:22:22,417 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:22:22,417 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:22:22,417 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:22:22,417 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:22:22,417 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:23:49,444 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:23:49,444 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:23:49,444 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:23:49,444 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:23:49,444 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "../dataset/train-clean-100/LibriSpeech/train-clean-100/",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:23:49,463 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 463450787840, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:23:49,464 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:23:49,464 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:23:49,464 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:23:49,464 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:23:49,464 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:23:49,464 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:23:49,469 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:23:50,719 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:23:50,719 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:23:58,716 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:23:58,760 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.2s
+2025-09-21 12:23:58,793 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:23:58,793 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:23:58,793 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:23:58,794 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:23:58,816 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:23:58,816 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:23:58,816 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:23:58,816 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:23:58,816 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:24:15,935 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:24:15,935 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:24:15,935 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:24:15,935 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:24:15,935 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./dataset/train-clean-100/LibriSpeech/train-clean-100/",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:24:15,954 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 467500154880, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:24:15,954 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:24:15,954 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:24:15,955 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:24:15,955 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:24:15,955 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:24:15,955 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:24:15,960 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:24:17,205 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:24:17,205 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:24:25,254 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:24:25,299 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.3s
+2025-09-21 12:24:25,332 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:24:25,332 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:24:25,332 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:24:25,333 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:24:25,356 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:24:25,356 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:24:25,356 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:24:25,356 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:24:25,356 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:28:50,266 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:28:50,266 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:28:50,266 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:28:50,266 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:28:50,266 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./dataset/train-clean-100/LibriSpeech/train-clean-100/",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:28:50,286 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 467657854976, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:28:50,286 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:28:50,286 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:28:50,287 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:28:50,287 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:28:50,287 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:28:50,287 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:28:50,292 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:28:51,537 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:28:51,537 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:28:59,379 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:28:59,424 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.1s
+2025-09-21 12:28:59,456 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:28:59,456 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:28:59,456 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:28:59,457 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:28:59,480 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:28:59,480 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:28:59,480 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:28:59,480 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:28:59,480 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:38:16,784 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:38:16,784 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:38:16,784 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:38:16,784 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:38:16,784 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "./dataset/train-clean-100/LibriSpeech/train-clean-100/",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:38:16,802 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 466305609728, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:38:16,802 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:38:16,802 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:38:16,802 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:38:16,802 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:38:16,803 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:38:16,803 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:38:16,807 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:38:16,808 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): 未找到LibriSpeech数据集，检查过的路径: [PosixPath('dataset/train-clean-100/LibriSpeech/train-clean-100'), PosixPath('dataset/train-clean-100/dataset/train-clean-100/LibriSpeech/train-clean-100'), PosixPath('/dataset/train-clean-100/LibriSpeech/train-clean-100')]
+2025-09-21 12:38:16,808 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:38:16,808 - baseline_trainer - WARNING - No successful runs for mel_mlp
+2025-09-21 12:38:16,808 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:38:16,808 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:38:16,827 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:38:16,828 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:38:16,828 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:38:16,828 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:38:16,828 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:40:09,133 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:40:09,133 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:40:09,133 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:40:09,133 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:40:09,133 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/Model/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:40:09,154 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 466363596800, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:40:09,154 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:40:09,154 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:40:09,154 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:40:09,154 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:40:09,154 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:40:09,154 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:40:09,159 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:40:09,159 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): 未找到LibriSpeech数据集，检查过的路径: [PosixPath('/scratch/project_2003370/yueyao/Model/dataset/train-clean-100/LibriSpeech/train-clean-100'), PosixPath('/scratch/project_2003370/yueyao/Model/dataset/train-clean-100/dataset/train-clean-100/LibriSpeech/train-clean-100'), PosixPath('/dataset/train-clean-100/LibriSpeech/train-clean-100')]
+2025-09-21 12:40:09,159 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:40:09,160 - baseline_trainer - WARNING - No successful runs for mel_mlp
+2025-09-21 12:40:09,160 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:40:09,160 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:40:09,181 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:40:09,181 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:40:09,181 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:40:09,181 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:40:09,181 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:49:19,959 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:49:19,959 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:49:19,959 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:49:19,959 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:49:19,959 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:49:19,981 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 466029518848, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:49:19,981 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:49:19,981 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:49:19,981 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:49:19,981 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:49:19,981 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:49:19,981 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:49:19,986 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:49:21,821 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:49:21,821 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:49:29,669 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:49:29,714 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.7s
+2025-09-21 12:49:29,747 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:49:29,747 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:49:29,747 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:49:29,748 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:49:29,771 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:49:29,771 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:49:29,771 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:49:29,771 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:49:29,771 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:54:39,592 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:54:39,592 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:54:39,592 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:54:39,592 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:54:39,592 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:54:39,612 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 465743060992, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:54:39,612 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:54:39,612 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:54:39,612 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:54:39,612 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:54:39,612 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:54:39,613 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:54:39,618 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:54:41,440 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:54:41,440 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:54:49,491 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:54:49,535 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.9s
+2025-09-21 12:54:49,568 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:54:49,568 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:54:49,568 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:54:49,569 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:54:49,591 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:54:49,591 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:54:49,591 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:54:49,591 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:54:49,591 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:59:17,099 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:59:17,099 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 12:59:17,099 - baseline_trainer - INFO - ============================================================
+2025-09-21 12:59:17,099 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 12:59:17,099 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 12:59:17,118 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 465249222656, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 12:59:17,118 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 12:59:17,118 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 12:59:17,118 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 12:59:17,118 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 12:59:17,118 - baseline_trainer - INFO - ==================================================
+2025-09-21 12:59:17,118 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 12:59:17,123 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 12:59:18,946 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 12:59:18,946 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 12:59:26,765 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 12:59:26,809 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.6s
+2025-09-21 12:59:26,843 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 12:59:26,843 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 12:59:26,843 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 12:59:26,844 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 12:59:26,866 - baseline_trainer - INFO - Reports saved:
+2025-09-21 12:59:26,867 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 12:59:26,867 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 12:59:26,867 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 12:59:26,867 - baseline_trainer - INFO - ============================================================
+2025-09-21 13:00:29,828 - baseline_trainer - INFO - ============================================================
+2025-09-21 13:00:29,828 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 13:00:29,828 - baseline_trainer - INFO - ============================================================
+2025-09-21 13:00:29,828 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 13:00:29,828 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 13:00:29,847 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 465242959872, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 13:00:29,847 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 13:00:29,847 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 13:00:29,847 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 13:00:29,848 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 13:00:29,848 - baseline_trainer - INFO - ==================================================
+2025-09-21 13:00:29,848 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 13:00:29,853 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 13:00:31,687 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 13:00:31,687 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 13:00:39,779 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 13:00:39,824 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 9.9s
+2025-09-21 13:00:39,857 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 13:00:39,857 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 13:00:39,857 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 13:00:39,858 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 13:00:39,880 - baseline_trainer - INFO - Reports saved:
+2025-09-21 13:00:39,880 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 13:00:39,880 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 13:00:39,881 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 13:00:39,881 - baseline_trainer - INFO - ============================================================
+2025-09-21 13:04:47,021 - baseline_trainer - INFO - ============================================================
+2025-09-21 13:04:47,021 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-09-21 13:04:47,021 - baseline_trainer - INFO - ============================================================
+2025-09-21 13:04:47,021 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-09-21 13:04:47,021 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-21 13:04:47,041 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 462427705344, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'unknown', 'branch': 'unknown', 'is_dirty': True}}
+2025-09-21 13:04:47,041 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-09-21 13:04:47,041 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2025-09-21 13:04:47,041 - baseline_trainer - INFO - 
+==================================================
+2025-09-21 13:04:47,041 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2025-09-21 13:04:47,041 - baseline_trainer - INFO - ==================================================
+2025-09-21 13:04:47,041 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2025-09-21 13:04:47,046 - baseline_trainer - INFO - Setting up mel_mlp...
+2025-09-21 13:04:48,896 - baseline_trainer - INFO - Model parameters: 68,388 (trainable: 68,388)
+2025-09-21 13:04:48,896 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-09-21 13:04:57,003 - baseline_trainer - INFO - Evaluating mel_mlp...
+2025-09-21 13:04:57,047 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 0.0100, Loss: 4.6053, Time: 10.0s
+2025-09-21 13:04:57,080 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-09-21 13:04:57,080 - baseline_trainer - INFO - mel_mlp Summary: 0.0100 ± 0.0000
+2025-09-21 13:04:57,080 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-09-21 13:04:57,081 - baseline_trainer - INFO - Generating baseline training report...
+2025-09-21 13:04:57,103 - baseline_trainer - INFO - Reports saved:
+2025-09-21 13:04:57,103 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-09-21 13:04:57,103 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-09-21 13:04:57,103 - baseline_trainer - INFO - Baseline training completed.
+2025-09-21 13:04:57,103 - baseline_trainer - INFO - ============================================================
