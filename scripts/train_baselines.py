@@ -10,6 +10,32 @@ Usage:
     python scripts/train_baselines.py --method mel_mlp --epochs 100
     python scripts/train_baselines.py --all --data_dir ./data/voxceleb
 """
+#!/usr/bin/env python3
+"""
+Baseline Training Script - Fixed Version
+This script trains baseline models for the ChNNs project with proper import handling.
+"""
+import logging
+import argparse
+import os
+import sys
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader
+from typing import Dict, Any, Tuple, Optional, List
+import numpy as np
+import json
+import matplotlib.pyplot as plt
+from datetime import datetime
+from pathlib import Path
+
+import os
+import sys
+import argparse
+import yaml
+from pathlib import Path
+from typing import Dict, List, Any, Optional
 
 import os
 import sys
@@ -19,47 +45,52 @@ import json
 import time
 import logging
 from pathlib import Path
-from typing import Dict, List, Any, Optional  # 添加这行
+from typing import Dict, List, Any, Optional
 from datetime import datetime
 
-# 设置导入路径
-def setup_paths():
-    """设置项目导入路径"""
-    script_dir = Path(__file__).parent  # scripts目录
-    model_dir = script_dir.parent       # Model目录
-    project_root = model_dir.parent     # 项目根目录
-    
-    paths = [
-        str(project_root),
-        str(model_dir),
-        str(model_dir / 'experiments'),
-        str(model_dir / 'data'),
-        str(model_dir / 'utils'),
-        str(model_dir / 'evaluation'),
-    ]
-    
-    for path in paths:
-        if path not in sys.path:
-            sys.path.insert(0, path)
-    
-    print(f"Setup paths from: {script_dir}")
-    return project_root
+# =============================================================================
+# 统一导入设置
+# =============================================================================
+def setup_module_imports(current_file: str = __file__):
+    try:
+        from setup_imports import setup_project_imports
+        return setup_project_imports(current_file), True
+    except ImportError:
+        current_dir = Path(current_file).resolve().parent  # scripts目录
+        project_root = current_dir.parent  # scripts -> Model
+        
+        paths = [
+            str(project_root),
+            str(project_root / 'experiments'),
+            str(project_root / 'utils'),
+            str(project_root / 'evaluation'),
+            str(project_root / 'data'),
+            str(project_root / 'models'),
+        ]
+        
+        for path in paths:
+            if Path(path).exists() and path not in sys.path:
+                sys.path.insert(0, path)
+        
+        return project_root, False
 
-# 设置路径
-project_root = setup_paths()
+# Setup imports
+PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 
-# 导入实验组件
+# =============================================================================
+# 项目模块导入
+# =============================================================================
 try:
     from experiments.baseline_experiment import BaselineExperiment, create_baseline_experiments
     from utils.logger import setup_logger
     from utils.reproducibility import set_seed, get_system_info
     from evaluation.metrics import evaluate_model_comprehensive, StatisticalAnalyzer
-    print("All modules imported successfully")
+    print("✓ All modules imported successfully")
 except ImportError as e:
-    print(f"Error importing modules: {e}")
-    import traceback
-    traceback.print_exc()
+    print(f"✗ Import error: {e}")
+    print(f"Project root: {PROJECT_ROOT}")
     sys.exit(1)
+
 
 class BaselineTrainingManager:
     """
@@ -748,5 +779,8 @@ Examples:
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    print(f"✓ Project Root: {PROJECT_ROOT}")
+    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
+    print(f"✓ Module imports successful")
     main()

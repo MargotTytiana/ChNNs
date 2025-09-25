@@ -20,17 +20,32 @@ import time
 from pathlib import Path
 import pickle
 import json
+
+
 import os
 import sys
+from pathlib import Path
 
-# 导入路径设置
-try:
-    from setup_imports import setup_project_imports
-    setup_project_imports()
-except ImportError:
-    # 手动设置路径
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    sys.path.insert(0, project_root)
+def setup_module_imports(current_file: str = __file__):
+    try:
+        from setup_imports import setup_project_imports
+        return setup_project_imports(current_file), True
+    except ImportError:
+        current_dir = Path(current_file).resolve().parent
+        # 根据文件位置调整project_root计算
+        project_root = current_dir.parent  # 大部分情况
+        
+        paths = [str(project_root), str(project_root/'core'), 
+                str(project_root/'models'), str(project_root/'features'),
+                str(project_root/'data'), str(project_root/'utils')]
+        
+        for path in paths:
+            if Path(path).exists() and path not in sys.path:
+                sys.path.insert(0, path)
+        return project_root, False
+
+PROJECT_ROOT, _ = setup_module_imports()
+
 
 # Ensure numerical stability
 np.seterr(divide='warn', over='warn', under='ignore', invalid='warn')

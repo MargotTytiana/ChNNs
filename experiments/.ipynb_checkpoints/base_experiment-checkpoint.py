@@ -12,17 +12,33 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
+# 标准的文件头部导入设置
 import os
 import sys
+from pathlib import Path
 
-# 导入路径设置
+# Setup project imports - this is our safety net
 try:
     from setup_imports import setup_project_imports
     setup_project_imports()
+    print("Import setup completed via setup_imports module")
 except ImportError:
-    # 手动设置路径
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    sys.path.insert(0, project_root)
+    # Fallback method if setup_imports is not found
+    project_root = Path(__file__).parent.parent
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
+    print(f"Fallback import setup: added {project_root} to path")
+
+# Now we can use clean, absolute imports based on the Model package
+try:
+    from Model.models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
+    from Model.models.mlp_classifier import MLPClassifier
+    from Model.data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
+    from Model.features.traditional_features import MelExtractor, MFCCExtractor
+    print("All required modules imported successfully!")
+except ImportError as e:
+    print(f"Import error: {e}")
+    print("Please check that all required files exist and the project structure is correct")
     
 
 # Import utilities (with fallbacks for testing)

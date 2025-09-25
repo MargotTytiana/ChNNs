@@ -13,28 +13,40 @@ from typing import Dict, List, Tuple, Any, Optional, Union, Callable, TYPE_CHECK
 from collections import defaultdict, Counter
 import random
 import numpy as np
-# from __future__ import annotations
+
+
+# 在文件开头统一添加
 import os
 import sys
+from pathlib import Path
 
-# 导入路径设置
+# Setup project imports
 try:
     from setup_imports import setup_project_imports
     setup_project_imports()
 except ImportError:
-    # 手动设置路径
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    sys.path.insert(0, project_root)
+    # Fallback method
+    project_root = Path(__file__).parent.parent
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
+
+# 然后使用绝对导入
+# REMOVED CIRCULAR IMPORT: # REMOVED CIRCULAR IMPORT: from Model.models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
+# REMOVED CIRCULAR IMPORT: # REMOVED CIRCULAR IMPORT: from Model.models.mlp_classifier import MLPClassifier
+# REMOVED SELF-IMPORT (Line 36): # REMOVED SELF-IMPORT (Line 36): # REMOVED SELF-IMPORT: # REMOVED SELF-IMPORT: from Model.data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
+from Model.features.traditional_features import MelSpectrogramExtractor, MFCCExtractor
+from Model.experiments.base_experiment import BaseExperiment
+
     
 try:
-    from audio_preprocessor import AudioPreprocessingPipeline, create_preprocessing_pipeline
-    from data_utils import DataValidator, DataTransformer, DatasetSplitter
+    from Model.data.audio_preprocessor import AudioPreprocessingPipeline, create_preprocessing_pipeline
+    from Model.data.data_utils import DataValidator, DataTransformer, DatasetSplitter
     HAS_PROJECT_MODULES = True
 except ImportError:
     # Fallback imports for standalone testing
     try:
-        from audio_preprocessor import AudioPreprocessingPipeline, create_preprocessing_pipeline
-        from data_utils import DataValidator, DataTransformer, DatasetSplitter
+        from Model.data.audio_preprocessor import AudioPreprocessingPipeline, create_preprocessing_pipeline
+        from Model.data.data_utils import DataValidator, DataTransformer, DatasetSplitter
         HAS_PROJECT_MODULES = True
     except ImportError:
         HAS_PROJECT_MODULES = False

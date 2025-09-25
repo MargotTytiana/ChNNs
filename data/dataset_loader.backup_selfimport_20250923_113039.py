@@ -33,8 +33,8 @@ except ImportError:
 # 然后使用绝对导入
 # REMOVED CIRCULAR IMPORT: # REMOVED CIRCULAR IMPORT: from Model.models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
 # REMOVED CIRCULAR IMPORT: # REMOVED CIRCULAR IMPORT: from Model.models.mlp_classifier import MLPClassifier
-# REMOVED SELF-IMPORT (Line 36): # REMOVED SELF-IMPORT: from Model.data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
-from Model.features.traditional_features import MelSpectrogramExtractor, MFCCExtractor
+from Model.data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
+from Model.features.traditional_features import MelExtractor, MFCCExtractor
 from Model.experiments.base_experiment import BaseExperiment
 
     

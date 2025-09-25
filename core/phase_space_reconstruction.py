@@ -20,18 +20,75 @@ from dataclasses import dataclass
 import matplotlib.pyplot as plt
 from abc import ABC, abstractmethod
 
+# AFTER (修复后的统一导入方式):
 import os
 import sys
+import numpy as np
+import warnings
+from typing import Dict, List, Tuple, Optional, Union, Any
+from dataclasses import dataclass, field
+from pathlib import Path
 
-# 导入路径设置
+# =============================================================================
+# 统一导入设置
+# =============================================================================
+def setup_module_imports(current_file: str = __file__):
+    """Setup imports for current module.""" 
+    try:
+        from setup_imports import setup_project_imports
+        return setup_project_imports(current_file), True
+    except ImportError:
+        current_dir = Path(current_file).resolve().parent  # core目录
+        project_root = current_dir.parent  # core -> Model
+        
+        paths_to_add = [
+            str(project_root),
+            str(project_root / 'core'),
+            str(project_root / 'utils'),
+        ]
+        
+        for path in paths_to_add:
+            if Path(path).exists() and path not in sys.path:
+                sys.path.insert(0, path)
+        
+        return project_root, False
+
+# Setup imports
+PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
+
+# =============================================================================
+# 项目模块导入 (带安全检查)
+# =============================================================================
 try:
-    from setup_imports import setup_project_imports
-    setup_project_imports()
-except ImportError:
-    # 手动设置路径
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    sys.path.insert(0, project_root)
+    from chaos_utils import (
+        largest_lyapunov_from_data, correlation_dimension, 
+        hurst_exponent, kolmogorov_entropy
+    )
+    HAS_CHAOS_UTILS = True
+except ImportError as e:
+    HAS_CHAOS_UTILS = False
+    warnings.warn(f"chaos_utils not available: {e}")
+    # 简单fallback，不需要大量代码
+    largest_lyapunov_from_data = lambda x: 0.0
+    correlation_dimension = lambda x: 2.0
+
+try:
+    from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
+    HAS_PHASE_SPACE = True
+except ImportError as e:
+    HAS_PHASE_SPACE = False
+    warnings.warn(f"phase_space_reconstruction not available: {e}")
+
+try:
+    from utils.numerical_stability import NumericalConfig, safe_divide
+    HAS_NUMERICAL_UTILS = True
+except ImportError as e:
+    HAS_NUMERICAL_UTILS = False
+    warnings.warn(f"numerical_stability not available: {e}")
+    # Simple fallback
+    safe_divide = lambda x, y: x / (y + 1e-12)
     
+
 @dataclass
 class EmbeddingConfig:
     """Configuration for phase space reconstruction parameters."""
@@ -750,6 +807,10 @@ def plot_embedding(embedded_data: np.ndarray, title: str = "Phase Space Reconstr
 
 
 if __name__ == "__main__":
+    print(f"✓ Project Root: {PROJECT_ROOT}")
+    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
+    print(f"✓ Module imports successful")
+    
     # Example usage and testing
     print("Testing Phase Space Reconstruction...")
     

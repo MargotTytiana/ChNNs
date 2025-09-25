@@ -30,57 +30,205 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 from pathlib import Path
 
-import os
-import sys
-import argparse
-import yaml
-from pathlib import Path
-from typing import Dict, List, Any, Optional
+# ============================================================================
+# IMPORT SETUP SECTION
+# This section ensures all project modules can be found and imported correctly
+# Think of this as preparing your workspace before starting an experiment
+# ============================================================================
 
-# =============================================================================
-# 统一导入设置
-# =============================================================================
-def setup_module_imports(current_file: str = __file__):
-    """Setup imports for current module."""
-    try:
-        from setup_imports import setup_project_imports
-        return setup_project_imports(current_file), True
-    except ImportError:
-        current_dir = Path(current_file).resolve().parent  # scripts目录
-        project_root = current_dir.parent  # scripts -> Model
-        
-        paths_to_add = [
-            str(project_root),
-            str(project_root / 'experiments'),
-            str(project_root / 'utils'),
-            str(project_root / 'evaluation'),
-        ]
-        
-        for path in paths_to_add:
-            if Path(path).exists() and path not in sys.path:
-                sys.path.insert(0, path)
-        
-        return project_root, False
+print("Setting up project imports...")
 
-# Setup imports
-PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
-
-# =============================================================================
-# 项目模块导入 (一次性，清晰)
-# =============================================================================
+# Method 1: Try to use our setup_imports module
 try:
-    from experiments.baseline_experiment import BaselineExperiment, create_baseline_experiments
-    from utils.logger import setup_logger
-    from utils.reproducibility import set_seed, get_system_info
-    from evaluation.metrics import evaluate_model_comprehensive, StatisticalAnalyzer
-    print("✓ All modules imported successfully")
-except ImportError as e:
-    print(f"✗ Error importing modules: {e}")
-    print(f"Project root: {PROJECT_ROOT}")
-    print(f"Python path: {sys.path[:3]}...")
-    import traceback
-    traceback.print_exc()
-    sys.exit(1)
+    from setup_imports import setup_project_imports
+    project_root = setup_project_imports()
+    print("✓ Import setup completed using setup_imports module")
+except ImportError:
+    print("setup_imports module not found, using fallback method...")
+    
+    # Method 2: Fallback - manually configure paths
+    # Find the project root by looking for the Model directory
+    current_file = Path(__file__).absolute()
+    
+    # Start from current file location and search upward
+    search_path = current_file.parent
+    project_root = None
+    
+    for _ in range(5):  # Search up to 5 levels up
+        model_dir = search_path / "Model"
+        if model_dir.exists() and model_dir.is_dir():
+            project_root = search_path
+            break
+        if search_path == search_path.parent:  # Reached filesystem root
+            break
+        search_path = search_path.parent
+    
+    # If still not found, try the specific path from your system
+    if project_root is None:
+        specific_path = Path("/scratch/project_2003370/yueyao")
+        if (specific_path / "Model").exists():
+            project_root = specific_path
+    
+    if project_root is None:
+        raise RuntimeError(
+            "Could not locate the Model package directory. "
+            "Please ensure your project structure is correct and "
+            "the Model directory exists with proper __init__.py files."
+        )
+    
+    # Add the project root to Python path
+    project_root_str = str(project_root)
+    if project_root_str not in sys.path:
+        sys.path.insert(0, project_root_str)
+        print(f"✓ Added to Python path: {project_root_str}")
+
+print(f"Project root: {project_root}")
+
+# ============================================================================
+# LOGGER SETUP
+# Import and configure logging before importing other project modules
+# ============================================================================
+
+# First, try to import our logger utilities
+try:
+    from logger_utils import setup_logger, log_system_info, TrainingProgressLogger
+    print("✓ Logger utilities imported successfully")
+except ImportError:
+    print("logger_utils not found, creating basic logger setup...")
+    
+    # Fallback logger setup if logger_utils is not available
+    import logging
+    
+    def setup_experiment_logger(name, log_dir='logs'):
+        """Basic logger setup as fallback"""
+        log_dir = Path(log_dir)
+        log_dir.mkdir(exist_ok=True)
+        
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        log_file = log_dir / f'{name}_{timestamp}.log'
+        
+        logger = logging.getLogger(name)
+        logger.setLevel(logging.INFO)
+        
+        # Clear existing handlers
+        if logger.handlers:
+            logger.handlers.clear()
+        
+        # Console handler
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
+        
+        # File handler
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setLevel(logging.INFO)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+        
+        return logger, log_file
+    
+    def log_system_info(logger):
+        """Basic system info logging"""
+        import platform
+        logger.info(f"Python version: {platform.python_version()}")
+        logger.info(f"Platform: {platform.platform()}")
+    
+    class TrainingProgressLogger:
+        """Simple training progress logger"""
+        def __init__(self, logger, total_epochs):
+            self.logger = logger
+            self.total_epochs = total_epochs
+        
+        def log_epoch_start(self, epoch):
+            if epoch % 10 == 0 or epoch == 1:
+                self.logger.info(f"Starting epoch {epoch}/{self.total_epochs}")
+        
+        def log_epoch_end(self, epoch, **metrics):
+            if epoch % 10 == 0 or epoch == self.total_epochs:
+                msg = f"Epoch {epoch} completed"
+                for key, value in metrics.items():
+                    if value is not None:
+                        msg += f" | {key}: {value:.4f}"
+                self.logger.info(msg)
+
+# For compatibility with your existing code
+setup_logger = setup_experiment_logger
+
+# ============================================================================
+# PROJECT MODULE IMPORTS
+# Import all the project-specific modules with proper error handling
+# ============================================================================
+
+print("Importing project modules...")
+
+# Import with detailed error reporting for easier debugging
+def safe_import(module_path, item_names, fallback_values=None):
+    """
+    Safely import modules with detailed error reporting.
+    This helps identify exactly which imports are failing and why.
+    """
+    imported_items = {}
+    
+    if isinstance(item_names, str):
+        item_names = [item_names]
+    
+    if fallback_values is None:
+        fallback_values = [None] * len(item_names)
+    elif not isinstance(fallback_values, list):
+        fallback_values = [fallback_values] * len(item_names)
+    
+    try:
+        module = __import__(module_path, fromlist=item_names)
+        for i, item_name in enumerate(item_names):
+            try:
+                imported_items[item_name] = getattr(module, item_name)
+                print(f"  ✓ {module_path}.{item_name}")
+            except AttributeError:
+                imported_items[item_name] = fallback_values[i]
+                print(f"  ⚠ {module_path}.{item_name} not found, using fallback")
+    except ImportError as e:
+        print(f"  ❌ Failed to import {module_path}: {e}")
+        for i, item_name in enumerate(item_names):
+            imported_items[item_name] = fallback_values[i]
+    
+    return imported_items
+
+# Import base experiment class
+base_imports = safe_import('Model.experiments.base_experiment', 'BaseExperiment')
+BaseExperiment = base_imports['BaseExperiment']
+
+# Import model classes
+model_imports = safe_import('Model.models.hybrid_models', 
+                           ['TraditionalMLPBaseline', 'HybridModelManager'])
+TraditionalMLPBaseline = model_imports['TraditionalMLPBaseline']
+HybridModelManager = model_imports['HybridModelManager']
+
+mlp_imports = safe_import('Model.models.mlp_classifier', 'MLPClassifier')
+MLPClassifier = mlp_imports['MLPClassifier']
+
+# Import data handling modules
+data_imports = safe_import('Model.data.dataset_loader', 
+                          ['create_speaker_dataloaders', 'LibriSpeechChaoticDataset'])
+create_speaker_dataloaders = data_imports['create_speaker_dataloaders']
+LibriSpeechChaoticDataset = data_imports['LibriSpeechChaoticDataset']
+
+# Import feature extractors
+feature_imports = safe_import('Model.features.traditional_features', 
+                             ['MelExtractor', 'MFCCExtractor'])
+MelExtractor = feature_imports['MelExtractor']
+MFCCExtractor = feature_imports['MFCCExtractor']
+
+print("Import setup completed!")
+
+# ============================================================================
+# TRAINING CONFIGURATION AND CLASSES
+# ============================================================================
+
+
+
+
 
 
 class BaselineTrainingManager:
@@ -770,8 +918,5 @@ Examples:
         sys.exit(1)
 
 
-if __name__ == "__main__":
-    print(f"✓ Project Root: {PROJECT_ROOT}")
-    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
-    print(f"✓ Module imports successful")
+if __name__ == '__main__':
     main()

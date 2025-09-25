@@ -23,67 +23,76 @@ import pytest
 
 import os
 import sys
+import unittest
+from pathlib import Path
 
-# 导入路径设置
-try:
-    from setup_imports import setup_project_imports
-    setup_project_imports()
-except ImportError:
-    # 手动设置路径
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    sys.path.insert(0, project_root)
+# =============================================================================
+# 统一导入设置  
+# =============================================================================
+def setup_module_imports(current_file: str = __file__):
+    """Setup imports for current module."""
+    try:
+        from setup_imports import setup_project_imports
+        return setup_project_imports(current_file), True
+    except ImportError:
+        current_dir = Path(current_file).resolve().parent  # data目录
+        project_root = current_dir.parent  # data -> Model
+        
+        paths_to_add = [
+            str(project_root),
+            str(project_root / 'data'),
+            str(project_root / 'utils'),
+        ]
+        
+        for path in paths_to_add:
+            if Path(path).exists() and path not in sys.path:
+                sys.path.insert(0, path)
+        
+        return project_root, False
+
+# Setup imports
+PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
+
+# =============================================================================
+# 测试导入 (清晰明了)
+# =============================================================================
+# Import components to test with clear error handling
+def safe_import_test_modules():
+    """Safely import all test modules."""
+    modules = {}
     
-# Import components to test
-try:
-    from data_utils import (
-        DataValidator, FileSystemUtils, DataSplitter, 
-        AudioUtils, MetadataManager, quick_audio_scan
-    )
-    HAS_DATA_UTILS = True
-except ImportError as e:
-    HAS_DATA_UTILS = False
-    print(f"Warning: Could not import data_utils: {e}")
+    try:
+        from data_utils import DataValidator, FileSystemUtils, DataSplitter
+        modules['data_utils'] = True
+        modules['DataValidator'] = DataValidator
+        modules['FileSystemUtils'] = FileSystemUtils
+        modules['DataSplitter'] = DataSplitter
+    except ImportError as e:
+        modules['data_utils'] = False
+        print(f"Warning: Could not import data_utils: {e}")
+    
+    try:
+        from audio_preprocessor import AudioLoader, AudioNormalizer
+        modules['audio_preprocessor'] = True
+        modules['AudioLoader'] = AudioLoader
+        modules['AudioNormalizer'] = AudioNormalizer
+    except ImportError as e:
+        modules['audio_preprocessor'] = False
+        print(f"Warning: Could not import audio_preprocessor: {e}")
+        
+    try:
+        from dataset_loader import DirectoryDataset, MetadataDataset
+        modules['dataset_loader'] = True  
+        modules['DirectoryDataset'] = DirectoryDataset
+        modules['MetadataDataset'] = MetadataDataset
+    except ImportError as e:
+        modules['dataset_loader'] = False
+        print(f"Warning: Could not import dataset_loader: {e}")
+    
+    return modules
 
-try:
-    from audio_preprocessor import (
-        AudioLoader, AudioNormalizer, SilenceTrimmer, NoiseReducer,
-        AudioAugmenter, AudioSegmenter, AudioPreprocessingPipeline,
-        preprocess_audio_file
-    )
-    HAS_AUDIO_PREPROCESSOR = True
-except ImportError as e:
-    HAS_AUDIO_PREPROCESSOR = False
-    print(f"Warning: Could not import audio_preprocessor: {e}")
-
-try:
-    from dataset_loader import (
-        DirectoryDataset, MetadataDataset, PyTorchDataset, 
-        TensorFlowDataset, DatasetManager, create_simple_dataset
-    )
-    HAS_DATASET_LOADER = True
-except ImportError as e:
-    HAS_DATASET_LOADER = False
-    print(f"Warning: Could not import dataset_loader: {e}")
-
-# Optional dependencies
-try:
-    import librosa
-    import soundfile as sf
-    HAS_AUDIO_LIBS = True
-except ImportError:
-    HAS_AUDIO_LIBS = False
-
-try:
-    import torch
-    HAS_TORCH = True
-except ImportError:
-    HAS_TORCH = False
-
-try:
-    import tensorflow as tf
-    HAS_TF = True
-except ImportError:
-    HAS_TF = False
+# Import all test modules
+TEST_MODULES = safe_import_test_modules()
 
 
 class TestDataValidator:
@@ -1111,5 +1120,9 @@ def run_all_tests():
 
 
 if __name__ == "__main__":
+    print(f"✓ Project Root: {PROJECT_ROOT}")
+    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
+    print(f"✓ Module imports successful")
+    
     exit_code = run_all_tests()
     sys.exit(exit_code)

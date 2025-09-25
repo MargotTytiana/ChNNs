@@ -29,20 +29,28 @@ except ImportError:
     SKLEARN_AVAILABLE = False
     warnings.warn("Scikit-learn not available. Some hyperparameter optimization features will be limited.")
 
-# Import base model components
-try:
-    from .base_model import (
-        BaseModel, ModelConfig, ModelType, TaskType, OptimizationType,
-        create_model_config, get_model_info, compare_models
-    )
-    BASE_MODEL_AVAILABLE = True
-except ImportError:
-    BASE_MODEL_AVAILABLE = False
-    warnings.warn("Base model not available. Make sure models/base_model.py exists.")
+import os
+import sys
+from pathlib import Path
+
+# 立即修复导入
+def fix_imports():
+    current_file = Path(__file__).resolve()
+    model_dir = current_file.parent.parent  # models -> Model
+    paths = [str(model_dir), str(model_dir/'models'), str(model_dir/'core')]
+    for path in paths:
+        if os.path.exists(path) and path not in sys.path:
+            sys.path.insert(0, path)
+    return model_dir
+
+MODEL_DIR = fix_imports()
+
+# 现在直接导入，不用相对导入
+from base_model import BaseModel, ModelConfig, ModelType
 
 # Import specific model implementations
 try:
-    from .mlp_classifier import create_mlp_classifier, PyTorchMLPClassifier, SklearnMLPClassifier
+    from mlp_classifier import create_mlp_classifier, MLPClassifier, SklearnMLPClassifier
     MLP_AVAILABLE = True
 except ImportError:
     MLP_AVAILABLE = False

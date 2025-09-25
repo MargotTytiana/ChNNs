@@ -14,19 +14,23 @@ import warnings
 import time
 from typing import Dict, List, Tuple, Optional, Union, Any
 from pathlib import Path
+import os
+import sys
+from pathlib import Path
 
-try:
-    from .base_model import (
-        BaseModel, SklearnCompatibleModel, ModelConfig, TrainingMetrics,
-        ModelType, TaskType, OptimizationType, create_default_callbacks,
-        validate_model_inputs
-    )
-except ImportError:
-    from models.base_model import (
-        BaseModel, SklearnCompatibleModel, ModelConfig, TrainingMetrics,
-        ModelType, TaskType, OptimizationType, create_default_callbacks,
-        validate_model_inputs
-    )
+def fix_imports():
+    current_file = Path(__file__).resolve() 
+    model_dir = current_file.parent.parent  # models -> Model
+    paths = [str(model_dir), str(model_dir/'models')]
+    for path in paths:
+        if os.path.exists(path) and path not in sys.path:
+            sys.path.insert(0, path)
+    return model_dir
+
+MODEL_DIR = fix_imports()
+
+# 直接导入
+from base_model import BaseModel, SklearnCompatibleModel, ModelConfig
 
 # PyTorch imports
 try:
@@ -141,12 +145,12 @@ class MLPNetwork(nn.Module):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
 
 
-class PyTorchMLPClassifier(BaseModel):
-    """PyTorch-based MLP classifier implementation."""
+class MLPClassifier(BaseModel):
+    """MLP classifier implementation."""
     
     def __init__(self, config: ModelConfig):
         if not PYTORCH_AVAILABLE:
-            raise ImportError("PyTorch is required for PyTorchMLPClassifier")
+            raise ImportError("PyTorch is required for MLPClassifier")
         
         super().__init__(config)
         
@@ -240,7 +244,7 @@ class PyTorchMLPClassifier(BaseModel):
     
     def fit(self, X: np.ndarray, y: np.ndarray,
             X_val: Optional[np.ndarray] = None,
-            y_val: Optional[np.ndarray] = None) -> 'PyTorchMLPClassifier':
+            y_val: Optional[np.ndarray] = None) -> 'MLPClassifier':
         """Train the MLP classifier."""
         # Validate inputs
         X, y = validate_model_inputs(X, y, self.config.task_type)
@@ -756,7 +760,7 @@ def create_mlp_classifier(backend: str = 'pytorch', config: ModelConfig = None, 
     if backend.lower() == 'pytorch':
         if not PYTORCH_AVAILABLE:
             raise ImportError("PyTorch is not available. Install torch to use PyTorch backend.")
-        return PyTorchMLPClassifier(config)
+        return MLPClassifier(config)
     
     elif backend.lower() == 'sklearn':
         if not SKLEARN_AVAILABLE:
@@ -766,6 +770,14 @@ def create_mlp_classifier(backend: str = 'pytorch', config: ModelConfig = None, 
     else:
         raise ValueError(f"Unknown backend: {backend}. Choose 'pytorch' or 'sklearn'.")
 
+
+MLPClassifier = MLPClassifier  # Backward compatibility alias
+
+MLPClassifier = MLPClassifier  # Backward compatibility alias
+
+PyTorchMLPClassifier = MLPClassifier  # Backward compatibility alias
+
+__all__ = ['MLPClassifier']
 
 if __name__ == "__main__":
     # Example usage and testing

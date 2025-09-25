@@ -18,6 +18,74 @@ from sklearn.neighbors import NearestNeighbors
 from typing import Tuple, List, Dict, Optional, Union, Any
 import logging
 
+# AFTER (修复后的统一导入方式):
+import os
+import sys
+import numpy as np
+import warnings
+from typing import Dict, List, Tuple, Optional, Union, Any
+from dataclasses import dataclass, field
+from pathlib import Path
+
+# =============================================================================
+# 统一导入设置
+# =============================================================================
+def setup_module_imports(current_file: str = __file__):
+    """Setup imports for current module.""" 
+    try:
+        from setup_imports import setup_project_imports
+        return setup_project_imports(current_file), True
+    except ImportError:
+        current_dir = Path(current_file).resolve().parent  # core目录
+        project_root = current_dir.parent  # core -> Model
+        
+        paths_to_add = [
+            str(project_root),
+            str(project_root / 'core'),
+            str(project_root / 'utils'),
+        ]
+        
+        for path in paths_to_add:
+            if Path(path).exists() and path not in sys.path:
+                sys.path.insert(0, path)
+        
+        return project_root, False
+
+# Setup imports
+PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
+
+# =============================================================================
+# 项目模块导入 (带安全检查)
+# =============================================================================
+try:
+    from chaos_utils import (
+        largest_lyapunov_from_data, correlation_dimension, 
+        hurst_exponent, kolmogorov_entropy
+    )
+    HAS_CHAOS_UTILS = True
+except ImportError as e:
+    HAS_CHAOS_UTILS = False
+    warnings.warn(f"chaos_utils not available: {e}")
+    # 简单fallback，不需要大量代码
+    largest_lyapunov_from_data = lambda x: 0.0
+    correlation_dimension = lambda x: 2.0
+
+try:
+    from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
+    HAS_PHASE_SPACE = True
+except ImportError as e:
+    HAS_PHASE_SPACE = False
+    warnings.warn(f"phase_space_reconstruction not available: {e}")
+
+try:
+    from utils.numerical_stability import NumericalConfig, safe_divide
+    HAS_NUMERICAL_UTILS = True
+except ImportError as e:
+    HAS_NUMERICAL_UTILS = False
+    warnings.warn(f"numerical_stability not available: {e}")
+    # Simple fallback
+    safe_divide = lambda x, y: x / (y + 1e-12)
+    
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -992,6 +1060,10 @@ def create_chaotic_system(system_type: str, **kwargs) -> ChaoticSystem:
 
 
 if __name__ == "__main__":
+    print(f"✓ Project Root: {PROJECT_ROOT}")
+    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
+    print(f"✓ Module imports successful")
+    
     print("Testing Chaos Utils...")
     
     # 创建Lorenz系统并求解

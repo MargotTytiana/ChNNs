@@ -8,146 +8,36 @@ import numpy as np
 import sys
 from pathlib import Path
 
-# 设置项目根路径
-project_root = Path(__file__).parent.parent  # 从experiments回到Model
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
+import os
+import sys
+import torch
+import torch.nn as nn
+from pathlib import Path
+from typing import Dict, Any, Tuple, Optional
 
-# 添加调试信息
-print(f"Project root: {project_root}")
-print(f"Current file: {__file__}")
-print(f"Python path includes: {[p for p in sys.path if 'Model' in str(p)]}")
+def fix_imports():
+    current_file = Path(__file__).resolve()
+    model_dir = current_file.parent.parent  # experiments -> Model
+    paths = [
+        str(model_dir),
+        str(model_dir/'experiments'), 
+        str(model_dir/'models'),
+        str(model_dir/'features'),
+        str(model_dir/'data'),
+        str(model_dir/'utils')
+    ]
+    for path in paths:
+        if os.path.exists(path) and path not in sys.path:
+            sys.path.insert(0, path)
+    return model_dir
 
-# Import base experiment class
-try:
-    from experiments.base_experiment import BaseExperiment
-    print("Successfully imported BaseExperiment")
-except ImportError as e:
-    print(f"Failed to import BaseExperiment: {e}")
-    # Fallback
-    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-    from experiments.base_experiment import BaseExperiment
+MODEL_DIR = fix_imports()
 
-# Import models and components with detailed error handling
-def safe_import():
-    """安全导入所有依赖模块"""
-    imports = {}
-    
-    # 尝试导入各个模块
-    try:
-        from models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
-        imports['TraditionalMLPBaseline'] = TraditionalMLPBaseline
-        imports['HybridModelManager'] = HybridModelManager
-        print("Successfully imported hybrid_models")
-    except ImportError as e:
-        print(f"Failed to import hybrid_models: {e}")
-        imports['TraditionalMLPBaseline'] = None
-        imports['HybridModelManager'] = None
-    
-    try:
-        from models.mlp_classifier import MLPClassifier
-        imports['MLPClassifier'] = MLPClassifier
-        print("Successfully imported MLPClassifier")
-    except ImportError as e:
-        print(f"Failed to import MLPClassifier: {e}")
-        imports['MLPClassifier'] = None
-    
-    try:
-        from features.traditional_features import MelExtractor, MFCCExtractor
-        imports['MelExtractor'] = MelExtractor
-        imports['MFCCExtractor'] = MFCCExtractor
-        print("Successfully imported traditional_features")
-    except ImportError as e:
-        print(f"Failed to import traditional_features: {e}")
-        imports['MelExtractor'] = None
-        imports['MFCCExtractor'] = None
-    
-    # 关键：修复 dataset_loader 导入
-    try:
-        # 尝试多种导入路径
-        from data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
-        imports['create_speaker_dataloaders'] = create_speaker_dataloaders
-        imports['SpeakerDataset'] = LibriSpeechChaoticDataset  # 使用实际存在的类
-        print("Successfully imported dataset_loader from data.dataset_loader")
-    except ImportError:
-        try:
-            from dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
-            imports['create_speaker_dataloaders'] = create_speaker_dataloaders
-            imports['SpeakerDataset'] = LibriSpeechChaoticDataset
-            print("Successfully imported dataset_loader from root")
-        except ImportError as e:
-            print(f"Failed to import dataset_loader: {e}")
-            imports['create_speaker_dataloaders'] = None
-            imports['SpeakerDataset'] = None
-    
-    try:
-        from data.audio_preprocessor import AudioPreprocessor
-        imports['AudioPreprocessor'] = AudioPreprocessor
-        print("Successfully imported AudioPreprocessor")
-    except ImportError as e:
-        print(f"Failed to import AudioPreprocessor: {e}")
-        imports['AudioPreprocessor'] = None
-    
-    return imports
-
-# 执行安全导入
-imported_modules = safe_import()
-TraditionalMLPBaseline = imported_modules['TraditionalMLPBaseline']
-HybridModelManager = imported_modules['HybridModelManager']
-MLPClassifier = imported_modules['MLPClassifier']
-MelExtractor = imported_modules['MelExtractor']
-MFCCExtractor = imported_modules['MFCCExtractor']
-create_speaker_dataloaders = imported_modules['create_speaker_dataloaders']
-SpeakerDataset = imported_modules['SpeakerDataset']
-AudioPreprocessor = imported_modules['AudioPreprocessor']
-
-# 如果导入失败，使用Mock实现
-if create_speaker_dataloaders is None:
-    print("Warning: create_speaker_dataloaders not available. Using mock implementations.")
-    
-    class MockMLPClassifier(nn.Module):
-        def __init__(self, input_dim, output_dim, hidden_dims=[128, 64]):
-            super().__init__()
-            layers = []
-            current_dim = input_dim
-            for hidden_dim in hidden_dims:
-                layers.extend([
-                    nn.Linear(current_dim, hidden_dim),
-                    nn.ReLU(),
-                    nn.Dropout(0.2)
-                ])
-                current_dim = hidden_dim
-            layers.append(nn.Linear(current_dim, output_dim))
-            self.model = nn.Sequential(*layers)
-            
-        def forward(self, x):
-            return self.model(x)
-    
-    class MockFeatureExtractor(nn.Module):
-        def __init__(self, output_dim):
-            super().__init__()
-            self.output_dim = output_dim
-            
-        def forward(self, x):
-            batch_size = x.shape[0]
-            return torch.randn(batch_size, self.output_dim, 
-                              device=x.device, dtype=x.dtype)
-    
-    class MockDataset(torch.utils.data.Dataset):
-        def __init__(self, num_samples, num_classes, feature_dim):
-            self.num_samples = num_samples
-            self.num_classes = num_classes
-            self.feature_dim = feature_dim
-            
-        def __len__(self):
-            return self.num_samples
-            
-        def __getitem__(self, idx):
-            # Return (audio, speaker_id)
-            audio = torch.randn(8000)  # 0.5 seconds at 16kHz
-            speaker_id = torch.randint(0, self.num_classes, (1,)).item()
-            return audio, speaker_id
-
+# 直接导入
+from base_experiment import BaseExperiment
+from hybrid_models import TraditionalMLPBaseline, HybridModelManager
+from traditional_features import MelExtractor, MFCCExtractor
+from dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
 
 class BaselineExperiment(BaseExperiment):
     """
@@ -787,6 +677,10 @@ def test(self) -> Dict[str, float]:
 
     
 if __name__ == "__main__":
+    print(f"✓ Project Root: {PROJECT_ROOT}")
+    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
+    print(f"✓ Module imports successful")
+    
     # Example usage and testing
     
     # Test configuration
