@@ -46,7 +46,7 @@ def fix_imports():
 MODEL_DIR = fix_imports()
 
 # 现在直接导入，不用相对导入
-from base_model import BaseModel, ModelConfig, ModelType
+from base_model import BaseModel, ModelConfig, ModelType, TaskType, ModelType, OptimizationType
 
 # Import specific model implementations
 try:

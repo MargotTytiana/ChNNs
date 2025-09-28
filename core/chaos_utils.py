@@ -58,19 +58,6 @@ PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 # 项目模块导入 (带安全检查)
 # =============================================================================
 try:
-    from chaos_utils import (
-        largest_lyapunov_from_data, correlation_dimension, 
-        hurst_exponent, kolmogorov_entropy
-    )
-    HAS_CHAOS_UTILS = True
-except ImportError as e:
-    HAS_CHAOS_UTILS = False
-    warnings.warn(f"chaos_utils not available: {e}")
-    # 简单fallback，不需要大量代码
-    largest_lyapunov_from_data = lambda x: 0.0
-    correlation_dimension = lambda x: 2.0
-
-try:
     from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
     HAS_PHASE_SPACE = True
 except ImportError as e:

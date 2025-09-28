@@ -31,10 +31,10 @@ except ImportError:
 
 # Now we can use clean, absolute imports based on the Model package
 try:
-    from Model.models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
-    from Model.models.mlp_classifier import MLPClassifier
-    from Model.data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
-    from Model.features.traditional_features import MelExtractor, MFCCExtractor
+    from models.hybrid_models import TraditionalMLPBaseline, HybridModelManager
+    from models.mlp_classifier import MLPClassifier
+    from data.dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
+    from features.traditional_features import MelSpectrogramExtractor, MFCCExtractor
     print("All required modules imported successfully!")
 except ImportError as e:
     print(f"Import error: {e}")

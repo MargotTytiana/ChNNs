@@ -3916,3 +3916,376 @@
 2025-09-21 13:04:57,002 - experiment_baseline_mel_mlp_run_0 - INFO - Training completed
 2025-09-21 13:04:57,046 - experiment_baseline_mel_mlp_run_0 - INFO - Running baseline analysis...
 2025-09-21 13:04:57,047 - experiment_baseline_mel_mlp_run_0 - INFO - Baseline analysis completed
+2025-09-25 13:14:51,697 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-25 13:14:51,708 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-25 13:14:51,708 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-25 13:14:51,708 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-25 13:14:51,708 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-25 13:14:53,576 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-25 13:14:53,576 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-25 13:14:53,797 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-25 13:14:53,797 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-25 13:14:53,797 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-25 13:14:53,797 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-25 13:19:19,327 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-25 13:19:19,328 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 164 batches
+2025-09-25 13:19:19,328 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 35 batches
+2025-09-25 13:19:19,328 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 37 batches
+2025-09-25 13:19:22,080 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-09-25 13:19:22,080 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-09-25 13:19:22,080 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-09-25 13:19:22,127 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-09-25 13:19:22,127 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-09-25 13:19:22,128 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-09-25 13:19:27,551 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: Caught RuntimeError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/worker.py", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 398, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 212, in collate
+    collate(samples, collate_fn_map=collate_fn_map)
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 155, in collate
+    return collate_fn_map[elem_type](batch, collate_fn_map=collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 271, in collate_tensor_fn
+    out = elem.new(storage).resize_(len(batch), *list(elem.size()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Trying to resize storage that is not resizable
+
+2025-09-28 09:43:50,880 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 09:43:50,897 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-28 09:43:50,897 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 09:43:50,897 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-28 09:43:50,898 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-28 09:43:52,083 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 09:43:52,083 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-28 09:43:52,304 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-28 09:43:52,304 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-28 09:43:52,304 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-28 09:43:52,304 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-28 09:47:32,278 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-28 09:47:32,278 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 164 batches
+2025-09-28 09:47:32,278 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 35 batches
+2025-09-28 09:47:32,278 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 37 batches
+2025-09-28 09:47:34,942 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-09-28 09:47:34,943 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-09-28 09:47:34,943 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-09-28 09:47:34,988 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-09-28 09:47:34,988 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-09-28 09:47:34,988 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-09-28 09:47:35,875 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: Caught RuntimeError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/worker.py", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 398, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 212, in collate
+    collate(samples, collate_fn_map=collate_fn_map)
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 155, in collate
+    return collate_fn_map[elem_type](batch, collate_fn_map=collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 271, in collate_tensor_fn
+    out = elem.new(storage).resize_(len(batch), *list(elem.size()))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Trying to resize storage that is not resizable
+
+2025-09-28 10:08:54,639 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 10:08:54,639 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-28 10:08:54,640 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 10:08:54,640 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-28 10:08:54,640 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-28 10:08:55,208 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 10:08:55,208 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-28 10:08:55,316 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-28 10:08:55,316 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-28 10:08:55,316 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-28 10:08:55,316 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-28 10:09:02,693 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-28 10:09:02,693 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 328 batches
+2025-09-28 10:09:02,693 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 70 batches
+2025-09-28 10:09:02,693 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 73 batches
+2025-09-28 10:09:03,813 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-09-28 10:09:03,813 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-09-28 10:09:03,813 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-09-28 10:09:03,856 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-09-28 10:09:03,856 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-09-28 10:09:03,857 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-09-28 10:09:04,602 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-09-28 10:13:43,483 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 10:13:43,483 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-28 10:13:43,483 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 10:13:43,483 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-28 10:13:43,484 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-28 10:13:44,051 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 10:13:44,052 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-28 10:13:44,157 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-28 10:13:44,158 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-28 10:13:44,158 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-28 10:13:44,158 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO - 数据集标签范围: 19 到 164
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到的说话人数量: 165
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO - 配置中的说话人数量: 100
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - WARNING - 数据集有 165 个说话人，超过配置的 100 个
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO - 自动调整 num_speakers 从 100 到 165
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO - 重新创建模型以匹配新的说话人数量...
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 标签范围验证通过: [0, 164] 在 165 个类别内
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 328 batches
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 70 batches
+2025-09-28 10:13:56,941 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 73 batches
+2025-09-28 10:23:06,664 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 10:23:06,664 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-28 10:23:06,664 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 10:23:06,664 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-28 10:23:06,664 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-28 10:23:07,236 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 10:23:07,236 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-28 10:23:07,343 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-28 10:23:07,343 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-28 10:23:07,343 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-28 10:23:07,343 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-28 10:23:14,677 - experiment_baseline_mel_mlp_run_0 - INFO - 数据集标签范围: 19 到 164
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到的说话人数量: 165
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - INFO - 配置中的说话人数量: 100
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - WARNING - 数据集有 165 个说话人，超过配置的 100 个
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - INFO - 自动调整 num_speakers 从 100 到 165
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到模型已存在，重新创建模型以匹配新的说话人数量...
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - INFO - 立即创建新模型...
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败: Unknown feature type: {'input_dim': 80, 'num_classes': 165, 'hidden_dims': [256, 128, 64], 'dropout_rate': 0.3, 'use_batch_norm': True}
+2025-09-28 10:23:14,678 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败，尝试备用创建方法...
+2025-09-28 10:23:14,712 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 备用模型创建成功，输出维度: 165
+2025-09-28 10:23:14,712 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 标签范围验证通过: [0, 164] 在 165 个类别内
+2025-09-28 10:23:14,712 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-28 10:23:14,712 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 328 batches
+2025-09-28 10:23:14,712 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 70 batches
+2025-09-28 10:23:14,713 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 73 batches
+2025-09-28 10:23:15,818 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-09-28 10:23:15,819 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-09-28 10:23:15,819 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-09-28 10:23:15,863 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-09-28 10:23:15,863 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-09-28 10:23:15,863 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-09-28 10:23:19,906 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: mat1 and mat2 shapes cannot be multiplied (16x48000 and 24000x256)
+2025-09-28 10:35:06,219 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 10:35:06,219 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-28 10:35:06,219 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 10:35:06,219 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-28 10:35:06,219 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-28 10:35:06,796 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 10:35:06,797 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-28 10:35:06,908 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-28 10:35:06,908 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-28 10:35:06,908 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-28 10:35:06,908 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-28 10:35:14,276 - experiment_baseline_mel_mlp_run_0 - INFO - 数据批次形状: torch.Size([16, 48000])
+2025-09-28 10:35:14,276 - experiment_baseline_mel_mlp_run_0 - INFO - 数据集标签范围: 19 到 164
+2025-09-28 10:35:14,276 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到的说话人数量: 165
+2025-09-28 10:35:14,276 - experiment_baseline_mel_mlp_run_0 - INFO - 配置中的说话人数量: 100
+2025-09-28 10:35:14,276 - experiment_baseline_mel_mlp_run_0 - INFO - 基线类型: mel_mlp
+2025-09-28 10:35:14,276 - experiment_baseline_mel_mlp_run_0 - WARNING - 检测到原始音频数据 torch.Size([16, 48000])，但基线类型是mel_mlp
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - WARNING - 这可能导致维度不匹配，模型将自动适应
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - WARNING - 数据集有 165 个说话人，超过配置的 100 个
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - INFO - 自动调整 num_speakers 从 100 到 165
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到模型已存在，重新创建模型以匹配新的说话人数量...
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - INFO - 立即创建新模型...
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到实际输入形状: torch.Size([16, 48000])
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - INFO - 创建模型配置: 输入维度=48000, 输出类别=165
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败: Unknown feature type: {'input_dim': 48000, 'num_classes': 165, 'hidden_dims': [256, 128, 64], 'dropout_rate': 0.3, 'use_batch_norm': True, 'baseline_type': 'mel_mlp'}
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败，尝试备用创建方法...
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - INFO - 备用模型：检测到实际输入形状: torch.Size([16, 48000])
+2025-09-28 10:35:14,277 - experiment_baseline_mel_mlp_run_0 - INFO - 备用模型使用输入维度: 48000
+2025-09-28 10:35:14,531 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 备用模型创建成功
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO -   输入维度: 48000
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO -   隐藏层: [1024, 512, 256]
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO -   输出维度: 165
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO -   总参数: 49,851,557
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 标签范围验证通过: [0, 164] 在 165 个类别内
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 328 batches
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 70 batches
+2025-09-28 10:35:14,532 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 73 batches
+2025-09-28 10:35:15,650 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-09-28 10:35:15,650 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-09-28 10:35:15,651 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-09-28 10:35:15,695 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-09-28 10:35:15,695 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-09-28 10:35:15,695 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-09-28 10:35:16,987 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-09-28 10:39:25,752 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 10:39:25,752 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-28 10:39:25,752 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 10:39:25,752 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-28 10:39:25,752 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-28 10:39:26,327 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 10:39:26,327 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-28 10:39:26,442 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-28 10:39:26,442 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-28 10:39:26,442 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-28 10:39:26,442 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-28 10:39:33,834 - experiment_baseline_mel_mlp_run_0 - INFO - 数据批次形状: torch.Size([16, 48000])
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 数据集标签范围: 19 到 164
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到的说话人数量: 165
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 配置中的说话人数量: 100
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 基线类型: mel_mlp
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - WARNING - 检测到原始音频数据 torch.Size([16, 48000])，但基线类型是mel_mlp
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - WARNING - 这可能导致维度不匹配，模型将自动适应
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - WARNING - 数据集有 165 个说话人，超过配置的 100 个
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 自动调整 num_speakers 从 100 到 165
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到模型已存在，重新创建模型以匹配新的说话人数量...
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 立即创建新模型...
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到实际输入形状: torch.Size([16, 48000])
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 创建模型配置: 输入维度=48000, 输出类别=165
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败: Unknown feature type: {'input_dim': 48000, 'num_classes': 165, 'hidden_dims': [256, 128, 64], 'dropout_rate': 0.3, 'use_batch_norm': True, 'baseline_type': 'mel_mlp'}
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败，尝试备用创建方法...
+2025-09-28 10:39:33,835 - experiment_baseline_mel_mlp_run_0 - INFO - 备用模型：检测到实际输入形状: torch.Size([16, 48000])
+2025-09-28 10:39:33,836 - experiment_baseline_mel_mlp_run_0 - INFO - 备用模型使用输入维度: 48000
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 备用模型创建成功
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO -   输入维度: 48000
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO -   隐藏层: [1024, 512, 256]
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO -   输出维度: 165
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO -   总参数: 49,851,557
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 标签范围验证通过: [0, 164] 在 165 个类别内
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 328 batches
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 70 batches
+2025-09-28 10:39:34,091 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 73 batches
+2025-09-28 10:39:35,222 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-09-28 10:39:35,222 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-09-28 10:39:35,222 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-09-28 10:39:35,266 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-09-28 10:39:35,266 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-09-28 10:39:35,266 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-09-28 10:39:35,427 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-09-28 10:41:14,957 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 10:41:14,957 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-09-28 10:41:14,957 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 10:41:14,957 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-09-28 10:41:14,958 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-09-28 10:41:15,528 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 10:41:15,529 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+2025-09-28 10:41:15,638 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-09-28 10:41:15,639 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-09-28 10:41:15,639 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-09-28 10:41:15,639 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-09-28 10:41:22,972 - experiment_baseline_mel_mlp_run_0 - INFO - 扫描所有数据以确定真实的标签范围...
+2025-09-28 10:41:22,993 - experiment_baseline_mel_mlp_run_0 - INFO - 扫描训练集...
+2025-09-28 10:41:23,959 - experiment_baseline_mel_mlp_run_0 - INFO - 已扫描 1 个训练批次, 当前标签范围: 24-169
+2025-09-28 10:41:30,017 - experiment_baseline_mel_mlp_run_0 - INFO - 已扫描 51 个训练批次, 当前标签范围: 0-174
+2025-09-28 10:41:35,736 - experiment_baseline_mel_mlp_run_0 - INFO - 已扫描 101 个训练批次, 当前标签范围: 0-174
+2025-09-28 10:41:41,816 - experiment_baseline_mel_mlp_run_0 - INFO - 已扫描 151 个训练批次, 当前标签范围: 0-174
+2025-09-28 10:41:47,486 - experiment_baseline_mel_mlp_run_0 - INFO - 已扫描 201 个训练批次, 当前标签范围: 0-174
+2025-09-28 10:41:53,170 - experiment_baseline_mel_mlp_run_0 - INFO - 已扫描 251 个训练批次, 当前标签范围: 0-174
+2025-09-28 10:41:59,287 - experiment_baseline_mel_mlp_run_0 - INFO - 已扫描 301 个训练批次, 当前标签范围: 0-174
+2025-09-28 10:42:02,417 - experiment_baseline_mel_mlp_run_0 - INFO - 扫描验证集...
+2025-09-28 10:42:10,617 - experiment_baseline_mel_mlp_run_0 - INFO - 扫描测试集...
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - === 完整数据集标签分析 ===
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 数据批次形状: torch.Size([16, 48000])
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 完整标签范围: 0 到 174
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 实际需要的类别数: 175
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 唯一标签数量: 175
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 配置中的说话人数量: 100
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 基线类型: mel_mlp
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - WARNING - 检测到原始音频数据 torch.Size([16, 48000])，但基线类型是mel_mlp
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - WARNING - 这可能导致维度不匹配，模型将自动适应
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - WARNING - 数据集需要 175 个类别，超过配置的 100 个
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 自动调整 num_speakers 从 100 到 175
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 重新创建模型以匹配完整的说话人数量...
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 创建适应完整数据集的模型...
+2025-09-28 10:42:19,169 - experiment_baseline_mel_mlp_run_0 - INFO - 检测到实际输入形状: torch.Size([16, 48000])
+2025-09-28 10:42:19,170 - experiment_baseline_mel_mlp_run_0 - INFO - 创建模型配置: 输入维度=48000, 输出类别=175
+2025-09-28 10:42:19,170 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败: Unknown feature type: {'input_dim': 48000, 'num_classes': 175, 'hidden_dims': [256, 128, 64], 'dropout_rate': 0.3, 'use_batch_norm': True, 'baseline_type': 'mel_mlp'}
+2025-09-28 10:42:19,170 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型创建失败，尝试备用创建方法...
+2025-09-28 10:42:19,170 - experiment_baseline_mel_mlp_run_0 - INFO - 备用模型：检测到实际输入形状: torch.Size([16, 48000])
+2025-09-28 10:42:19,170 - experiment_baseline_mel_mlp_run_0 - INFO - 备用模型使用输入维度: 48000
+2025-09-28 10:42:19,426 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 备用模型创建成功
+2025-09-28 10:42:19,426 - experiment_baseline_mel_mlp_run_0 - INFO -   输入维度: 48000
+2025-09-28 10:42:19,426 - experiment_baseline_mel_mlp_run_0 - INFO -   隐藏层: [1024, 512, 256]
+2025-09-28 10:42:19,426 - experiment_baseline_mel_mlp_run_0 - INFO -   输出维度: 175
+2025-09-28 10:42:19,426 - experiment_baseline_mel_mlp_run_0 - INFO -   总参数: 49,854,127
+2025-09-28 10:42:19,426 - experiment_baseline_mel_mlp_run_0 - INFO - ✓ 完整标签范围验证通过: [0, 174] 在 175 个类别内
+2025-09-28 10:42:26,990 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-09-28 10:42:26,990 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 328 batches
+2025-09-28 10:42:26,990 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 70 batches
+2025-09-28 10:42:26,990 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 73 batches
+2025-09-28 10:42:28,049 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-09-28 10:42:28,049 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-09-28 10:42:28,049 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-09-28 10:42:28,097 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-09-28 10:42:28,097 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-09-28 10:42:28,098 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-09-28 10:42:28,712 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [0/5250 (0.0%)]	Loss: 5.166339
+2025-09-28 10:42:33,491 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [1600/5250 (30.5%)]	Loss: 5.057660
+2025-09-28 10:42:38,242 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [3200/5250 (61.0%)]	Loss: 5.152803
+2025-09-28 10:42:43,043 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [4800/5250 (91.5%)]	Loss: 5.174575
+2025-09-28 10:42:46,008 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 0: Train Loss: 5.0812, Train Acc: 0.0141, Val Loss: 5.1884, Val Acc: 0.0063
+2025-09-28 10:42:48,375 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 0
+2025-09-28 10:42:51,631 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [0/5250 (0.0%)]	Loss: 4.678531
+2025-09-28 10:42:56,328 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [1600/5250 (30.5%)]	Loss: 5.039536
+2025-09-28 10:43:00,995 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [3200/5250 (61.0%)]	Loss: 4.791521
+2025-09-28 10:43:05,666 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [4800/5250 (91.5%)]	Loss: 5.318879
+2025-09-28 10:43:08,259 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 1: Train Loss: 4.9669, Train Acc: 0.0204, Val Loss: 5.4157, Val Acc: 0.0063
+2025-09-28 10:43:08,572 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [0/5250 (0.0%)]	Loss: 4.627313
+2025-09-28 10:43:13,185 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [1600/5250 (30.5%)]	Loss: 4.548790
+2025-09-28 10:43:17,782 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [3200/5250 (61.0%)]	Loss: 4.867802
+2025-09-28 10:43:22,372 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [4800/5250 (91.5%)]	Loss: 4.801881
+2025-09-28 10:43:24,891 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 2: Train Loss: 4.8013, Train Acc: 0.0335, Val Loss: 5.3955, Val Acc: 0.0081
+2025-09-28 10:43:27,623 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 2
+2025-09-28 10:43:28,883 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [0/5250 (0.0%)]	Loss: 4.319068
+2025-09-28 10:43:33,479 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [1600/5250 (30.5%)]	Loss: 4.698900
+2025-09-28 10:43:38,137 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [3200/5250 (61.0%)]	Loss: 4.652190
+2025-09-28 10:43:42,736 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [4800/5250 (91.5%)]	Loss: 4.434227
+2025-09-28 10:43:45,267 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 3: Train Loss: 4.5237, Train Acc: 0.0600, Val Loss: 5.5917, Val Acc: 0.0072
+2025-09-28 10:43:45,656 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [0/5250 (0.0%)]	Loss: 3.419478
+2025-09-28 10:43:50,263 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [1600/5250 (30.5%)]	Loss: 4.108889
+2025-09-28 10:43:54,870 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [3200/5250 (61.0%)]	Loss: 4.616808
+2025-09-28 10:43:59,477 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [4800/5250 (91.5%)]	Loss: 4.140904
+2025-09-28 10:44:02,008 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 4: Train Loss: 4.1343, Train Acc: 0.1025, Val Loss: 5.6843, Val Acc: 0.0054
+2025-09-28 10:44:02,382 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [0/5250 (0.0%)]	Loss: 3.332705
+2025-09-28 10:44:06,997 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [1600/5250 (30.5%)]	Loss: 3.585729
+2025-09-28 10:44:11,608 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [3200/5250 (61.0%)]	Loss: 3.873835
+2025-09-28 10:44:16,241 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [4800/5250 (91.5%)]	Loss: 3.704610
+2025-09-28 10:44:18,777 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 5: Train Loss: 3.7430, Train Acc: 0.1681, Val Loss: 5.7854, Val Acc: 0.0009
+2025-09-28 10:44:19,148 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [0/5250 (0.0%)]	Loss: 3.395156
+2025-09-28 10:44:23,767 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [1600/5250 (30.5%)]	Loss: 3.742395
+2025-09-28 10:44:28,383 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [3200/5250 (61.0%)]	Loss: 3.866346
+2025-09-28 10:44:32,998 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [4800/5250 (91.5%)]	Loss: 3.081163
+2025-09-28 10:44:35,601 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 6: Train Loss: 3.3947, Train Acc: 0.2248, Val Loss: 5.8825, Val Acc: 0.0027
+2025-09-28 10:44:35,986 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 7: [0/5250 (0.0%)]	Loss: 3.272499
+2025-09-28 10:44:40,631 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 7: [1600/5250 (30.5%)]	Loss: 3.034041
+2025-09-28 10:44:45,267 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 7: [3200/5250 (61.0%)]	Loss: 2.450785
+2025-09-28 10:44:49,903 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 7: [4800/5250 (91.5%)]	Loss: 3.106411
+2025-09-28 10:44:52,458 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 7: Train Loss: 3.1341, Train Acc: 0.2814, Val Loss: 5.8887, Val Acc: 0.0000
+2025-09-28 10:44:52,832 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 8: [0/5250 (0.0%)]	Loss: 3.233078
+2025-09-28 10:44:57,456 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 8: [1600/5250 (30.5%)]	Loss: 2.752282
+2025-09-28 10:45:02,075 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 8: [3200/5250 (61.0%)]	Loss: 2.433398
+2025-09-28 10:45:06,709 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 8: [4800/5250 (91.5%)]	Loss: 2.398045
+2025-09-28 10:45:09,263 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 8: Train Loss: 2.9225, Train Acc: 0.3205, Val Loss: 5.9978, Val Acc: 0.0018
+2025-09-28 10:45:09,634 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 9: [0/5250 (0.0%)]	Loss: 3.564023
+2025-09-28 10:45:14,254 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 9: [1600/5250 (30.5%)]	Loss: 3.215904
+2025-09-28 10:45:18,882 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 9: [3200/5250 (61.0%)]	Loss: 1.577799
+2025-09-28 10:45:23,501 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 9: [4800/5250 (91.5%)]	Loss: 2.861455
+2025-09-28 10:45:26,051 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 9: Train Loss: 2.7526, Train Acc: 0.3651, Val Loss: 5.8852, Val Acc: 0.0045
+2025-09-28 10:45:26,425 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 10: [0/5250 (0.0%)]	Loss: 2.004082

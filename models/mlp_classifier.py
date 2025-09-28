@@ -332,13 +332,37 @@ class MLPClassifier(BaseModel):
     
     def _create_data_loader(self, X: np.ndarray, y: np.ndarray, shuffle: bool = True) -> DataLoader:
         """Create PyTorch data loader."""
-        # Convert to tensors
-        X_tensor = torch.FloatTensor(X).to(self.device)
-        y_tensor = torch.LongTensor(y).to(self.device)
+        # Ensure data is contiguous and properly formatted
+        X = np.ascontiguousarray(X, dtype=np.float32)
+        y = np.ascontiguousarray(y, dtype=np.int64)
         
+        # Create tensors without immediately moving to device
+        X_tensor = torch.from_numpy(X).contiguous()
+        y_tensor = torch.from_numpy(y).contiguous()
+        
+        # Create dataset
         dataset = TensorDataset(X_tensor, y_tensor)
-        return DataLoader(dataset, batch_size=self.config.batch_size, shuffle=shuffle)
-    
+        
+        # Custom collate function to handle device transfer
+        def custom_collate_fn(batch):
+            # Separate features and labels
+            features, labels = zip(*batch)
+            
+            # Stack and move to device
+            features_batch = torch.stack(features).to(self.device)
+            labels_batch = torch.stack(labels).to(self.device)
+            
+            return features_batch, labels_batch
+        
+        return DataLoader(
+            dataset, 
+            batch_size=self.config.batch_size, 
+            shuffle=shuffle,
+            collate_fn=custom_collate_fn,
+            num_workers=0,  # Disable multiprocessing to avoid shared memory issues
+            pin_memory=False  # Disable pin memory for stability
+        )
+        
     def _train_loop(self, train_loader: DataLoader, val_loader: Optional[DataLoader]):
         """Main training loop."""
         start_time = time.time()
