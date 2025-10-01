@@ -307,12 +307,12 @@ class ChaoticSystemSolver:
             
             # Calculate number of points for extended integration
             total_time = t_end_extended - t_start_extended
-            num_points = max(int(total_time / dt) + 1, 100)
+            num_points = max(10, int((t_end - t_start) / dt) + 1)  # 最小10个点更合理
             t_eval = create_safe_time_array(t_start_extended, t_end_extended, num_points)
         else:
             integration_span = (t_start, t_end)
             total_time = t_end - t_start
-            num_points = max(int(total_time / dt) + 1, 100)
+            num_points = max(10, int((t_end - t_start) / dt) + 1)  # 最小10个点更合理
             t_eval = create_safe_time_array(t_start, t_end, num_points)
         
         # Validate parameters before integration

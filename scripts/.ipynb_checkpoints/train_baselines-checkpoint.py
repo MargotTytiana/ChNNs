@@ -424,7 +424,12 @@ class BaselineTrainingManager:
             return results
             
         except Exception as e:
-            self.logger.error(f"Failed to train {method} (Run {run_id + 1}): {e}")
+            import traceback
+            error_msg = f"Failed to train {method} (Run {run_id + 1}): {e}"
+            self.logger.error(error_msg)
+            self.logger.error(f"Full traceback:\n{traceback.format_exc()}")
+            print(f"ERROR: {error_msg}")
+            print(f"Full traceback:\n{traceback.format_exc()}")
             self.failed_experiments.append({
                 'method': method,
                 'run_id': run_id,

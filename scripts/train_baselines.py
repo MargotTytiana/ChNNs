@@ -73,7 +73,7 @@ HAS_UTILS = False
 try:
     from traditional_features import MelSpectrogramExtractor, MFCCExtractor
     # 创建别名以兼容旧代码
-    MelExtractor = MelSpectrogramExtractor
+    MelSpectrogramExtractor = MelSpectrogramExtractor
     HAS_TRADITIONAL_FEATURES = True
     print("✓ Traditional features imported successfully")
 except ImportError as e:
@@ -93,7 +93,7 @@ except ImportError as e:
         def extract(self, audio): 
             return np.random.randn(self.n_mfcc, 100)  # mock mfcc
     
-    MelExtractor = MelSpectrogramExtractor
+    MelSpectrogramExtractor = MelSpectrogramExtractor
     print("Using mock feature extractors")
 
 # 尝试导入实验管理
@@ -424,7 +424,12 @@ class BaselineTrainingManager:
             return results
             
         except Exception as e:
-            self.logger.error(f"Failed to train {method} (Run {run_id + 1}): {e}")
+            import traceback
+            error_msg = f"Failed to train {method} (Run {run_id + 1}): {e}"
+            self.logger.error(error_msg)
+            self.logger.error(f"Full traceback:\n{traceback.format_exc()}")
+            print(f"ERROR: {error_msg}")
+            print(f"Full traceback:\n{traceback.format_exc()}")
             self.failed_experiments.append({
                 'method': method,
                 'run_id': run_id,

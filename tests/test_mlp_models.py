@@ -23,37 +23,47 @@ import json
 from typing import List, Dict, Any, Tuple
 import os
 import sys
+import torch
+import torch.nn as nn
+from pathlib import Path
+from typing import Dict, Any, Tuple, Optional
 
-# 导入路径设置
-try:
-    from setup_imports import setup_project_imports
-    setup_project_imports()
-except ImportError:
-    # 手动设置路径
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    sys.path.insert(0, project_root)
+def fix_imports():
+    current_file = Path(__file__).resolve()
+    model_dir = current_file.parent.parent  # models -> Model
+    paths = [
+        str(model_dir),
+        str(model_dir/'experiments'), 
+        str(model_dir/'models'),
+        str(model_dir/'features'),
+        str(model_dir/'data'),
+        str(model_dir/'utils')
+    ]
+    for path in paths:
+        if os.path.exists(path) and path not in sys.path:
+            sys.path.insert(0, path)
+    return model_dir
+
+MODEL_DIR = fix_imports()
     
 # Test data generation
 from sklearn.datasets import make_classification, make_multilabel_classification
 from sklearn.model_selection import train_test_split
 
-try:
-    from models.base_model import (
-        BaseModel, ModelConfig, ModelType, TaskType, OptimizationType,
-        create_model_config, TrainingMetrics
-    )
-    from models.mlp_classifier import (
-        PyTorchMLPClassifier, SklearnMLPClassifier, MLPNetwork,
-        create_mlp_classifier
-    )
-    from models.model_factory import (
-        ModelFactory, ModelRegistry, ConfigTemplate, HyperparameterOptimizer,
-        get_model_factory, create_model, list_models, get_model_recommendations
-    )
-    IMPORTS_SUCCESSFUL = True
-except ImportError as e:
-    print(f"Warning: Could not import MLP modules: {e}")
-    IMPORTS_SUCCESSFUL = False
+from base_model import (
+    BaseModel, ModelConfig, ModelType, TaskType, OptimizationType,
+    create_model_config, TrainingMetrics
+)
+from mlp_classifier import (
+    PyTorchMLPClassifier, SklearnMLPClassifier, MLPNetwork,
+    create_mlp_classifier
+)
+from model_factory import (
+    ModelFactory, ModelRegistry, ConfigTemplate, HyperparameterOptimizer,
+    get_model_factory, create_model, list_models, get_model_recommendations
+)
+IMPORTS_SUCCESSFUL = True
+
 
 # Check for optional dependencies
 try:

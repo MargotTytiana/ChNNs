@@ -30,7 +30,7 @@ def fix_imports():
 MODEL_DIR = fix_imports()
 
 # 直接导入
-from base_model import BaseModel, SklearnCompatibleModel, ModelConfig
+from base_model import BaseModel, SklearnCompatibleModel, ModelConfig, ModelType, TaskType, OptimizationType
 
 # PyTorch imports
 try:
@@ -793,9 +793,6 @@ def create_mlp_classifier(backend: str = 'pytorch', config: ModelConfig = None, 
     
     else:
         raise ValueError(f"Unknown backend: {backend}. Choose 'pytorch' or 'sklearn'.")
-
-
-MLPClassifier = MLPClassifier  # Backward compatibility alias
 
 MLPClassifier = MLPClassifier  # Backward compatibility alias
 

@@ -3,25 +3,35 @@ import torch.nn as nn
 import torch.nn.functional as F
 from typing import Dict, List, Optional, Tuple, Union, Any
 import logging
+import os
+import sys
+import torch
+import torch.nn as nn
+from pathlib import Path
+from typing import Dict, Any, Tuple, Optional
 
-# Import components (with fallbacks for testing)
-try:
-    from features.traditional_features import MelExtractor, MFCCExtractor
-    from features.chaotic_features import ChaoticFeatureExtractor
-    from models.mlp_classifier import MLPClassifier
-    from models.chaotic_network import ChaoticEmbedding, AttractorPooling, SpeakerEmbedding, ChaoticClassifier
-except ImportError:
-    # Mock implementations for testing
-    MelExtractor = None
-    MFCCExtractor = None
-    ChaoticFeatureExtractor = None
-    MLPClassifier = None
-    ChaoticEmbedding = None
-    AttractorPooling = None
-    SpeakerEmbedding = None
-    ChaoticClassifier = None
-    print("Warning: Some feature extractors not found. Using mock implementations.")
+def fix_imports():
+    current_file = Path(__file__).resolve()
+    model_dir = current_file.parent.parent  # models -> Model
+    paths = [
+        str(model_dir),
+        str(model_dir/'experiments'), 
+        str(model_dir/'models'),
+        str(model_dir/'features'),
+        str(model_dir/'data'),
+        str(model_dir/'utils')
+    ]
+    for path in paths:
+        if os.path.exists(path) and path not in sys.path:
+            sys.path.insert(0, path)
+    return model_dir
 
+MODEL_DIR = fix_imports()
+
+from traditional_features import MelSpectrogramExtractor, MFCCExtractor
+from chaotic_features import ChaoticFeatureExtractor
+from mlp_classifier import MLPClassifier
+from chaotic_network import ChaoticEmbedding, AttractorPooling, SpeakerEmbedding, ChaoticClassifier
 
 class MockFeatureExtractor(nn.Module):
     """Mock feature extractor for testing."""
@@ -175,8 +185,8 @@ class TraditionalChaoticHybrid(nn.Module):
         
         # Traditional feature extractor
         if feature_type == 'mel':
-            if MelExtractor is not None:
-                self.feature_extractor = MelExtractor(
+            if MelSpectrogramExtractor is not None:
+                self.feature_extractor = MelSpectrogramExtractor(
                     n_mels=n_mels,
                     sample_rate=sample_rate
                 )
@@ -270,8 +280,19 @@ class TraditionalChaoticHybrid(nn.Module):
         Returns:
             Classification logits
         """
-        # Extract traditional features
-        traditional_features = self.feature_extractor(audio)
+        # Extract traditional features - 统一调用方式
+        if isinstance(self.feature_extractor, MockFeatureExtractor):
+            traditional_features = self.feature_extractor(audio)
+        else:
+            # 真实的特征提取器使用 extract 方法，需要转换为numpy
+            if isinstance(audio, torch.Tensor):
+                # 转换为numpy数组，librosa需要numpy输入
+                audio_np = audio.detach().cpu().numpy()
+                traditional_features = self.feature_extractor.extract(audio_np)
+                # 转换回tensor
+                traditional_features = torch.tensor(traditional_features, dtype=torch.float32, device=audio.device)
+            else:
+                traditional_features = self.feature_extractor.extract(audio)
         
         # Adapt dimensions for chaotic embedding
         adapted_features = self.dimension_adapter(traditional_features)
@@ -397,9 +418,13 @@ class TraditionalMLPBaseline(nn.Module):
     
     This serves as the traditional baseline for comparison with chaotic approaches.
     """
-    
     def __init__(
         self,
+        # 接受但忽略不相关的参数
+        input_dim: Optional[int] = None,  # 添加
+        num_classes: Optional[int] = None,  # 添加
+        baseline_type: Optional[str] = None,  # 添加
+        
         # Feature extraction parameters
         feature_type: str = 'mel',
         n_mels: int = 80,
@@ -415,87 +440,158 @@ class TraditionalMLPBaseline(nn.Module):
         # Classification parameters
         num_speakers: int = 100,
         
-        device: str = 'cpu'
+        device: str = 'cpu',
+        
+        **kwargs  # 添加这个来接受额外参数
+        
     ):
-        """
-        Initialize Traditional-MLP Baseline Model.
-        """
+        
+        """Initialize Traditional-MLP Baseline Model."""
         super(TraditionalMLPBaseline, self).__init__()
         
+        print("=== TraditionalMLPBaseline 初始化开始 ===")
+        print(f"接收到的参数: {kwargs}")
+        
+        # 参数处理
+        feature_type = kwargs.get('feature_type', 'mel')
+        n_mels = kwargs.get('n_mels', 80)
+        n_mfcc = kwargs.get('n_mfcc', 13)
+        hidden_dims = kwargs.get('hidden_dims', [256, 128, 64])
+        num_speakers = kwargs.get('num_speakers', 100)
+        dropout_rate = kwargs.get('dropout_rate', 0.3)
+        use_batch_norm = kwargs.get('use_batch_norm', True)
+        activation = kwargs.get('activation', 'relu')
+        
+        print(f"处理后的参数:")
+        print(f"  feature_type: {feature_type}")
+        print(f"  n_mels: {n_mels}, n_mfcc: {n_mfcc}")
+        print(f"  hidden_dims: {hidden_dims}")
+        print(f"  num_speakers: {num_speakers}")
+        
         self.feature_type = feature_type
-        self.device = device
         
         # Traditional feature extractor
-        if feature_type == 'mel':
-            if MelExtractor is not None:
-                self.feature_extractor = MelExtractor(
-                    n_mels=n_mels,
-                    sample_rate=sample_rate
-                )
-                feature_dim = n_mels
+        print("创建特征提取器...")
+        try:
+            if feature_type == 'mel':
+                if MelSpectrogramExtractor is not None:
+                    print("使用真实的 MelSpectrogramExtractor")
+                    self.feature_extractor = MelSpectrogramExtractor(n_mels=n_mels)
+                    feature_dim = n_mels
+                else:
+                    print("使用 Mock MelSpectrogramExtractor")
+                    self.feature_extractor = MockFeatureExtractor(None, n_mels)
+                    feature_dim = n_mels
             else:
-                self.feature_extractor = MockFeatureExtractor(None, n_mels)
-                feature_dim = n_mels
-                
-        elif feature_type == 'mfcc':
-            if MFCCExtractor is not None:
-                self.feature_extractor = MFCCExtractor(
-                    n_mfcc=n_mfcc,
-                    sample_rate=sample_rate
-                )
-                feature_dim = n_mfcc
-            else:
-                self.feature_extractor = MockFeatureExtractor(None, n_mfcc)
-                feature_dim = n_mfcc
-        else:
-            raise ValueError(f"Unknown feature type: {feature_type}")
+                print(f"不支持的特征类型: {feature_type}")
+                raise ValueError(f"Unknown feature type: {feature_type}")
+            
+            print(f"特征提取器创建成功，feature_dim: {feature_dim}")
+            
+        except Exception as e:
+            print(f"特征提取器创建失败: {e}")
+            raise
         
         # MLP classifier
-        if MLPClassifier is not None:
-            self.classifier = MLPClassifier(
-                input_dim=feature_dim,
-                hidden_dims=hidden_dims,
-                output_dim=num_speakers,
-                dropout_rate=dropout_rate,
-                activation=activation,
-                use_batch_norm=use_batch_norm
-            )
-        else:
-            # Build MLP manually
+        print("创建分类器...")
+        try:
+            # 强制使用手动构建，跳过 MLPClassifier
+            print("使用手动构建的MLP")
+            
             layers = []
             current_dim = feature_dim
             
-            for hidden_dim in hidden_dims:
+            print(f"开始构建MLP: {current_dim} -> {hidden_dims} -> {num_speakers}")
+            
+            for i, hidden_dim in enumerate(hidden_dims):
+                print(f"添加层 {i+1}: Linear({current_dim}, {hidden_dim})")
                 layers.append(nn.Linear(current_dim, hidden_dim))
                 
                 if use_batch_norm:
+                    print(f"添加层 {i+1}: BatchNorm1d({hidden_dim})")
                     layers.append(nn.BatchNorm1d(hidden_dim))
                     
-                if activation == 'relu':
-                    layers.append(nn.ReLU())
-                elif activation == 'tanh':
-                    layers.append(nn.Tanh())
-                elif activation == 'gelu':
-                    layers.append(nn.GELU())
-                    
+                print(f"添加层 {i+1}: ReLU()")
+                layers.append(nn.ReLU())
+                
+                print(f"添加层 {i+1}: Dropout({dropout_rate})")
                 layers.append(nn.Dropout(dropout_rate))
+                
                 current_dim = hidden_dim
             
+            print(f"添加输出层: Linear({current_dim}, {num_speakers})")
             layers.append(nn.Linear(current_dim, num_speakers))
+            
+            print(f"总共创建了 {len(layers)} 层")
+            
             self.classifier = nn.Sequential(*layers)
+            
+            # 验证分类器
+            total_params = sum(p.numel() for p in self.classifier.parameters())
+            print(f"分类器参数总数: {total_params:,}")
+            
+            if total_params == 0:
+                print("错误：分类器没有参数！")
+                raise ValueError("分类器创建失败")
+            
+        except Exception as e:
+            print(f"分类器创建失败: {e}")
+            import traceback
+            traceback.print_exc()
+            raise
+        
+        # 验证整个模型
+        total_model_params = sum(p.numel() for p in self.parameters())
+        print(f"整个模型参数总数: {total_model_params:,}")
+        
+        if total_model_params == 0:
+            print("错误：整个模型没有参数！")
+            raise ValueError("模型创建失败")
+        
+        print("=== TraditionalMLPBaseline 初始化完成 ===")
     
     def forward(self, audio: torch.Tensor) -> torch.Tensor:
-        """
-        Forward pass through traditional-MLP baseline.
+        """Forward pass through traditional-MLP baseline."""
         
-        Args:
-            audio: Input audio tensor
-            
-        Returns:
-            Classification logits
-        """
         # Extract traditional features
-        features = self.feature_extractor(audio)
+        if self.feature_extractor is None:
+            # If no feature extractor, use input directly
+            features = audio
+        elif isinstance(self.feature_extractor, MockFeatureExtractor):
+            features = self.feature_extractor(audio)
+        else:
+            # Real feature extractor, convert data type
+            batch_size = audio.shape[0]
+            features_list = []
+            
+            for i in range(batch_size):
+                single_audio = audio[i]
+                
+                if isinstance(single_audio, torch.Tensor):
+                    audio_np = single_audio.detach().cpu().numpy()
+                    feats = self.feature_extractor.extract(audio_np)
+                    # Convert to tensor: feats shape is [n_mels/n_mfcc, time_steps]
+                    feats = torch.tensor(feats, dtype=torch.float32, device=audio.device)
+                    
+                    # CRITICAL: Pool over time dimension to get fixed-size feature
+                    # [n_mels, time_steps] -> [n_mels]
+                    if len(feats.shape) == 2:
+                        feats = torch.mean(feats, dim=-1)
+                else:
+                    feats = self.feature_extractor.extract(single_audio)
+                    if len(feats.shape) == 2:
+                        feats = torch.mean(torch.tensor(feats), dim=-1)
+                
+                features_list.append(feats)
+            
+            # Stack into batch: [batch_size, feature_dim]
+            features = torch.stack(features_list, dim=0)
+        
+        # Ensure 2D shape [batch_size, feature_dim] for classifier
+        if len(features.shape) > 2:
+            features = features.view(features.shape[0], -1)
+        elif len(features.shape) == 1:
+            features = features.unsqueeze(0)
         
         # Classify using MLP
         logits = self.classifier(features)

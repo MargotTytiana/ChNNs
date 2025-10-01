@@ -1,0 +1,5 @@
+2025-10-01 12:50:11,000 - experiment_test_mel_mlp_baseline - INFO - Initialized experiment: test_mel_mlp_baseline
+2025-10-01 12:50:11,001 - experiment_test_mel_mlp_baseline - INFO - Device: cuda
+2025-10-01 12:50:11,001 - experiment_test_mel_mlp_baseline - INFO - Output directory: ./experiments/outputs/test_mel_mlp_baseline
+2025-10-01 12:50:11,001 - experiment_test_mel_mlp_baseline - INFO - Initialized mel_mlp baseline experiment
+2025-10-01 12:50:11,001 - experiment_test_mel_mlp_baseline - INFO - Setting up experiment components...

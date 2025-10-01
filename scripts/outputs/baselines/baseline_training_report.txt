@@ -1,6 +1,6 @@
 BASELINE MODELS TRAINING REPORT
 ==================================================
-Generated: 2025-09-28 10:39:35
+Generated: 2025-10-01 13:28:02
 Configuration: {
   "num_speakers": 100,
   "batch_size": 16,
@@ -40,23 +40,21 @@ Configuration: {
 
 SUMMARY STATISTICS
 --------------------
-Total experiments: 0
-Successful experiments: 0
-Failed experiments: 1
-Total training time: 0.0s (0.00h)
+Total experiments: 1
+Successful experiments: 1
+Failed experiments: 0
+Total training time: 1174.9s (0.33h)
 
 METHOD RESULTS
 ---------------
 
+MEL_MLP:
+  Accuracy: 0.9680 ± 0.0000 [nan, nan]
+  Loss: 0.1475 ± 0.0000
+  Training Time: 1174.9s ± 0.0s
+  Number of runs: 1
+
 BEST METHODS
 ------------
-FAILED EXPERIMENTS
-------------------
-Method: mel_mlp, Run: 0
-Error: CUDA error: device-side assert triggered
-CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
-For debugging consider passing CUDA_LAUNCH_BLOCKING=1
-Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
-
-Time: 2025-09-28T10:39:35.436882
-
+Best Accuracy: mel_mlp (0.9680)
+Most Efficient: mel_mlp (1174.9s)

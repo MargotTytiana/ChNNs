@@ -4,21 +4,36 @@ import torch.nn.functional as F
 from typing import Dict, Optional, Tuple, Union, Any
 import logging
 
-# Import core components (assuming they exist in the project structure)
-try:
-    from core.phase_space_reconstruction import PhaseSpaceReconstruction
-    from core.mlsa_extractor import MLSAExtractor
-    from core.rqa_extractor import RQAExtractor
-    from core.chaotic_embedding import ChaoticEmbedding
-    from core.attractor_pooling import AttractorPooling
-except ImportError:
-    # Fallback imports for testing
-    PhaseSpaceReconstruction = None
-    MLSAExtractor = None
-    RQAExtractor = None
-    ChaoticEmbedding = None
-    AttractorPooling = None
-    print("Warning: Core components not found. Using mock implementations for testing.")
+import os
+import sys
+import torch
+import torch.nn as nn
+from pathlib import Path
+from typing import Dict, Any, Tuple, Optional
+
+def fix_imports():
+    current_file = Path(__file__).resolve()
+    model_dir = current_file.parent.parent  # models -> Model
+    paths = [
+        str(model_dir),
+        str(model_dir/'experiments'), 
+        str(model_dir/'models'),
+        str(model_dir/'features'),
+        str(model_dir/'data'),
+        str(model_dir/'utils')
+    ]
+    for path in paths:
+        if os.path.exists(path) and path not in sys.path:
+            sys.path.insert(0, path)
+    return model_dir
+
+MODEL_DIR = fix_imports()
+
+from phase_space_reconstruction import PhaseSpaceReconstructor
+from mlsa_extractor import MLSAExtractor
+from rqa_extractor import RQAExtractor
+from chaotic_embedding import ChaoticEmbedding
+from attractor_pooling import AttractorPooling
 
 
 class MockComponent(nn.Module):
@@ -306,8 +321,8 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         """Initialize all network components."""
         
         # Phase space reconstruction
-        if PhaseSpaceReconstruction is not None:
-            self.phase_space = PhaseSpaceReconstruction(
+        if PhaseSpaceReconstructor is not None:
+            self.phase_space = PhaseSpaceReconstructor(
                 embedding_dim=embedding_dim,
                 delay_method=delay_method,
                 device=self.device

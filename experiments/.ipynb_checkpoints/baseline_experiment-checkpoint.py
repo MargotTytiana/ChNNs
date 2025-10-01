@@ -360,7 +360,8 @@ class BaselineExperiment(BaseExperiment):
                 num_workers=0,
                 train_split=self.config.get('train_split', 0.7),
                 val_split=self.config.get('val_split', 0.15),
-                seed=self.seed
+                seed=self.seed,
+                target_num_speakers=self.config['num_speakers']
             )
             
             # 保存dataloaders引用，供后续模型创建使用
@@ -462,7 +463,8 @@ class BaselineExperiment(BaseExperiment):
                     num_workers=0,
                     train_split=self.config.get('train_split', 0.7),
                     val_split=self.config.get('val_split', 0.15),
-                    seed=self.seed
+                    seed=self.seed,
+                    target_num_speakers=self.config['num_speakers']
                 )
                 
             except Exception as e:
@@ -663,19 +665,38 @@ class BaselineExperiment(BaseExperiment):
         Returns:
             Tuple of (loss, predictions, targets)
         """
-        audio, targets = batch
+        audio, labels = batch
+        
+        # Get current epoch safely
+        if hasattr(self.state, 'epoch'):
+            current_epoch = self.state.epoch
+        elif hasattr(self, 'current_epoch'):
+            current_epoch = self.current_epoch
+        else:
+            current_epoch = 0
+        
+        # Debug: Check label distribution in first validation epoch
+        if not training and current_epoch == 0:
+            print(f"验证集标签范围: {labels.min().item()} - {labels.max().item()}")
+            print(f"验证集唯一标签数: {len(torch.unique(labels))}")
         
         # Forward pass through model
         logits = self.model(audio)
         
+        # Debug: Check prediction distribution in first validation epoch
+        if not training and current_epoch == 0:
+            preds = torch.argmax(logits, dim=1)
+            print(f"预测标签范围: {preds.min().item()} - {preds.max().item()}")
+            print(f"预测唯一标签数: {len(torch.unique(preds))}")
+        
         # Compute loss
-        loss = self.criterion(logits, targets)
+        loss = self.criterion(logits, labels)
         
         # Get predictions
         predictions = torch.argmax(logits, dim=1)
         
-        return loss, predictions, targets
-    
+        return loss, predictions, labels
+        
     def calculate_metrics(
         self, 
         predictions: torch.Tensor, 
@@ -819,7 +840,13 @@ class BaselineExperiment(BaseExperiment):
         # Create model
         self.model = self.create_model()
         self.model.to(self.device)
-        model_device = next(self.model.parameters()).device
+        try:
+            model_device = next(self.model.parameters()).device
+        except StopIteration:
+            self.logger.error("模型没有参数！模型可能为空。")
+            self.logger.error(f"模型类型: {type(self.model)}")
+            self.logger.error(f"模型结构: {self.model}")
+            raise ValueError("模型没有参数，无法获取设备信息")
         if str(model_device) != str(self.device):
             self.logger.error(f"Model device mismatch: {model_device} vs {self.device}")
         
@@ -1042,9 +1069,9 @@ def test(self) -> Dict[str, float]:
 
     
 if __name__ == "__main__":
-    print(f"✓ Project Root: {PROJECT_ROOT}")
-    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
-    print(f"✓ Module imports successful")
+    # print(f"✓ Project Root: {PROJECT_ROOT}")
+    # print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
+    # print(f"✓ Module imports successful")
     
     # Example usage and testing
     

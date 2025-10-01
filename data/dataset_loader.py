@@ -195,6 +195,7 @@ class LibriSpeechChaoticDataset:
                  preprocessing_config: Optional[Dict[str, Any]] = None,
                  min_samples_per_speaker: int = 1,
                  max_samples_per_speaker: Optional[int] = None,
+                 target_num_speakers: Optional[int] = None,  # 添加这个参数
                  validation_config: Optional[Dict[str, Any]] = None,
                  cache_dir: Optional[str] = None,
                  random_seed: int = 42):
@@ -216,6 +217,7 @@ class LibriSpeechChaoticDataset:
         self.min_samples_per_speaker = min_samples_per_speaker
         self.max_samples_per_speaker = max_samples_per_speaker
         self.random_seed = random_seed
+        self.target_num_speakers = target_num_speakers
         
         # Set random seed for reproducibility
         random.seed(self.random_seed)
@@ -501,7 +503,6 @@ class LibriSpeechChaoticDataset:
             if HAS_PROJECT_MODULES and self.validator:
                 validated_files = []
                 for file_path in processed_files:
-                    # Create a copy of validation config without unsupported parameters
                     validation_config = self.validation_config.copy()
                     if 'required_format' in validation_config:
                         del validation_config['required_format']
@@ -512,11 +513,8 @@ class LibriSpeechChaoticDataset:
                     if validation_result['is_valid']:
                         validated_files.append(file_path)
                     elif validation_result['errors']:
-                        # For duration errors, we might want to be more lenient
                         duration_errors = [e for e in validation_result['errors'] if 'Duration' in e]
                         if duration_errors and 'max_duration' in self.validation_config:
-                            # If it's just a duration issue, we can still use the file
-                            # but warn about it
                             warnings.warn(f"Audio file {file_path} exceeds duration limit but will be included: {duration_errors}")
                             validated_files.append(file_path)
                         else:
@@ -527,20 +525,31 @@ class LibriSpeechChaoticDataset:
             else:
                 valid_speakers[speaker_id] = processed_files
         
-        # Create speaker mappings
+        # CRITICAL FIX: Limit number of speakers BEFORE creating label mapping
         speaker_ids = sorted(valid_speakers.keys())
+        
+        # If we have a target number of speakers from config, limit here
+        # This ensures labels stay in [0, num_speakers-1] range
+        if hasattr(self, 'target_num_speakers') and self.target_num_speakers:
+            if len(speaker_ids) > self.target_num_speakers:
+                print(f"Limiting speakers from {len(speaker_ids)} to {self.target_num_speakers}")
+                speaker_ids = speaker_ids[:self.target_num_speakers]
+                # Filter valid_speakers to only include selected speakers
+                valid_speakers = {spk_id: valid_speakers[spk_id] for spk_id in speaker_ids}
+        
+        # Create speaker mappings with continuous labels [0, num_speakers-1]
         self.speaker_to_idx = {speaker_id: idx for idx, speaker_id in enumerate(speaker_ids)}
         self.idx_to_speaker = {idx: speaker_id for speaker_id, idx in self.speaker_to_idx.items()}
         self.num_speakers = len(speaker_ids)
+        
+        print(f"Created label mapping for {self.num_speakers} speakers: labels in [0, {self.num_speakers-1}]")
         
         # Build sample list with metadata
         for speaker_id, files in valid_speakers.items():
             speaker_idx = self.speaker_to_idx[speaker_id]
             
             for file_path in files:
-                # Extract metadata from LibriSpeech file path
                 file_metadata = self._extract_file_metadata(file_path, speaker_id)
-                
                 self.audio_files.append(file_metadata)
                 self.speaker_labels.append(speaker_idx)
     
@@ -664,7 +673,7 @@ class LibriSpeechChaoticDataset:
                           train_ratio: float = 0.7,
                           val_ratio: float = 0.15,
                           test_ratio: float = 0.15,
-                          split_method: str = 'speaker_independent',
+                          split_method: str = 'file_based',
                           min_files_per_split: int = 1) -> Dict[str, 'LibriSpeechChaoticDataset']:
         """
         Create dataset splits using data_utils
@@ -715,27 +724,27 @@ class LibriSpeechChaoticDataset:
         
         return result_datasets
     
-    def _create_split_dataset(self, split_speaker_files: Dict[str, List[Path]], split_name: str):
-        """Create a dataset instance for a data split with proper label remapping"""
+    def _create_split_dataset(self, split_speaker_files, split_name):
         split_dataset = LibriSpeechChaoticDataset.__new__(LibriSpeechChaoticDataset)
         split_dataset.__dict__.update(self.__dict__)
         
-        # 重要：为分割数据集重新创建连续的标签映射
-        split_speaker_ids = sorted(split_speaker_files.keys())
-        split_dataset.speaker_to_idx = {
-            speaker_id: idx for idx, speaker_id in enumerate(split_speaker_ids)
-        }
-        split_dataset.idx_to_speaker = {
-            idx: speaker_id for speaker_id, idx in split_dataset.speaker_to_idx.items()
-        }
-        split_dataset.num_speakers = len(split_speaker_ids)
+        # ❌ 删除这些会重新创建映射的代码：
+        # split_speaker_ids = sorted(split_speaker_files.keys())
+        # split_dataset.speaker_to_idx = {speaker_id: idx for idx, speaker_id in enumerate(split_speaker_ids)}
+        # split_dataset.idx_to_speaker = {idx: speaker_id for speaker_id, idx in split_dataset.speaker_to_idx.items()}
+        # split_dataset.num_speakers = len(split_speaker_ids)
         
-        # 重建样本列表，确保标签从0开始连续
+        # ✅ 使用父数据集的映射（已有，保持不变）
+        split_dataset.speaker_to_idx = self.speaker_to_idx
+        split_dataset.idx_to_speaker = self.idx_to_speaker  
+        split_dataset.num_speakers = self.num_speakers
+        
+        # 重建样本列表
         split_dataset.audio_files = []
         split_dataset.speaker_labels = []
         
         for speaker_id, file_paths in split_speaker_files.items():
-            speaker_idx = split_dataset.speaker_to_idx[speaker_id]  # 使用新的映射
+            speaker_idx = self.speaker_to_idx[speaker_id]  # 使用父数据集的映射
             
             for file_path in file_paths:
                 # 找到对应的metadata
@@ -747,10 +756,11 @@ class LibriSpeechChaoticDataset:
                 
                 if file_metadata:
                     split_dataset.audio_files.append(file_metadata)
-                    split_dataset.speaker_labels.append(speaker_idx)  # 使用重新映射的标签
+                    split_dataset.speaker_labels.append(speaker_idx)
         
+        # 不打印错误的标签范围信息
         print(f"分割数据集 {split_name}: {len(split_dataset.audio_files)} 样本, "
-              f"{split_dataset.num_speakers} 说话人, 标签范围 [0, {split_dataset.num_speakers-1}]")
+              f"{len(set(split_dataset.speaker_labels))} 说话人")
         
         return split_dataset
     
@@ -873,6 +883,7 @@ def create_chaotic_speaker_dataset(
     dataset_path: str = "../../dataset/train-clean-100/LibriSpeech/train-clean-100/",
     preprocessing_config: Optional[Dict[str, Any]] = None,
     cache_dir: Optional[str] = "./cache/librispeech",
+    target_num_speakers: Optional[int] = None,  # 添加这个参数
     **kwargs
 ) -> LibriSpeechChaoticDataset:
     """
@@ -908,6 +919,7 @@ def create_chaotic_speaker_dataset(
         dataset_path=dataset_path,
         preprocessing_config=preprocessing_config,
         cache_dir=cache_dir,
+        target_num_speakers=target_num_speakers,  # 传递参数
         **kwargs
     )
 
@@ -976,7 +988,8 @@ def create_speaker_dataloaders_with_collate(
     train_split: float = 0.7,
     val_split: float = 0.15,
     seed: int = 42,
-    collate_fn=None  # 新增参数
+    collate_fn=None,
+    target_num_speakers: Optional[int] = None  # 添加这个参数
 ):
     """创建说话人识别的 DataLoader，支持自定义collate函数"""
     print(f"尝试从 {data_dir} 加载数据集...")
@@ -992,7 +1005,8 @@ def create_speaker_dataloaders_with_collate(
         dataset = create_chaotic_speaker_dataset(
             dataset_path=data_dir,
             min_samples_per_speaker=2,
-            max_samples_per_speaker=30
+            max_samples_per_speaker=30,
+            target_num_speakers=target_num_speakers 
         )
         
         # 创建数据分割
@@ -1103,16 +1117,17 @@ def _create_simple_mock_dataloaders_with_collate(batch_size: int, sample_rate: i
     print(f"模拟数据集创建成功: 10个说话人，训练集 {len(train_dataset)} 样本（支持变长音频）")
     return train_loader, val_loader, test_loader
     
-# 修改原有的create_speaker_dataloaders函数
+# 修改 create_speaker_dataloaders 函数
 def create_speaker_dataloaders(
     data_dir: str,
     batch_size: int = 32,
     sample_rate: int = 16000,
     max_length: float = 3.0,
-    num_workers: int = 0,  # 默认设为0避免多进程问题
+    num_workers: int = 0,
     train_split: float = 0.7,
     val_split: float = 0.15,
-    seed: int = 42
+    seed: int = 42,
+    target_num_speakers: Optional[int] = None  # 添加这个参数
 ):
     """修改后的create_speaker_dataloaders函数，自动使用smart_collate_fn"""
     return create_speaker_dataloaders_with_collate(
@@ -1124,7 +1139,8 @@ def create_speaker_dataloaders(
         train_split=train_split,
         val_split=val_split,
         seed=seed,
-        collate_fn=smart_collate_fn  # 默认使用智能collate函数
+        collate_fn=smart_collate_fn,
+        target_num_speakers=target_num_speakers  # 传递参数
     )
 
 # 特定用途的collate函数创建器
@@ -1231,7 +1247,7 @@ if __name__ == "__main__":
         print(f"\nTesting dataset splitting:")
         splits = dataset.create_data_splits(
             train_ratio=0.6, val_ratio=0.2, test_ratio=0.2,
-            split_method='speaker_independent'
+            split_method='file_based'
         )
         
         for split_name, split_dataset in splits.items():
