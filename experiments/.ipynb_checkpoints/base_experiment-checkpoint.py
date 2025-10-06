@@ -242,25 +242,43 @@ class BaseExperiment(ABC):
         pass
     
     def create_scheduler(self, optimizer: optim.Optimizer) -> Optional[optim.lr_scheduler._LRScheduler]:
-        """Create and return learning rate scheduler (optional)."""
-        scheduler_config = self.config.get('scheduler', {})
+        """Create learning rate scheduler."""
+        scheduler_config = self.config.get('scheduler', None)
         
-        if not scheduler_config or scheduler_config.get('type') is None:
+        if scheduler_config is None or scheduler_config.get('type') is None:
             return None
         
-        scheduler_type = scheduler_config['type']
+        scheduler_type = scheduler_config.get('type', 'none').lower()
+        
+        if scheduler_type == 'none' or scheduler_type is None:
+            return None
+        
         scheduler_params = scheduler_config.get('params', {})
         
         if scheduler_type == 'step':
             return optim.lr_scheduler.StepLR(optimizer, **scheduler_params)
+        
         elif scheduler_type == 'multistep':
             return optim.lr_scheduler.MultiStepLR(optimizer, **scheduler_params)
+        
+        elif scheduler_type == 'exponential':
+            return optim.lr_scheduler.ExponentialLR(optimizer, **scheduler_params)
+        
         elif scheduler_type == 'cosine':
+            # CosineAnnealingLR requires T_max parameter
+            if 'T_max' not in scheduler_params:
+                # Use num_epochs as default T_max
+                num_epochs = self.config.get('num_epochs', 100)
+                scheduler_params['T_max'] = num_epochs
+                self.logger.info(f"T_max not specified for CosineAnnealingLR, using num_epochs: {num_epochs}")
+            
             return optim.lr_scheduler.CosineAnnealingLR(optimizer, **scheduler_params)
-        elif scheduler_type == 'reduce_plateau':
+        
+        elif scheduler_type == 'plateau':
             return optim.lr_scheduler.ReduceLROnPlateau(optimizer, **scheduler_params)
+        
         else:
-            self.logger.warning(f"Unknown scheduler type: {scheduler_type}")
+            self.logger.warning(f"Unknown scheduler type: {scheduler_type}, no scheduler will be used")
             return None
     
     def create_criterion(self) -> nn.Module:
@@ -281,49 +299,45 @@ class BaseExperiment(ABC):
             return nn.CrossEntropyLoss()
     
     def setup(self):
-        """Set up all experiment components."""
+        """Override setup to create dataloaders before model."""
         self.logger.info("Setting up experiment components...")
         
-        # Create model
-        self.model = self.create_model()
-        self.model.to(self.device)
-        model_device = next(self.model.parameters()).device
-        if str(model_device) != str(self.device):
-            self.logger.error(f"Model device mismatch: {model_device} vs {self.device}")
-        
-        self.logger.info(f"Model created and moved to device: {model_device}")
-
-    
-        # Log model information
-        total_params = sum(p.numel() for p in self.model.parameters())
-        trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
-        self.logger.info(f"Total parameters: {total_params:,}")
-        self.logger.info(f"Trainable parameters: {trainable_params:,}")
-        
-        # Create dataloaders
+        # CRITICAL: Create dataloaders FIRST to detect num_speakers
+        self.logger.info("Creating dataloaders...")
         self.train_loader, self.val_loader, self.test_loader = self.create_dataloaders()
+        
         self.logger.info(f"Dataloaders created:")
         self.logger.info(f"  Train: {len(self.train_loader)} batches")
         self.logger.info(f"  Val: {len(self.val_loader)} batches")
         self.logger.info(f"  Test: {len(self.test_loader)} batches")
         
-        # Create optimizer
-        self.optimizer = self.create_optimizer(self.model)
-        self.logger.info(f"Optimizer: {type(self.optimizer).__name__}")
+        # NOW create model with correct num_speakers
+        self.logger.info("Creating model...")
+        self.model = self.create_model()
+        self.model = self.model.to(self.device)
         
-        # Create scheduler
+        # Count parameters
+        total_params = sum(p.numel() for p in self.model.parameters())
+        trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+        self.logger.info(f"Total parameters: {total_params:,}")
+        self.logger.info(f"Trainable parameters: {trainable_params:,}")
+        
+        # Create optimizer, scheduler, criterion
+        self.logger.info("Creating optimizer...")
+        self.optimizer = self.create_optimizer(self.model)
+        self.logger.info(f"Optimizer: {self.optimizer.__class__.__name__}")
+        
+        self.logger.info("Creating scheduler...")
         self.scheduler = self.create_scheduler(self.optimizer)
         if self.scheduler:
-            self.logger.info(f"Scheduler: {type(self.scheduler).__name__}")
+            self.logger.info(f"Scheduler: {self.scheduler.__class__.__name__}")
         
-        # Create criterion
+        self.logger.info("Creating criterion...")
         self.criterion = self.create_criterion()
-        self.criterion.to(self.device)
-        self.logger.info(f"Criterion: {type(self.criterion).__name__}")
+        self.logger.info(f"Criterion: {self.criterion.__class__.__name__}")
         
-        # Save experiment configuration
+        # Save configuration
         self.save_config()
-        
         self.logger.info("Experiment setup completed")
     
     def save_config(self):
@@ -528,22 +542,52 @@ class BaseExperiment(ABC):
         """
         metrics = {'loss': loss}
         
+        # Convert to numpy for metric calculation
+        if isinstance(predictions, torch.Tensor):
+            predictions = predictions.detach().cpu()
+        if isinstance(targets, torch.Tensor):
+            targets = targets.detach().cpu()
+        
         # Convert logits to class predictions if necessary
         if len(predictions.shape) > 1 and predictions.shape[1] > 1:
             pred_classes = torch.argmax(predictions, dim=1)
         else:
             pred_classes = predictions
         
-        # Calculate accuracy
-        accuracy = self.metrics_calculator.compute_accuracy(pred_classes, targets)
+        # Calculate accuracy directly (robust implementation)
+        correct = (pred_classes == targets).float()
+        accuracy = correct.mean().item()
         metrics['accuracy'] = accuracy
         
         # Calculate top-k accuracy if multi-class
         if len(predictions.shape) > 1 and predictions.shape[1] > 5:
-            top5_acc = self.metrics_calculator.compute_top_k_accuracy(predictions, targets, k=5)
-            metrics['top5_accuracy'] = top5_acc
+            try:
+                # Top-5 accuracy
+                _, pred_top5 = torch.topk(predictions, min(5, predictions.shape[1]), dim=1)
+                correct_top5 = pred_top5.eq(targets.view(-1, 1).expand_as(pred_top5))
+                top5_acc = correct_top5.any(dim=1).float().mean().item()
+                metrics['top5_accuracy'] = top5_acc
+            except Exception as e:
+                self.logger.debug(f"Could not calculate top-5 accuracy: {e}")
+        
+        # Try to use MetricsCalculator for additional metrics if available
+        try:
+            pred_np = pred_classes.numpy() if isinstance(pred_classes, torch.Tensor) else pred_classes
+            targets_np = targets.numpy() if isinstance(targets, torch.Tensor) else targets
+            
+            # Try different method names that MetricsCalculator might have
+            if hasattr(self.metrics_calculator, 'compute_all_metrics'):
+                extra_metrics = self.metrics_calculator.compute_all_metrics(pred_np, targets_np)
+                metrics.update(extra_metrics)
+            elif hasattr(self.metrics_calculator, 'calculate_metrics'):
+                extra_metrics = self.metrics_calculator.calculate_metrics(pred_np, targets_np)
+                metrics.update(extra_metrics)
+        except Exception as e:
+            self.logger.debug(f"Could not calculate additional metrics: {e}")
         
         return metrics
+
+    
     
     def train(self, num_epochs: int, resume_from_checkpoint: bool = False):
         """

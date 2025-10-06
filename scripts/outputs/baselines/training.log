@@ -3442,3 +3442,494 @@ NameError: name 'targets' is not defined
 2025-10-01 13:55:46,450 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
 2025-10-01 13:55:46,451 - baseline_trainer - INFO - Baseline training completed.
 2025-10-01 13:55:46,451 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:43:31,831 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:43:31,845 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-10-04 14:43:31,845 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:43:31,845 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-10-04 14:43:31,845 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-10-04 14:43:31,891 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 503413354496, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b8869759b4122b7648b00f614892269782e4ca2c', 'branch': 'origin', 'is_dirty': True}}
+2025-10-04 14:43:31,891 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-10-04 14:43:31,892 - baseline_trainer - INFO - Methods: ['mel_cnn']
+2025-10-04 14:43:31,892 - baseline_trainer - INFO - 
+==================================================
+2025-10-04 14:43:31,892 - baseline_trainer - INFO - TRAINING METHOD: MEL_CNN
+2025-10-04 14:43:31,892 - baseline_trainer - INFO - ==================================================
+2025-10-04 14:43:31,892 - baseline_trainer - INFO - Training mel_cnn (Run 1)...
+2025-10-04 14:43:31,905 - baseline_trainer - INFO - Setting up mel_cnn...
+2025-10-04 14:43:33,324 - baseline_trainer - ERROR - Failed to train mel_cnn (Run 1): 'CNNBaseline' object has no attribute 'config'
+2025-10-04 14:43:33,327 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 841, in setup
+    self.model = self.create_model()
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 165, in create_model
+    model = self._create_cnn_model('mel')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 271, in _create_cnn_model
+    return CNNBaseline(
+           ^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 199, in __init__
+    sample_rate=self.config['sample_rate']
+                ^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1940, in __getattr__
+    raise AttributeError(
+AttributeError: 'CNNBaseline' object has no attribute 'config'
+
+2025-10-04 14:43:33,328 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-04 14:43:33,328 - baseline_trainer - WARNING - No successful runs for mel_cnn
+2025-10-04 14:43:33,328 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-10-04 14:43:33,328 - baseline_trainer - INFO - Generating baseline training report...
+2025-10-04 14:43:33,376 - baseline_trainer - INFO - Reports saved:
+2025-10-04 14:43:33,377 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-10-04 14:43:33,377 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-10-04 14:43:33,377 - baseline_trainer - INFO - Baseline training completed.
+2025-10-04 14:43:33,377 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:46:18,881 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:46:18,881 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-10-04 14:46:18,881 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:46:18,881 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-10-04 14:46:18,881 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-10-04 14:46:18,924 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 503415623680, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b8869759b4122b7648b00f614892269782e4ca2c', 'branch': 'origin', 'is_dirty': True}}
+2025-10-04 14:46:18,925 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-10-04 14:46:18,925 - baseline_trainer - INFO - Methods: ['mel_cnn']
+2025-10-04 14:46:18,925 - baseline_trainer - INFO - 
+==================================================
+2025-10-04 14:46:18,925 - baseline_trainer - INFO - TRAINING METHOD: MEL_CNN
+2025-10-04 14:46:18,925 - baseline_trainer - INFO - ==================================================
+2025-10-04 14:46:18,925 - baseline_trainer - INFO - Training mel_cnn (Run 1)...
+2025-10-04 14:46:18,935 - baseline_trainer - INFO - Setting up mel_cnn...
+2025-10-04 14:51:43,760 - baseline_trainer - INFO - Model parameters: 185,380 (trainable: 185,380)
+2025-10-04 14:51:43,760 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-10-04 14:51:43,783 - baseline_trainer - ERROR - Failed to train mel_cnn (Run 1): 'MelSpectrogramExtractor' object is not callable
+2025-10-04 14:51:43,785 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 377, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 569, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 370, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 689, in forward_pass
+    logits = self.model(audio)
+             ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 253, in forward
+    features = self.feature_extractor(x)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'MelSpectrogramExtractor' object is not callable
+
+2025-10-04 14:51:43,787 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-04 14:51:43,787 - baseline_trainer - WARNING - No successful runs for mel_cnn
+2025-10-04 14:51:43,787 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-10-04 14:51:43,787 - baseline_trainer - INFO - Generating baseline training report...
+2025-10-04 14:51:43,832 - baseline_trainer - INFO - Reports saved:
+2025-10-04 14:51:43,832 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-10-04 14:51:43,832 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-10-04 14:51:43,833 - baseline_trainer - INFO - Baseline training completed.
+2025-10-04 14:51:43,833 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:58:05,968 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:58:05,969 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-10-04 14:58:05,969 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:58:05,969 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-10-04 14:58:05,969 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-10-04 14:58:06,012 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 503338356736, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b8869759b4122b7648b00f614892269782e4ca2c', 'branch': 'origin', 'is_dirty': True}}
+2025-10-04 14:58:06,012 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-10-04 14:58:06,012 - baseline_trainer - INFO - Methods: ['mel_cnn']
+2025-10-04 14:58:06,012 - baseline_trainer - INFO - 
+==================================================
+2025-10-04 14:58:06,012 - baseline_trainer - INFO - TRAINING METHOD: MEL_CNN
+2025-10-04 14:58:06,012 - baseline_trainer - INFO - ==================================================
+2025-10-04 14:58:06,012 - baseline_trainer - INFO - Training mel_cnn (Run 1)...
+2025-10-04 14:58:06,022 - baseline_trainer - INFO - Setting up mel_cnn...
+2025-10-04 14:58:21,687 - baseline_trainer - INFO - Model parameters: 185,380 (trainable: 185,380)
+2025-10-04 14:58:21,687 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-10-04 14:58:22,077 - baseline_trainer - ERROR - Failed to train mel_cnn (Run 1): Audio data must be of type numpy.ndarray
+2025-10-04 14:58:22,080 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 377, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 569, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 370, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 697, in forward_pass
+    logits = self.model(audio)
+             ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 257, in forward
+    features = self.feature_extractor.extract(x)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/features/traditional_features.py", line 218, in extract
+    mel_spec = librosa.feature.melspectrogram(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/librosa/feature/spectral.py", line 2135, in melspectrogram
+    S, n_fft = _spectrogram(
+               ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/librosa/core/spectrum.py", line 2945, in _spectrogram
+    stft(
+  File "/usr/local/lib/python3.12/site-packages/librosa/core/spectrum.py", line 239, in stft
+    util.valid_audio(y)
+  File "/usr/local/lib/python3.12/site-packages/librosa/util/utils.py", line 287, in valid_audio
+    raise ParameterError("Audio data must be of type numpy.ndarray")
+librosa.util.exceptions.ParameterError: Audio data must be of type numpy.ndarray
+
+2025-10-04 14:58:22,083 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-04 14:58:22,083 - baseline_trainer - WARNING - No successful runs for mel_cnn
+2025-10-04 14:58:22,083 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-10-04 14:58:22,083 - baseline_trainer - INFO - Generating baseline training report...
+2025-10-04 14:58:22,130 - baseline_trainer - INFO - Reports saved:
+2025-10-04 14:58:22,130 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-10-04 14:58:22,130 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-10-04 14:58:22,130 - baseline_trainer - INFO - Baseline training completed.
+2025-10-04 14:58:22,130 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:59:39,339 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:59:39,339 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-10-04 14:59:39,339 - baseline_trainer - INFO - ============================================================
+2025-10-04 14:59:39,339 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-10-04 14:59:39,339 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-10-04 14:59:39,383 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 503342256128, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b8869759b4122b7648b00f614892269782e4ca2c', 'branch': 'origin', 'is_dirty': True}}
+2025-10-04 14:59:39,383 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-10-04 14:59:39,383 - baseline_trainer - INFO - Methods: ['mel_cnn']
+2025-10-04 14:59:39,383 - baseline_trainer - INFO - 
+==================================================
+2025-10-04 14:59:39,383 - baseline_trainer - INFO - TRAINING METHOD: MEL_CNN
+2025-10-04 14:59:39,384 - baseline_trainer - INFO - ==================================================
+2025-10-04 14:59:39,384 - baseline_trainer - INFO - Training mel_cnn (Run 1)...
+2025-10-04 14:59:39,395 - baseline_trainer - INFO - Setting up mel_cnn...
+2025-10-04 14:59:55,111 - baseline_trainer - INFO - Model parameters: 185,380 (trainable: 185,380)
+2025-10-04 14:59:55,111 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-10-04 14:59:55,485 - baseline_trainer - ERROR - Failed to train mel_cnn (Run 1): Given groups=1, weight of size [64, 80, 3], expected input[16, 94, 80] to have 80 channels, but got 94 channels instead
+2025-10-04 14:59:55,487 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 377, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 569, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 370, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 714, in forward_pass
+    logits = self.model(audio)
+             ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 292, in forward
+    conv_out = self.conv_layers(features)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Given groups=1, weight of size [64, 80, 3], expected input[16, 94, 80] to have 80 channels, but got 94 channels instead
+
+2025-10-04 14:59:55,491 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-04 14:59:55,491 - baseline_trainer - WARNING - No successful runs for mel_cnn
+2025-10-04 14:59:55,491 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-10-04 14:59:55,491 - baseline_trainer - INFO - Generating baseline training report...
+2025-10-04 14:59:55,538 - baseline_trainer - INFO - Reports saved:
+2025-10-04 14:59:55,539 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-10-04 14:59:55,539 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-10-04 14:59:55,539 - baseline_trainer - INFO - Baseline training completed.
+2025-10-04 14:59:55,539 - baseline_trainer - INFO - ============================================================
+2025-10-04 15:01:55,370 - baseline_trainer - INFO - ============================================================
+2025-10-04 15:01:55,370 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-10-04 15:01:55,371 - baseline_trainer - INFO - ============================================================
+2025-10-04 15:01:55,371 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-10-04 15:01:55,371 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-10-04 15:01:55,414 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 503344209920, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b8869759b4122b7648b00f614892269782e4ca2c', 'branch': 'origin', 'is_dirty': True}}
+2025-10-04 15:01:55,414 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-10-04 15:01:55,414 - baseline_trainer - INFO - Methods: ['mel_cnn']
+2025-10-04 15:01:55,414 - baseline_trainer - INFO - 
+==================================================
+2025-10-04 15:01:55,414 - baseline_trainer - INFO - TRAINING METHOD: MEL_CNN
+2025-10-04 15:01:55,414 - baseline_trainer - INFO - ==================================================
+2025-10-04 15:01:55,414 - baseline_trainer - INFO - Training mel_cnn (Run 1)...
+2025-10-04 15:01:55,425 - baseline_trainer - INFO - Setting up mel_cnn...
+2025-10-04 15:02:11,148 - baseline_trainer - INFO - Model parameters: 185,380 (trainable: 185,380)
+2025-10-04 15:02:11,148 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-10-04 15:15:29,622 - baseline_trainer - INFO - Evaluating mel_cnn...
+2025-10-04 15:15:32,064 - baseline_trainer - INFO - Completed mel_cnn (Run 1): Accuracy: 0.9620, Loss: 0.1596, Time: 814.2s
+2025-10-04 15:15:32,191 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-04 15:15:32,191 - baseline_trainer - INFO - mel_cnn Summary: 0.9620 ± 0.0000
+2025-10-04 15:15:32,191 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-10-04 15:15:32,192 - baseline_trainer - INFO - Generating baseline training report...
+2025-10-04 15:15:32,237 - baseline_trainer - INFO - Reports saved:
+2025-10-04 15:15:32,237 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-10-04 15:15:32,237 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-10-04 15:15:32,237 - baseline_trainer - INFO - Baseline training completed.
+2025-10-04 15:15:32,237 - baseline_trainer - INFO - ============================================================
+2025-10-04 15:17:08,232 - baseline_trainer - INFO - ============================================================
+2025-10-04 15:17:08,232 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2025-10-04 15:17:08,232 - baseline_trainer - INFO - ============================================================
+2025-10-04 15:17:08,232 - baseline_trainer - INFO - Output directory: outputs/baselines
+2025-10-04 15:17:08,232 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-10-04 15:17:08,276 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 503194083328, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b8869759b4122b7648b00f614892269782e4ca2c', 'branch': 'origin', 'is_dirty': True}}
+2025-10-04 15:17:08,276 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2025-10-04 15:17:08,277 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2025-10-04 15:17:08,277 - baseline_trainer - INFO - 
+==================================================
+2025-10-04 15:17:08,277 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2025-10-04 15:17:08,277 - baseline_trainer - INFO - ==================================================
+2025-10-04 15:17:08,277 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2025-10-04 15:17:08,290 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2025-10-04 15:17:23,168 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2025-10-04 15:17:23,168 - baseline_trainer - INFO - Starting training for 100 epochs...
+2025-10-04 15:39:31,462 - baseline_trainer - INFO - Evaluating mfcc_cnn...
+2025-10-04 15:39:34,514 - baseline_trainer - INFO - Completed mfcc_cnn (Run 1): Accuracy: 0.9080, Loss: 0.2976, Time: 1343.2s
+2025-10-04 15:39:34,690 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-04 15:39:34,690 - baseline_trainer - INFO - mfcc_cnn Summary: 0.9080 ± 0.0000
+2025-10-04 15:39:34,690 - baseline_trainer - INFO - Analyzing baseline training results...
+2025-10-04 15:39:34,691 - baseline_trainer - INFO - Generating baseline training report...
+2025-10-04 15:39:34,737 - baseline_trainer - INFO - Reports saved:
+2025-10-04 15:39:34,737 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+2025-10-04 15:39:34,737 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+2025-10-04 15:39:34,737 - baseline_trainer - INFO - Baseline training completed.
+2025-10-04 15:39:34,737 - baseline_trainer - INFO - ============================================================

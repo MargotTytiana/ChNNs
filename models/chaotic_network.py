@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from typing import Dict, Optional, Tuple, Union, Any
+from typing import Dict, Optional, Tuple, Union, Any, List
 import logging
 
 import os
@@ -252,7 +252,7 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
     5. Speaker Embedding
     6. Classification
     """
-    
+        
     def __init__(
         self,
         # Audio processing parameters
@@ -291,17 +291,40 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         """
         super(ChaoticSpeakerRecognitionNetwork, self).__init__()
         
+        # Save all parameters as instance attributes
+        # Audio processing
         self.sample_rate = sample_rate
         self.frame_length = frame_length
         self.hop_length = hop_length
+        
+        # Phase space reconstruction
+        self.embedding_dim = embedding_dim
+        self.delay_method = delay_method
+        
+        # Chaotic features
+        self.mlsa_scales = mlsa_scales
+        self.rqa_radius_ratio = rqa_radius_ratio
+        
+        # Chaotic embedding
+        self.chaotic_system = chaotic_system
+        self.evolution_time = evolution_time
+        self.time_step = time_step
+        
+        # Attractor pooling
+        self.pooling_type = pooling_type
+        
+        # Speaker embedding
+        self.speaker_embedding_dim = speaker_embedding_dim
+        
+        # Classification
+        self.num_speakers = num_speakers
+        self.classifier_type = classifier_type
+        
+        # Device
         self.device = device
         
         # Initialize components based on availability
-        self._initialize_components(
-            embedding_dim, delay_method, mlsa_scales, rqa_radius_ratio,
-            chaotic_system, evolution_time, time_step, pooling_type,
-            speaker_embedding_dim, num_speakers, classifier_type
-        )
+        self._initialize_components()
         
         # Loss functions
         self.cross_entropy_loss = nn.CrossEntropyLoss()
@@ -313,64 +336,89 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
             'num_batches': 0
         }
         
-    def _initialize_components(
-        self, embedding_dim, delay_method, mlsa_scales, rqa_radius_ratio,
-        chaotic_system, evolution_time, time_step, pooling_type,
-        speaker_embedding_dim, num_speakers, classifier_type
-    ):
+
+    def _initialize_components(self):
         """Initialize all network components."""
         
-        # Phase space reconstruction
-        if PhaseSpaceReconstructor is not None:
-            self.phase_space = PhaseSpaceReconstructor(
-                embedding_dim=embedding_dim,
-                delay_method=delay_method,
-                device=self.device
-            )
-        else:
-            self.phase_space = MockComponent(None, embedding_dim)
-            
-        # MLSA extractor
+        # Phase space reconstruction with EmbeddingConfig
+        from phase_space_reconstruction import EmbeddingConfig
+        
+        phase_space_config = EmbeddingConfig()
+        base_reconstructor = PhaseSpaceReconstructor(config=phase_space_config)
+        
+        # Wrap with batch processor
+        self.phase_space = BatchPhaseSpaceReconstructor(
+            reconstructor=base_reconstructor,
+            fixed_output_length=100,  # Or from config
+            device=self.device
+        )
+        
+        # MLSA extractor - needs MLSAConfig
         if MLSAExtractor is not None:
-            self.mlsa_extractor = MLSAExtractor(
-                scales=mlsa_scales,
-                device=self.device
-            )
+            try:
+                from mlsa_extractor import MLSAConfig
+                
+                mlsa_config = MLSAConfig(
+                    n_scales=self.mlsa_scales,
+                    scale_factors=[1, 2, 4, 8, 16][:self.mlsa_scales],  # Use first n_scales factors
+                    decomposition_method='fourier',  # Use Fourier for stability
+                    min_segment_length=100
+                )
+                
+                self.mlsa_extractor = MLSAExtractor(config=mlsa_config)
+            except Exception as e:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.warning(f"Failed to create MLSAExtractor: {e}, using MockComponent")
+                self.mlsa_extractor = MockComponent(None, self.mlsa_scales)
         else:
-            self.mlsa_extractor = MockComponent(None, mlsa_scales)
+            self.mlsa_extractor = MockComponent(None, self.mlsa_scales)
             
-        # RQA extractor  
+        # RQA extractor - needs RQAConfig  
         if RQAExtractor is not None:
-            self.rqa_extractor = RQAExtractor(
-                radius_ratio=rqa_radius_ratio,
-                device=self.device
-            )
+            try:
+                from rqa_extractor import RQAConfig
+                
+                rqa_config = RQAConfig(
+                    threshold_method='fixed_amount',
+                    recurrence_rate_target=self.rqa_radius_ratio,  # Use this as recurrence rate
+                    scale_factors=[1, 2, 4],  # Standard multi-scale factors
+                    min_diagonal_length=2,
+                    min_vertical_length=2
+                )
+                
+                self.rqa_extractor = RQAExtractor(config=rqa_config)
+            except Exception as e:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.warning(f"Failed to create RQAExtractor: {e}, using MockComponent")
+                self.rqa_extractor = MockComponent(None, 3)
         else:
             self.rqa_extractor = MockComponent(None, 3)
             
         # Determine chaotic feature dimension
-        chaotic_feature_dim = mlsa_scales + 3  # MLSA scales + RQA features (RR, DET, LAM)
+        chaotic_feature_dim = self.mlsa_scales + 3  # MLSA scales + RQA features
         
-        # Chaotic embedding layer
+        # Chaotic embedding layer - this one accepts direct parameters
         if ChaoticEmbedding is not None:
             self.chaotic_embedding = ChaoticEmbedding(
                 input_dim=chaotic_feature_dim,
-                system_type=chaotic_system,
-                evolution_time=evolution_time,
-                time_step=time_step,
+                system_type=self.chaotic_system,
+                evolution_time=self.evolution_time,
+                time_step=self.time_step,
                 device=self.device
             )
         else:
-            trajectory_dim = int(evolution_time / time_step) * 3  # steps * 3D
+            trajectory_dim = int(self.evolution_time / self.time_step) * 3
             self.chaotic_embedding = MockComponent(None, trajectory_dim)
             
-        # Attractor pooling
+        # Attractor pooling - this one also accepts direct parameters
         if AttractorPooling is not None:
             self.attractor_pooling = AttractorPooling(
-                pooling_type=pooling_type,
+                pooling_type=self.pooling_type,
                 device=self.device
             )
-            pooling_output_dim = 5 if pooling_type == 'comprehensive' else 3
+            pooling_output_dim = 5 if self.pooling_type == 'comprehensive' else 3
         else:
             pooling_output_dim = 5
             self.attractor_pooling = MockComponent(None, pooling_output_dim)
@@ -378,15 +426,16 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         # Speaker embedding
         self.speaker_embedding = SpeakerEmbedding(
             input_dim=pooling_output_dim,
-            embedding_dim=speaker_embedding_dim
+            embedding_dim=self.speaker_embedding_dim
         )
         
         # Final classifier
         self.classifier = ChaoticClassifier(
-            embedding_dim=speaker_embedding_dim,
-            num_speakers=num_speakers,
-            classifier_type=classifier_type
+            embedding_dim=self.speaker_embedding_dim,
+            num_speakers=self.num_speakers,
+            classifier_type=self.classifier_type
         )
+    
     
     def extract_chaotic_features(self, phase_space_data: torch.Tensor) -> torch.Tensor:
         """
@@ -431,6 +480,7 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         
         # Step 1: Phase space reconstruction
         phase_space_data = self.phase_space(audio)
+
         if return_intermediates:
             intermediates['phase_space'] = phase_space_data
         
@@ -613,6 +663,94 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
             
         return checkpoint
 
+
+class BatchPhaseSpaceReconstructor(nn.Module):
+    """Batch-enabled wrapper for PhaseSpaceReconstructor."""
+    
+    def __init__(self, reconstructor: PhaseSpaceReconstructor, 
+                 fixed_output_length: int = 100,
+                 device: str = 'cpu'):
+        super().__init__()
+        self.reconstructor = reconstructor
+        self.fixed_output_length = fixed_output_length
+        self.device = device
+        
+    def forward(self, audio_batch: torch.Tensor) -> torch.Tensor:
+        """
+        Process a batch of audio signals.
+        
+        Args:
+            audio_batch: [batch_size, num_samples]
+            
+        Returns:
+            phase_space_batch: [batch_size, time_steps, embedding_dim]
+        """
+        batch_size = audio_batch.shape[0]
+        results = []
+        
+        for i in range(batch_size):
+            single_audio = audio_batch[i].cpu().numpy()
+            
+            try:
+                reconstruction = self.reconstructor.reconstruct(
+                    single_audio, delay=None, dimension=None
+                )
+                
+                if reconstruction['embedding_success']:
+                    embedded = reconstruction['embedded_data']
+                    embedded_tensor = torch.from_numpy(embedded).float()
+                else:
+                    # Fallback
+                    embedded_tensor = self._create_fallback_embedding(audio_batch[i])
+                    
+            except Exception as e:
+                # Robust fallback
+                embedded_tensor = self._create_fallback_embedding(audio_batch[i])
+            
+            results.append(embedded_tensor)
+        
+        # Standardize length
+        standardized = self._standardize_length(results)
+        return standardized.to(self.device)
+    
+    def _create_fallback_embedding(self, audio: torch.Tensor) -> torch.Tensor:
+        """Create simple fallback phase space embedding."""
+        # Use time-delay embedding directly
+        delay = 1
+        dim = 3
+        
+        audio_np = audio.cpu().numpy()
+        n_points = len(audio_np) - (dim - 1) * delay
+        
+        if n_points <= 0:
+            # Audio too short, return minimal embedding
+            return torch.zeros(self.fixed_output_length, dim)
+        
+        embedded = np.zeros((n_points, dim))
+        for i in range(dim):
+            embedded[:, i] = audio_np[i*delay : i*delay + n_points]
+        
+        return torch.from_numpy(embedded).float()
+    
+    def _standardize_length(self, embeddings: List[torch.Tensor]) -> torch.Tensor:
+        """Standardize all embeddings to same length."""
+        # Option 1: Pad to max length
+        max_len = max(emb.shape[0] for emb in embeddings)
+        target_len = min(max_len, self.fixed_output_length)
+        
+        standardized = []
+        for emb in embeddings:
+            if emb.shape[0] > target_len:
+                # Truncate
+                emb = emb[:target_len]
+            elif emb.shape[0] < target_len:
+                # Pad
+                padding = torch.zeros(target_len - emb.shape[0], emb.shape[1])
+                emb = torch.cat([emb, padding], dim=0)
+            
+            standardized.append(emb)
+        
+        return torch.stack(standardized)
 
 # Factory function for easy model creation
 def create_chaotic_speaker_network(config: Dict) -> ChaoticSpeakerRecognitionNetwork:

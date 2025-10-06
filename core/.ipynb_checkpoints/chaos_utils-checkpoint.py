@@ -1045,7 +1045,217 @@ def create_chaotic_system(system_type: str, **kwargs) -> ChaoticSystem:
     else:
         raise ValueError(f"Unknown chaotic system type: {system_type}")
 
+def validate_chaotic_parameters(
+    system_type: str,
+    evolution_time: Optional[float] = None,
+    time_step: Optional[float] = None,
+    coupling_strength: Optional[float] = None,
+    noise_level: Optional[float] = None,
+    **kwargs
+) -> Tuple[bool, str]:
+    """
+    Validate parameters for chaotic system integration.
+    
+    Args:
+        system_type: Type of chaotic system ('lorenz', 'rossler', 'chen', etc.)
+        evolution_time: Total evolution time for integration
+        time_step: Integration time step
+        coupling_strength: Coupling strength parameter
+        noise_level: Noise level parameter
+        **kwargs: Additional system-specific parameters
+        
+    Returns:
+        Tuple of (is_valid, message)
+    """
+    system_type = system_type.lower()
+    
+    # Validate system type
+    valid_systems = ['lorenz', 'rossler', 'chen', 'mackey_glass', 'chua']
+    if system_type not in valid_systems:
+        return False, f"Invalid system type '{system_type}'. Must be one of: {valid_systems}"
+    
+    # Validate evolution time
+    if evolution_time is not None:
+        if evolution_time <= 0:
+            return False, f"evolution_time must be positive, got {evolution_time}"
+        if evolution_time > 100:
+            return False, f"evolution_time too large ({evolution_time}), may cause numerical issues"
+    
+    # Validate time step
+    if time_step is not None:
+        if time_step <= 0:
+            return False, f"time_step must be positive, got {time_step}"
+        if time_step > 1.0:
+            return False, f"time_step too large ({time_step}), may cause integration errors"
+        if evolution_time is not None and time_step > evolution_time / 10:
+            return False, f"time_step ({time_step}) should be much smaller than evolution_time ({evolution_time})"
+    
+    # Validate coupling strength
+    if coupling_strength is not None:
+        if coupling_strength < 0:
+            return False, f"coupling_strength must be non-negative, got {coupling_strength}"
+        if coupling_strength > 10:
+            return False, f"coupling_strength too large ({coupling_strength}), may cause instability"
+    
+    # Validate noise level
+    if noise_level is not None:
+        if noise_level < 0:
+            return False, f"noise_level must be non-negative, got {noise_level}"
+        if noise_level > 0.1:
+            return False, f"noise_level too large ({noise_level}), may dominate chaotic dynamics"
+    
+    # System-specific validation
+    if system_type == 'lorenz':
+        # Lorenz system is generally stable with default parameters
+        pass
+    
+    elif system_type == 'rossler':
+        # Rossler system may need smaller time steps
+        if time_step is not None and time_step > 0.01:
+            return False, "Rossler system requires smaller time_step (≤0.01) for numerical stability"
+    
+    elif system_type == 'mackey_glass':
+        # Mackey-Glass needs specific delay parameter
+        delay_tau = kwargs.get('delay_tau', 17)
+        if delay_tau <= 0:
+            return False, f"Mackey-Glass delay_tau must be positive, got {delay_tau}"
+    
+    elif system_type == 'chua':
+        # Chua circuit can be sensitive to parameters
+        if noise_level is not None and noise_level > 0.001:
+            return False, "Chua system requires very small noise_level (≤0.001)"
+    
+    return True, "Parameters valid"
 
+
+def optimize_chaotic_parameters(
+    system_type: str,
+    evolution_time: Optional[float] = None,
+    time_step: Optional[float] = None,
+    coupling_strength: Optional[float] = None,
+    noise_level: Optional[float] = None,
+    **kwargs
+) -> Dict[str, float]:
+    """
+    Optimize parameters for chaotic system to ensure numerical stability.
+    
+    Args:
+        system_type: Type of chaotic system
+        evolution_time: Evolution time (will be adjusted if needed)
+        time_step: Time step (will be adjusted if needed)
+        coupling_strength: Coupling strength (will be adjusted if needed)
+        noise_level: Noise level (will be adjusted if needed)
+        **kwargs: Additional parameters
+        
+    Returns:
+        Dictionary of optimized parameters
+    """
+    system_type = system_type.lower()
+    optimized = {}
+    
+    # System-specific optimal ranges
+    optimal_ranges = {
+        'lorenz': {
+            'evolution_time': (0.1, 2.0),
+            'time_step': (0.001, 0.05),
+            'coupling_strength': (0.5, 2.0),
+            'noise_level': (0.0001, 0.01)
+        },
+        'rossler': {
+            'evolution_time': (0.5, 3.0),
+            'time_step': (0.001, 0.01),
+            'coupling_strength': (0.3, 1.5),
+            'noise_level': (0.0001, 0.005)
+        },
+        'chen': {
+            'evolution_time': (0.1, 2.0),
+            'time_step': (0.001, 0.05),
+            'coupling_strength': (0.5, 2.0),
+            'noise_level': (0.0001, 0.01)
+        },
+        'mackey_glass': {
+            'evolution_time': (0.5, 5.0),
+            'time_step': (0.01, 0.1),
+            'coupling_strength': (0.1, 1.0),
+            'noise_level': (0.0001, 0.005)
+        },
+        'chua': {
+            'evolution_time': (0.1, 1.0),
+            'time_step': (0.001, 0.01),
+            'coupling_strength': (0.5, 2.0),
+            'noise_level': (0.00001, 0.001)
+        }
+    }
+    
+    # Get optimal ranges for this system
+    if system_type not in optimal_ranges:
+        logger.warning(f"Unknown system type '{system_type}', using default ranges")
+        ranges = optimal_ranges['lorenz']
+    else:
+        ranges = optimal_ranges[system_type]
+    
+    # Optimize evolution_time
+    if evolution_time is not None:
+        min_time, max_time = ranges['evolution_time']
+        if evolution_time < min_time:
+            optimized['evolution_time'] = min_time
+            logger.info(f"Adjusted evolution_time from {evolution_time} to {min_time}")
+        elif evolution_time > max_time:
+            optimized['evolution_time'] = max_time
+            logger.info(f"Adjusted evolution_time from {evolution_time} to {max_time}")
+        else:
+            optimized['evolution_time'] = evolution_time
+    
+    # Optimize time_step
+    if time_step is not None:
+        min_step, max_step = ranges['time_step']
+        if time_step < min_step:
+            optimized['time_step'] = min_step
+            logger.info(f"Adjusted time_step from {time_step} to {min_step}")
+        elif time_step > max_step:
+            optimized['time_step'] = max_step
+            logger.info(f"Adjusted time_step from {time_step} to {max_step}")
+        else:
+            optimized['time_step'] = time_step
+        
+        # Ensure time_step is reasonable relative to evolution_time
+        if evolution_time is not None:
+            max_allowed_step = evolution_time / 10
+            if optimized['time_step'] > max_allowed_step:
+                optimized['time_step'] = max_allowed_step
+                logger.info(f"Adjusted time_step to {max_allowed_step} (evolution_time/10)")
+    
+    # Optimize coupling_strength
+    if coupling_strength is not None:
+        min_coupling, max_coupling = ranges['coupling_strength']
+        if coupling_strength < min_coupling:
+            optimized['coupling_strength'] = min_coupling
+            logger.info(f"Adjusted coupling_strength from {coupling_strength} to {min_coupling}")
+        elif coupling_strength > max_coupling:
+            optimized['coupling_strength'] = max_coupling
+            logger.info(f"Adjusted coupling_strength from {coupling_strength} to {max_coupling}")
+        else:
+            optimized['coupling_strength'] = coupling_strength
+    
+    # Optimize noise_level
+    if noise_level is not None:
+        min_noise, max_noise = ranges['noise_level']
+        if noise_level < min_noise:
+            optimized['noise_level'] = min_noise
+            logger.info(f"Adjusted noise_level from {noise_level} to {min_noise}")
+        elif noise_level > max_noise:
+            optimized['noise_level'] = max_noise
+            logger.info(f"Adjusted noise_level from {noise_level} to {max_noise}")
+        else:
+            optimized['noise_level'] = noise_level
+    
+    # Include any additional parameters
+    for key, value in kwargs.items():
+        if key not in optimized:
+            optimized[key] = value
+    
+    return optimized
+    
 if __name__ == "__main__":
     print(f"✓ Project Root: {PROJECT_ROOT}")
     print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")

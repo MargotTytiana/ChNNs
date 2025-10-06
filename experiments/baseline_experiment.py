@@ -179,13 +179,17 @@ class BaselineExperiment(BaseExperiment):
                 self.logger.warning(f"Parameter {name} not on correct device: {param.device} vs {self.device}")
         
         return model
-    
+        
     def _create_cnn_model(self, feature_type: str) -> nn.Module:
         """Create CNN-based baseline model."""
         if feature_type == 'mel':
             feature_dim = self.config['n_mels']
         else:  # mfcc
             feature_dim = self.config['n_mfcc']
+        
+        # Store config values in local variables for use in the inner class
+        sample_rate = self.config['sample_rate']
+        outer_config = self.config  # Store reference to outer config
         
         class CNNBaseline(nn.Module):
             def __init__(self, feature_dim, num_classes, dropout_rate=0.3):
@@ -196,7 +200,7 @@ class BaselineExperiment(BaseExperiment):
                     if MelSpectrogramExtractor is not None:
                         self.feature_extractor = MelSpectrogramExtractor(
                             n_mels=feature_dim,
-                            sample_rate=self.config['sample_rate']
+                            sample_rate=sample_rate
                         )
                     else:
                         self.feature_extractor = MockFeatureExtractor(feature_dim)
@@ -204,7 +208,7 @@ class BaselineExperiment(BaseExperiment):
                     if MFCCExtractor is not None:
                         self.feature_extractor = MFCCExtractor(
                             n_mfcc=feature_dim,
-                            sample_rate=self.config['sample_rate']
+                            sample_rate=sample_rate
                         )
                     else:
                         self.feature_extractor = MockFeatureExtractor(feature_dim)
@@ -226,7 +230,7 @@ class BaselineExperiment(BaseExperiment):
                     nn.Conv1d(128, 256, kernel_size=3, padding=1),
                     nn.BatchNorm1d(256),
                     nn.ReLU(),
-                    nn.AdaptiveAvgPool1d(1),  # Global average pooling
+                    nn.AdaptiveAvgPool1d(1),
                     nn.Dropout(dropout_rate)
                 )
                 
@@ -240,25 +244,61 @@ class BaselineExperiment(BaseExperiment):
                 )
             
             def forward(self, x):
-                # 确保输入在正确设备上
+                import torch
+                
+                # Ensure input is on correct device
                 device = next(self.parameters()).device
                 if x.device != device:
                     x = x.to(device)
-                    
-                # Extract features
-                features = self.feature_extractor(x)
                 
-                # 确保特征在正确设备上
+                # Extract features
+                # Check if feature_extractor has extract method (real extractors)
+                if hasattr(self.feature_extractor, 'extract'):
+                    # Real feature extractors need numpy arrays
+                    # Process each sample in the batch
+                    batch_size = x.shape[0]
+                    feature_list = []
+                    
+                    for i in range(batch_size):
+                        # Convert single audio sample to numpy
+                        audio_numpy = x[i].cpu().numpy()
+                        
+                        # Extract features using the extractor
+                        # Output shape: (n_mels, time_frames) or (n_mfcc, time_frames)
+                        sample_features = self.feature_extractor.extract(audio_numpy)
+                        
+                        # Convert back to tensor
+                        feature_list.append(torch.from_numpy(sample_features))
+                    
+                    # Stack features back into a batch
+                    # Shape: (batch, feature_dim, time_frames)
+                    features = torch.stack(feature_list).to(device)
+                else:
+                    # For mock or callable extractors (already handle tensors)
+                    features = self.feature_extractor(x)
+                
+                # Ensure features are on correct device
                 if features.device != device:
                     features = features.to(device)
             
-                # Handle different feature shapes
+                # Handle different feature shapes for Conv1d
+                # Conv1d expects input shape: (batch, channels, length)
+                # where channels = feature_dim and length = time_frames
+                
                 if len(features.shape) == 2:
-                    # Add time dimension if needed
-                    features = features.unsqueeze(-1)
+                    # Shape: (batch, features) - need to add time dimension
+                    # This shouldn't happen with real audio features, but handle it anyway
+                    features = features.unsqueeze(-1)  # (batch, features, 1)
+                    
                 elif len(features.shape) == 3:
-                    # Transpose to (batch, feature, time) for Conv1d
-                    features = features.transpose(1, 2)
+                    # Shape should be (batch, feature_dim, time_frames)
+                    # Check if we need to transpose
+                    # If second dimension is not feature_dim, we need to fix it
+                    if features.shape[1] != feature_dim and features.shape[2] == feature_dim:
+                        # Wrong order: (batch, time_frames, feature_dim)
+                        # Need to transpose to: (batch, feature_dim, time_frames)
+                        features = features.transpose(1, 2)
+                    # else: already in correct format (batch, feature_dim, time_frames)
                 
                 # CNN processing
                 conv_out = self.conv_layers(features)
@@ -271,7 +311,9 @@ class BaselineExperiment(BaseExperiment):
         return CNNBaseline(
             feature_dim=feature_dim,
             num_classes=self.config['num_speakers'],
-            dropout_rate=self.config['dropout_rate'])
+            dropout_rate=self.config['dropout_rate']
+        )
+    
 
         
     def _apply_feature_extraction(self, train_loader, val_loader, test_loader):
