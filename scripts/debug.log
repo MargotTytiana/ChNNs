@@ -1,0 +1,489 @@
+✓ Added paths to sys.path: /scratch/project_2003370/yueyao/Model
+✓ Traditional features imported successfully
+Fallback import setup: added /scratch/project_2003370/yueyao/Model to path
+  ✓ Base model classes loaded
+  ✓ MLP classifier models loaded
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+  ✓ Hybrid models loaded
+  ✓ Chaotic network models loaded
+  ✓ Model factory loaded
+  ✓ Dataset loader imported successfully
+✓ Data package initialized (circular import free)
+All required modules imported successfully!
+✓ Baseline experiment imported successfully
+✓ Utils imported successfully
+✓ Evaluation tools imported successfully
+
+============================================================
+IMPORT SUMMARY
+============================================================
+Project Root: /scratch/project_2003370/yueyao/Model
+Traditional Features: ✓
+Baseline Experiment: ✓
+Utils: ✓
+PyTorch: ✓
+============================================================
+测试collate函数...
+测试自定义collate函数...
+1. 测试音频collate函数
+✓ 音频collate成功: torch.Size([3, 48000]), torch.Size([3])
+2. 测试特征collate函数
+✓ 特征collate成功: torch.Size([3, 80, 300]), torch.Size([3])
+3. 测试智能collate函数
+✓ 智能collate (音频)成功: torch.Size([3, 48000]), torch.Size([3])
+✓ 智能collate (特征)成功: torch.Size([3, 80, 300]), torch.Size([3])
+✓ Collate函数测试成功
+数据加载器修复验证成功，开始训练...
+✓ Project Root: /scratch/project_2003370/yueyao/Model
+✓ Import Manager: True
+✓ Module imports successful
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Environment information collected
+[2025-09-28 11:34:18] [INFO] Configuring deterministic operations
+[2025-09-28 11:34:18] [INFO] PyTorch deterministic operations configured
+[2025-09-28 11:34:18] [INFO] Starting reproducibility verification
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 1 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 2 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 3 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 4 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 5 is reproducible
+[2025-09-28 11:34:18] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: dad7b208dd0a22b3
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: MIG-76d81f46-71ec-5880-a6b2-971d8e0e358f
+  OMP_NUM_THREADS: not_set
+  MKL_NUM_THREADS: not_set
+============================================================
+2025-09-28 11:34:18,415 - baseline_trainer - INFO - ============================================================
+INFO:baseline_trainer:============================================================
+2025-09-28 11:34:18,415 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+INFO:baseline_trainer:BASELINE MODELS TRAINING
+2025-09-28 11:34:18,415 - baseline_trainer - INFO - ============================================================
+INFO:baseline_trainer:============================================================
+2025-09-28 11:34:18,415 - baseline_trainer - INFO - Output directory: outputs/baselines
+INFO:baseline_trainer:Output directory: outputs/baselines
+2025-09-28 11:34:18,415 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 5,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+INFO:baseline_trainer:Configuration: {
+  "num_speakers": 100,
+  "batch_size": 16,
+  "num_epochs": 5,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2025-09-28 11:34:18,457 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 501337243648, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '24e45f230c2ce9710aa7228339f19eed98659a61', 'branch': 'origin', 'is_dirty': True}}
+INFO:baseline_trainer:System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285198336, 'available_memory': 501337243648, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '24e45f230c2ce9710aa7228339f19eed98659a61', 'branch': 'origin', 'is_dirty': True}}
+Training method: mel_mlp
+Starting training with 1 runs per method...
+2025-09-28 11:34:18,457 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+INFO:baseline_trainer:Training 1 methods with 1 runs each...
+2025-09-28 11:34:18,457 - baseline_trainer - INFO - Methods: ['mel_mlp']
+INFO:baseline_trainer:Methods: ['mel_mlp']
+2025-09-28 11:34:18,457 - baseline_trainer - INFO - 
+==================================================
+INFO:baseline_trainer:
+==================================================
+2025-09-28 11:34:18,458 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+INFO:baseline_trainer:TRAINING METHOD: MEL_MLP
+2025-09-28 11:34:18,458 - baseline_trainer - INFO - ==================================================
+INFO:baseline_trainer:==================================================
+2025-09-28 11:34:18,458 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+INFO:baseline_trainer:Training mel_mlp (Run 1)...
+CheckpointManager initialized for experiment: exp_20250928_113418
+Checkpoint directory: outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_113418
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Environment information collected
+[2025-09-28 11:34:18] [INFO] Configuring deterministic operations
+[2025-09-28 11:34:18] [INFO] PyTorch deterministic operations configured
+[2025-09-28 11:34:18] [INFO] Starting reproducibility verification
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 1 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 2 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 3 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 4 is reproducible
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Setting global random seed to: 42
+[2025-09-28 11:34:18] [INFO] Python random seed set
+[2025-09-28 11:34:18] [INFO] PYTHONHASHSEED set to: 42
+[2025-09-28 11:34:18] [INFO] NumPy random seed set
+[2025-09-28 11:34:18] [INFO] PyTorch CUDA seeds set
+[2025-09-28 11:34:18] [INFO] PyTorch strict reproducibility mode enabled
+[2025-09-28 11:34:18] [INFO] PyTorch seeds set
+[2025-09-28 11:34:18] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-09-28 11:34:18] [INFO] Operation 5 is reproducible
+[2025-09-28 11:34:18] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: d0987daa5975a116
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: MIG-76d81f46-71ec-5880-a6b2-971d8e0e358f
+  OMP_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+============================================================
+2025-09-28 11:34:18,468 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+INFO:experiment_baseline_mel_mlp_run_0:Initialized experiment: baseline_mel_mlp_run_0
+2025-09-28 11:34:18,468 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+INFO:experiment_baseline_mel_mlp_run_0:Device: cuda
+2025-09-28 11:34:18,468 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+INFO:experiment_baseline_mel_mlp_run_0:Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-09-28 11:34:18,468 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+INFO:experiment_baseline_mel_mlp_run_0:Initialized mel_mlp baseline experiment
+2025-09-28 11:34:18,468 - baseline_trainer - INFO - Setting up mel_mlp...
+INFO:baseline_trainer:Setting up mel_mlp...
+2025-09-28 11:34:18,468 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+INFO:experiment_baseline_mel_mlp_run_0:Setting up experiment components...
+2025-09-28 11:34:19,034 - experiment_baseline_mel_mlp_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+INFO:experiment_baseline_mel_mlp_run_0:数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-09-28 11:34:19,034 - experiment_baseline_mel_mlp_run_0 - INFO - 找到 28539 个FLAC文件
+INFO:experiment_baseline_mel_mlp_run_0:找到 28539 个FLAC文件
+2025-09-28 11:34:20,804 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型没有参数！模型可能为空。
+ERROR:experiment_baseline_mel_mlp_run_0:模型没有参数！模型可能为空。
+2025-09-28 11:34:20,804 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型类型: <class 'hybrid_models.TraditionalMLPBaseline'>
+ERROR:experiment_baseline_mel_mlp_run_0:模型类型: <class 'hybrid_models.TraditionalMLPBaseline'>
+2025-09-28 11:34:20,805 - experiment_baseline_mel_mlp_run_0 - ERROR - 模型结构: TraditionalMLPBaseline()
+ERROR:experiment_baseline_mel_mlp_run_0:模型结构: TraditionalMLPBaseline()
+2025-09-28 11:34:20,805 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): 模型没有参数，无法获取设备信息
+ERROR:baseline_trainer:Failed to train mel_mlp (Run 1): 模型没有参数，无法获取设备信息
+2025-09-28 11:34:20,805 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 823, in setup
+    model_device = next(self.model.parameters()).device
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 828, in setup
+    raise ValueError("模型没有参数，无法获取设备信息")
+ValueError: 模型没有参数，无法获取设备信息
+
+ERROR:baseline_trainer:Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 823, in setup
+    model_device = next(self.model.parameters()).device
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 828, in setup
+    raise ValueError("模型没有参数，无法获取设备信息")
+ValueError: 模型没有参数，无法获取设备信息
+
+ERROR: Failed to train mel_mlp (Run 1): 模型没有参数，无法获取设备信息
+Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 823, in setup
+    model_device = next(self.model.parameters()).device
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 828, in setup
+    raise ValueError("模型没有参数，无法获取设备信息")
+ValueError: 模型没有参数，无法获取设备信息
+
+2025-09-28 11:34:20,806 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+INFO:baseline_trainer:Progress: 1/1 (100.0%)
+2025-09-28 11:34:20,806 - baseline_trainer - WARNING - No successful runs for mel_mlp
+WARNING:baseline_trainer:No successful runs for mel_mlp
+2025-09-28 11:34:20,806 - baseline_trainer - INFO - Analyzing baseline training results...
+INFO:baseline_trainer:Analyzing baseline training results...
+2025-09-28 11:34:20,806 - baseline_trainer - INFO - Generating baseline training report...
+INFO:baseline_trainer:Generating baseline training report...
+2025-09-28 11:34:20,851 - baseline_trainer - INFO - Reports saved:
+INFO:baseline_trainer:Reports saved:
+2025-09-28 11:34:20,851 - baseline_trainer - INFO -   Text report: outputs/baselines/baseline_training_report.txt
+INFO:baseline_trainer:  Text report: outputs/baselines/baseline_training_report.txt
+2025-09-28 11:34:20,851 - baseline_trainer - INFO -   JSON report: outputs/baselines/baseline_training_results.json
+INFO:baseline_trainer:  JSON report: outputs/baselines/baseline_training_results.json
+
+============================================================
+TRAINING COMPLETED
+============================================================
+Results saved to: ./outputs/baselines
+2025-09-28 11:34:20,852 - baseline_trainer - INFO - Baseline training completed.
+INFO:baseline_trainer:Baseline training completed.
+2025-09-28 11:34:20,852 - baseline_trainer - INFO - ============================================================
+INFO:baseline_trainer:============================================================
