@@ -21,12 +21,8 @@ import time
 import pickle
 import json
 from typing import List, Dict, Any, Tuple
-import os
-import sys
 import torch
 import torch.nn as nn
-from pathlib import Path
-from typing import Dict, Any, Tuple, Optional
 
 def fix_imports():
     current_file = Path(__file__).resolve()
@@ -67,8 +63,6 @@ IMPORTS_SUCCESSFUL = True
 
 # Check for optional dependencies
 try:
-    import torch
-    import torch.nn as nn
     PYTORCH_AVAILABLE = True
 except ImportError:
     PYTORCH_AVAILABLE = False

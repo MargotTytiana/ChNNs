@@ -17,26 +17,19 @@ from scipy.signal import detrend
 from sklearn.neighbors import NearestNeighbors
 from typing import Tuple, List, Dict, Optional, Union, Any
 import logging
-
-# AFTER (修复后的统一导入方式):
 import os
 import sys
-import numpy as np
-import warnings
-from typing import Dict, List, Tuple, Optional, Union, Any
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# =============================================================================
-# 统一导入设置
-# =============================================================================
+
 def setup_module_imports(current_file: str = __file__):
     """Setup imports for current module.""" 
     try:
         from setup_imports import setup_project_imports
         return setup_project_imports(current_file), True
     except ImportError:
-        current_dir = Path(current_file).resolve().parent  # core目录
+        current_dir = Path(current_file).resolve().parent  # core
         project_root = current_dir.parent  # core -> Model
         
         paths_to_add = [
@@ -55,7 +48,7 @@ def setup_module_imports(current_file: str = __file__):
 PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 
 # =============================================================================
-# 项目模块导入 (带安全检查)
+# project model import
 # =============================================================================
 try:
     from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
@@ -307,12 +300,12 @@ class ChaoticSystemSolver:
             
             # Calculate number of points for extended integration
             total_time = t_end_extended - t_start_extended
-            num_points = max(10, int((t_end - t_start) / dt) + 1)  # 最小10个点更合理
+            num_points = max(10, int((t_end - t_start) / dt) + 1)  # min 10 is reasonable
             t_eval = create_safe_time_array(t_start_extended, t_end_extended, num_points)
         else:
             integration_span = (t_start, t_end)
             total_time = t_end - t_start
-            num_points = max(10, int((t_end - t_start) / dt) + 1)  # 最小10个点更合理
+            num_points = max(10, int((t_end - t_start) / dt) + 1)  # min 10 is reasonable
             t_eval = create_safe_time_array(t_start, t_end, num_points)
         
         # Validate parameters before integration
@@ -578,14 +571,13 @@ class LyapunovExponentCalculator:
         dimension = self.system.dimension
         
         # Initialize orthonormal basis with better conditioning
-        w = np.eye(dimension) + 1e-8 * np.random.randn(dimension, dimension)  # 添加小扰动
+        w = np.eye(dimension) + 1e-8 * np.random.randn(dimension, dimension)  # small disturbance
         lyap_sum = np.zeros(dimension)
         
         current_state = initial_state.copy()
         step_time = (time_span[1] - time_span[0]) / n_steps
         
-        # 更频繁的重正交化
-        reorthogonalize_interval = max(1, n_steps // 100)  # 每1%的步数重正交化一次
+        reorthogonalize_interval = max(1, n_steps // 100)  # reorthogonalize in every 1% step
         
         successful_steps = 0
         
@@ -601,25 +593,21 @@ class LyapunovExponentCalculator:
                 # Get Jacobian at current state
                 jacobian = self.system.get_jacobian(current_state)
                 
-                # 检查雅可比矩阵的条件数
                 condition_number = np.linalg.cond(jacobian)
                 if condition_number > 1e10:
                     logger.warning(f"High condition number ({condition_number:.2e}) at step {step}")
-                    # 添加数值正则化
                     jacobian += 1e-12 * np.eye(dimension)
                 
                 # Evolve tangent vectors
                 w = jacobian @ w
                 
-                # 定期重正交化或当矩阵条件数过大时
                 if step % reorthogonalize_interval == 0 or condition_number > 1e10:
                     try:
                         q, r = np.linalg.qr(w)
                         
-                        # 数值稳定性处理
+                        # stability
                         diagonal_elements = np.diag(r)
                         
-                        # 检查并修复小的或负的对角元素
                         min_threshold = 1e-12
                         fixed_count = 0
                         
@@ -628,14 +616,12 @@ class LyapunovExponentCalculator:
                                 r[i, i] = min_threshold if diagonal_elements[i] >= 0 else -min_threshold
                                 fixed_count += 1
                         
-                        if fixed_count > 0 and step % 100 == 0:  # 只在每100步报告一次
+                        if fixed_count > 0 and step % 100 == 0:
                             logger.debug(f"Fixed {fixed_count} small diagonal elements at step {step}")
                         
                         w = q
                         
-                        # 累加对数增长率
                         for i in range(dimension):
-                            # 使用绝对值来处理可能的负值
                             log_value = np.log(max(abs(r[i, i]), min_threshold))
                             lyap_sum[i] += log_value
                             
@@ -643,11 +629,9 @@ class LyapunovExponentCalculator:
                         
                     except np.linalg.LinAlgError as e:
                         logger.warning(f"QR decomposition failed at step {step}: {e}")
-                        # 重新初始化正交基
                         w = np.eye(dimension) + 1e-6 * np.random.randn(dimension, dimension)
                         continue
                 else:
-                    # 不进行QR分解的步骤，仍然计数
                     successful_steps += 1
                     
             except Exception as e:
@@ -665,10 +649,8 @@ class LyapunovExponentCalculator:
         # Sort in descending order
         lyapunov_spectrum = np.sort(lyapunov_spectrum)[::-1]
         
-        # 基本合理性检查
         if np.any(np.abs(lyapunov_spectrum) > 100):
             logger.warning(f"Unreasonably large Lyapunov exponents detected: {lyapunov_spectrum}")
-            # 可以选择返回更保守的估计或重新计算
         
         return lyapunov_spectrum
 
@@ -1263,14 +1245,12 @@ if __name__ == "__main__":
     
     print("Testing Chaos Utils...")
     
-    # 创建Lorenz系统并求解
     lorenz = LorenzSystem()
     solver = ChaoticSystemSolver(lorenz)
     initial_state = np.array([1.0, 1.0, 1.0])
     
-    # 修复：使用合适的参数确保生成足够的点
-    time_span = (0.0, 10.0)  # 10秒积分时间
-    dt = 0.01  # 0.01秒时间步长
+    time_span = (0.0, 10.0)
+    dt = 0.01
     
     print(f"Integration setup: time_span={time_span}, dt={dt}")
     print(f"Expected points: ~{int((time_span[1] - time_span[0]) / dt)}")
@@ -1283,18 +1263,15 @@ if __name__ == "__main__":
         print(f"Time range: [{t[0]:.3f}, {t[-1]:.3f}]")
         print(f"Final state: {trajectory[:, -1]}")
         
-        # 检查轨迹是否足够长
         if trajectory.shape[1] < 100:
             print(f"Warning: Only {trajectory.shape[1]} points generated, need at least 100 for reliable analysis")
             
-            # 尝试用更长的积分时间
             print("Retrying with longer integration time...")
             time_span_long = (0.0, 20.0)
             dt_small = 0.005
             t, trajectory = solver.solve(initial_state, time_span_long, dt=dt_small, method='rk45')
             print(f"Retry: Generated trajectory with {trajectory.shape[1]} points")
         
-        # 计算最大李雅普诺夫指数
         if trajectory.shape[1] >= 100:
             lyap_calc = LyapunovExponentCalculator(lorenz)
             largest_lyap = lyap_calc.calculate_largest_lyapunov(
@@ -1302,9 +1279,8 @@ if __name__ == "__main__":
             )
             print(f"Largest Lyapunov exponent: {largest_lyap:.6f}")
             
-            # 相关维数计算 - 使用转置的轨迹数据
             try:
-                trajectory_for_corr = trajectory.T  # 转置：时间×维度
+                trajectory_for_corr = trajectory.T
                 print(f"Trajectory for correlation dim: {trajectory_for_corr.shape}")
                 
                 if trajectory_for_corr.shape[0] >= 50:
@@ -1316,9 +1292,8 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f"Correlation dimension calculation failed: {e}")
                 
-            # 测试Hurst指数
             try:
-                hurst = hurst_exponent(trajectory[0, :])  # 使用x坐标时间序列
+                hurst = hurst_exponent(trajectory[0, :])
                 print(f"Hurst exponent: {hurst:.3f}")
             except Exception as e:
                 print(f"Hurst exponent calculation failed: {e}")
@@ -1330,10 +1305,8 @@ if __name__ == "__main__":
         print(f"Integration failed: {e}")
         print(f"Error type: {type(e).__name__}")
         
-        # 调试信息
         print("\nDebugging integration issue...")
         try:
-            # 尝试更简单的参数
             simple_span = (0.0, 1.0)
             simple_dt = 0.1
             t_simple, traj_simple = solver.solve(initial_state, simple_span, dt=simple_dt)
@@ -1344,9 +1317,8 @@ if __name__ == "__main__":
     print("Chaos utils testing completed.")
 
 
-# 额外的调试函数
 def debug_integration_parameters():
-    """调试积分参数设置"""
+    """debug integration parameters setting"""
     print("\n=== Integration Parameter Debug ===")
     
     time_spans = [(0.0, 1.0), (0.0, 5.0), (0.0, 10.0)]
@@ -1374,5 +1346,5 @@ def debug_integration_parameters():
     print("=== Debug Complete ===\n")
 
 
-# 如果你想运行调试，取消下面的注释
+# delete the annotate if wanna debug
 debug_integration_parameters()

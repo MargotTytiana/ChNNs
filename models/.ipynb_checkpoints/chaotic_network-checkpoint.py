@@ -6,10 +6,7 @@ import logging
 
 import os
 import sys
-import torch
-import torch.nn as nn
 from pathlib import Path
-from typing import Dict, Any, Tuple, Optional
 
 def fix_imports():
     current_file = Path(__file__).resolve()
@@ -367,7 +364,6 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
                 
                 self.mlsa_extractor = MLSAExtractor(config=mlsa_config)
             except Exception as e:
-                import logging
                 logger = logging.getLogger(__name__)
                 logger.warning(f"Failed to create MLSAExtractor: {e}, using MockComponent")
                 self.mlsa_extractor = MockComponent(None, self.mlsa_scales)
@@ -389,7 +385,6 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
                 
                 self.rqa_extractor = RQAExtractor(config=rqa_config)
             except Exception as e:
-                import logging
                 logger = logging.getLogger(__name__)
                 logger.warning(f"Failed to create RQAExtractor: {e}, using MockComponent")
                 self.rqa_extractor = MockComponent(None, 3)

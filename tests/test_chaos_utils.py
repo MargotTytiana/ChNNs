@@ -15,12 +15,10 @@ import sys
 import os
 from typing import List, Tuple, Dict, Any
 
-# 导入路径设置
 try:
     from setup_imports import setup_project_imports
     setup_project_imports()
 except ImportError:
-    # 手动设置路径
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     sys.path.insert(0, project_root)
     
@@ -626,7 +624,6 @@ class TestPerformance(unittest.TestCase):
         calculator = LyapunovExponentCalculator(lorenz)
         initial_state = np.array([1.0, 1.0, 1.0])
         
-        import time
         
         # Time the calculation
         start_time = time.time()
@@ -672,7 +669,6 @@ if __name__ == "__main__":
     
     # Check if chaos_utils can be imported
     try:
-        from core.chaos_utils import LorenzSystem
         print("✓ chaos_utils module imported successfully")
         
         # Run the tests

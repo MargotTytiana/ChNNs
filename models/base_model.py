@@ -83,12 +83,12 @@ class ModelConfig:
     output_dim: Optional[int] = None
     hidden_dims: List[int] = field(default_factory=lambda: [128, 64])
 
-    # 添加 activation 字段
+    # ADD activation
     activation: str = 'relu'
-    output_activation: Optional[str] = None  # 输出层激活函数
-    activation_params: Dict[str, Any] = field(default_factory=dict)  # 激活函数参数
+    output_activation: Optional[str] = None  # output layer activation function
+    activation_params: Dict[str, Any] = field(default_factory=dict)  # activation function parameters
     
-    # 批量归一化相关
+    # Batch Normalization
     batch_norm: bool = True
     
     # Training parameters
@@ -130,13 +130,13 @@ class ModelConfig:
     def __post_init__(self):
         """Validate configuration after initialization."""
         
-        # 验证 activation
+        # validate activation
         valid_activations = ['relu', 'tanh', 'sigmoid', 'leaky_relu', 'gelu', 'elu', 'swish']
         
         if self.activation not in valid_activations:
             raise ValueError(f"Invalid activation '{self.activation}'. Must be one of {valid_activations}")
         
-        # 验证 output_activation（如果指定）
+        # validate output_activation（if assigned）
         if self.output_activation and self.output_activation not in valid_activations + ['softmax']:
             raise ValueError(f"Invalid output activation '{self.output_activation}'")
             

@@ -13,8 +13,7 @@ def setup_module_imports(current_file: str = __file__):
         return setup_project_imports(current_file), True
     except ImportError:
         current_dir = Path(current_file).resolve().parent
-        # 根据文件位置调整project_root计算
-        project_root = current_dir.parent  # 大部分情况
+        project_root = current_dir.parent  # for most case
         
         paths = [str(project_root), str(project_root/'core'), 
                 str(project_root/'models'), str(project_root/'features'),

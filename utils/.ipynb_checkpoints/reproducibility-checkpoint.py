@@ -48,27 +48,19 @@ except ImportError:
 
 
 
-import os
-import sys
-import random
-import platform
 import subprocess
-from typing import Dict, Any, Optional
-import numpy as np
 
 def set_seed(seed: int = 42):
     """
-    设置所有随机种子以确保可重复性
+    set every random seed to make sure the reproducibility
     
     Args:
-        seed: 随机种子值
+        seed: random seed value
     """
     random.seed(seed)
     np.random.seed(seed)
     
-    # 如果有 PyTorch，设置 PyTorch 种子
     try:
-        import torch
         torch.manual_seed(seed)
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
@@ -77,23 +69,19 @@ def set_seed(seed: int = 42):
     except ImportError:
         pass
     
-    # 如果有 TensorFlow，设置 TensorFlow 种子
     try:
-        import tensorflow as tf
         tf.random.set_seed(seed)
     except ImportError:
         pass
     
-    # 设置 Python 的哈希种子（需要在程序启动时设置）
     os.environ['PYTHONHASHSEED'] = str(seed)
 
 
 def get_system_info() -> Dict[str, Any]:
     """
-    获取系统信息用于实验记录
+    get system info to document experiments
     
-    Returns:
-        包含系统信息的字典
+    Returns: dictionary includes system info
     """
     system_info = {
         'platform': platform.platform(),
@@ -107,13 +95,13 @@ def get_system_info() -> Dict[str, Any]:
         'python_executable': sys.executable,
     }
     
-    # CPU 信息
+    # CPU
     try:
         system_info['cpu_count'] = os.cpu_count()
     except:
         system_info['cpu_count'] = 'unknown'
     
-    # 内存信息
+    # memory
     try:
         import psutil
         memory = psutil.virtual_memory()
@@ -123,13 +111,13 @@ def get_system_info() -> Dict[str, Any]:
         system_info['total_memory'] = 'unknown'
         system_info['available_memory'] = 'unknown'
     
-    # GPU 信息
+    # GPU
     system_info['gpu_info'] = get_gpu_info()
     
-    # Python 包版本
+    # Python package
     system_info['package_versions'] = get_package_versions()
     
-    # Git 信息（如果在 git 仓库中）
+    # Git info
     system_info['git_info'] = get_git_info()
     
     return system_info
@@ -137,10 +125,9 @@ def get_system_info() -> Dict[str, Any]:
 
 def get_gpu_info() -> Dict[str, Any]:
     """
-    获取 GPU 信息
+    Get gpu info
     
-    Returns:
-        GPU 信息字典
+    Returns: gpu info dict
     """
     gpu_info = {
         'cuda_available': False,
@@ -149,9 +136,8 @@ def get_gpu_info() -> Dict[str, Any]:
         'gpu_names': []
     }
     
-    # PyTorch CUDA 信息
+    # PyTorch CUDA
     try:
-        import torch
         gpu_info['cuda_available'] = torch.cuda.is_available()
         if torch.cuda.is_available():
             gpu_info['cuda_version'] = torch.version.cuda
@@ -161,7 +147,6 @@ def get_gpu_info() -> Dict[str, Any]:
     except ImportError:
         pass
     
-    # 尝试使用 nvidia-smi 获取信息
     if not gpu_info['cuda_available']:
         try:
             result = subprocess.run(['nvidia-smi', '--query-gpu=name', '--format=csv,noheader'], 
@@ -178,10 +163,9 @@ def get_gpu_info() -> Dict[str, Any]:
 
 def get_package_versions() -> Dict[str, str]:
     """
-    获取重要包的版本信息
+    get package versions
     
-    Returns:
-        包版本字典
+    Returns: package version dict
     """
     packages = [
         'numpy', 'scipy', 'scikit-learn', 'librosa', 'soundfile',
@@ -204,10 +188,9 @@ def get_package_versions() -> Dict[str, str]:
 
 def get_git_info() -> Dict[str, str]:
     """
-    获取 Git 仓库信息
+    get Git info
     
-    Returns:
-        Git 信息字典
+    Returns: Git info dict
     """
     git_info = {
         'commit_hash': 'unknown',
@@ -216,19 +199,16 @@ def get_git_info() -> Dict[str, str]:
     }
     
     try:
-        # 获取当前提交哈希
         result = subprocess.run(['git', 'rev-parse', 'HEAD'], 
                               capture_output=True, text=True, timeout=5)
         if result.returncode == 0:
             git_info['commit_hash'] = result.stdout.strip()
         
-        # 获取当前分支
         result = subprocess.run(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], 
                               capture_output=True, text=True, timeout=5)
         if result.returncode == 0:
             git_info['branch'] = result.stdout.strip()
         
-        # 检查是否有未提交的更改
         result = subprocess.run(['git', 'diff', '--quiet'], 
                               capture_output=True, timeout=5)
         git_info['is_dirty'] = result.returncode != 0
@@ -241,39 +221,22 @@ def get_git_info() -> Dict[str, str]:
 
 def create_reproducible_environment(seed: int = 42, 
                                   disable_cuda_benchmark: bool = True) -> Dict[str, Any]:
-    """
-    创建可重复的实验环境
-    
-    Args:
-        seed: 随机种子
-        disable_cuda_benchmark: 是否禁用 CUDA benchmark 以确保确定性
-        
-    Returns:
-        环境配置信息
-    """
-    # 设置种子
+
     set_seed(seed)
-    
-    # 获取系统信息
+
     system_info = get_system_info()
     
-    # PyTorch 特定设置
     try:
-        import torch
         if disable_cuda_benchmark:
             torch.backends.cudnn.benchmark = False
             torch.backends.cudnn.deterministic = True
         
-        # 设置线程数以确保确定性
         torch.set_num_threads(1)
         
     except ImportError:
         pass
     
-    # TensorFlow 特定设置
     try:
-        import tensorflow as tf
-        # 设置确定性操作
         if hasattr(tf.config.experimental, 'enable_op_determinism'):
             tf.config.experimental.enable_op_determinism()
     except ImportError:
@@ -292,15 +255,6 @@ def create_reproducible_environment(seed: int = 42,
 
 
 def save_environment_info(output_path: str, seed: int = 42):
-    """
-    保存环境信息到文件
-    
-    Args:
-        output_path: 输出文件路径
-        seed: 随机种子
-    """
-    import json
-    from pathlib import Path
     
     env_info = create_reproducible_environment(seed)
     
@@ -312,17 +266,6 @@ def save_environment_info(output_path: str, seed: int = 42):
 
 
 def verify_reproducibility(reference_file: str) -> Dict[str, bool]:
-    """
-    验证当前环境与参考环境的一致性
-    
-    Args:
-        reference_file: 参考环境信息文件路径
-        
-    Returns:
-        验证结果字典
-    """
-    import json
-    from pathlib import Path
     
     verification_results = {
         'python_version_match': False,
@@ -337,12 +280,10 @@ def verify_reproducibility(reference_file: str) -> Dict[str, bool]:
         
         current_info = get_system_info()
         
-        # 检查 Python 版本
         ref_python = reference_info['system_info']['python_version'].split()[0]
         cur_python = current_info['python_version'].split()[0]
         verification_results['python_version_match'] = ref_python == cur_python
         
-        # 检查关键包版本
         ref_packages = reference_info['system_info']['package_versions']
         cur_packages = current_info['package_versions']
         
@@ -355,23 +296,19 @@ def verify_reproducibility(reference_file: str) -> Dict[str, bool]:
         
         verification_results['package_versions_match'] = all(package_matches) if package_matches else False
         
-        # 检查平台
         verification_results['platform_match'] = (
             reference_info['system_info']['system'] == current_info['system']
         )
         
-        # 整体兼容性评估
         verification_results['overall_compatible'] = (
             verification_results['python_version_match'] and
             verification_results['package_versions_match']
         )
         
     except Exception as e:
-        print(f"验证过程中出错: {e}")
+        print(f"ERROR in VARYIFICATION: {e}")
     
     return verification_results
-
-
 
 
 class ReproducibilityManager:

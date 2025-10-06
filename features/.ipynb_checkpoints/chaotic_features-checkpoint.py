@@ -24,7 +24,6 @@ import json
 
 import os
 import sys
-from pathlib import Path
 
 def setup_module_imports(current_file: str = __file__):
     try:
@@ -32,8 +31,7 @@ def setup_module_imports(current_file: str = __file__):
         return setup_project_imports(current_file), True
     except ImportError:
         current_dir = Path(current_file).resolve().parent
-        # 根据文件位置调整project_root计算
-        project_root = current_dir.parent  # 大部分情况
+        project_root = current_dir.parent
         
         paths = [str(project_root), str(project_root/'core'), 
                 str(project_root/'models'), str(project_root/'features'),
@@ -189,10 +187,10 @@ class RQAConfig:
     recurrence_rate_target: float = 0.05
     threshold_value: Optional[float] = None
     
-    # 🔧 添加缺失的属性
-    theiler_window: int = 1  # Theiler窗口，用于排除时间上过近的点
-    max_matrix_size: int = 1000  # 添加矩阵大小限制
-    scale_method: str = 'coarse_graining'  # 添加尺度方法
+    # 🔧 ADD MISS PROPERTY
+    theiler_window: int = 1  # Theiler window to eliminate too-close points
+    max_matrix_size: int = 1000  # matrix size limits
+    scale_method: str = 'coarse_graining'  # add scale method
     
     # Line detection parameters
     min_diagonal_length: int = 2

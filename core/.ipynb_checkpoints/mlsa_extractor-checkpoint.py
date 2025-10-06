@@ -14,8 +14,6 @@ import scipy.signal as signal
 from scipy.stats import entropy
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import logging
-
-# AFTER (修复后的统一导入方式):
 import os
 import sys
 import numpy as np
@@ -25,7 +23,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 # =============================================================================
-# 统一导入设置
+# universal import
 # =============================================================================
 def setup_module_imports(current_file: str = __file__):
     """Setup imports for current module.""" 
@@ -33,7 +31,7 @@ def setup_module_imports(current_file: str = __file__):
         from setup_imports import setup_project_imports
         return setup_project_imports(current_file), True
     except ImportError:
-        current_dir = Path(current_file).resolve().parent  # core目录
+        current_dir = Path(current_file).resolve().parent  # core
         project_root = current_dir.parent  # core -> Model
         
         paths_to_add = [
@@ -52,7 +50,7 @@ def setup_module_imports(current_file: str = __file__):
 PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 
 # =============================================================================
-# 项目模块导入 (带安全检查)
+# Project Model Import
 # =============================================================================
 try:
     from chaos_utils import (
@@ -63,7 +61,6 @@ try:
 except ImportError as e:
     HAS_CHAOS_UTILS = False
     warnings.warn(f"chaos_utils not available: {e}")
-    # 简单fallback，不需要大量代码
     largest_lyapunov_from_data = lambda x: 0.0
     correlation_dimension = lambda x: 2.0
 

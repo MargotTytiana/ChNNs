@@ -840,36 +840,31 @@ class FeaturePostProcessor:
         if not self.is_fitted:
             raise ValueError("FeaturePostProcessor must be fitted before transform")
         
-        print(f"Transforming features with shape: {features.shape}")  # 调试信息
+        print(f"Transforming features with shape: {features.shape}")
         
-        # 保存原始形状以便恢复
         original_shape = features.shape
         
-        # 确保特征是正确的形状
         if features.ndim == 1:
-            # 单个样本，重塑为 (1, n_features)
+            # singal sample reshape as (1, n_features)
             features = features.reshape(1, -1)
         elif features.ndim == 3:
-            # 展平时间维度
+            # flatten
             n_samples, n_features, n_frames = features.shape
             features = features.reshape(n_samples, n_features * n_frames)
         
-        print(f"Reshaped features for transformation: {features.shape}")  # 调试信息
+        print(f"Reshaped features for transformation: {features.shape}")
         
-        # 检查特征数量是否与训练时匹配
         if self.scaler:
             expected_features = self.scaler.n_features_in_
-            print(f"Scaler expects {expected_features} features")  # 调试信息
+            print(f"Scaler expects {expected_features} features")
             if features.shape[1] != expected_features:
                 raise ValueError(
                     f"X has {features.shape[1]} features, but StandardScaler is expecting {expected_features} features as input."
                 )
         
-        # 应用归一化
         if self.scaler:
             features = self.scaler.transform(features)
         
-        # 应用 PCA
         if self.pca:
             features = self.pca.transform(features)
 
@@ -888,7 +883,7 @@ class FeaturePostProcessor:
             elif original_shape[0] < original_shape[1]:
                 features = features.T
         
-        print(f"Transformed features shape: {features.shape}")  # 调试信息
+        print(f"Transformed features shape: {features.shape}")
         return features
     
     def fit_transform(self, features: np.ndarray) -> np.ndarray:

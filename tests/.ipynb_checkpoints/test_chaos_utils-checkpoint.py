@@ -626,7 +626,6 @@ class TestPerformance(unittest.TestCase):
         calculator = LyapunovExponentCalculator(lorenz)
         initial_state = np.array([1.0, 1.0, 1.0])
         
-        import time
         
         # Time the calculation
         start_time = time.time()
@@ -672,7 +671,6 @@ if __name__ == "__main__":
     
     # Check if chaos_utils can be imported
     try:
-        from core.chaos_utils import LorenzSystem
         print("✓ chaos_utils module imported successfully")
         
         # Run the tests

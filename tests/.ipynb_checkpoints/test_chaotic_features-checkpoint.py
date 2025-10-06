@@ -19,8 +19,6 @@ from pathlib import Path
 import pickle
 import time
 from typing import List, Dict, Any, Tuple
-import os
-import sys
 
 # 导入路径设置
 try:
@@ -859,7 +857,6 @@ if __name__ == "__main__":
     
     # Check if scipy is available for test data generation
     try:
-        from scipy.integrate import solve_ivp
         print("✓ Test data generation available")
     except ImportError:
         print("❌ scipy not available. Cannot generate test data.")

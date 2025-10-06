@@ -5,10 +5,7 @@ from typing import Dict, List, Optional, Tuple, Union, Any
 import logging
 import os
 import sys
-import torch
-import torch.nn as nn
 from pathlib import Path
-from typing import Dict, Any, Tuple, Optional
 
 def fix_imports():
     current_file = Path(__file__).resolve()
@@ -253,14 +250,12 @@ class TraditionalChaoticHybrid(nn.Module):
                 classifier_type=classifier_type
             )
         else:
-            # 创建一个能接受两个参数的 mock classifier
             class MockClassifier(nn.Module):
                 def __init__(self, input_dim, output_dim):
                     super().__init__()
                     self.linear = nn.Linear(input_dim, output_dim)
                 
                 def forward(self, x, labels=None):
-                    # 忽略 labels 参数，只使用输入特征
                     return self.linear(x)
             
             self.classifier = MockClassifier(speaker_embedding_dim, num_speakers)
@@ -280,16 +275,13 @@ class TraditionalChaoticHybrid(nn.Module):
         Returns:
             Classification logits
         """
-        # Extract traditional features - 统一调用方式
+        # Extract traditional features
         if isinstance(self.feature_extractor, MockFeatureExtractor):
             traditional_features = self.feature_extractor(audio)
         else:
-            # 真实的特征提取器使用 extract 方法，需要转换为numpy
             if isinstance(audio, torch.Tensor):
-                # 转换为numpy数组，librosa需要numpy输入
                 audio_np = audio.detach().cpu().numpy()
                 traditional_features = self.feature_extractor.extract(audio_np)
-                # 转换回tensor
                 traditional_features = torch.tensor(traditional_features, dtype=torch.float32, device=audio.device)
             else:
                 traditional_features = self.feature_extractor.extract(audio)
@@ -420,10 +412,9 @@ class TraditionalMLPBaseline(nn.Module):
     """
     def __init__(
         self,
-        # 接受但忽略不相关的参数
-        input_dim: Optional[int] = None,  # 添加
-        num_classes: Optional[int] = None,  # 添加
-        baseline_type: Optional[str] = None,  # 添加
+        input_dim: Optional[int] = None,
+        num_classes: Optional[int] = None,
+        baseline_type: Optional[str] = None,
         
         # Feature extraction parameters
         feature_type: str = 'mel',
@@ -442,17 +433,16 @@ class TraditionalMLPBaseline(nn.Module):
         
         device: str = 'cpu',
         
-        **kwargs  # 添加这个来接受额外参数
+        **kwargs
         
     ):
         
         """Initialize Traditional-MLP Baseline Model."""
         super(TraditionalMLPBaseline, self).__init__()
         
-        print("=== TraditionalMLPBaseline 初始化开始 ===")
-        print(f"接收到的参数: {kwargs}")
+        print("=== TraditionalMLPBaseline Initial ===")
+        print(f"Received Parameters: {kwargs}")
         
-        # 参数处理
         feature_type = kwargs.get('feature_type', 'mel')
         n_mels = kwargs.get('n_mels', 80)
         n_mfcc = kwargs.get('n_mfcc', 13)
@@ -462,7 +452,8 @@ class TraditionalMLPBaseline(nn.Module):
         use_batch_norm = kwargs.get('use_batch_norm', True)
         activation = kwargs.get('activation', 'relu')
         
-        print(f"处理后的参数:")
+        print("=" * 20)
+        print(f"PARAMETERS AFTER:")
         print(f"  feature_type: {feature_type}")
         print(f"  n_mels: {n_mels}, n_mfcc: {n_mfcc}")
         print(f"  hidden_dims: {hidden_dims}")
@@ -471,84 +462,81 @@ class TraditionalMLPBaseline(nn.Module):
         self.feature_type = feature_type
         
         # Traditional feature extractor
-        print("创建特征提取器...")
+        print("Create traditional feature extractor...")
         try:
             if feature_type == 'mel':
                 if MelSpectrogramExtractor is not None:
-                    print("使用真实的 MelSpectrogramExtractor")
+                    print("Use Actual MelSpectrogramExtractor")
                     self.feature_extractor = MelSpectrogramExtractor(n_mels=n_mels)
                     feature_dim = n_mels
                 else:
-                    print("使用 Mock MelSpectrogramExtractor")
+                    print("Use Mock MelSpectrogramExtractor")
                     self.feature_extractor = MockFeatureExtractor(None, n_mels)
                     feature_dim = n_mels
             else:
-                print(f"不支持的特征类型: {feature_type}")
+                print(f"Not support feature type: {feature_type}")
                 raise ValueError(f"Unknown feature type: {feature_type}")
             
-            print(f"特征提取器创建成功，feature_dim: {feature_dim}")
+            print(f"Feature Extractor Create Success，feature_dim: {feature_dim}")
             
         except Exception as e:
-            print(f"特征提取器创建失败: {e}")
+            print(f"Feature Extractor Create Fail: {e}")
             raise
         
         # MLP classifier
-        print("创建分类器...")
+        print("Create MLP Classifier...")
         try:
-            # 强制使用手动构建，跳过 MLPClassifier
-            print("使用手动构建的MLP")
+            print("Use Manuall Created MLP")
             
             layers = []
             current_dim = feature_dim
             
-            print(f"开始构建MLP: {current_dim} -> {hidden_dims} -> {num_speakers}")
+            print(f"Start Create MLP: {current_dim} -> {hidden_dims} -> {num_speakers}")
             
             for i, hidden_dim in enumerate(hidden_dims):
-                print(f"添加层 {i+1}: Linear({current_dim}, {hidden_dim})")
+                print(f"ADD LAYER {i+1}: Linear({current_dim}, {hidden_dim})")
                 layers.append(nn.Linear(current_dim, hidden_dim))
                 
                 if use_batch_norm:
-                    print(f"添加层 {i+1}: BatchNorm1d({hidden_dim})")
+                    print(f"ADD LAYER {i+1}: BatchNorm1d({hidden_dim})")
                     layers.append(nn.BatchNorm1d(hidden_dim))
                     
-                print(f"添加层 {i+1}: ReLU()")
+                print(f"ADD LAYER {i+1}: ReLU()")
                 layers.append(nn.ReLU())
                 
-                print(f"添加层 {i+1}: Dropout({dropout_rate})")
+                print(f"ADD LAYER {i+1}: Dropout({dropout_rate})")
                 layers.append(nn.Dropout(dropout_rate))
                 
                 current_dim = hidden_dim
             
-            print(f"添加输出层: Linear({current_dim}, {num_speakers})")
+            print(f"ADD OUTPUT LAYER: Linear({current_dim}, {num_speakers})")
             layers.append(nn.Linear(current_dim, num_speakers))
             
-            print(f"总共创建了 {len(layers)} 层")
+            print(f"Created {len(layers)} layers in total")
             
             self.classifier = nn.Sequential(*layers)
             
-            # 验证分类器
             total_params = sum(p.numel() for p in self.classifier.parameters())
-            print(f"分类器参数总数: {total_params:,}")
+            print(f"TOTAL PARAMETERS: {total_params:,}")
             
             if total_params == 0:
-                print("错误：分类器没有参数！")
-                raise ValueError("分类器创建失败")
+                print("❌ERROR：NO PARAMETERS IN CLASSIFIER!")
+                raise ValueError("Classifier create fail")
             
         except Exception as e:
-            print(f"分类器创建失败: {e}")
+            print(f"Classifier create fail: {e}")
             import traceback
             traceback.print_exc()
             raise
         
-        # 验证整个模型
         total_model_params = sum(p.numel() for p in self.parameters())
-        print(f"整个模型参数总数: {total_model_params:,}")
+        print(f"TOTAL MODEL PARAMETERS: {total_model_params:,}")
         
         if total_model_params == 0:
-            print("错误：整个模型没有参数！")
-            raise ValueError("模型创建失败")
+            print("❌ERROR: NO PARAMETERS FOR THE WHOLE MODEL")
+            raise ValueError("Model create fail")
         
-        print("=== TraditionalMLPBaseline 初始化完成 ===")
+        print("=== TraditionalMLPBaseline Initial ===")
     
     def forward(self, audio: torch.Tensor) -> torch.Tensor:
         """Forward pass through traditional-MLP baseline."""

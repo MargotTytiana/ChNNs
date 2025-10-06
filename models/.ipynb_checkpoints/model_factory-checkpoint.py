@@ -31,9 +31,7 @@ except ImportError:
 
 import os
 import sys
-from pathlib import Path
 
-# 立即修复导入
 def fix_imports():
     current_file = Path(__file__).resolve()
     model_dir = current_file.parent.parent  # models -> Model
@@ -45,8 +43,6 @@ def fix_imports():
 
 MODEL_DIR = fix_imports()
 
-# 现在直接导入，不用相对导入
-from base_model import BaseModel, ModelConfig, ModelType, TaskType, ModelType, OptimizationType
 
 # Import specific model implementations
 try:

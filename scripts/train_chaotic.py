@@ -22,12 +22,8 @@ import numpy as np
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
-import os
-import sys
 import torch
 import torch.nn as nn
-from pathlib import Path
-from typing import Dict, Any, Tuple, Optional
 
 def fix_imports():
     current_file = Path(__file__).resolve()
@@ -1225,7 +1221,6 @@ Examples:
     except Exception as e:
         print(f"Training failed with error: {e}")
         if args.verbose:
-            import traceback
             traceback.print_exc()
         sys.exit(1)
 

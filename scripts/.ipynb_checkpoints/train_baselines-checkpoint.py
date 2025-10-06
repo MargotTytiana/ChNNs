@@ -43,7 +43,6 @@ def setup_project_imports():
     current_file = Path(__file__)
     project_root = current_file.parent.parent  # scripts -> Model
     
-    # 添加所有必要路径
     paths_to_add = [
         str(project_root),
         str(project_root / 'features'),
@@ -61,24 +60,20 @@ def setup_project_imports():
     print(f"✓ Added paths to sys.path: {project_root}")
     return project_root, True
 
-# 设置导入路径
 PROJECT_ROOT, USING_IMPORT_MANAGER = setup_project_imports()
 
-# 项目模块导入
 HAS_BASELINE_EXPERIMENT = False
 HAS_TRADITIONAL_FEATURES = False
 HAS_UTILS = False
 
-# 尝试导入特征提取器
 try:
     from traditional_features import MelSpectrogramExtractor, MFCCExtractor
-    # 创建别名以兼容旧代码
-    MelExtractor = MelSpectrogramExtractor
+    MelSpectrogramExtractor = MelSpectrogramExtractor
     HAS_TRADITIONAL_FEATURES = True
     print("✓ Traditional features imported successfully")
 except ImportError as e:
     print(f"✗ Traditional features import error: {e}")
-    # Mock实现
+    # Mock
     class MelSpectrogramExtractor:
         def __init__(self, **kwargs): 
             self.sample_rate = kwargs.get('sample_rate', 16000)
@@ -93,17 +88,16 @@ except ImportError as e:
         def extract(self, audio): 
             return np.random.randn(self.n_mfcc, 100)  # mock mfcc
     
-    MelExtractor = MelSpectrogramExtractor
+    MelSpectrogramExtractor = MelSpectrogramExtractor
     print("Using mock feature extractors")
 
-# 尝试导入实验管理
 try:
     from baseline_experiment import BaselineExperiment, create_baseline_experiments
     HAS_BASELINE_EXPERIMENT = True
     print("✓ Baseline experiment imported successfully")
 except ImportError as e:
     print(f"✗ Baseline experiment import error: {e}")
-    # Mock实现
+    # Mock
     class BaselineExperiment:
         def __init__(self, config, experiment_name, output_dir, device='auto', seed=42):
             self.config = config
@@ -134,7 +128,6 @@ except ImportError as e:
     
     print("Using mock baseline experiment")
 
-# 尝试导入工具函数
 try:
     from logger import setup_logger
     from reproducibility import set_seed, get_system_info
@@ -142,7 +135,7 @@ try:
     print("✓ Utils imported successfully")
 except ImportError as e:
     print(f"✗ Utils import error: {e}")
-    # Mock实现
+    # Mock
     def setup_logger(name, log_file, level=logging.INFO):
         logger = logging.getLogger(name)
         if not logger.handlers:
@@ -170,25 +163,23 @@ except ImportError as e:
     
     print("Using mock utils")
 
-# 尝试导入评估工具
 try:
     from evaluation.metrics import evaluate_model_comprehensive, StatisticalAnalyzer
     HAS_EVALUATION = True
     print("✓ Evaluation tools imported successfully")
 except ImportError as e:
     print(f"✗ Evaluation tools import error: {e}")
-    # Mock实现
+    # Mock
     class StatisticalAnalyzer:
         @staticmethod
         def compute_confidence_interval(data, confidence=0.95):
             mean = sum(data) / len(data)
             std = (sum((x - mean)**2 for x in data) / len(data))**0.5
-            margin = 1.96 * std / (len(data)**0.5)  # 简化的CI计算
+            margin = 1.96 * std / (len(data)**0.5)
             return mean, mean - margin, mean + margin
         
         @staticmethod
         def perform_t_test(data1, data2):
-            # 简化的t检验
             mean1, mean2 = sum(data1)/len(data1), sum(data2)/len(data2)
             diff = abs(mean1 - mean2)
             return {
@@ -347,7 +338,6 @@ class BaselineTrainingManager:
             # Create experiment configuration
             experiment_config = self.create_experiment_config(method)
             
-            # 确保 num_speakers 在配置中
             if 'num_speakers' not in experiment_config:
                 experiment_config['num_speakers'] = self.config.get('num_speakers', 100)
     
@@ -703,15 +693,14 @@ def load_config(config_path: str) -> Dict[str, Any]:
 
 def create_default_config() -> Dict[str, Any]:
     """Create default configuration."""
-    # 计算相对于train_baselines.py的LibriSpeech路径
-    script_dir = Path(__file__).parent  # scripts目录
-    model_root = script_dir.parent  # Model根目录
-    project_root = model_root.parent  # Project 根目录 
+    script_dir = Path(__file__).parent  # scripts
+    model_root = script_dir.parent  # Model
+    project_root = model_root.parent  # Project
     librispeech_path = project_root / "dataset" / "train-clean-100" / "LibriSpeech" / "train-clean-100"
     
     return {
         'num_speakers': 100,
-        'batch_size': 16,   # 减小batch_size避免内存问题
+        'batch_size': 16,   # reduce batch_size to prevent cache problem
         'num_epochs': 50,
         'learning_rate': 0.001,
         'weight_decay': 1e-4,
@@ -720,7 +709,7 @@ def create_default_config() -> Dict[str, Any]:
         'use_batch_norm': True,
         'n_mels': 80,
         'n_mfcc': 13,
-        'num_workers': 0,  # 添加这个配置
+        'num_workers': 0,  # ADD
         'sample_rate': 16000,
         'max_audio_length': 3.0,
         'data_dir': str(librispeech_path),
@@ -901,28 +890,26 @@ Examples:
     except Exception as e:
         print(f"Training failed with error: {e}")
         if args.verbose:
-            import traceback
             traceback.print_exc()
         sys.exit(1)
 
 def test_dataloader_fix():
-    """测试数据加载器修复是否有效"""
+    """test if the dataloader fix works"""
     try:
         from dataset_loader import test_collate_functions
-        print("测试collate函数...")
+        print("Test collate function...")
         test_collate_functions()
-        print("✓ Collate函数测试成功")
+        print("✓ Collate function test success")
         return True
     except Exception as e:
-        print(f"✗ Collate函数测试失败: {e}")
+        print(f"✗ Collate function test fail: {e}")
         return False
         
 if __name__ == "__main__":
-        # 测试修复
     if test_dataloader_fix():
-        print("数据加载器修复验证成功，开始训练...")
+        print("dataloader fix test success，start training...")
     else:
-        print("数据加载器可能存在问题，但继续尝试训练...")
+        print("dataloader fix still got problem，but keep trying...")
     print(f"✓ Project Root: {PROJECT_ROOT}")
     print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
     print(f"✓ Module imports successful")

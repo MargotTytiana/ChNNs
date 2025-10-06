@@ -19,15 +19,11 @@ from pathlib import Path
 import pickle
 import time
 from typing import List, Dict, Any, Tuple
-import os
-import sys
 
-# 导入路径设置
 try:
     from setup_imports import setup_project_imports
     setup_project_imports()
 except ImportError:
-    # 手动设置路径
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     sys.path.insert(0, project_root)
     
@@ -859,7 +855,6 @@ if __name__ == "__main__":
     
     # Check if scipy is available for test data generation
     try:
-        from scipy.integrate import solve_ivp
         print("✓ Test data generation available")
     except ImportError:
         print("❌ scipy not available. Cannot generate test data.")

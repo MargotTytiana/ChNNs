@@ -15,7 +15,6 @@ except ImportError as e:
     TrainingMetrics = None
 
 try:
-    from .mlp_classifier import MLPClassifier, MLPClassifier, MLPNetwork
     print("  ✓ MLP classifier models loaded")
 except ImportError as e:
     print(f"  ⚠ MLP classifier import warning: {e}")

@@ -1048,7 +1048,7 @@ if __name__ == "__main__":
     all_metrics = evaluate_model_comprehensive(
         predictions=predictions,
         targets=targets,
-        num_classes=self.config['num_speakers'],  # 确保传递这个参数
+        num_classes=self.config['num_speakers'],
         logits=logits,
         confidences=confidences,
         verification_scores=verification_scores,

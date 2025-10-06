@@ -16,7 +16,6 @@ from typing import Dict, List, Tuple, Optional, Union, Any
 from pathlib import Path
 import os
 import sys
-from pathlib import Path
 
 def fix_imports():
     current_file = Path(__file__).resolve() 
@@ -301,7 +300,6 @@ class MLPClassifier(BaseModel):
         # Feature scaling
         if self.config.normalize_features:
             if self.config.feature_scaling == 'standard':
-                from sklearn.preprocessing import StandardScaler
                 self.scaler = StandardScaler()
             elif self.config.feature_scaling == 'minmax':
                 from sklearn.preprocessing import MinMaxScaler
@@ -677,13 +675,10 @@ class SklearnMLPClassifier(SklearnCompatibleModel):
         # Feature scaling
         if self.config.normalize_features:
             if self.config.feature_scaling == 'standard':
-                from sklearn.preprocessing import StandardScaler
                 self.scaler = StandardScaler()
             elif self.config.feature_scaling == 'minmax':
-                from sklearn.preprocessing import MinMaxScaler
                 self.scaler = MinMaxScaler()
             elif self.config.feature_scaling == 'robust':
-                from sklearn.preprocessing import RobustScaler
                 self.scaler = RobustScaler()
             
             if self.scaler:
@@ -827,7 +822,6 @@ if __name__ == "__main__":
         
         try:
             # Create configuration
-            from .base_model import create_model_config
             config = create_model_config(
                 model_type="classifier",
                 task_type="multiclass_classification",
@@ -847,7 +841,6 @@ if __name__ == "__main__":
             print(f"  Hidden layers: {classifier.config.hidden_dims}")
             
             # Split data
-            from sklearn.model_selection import train_test_split
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.2, random_state=42, stratify=y
             )

@@ -7,12 +7,10 @@ from unittest.mock import patch, MagicMock
 import sys
 from typing import Dict, Any
 
-# 导入路径设置
 try:
     from setup_imports import setup_project_imports
     setup_project_imports()
 except ImportError:
-    # 手动设置路径
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     sys.path.insert(0, project_root)
     

@@ -21,21 +21,14 @@ import time
 import numpy as np
 import pytest
 
-import os
-import sys
-import unittest
-from pathlib import Path
 
-# =============================================================================
-# 统一导入设置  
-# =============================================================================
 def setup_module_imports(current_file: str = __file__):
     """Setup imports for current module."""
     try:
         from setup_imports import setup_project_imports
         return setup_project_imports(current_file), True
     except ImportError:
-        current_dir = Path(current_file).resolve().parent  # data目录
+        current_dir = Path(current_file).resolve().parent  # data
         project_root = current_dir.parent  # data -> Model
         
         paths_to_add = [
@@ -53,9 +46,6 @@ def setup_module_imports(current_file: str = __file__):
 # Setup imports
 PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 
-# =============================================================================
-# 测试导入 (清晰明了)
-# =============================================================================
 # Import components to test with clear error handling
 def safe_import_test_modules():
     """Safely import all test modules."""

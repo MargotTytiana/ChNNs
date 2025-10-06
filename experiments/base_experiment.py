@@ -11,9 +11,6 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
-
-# 标准的文件头部导入设置
-import os
 import sys
 from pathlib import Path
 

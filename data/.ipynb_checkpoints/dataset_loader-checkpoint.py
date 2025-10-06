@@ -13,7 +13,6 @@ from collections import defaultdict, Counter
 import random
 import numpy as np
 import sys
-from pathlib import Path
 
 # Setup project imports
 try:
@@ -49,28 +48,25 @@ except ImportError:
     def tqdm(iterable, *args, **kwargs):
         return iterable
 
-import torch
 import torch.nn.functional as F
-from typing import List, Tuple, Union
-import warnings
 
 def custom_audio_collate_fn(batch: List[Tuple[torch.Tensor, int]], 
                            max_length: int = 48000,  # 3 seconds at 16kHz
                            pad_value: float = 0.0) -> Tuple[torch.Tensor, torch.Tensor]:
     """
-    自定义音频collate函数，处理不同长度的音频数据
+    self-define collate function，deal with the audio dataset with different length
     
     Args:
         batch: List of (audio_tensor, label) tuples
-        max_length: 最大音频长度（样本数）
-        pad_value: 填充值
+        max_length: max audio length (sample number)
+        pad_value: padding value
         
     Returns:
         Tuple of (padded_audio_batch, labels_batch)
     """
     audios, labels = zip(*batch)
     
-    # 转换为tensor
+    # transfer into tensor
     processed_audios = []
     for audio in audios:
         if isinstance(audio, torch.Tensor):
@@ -78,24 +74,21 @@ def custom_audio_collate_fn(batch: List[Tuple[torch.Tensor, int]],
         else:
             audio_tensor = torch.tensor(audio, dtype=torch.float32)
         
-        # 确保音频是1D
+        # make sure the audio is 1D
         if audio_tensor.dim() > 1:
             audio_tensor = audio_tensor.squeeze()
-            if audio_tensor.dim() > 1:  # 如果还是多维，取第一个通道
+            if audio_tensor.dim() > 1:  # select the first dim if multi-dim
                 audio_tensor = audio_tensor[0]
         
-        # 截断过长的音频
         if len(audio_tensor) > max_length:
             audio_tensor = audio_tensor[:max_length]
         
-        # 填充过短的音频
         if len(audio_tensor) < max_length:
             pad_length = max_length - len(audio_tensor)
             audio_tensor = F.pad(audio_tensor, (0, pad_length), value=pad_value)
         
         processed_audios.append(audio_tensor)
     
-    # 堆叠成批次
     audio_batch = torch.stack(processed_audios, dim=0)
     labels_batch = torch.tensor(labels, dtype=torch.long)
     
@@ -103,15 +96,15 @@ def custom_audio_collate_fn(batch: List[Tuple[torch.Tensor, int]],
 
 
 def custom_feature_collate_fn(batch: List[Tuple[torch.Tensor, int]], 
-                             max_time_frames: int = 300,  # 最大时间帧数
+                             max_time_frames: int = 300,
                              pad_value: float = 0.0) -> Tuple[torch.Tensor, torch.Tensor]:
     """
-    自定义特征collate函数，处理不同时间维度的特征数据（如Mel频谱图、MFCC）
+    self-define featured collate function，handling the featured data in different time dimention (e.g. Mel、MFCC)
     
     Args:
         batch: List of (feature_tensor, label) tuples where features are [feature_dim, time]
-        max_time_frames: 最大时间帧数
-        pad_value: 填充值
+        max_time_frames: Max time frame
+        pad_value: Padding value
         
     Returns:
         Tuple of (padded_features_batch, labels_batch)
@@ -125,7 +118,7 @@ def custom_feature_collate_fn(batch: List[Tuple[torch.Tensor, int]],
         else:
             feat_tensor = torch.tensor(feat, dtype=torch.float32)
         
-        # 确保特征是2D: [feature_dim, time]
+        # make sure the feature is 2D: [feature_dim, time]
         if feat_tensor.dim() == 1:
             feat_tensor = feat_tensor.unsqueeze(0)
         elif feat_tensor.dim() > 2:
@@ -134,20 +127,18 @@ def custom_feature_collate_fn(batch: List[Tuple[torch.Tensor, int]],
                 feat_tensor = feat_tensor.view(feat_tensor.shape[0], -1)
         
         feature_dim, time_frames = feat_tensor.shape
-        
-        # 截断时间维度
+
         if time_frames > max_time_frames:
             feat_tensor = feat_tensor[:, :max_time_frames]
             time_frames = max_time_frames
-        
-        # 填充时间维度
+
         if time_frames < max_time_frames:
             pad_length = max_time_frames - time_frames
             feat_tensor = F.pad(feat_tensor, (0, pad_length), value=pad_value)
         
         processed_features.append(feat_tensor)
     
-    # 堆叠成批次: [batch_size, feature_dim, time]
+    # [batch_size, feature_dim, time]
     features_batch = torch.stack(processed_features, dim=0)
     labels_batch = torch.tensor(labels, dtype=torch.long)
     
@@ -156,12 +147,12 @@ def custom_feature_collate_fn(batch: List[Tuple[torch.Tensor, int]],
 
 def smart_collate_fn(batch: List[Tuple[torch.Tensor, int]]) -> Tuple[torch.Tensor, torch.Tensor]:
     """
-    智能collate函数，自动检测数据类型并应用相应的处理
+    smart collate function，auto-detect data-type and apply
     """
     if not batch:
         raise ValueError("Empty batch")
     
-    # 检查第一个样本来确定数据类型
+    # check the first sample to decide the data type
     sample_data, _ = batch[0]
     if isinstance(sample_data, torch.Tensor):
         sample_tensor = sample_data
@@ -169,10 +160,8 @@ def smart_collate_fn(batch: List[Tuple[torch.Tensor, int]]) -> Tuple[torch.Tenso
         sample_tensor = torch.tensor(sample_data)
     
     if sample_tensor.dim() == 1:
-        # 原始音频数据
         return custom_audio_collate_fn(batch, max_length=48000)
     elif sample_tensor.dim() == 2:
-        # 特征数据（Mel/MFCC）
         return custom_feature_collate_fn(batch, max_time_frames=300)
     else:
         raise ValueError(f"Unsupported tensor dimension: {sample_tensor.dim()}")
@@ -195,7 +184,7 @@ class LibriSpeechChaoticDataset:
                  preprocessing_config: Optional[Dict[str, Any]] = None,
                  min_samples_per_speaker: int = 1,
                  max_samples_per_speaker: Optional[int] = None,
-                 target_num_speakers: Optional[int] = None,  # 添加这个参数
+                 target_num_speakers: Optional[int] = None,    # Adding this new parameter
                  validation_config: Optional[Dict[str, Any]] = None,
                  cache_dir: Optional[str] = None,
                  random_seed: int = 42):
@@ -728,26 +717,24 @@ class LibriSpeechChaoticDataset:
         split_dataset = LibriSpeechChaoticDataset.__new__(LibriSpeechChaoticDataset)
         split_dataset.__dict__.update(self.__dict__)
         
-        # ❌ 删除这些会重新创建映射的代码：
+        # ❌ 
         # split_speaker_ids = sorted(split_speaker_files.keys())
         # split_dataset.speaker_to_idx = {speaker_id: idx for idx, speaker_id in enumerate(split_speaker_ids)}
         # split_dataset.idx_to_speaker = {idx: speaker_id for speaker_id, idx in split_dataset.speaker_to_idx.items()}
         # split_dataset.num_speakers = len(split_speaker_ids)
         
-        # ✅ 使用父数据集的映射（已有，保持不变）
+        # ✅ 
         split_dataset.speaker_to_idx = self.speaker_to_idx
         split_dataset.idx_to_speaker = self.idx_to_speaker  
         split_dataset.num_speakers = self.num_speakers
         
-        # 重建样本列表
         split_dataset.audio_files = []
         split_dataset.speaker_labels = []
         
         for speaker_id, file_paths in split_speaker_files.items():
-            speaker_idx = self.speaker_to_idx[speaker_id]  # 使用父数据集的映射
+            speaker_idx = self.speaker_to_idx[speaker_id]
             
             for file_path in file_paths:
-                # 找到对应的metadata
                 file_metadata = None
                 for metadata in self.audio_files:
                     if metadata['file_path'] == str(file_path):
@@ -758,9 +745,8 @@ class LibriSpeechChaoticDataset:
                     split_dataset.audio_files.append(file_metadata)
                     split_dataset.speaker_labels.append(speaker_idx)
         
-        # 不打印错误的标签范围信息
-        print(f"分割数据集 {split_name}: {len(split_dataset.audio_files)} 样本, "
-              f"{len(set(split_dataset.speaker_labels))} 说话人")
+        print(f"Split dataset with {split_name}: {len(split_dataset.audio_files)} sample, "
+              f"{len(set(split_dataset.speaker_labels))} speakers")
         
         return split_dataset
     
@@ -883,7 +869,7 @@ def create_chaotic_speaker_dataset(
     dataset_path: str = "../../dataset/train-clean-100/LibriSpeech/train-clean-100/",
     preprocessing_config: Optional[Dict[str, Any]] = None,
     cache_dir: Optional[str] = "./cache/librispeech",
-    target_num_speakers: Optional[int] = None,  # 添加这个参数
+    target_num_speakers: Optional[int] = None,  # Adding new parameter
     **kwargs
 ) -> LibriSpeechChaoticDataset:
     """
@@ -919,7 +905,7 @@ def create_chaotic_speaker_dataset(
         dataset_path=dataset_path,
         preprocessing_config=preprocessing_config,
         cache_dir=cache_dir,
-        target_num_speakers=target_num_speakers,  # 传递参数
+        target_num_speakers=target_num_speakers,
         **kwargs
     )
 
@@ -984,23 +970,23 @@ def create_speaker_dataloaders_with_collate(
     batch_size: int = 32,
     sample_rate: int = 16000,
     max_length: float = 3.0,
-    num_workers: int = 0,  # 设置为0避免多进程问题
+    num_workers: int = 0,  # set 0 to prevent multi-process problem 
     train_split: float = 0.7,
     val_split: float = 0.15,
     seed: int = 42,
     collate_fn=None,
-    target_num_speakers: Optional[int] = None  # 添加这个参数
+    target_num_speakers: Optional[int] = None  # Adding the new parameter
 ):
-    """创建说话人识别的 DataLoader，支持自定义collate函数"""
-    print(f"尝试从 {data_dir} 加载数据集...")
+    """creat the speakers' DataLoader，support self-define collate function"""
+    print("=" * 20)
+    print(f"Trying to load dataset from: {data_dir} ")
+    print("=" * 20)
     
-    # 检查路径是否存在
     if not os.path.exists(data_dir):
-        print(f"数据路径不存在: {data_dir}")
-        print("使用模拟数据进行训练...")
+        print(f"❗Data Path Not Exist: {data_dir}")
+        print("Instead, using the mock data to go on training...")
         return _create_simple_mock_dataloaders_with_collate(batch_size, sample_rate, seed, collate_fn)
     
-    # 如果路径存在，尝试加载真实数据
     try:
         dataset = create_chaotic_speaker_dataset(
             dataset_path=data_dir,
@@ -1009,18 +995,15 @@ def create_speaker_dataloaders_with_collate(
             target_num_speakers=target_num_speakers 
         )
         
-        # 创建数据分割
         splits = dataset.create_data_splits(
             train_ratio=train_split,
             val_ratio=val_split,
             test_ratio=1.0 - train_split - val_split
         )
         
-        # 如果没有指定collate函数，使用智能collate函数
         if collate_fn is None:
             collate_fn = smart_collate_fn
         
-        # 创建dataloaders
         dataloaders = {}
         for split_name, split_dataset in splits.items():
             pytorch_dataset = split_dataset.create_pytorch_dataset(return_metadata=False)
@@ -1030,28 +1013,26 @@ def create_speaker_dataloaders_with_collate(
                 batch_size=batch_size,
                 shuffle=(split_name == 'train'),
                 num_workers=num_workers,
-                pin_memory=False,  # 避免CUDA相关问题
+                pin_memory=False,  # prevent the CUDA related problem
                 drop_last=(split_name == 'train'),
-                collate_fn=collate_fn  # 使用自定义collate函数
+                collate_fn=collate_fn
             )
             dataloaders[split_name] = dataloader
         
         return dataloaders['train'], dataloaders['val'], dataloaders['test']
         
     except Exception as e:
-        print(f"真实数据加载失败: {e}")
-        print(f"错误类型: {type(e).__name__}")
+        print(f"❗Targeted Data Loading False: {e}")
+        print(f"Fasle Type: {type(e).__name__}")
         import traceback
-        print("详细错误信息:")
+        print("Detailed Info:")
         traceback.print_exc()
         return _create_simple_mock_dataloaders_with_collate(batch_size, sample_rate, seed, collate_fn)
 
 
 
 def _create_simple_mock_dataloaders_with_collate(batch_size: int, sample_rate: int, seed: int, collate_fn=None):
-    """创建简单的模拟数据加载器，支持自定义collate函数"""
-    import torch
-    from torch.utils.data import DataLoader, Dataset
+    """Create simple mock dataloaders, support self-define，collate function"""
     
     class SimpleMockDataset(Dataset):
         def __init__(self, num_samples: int, num_classes: int = 10):
@@ -1065,33 +1046,28 @@ def _create_simple_mock_dataloaders_with_collate(batch_size: int, sample_rate: i
         def __getitem__(self, idx):
             speaker_id = idx % self.num_classes
             
-            # 创建不同长度的音频来测试collate函数
+            # create different length audio to test collate function 
             length_variation = torch.randint(sample_rate//2, sample_rate*2, (1,)).item()
             
-            # 为每个说话人创建不同的信号特征
+            # create different signal feature for each speaker
             base_freq = 200 + speaker_id * 100
             t = torch.linspace(0, length_variation/sample_rate, length_variation)
             
-            # 生成有特征的音频
             audio = torch.sin(2 * torch.pi * base_freq * t)
             audio += 0.3 * torch.sin(2 * torch.pi * base_freq * 1.5 * t)
             audio += 0.1 * torch.randn_like(audio)
             
-            # 归一化
             audio = audio / torch.max(torch.abs(audio))
             
             return audio.float(), torch.tensor(speaker_id, dtype=torch.long)
     
-    # 如果没有指定collate函数，使用智能collate函数
     if collate_fn is None:
         collate_fn = smart_collate_fn
     
-    # 创建数据集
     train_dataset = SimpleMockDataset(800, 10)
     val_dataset = SimpleMockDataset(160, 10)
     test_dataset = SimpleMockDataset(160, 10)
     
-    # 创建DataLoader
     train_loader = DataLoader(
         train_dataset, 
         batch_size=batch_size, 
@@ -1114,10 +1090,10 @@ def _create_simple_mock_dataloaders_with_collate(batch_size: int, sample_rate: i
         num_workers=0
     )
     
-    print(f"模拟数据集创建成功: 10个说话人，训练集 {len(train_dataset)} 样本（支持变长音频）")
+    print(f"✅ Mock Dataset Create Success: 10 speakers，training set {len(train_dataset)} sample")
     return train_loader, val_loader, test_loader
+
     
-# 修改 create_speaker_dataloaders 函数
 def create_speaker_dataloaders(
     data_dir: str,
     batch_size: int = 32,
@@ -1127,9 +1103,8 @@ def create_speaker_dataloaders(
     train_split: float = 0.7,
     val_split: float = 0.15,
     seed: int = 42,
-    target_num_speakers: Optional[int] = None  # 添加这个参数
+    target_num_speakers: Optional[int] = None  # Adding
 ):
-    """修改后的create_speaker_dataloaders函数，自动使用smart_collate_fn"""
     return create_speaker_dataloaders_with_collate(
         data_dir=data_dir,
         batch_size=batch_size,
@@ -1140,39 +1115,37 @@ def create_speaker_dataloaders(
         val_split=val_split,
         seed=seed,
         collate_fn=smart_collate_fn,
-        target_num_speakers=target_num_speakers  # 传递参数
+        target_num_speakers=target_num_speakers
     )
 
-# 特定用途的collate函数创建器
+
 def create_mel_collate_fn(n_mels: int = 80, max_time_frames: int = 300):
-    """创建Mel频谱图专用的collate函数"""
+    """collate for mel"""
     def mel_collate_fn(batch):
         return custom_feature_collate_fn(batch, max_time_frames=max_time_frames)
     return mel_collate_fn
 
 
 def create_mfcc_collate_fn(n_mfcc: int = 13, max_time_frames: int = 300):
-    """创建MFCC专用的collate函数"""
+    """collate function for MFCC"""
     def mfcc_collate_fn(batch):
         return custom_feature_collate_fn(batch, max_time_frames=max_time_frames)
     return mfcc_collate_fn
 
 
 def create_audio_collate_fn(max_length_seconds: float = 3.0, sample_rate: int = 16000):
-    """创建原始音频专用的collate函数"""
+    """collate function for original audio"""
     max_length = int(max_length_seconds * sample_rate)
     def audio_collate_fn(batch):
         return custom_audio_collate_fn(batch, max_length=max_length)
     return audio_collate_fn
 
 
-# 测试collate函数的功能
 def test_collate_functions():
-    """测试各种collate函数"""
-    print("测试自定义collate函数...")
+    """Test Every Type of collate function"""
+    print("Test self-defined collate function...")
     
-    # 测试音频collate函数
-    print("1. 测试音频collate函数")
+    print("1. Test audio collate function")
     test_audio_batch = [
         (torch.randn(24000), 0),  # 1.5s
         (torch.randn(48000), 1),  # 3.0s  
@@ -1181,12 +1154,11 @@ def test_collate_functions():
     
     try:
         audio_batch, labels = custom_audio_collate_fn(test_audio_batch)
-        print(f"✓ 音频collate成功: {audio_batch.shape}, {labels.shape}")
+        print(f"✓ audio collate success: {audio_batch.shape}, {labels.shape}")
     except Exception as e:
-        print(f"✗ 音频collate失败: {e}")
+        print(f"✗ audio collate fail: {e}")
     
-    # 测试特征collate函数
-    print("2. 测试特征collate函数")
+    print("2. test featured collate function")
     test_feature_batch = [
         (torch.randn(80, 200), 0),  # 80 mel bins, 200 frames
         (torch.randn(80, 150), 1),  # 80 mel bins, 150 frames
@@ -1195,20 +1167,19 @@ def test_collate_functions():
     
     try:
         feature_batch, labels = custom_feature_collate_fn(test_feature_batch)
-        print(f"✓ 特征collate成功: {feature_batch.shape}, {labels.shape}")
+        print(f"✓ featured collate success: {feature_batch.shape}, {labels.shape}")
     except Exception as e:
-        print(f"✗ 特征collate失败: {e}")
+        print(f"✗ featured collate fail: {e}")
     
-    # 测试智能collate函数
-    print("3. 测试智能collate函数")
+    print("3. Test smart collate function")
     try:
         audio_batch, labels = smart_collate_fn(test_audio_batch)
-        print(f"✓ 智能collate (音频)成功: {audio_batch.shape}, {labels.shape}")
+        print(f"✓ smart collate (audio) success: {audio_batch.shape}, {labels.shape}")
         
         feature_batch, labels = smart_collate_fn(test_feature_batch)
-        print(f"✓ 智能collate (特征)成功: {feature_batch.shape}, {labels.shape}")
+        print(f"✓ smart collate (featured) success: {feature_batch.shape}, {labels.shape}")
     except Exception as e:
-        print(f"✗ 智能collate失败: {e}")
+        print(f"✗ smart collate fail: {e}")
 
         
 # Example usage and testing
@@ -1287,5 +1258,4 @@ if __name__ == "__main__":
         print("Please ensure audio_preprocessor.py and data_utils.py are available.")
     except Exception as e:
         print(f"Error during testing: {e}")
-        import traceback
         traceback.print_exc()

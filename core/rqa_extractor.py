@@ -18,25 +18,17 @@ import scipy.spatial.distance as distance
 from scipy.stats import entropy
 from sklearn.preprocessing import StandardScaler
 import logging
-
 import os
 import sys
-import numpy as np
-import warnings
-from typing import Dict, List, Tuple, Optional, Union, Any
-from dataclasses import dataclass, field
 from pathlib import Path
 
-# =============================================================================
-# 统一导入设置
-# =============================================================================
 def setup_module_imports(current_file: str = __file__):
     """Setup imports for current module.""" 
     try:
         from setup_imports import setup_project_imports
         return setup_project_imports(current_file), True
     except ImportError:
-        current_dir = Path(current_file).resolve().parent  # core目录
+        current_dir = Path(current_file).resolve().parent  # core
         project_root = current_dir.parent  # core -> Model
         
         paths_to_add = [
@@ -54,9 +46,6 @@ def setup_module_imports(current_file: str = __file__):
 # Setup imports
 PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 
-# =============================================================================
-# 项目模块导入 (带安全检查)
-# =============================================================================
 try:
     from chaos_utils import (
         largest_lyapunov_from_data, correlation_dimension, 
@@ -66,7 +55,6 @@ try:
 except ImportError as e:
     HAS_CHAOS_UTILS = False
     warnings.warn(f"chaos_utils not available: {e}")
-    # 简单fallback，不需要大量代码
     largest_lyapunov_from_data = lambda x: 0.0
     correlation_dimension = lambda x: 2.0
 
@@ -86,7 +74,6 @@ except ImportError as e:
     # Simple fallback
     safe_divide = lambda x, y: x / (y + 1e-12)
     
-    # 提供默认类定义以避免NameError
     @dataclass
     class EmbeddingConfig:
         """Default EmbeddingConfig when import fails"""

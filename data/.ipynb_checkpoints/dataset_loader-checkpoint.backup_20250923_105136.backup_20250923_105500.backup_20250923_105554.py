@@ -16,9 +16,7 @@ import numpy as np
 
 
 # 在文件开头统一添加
-import os
 import sys
-from pathlib import Path
 
 # Setup project imports
 try:
@@ -45,8 +43,6 @@ try:
 except ImportError:
     # Fallback imports for standalone testing
     try:
-        from audio_preprocessor import AudioPreprocessingPipeline, create_preprocessing_pipeline
-        from data_utils import DataValidator, DataTransformer, DatasetSplitter
         HAS_PROJECT_MODULES = True
     except ImportError:
         HAS_PROJECT_MODULES = False
@@ -912,8 +908,6 @@ def create_speaker_dataloaders(
 
 def _create_simple_mock_dataloaders(batch_size: int, sample_rate: int, seed: int):
     """创建简单的模拟数据加载器"""
-    import torch
-    from torch.utils.data import DataLoader, Dataset
     
     class SimpleMockDataset(Dataset):
         def __init__(self, num_samples: int, num_classes: int = 10):
@@ -1029,5 +1023,4 @@ if __name__ == "__main__":
         print("Please ensure audio_preprocessor.py and data_utils.py are available.")
     except Exception as e:
         print(f"Error during testing: {e}")
-        import traceback
         traceback.print_exc()

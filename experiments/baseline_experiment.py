@@ -33,7 +33,6 @@ def fix_imports():
 
 MODEL_DIR = fix_imports()
 
-# 直接导入
 from base_experiment import BaseExperiment
 from hybrid_models import TraditionalMLPBaseline, HybridModelManager
 from traditional_features import MelSpectrogramExtractor, MFCCExtractor
@@ -74,7 +73,7 @@ class BaselineExperiment(BaseExperiment):
         # Initialize feature extractor
         self.feature_extractor = None
 
-        # 添加 MetricsCalculator 初始化
+        # Add MetricsCalculator Initialization
         from evaluation.metrics import MetricsCalculator
         self.metrics_calculator = MetricsCalculator(
             num_classes=self.config['num_speakers'],
@@ -170,10 +169,8 @@ class BaselineExperiment(BaseExperiment):
         else:
             raise ValueError(f"Unknown baseline type: {baseline_type}")
 
-        # 确保模型完全移动到设备
         model = model.to(self.device)
         
-        # 检查所有参数是否在正确设备上
         for name, param in model.named_parameters():
             if param.device.type != self.device:
                 self.logger.warning(f"Parameter {name} not on correct device: {param.device} vs {self.device}")
@@ -317,11 +314,10 @@ class BaselineExperiment(BaseExperiment):
 
         
     def _apply_feature_extraction(self, train_loader, val_loader, test_loader):
-        """在运行时应用特征提取"""
+        """Apply Feature Extraction when Training"""
         
-        self.logger.info("应用Mel特征提取...")
+        self.logger.info("Apply Mel Feature Extraction...")
         
-        # 创建Mel提取器
         mel_extractor = MelSpectrogramExtractor(
             sample_rate=self.config['sample_rate'],
             n_mels=self.config.get('n_mels', 80),
@@ -330,21 +326,18 @@ class BaselineExperiment(BaseExperiment):
         )
     
         def extract_features_from_loader(dataloader):
-            """从dataloader中提取特征"""
             features_list = []
             labels_list = []
             
             for batch_audio, batch_labels in dataloader:
                 batch_features = []
                 for audio in batch_audio:
-                    # 提取Mel特征
                     mel_features = mel_extractor.extract(audio.numpy())
                     batch_features.append(torch.tensor(mel_features))
                 
                 features_list.append(torch.stack(batch_features))
                 labels_list.append(batch_labels)
             
-            # 重新创建数据集
             all_features = torch.cat(features_list, dim=0)
             all_labels = torch.cat(labels_list, dim=0)
             
@@ -357,7 +350,6 @@ class BaselineExperiment(BaseExperiment):
                 collate_fn=smart_collate_fn
             )
         
-        # 应用特征提取
         new_train_loader = extract_features_from_loader(train_loader)
         new_val_loader = extract_features_from_loader(val_loader)
         new_test_loader = extract_features_from_loader(test_loader)
@@ -367,30 +359,25 @@ class BaselineExperiment(BaseExperiment):
     
     def create_dataloaders(self) -> Tuple[DataLoader, DataLoader, DataLoader]:
         """Create data loaders for training, validation, and testing."""
-        # 添加这些调试语句
-        print(f"create_speaker_dataloaders 变量值: {create_speaker_dataloaders}")
-        print(f"create_speaker_dataloaders 类型: {type(create_speaker_dataloaders)}")
+        print(f"create_speaker_dataloaders VALUE: {create_speaker_dataloaders}")
+        print(f"create_speaker_dataloaders TYPE: {type(create_speaker_dataloaders)}")
         
-        # 尝试手动导入测试
         try:
             from dataset_loader import create_speaker_dataloaders as manual_import
-            print(f"手动导入成功: {manual_import}")
+            print(f"Manually Import: {manual_import}")
         except ImportError as e:
-            print(f"手动导入失败: {e}")
+            print(f"✖️ Manually Import Fail: {e}")
         
-        # 检查当前Python路径
         import sys
-        print(f"当前Python路径: {sys.path[:3]}...")  # 只显示前3个路径
+        print(f"Current Python Path: {sys.path[:3]}...")
         
-        # 根据项目结构设置正确的数据路径
         if 'data_dir' not in self.config:
-            # 从Model目录向上找到project根目录，然后到dataset
-            model_dir = Path(__file__).parent.parent  # 从experiments回到Model
-            project_root = model_dir.parent  # 从Model回到project
+            model_dir = Path(__file__).parent.parent  # experiments --> Model
+            project_root = model_dir.parent  # Model --> project
             librispeech_path = project_root / "dataset" / "train-clean-100" / "LibriSpeech" / "train-clean-100"
             self.config['data_dir'] = str(librispeech_path)
             
-        print(f"使用数据路径: {self.config['data_dir']}")
+        print(f"✅ Data Path: {self.config['data_dir']}")
         
         if create_speaker_dataloaders is not None:
             # Use real data loading
@@ -406,97 +393,82 @@ class BaselineExperiment(BaseExperiment):
                 target_num_speakers=self.config['num_speakers']
             )
             
-            # 保存dataloaders引用，供后续模型创建使用
             self.dataloaders = (train_loader, val_loader, test_loader)
             
-            # === 修改：检查所有数据以找到真实的标签范围 ===
             try:
-                self.logger.info("扫描所有数据以确定真实的标签范围...")
+                self.logger.info("Scanning Every Data to verify the real Label Range...")
                 
-                # 获取第一个batch的输入维度
                 sample_batch = next(iter(train_loader))
                 sample_input, sample_labels = sample_batch
                 
-                # 扫描所有数据集以找到完整的标签范围
                 all_labels = []
                 
-                # 检查训练集
-                self.logger.info("扫描训练集...")
+                self.logger.info("Scanning the Training Dataset...")
                 for batch_idx, (_, labels) in enumerate(train_loader):
                     all_labels.extend(labels.tolist())
-                    if batch_idx % 50 == 0:  # 每50个batch打印一次进度
+                    if batch_idx % 50 == 0:
                         current_min = min(all_labels)
                         current_max = max(all_labels)
-                        self.logger.info(f"已扫描 {batch_idx + 1} 个训练批次, 当前标签范围: {current_min}-{current_max}")
-                
-                # 检查验证集
-                self.logger.info("扫描验证集...")
+                        self.logger.info(f"Finish Scan {batch_idx + 1} batch, current label range: {current_min}-{current_max}")
+
+                self.logger.info("Scanning the Val Dataset...")
                 for _, labels in val_loader:
                     all_labels.extend(labels.tolist())
                 
-                # 检查测试集
-                self.logger.info("扫描测试集...")
+                self.logger.info("Scanning the Test Dataset...")
                 for _, labels in test_loader:
                     all_labels.extend(labels.tolist())
                 
-                # 计算真实的标签范围
                 min_label = min(all_labels)
                 max_label = max(all_labels)
                 actual_num_speakers = max_label + 1
                 unique_labels = set(all_labels)
                 
-                self.logger.info(f"=== 完整数据集标签分析 ===")
-                self.logger.info(f"数据批次形状: {sample_input.shape}")
-                self.logger.info(f"完整标签范围: {min_label} 到 {max_label}")
-                self.logger.info(f"实际需要的类别数: {actual_num_speakers}")
-                self.logger.info(f"唯一标签数量: {len(unique_labels)}")
-                self.logger.info(f"配置中的说话人数量: {self.config['num_speakers']}")
-                self.logger.info(f"基线类型: {self.config['baseline_type']}")
+                self.logger.info(f"===== Dataset Labels Analysis =====")
+                self.logger.info(f"INPUT SHAPE: {sample_input.shape}")
+                self.logger.info(f"LABEL RANGE: {min_label} to {max_label}")
+                self.logger.info(f"ACTUAL SPEAKERS: {actual_num_speakers}")
+                self.logger.info(f"UNIQUE LABEL NUMBER: {len(unique_labels)}")
+                self.logger.info(f"SPEAKER NUMBER IN CONFIG: {self.config['num_speakers']}")
+                self.logger.info(f"BASELINE TYPE: {self.config['baseline_type']}")
                 
-                # 检查标签是否连续
                 expected_labels = set(range(min_label, max_label + 1))
                 missing_labels = expected_labels - unique_labels
                 if missing_labels:
-                    self.logger.warning(f"发现缺失的标签: {sorted(list(missing_labels))[:10]}{'...' if len(missing_labels) > 10 else ''}")
+                    self.logger.warning(f"‼️DETECT MISSING LABEL: {sorted(list(missing_labels))[:10]}{'...' if len(missing_labels) > 10 else ''}")
                 
-                # 检查数据类型匹配
                 if 'mel' in self.config['baseline_type'] and sample_input.shape[1] == 48000:
-                    self.logger.warning(f"检测到原始音频数据 {sample_input.shape}，但基线类型是mel_mlp")
-                    self.logger.warning("这可能导致维度不匹配，模型将自动适应")
+                    self.logger.warning(f"Detect original dataset: {sample_input.shape}，but baseline type is mel_mlp")
+                    self.logger.warning("Probably will lead to dim unmatch，model will auto-fit in")
                 
-                # 调整说话人数量到实际需要的数量
                 model_needs_recreation = False
                 if actual_num_speakers > self.config['num_speakers']:
                     old_num_speakers = self.config['num_speakers']
                     self.config['num_speakers'] = actual_num_speakers
-                    self.logger.warning(f"数据集需要 {actual_num_speakers} 个类别，超过配置的 {old_num_speakers} 个")
-                    self.logger.info(f"自动调整 num_speakers 从 {old_num_speakers} 到 {actual_num_speakers}")
+                    self.logger.warning(f"Dataset need speaker number: {actual_num_speakers}, surpass the nuber in config: {old_num_speakers}")
+                    self.logger.info(f"Adjust the  num_speakers from {old_num_speakers} to {actual_num_speakers}")
                     model_needs_recreation = True
                 
-                # 如果模型已存在且需要重新创建
                 if hasattr(self, 'model') and self.model is not None and model_needs_recreation:
-                    self.logger.info("重新创建模型以匹配完整的说话人数量...")
+                    self.logger.info("Recreat Model to Match the Speaker Number...")
                     self.model = None
                     model_needs_recreation = True
                 
-                # 创建模型
                 if model_needs_recreation or not hasattr(self, 'model') or self.model is None:
-                    self.logger.info("创建适应完整数据集的模型...")
+                    self.logger.info("Create the model that suits the full dataset...")
                     self._create_model_with_input_detection(sample_input)
                     
                     if self.model is None:
-                        self.logger.error("模型创建失败，尝试备用创建方法...")
+                        self.logger.error("Model creation failed，trying the other plan...")
                         self._create_model_fallback_with_detection(sample_input)
                 
-                # 最终验证
                 if min_label < 0:
-                    raise ValueError(f"发现负标签值: {min_label}")
+                    raise ValueError(f"DETECT NEGATIVE LABEL: {min_label}")
                 if max_label >= self.config['num_speakers']:
-                    raise ValueError(f"最大标签值 {max_label} 仍然超出类别范围 [0, {self.config['num_speakers']-1}]")
+                    raise ValueError(f"MAX LABEL: {max_label} --> EXCEED RANGE [0, {self.config['num_speakers']-1}]")
                     
-                self.logger.info(f"✓ 完整标签范围验证通过: [{min_label}, {max_label}] 在 {self.config['num_speakers']} 个类别内")
+                self.logger.info(f"✅ FALL LABEL RANGE VERIFICATION PASS: [{min_label}, {max_label}] in {self.config['num_speakers']} category")
                 
-                # 重新创建dataloader迭代器，因为我们已经消耗了数据
                 train_loader, val_loader, test_loader = create_speaker_dataloaders(
                     data_dir=self.config['data_dir'],
                     batch_size=self.config['batch_size'],
@@ -510,11 +482,10 @@ class BaselineExperiment(BaseExperiment):
                 )
                 
             except Exception as e:
-                self.logger.error(f"完整数据集扫描失败: {e}")
+                self.logger.error(f"❌ FALL LABEL RANGE VERIFICATION FAILED: {e}")
                 import traceback
                 traceback.print_exc()
-                # 使用保守的默认值
-                self.logger.info("使用保守的说话人数量: 260")
+                self.logger.info("USING NUMBER "260" instead")
                 self.config['num_speakers'] = 260
             
         else:
@@ -551,20 +522,18 @@ class BaselineExperiment(BaseExperiment):
         return train_loader, val_loader, test_loader
     
     def _create_model_with_input_detection(self, sample_input):
-        """根据实际输入创建模型"""
+        """Creater Model Based on the Real Input"""
         try:
-            # 根据实际输入形状确定输入维度
             actual_input_shape = sample_input.shape
-            self.logger.info(f"检测到实际输入形状: {actual_input_shape}")
+            self.logger.info(f"DETECT REAL INPUT SHAPE: {actual_input_shape}")
             
             if len(actual_input_shape) == 2:  # [batch_size, features]
                 input_dim = actual_input_shape[1]
             elif len(actual_input_shape) == 3:  # [batch_size, feature_dim, time_frames]
                 input_dim = actual_input_shape[1] * actual_input_shape[2]
             else:
-                raise ValueError(f"不支持的输入形状: {actual_input_shape}")
+                raise ValueError(f"NOT SUPPORT INPUT SHAPE: {actual_input_shape}")
             
-            # 创建模型配置
             model_config = {
                 'input_dim': input_dim,
                 'num_classes': self.config['num_speakers'],
@@ -574,86 +543,77 @@ class BaselineExperiment(BaseExperiment):
                 'baseline_type': self.config['baseline_type']
             }
             
-            self.logger.info(f"创建模型配置: 输入维度={input_dim}, 输出类别={self.config['num_speakers']}")
+            self.logger.info(f"CREATE MODEL CONFIG: INPUT DIM={input_dim}, OUTPUT TYPE={self.config['num_speakers']}")
             
-            # 使用现有的模型创建逻辑
             if hasattr(self, '_create_baseline_model'):
                 self.model = self._create_baseline_model(model_config)
             else:
-                # 如果没有_create_baseline_model方法，使用TraditionalMLPBaseline
                 from hybrid_models import TraditionalMLPBaseline
                 self.model = TraditionalMLPBaseline(model_config)
             
             if self.model is not None:
                 self.model = self.model.to(self.device)
-                self.logger.info(f"✓ 模型创建成功，输入维度: {input_dim}, 输出维度: {self.config['num_speakers']}")
+                self.logger.info("MODEL CREATE SUCCESS")
+                self.logger.info(f"INPUT DIM: {input_dim}, OUTPUT DIM: {self.config['num_speakers']}")
             else:
-                self.logger.error("模型创建返回None")
+                self.logger.error("MODEL RETURN: None")
                 
         except Exception as e:
-            self.logger.error(f"模型创建失败: {e}")
+            self.logger.error(f"MODEL CREATE FAILED: {e}")
             self.model = None
     
     def _create_model_fallback_with_detection(self, sample_input):
-        """备用模型创建方法，基于实际输入维度"""
+        """PLAN B model, based on the real input dim"""
         try:
             import torch.nn as nn
             
-            # 从实际输入中获取维度
             actual_input_shape = sample_input.shape
-            self.logger.info(f"备用模型：检测到实际输入形状: {actual_input_shape}")
+            self.logger.info(f"PLAN B MODEL：DETECT REAL INPUT DIM: {actual_input_shape}")
             
             if len(actual_input_shape) == 2:  # [batch_size, features]
                 input_dim = actual_input_shape[1]
             elif len(actual_input_shape) == 3:  # [batch_size, feature_dim, time_frames]
                 input_dim = actual_input_shape[1] * actual_input_shape[2]
             else:
-                # 如果形状异常，尝试flatten
                 input_dim = sample_input.view(sample_input.size(0), -1).shape[1]
             
-            self.logger.info(f"备用模型使用输入维度: {input_dim}")
+            self.logger.info(f"PLAN B MODEL USING DIM: {input_dim}")
             
-            # 创建适应性的MLP模型
-            if input_dim > 10000:  # 大输入维度
+            if input_dim > 10000:
                 hidden_dims = [1024, 512, 256]
-            elif input_dim > 1000:  # 中等输入维度
+            elif input_dim > 1000:
                 hidden_dims = [512, 256, 128]
-            else:  # 小输入维度
+            else:
                 hidden_dims = [256, 128, 64]
             
             layers = []
-            
-            # 输入层
             layers.append(nn.Flatten())
             layers.append(nn.Linear(input_dim, hidden_dims[0]))
             layers.append(nn.ReLU())
             layers.append(nn.Dropout(0.3))
             
-            # 隐藏层
             for i in range(len(hidden_dims) - 1):
                 layers.append(nn.Linear(hidden_dims[i], hidden_dims[i+1]))
                 layers.append(nn.ReLU())
                 layers.append(nn.Dropout(0.3))
             
-            # 输出层
             layers.append(nn.Linear(hidden_dims[-1], self.config['num_speakers']))
             
             self.model = nn.Sequential(*layers).to(self.device)
             
-            # 计算模型参数数量
             total_params = sum(p.numel() for p in self.model.parameters())
             
-            self.logger.info(f"✓ 备用模型创建成功")
-            self.logger.info(f"  输入维度: {input_dim}")
-            self.logger.info(f"  隐藏层: {hidden_dims}")
-            self.logger.info(f"  输出维度: {self.config['num_speakers']}")
-            self.logger.info(f"  总参数: {total_params:,}")
+            self.logger.info(f"✓ PLAN B MODEL CREATE SUCCESS")
+            self.logger.info(f"  INPUT DIM: {input_dim}")
+            self.logger.info(f"  HIDDEN LAYER: {hidden_dims}")
+            self.logger.info(f"  OUTPUT DIM: {self.config['num_speakers']}")
+            self.logger.info(f"  TOTAL PARAMS: {total_params:,}")
             
         except Exception as e:
-            self.logger.error(f"备用模型创建也失败: {e}")
+            self.logger.error(f"❌PLAN B MODEL CREATE FAILED: {e}")
             import traceback
             traceback.print_exc()
-            raise RuntimeError("无法创建模型")
+            raise RuntimeError("‼️CAN NOT CREATE MODEL")
                 
     def create_optimizer(self, model: nn.Module) -> optim.Optimizer:
         """Create optimizer for the baseline model."""
@@ -719,8 +679,8 @@ class BaselineExperiment(BaseExperiment):
         
         # Debug: Check label distribution in first validation epoch
         if not training and current_epoch == 0:
-            print(f"验证集标签范围: {labels.min().item()} - {labels.max().item()}")
-            print(f"验证集唯一标签数: {len(torch.unique(labels))}")
+            print(f"VAL Dataset Label Range: {labels.min().item()} - {labels.max().item()}")
+            print(f"VAL Dataset Unique Label Number: {len(torch.unique(labels))}")
         
         # Forward pass through model
         logits = self.model(audio)
@@ -728,8 +688,8 @@ class BaselineExperiment(BaseExperiment):
         # Debug: Check prediction distribution in first validation epoch
         if not training and current_epoch == 0:
             preds = torch.argmax(logits, dim=1)
-            print(f"预测标签范围: {preds.min().item()} - {preds.max().item()}")
-            print(f"预测唯一标签数: {len(torch.unique(preds))}")
+            print(f"Prediction Dataset Label Range: {preds.min().item()} - {preds.max().item()}")
+            print(f"Prediction Unique Label Number: {len(torch.unique(preds))}")
         
         # Compute loss
         loss = self.criterion(logits, labels)
@@ -845,12 +805,11 @@ class BaselineExperiment(BaseExperiment):
         return analysis_results
 
     def _validate_data_path(self):
-        """验证数据路径是否正确"""
+        """varify data path"""
         data_dir = Path(self.config['data_dir'])
         
         if not data_dir.exists():
-            self.logger.error(f"数据路径不存在: {data_dir}")
-            # 尝试其他可能的路径
+            self.logger.error(f"‼️Data path doesn't exsit: {data_dir}")
             alternatives = [
                 data_dir.parent.parent / "dataset" / "train-clean-100" / "LibriSpeech" / "train-clean-100",
                 Path("/dataset/train-clean-100/LibriSpeech/train-clean-100/"),
@@ -858,25 +817,23 @@ class BaselineExperiment(BaseExperiment):
             
             for alt_path in alternatives:
                 if alt_path.exists():
-                    self.logger.info(f"找到替代路径: {alt_path}")
+                    self.logger.info(f"Find Dataset in: {alt_path}")
                     self.config['data_dir'] = str(alt_path)
                     return
             
-            raise FileNotFoundError(f"未找到LibriSpeech数据集，检查过的路径: {[data_dir] + alternatives}")
+            raise FileNotFoundError(f"Didn't find LibriSpeech Dataset，Checked Path: {[data_dir] + alternatives}")
         
-        # 检查是否包含音频文件
         flac_files = list(data_dir.rglob("*.flac"))
         if len(flac_files) == 0:
-            raise ValueError(f"数据路径 {data_dir} 中未找到FLAC音频文件")
+            raise ValueError(f"Data Path {data_dir} didn't find FLAC files")
         
-        self.logger.info(f"数据路径验证成功: {data_dir}")
-        self.logger.info(f"找到 {len(flac_files)} 个FLAC文件")
+        self.logger.info(f"✅ DATA PATH VARIFICATION SUCCESS: {data_dir}")
+        self.logger.info(f"FOUND FLAC FILES: {len(flac_files)}")
 
     def setup(self):
         """Set up all experiment components."""
         self.logger.info("Setting up experiment components...")
         
-        # 验证数据路径
         self._validate_data_path()
         
         # Create model
@@ -885,10 +842,10 @@ class BaselineExperiment(BaseExperiment):
         try:
             model_device = next(self.model.parameters()).device
         except StopIteration:
-            self.logger.error("模型没有参数！模型可能为空。")
-            self.logger.error(f"模型类型: {type(self.model)}")
-            self.logger.error(f"模型结构: {self.model}")
-            raise ValueError("模型没有参数，无法获取设备信息")
+            self.logger.error("NO PARAMETERS IN MODEL! MODEL COULD BE EMPTY!")
+            self.logger.error(f"MODEL TYPE: {type(self.model)}")
+            self.logger.error(f"MODEL STURCTURE: {self.model}")
+            raise ValueError("CANNOT ACQUIRE DEVICE INFO WITHOUT PARAMETERS")
         if str(model_device) != str(self.device):
             self.logger.error(f"Model device mismatch: {model_device} vs {self.device}")
         
@@ -927,17 +884,15 @@ class BaselineExperiment(BaseExperiment):
         self.logger.info("Experiment setup completed")
 
     def _create_model(self):
-        """创建或重新创建模型"""
+        """Recreate model"""
         try:
-            # 根据baseline类型创建模型
             if 'mel' in self.config['baseline_type']:
                 input_dim = self.config.get('n_mels', 80)
             elif 'mfcc' in self.config['baseline_type']:
                 input_dim = self.config.get('n_mfcc', 13)
             else:
-                input_dim = 80  # 默认值
+                input_dim = 80  # defalue
             
-            # 创建模型配置
             model_config = {
                 'input_dim': input_dim,
                 'num_classes': self.config['num_speakers'],
@@ -946,84 +901,74 @@ class BaselineExperiment(BaseExperiment):
                 'use_batch_norm': self.config.get('use_batch_norm', True)
             }
             
-            # 使用现有的模型创建逻辑
             if hasattr(self, '_create_baseline_model'):
                 self.model = self._create_baseline_model(model_config)
             else:
-                # 如果没有_create_baseline_model方法，使用TraditionalMLPBaseline
                 from hybrid_models import TraditionalMLPBaseline
                 self.model = TraditionalMLPBaseline(model_config)
             
             if self.model is not None:
                 self.model = self.model.to(self.device)
-                self.logger.info(f"✓ 模型创建成功，输出维度: {self.config['num_speakers']}")
+                self.logger.info(f"✓ MODEL CREATE SUCCESS，OUTPUT DIM: {self.config['num_speakers']}")
             else:
-                self.logger.error("模型创建返回None")
+                self.logger.error("MODEL RETURN None")
                 
         except Exception as e:
-            self.logger.error(f"模型创建失败: {e}")
+            self.logger.error(f"MODEL CREATE FAILED: {e}")
             self.model = None
     
     def _create_model_fallback(self):
-        """备用模型创建方法"""
+        """PLAN B MODEL"""
         try:
             import torch.nn as nn
             
-            # 需要从一个实际的batch中获取输入维度
-            self.logger.info("检测实际输入维度...")
+            self.logger.info("DETECT REAL INPUT DIM...")
             
-            # 从dataloader获取一个batch来检测实际维度
             train_loader, _, _ = self.dataloaders if hasattr(self, 'dataloaders') else (None, None, None)
             if train_loader is not None:
                 sample_batch = next(iter(train_loader))
                 sample_input, _ = sample_batch
                 actual_input_shape = sample_input.shape
-                self.logger.info(f"检测到实际输入形状: {actual_input_shape}")
+                self.logger.info(f"DETECT ACTUAL INPUT SHAPE: {actual_input_shape}")
                 
-                # 计算实际的输入维度
                 if len(actual_input_shape) == 2:  # [batch_size, features]
                     input_dim = actual_input_shape[1]
                 elif len(actual_input_shape) == 3:  # [batch_size, feature_dim, time_frames]
                     input_dim = actual_input_shape[1] * actual_input_shape[2]
                 else:
-                    raise ValueError(f"不支持的输入形状: {actual_input_shape}")
+                    raise ValueError(f"NOT SUPPORT INPUT SHAPE: {actual_input_shape}")
             else:
-                # 如果无法获取实际维度，根据baseline类型估算
                 if 'mel' in self.config['baseline_type']:
-                    input_dim = 80 * 300  # mel特征
+                    input_dim = 80 * 300  # mel
                 elif 'mfcc' in self.config['baseline_type']:
-                    input_dim = 13 * 300  # mfcc特征
+                    input_dim = 13 * 300  # mfcc
                 else:
-                    input_dim = 48000  # 原始音频
+                    input_dim = 48000  # origin
             
-            self.logger.info(f"使用输入维度: {input_dim}")
+            self.logger.info(f"USING DIM: {input_dim}")
             
-            # 创建适应性的MLP模型
-            hidden_dims = [512, 256, 128]  # 更大的隐藏层来处理大输入
+            hidden_dims = [512, 256, 128]
             layers = []
             
-            # 输入层
             layers.append(nn.Flatten())
             layers.append(nn.Linear(input_dim, hidden_dims[0]))
             layers.append(nn.ReLU())
             layers.append(nn.Dropout(0.3))
             
-            # 隐藏层
             for i in range(len(hidden_dims) - 1):
                 layers.append(nn.Linear(hidden_dims[i], hidden_dims[i+1]))
                 layers.append(nn.ReLU())
                 layers.append(nn.Dropout(0.3))
             
-            # 输出层
             layers.append(nn.Linear(hidden_dims[-1], self.config['num_speakers']))
             
             self.model = nn.Sequential(*layers).to(self.device)
             
-            self.logger.info(f"✓ 备用模型创建成功，输入维度: {input_dim}, 输出维度: {self.config['num_speakers']}")
+            self.logger.info(f"✓ PLAN B MODEL CREATE SUCCESS，INPUT DIM: {input_dim}, OUTPUT DIM: {self.config['num_speakers']}")
             
         except Exception as e:
-            self.logger.error(f"备用模型创建也失败: {e}")
-            raise RuntimeError("无法创建模型")
+            self.logger.error(f"PLAN B MODEL CREATE FAILED: {e}")
+            raise RuntimeError("CANNOT CREATE MODEL")
 
 
 def create_baseline_experiments(base_config: Dict[str, Any]) -> Dict[str, BaselineExperiment]:

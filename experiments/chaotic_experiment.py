@@ -9,16 +9,9 @@ import json
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-import os
 import sys
-import torch
-import torch.nn as nn
 from pathlib import Path
-from typing import Dict, Any, Tuple, Optional
 
-# =============================================================================
-# 统一导入设置 (复制到每个文件)
-# =============================================================================
 def setup_module_imports(current_file: str = __file__):
     """Setup imports for current module."""
     try:
@@ -26,7 +19,7 @@ def setup_module_imports(current_file: str = __file__):
         return setup_project_imports(current_file), True
     except ImportError:
         # Fallback: manual path setup
-        current_dir = Path(current_file).resolve().parent  # experiments目录
+        current_dir = Path(current_file).resolve().parent  # experiments
         project_root = current_dir.parent  # experiments -> Model
         
         paths_to_add = [
@@ -48,8 +41,6 @@ def setup_module_imports(current_file: str = __file__):
 # Setup imports
 PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 
-# =============================================================================  
-# 项目模块导入 (现在路径已经正确设置)
 # =============================================================================
 from base_experiment import BaseExperiment
 from hybrid_models import TraditionalMLPBaseline, HybridModelManager  
@@ -830,7 +821,6 @@ class ChaoticExperiment(BaseExperiment):
     def _plot_trajectories(self, trajectories: torch.Tensor, save_path: str) -> Optional[str]:
         """Plot chaotic trajectories in 3D."""
         try:
-            import matplotlib.pyplot as plt
             from mpl_toolkits.mplot3d import Axes3D
             
             trajectories_cpu = trajectories.cpu().numpy()
@@ -868,7 +858,6 @@ class ChaoticExperiment(BaseExperiment):
     def _plot_feature_distributions(self, features: torch.Tensor, save_path: str) -> Optional[str]:
         """Plot distribution of pooled features."""
         try:
-            import matplotlib.pyplot as plt
             
             features_cpu = features.cpu().numpy()
             
@@ -907,7 +896,6 @@ class ChaoticExperiment(BaseExperiment):
     ) -> Optional[str]:
         """Plot speaker embeddings using t-SNE."""
         try:
-            import matplotlib.pyplot as plt
             from sklearn.manifold import TSNE
             
             embeddings_cpu = embeddings.cpu().numpy()
