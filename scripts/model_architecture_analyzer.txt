@@ -1,0 +1,69 @@
+🔧 Model Architecture Analyzer
+==================================================
+
+📁 STEP 1: Finding all model classes...
+📁 Found model class: MockFeatureExtractor in models/hybrid_models.py
+📁 Found model class: FeatureDimensionAdapter in models/hybrid_models.py
+📁 Found model class: TraditionalChaoticHybrid in models/hybrid_models.py
+📁 Found model class: MockClassifier in models/hybrid_models.py
+📁 Found model class: ChaoticMLPHybrid in models/hybrid_models.py
+📁 Found model class: TraditionalMLPBaseline in models/hybrid_models.py
+📁 Found model class: MockComponent in models/chaotic_network.py
+📁 Found model class: SpeakerEmbedding in models/chaotic_network.py
+📁 Found model class: ChaoticClassifier in models/chaotic_network.py
+📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/chaotic_network.py
+📁 Found model class: BatchPhaseSpaceReconstructor in models/chaotic_network.py
+📁 Found model class: MLPNetwork in models/mlp_classifier.py
+📁 Found model class: MockComponent in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: SpeakerEmbedding in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: ChaoticClassifier in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: BatchPhaseSpaceReconstructor in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: MLPNetwork in models/.ipynb_checkpoints/mlp_classifier-checkpoint.py
+📁 Found model class: MockFeatureExtractor in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: FeatureDimensionAdapter in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: TraditionalChaoticHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: MockClassifier in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: ChaoticMLPHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: TraditionalMLPBaseline in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: CNNBaseline in experiments/baseline_experiment.py
+📁 Found model class: CNNBaseline in experiments/.ipynb_checkpoints/baseline_experiment-checkpoint.py
+📁 Found model class: TestModel in utils/checkpoint.py
+📁 Found model class: MockFeatureExtractor in models/hybrid_models.py
+📁 Found model class: FeatureDimensionAdapter in models/hybrid_models.py
+📁 Found model class: TraditionalChaoticHybrid in models/hybrid_models.py
+📁 Found model class: MockClassifier in models/hybrid_models.py
+📁 Found model class: ChaoticMLPHybrid in models/hybrid_models.py
+📁 Found model class: TraditionalMLPBaseline in models/hybrid_models.py
+📁 Found model class: MockComponent in models/chaotic_network.py
+📁 Found model class: SpeakerEmbedding in models/chaotic_network.py
+📁 Found model class: ChaoticClassifier in models/chaotic_network.py
+📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/chaotic_network.py
+📁 Found model class: BatchPhaseSpaceReconstructor in models/chaotic_network.py
+📁 Found model class: MLPNetwork in models/mlp_classifier.py
+📁 Found model class: CNNBaseline in experiments/baseline_experiment.py
+📁 Found model class: AttractorPooling in core/attractor_pooling.py
+📁 Found model class: ChaoticEmbedding in core/chaotic_embedding.py
+📁 Found model class: TestModel in utils/.ipynb_checkpoints/checkpoint-checkpoint.py
+📁 Found model class: MockComponent in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: SpeakerEmbedding in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: ChaoticClassifier in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: BatchPhaseSpaceReconstructor in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
+📁 Found model class: MLPNetwork in models/.ipynb_checkpoints/mlp_classifier-checkpoint.py
+📁 Found model class: MockFeatureExtractor in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: FeatureDimensionAdapter in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: TraditionalChaoticHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: MockClassifier in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: ChaoticMLPHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: TraditionalMLPBaseline in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
+📁 Found model class: CNNBaseline in experiments/.ipynb_checkpoints/baseline_experiment-checkpoint.py
+📁 Found model class: ChaoticEmbedding in core/.ipynb_checkpoints/chaotic_embedding-checkpoint.py
+📁 Found model class: AttractorPooling in core/.ipynb_checkpoints/attractor_pooling-checkpoint.py
+   Found 16 model classes
+
+🔍 Analyzing checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251103_134109/checkpoint_epoch_0000_20251104_074641.pkl
+✅ Checkpoint loaded successfully
+📋 Checkpoint keys: ['epoch', 'timestamp', 'metrics', 'additional_info', 'model', 'framework']
+📦 Using model key
+❌ Failed to analyze checkpoint: 'int' object has no attribute 'shape'

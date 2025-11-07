@@ -1,0 +1,79 @@
+CHAOTIC NEURAL NETWORKS TRAINING REPORT
+============================================================
+Generated: 2025-10-25 23:03:09
+Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 128,
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ]
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06,
+      "T_max": 100
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100,
+  "delay_method": "autocorr",
+  "embedding_hidden_dims": [
+    64,
+    32
+  ],
+  "frame_length": 400,
+  "hop_length": 160
+}
+
+EXECUTIVE SUMMARY
+-----------------
+Total experiments: 0
+Successful experiments: -1
+Success rate: -100.0%
+
+CHAOTIC SYSTEMS COMPARISON
+---------------------------
+MODEL TYPES COMPARISON
+----------------------
+
+FAILED EXPERIMENTS ANALYSIS
+---------------------------
+Unknown: 1 failures
+  lorenz + full_chaotic: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (32,) + inhomogeneous part.
+
+RECOMMENDATIONS
+---------------
+3. Consider parameter optimization for failed experiments
+4. Monitor chaotic dynamics for early stopping criteria

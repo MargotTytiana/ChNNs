@@ -1,0 +1,27 @@
+2025-10-04 18:52:10,028 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_1
+2025-10-04 18:52:10,029 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Device: cuda
+2025-10-04 18:52:10,029 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1
+2025-10-04 18:52:10,029 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Initialized chaotic network experiment with rossler system
+2025-10-04 18:52:10,029 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Setting up experiment components...
+2025-10-04 18:52:10,029 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Creating dataloaders...
+2025-10-04 18:53:48,313 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Detected 251 speakers in dataset
+2025-10-04 18:53:48,313 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Dataloaders created:
+2025-10-04 18:53:48,314 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO -   Train: 164 batches
+2025-10-04 18:53:48,314 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO -   Val: 32 batches
+2025-10-04 18:53:48,314 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO -   Test: 40 batches
+2025-10-04 18:53:48,314 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Creating model...
+2025-10-04 18:53:48,314 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Using actual num_speakers from dataset: 251
+2025-10-04 18:53:48,317 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Total parameters: 39,401
+2025-10-04 18:53:48,317 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Trainable parameters: 39,401
+2025-10-04 18:53:48,317 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Creating optimizer...
+2025-10-04 18:53:48,317 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Optimizer: AdamW
+2025-10-04 18:53:48,317 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Creating scheduler...
+2025-10-04 18:53:48,318 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Scheduler: CosineAnnealingLR
+2025-10-04 18:53:48,318 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Creating criterion...
+2025-10-04 18:53:48,318 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Criterion: CrossEntropyLoss
+2025-10-04 18:53:48,925 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1/config.json
+2025-10-04 18:53:48,925 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Experiment setup completed
+2025-10-04 18:53:48,926 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Starting training for 100 epochs
+2025-10-04 18:54:04,080 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Train Epoch 0: [0/5268 (0.0%)]	Loss: 7.781735
+2025-10-04 19:18:45,205 - experiment_chaotic_rossler_full_chaotic_run_1 - INFO - Train Epoch 0: [3200/5268 (61.0%)]	Loss: 7.032910
+2025-10-04 19:34:21,036 - experiment_chaotic_rossler_full_chaotic_run_1 - ERROR - Training failed with error: 'MetricsCalculator' object has no attribute 'compute_accuracy'

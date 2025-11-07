@@ -9,6 +9,32 @@ Author: C-HiLAP Project
 Date: 2025
 """
 
+# =============================================================================
+# Path Setup and Imports
+# =============================================================================
+import os
+import sys
+from pathlib import Path
+
+def fix_imports():
+    current_file = Path(__file__).resolve()
+    model_dir = current_file.parent.parent  # core -> Model
+    paths = [
+        str(model_dir),
+        str(model_dir/'core'), 
+        str(model_dir/'models'),
+        str(model_dir/'features'),
+        str(model_dir/'data'),
+        str(model_dir/'utils')
+    ]
+    for path in paths:
+        if os.path.exists(path) and path not in sys.path:
+            sys.path.insert(0, path)
+    return model_dir
+
+MODEL_DIR = fix_imports()
+
+# Standard library imports
 import numpy as np
 import warnings
 from typing import Dict, List, Tuple, Optional, Union, Any, Callable
@@ -18,225 +44,15 @@ import scipy.spatial.distance as distance
 from scipy.stats import entropy
 from sklearn.preprocessing import StandardScaler
 import logging
-import os
-import sys
-from pathlib import Path
 
-def setup_module_imports(current_file: str = __file__):
-    """Setup imports for current module.""" 
-    try:
-        from setup_imports import setup_project_imports
-        return setup_project_imports(current_file), True
-    except ImportError:
-        current_dir = Path(current_file).resolve().parent  # core
-        project_root = current_dir.parent  # core -> Model
-        
-        paths_to_add = [
-            str(project_root),
-            str(project_root / 'core'),
-            str(project_root / 'utils'),
-        ]
-        
-        for path in paths_to_add:
-            if Path(path).exists() and path not in sys.path:
-                sys.path.insert(0, path)
-        
-        return project_root, False
+# Project imports
+from chaos_utils import (
+    largest_lyapunov_from_data, correlation_dimension, 
+    hurst_exponent, kolmogorov_entropy
+)
+from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
+from numerical_stability import NumericalConfig, OutlierDetector, NumericalValidator, safe_divide
 
-# Setup imports
-PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
-
-try:
-    from chaos_utils import (
-        largest_lyapunov_from_data, correlation_dimension, 
-        hurst_exponent, kolmogorov_entropy
-    )
-    HAS_CHAOS_UTILS = True
-except ImportError as e:
-    HAS_CHAOS_UTILS = False
-    warnings.warn(f"chaos_utils not available: {e}")
-    largest_lyapunov_from_data = lambda x: 0.0
-    correlation_dimension = lambda x: 2.0
-
-try:
-    from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
-    HAS_PHASE_SPACE = True
-except ImportError as e:
-    HAS_PHASE_SPACE = False
-    warnings.warn(f"phase_space_reconstruction not available: {e}")
-
-try:
-    from utils.numerical_stability import NumericalConfig, safe_divide
-    HAS_NUMERICAL_UTILS = True
-except ImportError as e:
-    HAS_NUMERICAL_UTILS = False
-    warnings.warn(f"numerical_stability not available: {e}")
-    # Simple fallback
-    safe_divide = lambda x, y: x / (y + 1e-12)
-    
-    @dataclass
-    class EmbeddingConfig:
-        """Default EmbeddingConfig when import fails"""
-        embedding_dim: int = 3
-        time_delay: int = 1
-        max_embedding_dim: int = 20
-        fnn_threshold: float = 15.0
-        autocorr_threshold: float = 0.1
-    
-    @dataclass
-    class NumericalConfig:
-        """Default NumericalConfig when import fails"""
-        epsilon: float = 1e-12
-        max_iterations: int = 1000
-        tolerance: float = 1e-8
-        rtol: float = 1e-5
-        atol: float = 1e-8
-        outlier_threshold: float = 3.0
-        stability_check: bool = True
-    
-    class PhaseSpaceReconstructor:
-        """Default PhaseSpaceReconstructor when import fails"""
-        def __init__(self, config):
-            self.config = config
-        
-        def reconstruct(self, signal, delay=None, dimension=None):
-            if delay is None:
-                delay = 1
-            if dimension is None:
-                dimension = 3
-            
-            N = len(signal)
-            if N < dimension * delay:
-                return {
-                    'embedding_success': False,
-                    'error': 'Signal too short for embedding'
-                }
-            
-            embedded = np.zeros((N - (dimension-1)*delay, dimension))
-            for i in range(dimension):
-                embedded[:, i] = signal[i*delay:N-(dimension-1-i)*delay]
-            
-            return {
-                'embedding_success': True,
-                'embedded_data': embedded,
-                'delay': delay,
-                'dimension': dimension,
-                'n_embedded_points': embedded.shape[0]
-            }
-    
-    class NumericalValidator:
-        def __init__(self, config=None):
-            self.config = config or NumericalConfig()
-        
-        def validate_array(self, arr, name="array"):
-            issues = []
-            
-            if not isinstance(arr, np.ndarray):
-                issues.append(f"{name} must be numpy array")
-            elif arr.size == 0:
-                issues.append(f"{name} cannot be empty")
-            elif not np.isfinite(arr).all():
-                issues.append(f"{name} contains non-finite values")
-            
-            return {
-                'is_valid': len(issues) == 0,
-                'issues': issues
-            }
-    
-    class OutlierDetector:
-        def __init__(self, config=None):
-            self.config = config or NumericalConfig()
-        
-        def remove_outliers(self, data, method='zscore'):
-            if method == 'zscore':
-                z_scores = np.abs((data - np.mean(data)) / (np.std(data) + 1e-12))
-                mask = z_scores < 3.0
-                return data[mask], np.where(~mask)[0]
-            else:
-                return data, np.array([])
-    
-    def correlation_dimension(data, r_points=30):
-        try:
-            N = len(data) if data.ndim == 1 else data.shape[0]
-            
-            if N < 50:
-                return np.array([]), np.array([]), 2.0
-            
-            if data.ndim == 1:
-                distances = np.abs(data[:, None] - data[None, :])
-            else:
-                from scipy.spatial.distance import pdist, squareform
-                distances = squareform(pdist(data))
-            
-            max_dist = np.max(distances)
-            min_dist = np.min(distances[distances > 0])
-            
-            radii = np.logspace(np.log10(min_dist), np.log10(max_dist), r_points)
-            correlations = []
-            
-            for r in radii:
-                count = np.sum(distances <= r)
-                correlation = count / (N * N)
-                correlations.append(correlation)
-            
-            correlations = np.array(correlations)
-            
-            valid_mask = (correlations > 0) & (correlations < 1)
-            if np.sum(valid_mask) > 5:
-                log_r = np.log(radii[valid_mask])
-                log_c = np.log(correlations[valid_mask])
-                slope = np.polyfit(log_r, log_c, 1)[0]
-                corr_dim = max(0, slope)
-            else:
-                corr_dim = 2.0
-            
-            return radii, correlations, corr_dim
-            
-        except Exception:
-            return np.array([]), np.array([]), 2.0
-    
-    def largest_lyapunov_from_data(data, dt=0.01, tau=1, min_neighbors=10):
-        try:
-            N = len(data)
-            if N < 100:
-                return 0.0
-            
-            m = 3
-            embedded = np.zeros((N - (m-1)*tau, m))
-            for i in range(m):
-                embedded[:, i] = data[i*tau:N-(m-1-i)*tau]
-            
-            n_points = min(200, embedded.shape[0] - 1)
-            divergence_rates = []
-            
-            for i in range(0, n_points, 10):
-                distances = np.linalg.norm(embedded - embedded[i], axis=1)
-                distances[i] = np.inf
-                
-                if np.min(distances) > 0:
-                    j = np.argmin(distances)
-                    track_length = min(20, embedded.shape[0] - max(i, j) - 1)
-                    if track_length > 5:
-                        initial_dist = distances[j]
-                        final_dist = np.linalg.norm(embedded[i + track_length] - 
-                                                  embedded[j + track_length])
-                        if initial_dist > 0 and final_dist > initial_dist:
-                            rate = np.log(final_dist / initial_dist) / (track_length * dt)
-                            divergence_rates.append(rate)
-            
-            return np.mean(divergence_rates) if divergence_rates else 0.0
-            
-        except Exception:
-            return 0.0
-    
-    def safe_divide(numerator, denominator, default=0.0, epsilon=1e-12):
-        with np.errstate(divide='ignore', invalid='ignore'):
-            result = np.where(np.abs(denominator) > epsilon, 
-                             numerator / denominator, default)
-        return result
-    
-    def safe_log(x, epsilon=1e-12):
-        return np.log(np.maximum(x, epsilon))
 
 @dataclass
 class RQAConfig:

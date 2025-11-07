@@ -8,6 +8,7 @@ import os
 import sys
 from pathlib import Path
 
+import numpy as np
 def fix_imports():
     current_file = Path(__file__).resolve()
     model_dir = current_file.parent.parent  # models -> Model
@@ -32,6 +33,7 @@ from rqa_extractor import RQAExtractor
 from chaotic_embedding import ChaoticEmbedding
 from attractor_pooling import AttractorPooling
 
+from numerical_stability import OutlierDetector
 
 class MockComponent(nn.Module):
     """Mock component for testing when core modules are not available."""
@@ -346,7 +348,7 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         # Wrap with batch processor
         self.phase_space = BatchPhaseSpaceReconstructor(
             reconstructor=base_reconstructor,
-            fixed_output_length=100,  # Or from config
+            fixed_output_length=200,  # Or from config
             device=self.device
         )
         
@@ -390,9 +392,50 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
                 self.rqa_extractor = MockComponent(None, 3)
         else:
             self.rqa_extractor = MockComponent(None, 3)
+
+        # Determine chaotic feature dimension more reliably
+        try:
+            # Create a dummy signal to determine feature dimensions
+            dummy_signal = np.random.randn(1000)  # Longer signal for better feature extraction
             
-        # Determine chaotic feature dimension
-        chaotic_feature_dim = self.mlsa_scales + 3  # MLSA scales + RQA features
+            # Get MLSA feature dimension
+            try:
+                mlsa_result = self.mlsa_extractor.extract_features(dummy_signal)
+                if mlsa_result['success'] and 'feature_vector' in mlsa_result:
+                    mlsa_feature_dim = len(mlsa_result['feature_vector'])
+                    self.mlsa_feature_dim = mlsa_feature_dim  # Store for later use
+                else:
+                    mlsa_feature_dim = self.mlsa_scales
+                    self.mlsa_feature_dim = mlsa_feature_dim
+            except Exception as e:
+                print(f"Warning: Could not determine MLSA feature dimension: {e}")
+                mlsa_feature_dim = self.mlsa_scales
+                self.mlsa_feature_dim = mlsa_feature_dim
+            
+            # Get RQA feature dimension
+            try:
+                rqa_result = self.rqa_extractor.extract_features(dummy_signal)
+                if rqa_result['success'] and 'feature_vector' in rqa_result:
+                    rqa_feature_dim = len(rqa_result['feature_vector'])
+                    self.rqa_feature_dim = rqa_feature_dim  # Store for later use
+                else:
+                    rqa_feature_dim = 3
+                    self.rqa_feature_dim = rqa_feature_dim
+            except Exception as e:
+                print(f"Warning: Could not determine RQA feature dimension: {e}")
+                rqa_feature_dim = 3
+                self.rqa_feature_dim = rqa_feature_dim
+            
+            chaotic_feature_dim = mlsa_feature_dim + rqa_feature_dim
+            print(f"Chaotic feature dimensions: MLSA={mlsa_feature_dim}, RQA={rqa_feature_dim}, Total={chaotic_feature_dim}")
+            
+        except Exception as e:
+            print(f"Warning: Error determining feature dimensions: {e}")
+            mlsa_feature_dim = self.mlsa_scales
+            rqa_feature_dim = 3
+            chaotic_feature_dim = mlsa_feature_dim + rqa_feature_dim
+            self.mlsa_feature_dim = mlsa_feature_dim
+            self.rqa_feature_dim = rqa_feature_dim
         
         # Chaotic embedding layer - this one accepts direct parameters
         if ChaoticEmbedding is not None:
@@ -437,16 +480,121 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         Extract chaotic features using MLSA and RQA.
         
         Args:
-            phase_space_data: Phase space reconstructed data
+            phase_space_data: Phase space reconstructed data [batch_size, time_steps, embedding_dim]
             
         Returns:
-            Combined chaotic features
+            Combined chaotic features [batch_size, feature_dim]
         """
-        # Extract MLSA features
-        mlsa_features = self.mlsa_extractor(phase_space_data)
+        batch_size = phase_space_data.shape[0]
+        all_mlsa_features = []
+        all_rqa_features = []
+
+        # Use pre-determined feature dimensions if available
+        mlsa_dim = self.mlsa_feature_dim if hasattr(self, 'mlsa_feature_dim') else None
+        rqa_dim = self.rqa_feature_dim if hasattr(self, 'rqa_feature_dim') else None
         
-        # Extract RQA features
-        rqa_features = self.rqa_extractor(phase_space_data)
+        # Process each sample in the batch
+        for i in range(batch_size):
+            # Convert to numpy for feature extraction
+            sample = phase_space_data[i].cpu().detach().numpy()  # [time_steps, embedding_dim]
+            
+            # Flatten to 1D signal (use first dimension or mean)
+            if sample.ndim == 2:
+                signal_1d = sample[:, 0]  # Use first dimension
+            else:
+                signal_1d = sample
+            
+            # Extract MLSA features
+            try:
+                mlsa_result = self.mlsa_extractor.extract_features(signal_1d)
+                if mlsa_result['success']:
+                    mlsa_vec = mlsa_result['feature_vector']
+                    # Set dimension from first successful extraction
+                    if mlsa_dim is None:
+                        mlsa_dim = len(mlsa_vec)
+                    # Ensure consistent dimension
+                    if len(mlsa_vec) != mlsa_dim:
+                        # Pad or truncate to match expected dimension
+                        if len(mlsa_vec) < mlsa_dim:
+                            mlsa_vec = np.pad(mlsa_vec, (0, mlsa_dim - len(mlsa_vec)), 
+                                             mode='constant', constant_values=0)
+                        else:
+                            mlsa_vec = mlsa_vec[:mlsa_dim]
+                else:
+                    # Use default dimension if available
+                    if mlsa_dim is None:
+                        mlsa_dim = self.mlsa_scales
+                    mlsa_vec = np.zeros(mlsa_dim)
+            except Exception as e:
+                if mlsa_dim is None:
+                    mlsa_dim = self.mlsa_scales
+                mlsa_vec = np.zeros(mlsa_dim)
+            
+            # Extract RQA features
+            try:
+                rqa_result = self.rqa_extractor.extract_features(signal_1d)
+                if rqa_result['success']:
+                    rqa_vec = rqa_result['feature_vector']
+                    # Set dimension from first successful extraction
+                    if rqa_dim is None:
+                        rqa_dim = len(rqa_vec)
+                    # Ensure consistent dimension
+                    if len(rqa_vec) != rqa_dim:
+                        if len(rqa_vec) < rqa_dim:
+                            rqa_vec = np.pad(rqa_vec, (0, rqa_dim - len(rqa_vec)), 
+                                            mode='constant', constant_values=0)
+                        else:
+                            rqa_vec = rqa_vec[:rqa_dim]
+                else:
+                    if rqa_dim is None:
+                        rqa_dim = 3  # Default RQA feature dimension
+                    rqa_vec = np.zeros(rqa_dim)
+            except Exception as e:
+                if rqa_dim is None:
+                    rqa_dim = 3
+                rqa_vec = np.zeros(rqa_dim)
+            
+            # Handle NaN values
+            mlsa_vec = np.nan_to_num(mlsa_vec, nan=0.0, posinf=0.0, neginf=0.0)
+            rqa_vec = np.nan_to_num(rqa_vec, nan=0.0, posinf=0.0, neginf=0.0)
+            
+            # Ensure vectors are 1D
+            mlsa_vec = np.atleast_1d(mlsa_vec).flatten()
+            rqa_vec = np.atleast_1d(rqa_vec).flatten()
+            
+            all_mlsa_features.append(mlsa_vec)
+            all_rqa_features.append(rqa_vec)
+        
+        # Convert to tensors with explicit shape checking
+        try:
+            # Stack arrays - this will fail if shapes are inconsistent
+            mlsa_array = np.stack(all_mlsa_features)  # [batch_size, mlsa_dim]
+            rqa_array = np.stack(all_rqa_features)    # [batch_size, rqa_dim]
+            
+            mlsa_features = torch.FloatTensor(mlsa_array).to(phase_space_data.device)
+            rqa_features = torch.FloatTensor(rqa_array).to(phase_space_data.device)
+            
+        except ValueError as e:
+            # Fallback: pad all vectors to maximum length
+            max_mlsa_len = max(len(vec) for vec in all_mlsa_features)
+            max_rqa_len = max(len(vec) for vec in all_rqa_features)
+            
+            padded_mlsa = []
+            for vec in all_mlsa_features:
+                if len(vec) < max_mlsa_len:
+                    vec = np.pad(vec, (0, max_mlsa_len - len(vec)), 
+                               mode='constant', constant_values=0)
+                padded_mlsa.append(vec)
+            
+            padded_rqa = []
+            for vec in all_rqa_features:
+                if len(vec) < max_rqa_len:
+                    vec = np.pad(vec, (0, max_rqa_len - len(vec)), 
+                               mode='constant', constant_values=0)
+                padded_rqa.append(vec)
+            
+            mlsa_features = torch.FloatTensor(np.stack(padded_mlsa)).to(phase_space_data.device)
+            rqa_features = torch.FloatTensor(np.stack(padded_rqa)).to(phase_space_data.device)
         
         # Combine features
         chaotic_features = torch.cat([mlsa_features, rqa_features], dim=-1)

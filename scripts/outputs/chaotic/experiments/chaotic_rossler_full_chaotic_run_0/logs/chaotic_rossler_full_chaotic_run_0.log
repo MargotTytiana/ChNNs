@@ -1,0 +1,134 @@
+2025-10-04 18:10:56,069 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_0
+2025-10-04 18:10:56,070 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Device: cuda
+2025-10-04 18:10:56,070 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+2025-10-04 18:10:56,070 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with rossler system
+2025-10-04 18:10:56,070 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-10-04 18:10:56,070 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating dataloaders...
+2025-10-04 18:11:34,838 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Detected 251 speakers in dataset
+2025-10-04 18:11:34,838 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-10-04 18:11:34,838 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Train: 164 batches
+2025-10-04 18:11:34,838 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Val: 32 batches
+2025-10-04 18:11:34,838 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Test: 40 batches
+2025-10-04 18:11:34,839 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating model...
+2025-10-04 18:11:34,839 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 251
+2025-10-04 18:11:34,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Total parameters: 39,401
+2025-10-04 18:11:34,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Trainable parameters: 39,401
+2025-10-04 18:11:34,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-10-04 18:11:34,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-10-04 18:11:34,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-10-04 18:11:34,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2025-10-04 18:11:34,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating criterion...
+2025-10-04 18:11:34,843 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-04 18:11:34,912 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+2025-10-04 18:11:34,912 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-10-04 18:11:34,912 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-10-04 18:11:49,906 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 0: [0/5268 (0.0%)]	Loss: 8.185482
+2025-10-04 18:36:35,845 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 0: [3200/5268 (61.0%)]	Loss: 6.106230
+2025-10-04 18:52:10,014 - experiment_chaotic_rossler_full_chaotic_run_0 - ERROR - Training failed with error: 'MetricsCalculator' object has no attribute 'compute_accuracy'
+2025-10-25 13:07:35,530 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_0
+2025-10-25 13:07:35,543 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Device: cuda
+2025-10-25 13:07:35,543 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+2025-10-25 13:07:35,543 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with rossler system
+2025-10-25 13:07:35,543 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-10-25 13:07:35,544 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating dataloaders...
+2025-10-25 13:07:35,545 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Detected 10 speakers in dataset
+2025-10-25 13:07:35,545 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-10-25 13:07:35,545 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Train: 25 batches
+2025-10-25 13:07:35,546 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Val: 5 batches
+2025-10-25 13:07:35,546 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Test: 5 batches
+2025-10-25 13:07:35,546 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating model...
+2025-10-25 13:07:35,546 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 10
+2025-10-25 13:07:35,739 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Total parameters: 8,553
+2025-10-25 13:07:35,739 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Trainable parameters: 8,553
+2025-10-25 13:07:35,739 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-10-25 13:07:37,755 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-10-25 13:07:37,755 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-10-25 13:07:37,755 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - T_max not specified for CosineAnnealingLR, using num_epochs: 100
+2025-10-25 13:07:37,756 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2025-10-25 13:07:37,756 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating criterion...
+2025-10-25 13:07:37,756 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-25 13:07:37,811 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+2025-10-25 13:07:37,811 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-10-25 13:07:37,812 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-10-25 13:08:06,229 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 0: [0/800 (0.0%)]	Loss: 5.514545
+2025-10-25 13:21:43,207 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 2.5175, Train Acc: 0.2937, Val Loss: 3.6203, Val Acc: 0.1000
+2025-10-25 13:21:43,237 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+2025-10-25 13:22:11,345 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 1: [0/800 (0.0%)]	Loss: 1.480110
+2025-10-25 13:28:53,788 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_0
+2025-10-25 13:28:53,789 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Device: cuda
+2025-10-25 13:28:53,789 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+2025-10-25 13:28:53,789 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with rossler system
+2025-10-25 13:28:53,789 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-10-25 13:28:53,789 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating dataloaders...
+2025-10-25 13:28:53,791 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Detected 10 speakers in dataset
+2025-10-25 13:28:53,791 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-10-25 13:28:53,791 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Train: 25 batches
+2025-10-25 13:28:53,791 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Val: 5 batches
+2025-10-25 13:28:53,791 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Test: 5 batches
+2025-10-25 13:28:53,791 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating model...
+2025-10-25 13:28:53,791 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 10
+2025-10-25 13:28:53,986 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Total parameters: 8,553
+2025-10-25 13:28:53,986 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Trainable parameters: 8,553
+2025-10-25 13:28:53,986 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-10-25 13:28:56,301 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-10-25 13:28:56,301 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-10-25 13:28:56,301 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - T_max not specified for CosineAnnealingLR, using num_epochs: 100
+2025-10-25 13:28:56,301 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2025-10-25 13:28:56,302 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating criterion...
+2025-10-25 13:28:56,302 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-25 13:28:56,361 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+2025-10-25 13:28:56,361 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-10-25 13:28:56,362 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-10-25 13:29:24,607 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 0: [0/800 (0.0%)]	Loss: 5.514545
+2025-10-25 13:41:50,847 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_0
+2025-10-25 13:41:50,847 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Device: cuda
+2025-10-25 13:41:50,847 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+2025-10-25 13:41:50,847 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with rossler system
+2025-10-25 13:41:50,847 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-10-25 13:41:50,847 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating dataloaders...
+2025-10-25 13:41:50,850 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Detected 10 speakers in dataset
+2025-10-25 13:41:50,850 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-10-25 13:41:50,850 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Train: 25 batches
+2025-10-25 13:41:50,850 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Val: 5 batches
+2025-10-25 13:41:50,850 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Test: 5 batches
+2025-10-25 13:41:50,850 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating model...
+2025-10-25 13:41:50,850 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 10
+2025-10-25 13:41:51,053 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Total parameters: 8,553
+2025-10-25 13:41:51,053 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Trainable parameters: 8,553
+2025-10-25 13:41:51,053 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-10-25 13:41:53,062 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-10-25 13:41:53,063 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-10-25 13:41:53,063 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - T_max not specified for CosineAnnealingLR, using num_epochs: 100
+2025-10-25 13:41:53,063 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2025-10-25 13:41:53,063 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating criterion...
+2025-10-25 13:41:53,063 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-25 13:41:53,119 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+2025-10-25 13:41:53,119 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-10-25 13:41:53,120 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-10-25 13:42:19,316 - experiment_chaotic_rossler_full_chaotic_run_0 - ERROR - Training failed with error: 'MLSAExtractor' object is not callable
+2025-10-25 22:15:16,943 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_0
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Device: cuda
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with rossler system
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating dataloaders...
+2025-10-25 22:15:16,953 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Detected 10 speakers in dataset
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Train: 25 batches
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Val: 5 batches
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Test: 5 batches
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating model...
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 10
+2025-10-25 22:15:17,336 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Total parameters: 8,553
+2025-10-25 22:15:17,336 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Trainable parameters: 8,553
+2025-10-25 22:15:17,336 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - T_max not specified for CosineAnnealingLR, using num_epochs: 100
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating criterion...
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-25 22:15:20,371 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+2025-10-25 22:15:20,371 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-10-25 22:15:20,372 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-10-25 22:15:47,199 - experiment_chaotic_rossler_full_chaotic_run_0 - ERROR - Training failed with error: name 'np' is not defined

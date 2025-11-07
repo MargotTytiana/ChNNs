@@ -1,0 +1,536 @@
+Fallback import setup: added /scratch/project_2003370/yueyao/Model to path
+  ✓ Base model classes loaded
+  ✓ MLP classifier models loaded
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+  ✓ Hybrid models loaded
+  ✓ Chaotic network models loaded
+  ✓ Model factory loaded
+  ✓ Dataset loader imported successfully
+✓ Data package initialized (circular import free)
+All required modules imported successfully!
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Environment information collected
+[2025-10-23 17:06:12] [INFO] Configuring deterministic operations
+[2025-10-23 17:06:12] [INFO] PyTorch deterministic operations configured
+[2025-10-23 17:06:12] [INFO] Starting reproducibility verification
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Operation 1 is reproducible
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Operation 2 is reproducible
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Operation 3 is reproducible
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Operation 4 is reproducible
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:12] [INFO] Python random seed set
+[2025-10-23 17:06:12] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:12] [INFO] NumPy random seed set
+[2025-10-23 17:06:12] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:12] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:12] [INFO] PyTorch seeds set
+[2025-10-23 17:06:12] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:12] [INFO] Operation 5 is reproducible
+[2025-10-23 17:06:12] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: 0ec1e99a4df15cd3
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: 0
+  OMP_NUM_THREADS: not_set
+  MKL_NUM_THREADS: not_set
+============================================================
+2025-10-23 17:06:12,759 - chaotic_trainer - INFO - ============================================================
+2025-10-23 17:06:12,785 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-10-23 17:06:12,785 - chaotic_trainer - INFO - ============================================================
+2025-10-23 17:06:12,785 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-10-23 17:06:12,785 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 128,
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-1",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ]
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g2101.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283572224, 'available_memory': 515081842688, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'cae3feb0b14cbd912b155032d1d4bf32c32d6e64', 'branch': 'origin', 'is_dirty': True}}
+Starting chaotic neural network training...
+Systems: ['lorenz']
+Runs per configuration: 1
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - 
+============================================================
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - ============================================================
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-10-23 17:06:13,427 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+CheckpointManager initialized for experiment: exp_20251023_170613
+Checkpoint directory: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Environment information collected
+[2025-10-23 17:06:13] [INFO] Configuring deterministic operations
+[2025-10-23 17:06:13] [INFO] PyTorch deterministic operations configured
+[2025-10-23 17:06:13] [INFO] Starting reproducibility verification
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Operation 1 is reproducible
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Operation 2 is reproducible
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Operation 3 is reproducible
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Operation 4 is reproducible
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Setting global random seed to: 42
+[2025-10-23 17:06:13] [INFO] Python random seed set
+[2025-10-23 17:06:13] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-23 17:06:13] [INFO] NumPy random seed set
+[2025-10-23 17:06:13] [INFO] PyTorch CUDA seeds set
+[2025-10-23 17:06:13] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-23 17:06:13] [INFO] PyTorch seeds set
+[2025-10-23 17:06:13] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-23 17:06:13] [INFO] Operation 5 is reproducible
+[2025-10-23 17:06:13] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: 782586f13cba6489
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: 0
+  OMP_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+============================================================
+2025-10-23 17:06:13,460 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+2025-10-23 17:06:13,495 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Device: cuda
+2025-10-23 17:06:13,495 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0
+2025-10-23 17:06:13,495 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with lorenz system
+2025-10-23 17:06:13,495 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-10-23 17:06:13,495 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-10-23 17:06:13,495 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating dataloaders...
+====================
+Trying to load dataset from: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-1 
+====================
+❗Data Path Not Exist: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-1
+Instead, using the mock data to go on training...
+✅ Mock Dataset Create Success: 10 speakers，training set 800 sample
+2025-10-23 17:06:13,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Detected 10 speakers in dataset
+2025-10-23 17:06:13,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-10-23 17:06:13,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Train: 25 batches
+2025-10-23 17:06:13,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Val: 5 batches
+2025-10-23 17:06:13,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Test: 5 batches
+2025-10-23 17:06:13,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating model...
+2025-10-23 17:06:13,513 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 10
+2025-10-23 17:06:13,878 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Total parameters: 8,553
+2025-10-23 17:06:13,878 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Trainable parameters: 8,553
+2025-10-23 17:06:13,878 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-10-23 17:06:16,516 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-10-23 17:06:16,516 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-10-23 17:06:16,516 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - T_max not specified for CosineAnnealingLR, using num_epochs: 100
+2025-10-23 17:06:16,516 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2025-10-23 17:06:16,517 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating criterion...
+2025-10-23 17:06:16,517 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-23 17:06:16,579 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/config.json
+2025-10-23 17:06:16,579 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-10-23 17:06:16,579 - chaotic_trainer - INFO - Model parameters: 8,553 (trainable: 8,553)
+2025-10-23 17:06:16,579 - chaotic_trainer - INFO - Starting training for 100 epochs...
+2025-10-23 17:06:16,580 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-10-23 17:06:45,462 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 0: [0/800 (0.0%)]	Loss: 6.160900
+2025-10-23 17:20:21,705 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 2.8672, Train Acc: 0.2200, Val Loss: 1.8175, Val Acc: 0.2562
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_172021.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_172021.pkl
+2025-10-23 17:20:21,735 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_172021.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_172021.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_172021.pkl
+2025-10-23 17:20:50,030 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 1: [0/800 (0.0%)]	Loss: 1.571957
+2025-10-23 17:34:13,815 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 1.4639, Train Acc: 0.4900, Val Loss: 0.8832, Val Acc: 0.6875
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_172021.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_173413.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_173413.pkl
+2025-10-23 17:34:13,844 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 1
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_173413.pkl
+2025-10-23 17:34:41,887 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 2: [0/800 (0.0%)]	Loss: 1.409334
+2025-10-23 17:48:08,453 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 1.2640, Train Acc: 0.5312, Val Loss: 0.8769, Val Acc: 0.6313
+2025-10-23 17:48:36,062 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 3: [0/800 (0.0%)]	Loss: 0.928541
+2025-10-23 18:01:57,880 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 1.1303, Train Acc: 0.5512, Val Loss: 0.9151, Val Acc: 0.6000
+2025-10-23 18:02:26,617 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 4: [0/800 (0.0%)]	Loss: 0.987002
+2025-10-23 18:16:13,146 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 1.0834, Train Acc: 0.5350, Val Loss: 0.8113, Val Acc: 0.6375
+2025-10-23 18:16:39,539 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 5: [0/800 (0.0%)]	Loss: 0.812082
+2025-10-23 18:30:07,212 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 0.9920, Train Acc: 0.5763, Val Loss: 0.7344, Val Acc: 0.6687
+2025-10-23 18:30:35,791 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 6: [0/800 (0.0%)]	Loss: 0.939044
+2025-10-23 18:44:09,685 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 0.9588, Train Acc: 0.5850, Val Loss: 0.6526, Val Acc: 0.6625
+2025-10-23 18:44:36,138 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 7: [0/800 (0.0%)]	Loss: 1.187985
+2025-10-23 18:57:58,829 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 0.8508, Train Acc: 0.5962, Val Loss: 0.6065, Val Acc: 0.6812
+2025-10-23 18:58:25,953 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 8: [0/800 (0.0%)]	Loss: 1.206365
+2025-10-23 19:12:00,114 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 0.8439, Train Acc: 0.6338, Val Loss: 0.6625, Val Acc: 0.6812
+2025-10-23 19:12:28,667 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 9: [0/800 (0.0%)]	Loss: 0.652923
+2025-10-23 19:26:03,326 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 9: Train Loss: 0.8196, Train Acc: 0.6250, Val Loss: 0.5613, Val Acc: 0.6687
+2025-10-23 19:26:29,620 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 10: [0/800 (0.0%)]	Loss: 0.668481
+2025-10-23 19:40:03,720 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 10: Train Loss: 0.7688, Train Acc: 0.6662, Val Loss: 0.5797, Val Acc: 0.7437
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_194003.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_194003.pkl
+2025-10-23 19:40:03,749 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 10
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_173413.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_194003.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_194003.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_194003.pkl
+2025-10-23 19:40:31,931 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 11: [0/800 (0.0%)]	Loss: 0.958143
+2025-10-23 19:54:08,218 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 11: Train Loss: 0.7953, Train Acc: 0.6612, Val Loss: 0.4850, Val Acc: 0.7937
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_194003.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_195408.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_195408.pkl
+2025-10-23 19:54:08,246 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 11
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_195408.pkl
+2025-10-23 19:54:35,372 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 12: [0/800 (0.0%)]	Loss: 0.552248
+2025-10-23 20:08:02,263 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 12: Train Loss: 0.7644, Train Acc: 0.6612, Val Loss: 0.5499, Val Acc: 0.7688
+2025-10-23 20:08:32,662 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 13: [0/800 (0.0%)]	Loss: 0.843117
+2025-10-23 20:22:08,485 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 13: Train Loss: 0.6588, Train Acc: 0.7325, Val Loss: 0.5025, Val Acc: 0.8188
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_202208.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_202208.pkl
+2025-10-23 20:22:08,513 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 13
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_195408.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_202208.pkl
+2025-10-23 20:22:36,394 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 14: [0/800 (0.0%)]	Loss: 0.981341
+2025-10-23 20:35:58,587 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 14: Train Loss: 0.7260, Train Acc: 0.6812, Val Loss: 0.4811, Val Acc: 0.7875
+2025-10-23 20:36:26,783 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 15: [0/800 (0.0%)]	Loss: 0.584495
+2025-10-23 20:49:54,359 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 15: Train Loss: 0.6768, Train Acc: 0.7225, Val Loss: 0.4669, Val Acc: 0.8062
+2025-10-23 20:50:22,058 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 16: [0/800 (0.0%)]	Loss: 0.572315
+2025-10-23 21:03:39,274 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 16: Train Loss: 0.6734, Train Acc: 0.7212, Val Loss: 0.5247, Val Acc: 0.7937
+2025-10-23 21:04:08,275 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 17: [0/800 (0.0%)]	Loss: 0.512518
+2025-10-23 21:17:36,610 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 17: Train Loss: 0.7073, Train Acc: 0.6900, Val Loss: 0.3536, Val Acc: 0.8625
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_211736.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_211736.pkl
+2025-10-23 21:17:36,638 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 17
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_202208.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_211736.pkl
+2025-10-23 21:18:05,132 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 18: [0/800 (0.0%)]	Loss: 0.717373
+2025-10-23 21:31:37,666 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 18: Train Loss: 0.6383, Train Acc: 0.7150, Val Loss: 0.3575, Val Acc: 0.8313
+2025-10-23 21:32:06,399 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 19: [0/800 (0.0%)]	Loss: 0.508093
+2025-10-23 21:45:30,485 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 19: Train Loss: 0.6344, Train Acc: 0.7262, Val Loss: 0.4283, Val Acc: 0.8000
+2025-10-23 21:45:58,196 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 20: [0/800 (0.0%)]	Loss: 0.567301
+2025-10-23 21:59:20,944 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 20: Train Loss: 0.6925, Train Acc: 0.7163, Val Loss: 0.3183, Val Acc: 0.9062
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_215920.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_215920.pkl
+2025-10-23 21:59:20,972 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 20
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_211736.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_215920.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_215920.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_215920.pkl
+2025-10-23 21:59:49,355 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 21: [0/800 (0.0%)]	Loss: 0.560700
+2025-10-23 22:13:20,124 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 21: Train Loss: 0.6007, Train Acc: 0.7325, Val Loss: 0.4003, Val Acc: 0.8000
+2025-10-23 22:13:46,259 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 22: [0/800 (0.0%)]	Loss: 1.043696
+2025-10-23 22:27:11,608 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 22: Train Loss: 0.6000, Train Acc: 0.7350, Val Loss: 0.4109, Val Acc: 0.8062
+2025-10-23 22:27:39,423 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 23: [0/800 (0.0%)]	Loss: 0.478707
+2025-10-23 22:41:03,986 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 23: Train Loss: 0.5622, Train Acc: 0.7538, Val Loss: 0.4316, Val Acc: 0.7937
+2025-10-23 22:41:31,992 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 24: [0/800 (0.0%)]	Loss: 0.508512
+2025-10-23 22:55:03,941 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 24: Train Loss: 0.5492, Train Acc: 0.7525, Val Loss: 0.3494, Val Acc: 0.8438
+2025-10-23 22:55:30,722 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 25: [0/800 (0.0%)]	Loss: 0.392089
+2025-10-23 23:08:48,859 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 25: Train Loss: 0.4984, Train Acc: 0.7812, Val Loss: 0.3324, Val Acc: 0.8562
+2025-10-23 23:09:13,947 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 26: [0/800 (0.0%)]	Loss: 0.494977
+2025-10-23 23:22:41,493 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 26: Train Loss: 0.5140, Train Acc: 0.7663, Val Loss: 0.4124, Val Acc: 0.8062
+2025-10-23 23:23:10,036 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 27: [0/800 (0.0%)]	Loss: 0.464897
+2025-10-23 23:36:39,371 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 27: Train Loss: 0.5152, Train Acc: 0.7588, Val Loss: 0.3977, Val Acc: 0.8125
+2025-10-23 23:37:05,752 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 28: [0/800 (0.0%)]	Loss: 0.925543
+2025-10-23 23:50:34,782 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 28: Train Loss: 0.5448, Train Acc: 0.7600, Val Loss: 0.3235, Val Acc: 0.8313
+2025-10-23 23:51:02,095 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 29: [0/800 (0.0%)]	Loss: 0.360631
+2025-10-24 00:04:30,620 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 29: Train Loss: 0.5062, Train Acc: 0.7713, Val Loss: 0.2883, Val Acc: 0.8500
+2025-10-24 00:04:59,619 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 30: [0/800 (0.0%)]	Loss: 0.412521
+2025-10-24 00:18:24,215 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 30: Train Loss: 0.5352, Train Acc: 0.7475, Val Loss: 0.2915, Val Acc: 0.8500
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251023_215920.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251024_001824.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251024_001824.pkl
+2025-10-24 00:18:50,539 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 31: [0/800 (0.0%)]	Loss: 0.437933
+2025-10-24 00:32:26,945 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 31: Train Loss: 0.4992, Train Acc: 0.7625, Val Loss: 0.2893, Val Acc: 0.8687
+2025-10-24 00:32:55,014 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 32: [0/800 (0.0%)]	Loss: 0.432020
+2025-10-24 00:46:16,831 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 32: Train Loss: 0.4941, Train Acc: 0.7825, Val Loss: 0.3329, Val Acc: 0.8375
+2025-10-24 00:46:44,860 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 33: [0/800 (0.0%)]	Loss: 0.789058
+2025-10-24 01:00:07,825 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 33: Train Loss: 0.4953, Train Acc: 0.7738, Val Loss: 0.3239, Val Acc: 0.8313
+2025-10-24 01:00:37,893 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 34: [0/800 (0.0%)]	Loss: 0.956905
+2025-10-24 01:14:14,882 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 34: Train Loss: 0.5812, Train Acc: 0.7487, Val Loss: 0.2814, Val Acc: 0.8375
+2025-10-24 01:14:44,080 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 35: [0/800 (0.0%)]	Loss: 0.293785
+2025-10-24 01:28:02,564 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 35: Train Loss: 0.5306, Train Acc: 0.7763, Val Loss: 0.2494, Val Acc: 0.8687
+2025-10-24 01:28:30,538 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 36: [0/800 (0.0%)]	Loss: 0.327941
+2025-10-24 01:42:02,103 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 36: Train Loss: 0.5558, Train Acc: 0.7538, Val Loss: 0.4114, Val Acc: 0.7812
+2025-10-24 01:42:28,875 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 37: [0/800 (0.0%)]	Loss: 0.471768
+2025-10-24 01:56:00,806 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 37: Train Loss: 0.4856, Train Acc: 0.7625, Val Loss: 0.2837, Val Acc: 0.8438
+2025-10-24 01:56:27,307 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 38: [0/800 (0.0%)]	Loss: 0.290578
+2025-10-24 02:09:37,492 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 38: Train Loss: 0.4855, Train Acc: 0.7775, Val Loss: 0.2583, Val Acc: 0.8750
+2025-10-24 02:10:03,066 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 39: [0/800 (0.0%)]	Loss: 0.395306
+2025-10-24 02:23:33,098 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 39: Train Loss: 0.4896, Train Acc: 0.7663, Val Loss: 0.3167, Val Acc: 0.8438
+2025-10-24 02:24:00,535 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 40: [0/800 (0.0%)]	Loss: 0.407717
+2025-10-24 02:37:25,973 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 40: Train Loss: 0.4987, Train Acc: 0.7875, Val Loss: 0.2460, Val Acc: 0.8500
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251024_023725.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613/checkpoint_epoch_0000_20251024_023725.pkl
+2025-10-24 02:37:26,002 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Early stopping triggered at epoch 40
+2025-10-24 02:37:26,004 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Running final test evaluation...
+2025-10-24 02:39:44,780 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Test Results:
+2025-10-24 02:39:44,781 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   loss: 0.2538
+2025-10-24 02:39:44,781 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   accuracy: 0.8750
+2025-10-24 02:39:44,781 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   avg_confidence: 0.5330
+2025-10-24 02:39:44,781 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_diversity: 1.0554
+2025-10-24 02:39:44,781 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_mean: 1.0000
+2025-10-24 02:39:44,781 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_std: 0.0000
+2025-10-24 02:39:44,783 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Training completed
+2025-10-24 02:39:44,783 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2025-10-24 02:42:01,178 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.8625, Loss: 0.3279, Time: 34411.3s
+2025-10-24 02:42:01,182 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-24 02:42:01,182 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.8625 ± 0.0000
+2025-10-24 02:42:01,182 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-10-24 02:42:01,183 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-10-24 02:42:03,298 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-10-24 02:42:03,299 - chaotic_trainer - INFO - Reports generated:
+2025-10-24 02:42:03,299 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-10-24 02:42:03,299 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+
+============================================================
+CHAOTIC TRAINING COMPLETED
+============================================================
+Best configuration: lorenz + full_chaotic
+Best accuracy: 0.8625
+
+Systems performance:
+  lorenz: 0.8625 ± 0.0000
+Results saved to: ./outputs/chaotic
+2025-10-24 02:42:03,299 - chaotic_trainer - INFO - Chaotic training completed.
+2025-10-24 02:42:03,299 - chaotic_trainer - INFO - ============================================================

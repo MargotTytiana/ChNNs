@@ -43,6 +43,10 @@ def fix_imports():
 
 MODEL_DIR = fix_imports()
 
+from base_model import (
+    BaseModel, ModelConfig, ModelType, TaskType, OptimizationType,
+    create_model_config
+)
 
 # Import specific model implementations
 try:

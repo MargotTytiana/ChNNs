@@ -1,0 +1,428 @@
+Fallback import setup: added /scratch/project_2003370/yueyao/Model to path
+  ✓ Base model classes loaded
+  ✓ MLP classifier models loaded
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+  ✓ Hybrid models loaded
+  ✓ Chaotic network models loaded
+  ✓ Model factory loaded
+  ✓ Dataset loader imported successfully
+✓ Data package initialized (circular import free)
+All required modules imported successfully!
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Environment information collected
+[2025-10-25 22:15:16] [INFO] Configuring deterministic operations
+[2025-10-25 22:15:16] [INFO] PyTorch deterministic operations configured
+[2025-10-25 22:15:16] [INFO] Starting reproducibility verification
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 1 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 2 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 3 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 4 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 5 is reproducible
+[2025-10-25 22:15:16] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: b156cb7e1b2de46c
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: 0
+  OMP_NUM_THREADS: not_set
+  MKL_NUM_THREADS: not_set
+============================================================
+2025-10-25 22:15:16,812 - chaotic_trainer - INFO - ============================================================
+2025-10-25 22:15:16,820 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-10-25 22:15:16,820 - chaotic_trainer - INFO - ============================================================
+2025-10-25 22:15:16,820 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-10-25 22:15:16,820 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 128,
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-1",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ]
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-10-25 22:15:16,932 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 518320357376, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'cae3feb0b14cbd912b155032d1d4bf32c32d6e64', 'branch': 'origin', 'is_dirty': True}}
+Starting chaotic neural network training...
+Systems: ['rossler']
+Model types: ['full_chaotic']
+Runs per configuration: 1
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - Systems: ['rossler']
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - 
+============================================================
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - TRAINING: ROSSLER + FULL_CHAOTIC
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - ============================================================
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - Training chaotic_rossler_full_chaotic_run_0...
+2025-10-25 22:15:16,933 - chaotic_trainer - INFO - Optimizing parameters for rossler system...
+CheckpointManager initialized for experiment: exp_20251025_221516
+Checkpoint directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251025_221516
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Environment information collected
+[2025-10-25 22:15:16] [INFO] Configuring deterministic operations
+[2025-10-25 22:15:16] [INFO] PyTorch deterministic operations configured
+[2025-10-25 22:15:16] [INFO] Starting reproducibility verification
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 1 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 2 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 3 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 4 is reproducible
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Setting global random seed to: 42
+[2025-10-25 22:15:16] [INFO] Python random seed set
+[2025-10-25 22:15:16] [INFO] PYTHONHASHSEED set to: 42
+[2025-10-25 22:15:16] [INFO] NumPy random seed set
+[2025-10-25 22:15:16] [INFO] PyTorch CUDA seeds set
+[2025-10-25 22:15:16] [INFO] PyTorch strict reproducibility mode enabled
+[2025-10-25 22:15:16] [INFO] PyTorch seeds set
+[2025-10-25 22:15:16] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-10-25 22:15:16] [INFO] Operation 5 is reproducible
+[2025-10-25 22:15:16] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: 82afcff8ed2e6492
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: 0
+  OMP_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+============================================================
+2025-10-25 22:15:16,943 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_0
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Device: cuda
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with rossler system
+2025-10-25 22:15:16,951 - chaotic_trainer - INFO - Setting up chaotic_rossler_full_chaotic_run_0...
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-10-25 22:15:16,951 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating dataloaders...
+====================
+Trying to load dataset from: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-1 
+====================
+❗Data Path Not Exist: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-1
+Instead, using the mock data to go on training...
+✅ Mock Dataset Create Success: 10 speakers，training set 800 sample
+2025-10-25 22:15:16,953 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Detected 10 speakers in dataset
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Train: 25 batches
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Val: 5 batches
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Test: 5 batches
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating model...
+2025-10-25 22:15:16,954 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 10
+2025-10-25 22:15:17,336 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Total parameters: 8,553
+2025-10-25 22:15:17,336 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Trainable parameters: 8,553
+2025-10-25 22:15:17,336 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - T_max not specified for CosineAnnealingLR, using num_epochs: 100
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating criterion...
+2025-10-25 22:15:20,317 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-25 22:15:20,371 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+2025-10-25 22:15:20,371 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-10-25 22:15:20,372 - chaotic_trainer - INFO - Model parameters: 8,553 (trainable: 8,553)
+2025-10-25 22:15:20,372 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-10-25 22:15:20,372 - chaotic_trainer - INFO - Starting training for 100 epochs...
+2025-10-25 22:15:20,372 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-10-25 22:15:47,199 - experiment_chaotic_rossler_full_chaotic_run_0 - ERROR - Training failed with error: name 'np' is not defined
+2025-10-25 22:15:47,201 - chaotic_trainer - ERROR - Failed to train chaotic_rossler_full_chaotic_run_0: name 'np' is not defined
+2025-10-25 22:15:47,204 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 448, in train_single_experiment
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 610, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 435, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 381, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 398, in forward_pass
+    logits = self.model(audio, labels=targets if training else None)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 539, in forward
+    chaotic_features = self.extract_chaotic_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 497, in extract_chaotic_features
+    mlsa_vec = np.nan_to_num(mlsa_vec, nan=0.0, posinf=0.0, neginf=0.0)
+               ^^
+NameError: name 'np' is not defined
+
+2025-10-25 22:15:47,204 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-10-25 22:15:47,204 - chaotic_trainer - WARNING - No successful runs for rossler + full_chaotic
+2025-10-25 22:15:47,204 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-10-25 22:15:47,204 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-10-25 22:15:47,261 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-10-25 22:15:47,261 - chaotic_trainer - INFO - Reports generated:
+2025-10-25 22:15:47,261 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-10-25 22:15:47,261 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+
+============================================================
+CHAOTIC TRAINING COMPLETED
+============================================================
+Results saved to: ./outputs/chaotic
+2025-10-25 22:15:47,261 - chaotic_trainer - INFO - Chaotic training completed.
+2025-10-25 22:15:47,261 - chaotic_trainer - INFO - ============================================================

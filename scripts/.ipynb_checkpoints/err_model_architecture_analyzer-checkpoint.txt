@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/model_architecture_analyzer.py", line 109, in analyze_checkpoint_architecture
+    'shape': list(tensor.shape),
+                  ^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'shape'

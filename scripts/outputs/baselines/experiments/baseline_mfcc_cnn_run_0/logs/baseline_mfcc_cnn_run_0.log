@@ -1,0 +1,628 @@
+2025-10-04 15:17:08,289 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized experiment: baseline_mfcc_cnn_run_0
+2025-10-04 15:17:08,289 - experiment_baseline_mfcc_cnn_run_0 - INFO - Device: cuda
+2025-10-04 15:17:08,289 - experiment_baseline_mfcc_cnn_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mfcc_cnn_run_0
+2025-10-04 15:17:08,290 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized mfcc_cnn baseline experiment
+2025-10-04 15:17:08,290 - experiment_baseline_mfcc_cnn_run_0 - INFO - Setting up experiment components...
+2025-10-04 15:17:08,858 - experiment_baseline_mfcc_cnn_run_0 - INFO - 数据路径验证成功: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-10-04 15:17:08,858 - experiment_baseline_mfcc_cnn_run_0 - INFO - 找到 28539 个FLAC文件
+2025-10-04 15:17:08,959 - experiment_baseline_mfcc_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-10-04 15:17:08,959 - experiment_baseline_mfcc_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2025-10-04 15:17:08,960 - experiment_baseline_mfcc_cnn_run_0 - INFO - Total parameters: 172,516
+2025-10-04 15:17:08,960 - experiment_baseline_mfcc_cnn_run_0 - INFO - Trainable parameters: 172,516
+2025-10-04 15:17:13,902 - experiment_baseline_mfcc_cnn_run_0 - INFO - 扫描所有数据以确定真实的标签范围...
+2025-10-04 15:17:13,922 - experiment_baseline_mfcc_cnn_run_0 - INFO - 扫描训练集...
+2025-10-04 15:17:13,938 - experiment_baseline_mfcc_cnn_run_0 - INFO - 已扫描 1 个训练批次, 当前标签范围: 7-93
+2025-10-04 15:17:14,791 - experiment_baseline_mfcc_cnn_run_0 - INFO - 已扫描 51 个训练批次, 当前标签范围: 0-99
+2025-10-04 15:17:15,636 - experiment_baseline_mfcc_cnn_run_0 - INFO - 已扫描 101 个训练批次, 当前标签范围: 0-99
+2025-10-04 15:17:16,143 - experiment_baseline_mfcc_cnn_run_0 - INFO - 扫描验证集...
+2025-10-04 15:17:16,546 - experiment_baseline_mfcc_cnn_run_0 - INFO - 扫描测试集...
+2025-10-04 15:17:17,052 - experiment_baseline_mfcc_cnn_run_0 - INFO - === 完整数据集标签分析 ===
+2025-10-04 15:17:17,053 - experiment_baseline_mfcc_cnn_run_0 - INFO - 数据批次形状: torch.Size([16, 48000])
+2025-10-04 15:17:17,053 - experiment_baseline_mfcc_cnn_run_0 - INFO - 完整标签范围: 0 到 99
+2025-10-04 15:17:17,053 - experiment_baseline_mfcc_cnn_run_0 - INFO - 实际需要的类别数: 100
+2025-10-04 15:17:17,053 - experiment_baseline_mfcc_cnn_run_0 - INFO - 唯一标签数量: 100
+2025-10-04 15:17:17,053 - experiment_baseline_mfcc_cnn_run_0 - INFO - 配置中的说话人数量: 100
+2025-10-04 15:17:17,053 - experiment_baseline_mfcc_cnn_run_0 - INFO - 基线类型: mfcc_cnn
+2025-10-04 15:17:17,053 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✓ 完整标签范围验证通过: [0, 99] 在 100 个类别内
+2025-10-04 15:17:21,882 - experiment_baseline_mfcc_cnn_run_0 - INFO - Dataloaders created:
+2025-10-04 15:17:21,883 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Train: 131 batches
+2025-10-04 15:17:21,883 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Val: 25 batches
+2025-10-04 15:17:21,883 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Test: 32 batches
+2025-10-04 15:17:23,120 - experiment_baseline_mfcc_cnn_run_0 - INFO - Optimizer: Adam
+2025-10-04 15:17:23,120 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scheduler: StepLR
+2025-10-04 15:17:23,120 - experiment_baseline_mfcc_cnn_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-10-04 15:17:23,167 - experiment_baseline_mfcc_cnn_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mfcc_cnn_run_0/config.json
+2025-10-04 15:17:23,168 - experiment_baseline_mfcc_cnn_run_0 - INFO - Experiment setup completed
+2025-10-04 15:17:23,168 - experiment_baseline_mfcc_cnn_run_0 - INFO - Starting training for 100 epochs
+2025-10-04 15:17:24,372 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 0: [0/2100 (0.0%)]	Loss: 4.590621
+2025-10-04 15:17:33,986 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 0: [1600/2100 (76.3%)]	Loss: 4.280090
+2025-10-04 15:17:39,627 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 0: Train Loss: 4.4959, Train Acc: 0.0291, Val Loss: 4.1759, Val Acc: 0.0975
+2025-10-04 15:17:39,928 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 0
+2025-10-04 15:17:40,065 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 1: [0/2100 (0.0%)]	Loss: 4.288297
+2025-10-04 15:17:49,747 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 1: [1600/2100 (76.3%)]	Loss: 3.578896
+2025-10-04 15:17:55,038 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 1: Train Loss: 3.8546, Train Acc: 0.0969, Val Loss: 3.2997, Val Acc: 0.2800
+2025-10-04 15:17:55,340 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 1
+2025-10-04 15:17:55,448 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 2: [0/2100 (0.0%)]	Loss: 3.165742
+2025-10-04 15:18:05,059 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 2: [1600/2100 (76.3%)]	Loss: 2.958347
+2025-10-04 15:18:10,374 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 2: Train Loss: 3.1675, Train Acc: 0.1856, Val Loss: 2.5876, Val Acc: 0.4000
+2025-10-04 15:18:10,672 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 2
+2025-10-04 15:18:10,782 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 3: [0/2100 (0.0%)]	Loss: 2.606088
+2025-10-04 15:18:20,443 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 3: [1600/2100 (76.3%)]	Loss: 2.294800
+2025-10-04 15:18:25,823 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 3: Train Loss: 2.7023, Train Acc: 0.2638, Val Loss: 2.3249, Val Acc: 0.3975
+2025-10-04 15:18:26,211 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 4: [0/2100 (0.0%)]	Loss: 2.180996
+2025-10-04 15:18:35,925 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 4: [1600/2100 (76.3%)]	Loss: 1.971156
+2025-10-04 15:18:41,277 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 4: Train Loss: 2.3481, Train Acc: 0.3359, Val Loss: 1.9005, Val Acc: 0.5100
+2025-10-04 15:18:41,598 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 4
+2025-10-04 15:18:41,710 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 5: [0/2100 (0.0%)]	Loss: 2.675001
+2025-10-04 15:18:51,363 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 5: [1600/2100 (76.3%)]	Loss: 2.236018
+2025-10-04 15:18:56,672 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 5: Train Loss: 2.1182, Train Acc: 0.3955, Val Loss: 1.6319, Val Acc: 0.6050
+2025-10-04 15:18:56,978 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 5
+2025-10-04 15:18:57,090 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 6: [0/2100 (0.0%)]	Loss: 1.882483
+2025-10-04 15:19:06,941 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 6: [1600/2100 (76.3%)]	Loss: 1.991719
+2025-10-04 15:19:12,268 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 6: Train Loss: 1.9081, Train Acc: 0.4480, Val Loss: 1.4674, Val Acc: 0.6375
+2025-10-04 15:19:12,582 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 6
+2025-10-04 15:19:12,700 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 7: [0/2100 (0.0%)]	Loss: 1.765207
+2025-10-04 15:19:22,340 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 7: [1600/2100 (76.3%)]	Loss: 1.882376
+2025-10-04 15:19:27,656 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 7: Train Loss: 1.7198, Train Acc: 0.4981, Val Loss: 1.3009, Val Acc: 0.6875
+2025-10-04 15:19:27,968 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 7
+2025-10-04 15:19:28,080 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 8: [0/2100 (0.0%)]	Loss: 1.489808
+2025-10-04 15:19:37,714 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 8: [1600/2100 (76.3%)]	Loss: 1.545983
+2025-10-04 15:19:43,022 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 8: Train Loss: 1.6418, Train Acc: 0.5172, Val Loss: 1.1888, Val Acc: 0.6825
+2025-10-04 15:19:43,392 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 9: [0/2100 (0.0%)]	Loss: 1.364500
+2025-10-04 15:19:53,029 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 9: [1600/2100 (76.3%)]	Loss: 1.291253
+2025-10-04 15:19:58,327 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 9: Train Loss: 1.5448, Train Acc: 0.5477, Val Loss: 1.0270, Val Acc: 0.7475
+2025-10-04 15:19:58,645 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 9
+2025-10-04 15:19:58,764 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 10: [0/2100 (0.0%)]	Loss: 0.857638
+2025-10-04 15:20:08,475 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 10: [1600/2100 (76.3%)]	Loss: 1.839355
+2025-10-04 15:20:13,819 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 10: Train Loss: 1.4290, Train Acc: 0.5830, Val Loss: 1.0110, Val Acc: 0.7350
+2025-10-04 15:20:14,239 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 11: [0/2100 (0.0%)]	Loss: 1.045582
+2025-10-04 15:20:23,858 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 11: [1600/2100 (76.3%)]	Loss: 1.506517
+2025-10-04 15:20:29,150 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 11: Train Loss: 1.3440, Train Acc: 0.6121, Val Loss: 0.9978, Val Acc: 0.7350
+2025-10-04 15:20:29,520 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 12: [0/2100 (0.0%)]	Loss: 1.095998
+2025-10-04 15:20:39,225 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 12: [1600/2100 (76.3%)]	Loss: 1.091895
+2025-10-04 15:20:44,600 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 12: Train Loss: 1.2615, Train Acc: 0.6183, Val Loss: 1.0015, Val Acc: 0.7000
+2025-10-04 15:20:44,983 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 13: [0/2100 (0.0%)]	Loss: 1.801350
+2025-10-04 15:20:54,598 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 13: [1600/2100 (76.3%)]	Loss: 0.758237
+2025-10-04 15:20:59,879 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 13: Train Loss: 1.2492, Train Acc: 0.6221, Val Loss: 0.8578, Val Acc: 0.7450
+2025-10-04 15:21:00,251 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 14: [0/2100 (0.0%)]	Loss: 0.812796
+2025-10-04 15:21:09,859 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 14: [1600/2100 (76.3%)]	Loss: 1.429725
+2025-10-04 15:21:15,154 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 14: Train Loss: 1.1667, Train Acc: 0.6365, Val Loss: 0.7855, Val Acc: 0.7650
+2025-10-04 15:21:15,471 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 14
+2025-10-04 15:21:15,586 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 15: [0/2100 (0.0%)]	Loss: 1.326564
+2025-10-04 15:21:25,180 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 15: [1600/2100 (76.3%)]	Loss: 1.541946
+2025-10-04 15:21:30,457 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 15: Train Loss: 1.1245, Train Acc: 0.6503, Val Loss: 0.8159, Val Acc: 0.7550
+2025-10-04 15:21:30,827 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 16: [0/2100 (0.0%)]	Loss: 1.091352
+2025-10-04 15:21:40,596 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 16: [1600/2100 (76.3%)]	Loss: 0.509348
+2025-10-04 15:21:45,899 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 16: Train Loss: 1.0827, Train Acc: 0.6760, Val Loss: 0.7089, Val Acc: 0.8000
+2025-10-04 15:21:46,222 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 16
+2025-10-04 15:21:46,348 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 17: [0/2100 (0.0%)]	Loss: 1.409040
+2025-10-04 15:21:55,984 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 17: [1600/2100 (76.3%)]	Loss: 1.293301
+2025-10-04 15:22:01,294 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 17: Train Loss: 1.0673, Train Acc: 0.6656, Val Loss: 0.6141, Val Acc: 0.8325
+2025-10-04 15:22:01,624 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 17
+2025-10-04 15:22:01,743 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 18: [0/2100 (0.0%)]	Loss: 1.879477
+2025-10-04 15:22:11,368 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 18: [1600/2100 (76.3%)]	Loss: 1.361046
+2025-10-04 15:22:16,656 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 18: Train Loss: 1.0102, Train Acc: 0.7004, Val Loss: 0.6041, Val Acc: 0.8450
+2025-10-04 15:22:16,980 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 18
+2025-10-04 15:22:17,100 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 19: [0/2100 (0.0%)]	Loss: 0.741820
+2025-10-04 15:22:26,726 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 19: [1600/2100 (76.3%)]	Loss: 1.484702
+2025-10-04 15:22:32,037 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 19: Train Loss: 1.0039, Train Acc: 0.6861, Val Loss: 0.5140, Val Acc: 0.8600
+2025-10-04 15:22:32,364 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 19
+2025-10-04 15:22:32,490 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 20: [0/2100 (0.0%)]	Loss: 1.065223
+2025-10-04 15:22:42,152 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 20: [1600/2100 (76.3%)]	Loss: 1.146841
+2025-10-04 15:22:47,446 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 20: Train Loss: 0.9402, Train Acc: 0.7142, Val Loss: 0.5970, Val Acc: 0.8325
+2025-10-04 15:22:47,866 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 21: [0/2100 (0.0%)]	Loss: 0.601631
+2025-10-04 15:22:57,559 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 21: [1600/2100 (76.3%)]	Loss: 1.127169
+2025-10-04 15:23:02,875 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 21: Train Loss: 0.9508, Train Acc: 0.7009, Val Loss: 0.5556, Val Acc: 0.8350
+2025-10-04 15:23:03,246 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 22: [0/2100 (0.0%)]	Loss: 0.823847
+2025-10-04 15:23:12,934 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 22: [1600/2100 (76.3%)]	Loss: 0.765907
+2025-10-04 15:23:18,269 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 22: Train Loss: 0.9020, Train Acc: 0.7176, Val Loss: 0.4660, Val Acc: 0.8825
+2025-10-04 15:23:18,607 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 22
+2025-10-04 15:23:18,734 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 23: [0/2100 (0.0%)]	Loss: 0.850599
+2025-10-04 15:23:28,497 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 23: [1600/2100 (76.3%)]	Loss: 0.911396
+2025-10-04 15:23:33,817 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 23: Train Loss: 0.9029, Train Acc: 0.7075, Val Loss: 0.5355, Val Acc: 0.8450
+2025-10-04 15:23:34,182 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 24: [0/2100 (0.0%)]	Loss: 0.930216
+2025-10-04 15:23:43,946 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 24: [1600/2100 (76.3%)]	Loss: 0.736762
+2025-10-04 15:23:49,303 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 24: Train Loss: 0.8706, Train Acc: 0.7271, Val Loss: 0.4401, Val Acc: 0.8800
+2025-10-04 15:23:49,673 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 25: [0/2100 (0.0%)]	Loss: 0.675759
+2025-10-04 15:23:59,338 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 25: [1600/2100 (76.3%)]	Loss: 1.138098
+2025-10-04 15:24:04,646 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 25: Train Loss: 0.8541, Train Acc: 0.7266, Val Loss: 0.4277, Val Acc: 0.8750
+2025-10-04 15:24:05,038 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 26: [0/2100 (0.0%)]	Loss: 0.522873
+2025-10-04 15:24:14,725 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 26: [1600/2100 (76.3%)]	Loss: 0.630108
+2025-10-04 15:24:20,050 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 26: Train Loss: 0.8180, Train Acc: 0.7486, Val Loss: 0.4278, Val Acc: 0.8675
+2025-10-04 15:24:20,417 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 27: [0/2100 (0.0%)]	Loss: 0.839842
+2025-10-04 15:24:30,143 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 27: [1600/2100 (76.3%)]	Loss: 0.648723
+2025-10-04 15:24:35,471 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 27: Train Loss: 0.8158, Train Acc: 0.7538, Val Loss: 0.4353, Val Acc: 0.8725
+2025-10-04 15:24:35,842 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 28: [0/2100 (0.0%)]	Loss: 0.782224
+2025-10-04 15:24:46,148 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 28: [1600/2100 (76.3%)]	Loss: 0.723150
+2025-10-04 15:24:52,834 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 28: Train Loss: 0.7543, Train Acc: 0.7562, Val Loss: 0.3831, Val Acc: 0.8900
+2025-10-04 15:24:53,170 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 28
+2025-10-04 15:24:53,296 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 29: [0/2100 (0.0%)]	Loss: 0.386254
+2025-10-04 15:25:02,989 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 29: [1600/2100 (76.3%)]	Loss: 0.887470
+2025-10-04 15:25:08,333 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 29: Train Loss: 0.7642, Train Acc: 0.7643, Val Loss: 0.4123, Val Acc: 0.8675
+2025-10-04 15:25:08,713 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 30: [0/2100 (0.0%)]	Loss: 0.638146
+2025-10-04 15:25:19,595 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 30: [1600/2100 (76.3%)]	Loss: 1.712508
+2025-10-04 15:25:26,318 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 30: Train Loss: 0.7020, Train Acc: 0.7910, Val Loss: 0.3616, Val Acc: 0.8875
+2025-10-04 15:25:26,764 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 31: [0/2100 (0.0%)]	Loss: 0.854350
+2025-10-04 15:25:36,419 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 31: [1600/2100 (76.3%)]	Loss: 0.760858
+2025-10-04 15:25:41,724 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 31: Train Loss: 0.6754, Train Acc: 0.7915, Val Loss: 0.3319, Val Acc: 0.9075
+2025-10-04 15:25:42,068 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 31
+2025-10-04 15:25:42,193 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 32: [0/2100 (0.0%)]	Loss: 0.696977
+2025-10-04 15:25:52,052 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 32: [1600/2100 (76.3%)]	Loss: 0.434871
+2025-10-04 15:25:57,365 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 32: Train Loss: 0.7014, Train Acc: 0.7758, Val Loss: 0.3489, Val Acc: 0.8975
+2025-10-04 15:25:57,754 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 33: [0/2100 (0.0%)]	Loss: 0.328235
+2025-10-04 15:26:07,766 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 33: [1600/2100 (76.3%)]	Loss: 1.555179
+2025-10-04 15:26:13,133 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 33: Train Loss: 0.6496, Train Acc: 0.7891, Val Loss: 0.3343, Val Acc: 0.9125
+2025-10-04 15:26:13,479 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 33
+2025-10-04 15:26:13,608 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 34: [0/2100 (0.0%)]	Loss: 0.907285
+2025-10-04 15:26:23,278 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 34: [1600/2100 (76.3%)]	Loss: 0.545521
+2025-10-04 15:26:28,613 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 34: Train Loss: 0.6751, Train Acc: 0.7853, Val Loss: 0.3220, Val Acc: 0.9100
+2025-10-04 15:26:28,985 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 35: [0/2100 (0.0%)]	Loss: 0.601493
+2025-10-04 15:26:38,755 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 35: [1600/2100 (76.3%)]	Loss: 0.840399
+2025-10-04 15:26:44,167 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 35: Train Loss: 0.6892, Train Acc: 0.7777, Val Loss: 0.3345, Val Acc: 0.8975
+2025-10-04 15:26:44,554 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 36: [0/2100 (0.0%)]	Loss: 0.467777
+2025-10-04 15:26:54,277 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 36: [1600/2100 (76.3%)]	Loss: 0.622709
+2025-10-04 15:26:59,623 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 36: Train Loss: 0.6260, Train Acc: 0.8068, Val Loss: 0.3309, Val Acc: 0.9100
+2025-10-04 15:26:59,996 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 37: [0/2100 (0.0%)]	Loss: 0.897738
+2025-10-04 15:27:09,663 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 37: [1600/2100 (76.3%)]	Loss: 0.331780
+2025-10-04 15:27:14,996 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 37: Train Loss: 0.6192, Train Acc: 0.8039, Val Loss: 0.3125, Val Acc: 0.9075
+2025-10-04 15:27:15,368 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 38: [0/2100 (0.0%)]	Loss: 0.648374
+2025-10-04 15:27:25,068 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 38: [1600/2100 (76.3%)]	Loss: 1.270314
+2025-10-04 15:27:30,380 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 38: Train Loss: 0.6162, Train Acc: 0.8030, Val Loss: 0.3204, Val Acc: 0.9050
+2025-10-04 15:27:30,771 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 39: [0/2100 (0.0%)]	Loss: 1.232696
+2025-10-04 15:27:40,467 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 39: [1600/2100 (76.3%)]	Loss: 0.863396
+2025-10-04 15:27:45,797 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 39: Train Loss: 0.6592, Train Acc: 0.7891, Val Loss: 0.3311, Val Acc: 0.9000
+2025-10-04 15:27:46,169 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 40: [0/2100 (0.0%)]	Loss: 0.370176
+2025-10-04 15:27:55,934 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 40: [1600/2100 (76.3%)]	Loss: 0.705860
+2025-10-04 15:28:01,311 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 40: Train Loss: 0.6562, Train Acc: 0.7948, Val Loss: 0.3222, Val Acc: 0.9000
+2025-10-04 15:28:01,749 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 41: [0/2100 (0.0%)]	Loss: 0.295721
+2025-10-04 15:28:11,407 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 41: [1600/2100 (76.3%)]	Loss: 1.400312
+2025-10-04 15:28:16,793 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 41: Train Loss: 0.6119, Train Acc: 0.8082, Val Loss: 0.2936, Val Acc: 0.9025
+2025-10-04 15:28:17,175 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 42: [0/2100 (0.0%)]	Loss: 0.575371
+2025-10-04 15:28:28,757 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 42: [1600/2100 (76.3%)]	Loss: 1.256437
+2025-10-04 15:28:34,643 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 42: Train Loss: 0.6145, Train Acc: 0.8068, Val Loss: 0.3219, Val Acc: 0.9025
+2025-10-04 15:28:35,022 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 43: [0/2100 (0.0%)]	Loss: 0.776190
+2025-10-04 15:28:44,764 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 43: [1600/2100 (76.3%)]	Loss: 0.670031
+2025-10-04 15:28:50,138 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 43: Train Loss: 0.5722, Train Acc: 0.8249, Val Loss: 0.2848, Val Acc: 0.9125
+2025-10-04 15:28:50,516 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 44: [0/2100 (0.0%)]	Loss: 0.685566
+2025-10-04 15:29:00,189 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 44: [1600/2100 (76.3%)]	Loss: 0.683211
+2025-10-04 15:29:05,509 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 44: Train Loss: 0.6104, Train Acc: 0.8020, Val Loss: 0.2943, Val Acc: 0.9200
+2025-10-04 15:29:05,865 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 44
+2025-10-04 15:29:06,001 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 45: [0/2100 (0.0%)]	Loss: 0.779390
+2025-10-04 15:29:15,691 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 45: [1600/2100 (76.3%)]	Loss: 0.806273
+2025-10-04 15:29:21,090 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 45: Train Loss: 0.6336, Train Acc: 0.7915, Val Loss: 0.2646, Val Acc: 0.9200
+2025-10-04 15:29:21,474 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 46: [0/2100 (0.0%)]	Loss: 0.279733
+2025-10-04 15:29:31,161 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 46: [1600/2100 (76.3%)]	Loss: 0.457658
+2025-10-04 15:29:36,488 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 46: Train Loss: 0.5522, Train Acc: 0.8225, Val Loss: 0.2547, Val Acc: 0.9225
+2025-10-04 15:29:36,844 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 46
+2025-10-04 15:29:36,980 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 47: [0/2100 (0.0%)]	Loss: 0.574785
+2025-10-04 15:29:46,662 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 47: [1600/2100 (76.3%)]	Loss: 0.322190
+2025-10-04 15:29:51,993 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 47: Train Loss: 0.6192, Train Acc: 0.7987, Val Loss: 0.2819, Val Acc: 0.9225
+2025-10-04 15:29:52,363 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 48: [0/2100 (0.0%)]	Loss: 0.770734
+2025-10-04 15:30:02,152 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 48: [1600/2100 (76.3%)]	Loss: 0.304290
+2025-10-04 15:30:07,557 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 48: Train Loss: 0.5371, Train Acc: 0.8335, Val Loss: 0.2575, Val Acc: 0.9275
+2025-10-04 15:30:07,928 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 48
+2025-10-04 15:30:08,071 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 49: [0/2100 (0.0%)]	Loss: 0.539146
+2025-10-04 15:30:17,728 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 49: [1600/2100 (76.3%)]	Loss: 0.522847
+2025-10-04 15:30:23,026 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 49: Train Loss: 0.5307, Train Acc: 0.8268, Val Loss: 0.2743, Val Acc: 0.9250
+2025-10-04 15:30:23,404 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 50: [0/2100 (0.0%)]	Loss: 0.321966
+2025-10-04 15:30:33,065 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 50: [1600/2100 (76.3%)]	Loss: 0.559022
+2025-10-04 15:30:38,384 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 50: Train Loss: 0.5900, Train Acc: 0.8087, Val Loss: 0.2845, Val Acc: 0.9125
+2025-10-04 15:30:38,838 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 51: [0/2100 (0.0%)]	Loss: 0.383592
+2025-10-04 15:30:48,667 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 51: [1600/2100 (76.3%)]	Loss: 0.409987
+2025-10-04 15:30:53,979 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 51: Train Loss: 0.5183, Train Acc: 0.8335, Val Loss: 0.2847, Val Acc: 0.9125
+2025-10-04 15:30:54,356 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 52: [0/2100 (0.0%)]	Loss: 0.713584
+2025-10-04 15:31:04,017 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 52: [1600/2100 (76.3%)]	Loss: 0.212967
+2025-10-04 15:31:09,326 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 52: Train Loss: 0.5635, Train Acc: 0.8139, Val Loss: 0.2492, Val Acc: 0.9250
+2025-10-04 15:31:09,701 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 53: [0/2100 (0.0%)]	Loss: 0.500054
+2025-10-04 15:31:19,359 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 53: [1600/2100 (76.3%)]	Loss: 0.517098
+2025-10-04 15:31:24,680 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 53: Train Loss: 0.5579, Train Acc: 0.8263, Val Loss: 0.2511, Val Acc: 0.9250
+2025-10-04 15:31:25,045 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 54: [0/2100 (0.0%)]	Loss: 0.402275
+2025-10-04 15:31:34,736 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 54: [1600/2100 (76.3%)]	Loss: 0.319264
+2025-10-04 15:31:40,049 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 54: Train Loss: 0.5826, Train Acc: 0.8135, Val Loss: 0.2302, Val Acc: 0.9450
+2025-10-04 15:31:40,425 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 54
+2025-10-04 15:31:40,572 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 55: [0/2100 (0.0%)]	Loss: 0.249204
+2025-10-04 15:31:50,256 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 55: [1600/2100 (76.3%)]	Loss: 0.679831
+2025-10-04 15:31:55,588 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 55: Train Loss: 0.5151, Train Acc: 0.8335, Val Loss: 0.2293, Val Acc: 0.9400
+2025-10-04 15:31:55,960 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 56: [0/2100 (0.0%)]	Loss: 0.514094
+2025-10-04 15:32:06,871 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 56: [1600/2100 (76.3%)]	Loss: 0.564049
+2025-10-04 15:32:13,414 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 56: Train Loss: 0.5263, Train Acc: 0.8340, Val Loss: 0.2522, Val Acc: 0.9175
+2025-10-04 15:32:13,790 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 57: [0/2100 (0.0%)]	Loss: 0.997020
+2025-10-04 15:32:23,537 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 57: [1600/2100 (76.3%)]	Loss: 1.335168
+2025-10-04 15:32:28,912 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 57: Train Loss: 0.5300, Train Acc: 0.8306, Val Loss: 0.2477, Val Acc: 0.9250
+2025-10-04 15:32:29,286 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 58: [0/2100 (0.0%)]	Loss: 0.509136
+2025-10-04 15:32:39,047 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 58: [1600/2100 (76.3%)]	Loss: 0.347662
+2025-10-04 15:32:44,443 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 58: Train Loss: 0.4991, Train Acc: 0.8387, Val Loss: 0.2501, Val Acc: 0.9275
+2025-10-04 15:32:44,840 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 59: [0/2100 (0.0%)]	Loss: 0.160341
+2025-10-04 15:32:54,715 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 59: [1600/2100 (76.3%)]	Loss: 0.160113
+2025-10-04 15:33:00,054 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 59: Train Loss: 0.5013, Train Acc: 0.8297, Val Loss: 0.2274, Val Acc: 0.9275
+2025-10-04 15:33:00,428 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 60: [0/2100 (0.0%)]	Loss: 0.156475
+2025-10-04 15:33:10,131 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 60: [1600/2100 (76.3%)]	Loss: 0.322082
+2025-10-04 15:33:15,464 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 60: Train Loss: 0.4832, Train Acc: 0.8497, Val Loss: 0.2270, Val Acc: 0.9225
+2025-10-04 15:33:15,938 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 61: [0/2100 (0.0%)]	Loss: 0.420449
+2025-10-04 15:33:25,789 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 61: [1600/2100 (76.3%)]	Loss: 0.154560
+2025-10-04 15:33:31,175 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 61: Train Loss: 0.4921, Train Acc: 0.8421, Val Loss: 0.2113, Val Acc: 0.9375
+2025-10-04 15:33:31,558 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 62: [0/2100 (0.0%)]	Loss: 0.800084
+2025-10-04 15:33:41,243 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 62: [1600/2100 (76.3%)]	Loss: 0.395950
+2025-10-04 15:33:46,568 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 62: Train Loss: 0.5052, Train Acc: 0.8311, Val Loss: 0.2208, Val Acc: 0.9350
+2025-10-04 15:33:46,943 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 63: [0/2100 (0.0%)]	Loss: 0.593756
+2025-10-04 15:33:56,629 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 63: [1600/2100 (76.3%)]	Loss: 0.665949
+2025-10-04 15:34:01,969 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 63: Train Loss: 0.4766, Train Acc: 0.8588, Val Loss: 0.2193, Val Acc: 0.9300
+2025-10-04 15:34:02,368 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 64: [0/2100 (0.0%)]	Loss: 0.386424
+2025-10-04 15:34:12,103 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 64: [1600/2100 (76.3%)]	Loss: 0.664433
+2025-10-04 15:34:17,441 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 64: Train Loss: 0.4475, Train Acc: 0.8578, Val Loss: 0.2081, Val Acc: 0.9350
+2025-10-04 15:34:17,827 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 65: [0/2100 (0.0%)]	Loss: 0.459306
+2025-10-04 15:34:27,536 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 65: [1600/2100 (76.3%)]	Loss: 0.559487
+2025-10-04 15:34:32,877 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 65: Train Loss: 0.4650, Train Acc: 0.8588, Val Loss: 0.2059, Val Acc: 0.9400
+2025-10-04 15:34:33,250 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 66: [0/2100 (0.0%)]	Loss: 0.407933
+2025-10-04 15:34:42,943 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 66: [1600/2100 (76.3%)]	Loss: 0.497850
+2025-10-04 15:34:48,277 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 66: Train Loss: 0.5017, Train Acc: 0.8392, Val Loss: 0.1989, Val Acc: 0.9400
+2025-10-04 15:34:48,663 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 67: [0/2100 (0.0%)]	Loss: 0.432316
+2025-10-04 15:34:58,365 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 67: [1600/2100 (76.3%)]	Loss: 0.303919
+2025-10-04 15:35:03,720 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 67: Train Loss: 0.4457, Train Acc: 0.8578, Val Loss: 0.2127, Val Acc: 0.9350
+2025-10-04 15:35:04,122 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 68: [0/2100 (0.0%)]	Loss: 0.209594
+2025-10-04 15:35:13,862 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 68: [1600/2100 (76.3%)]	Loss: 0.218558
+2025-10-04 15:35:19,206 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 68: Train Loss: 0.4989, Train Acc: 0.8359, Val Loss: 0.2271, Val Acc: 0.9325
+2025-10-04 15:35:19,589 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 69: [0/2100 (0.0%)]	Loss: 1.160633
+2025-10-04 15:35:29,303 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 69: [1600/2100 (76.3%)]	Loss: 0.391105
+2025-10-04 15:35:34,634 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 69: Train Loss: 0.4599, Train Acc: 0.8573, Val Loss: 0.2120, Val Acc: 0.9475
+2025-10-04 15:35:35,021 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 69
+2025-10-04 15:35:35,169 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 70: [0/2100 (0.0%)]	Loss: 0.278384
+2025-10-04 15:35:44,974 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 70: [1600/2100 (76.3%)]	Loss: 0.409082
+2025-10-04 15:35:50,371 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 70: Train Loss: 0.4746, Train Acc: 0.8502, Val Loss: 0.2097, Val Acc: 0.9375
+2025-10-04 15:35:50,855 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 71: [0/2100 (0.0%)]	Loss: 0.265752
+2025-10-04 15:36:00,599 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 71: [1600/2100 (76.3%)]	Loss: 0.587024
+2025-10-04 15:36:05,951 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 71: Train Loss: 0.4892, Train Acc: 0.8406, Val Loss: 0.2299, Val Acc: 0.9250
+2025-10-04 15:36:06,337 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 72: [0/2100 (0.0%)]	Loss: 0.483810
+2025-10-04 15:36:16,022 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 72: [1600/2100 (76.3%)]	Loss: 0.324359
+2025-10-04 15:36:21,336 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 72: Train Loss: 0.4722, Train Acc: 0.8445, Val Loss: 0.1931, Val Acc: 0.9350
+2025-10-04 15:36:21,707 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 73: [0/2100 (0.0%)]	Loss: 0.399007
+2025-10-04 15:36:31,366 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 73: [1600/2100 (76.3%)]	Loss: 0.507811
+2025-10-04 15:36:36,688 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 73: Train Loss: 0.4201, Train Acc: 0.8607, Val Loss: 0.1971, Val Acc: 0.9400
+2025-10-04 15:36:37,061 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 74: [0/2100 (0.0%)]	Loss: 0.597116
+2025-10-04 15:36:46,739 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 74: [1600/2100 (76.3%)]	Loss: 0.949673
+2025-10-04 15:36:52,062 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 74: Train Loss: 0.4964, Train Acc: 0.8349, Val Loss: 0.2164, Val Acc: 0.9400
+2025-10-04 15:36:52,448 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 75: [0/2100 (0.0%)]	Loss: 0.244622
+2025-10-04 15:37:02,148 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 75: [1600/2100 (76.3%)]	Loss: 0.465700
+2025-10-04 15:37:07,477 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 75: Train Loss: 0.4114, Train Acc: 0.8769, Val Loss: 0.2118, Val Acc: 0.9375
+2025-10-04 15:37:07,862 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 76: [0/2100 (0.0%)]	Loss: 0.372415
+2025-10-04 15:37:17,565 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 76: [1600/2100 (76.3%)]	Loss: 0.158742
+2025-10-04 15:37:22,888 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 76: Train Loss: 0.4868, Train Acc: 0.8411, Val Loss: 0.2180, Val Acc: 0.9350
+2025-10-04 15:37:23,258 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 77: [0/2100 (0.0%)]	Loss: 0.871148
+2025-10-04 15:37:32,940 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 77: [1600/2100 (76.3%)]	Loss: 0.355292
+2025-10-04 15:37:38,257 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 77: Train Loss: 0.4584, Train Acc: 0.8445, Val Loss: 0.2240, Val Acc: 0.9225
+2025-10-04 15:37:38,638 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 78: [0/2100 (0.0%)]	Loss: 0.538665
+2025-10-04 15:37:48,362 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 78: [1600/2100 (76.3%)]	Loss: 0.292638
+2025-10-04 15:37:53,715 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 78: Train Loss: 0.4468, Train Acc: 0.8612, Val Loss: 0.1960, Val Acc: 0.9400
+2025-10-04 15:37:54,084 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 79: [0/2100 (0.0%)]	Loss: 0.781971
+2025-10-04 15:38:05,161 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 79: [1600/2100 (76.3%)]	Loss: 0.084347
+2025-10-04 15:38:10,963 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 79: Train Loss: 0.4586, Train Acc: 0.8583, Val Loss: 0.2009, Val Acc: 0.9325
+2025-10-04 15:38:11,329 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 80: [0/2100 (0.0%)]	Loss: 0.139606
+2025-10-04 15:38:21,033 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 80: [1600/2100 (76.3%)]	Loss: 0.517646
+2025-10-04 15:38:26,363 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 80: Train Loss: 0.4474, Train Acc: 0.8511, Val Loss: 0.2140, Val Acc: 0.9425
+2025-10-04 15:38:26,871 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 81: [0/2100 (0.0%)]	Loss: 0.165777
+2025-10-04 15:38:36,572 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 81: [1600/2100 (76.3%)]	Loss: 0.171242
+2025-10-04 15:38:41,903 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 81: Train Loss: 0.4352, Train Acc: 0.8640, Val Loss: 0.1821, Val Acc: 0.9375
+2025-10-04 15:38:42,270 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 82: [0/2100 (0.0%)]	Loss: 0.357415
+2025-10-04 15:38:51,961 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 82: [1600/2100 (76.3%)]	Loss: 0.623334
+2025-10-04 15:38:57,298 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 82: Train Loss: 0.4449, Train Acc: 0.8640, Val Loss: 0.2110, Val Acc: 0.9300
+2025-10-04 15:38:57,677 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 83: [0/2100 (0.0%)]	Loss: 0.882232
+2025-10-04 15:39:07,353 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 83: [1600/2100 (76.3%)]	Loss: 0.680246
+2025-10-04 15:39:12,693 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 83: Train Loss: 0.4571, Train Acc: 0.8488, Val Loss: 0.2043, Val Acc: 0.9425
+2025-10-04 15:39:13,065 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 84: [0/2100 (0.0%)]	Loss: 0.632435
+2025-10-04 15:39:22,794 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 84: [1600/2100 (76.3%)]	Loss: 0.285359
+2025-10-04 15:39:28,145 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 84: Train Loss: 0.4140, Train Acc: 0.8712, Val Loss: 0.2112, Val Acc: 0.9400
+2025-10-04 15:39:28,425 - experiment_baseline_mfcc_cnn_run_0 - INFO - Early stopping triggered at epoch 84
+2025-10-04 15:39:28,462 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running final test evaluation...
+2025-10-04 15:39:31,438 - experiment_baseline_mfcc_cnn_run_0 - INFO - Test Results:
+2025-10-04 15:39:31,438 - experiment_baseline_mfcc_cnn_run_0 - INFO -   loss: 0.2976
+2025-10-04 15:39:31,438 - experiment_baseline_mfcc_cnn_run_0 - INFO -   accuracy: 0.9080
+2025-10-04 15:39:31,438 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_macro: 0.9252
+2025-10-04 15:39:31,438 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_macro: 0.9080
+2025-10-04 15:39:31,438 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_macro: 0.9028
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_weighted: 0.9252
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_weighted: 0.9080
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_weighted: 0.9028
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_0: 1.0000
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_0: 1.0000
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_0: 1.0000
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_1: 1.0000
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_1: 1.0000
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_1: 1.0000
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_2: 0.7143
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_2: 1.0000
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_2: 0.8333
+2025-10-04 15:39:31,439 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_3: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_3: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_3: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_4: 0.8333
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_4: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_4: 0.9091
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_5: 0.8333
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_5: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_5: 0.9091
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_6: 0.8333
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_6: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_6: 0.9091
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_7: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_7: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_7: 1.0000
+2025-10-04 15:39:31,440 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_8: 1.0000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_8: 0.8000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_8: 0.8889
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_9: 1.0000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_9: 1.0000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_9: 1.0000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_10: 0.8333
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_10: 1.0000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_10: 0.9091
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_11: 1.0000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_11: 0.6000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_11: 0.7500
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_12: 0.5714
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_12: 0.8000
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_12: 0.6667
+2025-10-04 15:39:31,441 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_13: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_13: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_13: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_14: 0.8333
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_14: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_14: 0.9091
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_15: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_15: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_15: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_16: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_16: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_16: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_17: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_17: 1.0000
+2025-10-04 15:39:31,442 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_17: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_18: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_18: 0.6000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_18: 0.7500
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_19: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_19: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_19: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_20: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_20: 0.8000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_20: 0.8889
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_21: 0.8333
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_21: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_21: 0.9091
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_22: 1.0000
+2025-10-04 15:39:31,443 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_22: 1.0000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_22: 1.0000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_23: 1.0000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_23: 0.8000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_23: 0.8889
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_24: 1.0000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_24: 0.8000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_24: 0.8889
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_25: 0.8000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_25: 0.8000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_25: 0.8000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_26: 0.7143
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_26: 1.0000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_26: 0.8333
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_27: 1.0000
+2025-10-04 15:39:31,444 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_27: 0.4000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_27: 0.5714
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_28: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_28: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_28: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_29: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_29: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_29: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_30: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_30: 0.8000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_30: 0.8889
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_31: 0.8333
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_31: 1.0000
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_31: 0.9091
+2025-10-04 15:39:31,445 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_32: 0.6667
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_32: 0.8000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_32: 0.7273
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_33: 0.8000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_33: 0.8000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_33: 0.8000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_34: 1.0000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_34: 1.0000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_34: 1.0000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_35: 1.0000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_35: 0.4000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_35: 0.5714
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_36: 0.8333
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_36: 1.0000
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_36: 0.9091
+2025-10-04 15:39:31,446 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_37: 0.7143
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_37: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_37: 0.8333
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_38: 0.7143
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_38: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_38: 0.8333
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_39: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_39: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_39: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_40: 0.8333
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_40: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_40: 0.9091
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_41: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_41: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_41: 1.0000
+2025-10-04 15:39:31,447 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_42: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_42: 0.6000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_42: 0.7500
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_43: 0.7143
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_43: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_43: 0.8333
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_44: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_44: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_44: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_45: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_45: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_45: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_46: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_46: 1.0000
+2025-10-04 15:39:31,448 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_46: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_47: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_47: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_47: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_48: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_48: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_48: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_49: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_49: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_49: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_50: 0.8333
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_50: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_50: 0.9091
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_51: 1.0000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_51: 0.8000
+2025-10-04 15:39:31,449 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_51: 0.8889
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_52: 0.8333
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_52: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_52: 0.9091
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_53: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_53: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_53: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_54: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_54: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_54: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_55: 1.0000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_55: 0.6000
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_55: 0.7500
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_56: 0.8333
+2025-10-04 15:39:31,450 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_56: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_56: 0.9091
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_57: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_57: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_57: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_58: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_58: 0.8000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_58: 0.8889
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_59: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_59: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_59: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_60: 0.6667
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_60: 0.8000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_60: 0.7273
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_61: 1.0000
+2025-10-04 15:39:31,451 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_61: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_61: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_62: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_62: 0.8000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_62: 0.8889
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_63: 0.8333
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_63: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_63: 0.9091
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_64: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_64: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_64: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_65: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_65: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_65: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_66: 1.0000
+2025-10-04 15:39:31,452 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_66: 0.8000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_66: 0.8889
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_67: 1.0000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_67: 1.0000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_67: 1.0000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_68: 0.8333
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_68: 1.0000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_68: 0.9091
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_69: 1.0000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_69: 0.8000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_69: 0.8889
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_70: 0.6250
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_70: 1.0000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_70: 0.7692
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_71: 1.0000
+2025-10-04 15:39:31,453 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_71: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_71: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_72: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_72: 0.6000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_72: 0.7500
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_73: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_73: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_73: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_74: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_74: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_74: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_75: 0.8333
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_75: 1.0000
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_75: 0.9091
+2025-10-04 15:39:31,454 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_76: 1.0000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_76: 0.8000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_76: 0.8889
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_77: 1.0000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_77: 0.8000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_77: 0.8889
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_78: 0.8000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_78: 0.8000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_78: 0.8000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_79: 1.0000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_79: 0.8000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_79: 0.8889
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_80: 0.8333
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_80: 1.0000
+2025-10-04 15:39:31,455 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_80: 0.9091
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_81: 0.8333
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_81: 1.0000
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_81: 0.9091
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_82: 1.0000
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_82: 1.0000
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_82: 1.0000
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_83: 1.0000
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_83: 1.0000
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_83: 1.0000
+2025-10-04 15:39:31,456 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_84: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_84: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_84: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_85: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_85: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_85: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_86: 0.6667
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_86: 0.4000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_86: 0.5000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_87: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_87: 0.6000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_87: 0.7500
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_88: 0.8333
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_88: 1.0000
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_88: 0.9091
+2025-10-04 15:39:31,457 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_89: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_89: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_89: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_90: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_90: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_90: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_91: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_91: 0.2000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_91: 0.3333
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_92: 0.8333
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_92: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_92: 0.9091
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_93: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_93: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_93: 1.0000
+2025-10-04 15:39:31,458 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_94: 0.8000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_94: 0.8000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_94: 0.8000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_95: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_95: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_95: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_96: 0.7143
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_96: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_96: 0.8333
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_97: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_97: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_97: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_98: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_98: 1.0000
+2025-10-04 15:39:31,459 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_98: 1.0000
+2025-10-04 15:39:31,460 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_99: 1.0000
+2025-10-04 15:39:31,460 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_99: 0.8000
+2025-10-04 15:39:31,460 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_99: 0.8889
+2025-10-04 15:39:31,460 - experiment_baseline_mfcc_cnn_run_0 - INFO -   balanced_accuracy: 0.9080
+2025-10-04 15:39:31,462 - experiment_baseline_mfcc_cnn_run_0 - INFO - Training completed
+2025-10-04 15:39:34,511 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running baseline analysis...
+2025-10-04 15:39:34,513 - experiment_baseline_mfcc_cnn_run_0 - INFO - Baseline analysis completed

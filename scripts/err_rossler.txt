@@ -1,0 +1,136 @@
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:CHAOTIC NEURAL NETWORKS TRAINING
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:Output directory: outputs/chaotic
+INFO:chaotic_trainer:Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 128,
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-1",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ]
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+INFO:chaotic_trainer:System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 518320357376, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'cae3feb0b14cbd912b155032d1d4bf32c32d6e64', 'branch': 'origin', 'is_dirty': True}}
+INFO:chaotic_trainer:Training 1 systems × 1 types × 1 runs...
+INFO:chaotic_trainer:Systems: ['rossler']
+INFO:chaotic_trainer:Model types: ['full_chaotic']
+INFO:chaotic_trainer:
+============================================================
+INFO:chaotic_trainer:TRAINING: ROSSLER + FULL_CHAOTIC
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:Training chaotic_rossler_full_chaotic_run_0...
+INFO:chaotic_trainer:Optimizing parameters for rossler system...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Initialized experiment: chaotic_rossler_full_chaotic_run_0
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Device: cuda
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Initialized chaotic network experiment with rossler system
+INFO:chaotic_trainer:Setting up chaotic_rossler_full_chaotic_run_0...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Setting up experiment components...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Creating dataloaders...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Detected 10 speakers in dataset
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Dataloaders created:
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:  Train: 25 batches
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:  Val: 5 batches
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:  Test: 5 batches
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Creating model...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Using actual num_speakers from dataset: 10
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Total parameters: 8,553
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Trainable parameters: 8,553
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Creating optimizer...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Optimizer: AdamW
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Creating scheduler...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:T_max not specified for CosineAnnealingLR, using num_epochs: 100
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Scheduler: CosineAnnealingLR
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Creating criterion...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Criterion: CrossEntropyLoss
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Experiment setup completed
+INFO:chaotic_trainer:Model parameters: 8,553 (trainable: 8,553)
+INFO:chaotic_trainer:Training with chaotic dynamics monitoring...
+INFO:chaotic_trainer:Starting training for 100 epochs...
+INFO:experiment_chaotic_rossler_full_chaotic_run_0:Starting training for 100 epochs
+WARNING:chaos_utils:Poor linear fit in Hurst exponent calculation
+WARNING:chaos_utils:Poor linear fit in Hurst exponent calculation
+ERROR:experiment_chaotic_rossler_full_chaotic_run_0:Training failed with error: name 'np' is not defined
+ERROR:chaotic_trainer:Failed to train chaotic_rossler_full_chaotic_run_0: name 'np' is not defined
+ERROR:chaotic_trainer:Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 448, in train_single_experiment
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 610, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 435, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 381, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 398, in forward_pass
+    logits = self.model(audio, labels=targets if training else None)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 539, in forward
+    chaotic_features = self.extract_chaotic_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 497, in extract_chaotic_features
+    mlsa_vec = np.nan_to_num(mlsa_vec, nan=0.0, posinf=0.0, neginf=0.0)
+               ^^
+NameError: name 'np' is not defined
+
+INFO:chaotic_trainer:Progress: 1/1 (100.0%)
+WARNING:chaotic_trainer:No successful runs for rossler + full_chaotic
+INFO:chaotic_trainer:Analyzing chaotic training results...
+INFO:chaotic_trainer:Generating comprehensive chaotic training report...
+INFO:chaotic_trainer:Visualizations saved to: outputs/chaotic/visualizations
+INFO:chaotic_trainer:Reports generated:
+INFO:chaotic_trainer:  Text report: outputs/chaotic/chaotic_training_report.txt
+INFO:chaotic_trainer:  JSON report: outputs/chaotic/chaotic_training_results.json
+INFO:chaotic_trainer:Chaotic training completed.
+INFO:chaotic_trainer:============================================================
