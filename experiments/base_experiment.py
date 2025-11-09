@@ -70,7 +70,7 @@ except ImportError:
         
         def load_checkpoint(self, filename):
             filepath = os.path.join(self.checkpoint_dir, filename)
-            return torch.load(filepath, map_location='cpu')
+            return torch.load(filepath, map_location='cpu', weights_only=False)
         
         def list_checkpoints(self):
             return [f for f in os.listdir(self.checkpoint_dir) if f.endswith('.pth')]

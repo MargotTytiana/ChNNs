@@ -1,0 +1,47 @@
+FINAL MODEL ARCHITECTURE ANALYSIS
+==================================================
+
+SUMMARY:
+  Checkpoint Parameters: 46,699
+  Current Model Parameters: 27,371
+  Parameter Match Rate: 100.0%
+  Current Model Class: ChaoticSpeakerRecognitionNetwork
+
+KEY FINDINGS:
+  29/29 parameters match exactly
+
+CHECKPOINT PARAMETER STRUCTURE:
+  chaotic_embedding.initial_state_mapper.0.weight: [16, 230]
+  chaotic_embedding.initial_state_mapper.0.bias: [16]
+  chaotic_embedding.initial_state_mapper.2.weight: [3, 16]
+  chaotic_embedding.initial_state_mapper.2.bias: [3]
+  chaotic_embedding.coupling_mapper.0.weight: [8, 230]
+  chaotic_embedding.coupling_mapper.0.bias: [8]
+  chaotic_embedding.coupling_mapper.2.weight: [3, 8]
+  chaotic_embedding.coupling_mapper.2.bias: [3]
+  chaotic_embedding.param_adapter.0.weight: [8, 230]
+  chaotic_embedding.param_adapter.0.bias: [8]
+  chaotic_embedding.param_adapter.2.weight: [3, 8]
+  chaotic_embedding.param_adapter.2.bias: [3]
+  speaker_embedding.embedding_network.0.weight: [64, 5]
+  speaker_embedding.embedding_network.0.bias: [64]
+  speaker_embedding.embedding_network.1.weight: [64]
+
+CURRENT MODEL PARAMETER STRUCTURE:
+  chaotic_embedding.initial_state_mapper.0.weight: [16, 230]
+  chaotic_embedding.initial_state_mapper.0.bias: [16]
+  chaotic_embedding.initial_state_mapper.2.weight: [3, 16]
+  chaotic_embedding.initial_state_mapper.2.bias: [3]
+  chaotic_embedding.coupling_mapper.0.weight: [8, 230]
+  chaotic_embedding.coupling_mapper.0.bias: [8]
+  chaotic_embedding.coupling_mapper.2.weight: [3, 8]
+  chaotic_embedding.coupling_mapper.2.bias: [3]
+  chaotic_embedding.param_adapter.0.weight: [8, 230]
+  chaotic_embedding.param_adapter.0.bias: [8]
+  chaotic_embedding.param_adapter.2.weight: [3, 8]
+  chaotic_embedding.param_adapter.2.bias: [3]
+  speaker_embedding.embedding_network.0.weight: [64, 5]
+  speaker_embedding.embedding_network.0.bias: [64]
+  speaker_embedding.embedding_network.1.weight: [64]
+
+SPECIFIC ACTIONS NEEDED:

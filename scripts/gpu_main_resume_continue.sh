@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=esc51_continue
 #SBATCH --account=project_2003370
-#SBATCH --output=out_esc_lorenz_continue.txt
-#SBATCH --error=err_esc_lorenz_continue.txt
+#SBATCH --output=out_esc_lorenz_continue_1109.txt
+#SBATCH --error=err_esc_lorenz_continue_1109.txt  
 #SBATCH --partition=gpusmall
 #SBATCH --time=1-12:00:00
 #SBATCH --begin=now
@@ -19,7 +19,7 @@ echo "================================================"
 echo "Start time: $(date)"
 echo "================================================"
 
-LATEST_CHECKPOINT="outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251103_134109/checkpoint_epoch_0000_20251104_074641.pkl"
+LATEST_CHECKPOINT="outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251026_015146/checkpoint_epoch_0000_20251027_103724_fixed_corrected.pth"
 
 if [ -f "$LATEST_CHECKPOINT" ]; then
     echo "✅ Found latest checkpoint: $LATEST_CHECKPOINT"

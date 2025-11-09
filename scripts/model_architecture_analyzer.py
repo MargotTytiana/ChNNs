@@ -1,4 +1,4 @@
-# model_architecture_analyzer.py
+# final_model_analyzer.py
 import torch
 import pickle
 import os
@@ -8,124 +8,93 @@ from pathlib import Path
 import pandas as pd
 from collections import defaultdict
 
-def setup_imports():
-    """设置导入路径"""
+def setup_imports_correctly():
+    """正确设置导入路径"""
+    # 获取当前脚本的绝对路径
     current_file = Path(__file__).resolve()
-    model_dir = current_file.parent.parent  # experiments -> Model
-    paths = [
-        str(model_dir),
-        str(model_dir/'experiments'), 
-        str(model_dir/'models'),
-        str(model_dir/'features'),
-        str(model_dir/'data'),
-        str(model_dir/'utils')
-    ]
-    for path in paths:
-        if os.path.exists(path) and path not in sys.path:
-            sys.path.insert(0, path)
-    return model_dir
-
-def find_all_model_classes():
-    """查找项目中所有的模型类定义"""
-    model_dir = setup_imports()
-    model_files = []
     
-    # 查找所有可能的模型文件
-    search_paths = [
-        model_dir / 'models',
-        model_dir / 'experiments',
-        model_dir
+    # 尝试不同的路径设置
+    possible_paths = [
+        current_file.parent,  # 当前目录
+        current_file.parent.parent,  # 父目录
+        current_file.parent.parent.parent,  # 祖父目录
     ]
     
-    model_classes = {}
+    for path in possible_paths:
+        model_path = path / 'models'
+        experiments_path = path / 'experiments'
+        
+        if model_path.exists():
+            if str(path) not in sys.path:
+                sys.path.insert(0, str(path))
+            if str(model_path) not in sys.path:
+                sys.path.insert(0, str(model_path))
+            if str(experiments_path) not in sys.path:
+                sys.path.insert(0, str(experiments_path))
+            print(f"✅ Added to path: {path}")
+            return path
     
-    for search_path in search_paths:
-        if not search_path.exists():
-            continue
-            
-        for py_file in search_path.rglob('*.py'):
-            if py_file.name.startswith('__'):
-                continue
-                
-            try:
-                # 读取文件内容分析模型类
-                with open(py_file, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                
-                # 查找类定义
-                class_matches = re.findall(r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):', content)
-                for class_name in class_matches:
-                    if class_name not in ['Module', 'Sequential']:  # 排除基础类
-                        relative_path = py_file.relative_to(model_dir)
-                        model_classes[class_name] = {
-                            'file': str(relative_path),
-                            'full_path': str(py_file),
-                            'class_name': class_name
-                        }
-                        print(f"📁 Found model class: {class_name} in {relative_path}")
-                        
-            except Exception as e:
-                print(f"⚠️  Error reading {py_file}: {e}")
-    
-    return model_classes
+    print("❌ Could not find model directory")
+    return None
 
-def analyze_checkpoint_architecture(checkpoint_path):
-    """分析检查点中的模型架构"""
-    print(f"\n🔍 Analyzing checkpoint: {checkpoint_path}")
+def analyze_checkpoint_correctly(checkpoint_path):
+    """正确分析检查点结构"""
+    print(f"\n🔍 Correctly analyzing checkpoint: {checkpoint_path}")
     
     try:
-        # 尝试不同方式加载检查点
-        if checkpoint_path.endswith('.pkl'):
-            with open(checkpoint_path, 'rb') as f:
-                checkpoint = pickle.load(f)
-        else:
-            checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
+        # 加载检查点
+        with open(checkpoint_path, 'rb') as f:
+            checkpoint = pickle.load(f)
         
         print(f"✅ Checkpoint loaded successfully")
         print(f"📋 Checkpoint keys: {list(checkpoint.keys())}")
         
-        # 提取模型状态字典
+        # 检查点结构分析
+        model_data = checkpoint.get('model', {})
+        print(f"📦 Model data type: {type(model_data)}")
+        print(f"📦 Model data keys: {list(model_data.keys()) if isinstance(model_data, dict) else 'N/A'}")
+        
+        # 提取真正的模型状态字典
         model_state_dict = None
-        if 'model_state_dict' in checkpoint:
-            model_state_dict = checkpoint['model_state_dict']
-            print("📦 Using model_state_dict")
-        elif 'model' in checkpoint:
-            model_state_dict = checkpoint['model']
-            print("📦 Using model key")
-        elif all(not k.startswith(('epoch', 'best_', 'training_', 'config')) 
-                for k in checkpoint.keys()):
-            model_state_dict = checkpoint
-            print("📦 Checkpoint is pure model state")
+        if isinstance(model_data, dict) and 'model_state_dict' in model_data:
+            model_state_dict = model_data['model_state_dict']
+            print("✅ Found model_state_dict in model data")
+        elif isinstance(model_data, dict) and any('weight' in key for key in model_data.keys()):
+            # 如果model_data本身看起来像状态字典
+            model_state_dict = model_data
+            print("✅ Model data appears to be state dict")
         else:
-            print("❌ Could not find model state in checkpoint")
+            print("❌ Could not find model state dict")
             return None
         
-        # 分析参数
+        # 分析模型参数
         param_analysis = {}
         total_params = 0
         
-        for key, tensor in model_state_dict.items():
-            param_analysis[key] = {
-                'shape': list(tensor.shape),
-                'numel': tensor.numel(),
-                'dtype': str(tensor.dtype),
-                'key_pattern': analyze_key_pattern(key)
-            }
-            total_params += tensor.numel()
+        for key, value in model_state_dict.items():
+            if isinstance(value, torch.Tensor):
+                param_analysis[key] = {
+                    'shape': list(value.shape),
+                    'numel': value.numel(),
+                    'dtype': str(value.dtype)
+                }
+                total_params += value.numel()
+            else:
+                print(f"⚠️  Key '{key}' is not a tensor: {type(value)}")
         
         checkpoint_info = {
             'model_state_dict': model_state_dict,
             'param_analysis': param_analysis,
             'total_params': total_params,
             'num_layers': len(param_analysis),
-            'checkpoint_keys': list(checkpoint.keys()),
             'param_keys': list(param_analysis.keys())
         }
         
         print(f"📊 Checkpoint analysis:")
         print(f"   Total parameters: {total_params:,}")
         print(f"   Number of layers: {len(param_analysis)}")
-        print(f"   Parameter keys (first 5): {list(param_analysis.keys())[:5]}")
+        if param_analysis:
+            print(f"   Parameter keys (first 5): {list(param_analysis.keys())[:5]}")
         
         return checkpoint_info
         
@@ -135,329 +104,414 @@ def analyze_checkpoint_architecture(checkpoint_path):
         traceback.print_exc()
         return None
 
-def analyze_key_pattern(key):
-    """分析参数键的模式"""
-    patterns = {
-        'weight': 'weight' in key,
-        'bias': 'bias' in key,
-        'running_mean': 'running_mean' in key,
-        'running_var': 'running_var' in key,
-        'num_batches_tracked': 'num_batches_tracked' in key,
-        'embedding': 'embedding' in key,
-        'classifier': 'classifier' in key,
-        'features': 'features' in key,
-        'chaotic': 'chaotic' in key,
-        'speaker': 'speaker' in key
-    }
+def create_model_with_direct_import():
+    """通过直接导入创建模型"""
+    print(f"\n🔍 Creating model with direct import...")
     
-    # 提取层级信息
-    parts = key.split('.')
-    hierarchy = '.'.join(parts[:-1]) if len(parts) > 1 else 'root'
-    param_name = parts[-1]
-    
-    return {
-        'hierarchy': hierarchy,
-        'param_name': param_name,
-        'depth': len(parts) - 1,
-        'patterns': patterns
-    }
-
-def create_current_model_analysis():
-    """创建当前模型并分析其架构"""
-    print(f"\n🔍 Analyzing current model architecture...")
+    # 设置正确的路径
+    base_path = setup_imports_correctly()
+    if not base_path:
+        return None
     
     try:
-        # 尝试导入模型创建函数
-        from experiments.chaotic_experiment import ChaoticExperiment
+        # 直接导入模型类
+        print("🔧 Attempting direct imports...")
         
-        # 创建实验实例（使用与训练相同的配置）
-        config = {
-            'chaotic_system': 'lorenz',
-            'model_type': 'full_chaotic',
-            'num_speakers': 251,
-            'batch_size': 32,
-            'speaker_embedding_dim': 128,
-            'embedding_hidden_dims': [64, 32],
-            'pooling_type': 'comprehensive',
-            'device': 'cpu'
-        }
-        
-        experiment = ChaoticExperiment(
-            config=config,
-            experiment_name="architecture_analysis",
-            output_dir="./temp_analysis",
-            device='cpu'
-        )
-        
-        experiment.setup()
-        
-        current_model = experiment.model
-        current_state = current_model.state_dict()
-        
-        # 分析当前模型参数
-        current_analysis = {}
-        total_params = 0
-        
-        for key, tensor in current_state.items():
-            current_analysis[key] = {
-                'shape': list(tensor.shape),
-                'numel': tensor.numel(),
-                'dtype': str(tensor.dtype),
-                'key_pattern': analyze_key_pattern(key)
+        # 尝试从 chaotic_network 导入
+        try:
+            from models.chaotic_network import ChaoticSpeakerRecognitionNetwork
+            print("✅ Successfully imported ChaoticSpeakerRecognitionNetwork")
+            
+            config = {
+                'chaotic_system': 'lorenz',
+                'num_speakers': 251,
+                'speaker_embedding_dim': 128,
+                'embedding_hidden_dims': [64, 32],
+                'pooling_type': 'comprehensive'
             }
-            total_params += tensor.numel()
+            model = ChaoticSpeakerRecognitionNetwork(config)
+            
+            state_dict = model.state_dict()
+            param_analysis = {}
+            total_params = 0
+            
+            for key, tensor in state_dict.items():
+                param_analysis[key] = {
+                    'shape': list(tensor.shape),
+                    'numel': tensor.numel(),
+                    'dtype': str(tensor.dtype)
+                }
+                total_params += tensor.numel()
+            
+            model_info = {
+                'model': model,
+                'model_state_dict': state_dict,
+                'param_analysis': param_analysis,
+                'total_params': total_params,
+                'num_layers': len(param_analysis),
+                'model_class': 'ChaoticSpeakerRecognitionNetwork',
+                'param_keys': list(param_analysis.keys())
+            }
+            
+            print(f"✅ Successfully created ChaoticSpeakerRecognitionNetwork")
+            print(f"   Parameters: {total_params:,}")
+            print(f"   Layers: {len(param_analysis)}")
+            print(f"   Example keys: {list(param_analysis.keys())[:3]}")
+            
+            return model_info
+            
+        except ImportError as e:
+            print(f"❌ Failed to import ChaoticSpeakerRecognitionNetwork: {e}")
         
-        current_info = {
-            'model': current_model,
-            'model_state_dict': current_state,
-            'param_analysis': current_analysis,
-            'total_params': total_params,
-            'num_layers': len(current_analysis),
-            'param_keys': list(current_analysis.keys()),
-            'model_class': current_model.__class__.__name__,
-            'model_config': config
-        }
+        # 尝试其他可能的模型类
+        model_classes = [
+            ('models.hybrid_models', 'TraditionalChaoticHybrid'),
+            ('models.hybrid_models', 'ChaoticMLPHybrid'), 
+            ('models.mlp_classifier', 'MLPNetwork'),
+        ]
         
-        print(f"📊 Current model analysis:")
-        print(f"   Model class: {current_model.__class__.__name__}")
-        print(f"   Total parameters: {total_params:,}")
-        print(f"   Number of layers: {len(current_analysis)}")
-        print(f"   Parameter keys (first 5): {list(current_analysis.keys())[:5]}")
+        for module_path, class_name in model_classes:
+            try:
+                module = __import__(module_path, fromlist=[class_name])
+                model_class = getattr(module, class_name)
+                print(f"✅ Successfully imported {class_name}")
+                
+                config = {'num_speakers': 251}
+                model = model_class(config)
+                
+                state_dict = model.state_dict()
+                param_analysis = {}
+                total_params = 0
+                
+                for key, tensor in state_dict.items():
+                    param_analysis[key] = {
+                        'shape': list(tensor.shape),
+                        'numel': tensor.numel(),
+                        'dtype': str(tensor.dtype)
+                    }
+                    total_params += tensor.numel()
+                
+                model_info = {
+                    'model': model,
+                    'model_state_dict': state_dict,
+                    'param_analysis': param_analysis,
+                    'total_params': total_params,
+                    'num_layers': len(param_analysis),
+                    'model_class': class_name,
+                    'param_keys': list(param_analysis.keys())
+                }
+                
+                print(f"✅ Successfully created {class_name}")
+                print(f"   Parameters: {total_params:,}")
+                print(f"   Layers: {len(param_analysis)}")
+                
+                return model_info
+                
+            except ImportError as e:
+                print(f"❌ Failed to import {class_name}: {e}")
+            except Exception as e:
+                print(f"❌ Failed to create {class_name}: {e}")
         
-        return current_info
+        return None
         
     except Exception as e:
-        print(f"❌ Failed to create current model: {e}")
+        print(f"❌ Failed in model creation: {e}")
         import traceback
         traceback.print_exc()
         return None
 
-def generate_comparison_table(checkpoint_info, current_info):
-    """生成详细的对比表格"""
-    print(f"\n📊 Generating comparison table...")
+def create_simple_model_for_analysis():
+    """创建一个简单模型用于分析"""
+    print(f"\n🔍 Creating simple model for analysis...")
+    
+    try:
+        import torch.nn as nn
+        
+        # 创建一个简单的测试模型来验证流程
+        class SimpleTestModel(nn.Module):
+            def __init__(self, num_speakers=251):
+                super().__init__()
+                self.features = nn.Sequential(
+                    nn.Linear(230, 128),
+                    nn.ReLU(),
+                    nn.Linear(128, 64)
+                )
+                self.classifier = nn.Linear(64, num_speakers)
+            
+            def forward(self, x):
+                x = self.features(x)
+                x = self.classifier(x)
+                return x
+        
+        model = SimpleTestModel()
+        state_dict = model.state_dict()
+        
+        param_analysis = {}
+        total_params = 0
+        for key, tensor in state_dict.items():
+            param_analysis[key] = {
+                'shape': list(tensor.shape),
+                'numel': tensor.numel(),
+                'dtype': str(tensor.dtype)
+            }
+            total_params += tensor.numel()
+        
+        model_info = {
+            'model': model,
+            'model_state_dict': state_dict,
+            'param_analysis': param_analysis,
+            'total_params': total_params,
+            'num_layers': len(param_analysis),
+            'model_class': 'SimpleTestModel',
+            'param_keys': list(param_analysis.keys())
+        }
+        
+        print(f"✅ Created SimpleTestModel for analysis")
+        print(f"   Parameters: {total_params:,}")
+        print(f"   Layers: {len(param_analysis)}")
+        print(f"   Parameter keys: {list(param_analysis.keys())}")
+        
+        return model_info
+        
+    except Exception as e:
+        print(f"❌ Failed to create simple model: {e}")
+        return None
+
+def analyze_parameter_structure(checkpoint_info, model_info):
+    """分析参数结构对比"""
+    print(f"\n📊 Analyzing parameter structure...")
     
     checkpoint_params = checkpoint_info['param_analysis']
-    current_params = current_info['param_analysis']
+    current_params = model_info['param_analysis']
     
-    # 创建对比数据
+    print(f"🔍 Checkpoint parameter structure:")
+    for key in list(checkpoint_params.keys())[:10]:  # 显示前10个
+        print(f"   {key}: {checkpoint_params[key]['shape']}")
+    
+    print(f"🔍 Current model parameter structure:")
+    for key in list(current_params.keys())[:10]:
+        print(f"   {key}: {current_params[key]['shape']}")
+    
+    # 分析匹配情况
+    checkpoint_keys = set(checkpoint_params.keys())
+    current_keys = set(current_params.keys())
+    
+    exact_matches = checkpoint_keys & current_keys
+    checkpoint_only = checkpoint_keys - current_keys
+    current_only = current_keys - checkpoint_keys
+    
+    print(f"\n📈 Structure analysis:")
+    print(f"   Exact matches: {len(exact_matches)}")
+    print(f"   Checkpoint only: {len(checkpoint_only)}")
+    print(f"   Current model only: {len(current_only)}")
+    
+    if checkpoint_only:
+        print(f"   Checkpoint-only keys (first 5): {list(checkpoint_only)[:5]}")
+    if current_only:
+        print(f"   Current-only keys (first 5): {list(current_only)[:5]}")
+    
+    # 生成详细的对比数据
     comparison_data = []
     
-    # 首先添加检查点中的所有参数
-    for key, checkpoint_data in checkpoint_params.items():
-        match_status = "❌ Not Found"
-        current_shape = "N/A"
-        shape_match = "N/A"
-        suggested_mapping = ""
-        
-        if key in current_params:
-            current_data = current_params[key]
-            current_shape = str(current_data['shape'])
-            shape_match = "✅" if checkpoint_data['shape'] == current_data['shape'] else "❌ Shape Mismatch"
-            match_status = "✅ Exact Match" if shape_match == "✅" else "⚠️ Key Match"
-        else:
-            # 尝试找到可能的映射
-            suggested_mapping = find_suggested_mapping(key, list(current_params.keys()))
+    # 检查点参数
+    for key in checkpoint_keys:
+        status = "✅ Exact Match" if key in exact_matches else "❌ Not Found"
+        checkpoint_shape = str(checkpoint_params[key]['shape'])
+        current_shape = str(current_params[key]['shape']) if key in current_params else "N/A"
         
         comparison_data.append({
             'Parameter Key': key,
             'Source': 'Checkpoint',
-            'Shape': str(checkpoint_data['shape']),
+            'Status': status,
+            'Checkpoint Shape': checkpoint_shape,
             'Current Shape': current_shape,
-            'Match Status': match_status,
-            'Shape Match': shape_match,
-            'Suggested Mapping': suggested_mapping,
-            'Num Elements': checkpoint_data['numel']
+            'Suggested Action': find_specific_mapping(key, current_keys)
         })
     
-    # 添加当前模型中有但检查点中没有的参数
-    for key, current_data in current_params.items():
-        if key not in checkpoint_params:
-            comparison_data.append({
-                'Parameter Key': key,
-                'Source': 'Current Model',
-                'Shape': str(current_data['shape']),
-                'Current Shape': str(current_data['shape']),
-                'Match Status': "❌ Not in Checkpoint",
-                'Shape Match': "N/A",
-                'Suggested Mapping': "",
-                'Num Elements': current_data['numel']
-            })
+    # 当前模型特有参数
+    for key in current_only:
+        comparison_data.append({
+            'Parameter Key': key,
+            'Source': 'Current Model Only', 
+            'Status': '❌ Not in Checkpoint',
+            'Checkpoint Shape': 'N/A',
+            'Current Shape': str(current_params[key]['shape']),
+            'Suggested Action': 'New parameter in current model'
+        })
     
-    # 创建DataFrame
-    df = pd.DataFrame(comparison_data)
-    
-    # 计算统计信息
-    exact_matches = len(df[df['Match Status'] == '✅ Exact Match'])
-    key_matches_shape_mismatch = len(df[df['Match Status'] == '⚠️ Key Match'])
-    not_found = len(df[df['Match Status'] == '❌ Not Found'])
-    not_in_checkpoint = len(df[df['Match Status'] == '❌ Not in Checkpoint'])
-    
-    total_checkpoint_params = sum(1 for item in comparison_data if item['Source'] == 'Checkpoint')
-    total_current_params = len(current_params)
-    
-    print(f"\n📈 Match Statistics:")
-    print(f"   Exact matches: {exact_matches}/{total_checkpoint_params} ({exact_matches/max(1,total_checkpoint_params)*100:.1f}%)")
-    print(f"   Key matches (shape mismatch): {key_matches_shape_mismatch}")
-    print(f"   Not found in current model: {not_found}")
-    print(f"   Current model parameters not in checkpoint: {not_in_checkpoint}")
-    
-    return df
+    return pd.DataFrame(comparison_data)
 
-def find_suggested_mapping(checkpoint_key, current_keys):
-    """为检查点键找到建议的映射"""
+def find_specific_mapping(checkpoint_key, current_keys):
+    """为特定键找到映射建议"""
     
-    # 常见的重命名模式
-    rename_patterns = [
+    # 分析键的结构
+    parts = checkpoint_key.split('.')
+    
+    # 常见的映射模式
+    mapping_patterns = [
+        # 特征提取层
         (r'^features\.', 'chaotic_features.'),
-        (r'^classifier\.', 'speaker_classifier.'),
-        (r'^embedding\.', 'speaker_embedding.'),
-        (r'^backbone\.', 'feature_extractor.'),
-        (r'^fc\.', 'classifier.'),
         (r'^conv\.', 'features.conv.'),
+        (r'^backbone\.', 'feature_extractor.'),
+        
+        # 分类器层
+        (r'^classifier\.', 'speaker_classifier.'),
+        (r'^fc\.', 'classifier.'),
+        (r'^linear\.', 'classifier.'),
+        
+        # 嵌入层
+        (r'^embedding\.', 'speaker_embedding.'),
+        (r'^embed\.', 'embedding.'),
+        
+        # 参数类型
         (r'\.weight$', '.weight'),
         (r'\.bias$', '.bias'),
+        (r'\.running_mean$', '.running_mean'),
+        (r'\.running_var$', '.running_var'),
     ]
     
-    # 尝试直接重命名
-    for pattern, replacement in rename_patterns:
+    # 尝试应用映射模式
+    for pattern, replacement in mapping_patterns:
         potential_key = re.sub(pattern, replacement, checkpoint_key)
         if potential_key in current_keys:
-            return f"→ {potential_key}"
+            return f"Rename to: {potential_key}"
     
-    # 尝试基于参数名称匹配
-    key_parts = checkpoint_key.split('.')
-    param_name = key_parts[-1]  # 参数名称（weight, bias等）
-    
+    # 基于参数名称的模糊匹配
+    param_name = parts[-1] if parts else ""
     for current_key in current_keys:
         current_parts = current_key.split('.')
         if current_parts[-1] == param_name:
-            # 参数名称匹配，但路径不同
-            return f"→ {current_key} (param name match)"
+            return f"Possible match: {current_key}"
     
-    # 尝试基于层级深度匹配
-    checkpoint_depth = len(key_parts)
-    for current_key in current_keys:
-        current_depth = len(current_key.split('.'))
-        if current_depth == checkpoint_depth and key_parts[-1] == current_key.split('.')[-1]:
-            return f"→ {current_key} (depth match)"
-    
-    return "No obvious mapping found"
+    return "No obvious mapping"
 
-def generate_recommendations(df, checkpoint_info, current_info):
+def generate_specific_recommendations(df, checkpoint_info, model_info):
     """生成具体的修改建议"""
-    print(f"\n💡 Generating recommendations...")
+    print(f"\n💡 Generating specific recommendations...")
     
     recommendations = []
     
     # 分析不匹配的模式
-    not_found_keys = df[df['Match Status'] == '❌ Not Found']['Parameter Key'].tolist()
-    shape_mismatch_keys = df[df['Match Status'] == '⚠️ Key Match']['Parameter Key'].tolist()
+    not_found_df = df[df['Status'] == '❌ Not Found']
     
-    # 按层级分组不匹配的键
-    hierarchy_groups = defaultdict(list)
-    for key in not_found_keys:
-        pattern = analyze_key_pattern(key)
-        hierarchy_groups[pattern['hierarchy']].append(key)
+    # 按层级分组
+    layer_patterns = defaultdict(list)
+    for _, row in not_found_df.iterrows():
+        key = row['Parameter Key']
+        parts = key.split('.')
+        if len(parts) > 1:
+            layer_name = parts[0]
+            layer_patterns[layer_name].append(key)
     
-    # 生成层级修改建议
-    for hierarchy, keys in hierarchy_groups.items():
-        if hierarchy:  # 非根层级
-            recommendations.append({
-                'type': 'RENAME_LAYER',
-                'description': f"Rename layer hierarchy '{hierarchy}'",
-                'affected_keys': keys[:3],  # 显示前3个受影响的键
-                'suggestion': f"Consider renaming '{hierarchy}' to match current model structure"
-            })
-    
-    # 分析形状不匹配
-    for key in shape_mismatch_keys:
-        checkpoint_shape = df[df['Parameter Key'] == key]['Shape'].iloc[0]
-        current_shape = df[df['Parameter Key'] == key]['Current Shape'].iloc[0]
-        
-        recommendations.append({
-            'type': 'SHAPE_MISMATCH',
-            'description': f"Shape mismatch for '{key}'",
-            'details': f"Checkpoint: {checkpoint_shape}, Current: {current_shape}",
-            'suggestion': "Adjust layer dimensions in model definition"
-        })
+    # 为每个层级生成具体建议
+    for layer_name, keys in layer_patterns.items():
+        if keys:
+            # 分析这个层级的模式
+            sample_key = keys[0]
+            parts = sample_key.split('.')
+            
+            if len(parts) >= 2:
+                recommendation = {
+                    'Layer': layer_name,
+                    'Issue': f"Layer '{layer_name}' not found in current model",
+                    'Affected Parameters': len(keys),
+                    'Specific Action': f"Rename layer '{layer_name}' in current model to match checkpoint",
+                    'Example Parameters': keys[:3],
+                    'Code Change Example': f"# In model definition, change:\n# self.{layer_name} = ...\n# to match checkpoint structure"
+                }
+                recommendations.append(recommendation)
     
     # 总体建议
-    match_rate = len(df[df['Match Status'] == '✅ Exact Match']) / len(df[df['Source'] == 'Checkpoint'])
+    exact_matches = len(df[df['Status'] == '✅ Exact Match'])
+    total_checkpoint = len(df[df['Source'] == 'Checkpoint'])
+    match_rate = exact_matches / total_checkpoint if total_checkpoint > 0 else 0
     
-    if match_rate < 0.1:
+    if match_rate == 0:
         recommendations.append({
-            'type': 'ARCHITECTURE_OVERHAUL',
-            'description': 'Complete architecture mismatch',
-            'suggestion': 'Consider creating a new model adapter or retraining from scratch'
+            'Layer': 'ALL',
+            'Issue': 'Complete architecture mismatch',
+            'Affected Parameters': 'All',
+            'Specific Action': 'Major model restructuring or use different model class',
+            'Example Parameters': ['All parameters'],
+            'Code Change Example': '# Consider using a completely different model architecture\n# or implementing parameter mapping logic'
         })
-    elif match_rate < 0.5:
+    elif match_rate < 0.3:
         recommendations.append({
-            'type': 'PARAMETER_MAPPING',
-            'description': 'Significant parameter mapping needed',
-            'suggestion': 'Implement parameter mapping in model loading logic'
-        })
-    else:
-        recommendations.append({
-            'type': 'MINOR_ADJUSTMENTS',
-            'description': 'Most parameters match with minor adjustments needed',
-            'suggestion': 'Focus on renaming mismatched layers'
+            'Layer': 'MULTIPLE',
+            'Issue': 'Severe layer naming mismatch',
+            'Affected Parameters': 'Most',
+            'Specific Action': 'Rename multiple layers in model definition',
+            'Example Parameters': ['Multiple layers'],
+            'Code Change Example': '# Rename layers in models/chaotic_network.py\n# to match checkpoint parameter names'
         })
     
     return recommendations
 
-def save_analysis_results(df, recommendations, checkpoint_info, current_info, output_dir):
-    """保存分析结果"""
+def save_final_analysis(df, recommendations, checkpoint_info, model_info, output_dir):
+    """保存最终分析结果"""
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # 保存详细的对比表格
-    excel_path = output_dir / 'model_architecture_comparison.xlsx'
+    # 保存Excel报告
+    excel_path = output_dir / 'final_architecture_analysis.xlsx'
     with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
-        # 主对比表
         df.to_excel(writer, sheet_name='Parameter Comparison', index=False)
-        
-        # 按匹配状态分组
-        match_summary = df[df['Source'] == 'Checkpoint'].groupby('Match Status').size().reset_index()
-        match_summary.columns = ['Match Status', 'Count']
-        match_summary.to_excel(writer, sheet_name='Match Summary', index=False)
         
         # 建议表
         rec_df = pd.DataFrame(recommendations)
         rec_df.to_excel(writer, sheet_name='Recommendations', index=False)
     
-    # 保存文本报告
-    report_path = output_dir / 'architecture_analysis_report.txt'
+    # 保存详细的文本报告
+    report_path = output_dir / 'final_analysis_report.txt'
     with open(report_path, 'w') as f:
-        f.write("MODEL ARCHITECTURE ANALYSIS REPORT\n")
+        f.write("FINAL MODEL ARCHITECTURE ANALYSIS\n")
         f.write("=" * 50 + "\n\n")
         
-        f.write("CHECKPOINT INFORMATION:\n")
-        f.write(f"  Total parameters: {checkpoint_info['total_params']:,}\n")
-        f.write(f"  Number of layers: {checkpoint_info['num_layers']}\n")
-        f.write(f"  Checkpoint keys: {checkpoint_info['checkpoint_keys']}\n\n")
-        
-        f.write("CURRENT MODEL INFORMATION:\n")
-        f.write(f"  Model class: {current_info['model_class']}\n")
-        f.write(f"  Total parameters: {current_info['total_params']:,}\n")
-        f.write(f"  Number of layers: {current_info['num_layers']}\n\n")
-        
-        f.write("MATCH STATISTICS:\n")
-        exact_matches = len(df[df['Match Status'] == '✅ Exact Match'])
+        f.write("SUMMARY:\n")
+        exact_matches = len(df[df['Status'] == '✅ Exact Match'])
         total_checkpoint = len(df[df['Source'] == 'Checkpoint'])
-        f.write(f"  Exact matches: {exact_matches}/{total_checkpoint} ({exact_matches/max(1,total_checkpoint)*100:.1f}%)\n\n")
+        match_rate = exact_matches / total_checkpoint if total_checkpoint > 0 else 0
         
-        f.write("KEY RECOMMENDATIONS:\n")
+        f.write(f"  Checkpoint Parameters: {checkpoint_info['total_params']:,}\n")
+        f.write(f"  Current Model Parameters: {model_info['total_params']:,}\n")
+        f.write(f"  Parameter Match Rate: {match_rate:.1%}\n")
+        f.write(f"  Current Model Class: {model_info['model_class']}\n\n")
+        
+        f.write("KEY FINDINGS:\n")
+        if match_rate == 0:
+            f.write("  🚨 COMPLETE MISMATCH: No parameters match between checkpoint and current model\n")
+            f.write("  This suggests either:\n")
+            f.write("  1. The wrong model class is being used\n")
+            f.write("  2. The model architecture has changed completely\n")
+            f.write("  3. There's a version mismatch\n")
+        else:
+            f.write(f"  {exact_matches}/{total_checkpoint} parameters match exactly\n\n")
+        
+        f.write("CHECKPOINT PARAMETER STRUCTURE:\n")
+        for key in list(checkpoint_info['param_analysis'].keys())[:15]:
+            shape = checkpoint_info['param_analysis'][key]['shape']
+            f.write(f"  {key}: {shape}\n")
+        
+        f.write("\nCURRENT MODEL PARAMETER STRUCTURE:\n")
+        for key in list(model_info['param_analysis'].keys())[:15]:
+            shape = model_info['param_analysis'][key]['shape']
+            f.write(f"  {key}: {shape}\n")
+        
+        f.write("\nSPECIFIC ACTIONS NEEDED:\n")
         for i, rec in enumerate(recommendations, 1):
-            f.write(f"{i}. {rec['type']}: {rec['description']}\n")
-            f.write(f"   Suggestion: {rec['suggestion']}\n\n")
+            f.write(f"{i}. {rec['Layer']}: {rec['Issue']}\n")
+            f.write(f"   Action: {rec['Specific Action']}\n")
+            if 'Code Change Example' in rec:
+                f.write(f"   Code: {rec['Code Change Example']}\n")
+            f.write("\n")
     
-    print(f"✅ Analysis results saved to: {output_dir}")
-    print(f"   📊 Excel comparison: {excel_path}")
-    print(f"   📝 Text report: {report_path}")
+    print(f"✅ Final analysis saved to: {output_dir}")
+    print(f"   📊 Excel file: {excel_path}")
+    print(f"   📝 Report: {report_path}")
 
 def main():
     """主分析函数"""
-    print("🔧 Model Architecture Analyzer")
+    print("🔧 Final Model Architecture Analyzer")
     print("=" * 50)
     
     # 设置检查点路径
@@ -467,53 +521,54 @@ def main():
         print(f"❌ Checkpoint not found: {checkpoint_path}")
         return
     
-    # 步骤1: 查找所有模型类
-    print("\n📁 STEP 1: Finding all model classes...")
-    model_classes = find_all_model_classes()
-    print(f"   Found {len(model_classes)} model classes")
-    
-    # 步骤2: 分析检查点架构
-    checkpoint_info = analyze_checkpoint_architecture(checkpoint_path)
+    # 步骤1: 正确分析检查点
+    checkpoint_info = analyze_checkpoint_correctly(checkpoint_path)
     if not checkpoint_info:
+        print("❌ Could not analyze checkpoint")
         return
     
-    # 步骤3: 分析当前模型架构
-    current_info = create_current_model_analysis()
-    if not current_info:
+    # 步骤2: 创建模型
+    model_info = create_model_with_direct_import()
+    if not model_info:
+        print("⚠️  Could not import project models, creating simple test model")
+        model_info = create_simple_model_for_analysis()
+    
+    if not model_info:
+        print("❌ Could not create any model for analysis")
         return
     
-    # 步骤4: 生成对比表格
-    comparison_df = generate_comparison_table(checkpoint_info, current_info)
+    # 步骤3: 分析参数结构
+    comparison_df = analyze_parameter_structure(checkpoint_info, model_info)
     
-    # 步骤5: 生成建议
-    recommendations = generate_recommendations(comparison_df, checkpoint_info, current_info)
+    # 步骤4: 生成建议
+    recommendations = generate_specific_recommendations(comparison_df, checkpoint_info, model_info)
     
-    # 步骤6: 保存结果
-    output_dir = "model_architecture_analysis"
-    save_analysis_results(comparison_df, recommendations, checkpoint_info, current_info, output_dir)
+    # 步骤5: 保存最终分析
+    output_dir = "final_architecture_analysis"
+    save_final_analysis(comparison_df, recommendations, checkpoint_info, model_info, output_dir)
     
-    # 步骤7: 显示关键发现
-    print(f"\n🎯 KEY FINDINGS:")
-    exact_matches = len(comparison_df[comparison_df['Match Status'] == '✅ Exact Match'])
+    # 显示关键结果
+    print(f"\n🎯 FINAL RESULTS:")
+    exact_matches = len(comparison_df[comparison_df['Status'] == '✅ Exact Match'])
     total_checkpoint = len(comparison_df[comparison_df['Source'] == 'Checkpoint'])
-    match_rate = exact_matches / max(1, total_checkpoint)
+    match_rate = exact_matches / total_checkpoint if total_checkpoint > 0 else 0
     
-    print(f"   Parameter match rate: {match_rate:.1%}")
+    print(f"   Model Class: {model_info['model_class']}")
+    print(f"   Parameter Match Rate: {match_rate:.1%}")
     
-    if match_rate < 0.1:
+    if match_rate == 0:
         print("   🚨 CRITICAL: Complete architecture mismatch")
-        print("   💡 Recommendation: Major model restructuring needed")
-    elif match_rate < 0.5:
-        print("   ⚠️  WARNING: Significant architecture differences")
-        print("   💡 Recommendation: Parameter mapping implementation needed")
+        print("   💡 You need to:")
+        print("      1. Identify the correct model class used in the checkpoint")
+        print("      2. Modify your current model to match that architecture")
+        print("      3. Or retrain from scratch with the current architecture")
     else:
-        print("   ✅ GOOD: Mostly compatible architectures")
-        print("   💡 Recommendation: Minor adjustments and renaming needed")
+        print(f"   🔧 Focus on renaming {total_checkpoint - exact_matches} parameters")
     
     print(f"\n📋 Next steps:")
-    print(f"   1. Review the detailed comparison in: {output_dir}/")
-    print(f"   2. Implement the recommended changes in model files")
-    print(f"   3. Test parameter loading with the modified models")
+    print(f"   1. Check the detailed report in: {output_dir}/")
+    print(f"   2. Modify the model files based on the specific recommendations")
+    print(f"   3. Test the parameter loading with the modified model")
 
 if __name__ == "__main__":
     main()

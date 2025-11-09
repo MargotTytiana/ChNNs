@@ -1,69 +1,85 @@
-🔧 Model Architecture Analyzer
+🔧 Final Model Architecture Analyzer
 ==================================================
 
-📁 STEP 1: Finding all model classes...
-📁 Found model class: MockFeatureExtractor in models/hybrid_models.py
-📁 Found model class: FeatureDimensionAdapter in models/hybrid_models.py
-📁 Found model class: TraditionalChaoticHybrid in models/hybrid_models.py
-📁 Found model class: MockClassifier in models/hybrid_models.py
-📁 Found model class: ChaoticMLPHybrid in models/hybrid_models.py
-📁 Found model class: TraditionalMLPBaseline in models/hybrid_models.py
-📁 Found model class: MockComponent in models/chaotic_network.py
-📁 Found model class: SpeakerEmbedding in models/chaotic_network.py
-📁 Found model class: ChaoticClassifier in models/chaotic_network.py
-📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/chaotic_network.py
-📁 Found model class: BatchPhaseSpaceReconstructor in models/chaotic_network.py
-📁 Found model class: MLPNetwork in models/mlp_classifier.py
-📁 Found model class: MockComponent in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: SpeakerEmbedding in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: ChaoticClassifier in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: BatchPhaseSpaceReconstructor in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: MLPNetwork in models/.ipynb_checkpoints/mlp_classifier-checkpoint.py
-📁 Found model class: MockFeatureExtractor in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: FeatureDimensionAdapter in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: TraditionalChaoticHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: MockClassifier in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: ChaoticMLPHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: TraditionalMLPBaseline in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: CNNBaseline in experiments/baseline_experiment.py
-📁 Found model class: CNNBaseline in experiments/.ipynb_checkpoints/baseline_experiment-checkpoint.py
-📁 Found model class: TestModel in utils/checkpoint.py
-📁 Found model class: MockFeatureExtractor in models/hybrid_models.py
-📁 Found model class: FeatureDimensionAdapter in models/hybrid_models.py
-📁 Found model class: TraditionalChaoticHybrid in models/hybrid_models.py
-📁 Found model class: MockClassifier in models/hybrid_models.py
-📁 Found model class: ChaoticMLPHybrid in models/hybrid_models.py
-📁 Found model class: TraditionalMLPBaseline in models/hybrid_models.py
-📁 Found model class: MockComponent in models/chaotic_network.py
-📁 Found model class: SpeakerEmbedding in models/chaotic_network.py
-📁 Found model class: ChaoticClassifier in models/chaotic_network.py
-📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/chaotic_network.py
-📁 Found model class: BatchPhaseSpaceReconstructor in models/chaotic_network.py
-📁 Found model class: MLPNetwork in models/mlp_classifier.py
-📁 Found model class: CNNBaseline in experiments/baseline_experiment.py
-📁 Found model class: AttractorPooling in core/attractor_pooling.py
-📁 Found model class: ChaoticEmbedding in core/chaotic_embedding.py
-📁 Found model class: TestModel in utils/.ipynb_checkpoints/checkpoint-checkpoint.py
-📁 Found model class: MockComponent in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: SpeakerEmbedding in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: ChaoticClassifier in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: ChaoticSpeakerRecognitionNetwork in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: BatchPhaseSpaceReconstructor in models/.ipynb_checkpoints/chaotic_network-checkpoint.py
-📁 Found model class: MLPNetwork in models/.ipynb_checkpoints/mlp_classifier-checkpoint.py
-📁 Found model class: MockFeatureExtractor in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: FeatureDimensionAdapter in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: TraditionalChaoticHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: MockClassifier in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: ChaoticMLPHybrid in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: TraditionalMLPBaseline in models/.ipynb_checkpoints/hybrid_models-checkpoint.py
-📁 Found model class: CNNBaseline in experiments/.ipynb_checkpoints/baseline_experiment-checkpoint.py
-📁 Found model class: ChaoticEmbedding in core/.ipynb_checkpoints/chaotic_embedding-checkpoint.py
-📁 Found model class: AttractorPooling in core/.ipynb_checkpoints/attractor_pooling-checkpoint.py
-   Found 16 model classes
-
-🔍 Analyzing checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251103_134109/checkpoint_epoch_0000_20251104_074641.pkl
+🔍 Correctly analyzing checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251103_134109/checkpoint_epoch_0000_20251104_074641.pkl
 ✅ Checkpoint loaded successfully
 📋 Checkpoint keys: ['epoch', 'timestamp', 'metrics', 'additional_info', 'model', 'framework']
-📦 Using model key
-❌ Failed to analyze checkpoint: 'int' object has no attribute 'shape'
+📦 Model data type: <class 'dict'>
+📦 Model data keys: ['epoch', 'model_state_dict', 'optimizer_state_dict', 'scheduler_state_dict', 'experiment_state', 'config', 'best_metric', 'best_epoch']
+✅ Found model_state_dict in model data
+📊 Checkpoint analysis:
+   Total parameters: 46,699
+   Number of layers: 29
+   Parameter keys (first 5): ['chaotic_embedding.initial_state_mapper.0.weight', 'chaotic_embedding.initial_state_mapper.0.bias', 'chaotic_embedding.initial_state_mapper.2.weight', 'chaotic_embedding.initial_state_mapper.2.bias', 'chaotic_embedding.coupling_mapper.0.weight']
+
+🔍 Creating model with direct import...
+✅ Added to path: /scratch/project_2003370/yueyao/Model
+🔧 Attempting direct imports...
+  ✓ Base model classes loaded
+  ✓ MLP classifier models loaded
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+  ✓ Hybrid models loaded
+  ✓ Chaotic network models loaded
+  ✓ Model factory loaded
+✅ Successfully imported ChaoticSpeakerRecognitionNetwork
+Chaotic feature dimensions: MLSA=105, RQA=125, Total=230
+✅ Successfully created ChaoticSpeakerRecognitionNetwork
+   Parameters: 27,371
+   Layers: 29
+   Example keys: ['chaotic_embedding.initial_state_mapper.0.weight', 'chaotic_embedding.initial_state_mapper.0.bias', 'chaotic_embedding.initial_state_mapper.2.weight']
+
+📊 Analyzing parameter structure...
+🔍 Checkpoint parameter structure:
+   chaotic_embedding.initial_state_mapper.0.weight: [16, 230]
+   chaotic_embedding.initial_state_mapper.0.bias: [16]
+   chaotic_embedding.initial_state_mapper.2.weight: [3, 16]
+   chaotic_embedding.initial_state_mapper.2.bias: [3]
+   chaotic_embedding.coupling_mapper.0.weight: [8, 230]
+   chaotic_embedding.coupling_mapper.0.bias: [8]
+   chaotic_embedding.coupling_mapper.2.weight: [3, 8]
+   chaotic_embedding.coupling_mapper.2.bias: [3]
+   chaotic_embedding.param_adapter.0.weight: [8, 230]
+   chaotic_embedding.param_adapter.0.bias: [8]
+🔍 Current model parameter structure:
+   chaotic_embedding.initial_state_mapper.0.weight: [16, 230]
+   chaotic_embedding.initial_state_mapper.0.bias: [16]
+   chaotic_embedding.initial_state_mapper.2.weight: [3, 16]
+   chaotic_embedding.initial_state_mapper.2.bias: [3]
+   chaotic_embedding.coupling_mapper.0.weight: [8, 230]
+   chaotic_embedding.coupling_mapper.0.bias: [8]
+   chaotic_embedding.coupling_mapper.2.weight: [3, 8]
+   chaotic_embedding.coupling_mapper.2.bias: [3]
+   chaotic_embedding.param_adapter.0.weight: [8, 230]
+   chaotic_embedding.param_adapter.0.bias: [8]
+
+📈 Structure analysis:
+   Exact matches: 29
+   Checkpoint only: 0
+   Current model only: 0
+
+💡 Generating specific recommendations...
+✅ Final analysis saved to: final_architecture_analysis
+   📊 Excel file: final_architecture_analysis/final_architecture_analysis.xlsx
+   📝 Report: final_architecture_analysis/final_analysis_report.txt
+
+🎯 FINAL RESULTS:
+   Model Class: ChaoticSpeakerRecognitionNetwork
+   Parameter Match Rate: 100.0%
+   🔧 Focus on renaming 0 parameters
+
+📋 Next steps:
+   1. Check the detailed report in: final_architecture_analysis/
+   2. Modify the model files based on the specific recommendations
+   3. Test the parameter loading with the modified model

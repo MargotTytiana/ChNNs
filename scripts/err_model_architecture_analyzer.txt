@@ -1,5 +1,8 @@
-Traceback (most recent call last):
-  File "/scratch/project_2003370/yueyao/Model/scripts/model_architecture_analyzer.py", line 109, in analyze_checkpoint_architecture
-    'shape': list(tensor.shape),
-                  ^^^^^^^^^^^^
-AttributeError: 'int' object has no attribute 'shape'
+/scratch/project_2003370/yueyao/Model/core/mlsa_extractor.py:351: UserWarning: Lyapunov calculation failed for scale 1: zero-size array to reduction operation fmin which has no identity
+  warnings.warn(f"Lyapunov calculation failed for scale {scale}: {e}")
+/scratch/project_2003370/yueyao/Model/core/rqa_extractor.py:600: UserWarning: RQA analysis failed for scale 1: safe_divide() got an unexpected keyword argument 'default'
+  warnings.warn(f"RQA analysis failed for scale {scale}: {e}")
+/scratch/project_2003370/yueyao/Model/core/rqa_extractor.py:600: UserWarning: RQA analysis failed for scale 2: safe_divide() got an unexpected keyword argument 'default'
+  warnings.warn(f"RQA analysis failed for scale {scale}: {e}")
+/scratch/project_2003370/yueyao/Model/core/rqa_extractor.py:600: UserWarning: RQA analysis failed for scale 4: safe_divide() got an unexpected keyword argument 'default'
+  warnings.warn(f"RQA analysis failed for scale {scale}: {e}")
