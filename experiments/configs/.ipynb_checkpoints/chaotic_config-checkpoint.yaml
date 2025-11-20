@@ -30,7 +30,7 @@ model:
 # Training adjustments for chaotic network
 training:
   batch_size: 16  # Smaller batch for stability
-  learning_rate: 0.0005  # Lower learning rate
+  learning_rate: 0.01  # Lower learning rate
   num_epochs: 200  # More epochs needed
   
   # Specialized optimizer for chaotic systems

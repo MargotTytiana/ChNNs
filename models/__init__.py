@@ -1,55 +1,34 @@
 """
-Models subpackage - Contains all neural network architectures and model definitions.
-This is like the workshop where all the different types of tools (models) are stored.
+模型包兼容性层
+确保向后兼容性
 """
 
-# Import key model classes with error handling
-# Each try-except block handles a specific model type independently
-try:
-    from .base_model import BaseModel, ModelConfig, TrainingMetrics
-    print("  ✓ Base model classes loaded")
-except ImportError as e:
-    print(f"  ⚠ Base model import warning: {e}")
-    BaseModel = None
-    ModelConfig = None
-    TrainingMetrics = None
+# 导入增强模型作为默认实现
+from .enhanced_chaotic_network import EnhancedChaoticNetwork
 
-try:
-    print("  ✓ MLP classifier models loaded")
-except ImportError as e:
-    print(f"  ⚠ MLP classifier import warning: {e}")
-    MLPClassifier = None
-    PyTorchMLPClassifier = None
-    MLPNetwork = None
+# 保持向后兼容性 - 将增强模型作为默认ChaoticNetwork
+ChaoticNetwork = EnhancedChaoticNetwork
 
-try:
-    from .hybrid_models import TraditionalMLPBaseline, HybridModelManager
-    print("  ✓ Hybrid models loaded")
-except ImportError as e:
-    print(f"  ⚠ Hybrid models import warning: {e}")
-    TraditionalMLPBaseline = None
-    HybridModelManager = None
-
-try:
-    from .chaotic_network import ChaoticSpeakerRecognitionNetwork, create_chaotic_speaker_network
-    print("  ✓ Chaotic network models loaded")
-except ImportError as e:
-    print(f"  ⚠ Chaotic network import warning: {e}")
-    ChaoticSpeakerRecognitionNetwork = None
-    create_chaotic_speaker_network = None
-
-try:
-    from .model_factory import ModelFactory, ModelRegistry
-    print("  ✓ Model factory loaded")
-except ImportError as e:
-    print(f"  ⚠ Model factory import warning: {e}")
-    ModelFactory = None
-    ModelRegistry = None
+# 导出所有模型类
+from .base_model import BaseModel, SklearnCompatibleModel, ModelConfig
+from .chaotic_network import ChaoticSpeakerRecognitionNetwork
+from .enhanced_chaotic_network import EnhancedChaoticNetwork
+from .hybrid_models import TraditionalChaoticHybrid, ChaoticMLPHybrid, TraditionalMLPBaseline
+from .mlp_classifier import MLPClassifier, SklearnMLPClassifier
+from .model_factory import ModelFactory, ModelRegistry
 
 __all__ = [
-    'BaseModel', 'ModelConfig', 'TrainingMetrics',
-    'MLPClassifier', 'PyTorchMLPClassifier', 'MLPNetwork',
-    'TraditionalMLPBaseline', 'HybridModelManager',
-    'ChaoticSpeakerRecognitionNetwork', 'create_chaotic_speaker_network',
-    'ModelFactory', 'ModelRegistry'
+    'BaseModel',
+    'SklearnCompatibleModel', 
+    'ModelConfig',
+    'ChaoticSpeakerRecognitionNetwork',
+    'EnhancedChaoticNetwork',
+    'ChaoticNetwork',  # 兼容性别名
+    'TraditionalChaoticHybrid',
+    'ChaoticMLPHybrid', 
+    'TraditionalMLPBaseline',
+    'MLPClassifier',
+    'SklearnMLPClassifier',
+    'ModelFactory',
+    'ModelRegistry'
 ]

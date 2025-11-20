@@ -1098,7 +1098,7 @@ def create_default_config() -> Dict[str, Any]:
         'num_speakers': 100,
         'batch_size': 32,
         'num_epochs': 100,
-        'learning_rate': 0.0005,
+        'learning_rate': 0.01,
         'weight_decay': 1e-5,
         'gradient_clipping': 1.0,
         
@@ -1113,7 +1113,8 @@ def create_default_config() -> Dict[str, Any]:
         
         # Network architecture
         'pooling_type': 'comprehensive',
-        'speaker_embedding_dim': 128,
+        'speaker_embedding_dim': 256,
+        'embedding_hidden_dims': [512, 256, 128],
         'classifier_type': 'cosine',
         'temperature': 30.0,
         'margin': 0.35,
@@ -1130,7 +1131,10 @@ def create_default_config() -> Dict[str, Any]:
         
         'optimizer': {
             'type': 'adamw',
-            'params': {'betas': [0.9, 0.999]}
+            'params': {'betas': [0.9, 0.999],
+                'eps': 1e-8,
+                'weight_decay': 1e-4  # ← 增加正则化
+            }
         },
         'scheduler': {
             'type': 'cosine',

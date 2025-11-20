@@ -401,3 +401,37 @@ Chaotic feature dimensions: MLSA=105, RQA=125, Total=230
 2025-11-09 12:33:27,557 - chaotic_trainer - INFO - Starting training from epoch 19 for 81 more epochs...
 2025-11-09 12:33:27,558 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Starting training for 81 epochs
 2025-11-09 12:34:35,393 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 19: [0/5268 (0.0%)]	Loss: 5.526345
+2025-11-09 14:25:04,103 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 19: [3200/5268 (61.0%)]	Loss: 5.324089
+2025-11-09 16:10:01,478 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 19: Train Loss: 5.4133, Train Acc: 0.0154, Val Loss: 5.3625, Val Acc: 0.0209
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_123246/checkpoint_epoch_0000_20251109_161001.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_123246/checkpoint_epoch_0000_20251109_161001.pkl
+2025-11-09 16:10:01,530 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 19
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_123246/checkpoint_epoch_0000_20251109_161001.pkl
+2025-11-09 16:11:08,944 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 20: [0/5268 (0.0%)]	Loss: 5.341588
+2025-11-09 18:01:22,647 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 20: [3200/5268 (61.0%)]	Loss: 5.064027
+2025-11-09 19:46:35,768 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 20: Train Loss: 5.3042, Train Acc: 0.0191, Val Loss: 5.6618, Val Acc: 0.0179
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_123246/checkpoint_epoch_0000_20251109_194635.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_123246/checkpoint_epoch_0000_20251109_194635.pkl
+2025-11-09 19:47:43,845 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 21: [0/5268 (0.0%)]	Loss: 5.308897
+2025-11-09 21:37:52,457 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 21: [3200/5268 (61.0%)]	Loss: 5.248267
+2025-11-09 23:22:49,936 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 21: Train Loss: 5.2835, Train Acc: 0.0185, Val Loss: 5.5047, Val Acc: 0.0130
+2025-11-09 23:23:57,890 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 22: [0/5268 (0.0%)]	Loss: 5.361031
+2025-11-10 01:14:13,501 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 22: [3200/5268 (61.0%)]	Loss: 5.314608
+2025-11-10 02:59:25,662 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 22: Train Loss: 5.2582, Train Acc: 0.0221, Val Loss: 5.4502, Val Acc: 0.0199
+2025-11-10 03:00:33,858 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 23: [0/5268 (0.0%)]	Loss: 5.349672
+2025-11-10 04:50:56,305 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 23: [3200/5268 (61.0%)]	Loss: 5.118852
+2025-11-10 06:36:05,167 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 23: Train Loss: 5.2393, Train Acc: 0.0213, Val Loss: 5.8107, Val Acc: 0.0110
+2025-11-10 06:37:12,614 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 24: [0/5268 (0.0%)]	Loss: 5.416498
+2025-11-10 08:27:29,313 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 24: [3200/5268 (61.0%)]	Loss: 5.404140
+2025-11-10 10:12:40,848 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 24: Train Loss: 5.2415, Train Acc: 0.0200, Val Loss: 5.8865, Val Acc: 0.0120
+2025-11-10 10:13:48,726 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 25: [0/5268 (0.0%)]	Loss: 5.137252
+2025-11-10 12:04:03,573 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 25: [3200/5268 (61.0%)]	Loss: 5.439156
+2025-11-10 13:49:24,970 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 25: Train Loss: 5.2290, Train Acc: 0.0175, Val Loss: 5.7555, Val Acc: 0.0100
+2025-11-10 13:50:33,965 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 26: [0/5268 (0.0%)]	Loss: 5.314958
+2025-11-10 15:40:55,440 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 26: [3200/5268 (61.0%)]	Loss: 5.266692
+2025-11-10 17:26:12,921 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 26: Train Loss: 5.2088, Train Acc: 0.0208, Val Loss: 5.8557, Val Acc: 0.0150
+2025-11-10 17:27:19,800 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 27: [0/5268 (0.0%)]	Loss: 5.234971
+2025-11-10 19:17:41,200 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 27: [3200/5268 (61.0%)]	Loss: 5.230535
+2025-11-10 21:02:47,769 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 27: Train Loss: 5.1917, Train Acc: 0.0227, Val Loss: 6.0516, Val Acc: 0.0100
+2025-11-10 21:03:53,625 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 28: [0/5268 (0.0%)]	Loss: 5.221930
+2025-11-10 22:54:11,476 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 28: [3200/5268 (61.0%)]	Loss: 4.943604

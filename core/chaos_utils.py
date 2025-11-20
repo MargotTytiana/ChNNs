@@ -51,7 +51,7 @@ PROJECT_ROOT, USING_IMPORT_MANAGER = setup_module_imports()
 # project model import
 # =============================================================================
 try:
-    from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
+    from core.phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
     HAS_PHASE_SPACE = True
 except ImportError as e:
     HAS_PHASE_SPACE = False
@@ -845,102 +845,102 @@ def largest_lyapunov_from_data(data: np.ndarray, dt: float = 1.0, tau: int = 1,
         return np.nan
 
 
-def hurst_exponent(data: np.ndarray, max_lag: Optional[int] = None) -> float:
-    """
-    Calculate Hurst exponent using Detrended Fluctuation Analysis.
+# def hurst_exponent(data: np.ndarray, max_lag: Optional[int] = None) -> float:
+#     """
+#     Calculate Hurst exponent using Detrended Fluctuation Analysis.
     
-    Args:
-        data: Time series data
-        max_lag: Maximum lag for analysis
+#     Args:
+#         data: Time series data
+#         max_lag: Maximum lag for analysis
         
-    Returns:
-        Hurst exponent (0.5 for random, >0.5 for persistent, <0.5 for anti-persistent)
-    """
-    data = np.asarray(data)
+#     Returns:
+#         Hurst exponent (0.5 for random, >0.5 for persistent, <0.5 for anti-persistent)
+#     """
+#     data = np.asarray(data)
     
-    if len(data) < 20:
-        logger.warning("Insufficient data for Hurst exponent calculation")
-        return 0.5  # Default value
+#     if len(data) < 20:
+#         logger.warning("Insufficient data for Hurst exponent calculation")
+#         return 0.5  # Default value
     
-    # Remove invalid values
-    valid_mask = np.isfinite(data)
-    data = data[valid_mask]
+#     # Remove invalid values
+#     valid_mask = np.isfinite(data)
+#     data = data[valid_mask]
     
-    if len(data) < 10:
-        return 0.5
+#     if len(data) < 10:
+#         return 0.5
     
-    # Remove linear trend
-    try:
-        data = detrend(data)
-    except:
-        data = data - np.mean(data)
+#     # Remove linear trend
+#     try:
+#         data = detrend(data)
+#     except:
+#         data = data - np.mean(data)
     
-    n = len(data)
-    if max_lag is None:
-        max_lag = min(n // 4, 100)
+#     n = len(data)
+#     if max_lag is None:
+#         max_lag = min(n // 4, 100)
     
-    # Create profile (cumulative sum)
-    profile = np.cumsum(data - np.mean(data))
+#     # Create profile (cumulative sum)
+#     profile = np.cumsum(data - np.mean(data))
     
-    # Calculate fluctuations at different scales
-    lags = np.unique(np.logspace(1, np.log10(max_lag), 15).astype(int))
-    lags = lags[lags < len(profile)]
+#     # Calculate fluctuations at different scales
+#     lags = np.unique(np.logspace(1, np.log10(max_lag), 15).astype(int))
+#     lags = lags[lags < len(profile)]
     
-    if len(lags) < 3:
-        return 0.5
+#     if len(lags) < 3:
+#         return 0.5
     
-    fluctuations = []
+#     fluctuations = []
     
-    for lag in lags:
-        # Number of complete windows
-        n_windows = len(profile) // lag
+#     for lag in lags:
+#         # Number of complete windows
+#         n_windows = len(profile) // lag
         
-        if n_windows < 2:
-            continue
+#         if n_windows < 2:
+#             continue
         
-        # Divide into non-overlapping windows
-        windowed_profile = profile[:n_windows * lag].reshape(n_windows, lag)
+#         # Divide into non-overlapping windows
+#         windowed_profile = profile[:n_windows * lag].reshape(n_windows, lag)
         
-        # Calculate fluctuation for each window
-        window_fluctuations = []
-        for window in windowed_profile:
-            # Linear detrending within window
-            try:
-                coeffs = np.polyfit(range(lag), window, 1)
-                trend = np.polyval(coeffs, range(lag))
-                detrended = window - trend
-                fluctuation = np.sqrt(np.mean(detrended**2))
+#         # Calculate fluctuation for each window
+#         window_fluctuations = []
+#         for window in windowed_profile:
+#             # Linear detrending within window
+#             try:
+#                 coeffs = np.polyfit(range(lag), window, 1)
+#                 trend = np.polyval(coeffs, range(lag))
+#                 detrended = window - trend
+#                 fluctuation = np.sqrt(np.mean(detrended**2))
                 
-                if np.isfinite(fluctuation) and fluctuation > 0:
-                    window_fluctuations.append(fluctuation)
-            except:
-                continue
+#                 if np.isfinite(fluctuation) and fluctuation > 0:
+#                     window_fluctuations.append(fluctuation)
+#             except:
+#                 continue
         
-        if window_fluctuations:
-            fluctuations.append(np.mean(window_fluctuations))
+#         if window_fluctuations:
+#             fluctuations.append(np.mean(window_fluctuations))
     
-    if len(fluctuations) < 3:
-        return 0.5
+#     if len(fluctuations) < 3:
+#         return 0.5
     
-    # Linear regression in log-log space
-    try:
-        valid_lags = lags[:len(fluctuations)]
-        log_lags = np.log(valid_lags)
-        log_fluctuations = np.log(fluctuations)
+#     # Linear regression in log-log space
+#     try:
+#         valid_lags = lags[:len(fluctuations)]
+#         log_lags = np.log(valid_lags)
+#         log_fluctuations = np.log(fluctuations)
         
-        slope, _, r_value, _, _ = linregress(log_lags, log_fluctuations)
+#         slope, _, r_value, _, _ = linregress(log_lags, log_fluctuations)
         
-        # Hurst exponent should be between 0 and 1
-        hurst = np.clip(slope, 0.0, 1.0)
+#         # Hurst exponent should be between 0 and 1
+#         hurst = np.clip(slope, 0.0, 1.0)
         
-        if r_value**2 < 0.5:
-            logger.warning("Poor linear fit in Hurst exponent calculation")
+#         if r_value**2 < 0.5:
+#             logger.warning("Poor linear fit in Hurst exponent calculation")
         
-        return hurst
+#         return hurst
         
-    except Exception as e:
-        logger.warning(f"Hurst exponent calculation failed: {e}")
-        return 0.5
+#     except Exception as e:
+#         logger.warning(f"Hurst exponent calculation failed: {e}")
+#         return 0.5
 
 
 def is_chaotic(lyapunov_spectrum: np.ndarray, tolerance: float = 1e-6) -> bool:
@@ -1237,7 +1237,276 @@ def optimize_chaotic_parameters(
             optimized[key] = value
     
     return optimized
+
+
+def improved_hurst_exponent(data: np.ndarray, max_lag: Optional[int] = None, 
+                          min_lag: Optional[int] = None) -> Tuple[float, Dict[str, Any]]:
+    """
+    Improved Hurst exponent calculation with better linear fitting.
     
+    Args:
+        data: Time series data
+        max_lag: Maximum lag for analysis
+        min_lag: Minimum lag for analysis
+        
+    Returns:
+        Tuple of (hurst_exponent, diagnostics_dict)
+    """
+    data = np.asarray(data)
+    
+    if len(data) < 50:
+        logger.warning("Insufficient data for Hurst exponent calculation")
+        return 0.5, {"error": "insufficient_data", "n_points": len(data)}
+    
+    # Remove invalid values and detrend
+    valid_mask = np.isfinite(data)
+    data = data[valid_mask]
+    
+    if len(data) < 30:
+        return 0.5, {"error": "too_few_valid_points", "n_points": len(data)}
+    
+    # Remove linear and quadratic trends for better stability
+    try:
+        # Try quadratic detrending first
+        x = np.arange(len(data))
+        coeffs = np.polyfit(x, data, 2)
+        trend = np.polyval(coeffs, x)
+        data_detrended = data - trend
+    except:
+        try:
+            # Fallback to linear detrending
+            data_detrended = detrend(data)
+        except:
+            # Final fallback: remove mean only
+            data_detrended = data - np.mean(data)
+    
+    # Create profile (cumulative sum of detrended data)
+    profile = np.cumsum(data_detrended)
+    n = len(profile)
+    
+    # Set lag ranges adaptively
+    if min_lag is None:
+        min_lag = max(4, n // 50)  # At least 4 points, but reasonable minimum
+    if max_lag is None:
+        max_lag = min(n // 4, 100)  # At most 1/4 of data length
+    
+    if max_lag <= min_lag:
+        max_lag = min_lag + 10
+    
+    # Generate logarithmic spaced lags for better coverage
+    lags = np.unique(
+        np.logspace(np.log10(min_lag), np.log10(max_lag), 20).astype(int)
+    )
+    lags = lags[(lags >= min_lag) & (lags <= max_lag)]
+    
+    if len(lags) < 4:
+        return 0.5, {"error": "insufficient_lags", "n_lags": len(lags)}
+    
+    fluctuations = []
+    valid_lags = []
+    
+    for lag in lags:
+        n_windows = len(profile) // lag
+        
+        if n_windows < 2:
+            continue
+        
+        window_fluctuations = []
+        windowed_profile = profile[:n_windows * lag].reshape(n_windows, lag)
+        
+        for window in windowed_profile:
+            try:
+                # Use linear detrending within each window
+                window_x = np.arange(lag)
+                coeffs = np.polyfit(window_x, window, 1)
+                trend = np.polyval(coeffs, window_x)
+                detrended_window = window - trend
+                
+                fluctuation = np.sqrt(np.mean(detrended_window**2))
+                
+                if np.isfinite(fluctuation) and fluctuation > 1e-12:
+                    window_fluctuations.append(fluctuation)
+            except Exception as e:
+                continue
+        
+        if len(window_fluctuations) >= 2:  # Require at least 2 valid windows
+            avg_fluctuation = np.mean(window_fluctuations)
+            fluctuations.append(avg_fluctuation)
+            valid_lags.append(lag)
+    
+    if len(fluctuations) < 4:
+        return 0.5, {"error": "insufficient_fluctuations", "n_fluctuations": len(fluctuations)}
+    
+    # Convert to log space for linear regression
+    log_lags = np.log(valid_lags)
+    log_fluctuations = np.log(fluctuations)
+    
+    # Find the most linear region using R² optimization
+    best_r2 = -np.inf
+    best_slope = 0.5
+    best_intercept = 0
+    best_indices = (0, len(log_lags))
+    
+    n_points = len(log_lags)
+    
+    # Try different segments to find the best linear region
+    for start in range(0, n_points - 3):
+        for end in range(start + 4, n_points + 1):
+            segment_lags = log_lags[start:end]
+            segment_flucts = log_fluctuations[start:end]
+            
+            try:
+                slope, intercept, r_value, p_value, std_err = linregress(
+                    segment_lags, segment_flucts
+                )
+                
+                r2 = r_value ** 2
+                
+                if r2 > best_r2 and abs(slope) <= 2.0:  # Reasonable slope constraint
+                    best_r2 = r2
+                    best_slope = slope
+                    best_intercept = intercept
+                    best_indices = (start, end)
+            except:
+                continue
+    
+    hurst = np.clip(best_slope, 0.0, 1.0)
+    
+    diagnostics = {
+        "r_squared": best_r2,
+        "n_points_used": best_indices[1] - best_indices[0],
+        "total_lags": len(valid_lags),
+        "fit_quality": "good" if best_r2 > 0.9 else "fair" if best_r2 > 0.7 else "poor",
+        "valid_data_points": len(data)
+    }
+    
+    if best_r2 < 0.5:
+        logger.warning(f"Poor Hurst exponent fit (R²={best_r2:.3f}). Data may not exhibit long-range correlation.")
+    
+    return hurst, diagnostics
+
+
+def rs_hurst_estimate(data: np.ndarray) -> float:
+    """
+    Alternative Hurst exponent estimation using R/S method.
+    """
+    data = np.asarray(data)
+    n = len(data)
+    
+    # Calculate rescaled range for different segment sizes
+    segment_sizes = np.unique(np.logspace(np.log10(10), np.log10(n//4), 15).astype(int))
+    segment_sizes = segment_sizes[segment_sizes <= n//4]
+    
+    rs_ratios = []
+    
+    for size in segment_sizes:
+        n_segments = n // size
+        if n_segments < 2:
+            continue
+            
+        segment_rs = []
+        
+        for i in range(n_segments):
+            segment = data[i*size:(i+1)*size]
+            if len(segment) < 2:
+                continue
+                
+            # Calculate mean and cumulative deviations
+            mean_val = np.mean(segment)
+            deviations = segment - mean_val
+            cumulative_deviations = np.cumsum(deviations)
+            
+            # Range
+            R = np.max(cumulative_deviations) - np.min(cumulative_deviations)
+            # Standard deviation
+            S = np.std(segment)
+            
+            if S > 1e-12:
+                rs_ratio = R / S
+                if rs_ratio > 0:
+                    segment_rs.append(rs_ratio)
+        
+        if segment_rs:
+            rs_ratios.append(np.mean(segment_rs))
+        else:
+            rs_ratios.append(np.nan)
+    
+    # Remove NaN values
+    valid_indices = ~np.isnan(rs_ratios)
+    if np.sum(valid_indices) < 3:
+        return 0.5
+    
+    valid_sizes = segment_sizes[valid_indices]
+    valid_rs = np.array(rs_ratios)[valid_indices]
+    
+    # Linear regression in log-log space
+    try:
+        log_sizes = np.log(valid_sizes)
+        log_rs = np.log(valid_rs)
+        
+        slope, _, r_value, _, _ = linregress(log_sizes, log_rs)
+        hurst = slope
+        
+        if r_value**2 < 0.5:
+            logger.warning("Poor R/S method linear fit")
+            
+        return np.clip(hurst, 0.0, 1.0)
+    except:
+        return 0.5
+
+
+def robust_hurst_exponent(data: np.ndarray, method: str = 'auto') -> float:
+    """
+    Robust Hurst exponent calculation with multiple fallback methods.
+    
+    Args:
+        data: Time series data
+        method: Calculation method ('auto', 'dfa', 'rs')
+        
+    Returns:
+        Hurst exponent estimate
+    """
+    data = np.asarray(data)
+    
+    if len(data) < 40:
+        return 0.5
+    
+    # Try the improved DFA method first
+    try:
+        hurst, diagnostics = improved_hurst_exponent(data)
+        
+        if diagnostics.get("r_squared", 0) > 0.6:  # Acceptable fit
+            return hurst
+        else:
+            logger.info(f"Poor DFA fit (R²={diagnostics.get('r_squared', 0):.3f}), trying alternative methods")
+    except Exception as e:
+        logger.warning(f"Improved Hurst calculation failed: {e}")
+    
+    # Fallback: Simple R/S method
+    try:
+        return rs_hurst_estimate(data)
+    except Exception as e:
+        logger.warning(f"R/S method also failed: {e}")
+    
+    # Final fallback
+    return 0.5
+
+
+# 替换原来的 hurst_exponent 函数
+def hurst_exponent(data: np.ndarray, max_lag: Optional[int] = None) -> float:
+    """
+    Calculate Hurst exponent using Detrended Fluctuation Analysis.
+    
+    Args:
+        data: Time series data
+        max_lag: Maximum lag for analysis
+        
+    Returns:
+        Hurst exponent (0.5 for random, >0.5 for persistent, <0.5 for anti-persistent)
+    """
+    return robust_hurst_exponent(data, method='auto')
+
+
 if __name__ == "__main__":
     print(f"✓ Project Root: {PROJECT_ROOT}")
     print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
@@ -1293,10 +1562,16 @@ if __name__ == "__main__":
                 print(f"Correlation dimension calculation failed: {e}")
                 
             try:
-                hurst = hurst_exponent(trajectory[0, :])
-                print(f"Hurst exponent: {hurst:.3f}")
+                # 使用改进的 Hurst 指数计算
+                hurst, diagnostics = improved_hurst_exponent(trajectory[0, :])
+                print(f"Hurst exponent: {hurst:.3f} (R²={diagnostics.get('r_squared', 0):.3f})")
+                if diagnostics.get('r_squared', 0) < 0.7:
+                    print(f"  Note: Fit quality is {diagnostics.get('fit_quality', 'unknown')}")
             except Exception as e:
                 print(f"Hurst exponent calculation failed: {e}")
+                # 备选方法
+                hurst = robust_hurst_exponent(trajectory[0, :])
+                print(f"Robust Hurst exponent: {hurst:.3f}")
         
         else:
             print("Insufficient data for chaos analysis")

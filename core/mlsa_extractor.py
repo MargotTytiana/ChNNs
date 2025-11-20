@@ -49,7 +49,7 @@ from chaos_utils import (
     largest_lyapunov_from_data, correlation_dimension, 
     hurst_exponent, kolmogorov_entropy
 )
-from phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
+from core.phase_space_reconstruction import PhaseSpaceReconstructor, EmbeddingConfig
 from numerical_stability import NumericalConfig, OutlierDetector, NumericalValidator, safe_divide
 
 
