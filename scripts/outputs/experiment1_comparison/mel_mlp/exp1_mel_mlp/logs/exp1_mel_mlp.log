@@ -1,0 +1,365 @@
+2025-11-30 12:37:00,862 - experiment_exp1_mel_mlp - INFO - Initialized experiment: exp1_mel_mlp
+2025-11-30 12:37:00,863 - experiment_exp1_mel_mlp - INFO - Device: cuda
+2025-11-30 12:37:00,863 - experiment_exp1_mel_mlp - INFO - Output directory: outputs/experiment1_comparison/mel_mlp/exp1_mel_mlp
+2025-11-30 12:37:00,863 - experiment_exp1_mel_mlp - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 12:39:28,296 - experiment_exp1_mel_mlp - INFO - Initialized experiment: exp1_mel_mlp
+2025-11-30 12:39:28,297 - experiment_exp1_mel_mlp - INFO - Device: cuda
+2025-11-30 12:39:28,297 - experiment_exp1_mel_mlp - INFO - Output directory: outputs/experiment1_comparison/mel_mlp/exp1_mel_mlp
+2025-11-30 12:39:28,297 - experiment_exp1_mel_mlp - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 13:00:05,920 - experiment_exp1_mel_mlp - INFO - Initialized experiment: exp1_mel_mlp
+2025-11-30 13:00:05,920 - experiment_exp1_mel_mlp - INFO - Device: cuda
+2025-11-30 13:00:05,920 - experiment_exp1_mel_mlp - INFO - Output directory: outputs/experiment1_comparison/mel_mlp/exp1_mel_mlp
+2025-11-30 13:00:05,920 - experiment_exp1_mel_mlp - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 13:43:17,526 - experiment_exp1_mel_mlp - INFO - Initialized experiment: exp1_mel_mlp
+2025-11-30 13:43:17,536 - experiment_exp1_mel_mlp - INFO - Device: cuda
+2025-11-30 13:43:17,536 - experiment_exp1_mel_mlp - INFO - Output directory: outputs/experiment1_comparison/mel_mlp/exp1_mel_mlp
+2025-11-30 13:43:17,536 - experiment_exp1_mel_mlp - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 17:54:50,637 - experiment_exp1_mel_mlp - INFO - Initialized experiment: exp1_mel_mlp
+2025-11-30 17:54:50,660 - experiment_exp1_mel_mlp - INFO - Device: cuda
+2025-11-30 17:54:50,661 - experiment_exp1_mel_mlp - INFO - Output directory: outputs/experiment1_comparison/mel_mlp/exp1_mel_mlp
+2025-11-30 17:54:50,661 - experiment_exp1_mel_mlp - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 17:54:50,661 - experiment_exp1_mel_mlp - INFO - Setting up experiment components...
+2025-11-30 17:54:50,726 - experiment_exp1_mel_mlp - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2025-11-30 17:54:50,727 - experiment_exp1_mel_mlp - INFO - FOUND FLAC FILES: 1089
+2025-11-30 17:54:51,830 - experiment_exp1_mel_mlp - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 17:54:51,830 - experiment_exp1_mel_mlp - INFO - Model created and moved to device: cuda:0
+2025-11-30 17:54:51,830 - experiment_exp1_mel_mlp - INFO - Total parameters: 69,284
+2025-11-30 17:54:51,830 - experiment_exp1_mel_mlp - INFO - Trainable parameters: 69,284
+2025-11-30 17:55:07,277 - experiment_exp1_mel_mlp - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 17:55:07,781 - experiment_exp1_mel_mlp - INFO - Scanning the Training Dataset...
+2025-11-30 17:55:08,277 - experiment_exp1_mel_mlp - INFO - Finish Scan 1 batch, current label range: 0-24
+2025-11-30 17:55:15,173 - experiment_exp1_mel_mlp - INFO - Scanning the Val Dataset...
+2025-11-30 17:55:16,648 - experiment_exp1_mel_mlp - INFO - Scanning the Test Dataset...
+2025-11-30 17:55:19,010 - experiment_exp1_mel_mlp - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 17:55:19,010 - experiment_exp1_mel_mlp - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2025-11-30 17:55:19,010 - experiment_exp1_mel_mlp - INFO - LABEL RANGE: 0 to 25
+2025-11-30 17:55:19,011 - experiment_exp1_mel_mlp - INFO - ACTUAL SPEAKERS: 26
+2025-11-30 17:55:19,011 - experiment_exp1_mel_mlp - INFO - UNIQUE LABEL NUMBER: 26
+2025-11-30 17:55:19,011 - experiment_exp1_mel_mlp - INFO - SPEAKER NUMBER IN CONFIG: 26
+2025-11-30 17:55:19,011 - experiment_exp1_mel_mlp - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 17:55:19,011 - experiment_exp1_mel_mlp - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2025-11-30 17:55:19,011 - experiment_exp1_mel_mlp - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 17:55:19,011 - experiment_exp1_mel_mlp - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2025-11-30 17:55:19,402 - experiment_exp1_mel_mlp - INFO - Dataloaders created:
+2025-11-30 17:55:19,402 - experiment_exp1_mel_mlp - INFO -   Train: 14 batches
+2025-11-30 17:55:19,403 - experiment_exp1_mel_mlp - INFO -   Val: 3 batches
+2025-11-30 17:55:19,403 - experiment_exp1_mel_mlp - INFO -   Test: 4 batches
+2025-11-30 17:55:20,560 - experiment_exp1_mel_mlp - INFO - Optimizer: AdamW
+2025-11-30 17:55:20,561 - experiment_exp1_mel_mlp - WARNING - Unknown scheduler type: reduce_on_plateau, no scheduler will be used
+2025-11-30 17:55:20,561 - experiment_exp1_mel_mlp - INFO - Criterion: CrossEntropyLoss
+2025-11-30 17:55:20,606 - experiment_exp1_mel_mlp - INFO - Configuration saved to: outputs/experiment1_comparison/mel_mlp/exp1_mel_mlp/config.json
+2025-11-30 17:55:20,606 - experiment_exp1_mel_mlp - INFO - Experiment setup completed
+2025-11-30 17:55:20,606 - experiment_exp1_mel_mlp - INFO - Starting training for 100 epochs
+2025-11-30 17:55:20,716 - experiment_exp1_mel_mlp - INFO - 
+================================================================================
+2025-11-30 17:55:20,716 - experiment_exp1_mel_mlp - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 17:55:20,717 - experiment_exp1_mel_mlp - INFO - ================================================================================
+2025-11-30 17:55:20,717 - experiment_exp1_mel_mlp - INFO - Batch Info:
+2025-11-30 17:55:20,717 - experiment_exp1_mel_mlp - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 17:55:20,717 - experiment_exp1_mel_mlp - INFO -   Targets shape: torch.Size([32])
+2025-11-30 17:55:20,719 - experiment_exp1_mel_mlp - INFO -   Targets (first 8): tensor([22, 23, 21,  3, 19, 10,  3, 18], device='cuda:0')
+2025-11-30 17:55:21,298 - experiment_exp1_mel_mlp - INFO - ================================================================================
+
+2025-11-30 17:55:21,420 - experiment_exp1_mel_mlp - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.714887
+2025-11-30 17:55:24,384 - experiment_exp1_mel_mlp - INFO - Epoch 0: Train Loss: 4.4411, Train Acc: 0.0625, Val Loss: 4.2200, Val Acc: 0.3146
+2025-11-30 17:55:24,503 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 0
+2025-11-30 17:55:24,679 - experiment_exp1_mel_mlp - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.094156
+2025-11-30 17:55:27,111 - experiment_exp1_mel_mlp - INFO - Epoch 1: Train Loss: 3.7547, Train Acc: 0.2344, Val Loss: 3.5353, Val Acc: 0.4607
+2025-11-30 17:55:27,236 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 1
+2025-11-30 17:55:27,389 - experiment_exp1_mel_mlp - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 3.282294
+2025-11-30 17:55:29,820 - experiment_exp1_mel_mlp - INFO - Epoch 2: Train Loss: 3.1977, Train Acc: 0.3929, Val Loss: 2.9298, Val Acc: 0.5393
+2025-11-30 17:55:29,945 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 2
+2025-11-30 17:55:30,100 - experiment_exp1_mel_mlp - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.742341
+2025-11-30 17:55:32,493 - experiment_exp1_mel_mlp - INFO - Epoch 3: Train Loss: 2.7536, Train Acc: 0.4844, Val Loss: 2.4497, Val Acc: 0.6854
+2025-11-30 17:55:32,618 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 3
+2025-11-30 17:55:32,773 - experiment_exp1_mel_mlp - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 2.427248
+2025-11-30 17:55:35,167 - experiment_exp1_mel_mlp - INFO - Epoch 4: Train Loss: 2.3930, Train Acc: 0.5804, Val Loss: 2.0690, Val Acc: 0.7640
+2025-11-30 17:55:35,297 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 4
+2025-11-30 17:55:35,453 - experiment_exp1_mel_mlp - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.325650
+2025-11-30 17:55:37,840 - experiment_exp1_mel_mlp - INFO - Epoch 5: Train Loss: 2.0715, Train Acc: 0.6607, Val Loss: 1.8013, Val Acc: 0.8202
+2025-11-30 17:55:37,966 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 5
+2025-11-30 17:55:38,121 - experiment_exp1_mel_mlp - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.841833
+2025-11-30 17:55:40,534 - experiment_exp1_mel_mlp - INFO - Epoch 6: Train Loss: 1.8056, Train Acc: 0.7277, Val Loss: 1.4985, Val Acc: 0.8652
+2025-11-30 17:55:40,667 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 6
+2025-11-30 17:55:40,823 - experiment_exp1_mel_mlp - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.614268
+2025-11-30 17:55:43,203 - experiment_exp1_mel_mlp - INFO - Epoch 7: Train Loss: 1.5451, Train Acc: 0.7857, Val Loss: 1.2431, Val Acc: 0.8652
+2025-11-30 17:55:43,454 - experiment_exp1_mel_mlp - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.485334
+2025-11-30 17:55:45,829 - experiment_exp1_mel_mlp - INFO - Epoch 8: Train Loss: 1.3835, Train Acc: 0.8170, Val Loss: 1.0641, Val Acc: 0.8989
+2025-11-30 17:55:45,955 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 8
+2025-11-30 17:55:46,111 - experiment_exp1_mel_mlp - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.236275
+2025-11-30 17:55:48,503 - experiment_exp1_mel_mlp - INFO - Epoch 9: Train Loss: 1.2588, Train Acc: 0.8080, Val Loss: 0.9315, Val Acc: 0.9101
+2025-11-30 17:55:48,630 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 9
+2025-11-30 17:55:48,787 - experiment_exp1_mel_mlp - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.206781
+2025-11-30 17:55:51,178 - experiment_exp1_mel_mlp - INFO - Epoch 10: Train Loss: 1.0962, Train Acc: 0.8348, Val Loss: 0.7814, Val Acc: 0.9438
+2025-11-30 17:55:51,307 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 10
+2025-11-30 17:55:51,484 - experiment_exp1_mel_mlp - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.154900
+2025-11-30 17:55:53,872 - experiment_exp1_mel_mlp - INFO - Epoch 11: Train Loss: 1.0460, Train Acc: 0.8482, Val Loss: 0.6948, Val Acc: 0.9438
+2025-11-30 17:55:54,133 - experiment_exp1_mel_mlp - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.947802
+2025-11-30 17:55:56,528 - experiment_exp1_mel_mlp - INFO - Epoch 12: Train Loss: 0.8823, Train Acc: 0.8839, Val Loss: 0.5810, Val Acc: 0.9326
+2025-11-30 17:55:56,781 - experiment_exp1_mel_mlp - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.754690
+2025-11-30 17:55:59,193 - experiment_exp1_mel_mlp - INFO - Epoch 13: Train Loss: 0.8265, Train Acc: 0.8795, Val Loss: 0.5283, Val Acc: 0.9551
+2025-11-30 17:55:59,324 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 13
+2025-11-30 17:55:59,480 - experiment_exp1_mel_mlp - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.747550
+2025-11-30 17:56:01,858 - experiment_exp1_mel_mlp - INFO - Epoch 14: Train Loss: 0.7881, Train Acc: 0.8594, Val Loss: 0.4192, Val Acc: 0.9888
+2025-11-30 17:56:01,989 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 14
+2025-11-30 17:56:02,145 - experiment_exp1_mel_mlp - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.709617
+2025-11-30 17:56:04,529 - experiment_exp1_mel_mlp - INFO - Epoch 15: Train Loss: 0.6725, Train Acc: 0.9040, Val Loss: 0.3935, Val Acc: 0.9775
+2025-11-30 17:56:04,782 - experiment_exp1_mel_mlp - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.783167
+2025-11-30 17:56:07,191 - experiment_exp1_mel_mlp - INFO - Epoch 16: Train Loss: 0.6021, Train Acc: 0.9308, Val Loss: 0.3577, Val Acc: 0.9775
+2025-11-30 17:56:07,445 - experiment_exp1_mel_mlp - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.555821
+2025-11-30 17:56:09,828 - experiment_exp1_mel_mlp - INFO - Epoch 17: Train Loss: 0.5929, Train Acc: 0.8996, Val Loss: 0.3201, Val Acc: 0.9888
+2025-11-30 17:56:10,080 - experiment_exp1_mel_mlp - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.487728
+2025-11-30 17:56:12,469 - experiment_exp1_mel_mlp - INFO - Epoch 18: Train Loss: 0.5368, Train Acc: 0.9308, Val Loss: 0.2685, Val Acc: 0.9888
+2025-11-30 17:56:12,727 - experiment_exp1_mel_mlp - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.452643
+2025-11-30 17:56:15,130 - experiment_exp1_mel_mlp - INFO - Epoch 19: Train Loss: 0.5089, Train Acc: 0.9129, Val Loss: 0.2815, Val Acc: 0.9775
+2025-11-30 17:56:15,382 - experiment_exp1_mel_mlp - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.425698
+2025-11-30 17:56:17,771 - experiment_exp1_mel_mlp - INFO - Epoch 20: Train Loss: 0.4445, Train Acc: 0.9397, Val Loss: 0.2714, Val Acc: 0.9551
+2025-11-30 17:56:18,046 - experiment_exp1_mel_mlp - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.450851
+2025-11-30 17:56:20,435 - experiment_exp1_mel_mlp - INFO - Epoch 21: Train Loss: 0.4132, Train Acc: 0.9442, Val Loss: 0.1888, Val Acc: 0.9888
+2025-11-30 17:56:20,686 - experiment_exp1_mel_mlp - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.462318
+2025-11-30 17:56:23,094 - experiment_exp1_mel_mlp - INFO - Epoch 22: Train Loss: 0.4255, Train Acc: 0.9353, Val Loss: 0.2323, Val Acc: 0.9775
+2025-11-30 17:56:23,359 - experiment_exp1_mel_mlp - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.473333
+2025-11-30 17:56:25,757 - experiment_exp1_mel_mlp - INFO - Epoch 23: Train Loss: 0.4066, Train Acc: 0.9375, Val Loss: 0.1851, Val Acc: 0.9888
+2025-11-30 17:56:26,008 - experiment_exp1_mel_mlp - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.373639
+2025-11-30 17:56:28,390 - experiment_exp1_mel_mlp - INFO - Epoch 24: Train Loss: 0.3459, Train Acc: 0.9464, Val Loss: 0.2345, Val Acc: 0.9551
+2025-11-30 17:56:28,643 - experiment_exp1_mel_mlp - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.355879
+2025-11-30 17:56:31,019 - experiment_exp1_mel_mlp - INFO - Epoch 25: Train Loss: 0.3504, Train Acc: 0.9375, Val Loss: 0.1622, Val Acc: 0.9775
+2025-11-30 17:56:31,269 - experiment_exp1_mel_mlp - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.401423
+2025-11-30 17:56:33,650 - experiment_exp1_mel_mlp - INFO - Epoch 26: Train Loss: 0.3084, Train Acc: 0.9576, Val Loss: 0.1681, Val Acc: 0.9663
+2025-11-30 17:56:33,902 - experiment_exp1_mel_mlp - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.351895
+2025-11-30 17:56:36,282 - experiment_exp1_mel_mlp - INFO - Epoch 27: Train Loss: 0.3394, Train Acc: 0.9330, Val Loss: 0.1588, Val Acc: 0.9663
+2025-11-30 17:56:36,536 - experiment_exp1_mel_mlp - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.247028
+2025-11-30 17:56:38,930 - experiment_exp1_mel_mlp - INFO - Epoch 28: Train Loss: 0.3085, Train Acc: 0.9420, Val Loss: 0.1216, Val Acc: 0.9888
+2025-11-30 17:56:39,182 - experiment_exp1_mel_mlp - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.382152
+2025-11-30 17:56:41,580 - experiment_exp1_mel_mlp - INFO - Epoch 29: Train Loss: 0.3140, Train Acc: 0.9487, Val Loss: 0.2055, Val Acc: 0.9438
+2025-11-30 17:56:41,836 - experiment_exp1_mel_mlp - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.257645
+2025-11-30 17:56:44,225 - experiment_exp1_mel_mlp - INFO - Epoch 30: Train Loss: 0.3774, Train Acc: 0.9241, Val Loss: 0.1149, Val Acc: 0.9888
+2025-11-30 17:56:44,507 - experiment_exp1_mel_mlp - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.257612
+2025-11-30 17:56:46,886 - experiment_exp1_mel_mlp - INFO - Epoch 31: Train Loss: 0.3019, Train Acc: 0.9554, Val Loss: 0.2176, Val Acc: 0.9438
+2025-11-30 17:56:47,139 - experiment_exp1_mel_mlp - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.225276
+2025-11-30 17:56:49,521 - experiment_exp1_mel_mlp - INFO - Epoch 32: Train Loss: 0.3007, Train Acc: 0.9397, Val Loss: 0.1133, Val Acc: 0.9775
+2025-11-30 17:56:49,775 - experiment_exp1_mel_mlp - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.370463
+2025-11-30 17:56:52,159 - experiment_exp1_mel_mlp - INFO - Epoch 33: Train Loss: 0.2839, Train Acc: 0.9509, Val Loss: 0.1011, Val Acc: 1.0000
+2025-11-30 17:56:52,296 - experiment_exp1_mel_mlp - INFO - Saved new best model at epoch 33
+2025-11-30 17:56:52,455 - experiment_exp1_mel_mlp - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.180732
+2025-11-30 17:56:54,842 - experiment_exp1_mel_mlp - INFO - Epoch 34: Train Loss: 0.3029, Train Acc: 0.9509, Val Loss: 0.0761, Val Acc: 1.0000
+2025-11-30 17:56:55,107 - experiment_exp1_mel_mlp - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.176542
+2025-11-30 17:56:57,494 - experiment_exp1_mel_mlp - INFO - Epoch 35: Train Loss: 0.2448, Train Acc: 0.9598, Val Loss: 0.1582, Val Acc: 0.9663
+2025-11-30 17:56:57,745 - experiment_exp1_mel_mlp - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.163953
+2025-11-30 17:57:00,138 - experiment_exp1_mel_mlp - INFO - Epoch 36: Train Loss: 0.2350, Train Acc: 0.9487, Val Loss: 0.0834, Val Acc: 0.9888
+2025-11-30 17:57:00,391 - experiment_exp1_mel_mlp - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.346730
+2025-11-30 17:57:02,776 - experiment_exp1_mel_mlp - INFO - Epoch 37: Train Loss: 0.2250, Train Acc: 0.9688, Val Loss: 0.1045, Val Acc: 0.9775
+2025-11-30 17:57:03,032 - experiment_exp1_mel_mlp - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.163547
+2025-11-30 17:57:05,427 - experiment_exp1_mel_mlp - INFO - Epoch 38: Train Loss: 0.2422, Train Acc: 0.9509, Val Loss: 0.0962, Val Acc: 0.9888
+2025-11-30 17:57:05,678 - experiment_exp1_mel_mlp - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.300941
+2025-11-30 17:57:08,049 - experiment_exp1_mel_mlp - INFO - Epoch 39: Train Loss: 0.2238, Train Acc: 0.9621, Val Loss: 0.1010, Val Acc: 0.9775
+2025-11-30 17:57:08,305 - experiment_exp1_mel_mlp - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.195378
+2025-11-30 17:57:10,688 - experiment_exp1_mel_mlp - INFO - Epoch 40: Train Loss: 0.1782, Train Acc: 0.9754, Val Loss: 0.0641, Val Acc: 1.0000
+2025-11-30 17:57:10,971 - experiment_exp1_mel_mlp - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.178645
+2025-11-30 17:57:13,357 - experiment_exp1_mel_mlp - INFO - Epoch 41: Train Loss: 0.1942, Train Acc: 0.9621, Val Loss: 0.1301, Val Acc: 0.9663
+2025-11-30 17:57:13,608 - experiment_exp1_mel_mlp - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.077004
+2025-11-30 17:57:16,018 - experiment_exp1_mel_mlp - INFO - Epoch 42: Train Loss: 0.1964, Train Acc: 0.9665, Val Loss: 0.0863, Val Acc: 0.9888
+2025-11-30 17:57:16,277 - experiment_exp1_mel_mlp - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.130658
+2025-11-30 17:57:18,669 - experiment_exp1_mel_mlp - INFO - Epoch 43: Train Loss: 0.2223, Train Acc: 0.9509, Val Loss: 0.0813, Val Acc: 0.9888
+2025-11-30 17:57:18,924 - experiment_exp1_mel_mlp - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.245962
+2025-11-30 17:57:21,309 - experiment_exp1_mel_mlp - INFO - Epoch 44: Train Loss: 0.2130, Train Acc: 0.9576, Val Loss: 0.0914, Val Acc: 0.9775
+2025-11-30 17:57:21,563 - experiment_exp1_mel_mlp - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.151934
+2025-11-30 17:57:23,947 - experiment_exp1_mel_mlp - INFO - Epoch 45: Train Loss: 0.1736, Train Acc: 0.9643, Val Loss: 0.1192, Val Acc: 0.9551
+2025-11-30 17:57:24,212 - experiment_exp1_mel_mlp - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.225724
+2025-11-30 17:57:26,620 - experiment_exp1_mel_mlp - INFO - Epoch 46: Train Loss: 0.1856, Train Acc: 0.9688, Val Loss: 0.1254, Val Acc: 0.9775
+2025-11-30 17:57:26,871 - experiment_exp1_mel_mlp - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.058310
+2025-11-30 17:57:29,265 - experiment_exp1_mel_mlp - INFO - Epoch 47: Train Loss: 0.1951, Train Acc: 0.9598, Val Loss: 0.0590, Val Acc: 0.9888
+2025-11-30 17:57:29,520 - experiment_exp1_mel_mlp - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.293770
+2025-11-30 17:57:31,918 - experiment_exp1_mel_mlp - INFO - Epoch 48: Train Loss: 0.1912, Train Acc: 0.9665, Val Loss: 0.0807, Val Acc: 0.9775
+2025-11-30 17:57:32,169 - experiment_exp1_mel_mlp - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.247244
+2025-11-30 17:57:34,547 - experiment_exp1_mel_mlp - INFO - Epoch 49: Train Loss: 0.1886, Train Acc: 0.9643, Val Loss: 0.0704, Val Acc: 0.9775
+2025-11-30 17:57:34,799 - experiment_exp1_mel_mlp - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.267300
+2025-11-30 17:57:37,207 - experiment_exp1_mel_mlp - INFO - Epoch 50: Train Loss: 0.2200, Train Acc: 0.9442, Val Loss: 0.0666, Val Acc: 0.9888
+2025-11-30 17:57:37,499 - experiment_exp1_mel_mlp - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.192660
+2025-11-30 17:57:39,886 - experiment_exp1_mel_mlp - INFO - Epoch 51: Train Loss: 0.1837, Train Acc: 0.9576, Val Loss: 0.0853, Val Acc: 0.9663
+2025-11-30 17:57:40,138 - experiment_exp1_mel_mlp - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.149679
+2025-11-30 17:57:42,534 - experiment_exp1_mel_mlp - INFO - Epoch 52: Train Loss: 0.1754, Train Acc: 0.9643, Val Loss: 0.0505, Val Acc: 0.9888
+2025-11-30 17:57:42,789 - experiment_exp1_mel_mlp - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.086611
+2025-11-30 17:57:45,175 - experiment_exp1_mel_mlp - INFO - Epoch 53: Train Loss: 0.1759, Train Acc: 0.9643, Val Loss: 0.0579, Val Acc: 0.9888
+2025-11-30 17:57:45,426 - experiment_exp1_mel_mlp - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.172973
+2025-11-30 17:57:47,820 - experiment_exp1_mel_mlp - INFO - Epoch 54: Train Loss: 0.1690, Train Acc: 0.9710, Val Loss: 0.0442, Val Acc: 0.9888
+2025-11-30 17:57:48,073 - experiment_exp1_mel_mlp - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.187015
+2025-11-30 17:57:50,467 - experiment_exp1_mel_mlp - INFO - Epoch 55: Train Loss: 0.1588, Train Acc: 0.9665, Val Loss: 0.0647, Val Acc: 0.9775
+2025-11-30 17:57:50,728 - experiment_exp1_mel_mlp - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.057787
+2025-11-30 17:57:53,117 - experiment_exp1_mel_mlp - INFO - Epoch 56: Train Loss: 0.1478, Train Acc: 0.9688, Val Loss: 0.0434, Val Acc: 0.9888
+2025-11-30 17:57:53,369 - experiment_exp1_mel_mlp - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.096594
+2025-11-30 17:57:55,757 - experiment_exp1_mel_mlp - INFO - Epoch 57: Train Loss: 0.1475, Train Acc: 0.9732, Val Loss: 0.0828, Val Acc: 0.9775
+2025-11-30 17:57:56,025 - experiment_exp1_mel_mlp - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.173478
+2025-11-30 17:57:58,427 - experiment_exp1_mel_mlp - INFO - Epoch 58: Train Loss: 0.1677, Train Acc: 0.9643, Val Loss: 0.1189, Val Acc: 0.9775
+2025-11-30 17:57:58,682 - experiment_exp1_mel_mlp - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.248509
+2025-11-30 17:58:01,074 - experiment_exp1_mel_mlp - INFO - Epoch 59: Train Loss: 0.1373, Train Acc: 0.9710, Val Loss: 0.0945, Val Acc: 0.9663
+2025-11-30 17:58:01,328 - experiment_exp1_mel_mlp - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.042068
+2025-11-30 17:58:03,716 - experiment_exp1_mel_mlp - INFO - Epoch 60: Train Loss: 0.1482, Train Acc: 0.9621, Val Loss: 0.0374, Val Acc: 0.9888
+2025-11-30 17:58:04,009 - experiment_exp1_mel_mlp - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.111955
+2025-11-30 17:58:06,404 - experiment_exp1_mel_mlp - INFO - Epoch 61: Train Loss: 0.1439, Train Acc: 0.9710, Val Loss: 0.0947, Val Acc: 0.9775
+2025-11-30 17:58:06,658 - experiment_exp1_mel_mlp - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.062021
+2025-11-30 17:58:09,036 - experiment_exp1_mel_mlp - INFO - Epoch 62: Train Loss: 0.1651, Train Acc: 0.9621, Val Loss: 0.0837, Val Acc: 0.9888
+2025-11-30 17:58:09,291 - experiment_exp1_mel_mlp - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.088259
+2025-11-30 17:58:11,672 - experiment_exp1_mel_mlp - INFO - Epoch 63: Train Loss: 0.1980, Train Acc: 0.9576, Val Loss: 0.0481, Val Acc: 0.9888
+2025-11-30 17:58:11,929 - experiment_exp1_mel_mlp - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.037048
+2025-11-30 17:58:14,319 - experiment_exp1_mel_mlp - INFO - Epoch 64: Train Loss: 0.1201, Train Acc: 0.9777, Val Loss: 0.0650, Val Acc: 0.9888
+2025-11-30 17:58:14,573 - experiment_exp1_mel_mlp - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.084661
+2025-11-30 17:58:16,965 - experiment_exp1_mel_mlp - INFO - Epoch 65: Train Loss: 0.1821, Train Acc: 0.9576, Val Loss: 0.0650, Val Acc: 0.9775
+2025-11-30 17:58:17,217 - experiment_exp1_mel_mlp - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.157616
+2025-11-30 17:58:19,626 - experiment_exp1_mel_mlp - INFO - Epoch 66: Train Loss: 0.1083, Train Acc: 0.9710, Val Loss: 0.0636, Val Acc: 0.9775
+2025-11-30 17:58:19,882 - experiment_exp1_mel_mlp - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.370079
+2025-11-30 17:58:22,263 - experiment_exp1_mel_mlp - INFO - Epoch 67: Train Loss: 0.1480, Train Acc: 0.9643, Val Loss: 0.0552, Val Acc: 0.9775
+2025-11-30 17:58:22,515 - experiment_exp1_mel_mlp - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.089151
+2025-11-30 17:58:24,902 - experiment_exp1_mel_mlp - INFO - Epoch 68: Train Loss: 0.1086, Train Acc: 0.9732, Val Loss: 0.0599, Val Acc: 0.9888
+2025-11-30 17:58:25,165 - experiment_exp1_mel_mlp - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.193597
+2025-11-30 17:58:27,564 - experiment_exp1_mel_mlp - INFO - Epoch 69: Train Loss: 0.1670, Train Acc: 0.9621, Val Loss: 0.0336, Val Acc: 0.9888
+2025-11-30 17:58:27,817 - experiment_exp1_mel_mlp - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.329118
+2025-11-30 17:58:30,206 - experiment_exp1_mel_mlp - INFO - Epoch 70: Train Loss: 0.1435, Train Acc: 0.9643, Val Loss: 0.0929, Val Acc: 0.9775
+2025-11-30 17:58:30,500 - experiment_exp1_mel_mlp - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.109244
+2025-11-30 17:58:32,885 - experiment_exp1_mel_mlp - INFO - Epoch 71: Train Loss: 0.1353, Train Acc: 0.9688, Val Loss: 0.0757, Val Acc: 0.9775
+2025-11-30 17:58:33,141 - experiment_exp1_mel_mlp - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.186669
+2025-11-30 17:58:35,514 - experiment_exp1_mel_mlp - INFO - Epoch 72: Train Loss: 0.1658, Train Acc: 0.9598, Val Loss: 0.0627, Val Acc: 0.9775
+2025-11-30 17:58:35,765 - experiment_exp1_mel_mlp - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.338285
+2025-11-30 17:58:38,161 - experiment_exp1_mel_mlp - INFO - Epoch 73: Train Loss: 0.1685, Train Acc: 0.9576, Val Loss: 0.0452, Val Acc: 1.0000
+2025-11-30 17:58:38,412 - experiment_exp1_mel_mlp - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.232122
+2025-11-30 17:58:40,818 - experiment_exp1_mel_mlp - INFO - Epoch 74: Train Loss: 0.1346, Train Acc: 0.9643, Val Loss: 0.1317, Val Acc: 0.9775
+2025-11-30 17:58:41,071 - experiment_exp1_mel_mlp - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.171969
+2025-11-30 17:58:43,467 - experiment_exp1_mel_mlp - INFO - Epoch 75: Train Loss: 0.1362, Train Acc: 0.9643, Val Loss: 0.0534, Val Acc: 0.9775
+2025-11-30 17:58:43,726 - experiment_exp1_mel_mlp - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.124115
+2025-11-30 17:58:46,111 - experiment_exp1_mel_mlp - INFO - Epoch 76: Train Loss: 0.1133, Train Acc: 0.9710, Val Loss: 0.0272, Val Acc: 1.0000
+2025-11-30 17:58:46,362 - experiment_exp1_mel_mlp - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.159901
+2025-11-30 17:58:48,740 - experiment_exp1_mel_mlp - INFO - Epoch 77: Train Loss: 0.1179, Train Acc: 0.9688, Val Loss: 0.0522, Val Acc: 0.9888
+2025-11-30 17:58:48,991 - experiment_exp1_mel_mlp - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.037875
+2025-11-30 17:58:51,381 - experiment_exp1_mel_mlp - INFO - Epoch 78: Train Loss: 0.0843, Train Acc: 0.9888, Val Loss: 0.0440, Val Acc: 0.9888
+2025-11-30 17:58:51,635 - experiment_exp1_mel_mlp - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.103765
+2025-11-30 17:58:54,021 - experiment_exp1_mel_mlp - INFO - Epoch 79: Train Loss: 0.1023, Train Acc: 0.9799, Val Loss: 0.0354, Val Acc: 0.9888
+2025-11-30 17:58:54,286 - experiment_exp1_mel_mlp - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.038331
+2025-11-30 17:58:56,672 - experiment_exp1_mel_mlp - INFO - Epoch 80: Train Loss: 0.1403, Train Acc: 0.9732, Val Loss: 0.0647, Val Acc: 0.9775
+2025-11-30 17:58:56,972 - experiment_exp1_mel_mlp - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.084308
+2025-11-30 17:58:59,373 - experiment_exp1_mel_mlp - INFO - Epoch 81: Train Loss: 0.1215, Train Acc: 0.9665, Val Loss: 0.1064, Val Acc: 0.9775
+2025-11-30 17:58:59,624 - experiment_exp1_mel_mlp - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.113631
+2025-11-30 17:59:02,004 - experiment_exp1_mel_mlp - INFO - Epoch 82: Train Loss: 0.1336, Train Acc: 0.9710, Val Loss: 0.0983, Val Acc: 0.9775
+2025-11-30 17:59:02,255 - experiment_exp1_mel_mlp - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.120988
+2025-11-30 17:59:04,638 - experiment_exp1_mel_mlp - INFO - Epoch 83: Train Loss: 0.1444, Train Acc: 0.9643, Val Loss: 0.0307, Val Acc: 1.0000
+2025-11-30 17:59:04,890 - experiment_exp1_mel_mlp - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.113700
+2025-11-30 17:59:07,269 - experiment_exp1_mel_mlp - INFO - Epoch 84: Train Loss: 0.1032, Train Acc: 0.9911, Val Loss: 0.0473, Val Acc: 0.9888
+2025-11-30 17:59:07,524 - experiment_exp1_mel_mlp - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.015596
+2025-11-30 17:59:09,898 - experiment_exp1_mel_mlp - INFO - Epoch 85: Train Loss: 0.1455, Train Acc: 0.9643, Val Loss: 0.0338, Val Acc: 1.0000
+2025-11-30 17:59:10,161 - experiment_exp1_mel_mlp - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.392794
+2025-11-30 17:59:12,560 - experiment_exp1_mel_mlp - INFO - Epoch 86: Train Loss: 0.1606, Train Acc: 0.9576, Val Loss: 0.0697, Val Acc: 0.9663
+2025-11-30 17:59:12,814 - experiment_exp1_mel_mlp - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.120779
+2025-11-30 17:59:15,189 - experiment_exp1_mel_mlp - INFO - Epoch 87: Train Loss: 0.1301, Train Acc: 0.9665, Val Loss: 0.0656, Val Acc: 0.9663
+2025-11-30 17:59:15,441 - experiment_exp1_mel_mlp - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.076183
+2025-11-30 17:59:17,805 - experiment_exp1_mel_mlp - INFO - Epoch 88: Train Loss: 0.0959, Train Acc: 0.9777, Val Loss: 0.0551, Val Acc: 0.9775
+2025-11-30 17:59:18,057 - experiment_exp1_mel_mlp - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.106641
+2025-11-30 17:59:20,428 - experiment_exp1_mel_mlp - INFO - Epoch 89: Train Loss: 0.1024, Train Acc: 0.9754, Val Loss: 0.0411, Val Acc: 0.9888
+2025-11-30 17:59:20,681 - experiment_exp1_mel_mlp - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.187824
+2025-11-30 17:59:23,075 - experiment_exp1_mel_mlp - INFO - Epoch 90: Train Loss: 0.1322, Train Acc: 0.9777, Val Loss: 0.0860, Val Acc: 0.9775
+2025-11-30 17:59:23,376 - experiment_exp1_mel_mlp - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.111865
+2025-11-30 17:59:25,754 - experiment_exp1_mel_mlp - INFO - Epoch 91: Train Loss: 0.0983, Train Acc: 0.9777, Val Loss: 0.0811, Val Acc: 0.9663
+2025-11-30 17:59:26,018 - experiment_exp1_mel_mlp - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.069199
+2025-11-30 17:59:28,424 - experiment_exp1_mel_mlp - INFO - Epoch 92: Train Loss: 0.0905, Train Acc: 0.9777, Val Loss: 0.0569, Val Acc: 0.9775
+2025-11-30 17:59:28,681 - experiment_exp1_mel_mlp - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.170505
+2025-11-30 17:59:31,059 - experiment_exp1_mel_mlp - INFO - Epoch 93: Train Loss: 0.1205, Train Acc: 0.9665, Val Loss: 0.0262, Val Acc: 1.0000
+2025-11-30 17:59:31,313 - experiment_exp1_mel_mlp - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.095079
+2025-11-30 17:59:33,690 - experiment_exp1_mel_mlp - INFO - Epoch 94: Train Loss: 0.0949, Train Acc: 0.9732, Val Loss: 0.0593, Val Acc: 0.9663
+2025-11-30 17:59:33,941 - experiment_exp1_mel_mlp - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.139148
+2025-11-30 17:59:36,326 - experiment_exp1_mel_mlp - INFO - Epoch 95: Train Loss: 0.1240, Train Acc: 0.9665, Val Loss: 0.0886, Val Acc: 0.9888
+2025-11-30 17:59:36,579 - experiment_exp1_mel_mlp - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.044073
+2025-11-30 17:59:38,961 - experiment_exp1_mel_mlp - INFO - Epoch 96: Train Loss: 0.1091, Train Acc: 0.9710, Val Loss: 0.0504, Val Acc: 0.9775
+2025-11-30 17:59:39,212 - experiment_exp1_mel_mlp - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.066289
+2025-11-30 17:59:41,617 - experiment_exp1_mel_mlp - INFO - Epoch 97: Train Loss: 0.1024, Train Acc: 0.9710, Val Loss: 0.0976, Val Acc: 0.9775
+2025-11-30 17:59:41,870 - experiment_exp1_mel_mlp - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.187140
+2025-11-30 17:59:44,249 - experiment_exp1_mel_mlp - INFO - Epoch 98: Train Loss: 0.0965, Train Acc: 0.9688, Val Loss: 0.0762, Val Acc: 0.9663
+2025-11-30 17:59:44,500 - experiment_exp1_mel_mlp - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.089594
+2025-11-30 17:59:46,878 - experiment_exp1_mel_mlp - INFO - Epoch 99: Train Loss: 0.1228, Train Acc: 0.9643, Val Loss: 0.0801, Val Acc: 0.9775
+2025-11-30 17:59:46,997 - experiment_exp1_mel_mlp - INFO - Running final test evaluation...
+2025-11-30 17:59:47,570 - experiment_exp1_mel_mlp - INFO - Test Results:
+2025-11-30 17:59:47,570 - experiment_exp1_mel_mlp - INFO -   loss: 0.0321
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   accuracy: 0.9831
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   precision_macro: 0.9872
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   recall_macro: 0.9795
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   f1_macro: 0.9810
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   precision_weighted: 0.9859
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   recall_weighted: 0.9831
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   f1_weighted: 0.9825
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   precision_class_0: 0.8333
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   recall_class_0: 1.0000
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   f1_class_0: 0.9091
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   precision_class_1: 1.0000
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   recall_class_1: 1.0000
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   f1_class_1: 1.0000
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   precision_class_2: 1.0000
+2025-11-30 17:59:47,571 - experiment_exp1_mel_mlp - INFO -   recall_class_2: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   f1_class_2: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   precision_class_3: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   recall_class_3: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   f1_class_3: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   precision_class_4: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   recall_class_4: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   f1_class_4: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   precision_class_5: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   recall_class_5: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   f1_class_5: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   precision_class_6: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   recall_class_6: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   f1_class_6: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   precision_class_7: 1.0000
+2025-11-30 17:59:47,572 - experiment_exp1_mel_mlp - INFO -   recall_class_7: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   f1_class_7: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   precision_class_8: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   recall_class_8: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   f1_class_8: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   precision_class_9: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   recall_class_9: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   f1_class_9: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   precision_class_10: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   recall_class_10: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   f1_class_10: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   precision_class_11: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   recall_class_11: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   f1_class_11: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   precision_class_12: 1.0000
+2025-11-30 17:59:47,573 - experiment_exp1_mel_mlp - INFO -   recall_class_12: 0.8000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   f1_class_12: 0.8889
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   precision_class_13: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   recall_class_13: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   f1_class_13: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   precision_class_14: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   recall_class_14: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   f1_class_14: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   precision_class_15: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   recall_class_15: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   f1_class_15: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   precision_class_16: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   recall_class_16: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   f1_class_16: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   precision_class_17: 1.0000
+2025-11-30 17:59:47,574 - experiment_exp1_mel_mlp - INFO -   recall_class_17: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   f1_class_17: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   precision_class_18: 0.8333
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   recall_class_18: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   f1_class_18: 0.9091
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   precision_class_19: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   recall_class_19: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   f1_class_19: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   precision_class_20: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   recall_class_20: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   f1_class_20: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   precision_class_21: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   recall_class_21: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   f1_class_21: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   precision_class_22: 1.0000
+2025-11-30 17:59:47,575 - experiment_exp1_mel_mlp - INFO -   recall_class_22: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   f1_class_22: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   precision_class_23: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   recall_class_23: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   f1_class_23: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   precision_class_24: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   recall_class_24: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   f1_class_24: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   precision_class_25: 1.0000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   recall_class_25: 0.6667
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   f1_class_25: 0.8000
+2025-11-30 17:59:47,576 - experiment_exp1_mel_mlp - INFO -   balanced_accuracy: 0.9795
+2025-11-30 17:59:47,578 - experiment_exp1_mel_mlp - INFO - Training completed

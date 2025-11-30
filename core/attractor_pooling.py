@@ -87,13 +87,12 @@ class AttractorPooling(nn.Module):
         )
     
     def _get_output_dim(self) -> int:
-        """Get output dimension based on pooling type."""
         if self.pooling_type == 'basic':
-            return 3  # D2, DL, K
+            return 3
         elif self.pooling_type == 'comprehensive':
-            return 5  # D2, DL, K, + additional invariants
+            return 115
         elif self.pooling_type == 'learnable':
-            return 3  # Learned combination
+            return 3
         else:
             return 3
     
@@ -366,30 +365,130 @@ class AttractorPooling(nn.Module):
         K = self._compute_kolmogorov_entropy(lyap_exps)
         
         return torch.stack([D2, DL, K], dim=1)
-    
+
     def _comprehensive_pooling(self, trajectory: torch.Tensor) -> torch.Tensor:
         """
-        Comprehensive pooling: D2, DL, K + additional invariants.
-        
-        Args:
-            trajectory: Trajectory tensor [batch_size, num_steps, 3]
-            
-        Returns:
-            Comprehensive features [batch_size, 5]
+        ULTRA-ENHANCED pooling for small speaker datasets.
+        Output: 128 dimensions (was 60)
         """
-        # Get basic features
-        basic_features = self._basic_pooling(trajectory)  # [batch_size, 3]
+        batch_size, num_steps, dim = trajectory.shape
+        all_features = []
         
-        # Get additional invariants
+        # 1. Original features (5)
+        basic_features = self._basic_pooling(trajectory)
         additional = self._compute_additional_invariants(trajectory)
-        
-        # Combine features
         extra_features = torch.stack([
             additional['gyration_radius'],
             additional['box_dimension']
-        ], dim=1)  # [batch_size, 2]
+        ], dim=1)
+        all_features.extend([basic_features, extra_features])
         
-        return torch.cat([basic_features, extra_features], dim=1)
+        # 2. Statistical moments (12)
+        mean = torch.mean(trajectory, dim=1)
+        std = torch.std(trajectory, dim=1)
+        std_safe = torch.clamp(std, min=self.eps)
+        centered = (trajectory - mean.unsqueeze(1)) / std_safe.unsqueeze(1)
+        skewness = torch.clamp(torch.mean(centered ** 3, dim=1), -10.0, 10.0)
+        kurtosis = torch.clamp(torch.mean(centered ** 4, dim=1), -10.0, 100.0)
+        all_features.extend([mean, std, skewness, kurtosis])
+        
+        # 3. Min/Max (6)
+        traj_min = torch.min(trajectory, dim=1)[0]
+        traj_max = torch.max(trajectory, dim=1)[0]
+        all_features.extend([traj_min, traj_max])
+        
+        # 4. Velocity (9)
+        velocity = torch.diff(trajectory, dim=1)
+        vel_mean = torch.mean(velocity, dim=1)
+        vel_std = torch.std(velocity, dim=1)
+        vel_max = torch.max(torch.abs(velocity), dim=1)[0]
+        all_features.extend([vel_mean, vel_std, vel_max])
+        
+        # 5. Acceleration (9)
+        if num_steps > 2:
+            acceleration = torch.diff(velocity, dim=1)
+            acc_mean = torch.mean(acceleration, dim=1)
+            acc_std = torch.std(acceleration, dim=1)
+            acc_max = torch.max(torch.abs(acceleration), dim=1)[0]
+        else:
+            acc_mean = torch.zeros(batch_size, 3, device=trajectory.device)
+            acc_std = torch.zeros(batch_size, 3, device=trajectory.device)
+            acc_max = torch.zeros(batch_size, 3, device=trajectory.device)
+        all_features.extend([acc_mean, acc_std, acc_max])
+        
+        # 6. Cross-correlation (3)
+        xy_corr = torch.mean(centered[:,:,0] * centered[:,:,1], dim=1)
+        xz_corr = torch.mean(centered[:,:,0] * centered[:,:,2], dim=1)
+        yz_corr = torch.mean(centered[:,:,1] * centered[:,:,2], dim=1)
+        cross_corr = torch.clamp(torch.stack([xy_corr, xz_corr, yz_corr], dim=1), -1.0, 1.0)
+        all_features.append(cross_corr)
+        
+        # 7. Total length (1)
+        all_features.append(additional['total_length'].unsqueeze(1))
+        
+        # 8. Percentiles (15)
+        percentiles = [10, 25, 50, 75, 90]
+        for p in percentiles:
+            idx = min(int(num_steps * p / 100), num_steps - 1)
+            sorted_traj, _ = torch.sort(trajectory, dim=1)
+            all_features.append(sorted_traj[:, idx, :])
+        
+        # 9. NEW: Trajectory samples at fixed intervals (30 features: 10 timepoints x 3 dims)
+        sample_indices = torch.linspace(0, num_steps-1, 10, dtype=torch.long)
+        for idx in sample_indices:
+            all_features.append(trajectory[:, idx, :])
+        
+        # 10. NEW: Autocorrelation features (9 features: 3 lags x 3 dims)
+        for lag in [1, num_steps//4, num_steps//2]:
+            if lag < num_steps:
+                autocorr = torch.mean(
+                    trajectory[:, :-lag, :] * trajectory[:, lag:, :], 
+                    dim=1
+                )
+                all_features.append(autocorr)
+        
+        # 11. Frequency domain features with proper normalization
+        try:
+            # Apply FFT
+            fft_vals = torch.fft.rfft(trajectory, dim=1)
+            power_spectrum = torch.abs(fft_vals) ** 2
+            
+            # Log-scale to compress range
+            power_spectrum = torch.log1p(power_spectrum)  # log(1 + x) to avoid log(0)
+            
+            # Bin and normalize
+            num_bins = 6
+            bin_size = max(1, power_spectrum.shape[1] // num_bins)
+            for i in range(num_bins):
+                end_idx = min((i+1)*bin_size, power_spectrum.shape[1])
+                if end_idx > i*bin_size:
+                    bin_power = torch.mean(
+                        power_spectrum[:, i*bin_size:end_idx, :],
+                        dim=1
+                    )
+                    # Clamp to reasonable range
+                    bin_power = torch.clamp(bin_power, -10.0, 10.0)
+                    all_features.append(bin_power)
+        except Exception as e:
+            # Fallback: add zeros if FFT fails
+            for _ in range(6):
+                all_features.append(torch.zeros(batch_size, 3, device=trajectory.device))
+        
+        # Concatenate
+        comprehensive = torch.cat(all_features, dim=1)  # Should be ~128 dims
+        
+        # Final cleanup
+        comprehensive = torch.nan_to_num(comprehensive, nan=0.0, posinf=1e6, neginf=-1e6)
+        comprehensive = torch.clamp(comprehensive, -100, 100)
+        
+        # Remove dimensions with zero variance
+        # std_per_dim = torch.std(comprehensive, dim=0)
+        # active_dims = std_per_dim > 1e-6
+        # if active_dims.sum() > 10:  # 保留至少 10 维
+        #     comprehensive = comprehensive[:, active_dims]
+        #     print(f"[POOLING] Kept {active_dims.sum()}/{len(std_per_dim)} active dimensions")
+        
+        return comprehensive
     
     def _learnable_pooling(self, trajectory: torch.Tensor) -> torch.Tensor:
         """

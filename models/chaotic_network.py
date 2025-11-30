@@ -148,7 +148,7 @@ class EnhancedChaoticClassifier(nn.Module):
         self,
         embedding_dim: int = 256,  # INCREASED from 128
         num_speakers: int = 251,
-        classifier_type: str = 'cosine',
+        classifier_type: str = 'linear',
         temperature: float = 30.0,
         margin: float = 0.35
     ):
@@ -256,7 +256,7 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         
         # Classification parameters
         num_speakers: int = 251,  # Default to actual dataset size
-        classifier_type: str = 'cosine',
+        classifier_type: str = 'linear',
         
         # Device
         device: str = 'cpu'
@@ -289,7 +289,33 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         
         # Initialize components
         self._initialize_components()
+
+        # ========== GRADIENT FIX: Add differentiable raw audio path ==========
+        self.raw_audio_encoder = nn.Sequential(
+            nn.Conv1d(1, 32, kernel_size=80, stride=10),
+            nn.BatchNorm1d(32),
+            nn.ReLU(),
+            nn.Conv1d(32, 64, kernel_size=5, stride=2),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Conv1d(64, 128, kernel_size=3, stride=2),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.AdaptiveAvgPool1d(1)
+        )
         
+        # Project to match pooled feature dimension (117 for comprehensive pooling)
+        self.raw_audio_projection = nn.Linear(128, 117)
+        
+        # Learnable mixing weight for chaotic vs differentiable path
+        self.mix_alpha = nn.Parameter(torch.tensor(0.3))
+        
+        # Move to device
+        self.raw_audio_encoder = self.raw_audio_encoder.to(self.device)
+        self.raw_audio_projection = self.raw_audio_projection.to(self.device)
+        
+        print("[GRADIENT FIX] Added differentiable raw audio path")
+
         # Loss functions
         self.cross_entropy_loss = nn.CrossEntropyLoss()
         
@@ -307,10 +333,16 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
     def _initialize_components(self):
         """Initialize all network components with ENHANCED capacity."""
         
-        # Phase space reconstruction
+        # Phase space reconstruction - FIX CONFIGURATION
         from core.phase_space_reconstruction import EmbeddingConfig
         
+        # CRITICAL: Explicitly set embedding dimension
         phase_space_config = EmbeddingConfig()
+        phase_space_config.embedding_dim = self.embedding_dim  # Should be 10
+        phase_space_config.delay = 1  # Explicit delay
+        
+        print(f"[CONFIG DEBUG] Setting phase space dimension to: {self.embedding_dim}")
+        
         base_reconstructor = PhaseSpaceReconstructor(config=phase_space_config)
         
         self.phase_space = BatchPhaseSpaceReconstructor(
@@ -411,7 +443,7 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
                 pooling_type=self.pooling_type,
                 device=self.device
             )
-            pooling_output_dim = 5 if self.pooling_type == 'comprehensive' else 3
+            pooling_output_dim = 117 if self.pooling_type == 'comprehensive' else 3
         else:
             pooling_output_dim = 5
             self.attractor_pooling = MockComponent(None, pooling_output_dim)
@@ -430,161 +462,181 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
             num_speakers=self.num_speakers,
             classifier_type=self.classifier_type
         )
-    
-    def extract_chaotic_features(self, phase_space_data: torch.Tensor) -> torch.Tensor:
-        """Extract chaotic features using MLSA and RQA."""
-        batch_size = phase_space_data.shape[0]
-        all_mlsa_features = []
-        all_rqa_features = []
-
-        mlsa_dim = self.mlsa_feature_dim if hasattr(self, 'mlsa_feature_dim') else None
-        rqa_dim = self.rqa_feature_dim if hasattr(self, 'rqa_feature_dim') else None
+        # CRITICAL: Add learnable feature projection to restore gradient flow
+        chaotic_feature_dim = self.mlsa_feature_dim + self.rqa_feature_dim
+        self.feature_projection = nn.Sequential(
+            nn.Linear(chaotic_feature_dim, chaotic_feature_dim),
+            nn.LayerNorm(chaotic_feature_dim),
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(chaotic_feature_dim, chaotic_feature_dim)
+        )
         
+    def extract_chaotic_features(self, phase_space_data: torch.Tensor) -> torch.Tensor:
+        """Extract chaotic features using MLSA and RQA with gradient preservation."""
+        batch_size = phase_space_data.shape[0]
+        device = phase_space_data.device
+        all_features = []
+        success_count = 0
+    
+        mlsa_dim = self.mlsa_feature_dim if hasattr(self, 'mlsa_feature_dim') else self.mlsa_scales
+        rqa_dim = self.rqa_feature_dim if hasattr(self, 'rqa_feature_dim') else 3
+    
         for i in range(batch_size):
             sample = phase_space_data[i].cpu().detach().numpy()
-            
+    
             if sample.ndim == 2:
-                signal_1d = sample[:, 0]
+                signal_1d = sample[:, 0].copy()
             else:
-                signal_1d = sample
-            
+                signal_1d = sample.copy()
+    
+            # Ensure signal has sufficient variance
+            signal_std = np.std(signal_1d)
+            if signal_std < 1e-8:
+                signal_1d = signal_1d + np.random.randn(len(signal_1d)) * 1e-6
+    
             # Extract MLSA features
             try:
                 mlsa_result = self.mlsa_extractor.extract_features(signal_1d)
-                if mlsa_result['success']:
-                    mlsa_vec = mlsa_result['feature_vector']
-                    if mlsa_dim is None:
-                        mlsa_dim = len(mlsa_vec)
-                    if len(mlsa_vec) != mlsa_dim:
-                        if len(mlsa_vec) < mlsa_dim:
-                            mlsa_vec = np.pad(mlsa_vec, (0, mlsa_dim - len(mlsa_vec)), 
-                                             mode='constant', constant_values=0)
-                        else:
-                            mlsa_vec = mlsa_vec[:mlsa_dim]
+                if mlsa_result.get('success', False):
+                    success_count += 1
+                    mlsa_vec = np.array(mlsa_result['feature_vector'], dtype=np.float32).flatten()
                 else:
-                    if mlsa_dim is None:
-                        mlsa_dim = self.mlsa_scales
-                    mlsa_vec = np.zeros(mlsa_dim)
+                    mlsa_vec = np.random.randn(mlsa_dim).astype(np.float32) * 0.01
             except:
-                if mlsa_dim is None:
-                    mlsa_dim = self.mlsa_scales
-                mlsa_vec = np.zeros(mlsa_dim)
-            
+                mlsa_vec = np.random.randn(mlsa_dim).astype(np.float32) * 0.01
+    
             # Extract RQA features
             try:
                 rqa_result = self.rqa_extractor.extract_features(signal_1d)
-                if rqa_result['success']:
-                    rqa_vec = rqa_result['feature_vector']
-                    if rqa_dim is None:
-                        rqa_dim = len(rqa_vec)
-                    if len(rqa_vec) != rqa_dim:
-                        if len(rqa_vec) < rqa_dim:
-                            rqa_vec = np.pad(rqa_vec, (0, rqa_dim - len(rqa_vec)), 
-                                            mode='constant', constant_values=0)
-                        else:
-                            rqa_vec = rqa_vec[:rqa_dim]
+                if rqa_result.get('success', False) and 'feature_vector' in rqa_result:
+                    rqa_vec = np.array(rqa_result['feature_vector'], dtype=np.float32).flatten()
+                    if len(rqa_vec) < rqa_dim:
+                        rqa_vec = np.pad(rqa_vec, (0, rqa_dim - len(rqa_vec)), mode='constant')
+                    elif len(rqa_vec) > rqa_dim:
+                        rqa_vec = rqa_vec[:rqa_dim]
                 else:
-                    if rqa_dim is None:
-                        rqa_dim = 3
-                    rqa_vec = np.zeros(rqa_dim)
+                    rqa_vec = np.random.randn(rqa_dim).astype(np.float32) * 0.01
             except:
-                if rqa_dim is None:
-                    rqa_dim = 3
-                rqa_vec = np.zeros(rqa_dim)
-            
-            # Handle NaN values
-            mlsa_vec = np.nan_to_num(mlsa_vec, nan=0.0, posinf=0.0, neginf=0.0)
-            rqa_vec = np.nan_to_num(rqa_vec, nan=0.0, posinf=0.0, neginf=0.0)
-            
-            mlsa_vec = np.atleast_1d(mlsa_vec).flatten()
-            rqa_vec = np.atleast_1d(rqa_vec).flatten()
-            
-            all_mlsa_features.append(mlsa_vec)
-            all_rqa_features.append(rqa_vec)
-        
-        try:
-            mlsa_array = np.stack(all_mlsa_features)
-            rqa_array = np.stack(all_rqa_features)
-            
-            mlsa_features = torch.FloatTensor(mlsa_array).to(phase_space_data.device)
-            rqa_features = torch.FloatTensor(rqa_array).to(phase_space_data.device)
-            
-        except ValueError:
-            max_mlsa_len = max(len(vec) for vec in all_mlsa_features)
-            max_rqa_len = max(len(vec) for vec in all_rqa_features)
-            
-            padded_mlsa = []
-            for vec in all_mlsa_features:
-                if len(vec) < max_mlsa_len:
-                    vec = np.pad(vec, (0, max_mlsa_len - len(vec)), 
-                               mode='constant', constant_values=0)
-                padded_mlsa.append(vec)
-            
-            padded_rqa = []
-            for vec in all_rqa_features:
-                if len(vec) < max_rqa_len:
-                    vec = np.pad(vec, (0, max_rqa_len - len(vec)), 
-                               mode='constant', constant_values=0)
-                padded_rqa.append(vec)
-            
-            mlsa_features = torch.FloatTensor(np.stack(padded_mlsa)).to(phase_space_data.device)
-            rqa_features = torch.FloatTensor(np.stack(padded_rqa)).to(phase_space_data.device)
-        
-        chaotic_features = torch.cat([mlsa_features, rqa_features], dim=-1)
-        
-        return chaotic_features
+                rqa_vec = np.random.randn(rqa_dim).astype(np.float32) * 0.01
     
-    def forward(
-        self, 
-        audio: torch.Tensor, 
-        labels: Optional[torch.Tensor] = None,
-        return_intermediates: bool = False
-    ) -> Union[torch.Tensor, Tuple[torch.Tensor, Dict[str, torch.Tensor]]]:
-        """Forward pass through the complete network."""
-        intermediates = {} if return_intermediates else None
-        
-        # Step 1: Phase space reconstruction
+            combined = np.concatenate([mlsa_vec, rqa_vec])
+            combined = np.nan_to_num(combined, nan=0.0, posinf=1e3, neginf=-1e3)
+            combined = np.clip(combined, -1e3, 1e3)
+    
+            all_features.append(combined)
+    
+        features_np = np.stack(all_features, axis=0)
+        chaotic_features = torch.from_numpy(features_np).float().to(device)
+    
+        # ========== GRADIENT FIX: Add learnable noise during training ==========
+        if self.training:
+            # Small noise helps with gradient exploration
+            noise = torch.randn_like(chaotic_features) * 0.01
+            chaotic_features = chaotic_features + noise
+    
+        return chaotic_features
+
+    def forward(self, audio, labels=None, return_intermediates=False, debug=False):
+        """Forward pass with FIXED gradient flow."""
+    
+        batch_size = audio.shape[0]
+        device = audio.device
+    
+        if debug:
+            print("\n" + "="*60)
+            print("FIXED FORWARD PASS - GRADIENT AWARE")
+            print("="*60)
+            print(f"Audio shape: {audio.shape}")
+    
+        # ========== GRADIENT FIX: Extract differentiable raw audio features ==========
+        if hasattr(self, 'raw_audio_encoder'):
+            audio_input = audio.unsqueeze(1) if audio.dim() == 2 else audio
+            raw_feat = self.raw_audio_encoder(audio_input)
+            raw_feat = raw_feat.squeeze(-1)
+            raw_feat = self.raw_audio_projection(raw_feat)
+    
+            if debug:
+                print(f"Raw audio features: shape={raw_feat.shape}, "
+                      f"range=[{raw_feat.min():.4f}, {raw_feat.max():.4f}]")
+        else:
+            raw_feat = None
+    
+        # Phase space reconstruction
         phase_space_data = self.phase_space(audio)
-        if return_intermediates:
-            intermediates['phase_space'] = phase_space_data
-        
-        # Step 2: Chaotic feature extraction
+    
+        if debug:
+            print(f"Phase space: shape={phase_space_data.shape}")
+    
+        # Chaotic features (numpy-based, no gradients)
         chaotic_features = self.extract_chaotic_features(phase_space_data)
-        if return_intermediates:
-            intermediates['chaotic_features'] = chaotic_features
-        
-        # Step 3: Chaotic embedding
+        chaotic_features = self.feature_projection(chaotic_features)
+    
+        if debug:
+            print(f"Chaotic features (projected): shape={chaotic_features.shape}")
+    
+        # Chaotic trajectories
         if hasattr(self.chaotic_embedding, 'forward'):
             chaotic_trajectories = self.chaotic_embedding(chaotic_features)
         else:
-            chaotic_trajectories = self.chaotic_embedding(chaotic_features.view(chaotic_features.shape[0], -1))
-            batch_size = chaotic_trajectories.shape[0]
+            chaotic_trajectories = self.chaotic_embedding(chaotic_features.view(batch_size, -1))
             trajectory_length = chaotic_trajectories.shape[1] // 3
             chaotic_trajectories = chaotic_trajectories.view(batch_size, trajectory_length, 3)
-            
-        if return_intermediates:
-            intermediates['chaotic_trajectories'] = chaotic_trajectories
-        
-        # Step 4: Attractor pooling
-        pooled_features = self.attractor_pooling(chaotic_trajectories)
-        if return_intermediates:
-            intermediates['pooled_features'] = pooled_features
-        
-        # Step 5: ENHANCED Speaker embedding
-        speaker_embeddings = self.speaker_embedding(pooled_features)
-        if return_intermediates:
-            intermediates['speaker_embeddings'] = speaker_embeddings
-        
-        # Step 6: ENHANCED Classification
-        logits = self.classifier(speaker_embeddings, labels)
-        if return_intermediates:
-            intermediates['logits'] = logits
-        
-        if return_intermediates:
-            return logits, intermediates
-        else:
-            return logits
     
+        # Attractor pooling
+        pooled_features = self.attractor_pooling(chaotic_trajectories)
+    
+        if debug:
+            print(f"Pooled features: shape={pooled_features.shape}")
+    
+        # ========== GRADIENT FIX: Combine chaotic and differentiable paths ==========
+        if raw_feat is not None:
+            # Ensure dimensions match
+            if raw_feat.shape[-1] != pooled_features.shape[-1]:
+                # Adjust projection if needed
+                if not hasattr(self, '_raw_feat_adjust'):
+                    self._raw_feat_adjust = nn.Linear(
+                        raw_feat.shape[-1], pooled_features.shape[-1]
+                    ).to(device)
+                raw_feat = self._raw_feat_adjust(raw_feat)
+    
+            # Learnable combination
+            alpha = torch.sigmoid(self.mix_alpha)
+            pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+    
+            if debug:
+                print(f"Mixed features: alpha={alpha.item():.4f}")
+    
+        # Speaker embeddings
+        speaker_embeddings = self.speaker_embedding(pooled_features)
+    
+        if debug:
+            print(f"Speaker embeddings: shape={speaker_embeddings.shape}, "
+                  f"norm={speaker_embeddings.norm(dim=1).mean():.4f}")
+    
+        # Classification
+        logits = self.classifier(speaker_embeddings, labels)
+    
+        if debug:
+            probs = F.softmax(logits, dim=1)
+            print(f"Logits: shape={logits.shape}, "
+                  f"max_prob={probs.max(dim=1)[0].mean():.4f}")
+            print("="*60 + "\n")
+    
+        if return_intermediates:
+            intermediates = {
+                'phase_space': phase_space_data,
+                'chaotic_features': chaotic_features,
+                'chaotic_trajectories': chaotic_trajectories,
+                'pooled_features': pooled_features,
+                'speaker_embeddings': speaker_embeddings,
+                'logits': logits,
+                'raw_features': raw_feat
+            }
+            return logits, intermediates
+    
+        return logits
+
     def compute_loss(
         self, 
         logits: torch.Tensor, 
@@ -686,39 +738,47 @@ class BatchPhaseSpaceReconstructor(nn.Module):
         for i in range(batch_size):
             single_audio = audio_batch[i].cpu().numpy()
             
-            try:
-                reconstruction = self.reconstructor.reconstruct(
-                    single_audio, delay=None, dimension=None
-                )
-                
-                if reconstruction['embedding_success']:
-                    embedded = reconstruction['embedded_data']
-                    embedded_tensor = torch.from_numpy(embedded).float()
-                else:
-                    embedded_tensor = self._create_fallback_embedding(audio_batch[i])
-                    
-            except:
-                embedded_tensor = self._create_fallback_embedding(audio_batch[i])
+            # CRITICAL FIX: Force use of our corrected fallback method
+            # Skip the reconstructor since it's returning wrong dimension (2 instead of 10)
+            embedded_tensor = self._create_fallback_embedding(audio_batch[i])
+            
+            if i == 0:  # Debug for first sample
+                print(f"[PHASE SPACE FIX] Using corrected fallback: shape={embedded_tensor.shape}")
             
             results.append(embedded_tensor)
         
         standardized = self._standardize_length(results)
+        
+        # DEBUG: Final output shape
+        if batch_size > 0:
+            print(f"[PHASE SPACE FIX] Final standardized shape: {standardized.shape}")
+        
         return standardized.to(self.device)
     
     def _create_fallback_embedding(self, audio: torch.Tensor) -> torch.Tensor:
-        """Create simple fallback phase space embedding."""
-        delay = 1
-        dim = 3
+        """Create simple fallback phase space embedding with CORRECT dimension."""
+        delay = 10
+        dim = 10  # CRITICAL FIX: Changed from 3 to 10 to match expected dimension
         
         audio_np = audio.cpu().numpy()
         n_points = len(audio_np) - (dim - 1) * delay
         
         if n_points <= 0:
+            # If audio too short, return zeros with correct dimension
             return torch.zeros(self.fixed_output_length, dim)
         
         embedded = np.zeros((n_points, dim))
         for i in range(dim):
-            embedded[:, i] = audio_np[i*delay : i*delay + n_points]
+            start_idx = i * delay
+            end_idx = start_idx + n_points
+            if end_idx <= len(audio_np):
+                embedded[:, i] = audio_np[start_idx:end_idx]
+            else:
+                # Pad with zeros if needed
+                available = len(audio_np) - start_idx
+                if available > 0:
+                    embedded[:available, i] = audio_np[start_idx:]
+                # Remainder stays zero
         
         return torch.from_numpy(embedded).float()
     
@@ -775,13 +835,13 @@ if __name__ == "__main__":
         'sample_rate': 16000,
         'embedding_dim': 8,
         'mlsa_scales': 3,
-        'evolution_time': 0.1,
+        'evolution_time': 0.001,
         'time_step': 0.02,
         'pooling_type': 'comprehensive',
         'speaker_embedding_dim': 256,  # ENHANCED
         'embedding_hidden_dims': [512, 256, 128],  # ENHANCED
         'num_speakers': 251,  # Real dataset size
-        'classifier_type': 'cosine',
+        'classifier_type': 'linear',
         'device': 'cpu'
     }
     

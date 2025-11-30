@@ -1,0 +1,1101 @@
+📁 .
+    └── 📄 __init__.py
+    └── 📄 .gitattributes
+    └── 📄 project_structure.txt
+    └── 📄 gpu_main.sh
+    └── 📄 Untitled.ipynb
+    └── 📄 .gitignore
+    📁 ./utils
+        └── 📄 reproducibility.py
+        └── 📄 __init__.py
+        └── 📄 numerical_stability.py
+        └── 📄 checkpoint.py
+        └── 📄 test_reproducibility_state.json
+        └── 📄 logger.py
+        └── 📄 RUN.ipynb
+        📁 ./utils/.ipynb_checkpoints
+            └── 📄 checkpoint-checkpoint.py
+            └── 📄 __init__-checkpoint.py
+            └── 📄 logger-checkpoint.py
+            └── 📄 test_reproducibility_state-checkpoint.json
+            └── 📄 RUN-checkpoint.ipynb
+            └── 📄 reproducibility-checkpoint.py
+            └── 📄 numerical_stability-checkpoint.py
+        📁 ./utils/logs
+            📁 ./utils/logs/test_experiment
+                └── 📄 error.log
+                └── 📄 system_info.json
+                └── 📄 metrics.jsonl
+                └── 📄 config.json
+                └── 📄 main.log
+        📁 ./utils/test_checkpoints
+            📁 ./utils/test_checkpoints/test_experiment
+                └── 📄 checkpoint_epoch_0001_20250914_205834.pt
+                └── 📄 best_checkpoint.pt
+                └── 📄 checkpoint_epoch_0000_20250914_205834.pt
+                └── 📄 checkpoint_metadata.json
+                └── 📄 checkpoint_epoch_0004_20250914_205834.pt
+        📁 ./utils/__pycache__
+            └── 📄 __init__.cpython-312.pyc
+            └── 📄 logger.cpython-312.pyc
+            └── 📄 reproducibility.cpython-312.pyc
+            └── 📄 checkpoint.cpython-312.pyc
+            └── 📄 numerical_stability.cpython-312.pyc
+    📁 ./tests
+        └── 📄 __init__.py
+        └── 📄 test_chaotic_features.py
+        └── 📄 test_chaotic_models.py
+        └── 📄 test_chaos_utils.py
+        └── 📄 test_mlp_models.py
+        └── 📄 test_traditional_features.py
+        └── 📄 RUN_TEST.ipynb
+        📁 ./tests/.ipynb_checkpoints
+            └── 📄 test_chaos_utils-checkpoint.py
+            └── 📄 __init__-checkpoint.py
+            └── 📄 test_traditional_features-checkpoint.py
+            └── 📄 test_chaotic_models-checkpoint.py
+            └── 📄 RUN_TEST-checkpoint.ipynb
+            └── 📄 test_mlp_models-checkpoint.py
+            └── 📄 test_chaotic_features-checkpoint.py
+    📁 ./models
+        └── 📄 enhanced_chaotic_network.py
+        └── 📄 __init__.py
+        └── 📄 chaotic_network_backup.py
+        └── 📄 base_model.py
+        └── 📄 RUN_MODEL.ipynb
+        └── 📄 hybrid_models.py
+        └── 📄 chaotic_network.py
+        └── 📄 mlp_classifier.py
+        └── 📄 model_factory.py
+        📁 ./models/.ipynb_checkpoints
+            └── 📄 chaotic_network-checkpoint.py
+            └── 📄 mlp_classifier-checkpoint.py
+            └── 📄 __init__-checkpoint.py
+            └── 📄 chaotic_network_backup-checkpoint.py
+            └── 📄 enhanced_chaotic_network-checkpoint.py
+            └── 📄 RUN_MODEL-checkpoint.ipynb
+            └── 📄 base_model-checkpoint.py
+            └── 📄 model_factory-checkpoint.py
+            └── 📄 hybrid_models-checkpoint.py
+        📁 ./models/__pycache__
+            └── 📄 __init__.cpython-312.pyc
+            └── 📄 base_model.cpython-312.pyc
+            └── 📄 hybrid_models.cpython-312.pyc
+            └── 📄 enhanced_chaotic_network.cpython-312.pyc
+            └── 📄 mlp_classifier.cpython-312.pyc
+            └── 📄 model_factory.cpython-312.pyc
+            └── 📄 chaotic_network.cpython-312.pyc
+    📁 ./experiments
+        └── 📄 RUN_EXPER.ipynb
+        └── 📄 __init__.py
+        └── 📄 baseline_experiment.py
+        └── 📄 base_experiment.py
+        └── 📄 chaotic_experiment.py
+        └── 📄 comparison_experiment.ipynb
+        📁 ./experiments/experiments
+            📁 ./experiments/experiments/outputs
+                📁 ./experiments/experiments/outputs/test_mel_mlp_baseline
+                    📁 ./experiments/experiments/outputs/test_mel_mlp_baseline/checkpoints
+                        📁 ./experiments/experiments/outputs/test_mel_mlp_baseline/checkpoints/exp_20251001_125010
+                        📁 ./experiments/experiments/outputs/test_mel_mlp_baseline/checkpoints/exp_20250921_111744
+                    📁 ./experiments/experiments/outputs/test_mel_mlp_baseline/logs
+                        └── 📄 test_mel_mlp_baseline.log
+                        └── 📄 events.out.tfevents.1758442664.g1102.mahti.csc.fi.3812795.0
+                        └── 📄 events.out.tfevents.1759312210.g1102.mahti.csc.fi.2383306.0
+                    📁 ./experiments/experiments/outputs/test_mel_mlp_baseline/results
+        📁 ./experiments/.ipynb_checkpoints
+            └── 📄 RUN_EXPER-checkpoint.ipynb
+            └── 📄 baseline_experiment-checkpoint.py
+            └── 📄 __init__-checkpoint.py
+            └── 📄 chaotic_experiment-checkpoint.py
+            └── 📄 base_experiment-checkpoint.py
+            └── 📄 comparison_experiment-checkpoint.ipynb
+        📁 ./experiments/test_outputs
+            📁 ./experiments/test_outputs/test_experiment
+                └── 📄 config.json
+                └── 📄 experiment_state.json
+                📁 ./experiments/test_outputs/test_experiment/checkpoints
+                    └── 📄 checkpoint_epoch_0.pth
+                    └── 📄 latest.pth
+                    └── 📄 best_model.pth
+                📁 ./experiments/test_outputs/test_experiment/logs
+                    └── 📄 events.out.tfevents.1758390674.g1102.mahti.csc.fi.2272703.0
+                📁 ./experiments/test_outputs/test_experiment/results
+                    └── 📄 test_results.json
+        📁 ./experiments/configs
+            └── 📄 comparison_config.yaml
+            └── 📄 debug_config.yaml
+            └── 📄 chaotic_config.yaml
+            └── 📄 mlp_config.yaml
+            └── 📄 base_config.yaml
+            📁 ./experiments/configs/.ipynb_checkpoints
+                └── 📄 debug_config-checkpoint.yaml
+                └── 📄 chaotic_config-checkpoint.yaml
+                └── 📄 mlp_config-checkpoint.yaml
+                └── 📄 comparison_config-checkpoint.yaml
+                └── 📄 base_config-checkpoint.yaml
+        📁 ./experiments/__pycache__
+            └── 📄 base_experiment.cpython-312.pyc
+            └── 📄 __init__.cpython-312.pyc
+            └── 📄 chaotic_experiment.cpython-312.pyc
+            └── 📄 baseline_experiment.cpython-312.pyc
+    📁 ./.ipynb_checkpoints
+        └── 📄 __init__-checkpoint.py
+        └── 📄 Untitled-checkpoint.ipynb
+        └── 📄 gpu_main-checkpoint.sh
+        └── 📄 project_structure-checkpoint.txt
+    📁 ./scripts
+        └── 📄 out_minidata_gradient.txt  
+        └── 📄 RUN_scripts.ipynb
+        └── 📄 out_minidata_mg.txt  
+        └── 📄 err_minidata_rossler.txt
+        └── 📄 __init__.py
+        └── 📄 minidata_chua.sh
+        └── 📄 train_chaotic.py
+        └── 📄 minidata_.sh
+        └── 📄 minidata_gradient.sh
+        └── 📄 fix_checkpoint.ipynb
+        └── 📄 err_minidata_chua.txt
+        └── 📄 RUN_chaos_others.ipynb
+        └── 📄 minidata_pooling.sh
+        └── 📄 train_baselines.py
+        └── 📄 diagnose_chaotic_training.py
+        └── 📄 RUN_FIX.ipynb
+        └── 📄 minidata_rossler.sh
+        └── 📄 err_minidata_mg.txt
+        └── 📄 fixed_chaotic_network.py
+        └── 📄 RUN_chaos.ipynb
+        └── 📄 out_minidata_chua.txt  
+        └── 📄 err_minidata_gradient.txt
+        └── 📄 minidata_learning_rate.sh
+        └── 📄 minidata_mackey_glass.sh
+        └── 📄 Minidata_Lorenz.ipynb
+        └── 📄 out_minidata_rossler.txt  
+        📁 ./scripts/final_architecture_analysis
+            └── 📄 final_analysis_report.txt
+            └── 📄 final_architecture_analysis.xlsx
+            📁 ./scripts/final_architecture_analysis/.ipynb_checkpoints
+                └── 📄 final_analysis_report-checkpoint.txt
+        📁 ./scripts/.ipynb_checkpoints
+            └── 📄 minidata_mackey_glass-checkpoint.sh
+            └── 📄 out_minidata_gradient-checkpoint.txt  
+            └── 📄 RUN_chaos_others-checkpoint.ipynb
+            └── 📄 minidata_gradient-checkpoint.sh
+            └── 📄 train_chaotic-checkpoint.py
+            └── 📄 out_minidata_mg-checkpoint.txt  
+            └── 📄 minidata_pooling-checkpoint.sh
+            └── 📄 minidata_chua-checkpoint.sh
+            └── 📄 RUN_scripts-checkpoint.ipynb
+            └── 📄 Minidata_Lorenz-checkpoint.ipynb
+            └── 📄 fix_checkpoint-checkpoint.ipynb
+            └── 📄 __init__-checkpoint.py
+            └── 📄 auto_recovery-checkpoint.py
+            └── 📄 RUN_FIX-checkpoint.ipynb
+            └── 📄 err_minidata_rossler-checkpoint.txt
+            └── 📄 RUN_chaos-checkpoint.ipynb
+            └── 📄 err_minidata_gradient-checkpoint.txt
+            └── 📄 minidata_learning_rate-checkpoint.sh
+            └── 📄 debug_resume-checkpoint.py
+            └── 📄 diagnose_chaotic_training-checkpoint.py
+            └── 📄 out_minidata_chua-checkpoint.txt  
+            └── 📄 simple_checkpoint_test-checkpoint.py
+            └── 📄 minidata_rossler-checkpoint.sh
+            └── 📄 out_minidata_rossler-checkpoint.txt  
+            └── 📄 train_baselines-checkpoint.py
+            └── 📄 ultimate_checkpoint_fix-checkpoint.py
+            └── 📄 complete_solution-checkpoint.py
+            📁 ./scripts/.ipynb_checkpoints/__pycache__
+                └── 📄 debug_parameter_mismatch-checkpoint.cpython-312.pyc
+        📁 ./scripts/cache
+        📁 ./scripts/outputs
+            └── 📄 model_architecture_analyzer.txt
+            📁 ./scripts/outputs/.ipynb_checkpoints
+                └── 📄 model_architecture_analyzer-checkpoint.txt
+            📁 ./scripts/outputs/baselines
+                └── 📄 training.log
+                └── 📄 baseline_training_results.json
+                └── 📄 baseline_training_report.txt
+                📁 ./scripts/outputs/baselines/models
+                📁 ./scripts/outputs/baselines/experiments
+                    📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_102306
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_125044
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_122212
+                                └── 📄 checkpoint_epoch_0000_20250921_122222.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_122219.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_123733
+                                └── 📄 checkpoint_epoch_0000_20251001_123825.pkl
+                                └── 📄 checkpoint_epoch_0000_20251001_123905.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250920_211412
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_103506
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_124919
+                                └── 📄 checkpoint_epoch_0000_20250921_124926.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_124929.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_101343
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_104114
+                                └── 📄 checkpoint_epoch_0000_20250928_105132.pkl
+                                └── 📄 checkpoint_epoch_0000_20250928_105127.pkl
+                                └── 📄 checkpoint_epoch_0000_20250928_105128.pkl
+                                └── 📄 checkpoint_epoch_0000_20250928_105133.pkl
+                                └── 📄 checkpoint_epoch_0000_20250928_104838.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_130546
+                                └── 📄 checkpoint_epoch_0000_20251001_130643.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_111229
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_125622
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_113418
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_112610
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_130059
+                                └── 📄 checkpoint_epoch_0000_20251001_130506.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251001_130352.pkl
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_130447
+                                └── 📄 checkpoint_epoch_0000_20250921_130454.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_130457.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_123223
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_130029
+                                └── 📄 checkpoint_epoch_0000_20250921_130039.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_130037.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_130036.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_103925
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_125519
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_125439
+                                └── 📄 checkpoint_epoch_0000_20250921_125449.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_125446.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_111640
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_123816
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_111921
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_100854
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_121310
+                                └── 📄 checkpoint_epoch_0000_20250921_121319.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20250921_121316.pkl
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_125917
+                                └── 📄 checkpoint_epoch_0000_20250921_125924.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_125926.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_122415
+                                └── 📄 checkpoint_epoch_0000_20250921_122422.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20250921_122425.pkl
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_110523
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_113118
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_111943
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_112529
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_112951
+                                └── 📄 checkpoint_epoch_0000_20250921_113001.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_112958.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_113411
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_112908
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_124025
+                                └── 📄 checkpoint_epoch_0000_20251001_124559.pkl
+                                └── 📄 checkpoint_epoch_0000_20251001_124419.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_124009
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_122349
+                                └── 📄 checkpoint_epoch_0000_20250921_122358.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20250921_122355.pkl
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_125803
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250925_131451
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250928_094350
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_121740
+                                └── 📄 checkpoint_epoch_0000_20250921_121747.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_121750.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_120505
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_130825
+                                └── 📄 checkpoint_epoch_0000_20251001_132802.pkl
+                                └── 📄 checkpoint_epoch_0000_20251001_132736.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_122017
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_122850
+                                └── 📄 checkpoint_epoch_0000_20250921_122856.pkl
+                                └── 📄 checkpoint_epoch_0000_20250921_122859.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_123502
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20251001_115900
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/logs
+                            └── 📄 events.out.tfevents.1758445990.g1102.mahti.csc.fi.4188707.0
+                            └── 📄 events.out.tfevents.1759311143.g1102.mahti.csc.fi.2378037.0
+                            └── 📄 events.out.tfevents.1759048278.g1102.mahti.csc.fi.796562.0
+                            └── 📄 events.out.tfevents.1759048458.g1102.mahti.csc.fi.797274.0
+                            └── 📄 baseline_mel_mlp_run_0.log
+                            └── 📄 events.out.tfevents.1759312582.g1102.mahti.csc.fi.2397791.0
+                            └── 📄 events.out.tfevents.1759047929.g1102.mahti.csc.fi.793783.0
+                            └── 📄 events.out.tfevents.1759048148.g1102.mahti.csc.fi.795502.0
+                            └── 📄 events.out.tfevents.1759312519.g1102.mahti.csc.fi.2397420.0
+                            └── 📄 events.out.tfevents.1758392052.g1102.mahti.csc.fi.2424570.0
+                            └── 📄 events.out.tfevents.1759048451.g1102.mahti.csc.fi.797215.0
+                            └── 📄 events.out.tfevents.1759046723.g1102.mahti.csc.fi.785865.0
+                            └── 📄 events.out.tfevents.1758446629.g1102.mahti.csc.fi.68652.0
+                            └── 📄 events.out.tfevents.1759043623.g1102.mahti.csc.fi.772460.0
+                            └── 📄 events.out.tfevents.1759309140.g1102.mahti.csc.fi.2365271.0
+                            └── 📄 events.out.tfevents.1759044186.g1102.mahti.csc.fi.774186.0
+                            └── 📄 events.out.tfevents.1758448479.g1102.mahti.csc.fi.277193.0
+                            └── 📄 events.out.tfevents.1759045274.g1102.mahti.csc.fi.778503.0
+                            └── 📄 events.out.tfevents.1758446655.g1102.mahti.csc.fi.71072.0
+                            └── 📄 events.out.tfevents.1759311453.g1102.mahti.csc.fi.2379434.0
+                            └── 📄 events.out.tfevents.1759312859.g1102.mahti.csc.fi.2431257.0
+                            └── 📄 events.out.tfevents.1758442761.g1102.mahti.csc.fi.3823836.0
+                            └── 📄 events.out.tfevents.1759047149.g1102.mahti.csc.fi.789740.0
+                            └── 📄 events.out.tfevents.1758442600.g1102.mahti.csc.fi.3805061.0
+                            └── 📄 events.out.tfevents.1759311625.g1102.mahti.csc.fi.2379973.0
+                            └── 📄 events.out.tfevents.1759313305.g1102.mahti.csc.fi.2445227.0
+                            └── 📄 events.out.tfevents.1758446532.g1102.mahti.csc.fi.57370.0
+                            └── 📄 events.out.tfevents.1759047970.g1102.mahti.csc.fi.794060.0
+                            └── 📄 events.out.tfevents.1759312683.g1102.mahti.csc.fi.2398707.0
+                            └── 📄 events.out.tfevents.1758448757.g1102.mahti.csc.fi.308756.0
+                            └── 📄 events.out.tfevents.1758446930.g1102.mahti.csc.fi.102358.0
+                            └── 📄 events.out.tfevents.1758446260.g1102.mahti.csc.fi.26838.0
+                            └── 📄 events.out.tfevents.1759043334.g1102.mahti.csc.fi.769758.0
+                            └── 📄 events.out.tfevents.1759045165.g1102.mahti.csc.fi.778273.0
+                            └── 📄 events.out.tfevents.1758443391.g1102.mahti.csc.fi.3895377.0
+                            └── 📄 events.out.tfevents.1759041830.g1102.mahti.csc.fi.762191.0
+                            └── 📄 events.out.tfevents.1759309505.g1102.mahti.csc.fi.2368414.0
+                            └── 📄 events.out.tfevents.1759313146.g1102.mahti.csc.fi.2443432.0
+                            └── 📄 events.out.tfevents.1759310417.g1102.mahti.csc.fi.2373889.0
+                            └── 📄 events.out.tfevents.1758447609.g1102.mahti.csc.fi.179389.0
+                            └── 📄 events.out.tfevents.1759312244.g1102.mahti.csc.fi.2386409.0
+                            └── 📄 events.out.tfevents.1759311302.g1102.mahti.csc.fi.2378656.0
+                            └── 📄 events.out.tfevents.1758448159.g1102.mahti.csc.fi.241000.0
+                            └── 📄 events.out.tfevents.1759047583.g1102.mahti.csc.fi.791691.0
+                            └── 📄 events.out.tfevents.1758449087.g1102.mahti.csc.fi.345864.0
+                            └── 📄 events.out.tfevents.1758447496.g1102.mahti.csc.fi.166317.0
+                            └── 📄 events.out.tfevents.1758448829.g1102.mahti.csc.fi.316999.0
+                            └── 📄 events.out.tfevents.1758795291.g6301.mahti.csc.fi.251854.0
+                            └── 📄 events.out.tfevents.1759044906.g1102.mahti.csc.fi.776689.0
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mel_mlp_run_0/results
+                            └── 📄 test_results.json
+                            └── 📄 baseline_analysis.json
+                    📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_mlp_run_0
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_mlp_run_0/checkpoints
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_mlp_run_0/checkpoints/exp_20251001_133454
+                                └── 📄 checkpoint_epoch_0000_20251001_135526.pkl
+                                └── 📄 checkpoint_epoch_0000_20251001_135546.pkl
+                                └── 📄 checkpoint_metadata.json
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_mlp_run_0/logs
+                            └── 📄 baseline_mfcc_mlp_run_0.log
+                            └── 📄 events.out.tfevents.1759314894.g1102.mahti.csc.fi.2496904.0
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_mlp_run_0/results
+                            └── 📄 test_results.json
+                            └── 📄 baseline_analysis.json
+                    📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/checkpoints
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/checkpoints/exp_20251004_145806
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/checkpoints/exp_20251004_145939
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/checkpoints/exp_20251004_144618
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/checkpoints/exp_20251004_144331
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/checkpoints/exp_20251004_150155
+                                └── 📄 checkpoint_epoch_0000_20251004_151527.pkl
+                                └── 📄 checkpoint_epoch_0000_20251004_151532.pkl
+                                └── 📄 checkpoint_metadata.json
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/logs
+                            └── 📄 baseline_mel_cnn_run_0.log
+                            └── 📄 events.out.tfevents.1759578378.g1102.mahti.csc.fi.1140139.0
+                            └── 📄 events.out.tfevents.1759579179.g1102.mahti.csc.fi.1143840.0
+                            └── 📄 events.out.tfevents.1759579315.g1102.mahti.csc.fi.1144754.0
+                            └── 📄 events.out.tfevents.1759578211.g1102.mahti.csc.fi.1139115.0
+                            └── 📄 events.out.tfevents.1759579086.g1102.mahti.csc.fi.1143095.0
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mel_cnn_run_0/results
+                            └── 📄 test_results.json
+                            └── 📄 baseline_analysis.json
+                    📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_cnn_run_0
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_cnn_run_0/checkpoints
+                            📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_cnn_run_0/checkpoints/exp_20251004_151708
+                                └── 📄 checkpoint_epoch_0000_20251004_153934.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251004_153826.pkl
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_cnn_run_0/logs
+                            └── 📄 baseline_mfcc_cnn_run_0.log
+                            └── 📄 events.out.tfevents.1759580228.g1102.mahti.csc.fi.1149862.0
+                        📁 ./scripts/outputs/baselines/experiments/baseline_mfcc_cnn_run_0/results
+                            └── 📄 test_results.json
+                            └── 📄 baseline_analysis.json
+                📁 ./scripts/outputs/baselines/results
+                    └── 📄 mel_cnn_run_0_results.json
+                    └── 📄 mfcc_mlp_run_0_results.json
+                    └── 📄 mfcc_cnn_run_0_results.json
+                    └── 📄 mel_mlp_run_0_results.json
+            📁 ./scripts/outputs/chaotic
+                └── 📄 training.log
+                └── 📄 chaotic_training_report.txt
+                └── 📄 chaotic_training_results.json
+                📁 ./scripts/outputs/chaotic/models
+                📁 ./scripts/outputs/chaotic/experiments
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_mackey_glass_full_chaotic_run_0
+                        └── 📄 config.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_mackey_glass_full_chaotic_run_0/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_mackey_glass_full_chaotic_run_0/checkpoints/exp_20251129_123812
+                                └── 📄 checkpoint_epoch_0000_20251130_112725.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251130_091307.pkl
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_mackey_glass_full_chaotic_run_0/checkpoints/exp_20251129_111525
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_mackey_glass_full_chaotic_run_0/checkpoints/exp_20251129_112629
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_mackey_glass_full_chaotic_run_0/logs
+                            └── 📄 events.out.tfevents.1764408389.g4102.mahti.csc.fi.686201.0
+                            └── 📄 events.out.tfevents.1764407725.g2101.mahti.csc.fi.214681.0
+                            └── 📄 chaotic_mackey_glass_full_chaotic_run_0.log
+                            └── 📄 events.out.tfevents.1764412692.g2101.mahti.csc.fi.222177.0
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_mackey_glass_full_chaotic_run_0/results
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_1
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_1/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_1/checkpoints/exp_20251004_164634
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_1/checkpoints/exp_20251004_155805
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_1/logs
+                            └── 📄 chaotic_lorenz_full_chaotic_run_1.log
+                            └── 📄 events.out.tfevents.1759585594.g1102.mahti.csc.fi.1161520.1
+                            └── 📄 events.out.tfevents.1759582685.g1102.mahti.csc.fi.1159443.1
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_1/results
+                    📁 ./scripts/outputs/chaotic/experiments/.ipynb_checkpoints
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_151417
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251024_221940
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251126_121343
+                                └── 📄 checkpoint_epoch_0000_20251126_151833.pkl
+                                └── 📄 checkpoint_epoch_0000_20251126_180522.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251103_132508
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251008_094650
+                                └── 📄 checkpoint_epoch_0000_20251008_170543.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251008_094600
+                                └── 📄 checkpoint_epoch_0000_20251008_144112.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251117_212901
+                                └── 📄 checkpoint_epoch_0000_20251118_201139.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251125_123140
+                                └── 📄 checkpoint_epoch_0000_20251125_153158.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_153941
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_223336
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_223845
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251123_181005
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_155741
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251122_154404
+                                └── 📄 checkpoint_epoch_0000_20251122_230214.pkl
+                                └── 📄 checkpoint_epoch_0000_20251122_193400.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251102_143959
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_155254
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251025_225926
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251111_211001
+                                └── 📄 checkpoint_epoch_0000_20251112_184500.pkl
+                                └── 📄 checkpoint_epoch_0000_20251113_090427_fixed_corrected.pth
+                                └── 📄 checkpoint_epoch_0000_20251113_090427.pkl
+                                └── 📄 checkpoint_epoch_0000_20251113_090427_fixed.pth
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251126_120403
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251123_192623
+                                └── 📄 checkpoint_epoch_0000_20251124_031305.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251124_025827.pkl
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251125_110828
+                                └── 📄 checkpoint_epoch_0000_20251125_113132.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_152830
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_120549
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251113_231525
+                                └── 📄 checkpoint_epoch_0000_20251114_025531_fixed_corrected.pth
+                                └── 📄 checkpoint_epoch_0000_20251114_025531.pkl
+                                └── 📄 checkpoint_epoch_0000_20251114_025531_fixed.pth
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_160450
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_152522
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251006_132340
+                                └── 📄 checkpoint_epoch_0000_20251006_182027.pkl
+                                └── 📄 checkpoint_epoch_0000_20251006_173148.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_155522
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251025_223941
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251125_160406
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251106_014217
+                                └── 📄 checkpoint_epoch_0000_20251106_090404.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_160049
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_154241
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251102_145453
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251102_131805
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251025_130240
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_155601
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_122446
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251023_170613
+                                └── 📄 checkpoint_epoch_0000_20251024_023725.pkl
+                                └── 📄 checkpoint_epoch_0000_20251024_001824.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_153805
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251122_104431
+                                └── 📄 checkpoint_epoch_0000_20251122_143102.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_224343
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251125_163212
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251102_141822
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251029_144508
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407
+                                └── 📄 checkpoint_epoch_0000_20251124_212300.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251124_202115.pkl
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251115_175802
+                                └── 📄 checkpoint_epoch_0000_20251117_022036.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251116_224515.pkl
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251109_123246
+                                └── 📄 checkpoint_epoch_0000_20251109_161001.pkl
+                                └── 📄 checkpoint_epoch_0000_20251109_194635_fixed.pth
+                                └── 📄 checkpoint_epoch_0000_20251109_194635.pkl
+                                └── 📄 checkpoint_epoch_0000_20251109_194635_fixed_corrected.pth
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251102_135918
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251128_125858
+                                └── 📄 checkpoint_epoch_0000_20251129_170657.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251129_141451.pkl
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251103_134109
+                                └── 📄 checkpoint_epoch_0000_20251104_074641.pkl.backup
+                                └── 📄 checkpoint_epoch_0000_20251104_074641_fixed_corrected.pth
+                                └── 📄 checkpoint_epoch_0000_20251104_074641_fixed.pth
+                                └── 📄 checkpoint_epoch_0000_20251104_074641.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251125_122503
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_151627
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251121_104009
+                                └── 📄 checkpoint_epoch_0000_20251121_110101.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251102_133158
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251117_075445
+                                └── 📄 checkpoint_epoch_0000_20251117_151656.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251102_134412
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251026_015146
+                                └── 📄 checkpoint_epoch_0000_20251027_103724_fixed.pth
+                                └── 📄 checkpoint_epoch_0000_20251027_103724_fixed_corrected.pth
+                                └── 📄 checkpoint_epoch_0000_20251027_103724.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_153210
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_224105
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251120_144951
+                                └── 📄 checkpoint_epoch_0000_20251121_055840.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251120_133549
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_154428
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251121_103559
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251121_112541
+                                └── 📄 checkpoint_epoch_0000_20251121_184904.pkl
+                                └── 📄 checkpoint_epoch_0000_20251121_183505.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251126_223701
+                                └── 📄 checkpoint_epoch_0000_20251127_232828.pkl
+                                └── 📄 checkpoint_epoch_0000_20251128_015107.pkl
+                                └── 📄 checkpoint_epoch_0000_20251127_204444.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251116_203849
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251126_121258
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251128_123855
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251123_181856
+                                └── 📄 checkpoint_epoch_0000_20251123_184041.pkl
+                                └── 📄 checkpoint_epoch_0000_20251123_184040.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251025_222134
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251029_151635
+                                └── 📄 checkpoint_epoch_0000_20251030_092020_standard.pth
+                                └── 📄 checkpoint_compatible.pth
+                                └── 📄 checkpoint_epoch_0000_20251030_092020_fixed_corrected.pth
+                                └── 📄 checkpoint_epoch_0000_20251030_092020_fixed.pth
+                                └── 📄 checkpoint_fallback.pth
+                                └── 📄 checkpoint_epoch_0000_20251030_092020.pkl
+                                └── 📄 checkpoint_proper.pth
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251004_160545
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251126_121242
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251101_081126
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251127_121533
+                                └── 📄 checkpoint_epoch_0000_20251128_132158.pkl
+                                └── 📄 checkpoint_epoch_0000_20251128_160214.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251122_093759
+                                └── 📄 checkpoint_epoch_0000_20251122_095900.pkl
+                                └── 📄 checkpoint_metadata.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/logs
+                            └── 📄 events.out.tfevents.1759582561.g1102.mahti.csc.fi.1159147.0
+                            └── 📄 events.out.tfevents.1762682749.g2102.mahti.csc.fi.2008916.0
+                            └── 📄 events.out.tfevents.1762082285.g3102.mahti.csc.fi.1931678.0
+                            └── 📄 events.out.tfevents.1762169108.g3102.mahti.csc.fi.2296573.0
+                            └── 📄 events.out.tfevents.1761386560.g1102.mahti.csc.fi.1394752.0
+                            └── 📄 events.out.tfevents.1762683886.g1102.mahti.csc.fi.3573062.0
+                            └── 📄 events.out.tfevents.1764061708.g1102.mahti.csc.fi.2966574.0
+                            └── 📄 events.out.tfevents.1763801071.g5301.mahti.csc.fi.536181.0
+                            └── 📄 events.out.tfevents.1759746220.g6301.mahti.csc.fi.4106638.0
+                            └── 📄 events.out.tfevents.1759582374.g1102.mahti.csc.fi.1157793.0
+                            └── 📄 events.out.tfevents.1759581485.g1102.mahti.csc.fi.1154810.0
+                            └── 📄 events.out.tfevents.1762088093.g1102.mahti.csc.fi.2721817.0
+                            └── 📄 events.out.tfevents.1763407741.g5102.mahti.csc.fi.4022215.0
+                            └── 📄 events.out.tfevents.1764189421.g1201.mahti.csc.fi.3672102.0
+                            └── 📄 events.out.tfevents.1761333580.g4101.mahti.csc.fi.533370.0
+                            └── 📄 events.out.tfevents.1764017023.g6301.mahti.csc.fi.3590748.0
+                            └── 📄 events.out.tfevents.1762170069.g3102.mahti.csc.fi.2298148.0
+                            └── 📄 events.out.tfevents.1763914205.g6301.mahti.csc.fi.87630.0
+                            └── 📄 events.out.tfevents.1764151978.g6101.mahti.csc.fi.2300736.0
+                            └── 📄 events.out.tfevents.1764326335.g6301.mahti.csc.fi.3627375.0
+                            └── 📄 events.out.tfevents.1763714409.g1102.mahti.csc.fi.320329.0
+                            └── 📄 events.out.tfevents.1759580057.g1102.mahti.csc.fi.1148771.0
+                            └── 📄 events.out.tfevents.1763222282.g2102.mahti.csc.fi.3603704.0
+                            └── 📄 events.out.tfevents.1763638549.g1102.mahti.csc.fi.3786044.0
+                            └── 📄 events.out.tfevents.1762684366.g1102.mahti.csc.fi.3575658.0
+                            └── 📄 events.out.tfevents.1759581581.g1102.mahti.csc.fi.1155178.0
+                            └── 📄 events.out.tfevents.1762083852.g5301.mahti.csc.fi.3434395.0
+                            └── 📄 events.out.tfevents.1764238533.g4101.mahti.csc.fi.2083846.0
+                            └── 📄 chaotic_lorenz_full_chaotic_run_0.log
+                            └── 📄 events.out.tfevents.1764327538.g1201.mahti.csc.fi.4192993.0
+                            └── 📄 events.out.tfevents.1759583090.g1102.mahti.csc.fi.1161429.0
+                            └── 📄 events.out.tfevents.1759906010.g6301.mahti.csc.fi.331165.0
+                            └── 📄 events.out.tfevents.1761432705.g6301.mahti.csc.fi.3731592.0
+                            └── 📄 events.out.tfevents.1764079446.g6301.mahti.csc.fi.1794898.0
+                            └── 📄 events.out.tfevents.1764081132.g3301.mahti.csc.fi.4186136.0
+                            └── 📄 events.out.tfevents.1762888201.g6301.mahti.csc.fi.80399.0
+                            └── 📄 events.out.tfevents.1759582661.g1102.mahti.csc.fi.1159443.0
+                            └── 📄 events.out.tfevents.1759580910.g1102.mahti.csc.fi.1152563.0
+                            └── 📄 events.out.tfevents.1759582522.g1102.mahti.csc.fi.1158543.0
+                            └── 📄 events.out.tfevents.1764016865.g6301.mahti.csc.fi.3584661.0
+                            └── 📄 events.out.tfevents.1759581868.g1102.mahti.csc.fi.1156051.0
+                            └── 📄 events.out.tfevents.1762386137.g5101.mahti.csc.fi.2339408.0
+                            └── 📄 events.out.tfevents.1759581761.g1102.mahti.csc.fi.1155913.0
+                            └── 📄 events.out.tfevents.1761977486.g2101.mahti.csc.fi.745876.0
+                            └── 📄 events.out.tfevents.1762084758.g5301.mahti.csc.fi.3435901.0
+                            └── 📄 events.out.tfevents.1761421181.g2102.mahti.csc.fi.2537208.0
+                            └── 📄 events.out.tfevents.1761743795.g1301.mahti.csc.fi.2436321.0
+                            └── 📄 events.out.tfevents.1763973847.g3102.mahti.csc.fi.2289678.0
+                            └── 📄 events.out.tfevents.1764151962.g3102.mahti.csc.fi.2683069.0
+                            └── 📄 events.out.tfevents.1764016725.g6301.mahti.csc.fi.3579161.0
+                            └── 📄 events.out.tfevents.1764152023.g3102.mahti.csc.fi.2683994.0
+                            └── 📄 events.out.tfevents.1759905960.g6301.mahti.csc.fi.330996.0
+                            └── 📄 events.out.tfevents.1763797079.g5301.mahti.csc.fi.522848.0
+                            └── 📄 events.out.tfevents.1759581130.g1102.mahti.csc.fi.1153451.0
+                            └── 📄 events.out.tfevents.1763068525.g1201.mahti.csc.fi.2370544.0
+                            └── 📄 events.out.tfevents.1759746220.g6301.mahti.csc.fi.4106658.0
+                            └── 📄 events.out.tfevents.1761420094.g1102.mahti.csc.fi.1732642.0
+                            └── 📄 events.out.tfevents.1763914736.g3101.mahti.csc.fi.450172.0
+                            └── 📄 events.out.tfevents.1762087199.g3101.mahti.csc.fi.1723370.0
+                            └── 📄 events.out.tfevents.1763918783.g1201.mahti.csc.fi.61367.0
+                            └── 📄 events.out.tfevents.1761422366.g2102.mahti.csc.fi.2539231.0
+                            └── 📄 events.out.tfevents.1761741908.g1301.mahti.csc.fi.2434041.0
+                            └── 📄 events.out.tfevents.1759580187.g1102.mahti.csc.fi.1149799.0
+                            └── 📄 events.out.tfevents.1762083118.g3102.mahti.csc.fi.1933014.0
+                            └── 📄 events.out.tfevents.1764066700.g6301.mahti.csc.fi.1501170.0
+                            └── 📄 events.out.tfevents.1763819044.g5301.mahti.csc.fi.586340.0
+                            └── 📄 events.out.tfevents.1761228373.g2101.mahti.csc.fi.955182.0
+                            └── 📄 events.out.tfevents.1763318329.g1102.mahti.csc.fi.3433107.0
+                            └── 📄 events.out.tfevents.1759580722.g1102.mahti.csc.fi.1151543.0
+                            └── 📄 events.out.tfevents.1763358885.g1102.mahti.csc.fi.3673454.0
+                            └── 📄 events.out.tfevents.1759582849.g1102.mahti.csc.fi.1160277.0
+                            └── 📄 events.out.tfevents.1759583145.g1102.mahti.csc.fi.1161520.0
+                            └── 📄 events.out.tfevents.1764016416.g6301.mahti.csc.fi.3566982.0
+                            └── 📄 events.out.tfevents.1763642991.g6301.mahti.csc.fi.3623036.0
+                            └── 📄 events.out.tfevents.1764066303.g6301.mahti.csc.fi.1500275.0
+                            └── 📄 events.out.tfevents.1763714159.g1102.mahti.csc.fi.318828.0
+                            └── 📄 events.out.tfevents.1764151443.g3102.mahti.csc.fi.2681043.0
+                            └── 📄 events.out.tfevents.1762085902.g3101.mahti.csc.fi.1721432.0
+                            └── 📄 events.out.tfevents.1763717141.g6301.mahti.csc.fi.3824993.0
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/results
+                            └── 📄 comprehensive_chaotic_analysis.json
+                            └── 📄 test_results.json
+                            └── 📄 chaotic_analysis.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/results/plots
+                                └── 📄 chaotic_trajectories.png
+                                └── 📄 feature_distributions.png
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_2
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_2/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_2/checkpoints/exp_20251004_155805
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_2/checkpoints/exp_20251004_172715
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_2/logs
+                            └── 📄 chaotic_lorenz_full_chaotic_run_2.log
+                            └── 📄 events.out.tfevents.1759582685.g1102.mahti.csc.fi.1159443.2
+                            └── 📄 events.out.tfevents.1759588035.g1102.mahti.csc.fi.1161520.2
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_2/results
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0/checkpoints/exp_20251129_123812
+                                └── 📄 checkpoint_epoch_0000_20251130_105356.pkl
+                                └── 📄 checkpoint_epoch_0000_20251130_080935.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0/checkpoints/exp_20251025_130419
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0/checkpoints/exp_20251129_111624
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0/checkpoints/exp_20251129_112629
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0/logs
+                            └── 📄 events.out.tfevents.1764412692.g4102.mahti.csc.fi.696511.0
+                            └── 📄 events.out.tfevents.1764408389.g2101.mahti.csc.fi.216250.0
+                            └── 📄 events.out.tfevents.1761386659.g1102.mahti.csc.fi.1395350.0
+                            └── 📄 chaotic_chua_full_chaotic_run_0.log
+                            └── 📄 events.out.tfevents.1764407784.g4102.mahti.csc.fi.683828.0
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_chua_full_chaotic_run_0/results
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_2
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_2/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_2/checkpoints/exp_20251004_193421
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_2/checkpoints/exp_20251004_155805
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_2/logs
+                            └── 📄 events.out.tfevents.1759582685.g1102.mahti.csc.fi.1159443.5
+                            └── 📄 chaotic_rossler_full_chaotic_run_2.log
+                            └── 📄 events.out.tfevents.1759595661.g1102.mahti.csc.fi.1161520.5
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_2/results
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251025_134150
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251025_130735
+                                └── 📄 checkpoint_epoch_0000_20251025_132143.pkl
+                                └── 📄 checkpoint_metadata.json
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251004_181056
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251004_155805
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251025_221516
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251025_132853
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/checkpoints/exp_20251129_111354
+                                └── 📄 checkpoint_epoch_0000_20251130_121031.pkl
+                                └── 📄 checkpoint_metadata.json
+                                └── 📄 checkpoint_epoch_0000_20251130_121032.pkl
+                                └── 📄 checkpoint_epoch_0000_20251130_092703.pkl
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/logs
+                            └── 📄 events.out.tfevents.1761386855.g1102.mahti.csc.fi.1398562.0
+                            └── 📄 events.out.tfevents.1759582685.g1102.mahti.csc.fi.1159443.3
+                            └── 📄 events.out.tfevents.1761419716.g1102.mahti.csc.fi.1730201.0
+                            └── 📄 events.out.tfevents.1761388910.g1102.mahti.csc.fi.1468293.0
+                            └── 📄 chaotic_rossler_full_chaotic_run_0.log
+                            └── 📄 events.out.tfevents.1759590656.g1102.mahti.csc.fi.1161520.3
+                            └── 📄 events.out.tfevents.1761388133.g1102.mahti.csc.fi.1465048.0
+                            └── 📄 events.out.tfevents.1764407634.g6301.mahti.csc.fi.3968361.0
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/results
+                    📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1
+                        └── 📄 config.json
+                        └── 📄 experiment_state.json
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1/checkpoints
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1/checkpoints/exp_20251004_155805
+                            📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1/checkpoints/exp_20251004_185210
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1/logs
+                            └── 📄 chaotic_rossler_full_chaotic_run_1.log
+                            └── 📄 events.out.tfevents.1759582685.g1102.mahti.csc.fi.1159443.4
+                            └── 📄 events.out.tfevents.1759593130.g1102.mahti.csc.fi.1161520.4
+                        📁 ./scripts/outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_1/results
+                📁 ./scripts/outputs/chaotic/visualizations
+                    └── 📄 dynamics_evolution.png
+                    └── 📄 systems_comparison.png
+                📁 ./scripts/outputs/chaotic/analysis
+                    └── 📄 lorenz_full_chaotic_run_0_results.json
+        📁 ./scripts/sbatch_files
+            └── 📄 gpu_main_resume_continue.sh
+            └── 📄 out_minidata_pooling_1121.txt  
+            └── 📄 gpu_main_rossler.sh
+            └── 📄 gpu_main_lorenz.sh
+            └── 📄 gpu_main_mackey_glass.sh
+            └── 📄 out_esc_lorenz_continue_1120.txt
+            └── 📄 gpu_main_chua.sh
+            └── 📄 err_minidata_pooling_1121.txt
+            └── 📄 gpu_main_lorenz_resume.sh
+            └── 📄 err_esc_lorenz_continue_1120.txt  
+            📁 ./scripts/sbatch_files/.ipynb_checkpoints
+                └── 📄 gpu_main_lorenz-checkpoint.sh
+                └── 📄 out_minidata_pooling_1121-checkpoint.txt  
+                └── 📄 gpu_main_chua-checkpoint.sh
+                └── 📄 gpu_main_mackey_glass-checkpoint.sh
+                └── 📄 gpu_main_rossler-checkpoint.sh
+                └── 📄 gpu_main_lorenz_resume-checkpoint.sh
+                └── 📄 err_minidata_pooling_1121-checkpoint.txt
+                └── 📄 gpu_main_resume_continue-checkpoint.sh
+        📁 ./scripts/err_output
+            └── 📄 err_esc_main_freeze_sgd.txt
+            └── 📄 err_esc_lorenz_continue.txt
+            └── 📄 err_minidata_pooling_1125.txt
+            └── 📄 err_esc_lorenz_continue_1113.txt  
+            └── 📄 err_rossler.txt
+            └── 📄 err_minidata_pooling_1124.txt
+            └── 📄 err_minidata_pooling_1123.txt
+            └── 📄 err_esc_lorenz_resume_2.txt
+            └── 📄 err_esc_lorenz_resume.txt
+            └── 📄 err_minidata_pooling_1121.txt
+            └── 📄 err_minidata_learning_rate_1127.txt
+            └── 📄 err_model_architecture_analyzer.txt
+            └── 📄 err_esc_lorenz_continue_1117.txt  
+            └── 📄 err_esc_lorenz_continue_1109.txt  
+            └── 📄 err_esc_lorenz_continue_1111.txt  
+            └── 📄 err_esc_lorenz_continue_1120.txt  
+            └── 📄 err_esc_lorenz_continue_1115.txt  
+            └── 📄 err_minidata_pooling_1125_2.txt
+            📁 ./scripts/err_output/.ipynb_checkpoints
+                └── 📄 err_rossler-checkpoint.txt
+                └── 📄 err_esc_lorenz_resume_2-checkpoint.txt
+                └── 📄 err_esc_lorenz_continue-checkpoint.txt
+                └── 📄 err_esc_lorenz_continue_1109-checkpoint.txt  
+                └── 📄 err_esc_lorenz_continue_1117-checkpoint.txt  
+                └── 📄 err_esc_lorenz_continue_1115-checkpoint.txt  
+                └── 📄 err_minidata_learning_rate_1127-checkpoint.txt
+                └── 📄 err_esc_main_freeze_sgd-checkpoint.txt
+                └── 📄 err_minidata_pooling_1123-checkpoint.txt
+                └── 📄 err_minidata_pooling_1121-checkpoint.txt
+                └── 📄 err_esc_lorenz_resume-checkpoint.txt
+                └── 📄 err_esc_lorenz_continue_1120-checkpoint.txt  
+                └── 📄 err_minidata_pooling_1125-checkpoint.txt
+                └── 📄 err_model_architecture_analyzer-checkpoint.txt
+                └── 📄 err_minidata_pooling_1124-checkpoint.txt
+        📁 ./scripts/results_output
+            └── 📄 out_minidata_pooling_1125_2.txt  
+            └── 📄 out_esc_lorenz_continue_1117.txt
+            └── 📄 out_minidata_pooling_1123.txt  
+            └── 📄 out_esc_main_freeze_sgd.txt
+            └── 📄 out_esc_lorenz_resume_2.txt
+            └── 📄 out_esc_lorenz_resume.txt
+            └── 📄 out_minidata_learning_rate_1127.txt  
+            └── 📄 out_minidata_pooling_1121.txt  
+            └── 📄 out_esc_lorenz_continue_1111.txt
+            └── 📄 out_esc_lorenz_continue_1120.txt
+            └── 📄 out_esc_lorenz_continue_1113.txt
+            └── 📄 out_rossler.txt
+            └── 📄 out_esc_lorenz_continue_1115.txt
+            └── 📄 out_esc_lorenz_continue.txt
+            └── 📄 out_minidata_pooling_1125.txt  
+            └── 📄 out_esc_lorenz_continue_1109.txt
+            └── 📄 out_minidata_pooling_1124.txt  
+            📁 ./scripts/results_output/.ipynb_checkpoints
+                └── 📄 out_minidata_pooling_1121-checkpoint.txt  
+                └── 📄 out_minidata_pooling_1125-checkpoint.txt  
+                └── 📄 out_minidata_learning_rate_1127-checkpoint.txt  
+                └── 📄 out_esc_lorenz_continue_1117-checkpoint.txt
+                └── 📄 out_esc_lorenz_continue_1109-checkpoint.txt
+                └── 📄 out_esc_main_freeze_sgd-checkpoint.txt
+                └── 📄 out_rossler-checkpoint.txt
+                └── 📄 out_minidata_pooling_1125_2-checkpoint.txt  
+                └── 📄 out_esc_lorenz_resume-checkpoint.txt
+                └── 📄 out_minidata_pooling_1123-checkpoint.txt  
+                └── 📄 out_esc_lorenz_continue-checkpoint.txt
+                └── 📄 out_esc_lorenz_continue_1115-checkpoint.txt
+                └── 📄 out_esc_lorenz_resume_2-checkpoint.txt
+                └── 📄 out_esc_lorenz_continue_1120-checkpoint.txt
+                └── 📄 out_esc_lorenz_continue_1113-checkpoint.txt
+                └── 📄 out_minidata_pooling_1124-checkpoint.txt  
+        📁 ./scripts/__pycache__
+            └── 📄 data_preprocessor.cpython-312.pyc
+            └── 📄 robust_chaotic_network.cpython-312.pyc
+            └── 📄 debug_parameter_mismatch.cpython-312.pyc
+            └── 📄 enhanced_chaotic_network.cpython-312.pyc
+            └── 📄 fix_feature_extractors.cpython-312.pyc
+            └── 📄 diagnose_chaotic_training.cpython-312.pyc
+    📁 ./evaluation
+        └── 📄 __init__.py
+        └── 📄 metrics.py
+        └── 📄 feature_visualizer.ipynb
+        └── 📄 RUN_EVA.ipynb
+        📁 ./evaluation/.ipynb_checkpoints
+            └── 📄 __init__-checkpoint.py
+            └── 📄 feature_visualizer-checkpoint.ipynb
+            └── 📄 metrics-checkpoint.py
+            └── 📄 RUN_EVA-checkpoint.ipynb
+        📁 ./evaluation/__pycache__
+            └── 📄 __init__.cpython-312.pyc
+            └── 📄 metrics.cpython-312.pyc
+    📁 ./data
+        └── 📄 __init__.py
+        └── 📄 dataset_loader.py
+        └── 📄 data_utils.py
+        └── 📄 audio_preprocessor.py
+        └── 📄 test_data_processing.py
+        └── 📄 dataset_info_chaotic.json
+        └── 📄 RUN.ipynb
+        📁 ./data/.ipynb_checkpoints
+            └── 📄 dataset_loader-checkpoint.backup_20250923_105136.backup_20250923_105500.py
+            └── 📄 __init__-checkpoint.py
+            └── 📄 dataset_loader-checkpoint.py
+            └── 📄 test_data_processing-checkpoint.py
+            └── 📄 dataset_loader-checkpoint.backup_20250923_105136.py
+            └── 📄 RUN-checkpoint.ipynb
+            └── 📄 dataset_loader-checkpoint.backup_20250923_105136.backup_20250923_105500.backup_20250923_105554.py
+            └── 📄 data_utils-checkpoint.py
+            └── 📄 audio_preprocessor-checkpoint.py
+        📁 ./data/cache
+            📁 ./data/cache/test
+                └── 📄 70135d6b9423f47329d3dc48f6df0183.pkl
+                └── 📄 a66976c6abf4dc68c809a631d904965d.pkl
+                └── 📄 bbd489219e8ef47e1042f4240b395c51.pkl
+                └── 📄 8d5787f59a5e3dd908568f17f7b906c0.pkl
+                └── 📄 7b87c4d59d5366b1115372cd9f463ef3.pkl
+                └── 📄 3e1daef1fb6ef140e3f1c988b6ed705b.pkl
+                └── 📄 5f688860e4a9ad6f5833a98cdafecc25.pkl
+                └── 📄 3d879bd8963afa945c76368de561e92b.pkl
+                └── 📄 749acb423ec62f3485613d3730d6aa47.pkl
+                └── 📄 531106695901ae513854be57b6072bea.pkl
+                └── 📄 e07fd0f721b7b9e7cfc3d1259428df6a.pkl
+                └── 📄 8d66ba941d4bdc9ae7383c7706360e0a.pkl
+                └── 📄 8d5dcd39155eb10ebab4c6f8dfea6337.pkl
+                └── 📄 ae178cd58eca7fade6665662531f52a9.pkl
+                └── 📄 47a62a88fac917fe4105a439d24d98f4.pkl
+                └── 📄 2cf8c614f108eab330b97d388114f0b9.pkl
+                └── 📄 97e4dd9979babe55409fbd547158dd47.pkl
+                └── 📄 08a8200ca49d26dd5a404d0126ae5db8.pkl
+                └── 📄 6f36169116b95202659e4c324dc2cf98.pkl
+        📁 ./data/.pytest_cache
+            └── 📄 README.md
+            └── 📄 CACHEDIR.TAG
+            └── 📄 .gitignore
+            📁 ./data/.pytest_cache/v
+                📁 ./data/.pytest_cache/v/cache
+                    └── 📄 nodeids
+        📁 ./data/__pycache__
+            └── 📄 __init__.cpython-312.pyc
+            └── 📄 dataset_loader.cpython-312.pyc
+            └── 📄 audio_preprocessor.cpython-312.pyc
+            └── 📄 test_data_processing.cpython-312-pytest-8.4.1.pyc
+            └── 📄 data_utils.cpython-312.pyc
+    📁 ./outputs
+        📁 ./outputs/baselines
+            └── 📄 training.log
+            └── 📄 baseline_training_results.json
+            └── 📄 baseline_training_report.txt
+            📁 ./outputs/baselines/experiments
+                📁 ./outputs/baselines/experiments/baseline_mel_mlp_run_0
+                    📁 ./outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints
+                        📁 ./outputs/baselines/experiments/baseline_mel_mlp_run_0/checkpoints/exp_20250921_124552
+                    📁 ./outputs/baselines/experiments/baseline_mel_mlp_run_0/logs
+                        └── 📄 baseline_mel_mlp_run_0.log
+                        └── 📄 events.out.tfevents.1758447952.g1102.mahti.csc.fi.218163.0
+                    📁 ./outputs/baselines/experiments/baseline_mel_mlp_run_0/results
+    📁 ./core
+        └── 📄 rqa_extractor.py
+        └── 📄 __init__.py
+        └── 📄 RUN_CORE.ipynb
+        └── 📄 fix_hurst_calculation.py
+        └── 📄 attractor_pooling.py
+        └── 📄 phase_space_reconstruction.py
+        └── 📄 mlsa_extractor.py
+        └── 📄 chaotic_embedding_backup.py
+        └── 📄 chaotic_embedding.py
+        └── 📄 chaos_utils.py
+        └── 📄 rqa_extractor.py.backup
+        └── 📄 mlsa_extractor.py.backup
+        └── 📄 chaos_utils_debug_patch.py
+        📁 ./core/.ipynb_checkpoints
+            └── 📄 chaotic_embedding-checkpoint.py
+            └── 📄 rqa_extractor.py-checkpoint.backup
+            └── 📄 RUN_CORE-checkpoint.ipynb
+            └── 📄 __init__-checkpoint.py
+            └── 📄 rqa_extractor-checkpoint.py
+            └── 📄 chaos_utils-checkpoint.py
+            └── 📄 fix_hurst_calculation-checkpoint.py
+            └── 📄 mlsa_extractor-checkpoint.py
+            └── 📄 attractor_pooling-checkpoint.py
+            └── 📄 chaotic_embedding_backup-checkpoint.py
+            └── 📄 phase_space_reconstruction-checkpoint.py
+        📁 ./core/__pycache__
+            └── 📄 __init__.cpython-312.pyc
+            └── 📄 chaos_utils.cpython-312.pyc
+            └── 📄 mlsa_extractor.cpython-312.pyc
+            └── 📄 rqa_extractor.cpython-312.pyc
+            └── 📄 chaotic_embedding.cpython-312.pyc
+            └── 📄 chaos_utils_debug_patch.cpython-312.pyc
+            └── 📄 attractor_pooling.cpython-312.pyc
+            └── 📄 phase_space_reconstruction.cpython-312.pyc
+    📁 ./features
+        └── 📄 RUN_features.ipynb
+        └── 📄 __init__.py
+        └── 📄 chaotic_features.py
+        └── 📄 feature_adapter.py
+        └── 📄 traditional_features.py
+        📁 ./features/.ipynb_checkpoints
+            └── 📄 chaotic_features-checkpoint.py
+            └── 📄 __init__-checkpoint.py
+            └── 📄 feature_adapter-checkpoint.py
+            └── 📄 RUN_features-checkpoint.ipynb
+            └── 📄 traditional_features-checkpoint.py
+        📁 ./features/.pytest_cache
+            └── 📄 README.md
+            └── 📄 CACHEDIR.TAG
+            └── 📄 .gitignore
+            📁 ./features/.pytest_cache/v
+                📁 ./features/.pytest_cache/v/cache
+                    └── 📄 lastfailed
+                    └── 📄 nodeids
+        📁 ./features/__pycache__
+            └── 📄 chaotic_features.cpython-312.pyc
+            └── 📄 __init__.cpython-312.pyc
+            └── 📄 traditional_features.cpython-312.pyc
+            └── 📄 feature_adapter.cpython-312.pyc
+            └── 📄 test_traditional_features.cpython-312-pytest-8.4.1.pyc
+    📁 ./ChNNs
+        └── 📄 __init__.py
+        └── 📄 README.md
+        📁 ./ChNNs/.ipynb_checkpoints
+            └── 📄 __init__-checkpoint.py
+            └── 📄 README-checkpoint.md
+        📁 ./ChNNs/.git
+            └── 📄 packed-refs
+            └── 📄 index
+            └── 📄 HEAD
+            └── 📄 description
+            └── 📄 config
+            📁 ./ChNNs/.git/hooks
+                └── 📄 sendemail-validate.sample
+                └── 📄 pre-applypatch.sample
+                └── 📄 post-update.sample
+                └── 📄 update.sample
+                └── 📄 pre-rebase.sample
+                └── 📄 pre-receive.sample
+                └── 📄 commit-msg.sample
+                └── 📄 applypatch-msg.sample
+                └── 📄 prepare-commit-msg.sample
+                └── 📄 pre-push.sample
+                └── 📄 pre-merge-commit.sample
+                └── 📄 push-to-checkout.sample
+                └── 📄 pre-commit.sample
+                └── 📄 fsmonitor-watchman.sample
+            📁 ./ChNNs/.git/info
+                └── 📄 exclude
+            📁 ./ChNNs/.git/logs
+                └── 📄 HEAD
+                📁 ./ChNNs/.git/logs/refs
+                    📁 ./ChNNs/.git/logs/refs/remotes
+                        📁 ./ChNNs/.git/logs/refs/remotes/origin
+                            └── 📄 HEAD
+                    📁 ./ChNNs/.git/logs/refs/heads
+                        └── 📄 main
+            📁 ./ChNNs/.git/branches
+            📁 ./ChNNs/.git/refs
+                📁 ./ChNNs/.git/refs/remotes
+                    📁 ./ChNNs/.git/refs/remotes/origin
+                        └── 📄 HEAD
+                📁 ./ChNNs/.git/refs/heads
+                    └── 📄 main
+                📁 ./ChNNs/.git/refs/tags
+            📁 ./ChNNs/.git/objects
+                📁 ./ChNNs/.git/objects/pack
+                    └── 📄 pack-ad247f49a3129d1e0fc469da5d0f0abfef58fd60.idx
+                    └── 📄 pack-ad247f49a3129d1e0fc469da5d0f0abfef58fd60.rev
+                    └── 📄 pack-ad247f49a3129d1e0fc469da5d0f0abfef58fd60.pack
+                📁 ./ChNNs/.git/objects/info
+    📁 ./__pycache__
+        └── 📄 __init__.cpython-312.pyc
+        └── 📄 audio_preprocessor.cpython-312.pyc
+        └── 📄 setup_imports.cpython-312.pyc

@@ -13,6 +13,7 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 import sys
 from pathlib import Path
+from tqdm import tqdm
 
 # Setup project imports - this is our safety net
 try:
@@ -370,9 +371,32 @@ class BaseExperiment(ABC):
         all_predictions = []
         all_targets = []
         
+        # 直接遍历 train_loader（不使用 tqdm）
         for batch_idx, batch in enumerate(self.train_loader):
-            # Move batch to device
-            batch = self._move_batch_to_device(batch)
+            # ========== DEBUG 代码 ==========
+            if batch_idx == 0 and self.state.epoch == 0:
+                # 解包 batch
+                if isinstance(batch, (list, tuple)) and len(batch) >= 2:
+                    audio = batch[0].to(self.device)
+                    targets = batch[1].to(self.device)
+                else:
+                    audio = batch.to(self.device)
+                    targets = None
+                
+                self.logger.info("\n" + "="*80)
+                self.logger.info("COMPREHENSIVE DEBUG - FIRST BATCH")
+                self.logger.info("="*80)
+                self.logger.info(f"Batch Info:")
+                self.logger.info(f"  Audio shape: {audio.shape}")
+                if targets is not None:
+                    self.logger.info(f"  Targets shape: {targets.shape}")
+                    self.logger.info(f"  Targets (first 8): {targets[:8]}")
+                
+                with torch.no_grad():
+                    _ = self.model(audio, targets, debug=True)
+                
+                self.logger.info("="*80 + "\n")
+            # ========== DEBUG 代码结束 ==========
             
             # Zero gradients
             self.optimizer.zero_grad()
@@ -389,6 +413,8 @@ class BaseExperiment(ABC):
                     self.model.parameters(), 
                     self.config['gradient_clipping']
                 )
+
+            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
             
             # Optimizer step
             self.optimizer.step()

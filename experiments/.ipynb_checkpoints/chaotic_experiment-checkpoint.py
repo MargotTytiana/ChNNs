@@ -374,7 +374,6 @@ class ChaoticExperiment(BaseExperiment):
         
         return optimizer
     
-    
     def forward_pass(
         self, 
         batch: Tuple[torch.Tensor, torch.Tensor], 
@@ -391,6 +390,10 @@ class ChaoticExperiment(BaseExperiment):
             Tuple of (loss, predictions, targets)
         """
         audio, targets = batch
+        
+        # CRITICAL: Move tensors to correct device
+        audio = audio.to(self.device)
+        targets = targets.to(self.device)
         
         # Forward pass through chaotic network
         if hasattr(self.model, 'forward') and 'labels' in self.model.forward.__code__.co_varnames:
@@ -1064,9 +1067,43 @@ if __name__ == "__main__":
         config=test_config,
         experiment_name='test_chaotic_lorenz'
     )
+
+    # 1. Before training, verify gradient flow:
+    def verify_gradients(model, sample_batch, device):
+        """Quick gradient verification."""
+        model.train()
+        model.zero_grad()
+    
+        audio, labels = sample_batch
+        audio = audio.to(device)
+        labels = labels.to(device)
+    
+        logits = model(audio, labels=labels)
+        loss = F.cross_entropy(logits, labels)
+        loss.backward()
+    
+        # Check gradient statistics
+        total_grad = 0
+        zero_grad_count = 0
+        for name, param in model.named_parameters():
+            if param.grad is not None:
+                grad_norm = param.grad.norm().item()
+                total_grad += grad_norm
+                if grad_norm == 0:
+                    zero_grad_count += 1
+    
+        print(f"[GRADIENT CHECK] Total grad norm: {total_grad:.4f}")
+        print(f"[GRADIENT CHECK] Zero gradient params: {zero_grad_count}")
+    
+        return total_grad > 0
     
     print("Setting up experiment...")
     experiment.setup()
+    
+    # 验证梯度流
+    sample_batch = next(iter(self.train_loader))
+    if not self._verify_gradients(sample_batch):
+        self.logger.error("Gradient flow is broken!")
     
     print("Running chaotic analysis...")
     analysis = experiment.run_chaotic_analysis()

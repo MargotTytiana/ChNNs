@@ -132,3 +132,268 @@
 2025-10-25 22:15:20,371 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
 2025-10-25 22:15:20,372 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
 2025-10-25 22:15:47,199 - experiment_chaotic_rossler_full_chaotic_run_0 - ERROR - Training failed with error: name 'np' is not defined
+2025-11-29 11:13:54,060 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_rossler_full_chaotic_run_0
+2025-11-29 11:13:54,072 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Device: cuda
+2025-11-29 11:13:54,073 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0
+2025-11-29 11:13:54,073 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with rossler system
+2025-11-29 11:13:54,073 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-11-29 11:13:54,073 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating dataloaders...
+2025-11-29 11:14:10,998 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2025-11-29 11:14:11,000 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-11-29 11:14:11,000 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Train: 14 batches
+2025-11-29 11:14:11,000 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Val: 3 batches
+2025-11-29 11:14:11,000 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Test: 4 batches
+2025-11-29 11:14:11,000 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating model...
+2025-11-29 11:14:11,000 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2025-11-29 11:14:41,675 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Total parameters: 499,289
+2025-11-29 11:14:41,678 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Trainable parameters: 499,289
+2025-11-29 11:14:41,678 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-11-29 11:14:44,279 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-11-29 11:14:44,279 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-11-29 11:14:44,279 - experiment_chaotic_rossler_full_chaotic_run_0 - WARNING - Unknown scheduler type: linear, no scheduler will be used
+2025-11-29 11:14:44,279 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating criterion...
+2025-11-29 11:14:44,279 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-29 11:14:44,342 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_rossler_full_chaotic_run_0/config.json
+2025-11-29 11:14:44,342 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-11-29 11:22:02,310 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2025-11-29 11:22:02,482 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - 
+================================================================================
+2025-11-29 11:22:02,483 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-29 11:22:02,483 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - ================================================================================
+2025-11-29 11:22:02,483 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Batch Info:
+2025-11-29 11:22:02,483 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-29 11:22:02,483 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2025-11-29 11:22:02,486 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([ 6, 16, 17,  2,  3, 15, 20, 11], device='cuda:0')
+2025-11-29 11:22:56,360 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - ================================================================================
+
+2025-11-29 11:23:50,476 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 3.245551
+2025-11-29 11:39:16,967 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 3.1528, Train Acc: 0.0960, Val Loss: 3.4426, Val Acc: 0.0449
+2025-11-29 11:39:17,092 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+2025-11-29 11:40:11,741 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 2.807606
+2025-11-29 11:55:38,923 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 2.6438, Train Acc: 0.1674, Val Loss: 4.9569, Val Acc: 0.0449
+2025-11-29 11:56:33,374 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 2.092845
+2025-11-29 12:11:59,564 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 2.2829, Train Acc: 0.2232, Val Loss: 4.6827, Val Acc: 0.0562
+2025-11-29 12:11:59,646 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 2
+2025-11-29 12:12:54,296 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.381078
+2025-11-29 12:28:21,836 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 2.2801, Train Acc: 0.2188, Val Loss: 2.8453, Val Acc: 0.2022
+2025-11-29 12:28:21,956 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 3
+2025-11-29 12:29:16,709 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 2.124942
+2025-11-29 12:44:43,106 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 1.9472, Train Acc: 0.3080, Val Loss: 1.9018, Val Acc: 0.4045
+2025-11-29 12:44:43,221 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 4
+2025-11-29 12:45:37,716 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.214779
+2025-11-29 13:01:06,956 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 1.8483, Train Acc: 0.3393, Val Loss: 2.0076, Val Acc: 0.3146
+2025-11-29 13:02:01,270 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.520405
+2025-11-29 13:17:27,990 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 1.7125, Train Acc: 0.3839, Val Loss: 2.1437, Val Acc: 0.3258
+2025-11-29 13:18:22,103 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.445963
+2025-11-29 13:33:48,451 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 1.5368, Train Acc: 0.4241, Val Loss: 1.6252, Val Acc: 0.5169
+2025-11-29 13:33:48,527 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 7
+2025-11-29 13:34:43,125 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.294525
+2025-11-29 13:50:10,024 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 1.5558, Train Acc: 0.4598, Val Loss: 1.2785, Val Acc: 0.5506
+2025-11-29 13:50:10,100 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 8
+2025-11-29 13:51:05,123 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.304566
+2025-11-29 14:06:30,752 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 9: Train Loss: 1.3340, Train Acc: 0.5290, Val Loss: 1.3506, Val Acc: 0.4944
+2025-11-29 14:07:24,902 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.851460
+2025-11-29 14:22:50,135 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 10: Train Loss: 1.2165, Train Acc: 0.5580, Val Loss: 1.3936, Val Acc: 0.5169
+2025-11-29 14:23:44,591 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.088936
+2025-11-29 14:39:11,875 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 11: Train Loss: 1.2392, Train Acc: 0.5558, Val Loss: 1.2518, Val Acc: 0.5393
+2025-11-29 14:40:05,964 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 1.384215
+2025-11-29 14:55:31,586 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 12: Train Loss: 1.0515, Train Acc: 0.5960, Val Loss: 1.3419, Val Acc: 0.6180
+2025-11-29 14:55:31,666 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 12
+2025-11-29 14:56:26,106 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.896008
+2025-11-29 15:11:52,490 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 13: Train Loss: 0.9996, Train Acc: 0.6406, Val Loss: 2.5146, Val Acc: 0.3258
+2025-11-29 15:12:47,063 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.952990
+2025-11-29 15:28:12,828 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 14: Train Loss: 1.0798, Train Acc: 0.6272, Val Loss: 1.8219, Val Acc: 0.4831
+2025-11-29 15:29:07,079 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.846568
+2025-11-29 15:44:32,209 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 15: Train Loss: 0.9105, Train Acc: 0.6763, Val Loss: 1.2880, Val Acc: 0.5843
+2025-11-29 15:45:26,269 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.703674
+2025-11-29 16:00:51,852 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 16: Train Loss: 0.9839, Train Acc: 0.6741, Val Loss: 1.1436, Val Acc: 0.5730
+2025-11-29 16:01:46,111 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.928626
+2025-11-29 16:17:11,683 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 17: Train Loss: 0.9512, Train Acc: 0.6518, Val Loss: 1.7011, Val Acc: 0.5056
+2025-11-29 16:18:06,043 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.614371
+2025-11-29 16:33:32,083 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 18: Train Loss: 0.8260, Train Acc: 0.7165, Val Loss: 0.8556, Val Acc: 0.6742
+2025-11-29 16:33:32,161 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 18
+2025-11-29 16:34:26,799 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.559957
+2025-11-29 16:49:53,545 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 19: Train Loss: 0.8485, Train Acc: 0.7121, Val Loss: 0.7409, Val Acc: 0.6966
+2025-11-29 16:49:53,618 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 19
+2025-11-29 16:50:47,927 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 1.171763
+2025-11-29 17:06:14,393 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 20: Train Loss: 0.9565, Train Acc: 0.6473, Val Loss: 1.0373, Val Acc: 0.6742
+2025-11-29 17:07:08,752 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.886717
+2025-11-29 17:22:35,879 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 21: Train Loss: 0.8971, Train Acc: 0.6964, Val Loss: 0.9888, Val Acc: 0.6517
+2025-11-29 17:23:30,114 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.741909
+2025-11-29 17:38:55,888 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 22: Train Loss: 0.7256, Train Acc: 0.7545, Val Loss: 0.7862, Val Acc: 0.7303
+2025-11-29 17:38:55,965 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 22
+2025-11-29 17:39:50,501 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.516873
+2025-11-29 17:55:16,251 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 23: Train Loss: 0.8722, Train Acc: 0.6853, Val Loss: 0.7723, Val Acc: 0.6966
+2025-11-29 17:56:10,971 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 1.446144
+2025-11-29 18:11:37,637 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 24: Train Loss: 0.8895, Train Acc: 0.6964, Val Loss: 0.9836, Val Acc: 0.6854
+2025-11-29 18:12:31,858 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.849916
+2025-11-29 18:27:57,743 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 25: Train Loss: 0.7459, Train Acc: 0.7232, Val Loss: 1.3626, Val Acc: 0.5955
+2025-11-29 18:28:51,800 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.499034
+2025-11-29 18:44:18,293 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 26: Train Loss: 0.7052, Train Acc: 0.7746, Val Loss: 0.7214, Val Acc: 0.7528
+2025-11-29 18:44:18,370 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 26
+2025-11-29 18:45:12,747 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.536140
+2025-11-29 19:00:40,244 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 27: Train Loss: 0.6930, Train Acc: 0.7634, Val Loss: 1.8200, Val Acc: 0.5169
+2025-11-29 19:01:34,601 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.672160
+2025-11-29 19:17:00,393 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 28: Train Loss: 0.7541, Train Acc: 0.7500, Val Loss: 1.0968, Val Acc: 0.6292
+2025-11-29 19:17:54,952 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.761306
+2025-11-29 19:33:23,413 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 29: Train Loss: 0.6215, Train Acc: 0.7902, Val Loss: 1.9370, Val Acc: 0.4944
+2025-11-29 19:34:17,343 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.509643
+2025-11-29 19:49:43,146 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 30: Train Loss: 0.6467, Train Acc: 0.7701, Val Loss: 1.5878, Val Acc: 0.5618
+2025-11-29 19:50:37,529 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.470557
+2025-11-29 20:06:03,693 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 31: Train Loss: 0.6703, Train Acc: 0.7679, Val Loss: 0.5788, Val Acc: 0.7865
+2025-11-29 20:06:03,768 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 31
+2025-11-29 20:06:58,450 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.338421
+2025-11-29 20:22:26,978 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 32: Train Loss: 0.5938, Train Acc: 0.7835, Val Loss: 0.6922, Val Acc: 0.7303
+2025-11-29 20:23:21,277 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.636400
+2025-11-29 20:38:48,218 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 33: Train Loss: 0.6558, Train Acc: 0.7835, Val Loss: 0.8253, Val Acc: 0.6966
+2025-11-29 20:39:43,006 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.565884
+2025-11-29 20:55:10,074 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 34: Train Loss: 0.5011, Train Acc: 0.8281, Val Loss: 1.0931, Val Acc: 0.6404
+2025-11-29 20:56:04,183 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 1.013415
+2025-11-29 21:11:30,842 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 35: Train Loss: 0.7283, Train Acc: 0.7478, Val Loss: 1.3104, Val Acc: 0.6180
+2025-11-29 21:12:25,220 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.681600
+2025-11-29 21:27:51,299 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 36: Train Loss: 0.4769, Train Acc: 0.8348, Val Loss: 0.6560, Val Acc: 0.7865
+2025-11-29 21:28:45,442 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.457542
+2025-11-29 21:44:10,577 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 37: Train Loss: 0.6026, Train Acc: 0.7946, Val Loss: 1.2621, Val Acc: 0.6742
+2025-11-29 21:45:05,084 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.554527
+2025-11-29 22:00:32,922 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 38: Train Loss: 0.7925, Train Acc: 0.7388, Val Loss: 0.7690, Val Acc: 0.7978
+2025-11-29 22:00:32,999 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 38
+2025-11-29 22:01:27,618 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.538761
+2025-11-29 22:16:53,757 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 39: Train Loss: 0.5643, Train Acc: 0.8013, Val Loss: 0.5939, Val Acc: 0.8202
+2025-11-29 22:16:53,833 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 39
+2025-11-29 22:17:48,246 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.460904
+2025-11-29 22:33:13,950 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 40: Train Loss: 0.5750, Train Acc: 0.7991, Val Loss: 0.7010, Val Acc: 0.7640
+2025-11-29 22:34:08,335 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.383039
+2025-11-29 22:49:34,661 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 41: Train Loss: 0.5295, Train Acc: 0.8103, Val Loss: 0.6704, Val Acc: 0.7865
+2025-11-29 22:50:28,756 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.680825
+2025-11-29 23:05:53,465 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 42: Train Loss: 0.5228, Train Acc: 0.8147, Val Loss: 0.5555, Val Acc: 0.8202
+2025-11-29 23:06:47,841 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.775537
+2025-11-29 23:22:15,013 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 43: Train Loss: 0.5199, Train Acc: 0.8304, Val Loss: 1.1165, Val Acc: 0.6292
+2025-11-29 23:23:09,332 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.583906
+2025-11-29 23:38:34,680 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 44: Train Loss: 0.4246, Train Acc: 0.8594, Val Loss: 1.2547, Val Acc: 0.6629
+2025-11-29 23:39:29,395 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.791097
+2025-11-29 23:54:55,410 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 45: Train Loss: 0.4217, Train Acc: 0.8728, Val Loss: 0.6037, Val Acc: 0.7753
+2025-11-29 23:55:49,692 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.505427
+2025-11-30 00:11:15,480 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 46: Train Loss: 0.4438, Train Acc: 0.8482, Val Loss: 0.9958, Val Acc: 0.7416
+2025-11-30 00:12:09,531 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.248976
+2025-11-30 00:27:35,224 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 47: Train Loss: 0.5682, Train Acc: 0.8393, Val Loss: 0.6914, Val Acc: 0.7978
+2025-11-30 00:28:29,640 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.272031
+2025-11-30 00:43:55,823 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 48: Train Loss: 0.4248, Train Acc: 0.8438, Val Loss: 1.1516, Val Acc: 0.6404
+2025-11-30 00:44:50,139 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.653859
+2025-11-30 01:00:15,491 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 49: Train Loss: 0.5198, Train Acc: 0.8170, Val Loss: 0.6165, Val Acc: 0.7640
+2025-11-30 01:01:09,942 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.296788
+2025-11-30 01:16:35,245 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 50: Train Loss: 0.5212, Train Acc: 0.8237, Val Loss: 0.5990, Val Acc: 0.8090
+2025-11-30 01:17:29,622 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.319173
+2025-11-30 01:32:57,014 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 51: Train Loss: 0.3602, Train Acc: 0.8906, Val Loss: 0.3616, Val Acc: 0.8876
+2025-11-30 01:32:57,089 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 51
+2025-11-30 01:33:51,531 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.405528
+2025-11-30 01:49:19,479 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 52: Train Loss: 0.4528, Train Acc: 0.8504, Val Loss: 1.3176, Val Acc: 0.6404
+2025-11-30 01:50:13,778 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.324319
+2025-11-30 02:05:38,050 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 53: Train Loss: 0.3271, Train Acc: 0.8929, Val Loss: 0.3095, Val Acc: 0.9326
+2025-11-30 02:05:38,126 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Saved new best model at epoch 53
+2025-11-30 02:06:32,556 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.271509
+2025-11-30 02:21:59,523 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 54: Train Loss: 0.4569, Train Acc: 0.8348, Val Loss: 1.0657, Val Acc: 0.7753
+2025-11-30 02:22:53,738 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.574516
+2025-11-30 02:38:20,303 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 55: Train Loss: 0.4433, Train Acc: 0.8549, Val Loss: 1.4871, Val Acc: 0.6517
+2025-11-30 02:39:14,351 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.423786
+2025-11-30 02:54:39,281 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 56: Train Loss: 0.4914, Train Acc: 0.8214, Val Loss: 0.4405, Val Acc: 0.8764
+2025-11-30 02:55:33,603 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.254538
+2025-11-30 03:10:58,158 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 57: Train Loss: 0.3334, Train Acc: 0.9018, Val Loss: 0.7685, Val Acc: 0.7865
+2025-11-30 03:11:52,504 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.104337
+2025-11-30 03:27:18,421 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 58: Train Loss: 0.3257, Train Acc: 0.8817, Val Loss: 0.9655, Val Acc: 0.7753
+2025-11-30 03:28:12,783 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.843919
+2025-11-30 03:43:39,297 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 59: Train Loss: 0.3869, Train Acc: 0.8839, Val Loss: 0.5332, Val Acc: 0.8652
+2025-11-30 03:44:33,769 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.185142
+2025-11-30 03:59:59,733 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 60: Train Loss: 0.3350, Train Acc: 0.8906, Val Loss: 0.6277, Val Acc: 0.7978
+2025-11-30 04:00:53,855 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.620316
+2025-11-30 04:16:20,099 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 61: Train Loss: 0.4814, Train Acc: 0.8638, Val Loss: 1.0504, Val Acc: 0.7303
+2025-11-30 04:17:14,189 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.162954
+2025-11-30 04:32:39,777 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 62: Train Loss: 0.3426, Train Acc: 0.8728, Val Loss: 0.5644, Val Acc: 0.8202
+2025-11-30 04:33:33,887 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.252427
+2025-11-30 04:49:00,576 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 63: Train Loss: 0.3316, Train Acc: 0.8884, Val Loss: 0.3212, Val Acc: 0.8876
+2025-11-30 04:49:55,115 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.426620
+2025-11-30 05:05:22,848 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 64: Train Loss: 0.4041, Train Acc: 0.8705, Val Loss: 0.4933, Val Acc: 0.8315
+2025-11-30 05:06:17,211 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.467709
+2025-11-30 05:21:43,604 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 65: Train Loss: 0.4323, Train Acc: 0.8371, Val Loss: 1.0714, Val Acc: 0.7079
+2025-11-30 05:22:37,987 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.093546
+2025-11-30 05:38:02,237 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 66: Train Loss: 0.2903, Train Acc: 0.8884, Val Loss: 0.7646, Val Acc: 0.7753
+2025-11-30 05:38:56,385 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.277363
+2025-11-30 05:54:21,369 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 67: Train Loss: 0.3289, Train Acc: 0.8973, Val Loss: 0.6089, Val Acc: 0.7978
+2025-11-30 05:55:15,629 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.230554
+2025-11-30 06:10:41,990 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 68: Train Loss: 0.3007, Train Acc: 0.9062, Val Loss: 0.3627, Val Acc: 0.8652
+2025-11-30 06:11:36,189 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.591747
+2025-11-30 06:27:01,851 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 69: Train Loss: 0.5028, Train Acc: 0.8371, Val Loss: 0.7153, Val Acc: 0.7528
+2025-11-30 06:27:56,131 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.199437
+2025-11-30 06:43:23,136 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 70: Train Loss: 0.4328, Train Acc: 0.8817, Val Loss: 1.0903, Val Acc: 0.7079
+2025-11-30 06:44:18,459 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.074996
+2025-11-30 06:59:45,740 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 71: Train Loss: 0.2704, Train Acc: 0.9241, Val Loss: 0.3985, Val Acc: 0.8764
+2025-11-30 07:00:40,009 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.148658
+2025-11-30 07:16:06,391 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 72: Train Loss: 0.2908, Train Acc: 0.9085, Val Loss: 0.4721, Val Acc: 0.8876
+2025-11-30 07:17:00,494 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.238219
+2025-11-30 07:32:28,594 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 73: Train Loss: 0.3099, Train Acc: 0.9174, Val Loss: 0.5254, Val Acc: 0.8427
+2025-11-30 07:33:23,173 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.174741
+2025-11-30 07:48:51,801 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 74: Train Loss: 0.4065, Train Acc: 0.8594, Val Loss: 0.8182, Val Acc: 0.7978
+2025-11-30 07:49:46,203 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.432884
+2025-11-30 08:05:13,903 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 75: Train Loss: 0.3330, Train Acc: 0.9062, Val Loss: 0.4676, Val Acc: 0.8652
+2025-11-30 08:06:08,571 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.274232
+2025-11-30 08:21:35,783 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 76: Train Loss: 0.4097, Train Acc: 0.8705, Val Loss: 0.3620, Val Acc: 0.8989
+2025-11-30 08:22:29,897 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.072768
+2025-11-30 08:37:56,439 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 77: Train Loss: 0.3035, Train Acc: 0.9040, Val Loss: 0.5340, Val Acc: 0.8315
+2025-11-30 08:38:51,260 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.568656
+2025-11-30 08:54:19,395 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 78: Train Loss: 0.2681, Train Acc: 0.9152, Val Loss: 0.3249, Val Acc: 0.8876
+2025-11-30 08:55:13,699 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.225611
+2025-11-30 09:10:42,029 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 79: Train Loss: 0.3069, Train Acc: 0.9018, Val Loss: 0.8634, Val Acc: 0.7640
+2025-11-30 09:11:36,891 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.116254
+2025-11-30 09:27:03,713 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 80: Train Loss: 0.1780, Train Acc: 0.9442, Val Loss: 0.8000, Val Acc: 0.8090
+2025-11-30 09:27:58,526 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.055042
+2025-11-30 09:43:26,343 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 81: Train Loss: 0.2919, Train Acc: 0.9040, Val Loss: 0.2103, Val Acc: 0.9213
+2025-11-30 09:44:20,863 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.123316
+2025-11-30 09:59:48,675 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 82: Train Loss: 0.2768, Train Acc: 0.9062, Val Loss: 0.2929, Val Acc: 0.9326
+2025-11-30 10:00:43,105 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.022037
+2025-11-30 10:16:10,416 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 83: Train Loss: 0.2307, Train Acc: 0.9152, Val Loss: 0.3270, Val Acc: 0.8989
+2025-11-30 10:17:05,091 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.266386
+2025-11-30 10:32:32,685 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 84: Train Loss: 0.2361, Train Acc: 0.9308, Val Loss: 1.0662, Val Acc: 0.7191
+2025-11-30 10:33:27,228 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.154127
+2025-11-30 10:48:53,368 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 85: Train Loss: 0.2493, Train Acc: 0.9286, Val Loss: 0.8455, Val Acc: 0.7640
+2025-11-30 10:49:48,009 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.197430
+2025-11-30 11:05:14,338 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 86: Train Loss: 0.2662, Train Acc: 0.9174, Val Loss: 0.4440, Val Acc: 0.8539
+2025-11-30 11:06:08,820 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.145583
+2025-11-30 11:21:32,077 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 87: Train Loss: 0.2860, Train Acc: 0.9129, Val Loss: 0.7165, Val Acc: 0.8315
+2025-11-30 11:22:26,485 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.193769
+2025-11-30 11:37:51,497 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 88: Train Loss: 0.1987, Train Acc: 0.9286, Val Loss: 0.3143, Val Acc: 0.9101
+2025-11-30 11:38:45,895 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.084683
+2025-11-30 11:54:11,350 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 89: Train Loss: 0.2702, Train Acc: 0.9085, Val Loss: 0.6322, Val Acc: 0.8315
+2025-11-30 11:55:05,805 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.114575
+2025-11-30 12:10:31,939 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 90: Train Loss: 0.2118, Train Acc: 0.9464, Val Loss: 0.7119, Val Acc: 0.8539
+2025-11-30 12:11:26,734 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.064400
+2025-11-30 12:26:53,206 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 91: Train Loss: 0.1419, Train Acc: 0.9509, Val Loss: 0.8017, Val Acc: 0.8427
+2025-11-30 12:27:47,941 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.053847
+2025-11-30 12:43:14,312 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 92: Train Loss: 0.2800, Train Acc: 0.9241, Val Loss: 0.6263, Val Acc: 0.8539
+2025-11-30 12:44:08,555 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.107402
+2025-11-30 12:59:34,399 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 93: Train Loss: 0.1739, Train Acc: 0.9487, Val Loss: 1.0122, Val Acc: 0.7528
+2025-11-30 13:00:28,671 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.194082
+2025-11-30 13:15:56,011 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 94: Train Loss: 0.2188, Train Acc: 0.9353, Val Loss: 0.8729, Val Acc: 0.8315
+2025-11-30 13:16:50,593 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.044951
+2025-11-30 13:32:17,768 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 95: Train Loss: 0.2242, Train Acc: 0.9196, Val Loss: 0.4021, Val Acc: 0.8764
+2025-11-30 13:33:12,240 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.408502
+2025-11-30 13:48:39,496 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 96: Train Loss: 0.2437, Train Acc: 0.9330, Val Loss: 0.2142, Val Acc: 0.9326
+2025-11-30 13:49:34,073 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.015956
+2025-11-30 14:05:00,343 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 97: Train Loss: 0.2969, Train Acc: 0.9107, Val Loss: 0.4263, Val Acc: 0.8764
+2025-11-30 14:05:54,697 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.456404
+2025-11-30 14:21:21,580 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 98: Train Loss: 0.2469, Train Acc: 0.9196, Val Loss: 0.6544, Val Acc: 0.8090
+2025-11-30 14:22:15,832 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.095135
+2025-11-30 14:37:45,746 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Epoch 99: Train Loss: 0.2669, Train Acc: 0.9196, Val Loss: 0.5872, Val Acc: 0.8202
+2025-11-30 14:37:45,766 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Running final test evaluation...
+2025-11-30 14:41:36,160 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Test Results:
+2025-11-30 14:41:36,160 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   loss: 0.6451
+2025-11-30 14:41:36,160 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   accuracy: 0.7797
+2025-11-30 14:41:36,160 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   avg_confidence: 1.0000
+2025-11-30 14:41:36,160 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   embedding_diversity: 0.0602
+2025-11-30 14:41:36,160 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   embedding_norm_mean: 1.0000
+2025-11-30 14:41:36,160 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO -   embedding_norm_std: 0.0000
+2025-11-30 14:41:36,163 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Training completed
+2025-11-30 14:45:24,536 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Running comprehensive chaotic network analysis...
+2025-11-30 14:45:24,537 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Analyzing chaotic features and dynamics...
+2025-11-30 14:48:43,267 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Chaotic analysis completed
+2025-11-30 14:48:43,269 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Creating chaotic dynamics visualizations...
+2025-11-30 14:48:59,707 - experiment_chaotic_rossler_full_chaotic_run_0 - WARNING - Embedding plotting failed: boolean index did not match indexed array along dimension 0; dimension is 8 but corresponding boolean dimension is 32
+2025-11-30 14:48:59,714 - experiment_chaotic_rossler_full_chaotic_run_0 - INFO - Chaotic network analysis completed

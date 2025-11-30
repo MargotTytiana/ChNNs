@@ -59,7 +59,6 @@ except ImportError:
     def optimize_chaotic_parameters(system_type, **params):
         return params
 
-
 class ChaoticTrainingManager:
     """
     Manager class for training chaotic neural networks.
@@ -415,7 +414,23 @@ class ChaoticTrainingManager:
             # Setup experiment
             start_time = time.time()
             self.logger.info(f"Setting up {experiment_name}...")
+            
             experiment.setup()
+            
+            from diagnose_chaotic_training import run_full_diagnosis
+            
+            # Run diagnosis
+            passed = run_full_diagnosis(
+                model=experiment.model,
+                train_loader=experiment.train_loader,
+                optimizer=experiment.optimizer,
+                device=experiment.device,
+                num_speakers=experiment.config['num_speakers']
+            )
+
+            if not passed:
+                self.logger.warning("Diagnosis found issues! Check output above.")
+
             
             # ==================== 健壮的检查点恢复逻辑 ====================
             start_epoch = 0
@@ -1098,8 +1113,8 @@ def create_default_config() -> Dict[str, Any]:
         'num_speakers': 100,
         'batch_size': 32,
         'num_epochs': 100,
-        'learning_rate': 0.01,
-        'weight_decay': 1e-5,
+        'learning_rate': 0.005,
+        'weight_decay': 1e-6,
         'gradient_clipping': 1.0,
         
         # Chaotic system parameters
@@ -1115,7 +1130,7 @@ def create_default_config() -> Dict[str, Any]:
         'pooling_type': 'comprehensive',
         'speaker_embedding_dim': 256,
         'embedding_hidden_dims': [512, 256, 128],
-        'classifier_type': 'cosine',
+        'classifier_type': 'linear',
         'temperature': 30.0,
         'margin': 0.35,
         
@@ -1137,11 +1152,11 @@ def create_default_config() -> Dict[str, Any]:
             }
         },
         'scheduler': {
-            'type': 'cosine',
+            'type': 'linear',
             'params': {'eta_min': 1e-6}
         },
         'early_stopping': {
-            'patience': 20
+            'patience': 50
         }
     }
 

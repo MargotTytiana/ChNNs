@@ -1,0 +1,1201 @@
+Fallback import setup: added /scratch/project_2003370/yueyao/Model to path
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+
+=== Integration Parameter Debug ===
+span=(0.0, 1.0), dt=0.1: expected 11, got 11
+span=(0.0, 1.0), dt=0.05: expected 21, got 21
+span=(0.0, 1.0), dt=0.01: expected 101, got 101
+span=(0.0, 5.0), dt=0.1: expected 51, got 51
+span=(0.0, 5.0), dt=0.05: expected 101, got 101
+span=(0.0, 5.0), dt=0.01: expected 501, got 501
+span=(0.0, 10.0), dt=0.1: expected 101, got 101
+span=(0.0, 10.0), dt=0.05: expected 201, got 201
+span=(0.0, 10.0), dt=0.01: expected 1001, got 1001
+=== Debug Complete ===
+
+  ✓ Dataset loader imported successfully
+✓ Data package initialized (circular import free)
+All required modules imported successfully!
+Error loading config from experiments/configs/chaotic_config.yaml: [Errno 2] No such file or directory: 'experiments/configs/chaotic_config.yaml'
+Failed to load config from experiments/configs/chaotic_config.yaml, using defaults
+[2025-11-24 10:44:06] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:06] [INFO] Python random seed set
+[2025-11-24 10:44:06] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:06] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Environment information collected
+[2025-11-24 10:44:07] [INFO] Configuring deterministic operations
+[2025-11-24 10:44:07] [INFO] PyTorch deterministic operations configured
+[2025-11-24 10:44:07] [INFO] Starting reproducibility verification
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 1 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 2 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 3 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 4 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 5 is reproducible
+[2025-11-24 10:44:07] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: 3d7360a50bacd42d
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: 0
+  OMP_NUM_THREADS: not_set
+  MKL_NUM_THREADS: not_set
+============================================================
+2025-11-24 10:44:07,129 - chaotic_trainer - INFO - ============================================================
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - ============================================================
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g3102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283723776, 'available_memory': 522031304704, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+Starting chaotic neural network training...
+Systems: ['lorenz']
+Model types: ['full_chaotic']
+Runs per configuration: 1
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - 
+============================================================
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - ============================================================
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+CheckpointManager initialized for experiment: exp_20251124_104407
+Checkpoint directory: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Environment information collected
+[2025-11-24 10:44:07] [INFO] Configuring deterministic operations
+[2025-11-24 10:44:07] [INFO] PyTorch deterministic operations configured
+[2025-11-24 10:44:07] [INFO] Starting reproducibility verification
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 1 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 2 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 3 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 4 is reproducible
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Setting global random seed to: 42
+[2025-11-24 10:44:07] [INFO] Python random seed set
+[2025-11-24 10:44:07] [INFO] PYTHONHASHSEED set to: 42
+[2025-11-24 10:44:07] [INFO] NumPy random seed set
+[2025-11-24 10:44:07] [INFO] PyTorch CUDA seeds set
+[2025-11-24 10:44:07] [INFO] PyTorch strict reproducibility mode enabled
+[2025-11-24 10:44:07] [INFO] PyTorch seeds set
+[2025-11-24 10:44:07] [WARNING] TensorFlow not available - skipping TensorFlow seed
+[2025-11-24 10:44:07] [INFO] Operation 5 is reproducible
+[2025-11-24 10:44:07] [SUCCESS] All operations are reproducible
+
+============================================================
+REPRODUCIBILITY SUMMARY
+============================================================
+Seed: 42
+Strict Mode: True
+Environment Hash: 5b01881662c098d3
+Python Version: 3.12.10
+
+Available Libraries:
+  numpy: 1.26.4
+  torch: 2.7.1+cu126
+  cuda_version: 12.6
+  cudnn_version: 91002
+  librosa: 0.11.0
+  soundfile: 0.13.1
+
+Environment Variables:
+  PYTHONHASHSEED: 42
+  CUDA_VISIBLE_DEVICES: 0
+  OMP_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+============================================================
+2025-11-24 10:44:07,696 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+2025-11-24 10:44:07,709 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Device: cuda
+2025-11-24 10:44:07,710 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Output directory: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0
+2025-11-24 10:44:07,710 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-24 10:44:07,710 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 10:44:07,710 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-11-24 10:44:07,710 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating dataloaders...
+====================
+Trying to load dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2 
+====================
+Loading LibriSpeech dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+Dataset validation: 0 speakers, 0 files
+Loading subsets: ['7976', '1988', '8297', '5895', '3000', '5694', '1462', '1272', '777', '84', '6295', '3536', '2803', '3576', '8842', '7850', '2035', '2412', '3752', '251', '174', '5338', '6241', '2428', '6319', '1993']
+Created label mapping for 26 speakers: labels in [0, 25]
+Dataset loaded: 679 samples from 26 speakers
+Split dataset with train: 472 sample, 26 speakers
+Split dataset with val: 89 sample, 26 speakers
+Split dataset with test: 118 sample, 26 speakers
+2025-11-24 10:44:24,997 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2025-11-24 10:44:24,997 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-11-24 10:44:24,997 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Train: 14 batches
+2025-11-24 10:44:24,997 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Val: 3 batches
+2025-11-24 10:44:24,997 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Test: 4 batches
+2025-11-24 10:44:24,997 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating model...
+2025-11-24 10:44:24,997 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+Chaotic feature dimensions: MLSA=105, RQA=125, Total=230
+
+============================================================
+ENHANCED CHAOTIC NETWORK INITIALIZED
+============================================================
+Total parameters: 380,329
+Parameters per speaker: 14628
+Speaker embedding dim: 256
+Hidden dims: [512, 256, 128]
+============================================================
+
+2025-11-24 10:44:55,496 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Total parameters: 380,329
+2025-11-24 10:44:55,497 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Trainable parameters: 380,329
+2025-11-24 10:44:55,497 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating optimizer...
+2025-11-24 10:44:57,872 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2025-11-24 10:44:57,872 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating scheduler...
+2025-11-24 10:44:57,872 - experiment_chaotic_lorenz_full_chaotic_run_0 - WARNING - Unknown scheduler type: linear, no scheduler will be used
+2025-11-24 10:44:57,873 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating criterion...
+2025-11-24 10:44:57,873 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-24 10:44:58,116 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Configuration saved to: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/config.json
+2025-11-24 10:44:58,116 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Experiment setup completed
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-24 10:44:58,117 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 10:46:10,716 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 5.141358
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 11:05:34,851 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 4.4480, Train Acc: 0.0357, Val Loss: 4.0236, Val Acc: 0.0449
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_110534.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_110534.pkl
+2025-11-24 11:05:34,942 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_110534.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_110534.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_110534.pkl
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 11:06:45,245 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.220846
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 11:26:09,187 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 4.1711, Train Acc: 0.0179, Val Loss: 3.9688, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 11:27:18,405 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 3.582428
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 11:46:40,656 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 3.8619, Train Acc: 0.0558, Val Loss: 3.5964, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 11:47:49,862 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.862665
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 12:07:13,871 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 3.8704, Train Acc: 0.0246, Val Loss: 3.6469, Val Acc: 0.0562
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_110534.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_120713.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_120713.pkl
+2025-11-24 12:07:13,928 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 3
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_120713.pkl
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 12:08:23,454 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 3.699503
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 12:27:47,684 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 3.7116, Train Acc: 0.0491, Val Loss: 3.4757, Val Acc: 0.0337
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 12:28:56,603 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 3.536923
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 12:48:20,900 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 3.6735, Train Acc: 0.0246, Val Loss: 3.3860, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 12:49:29,227 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 3.891042
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 13:08:55,339 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 3.5488, Train Acc: 0.0446, Val Loss: 3.4115, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 13:10:04,263 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 3.273127
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 13:29:26,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 3.5234, Train Acc: 0.0491, Val Loss: 3.4922, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 13:30:36,947 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 3.228710
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 13:50:01,262 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 3.5487, Train Acc: 0.0402, Val Loss: 3.4815, Val Acc: 0.0337
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 13:51:11,126 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 3.468616
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 14:10:35,486 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 9: Train Loss: 3.6028, Train Acc: 0.0491, Val Loss: 3.4188, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 14:11:44,748 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 3.648449
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 14:31:10,978 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 10: Train Loss: 3.5040, Train Acc: 0.0357, Val Loss: 3.5109, Val Acc: 0.0449
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_143110.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_143111.pkl
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 14:32:20,619 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 3.506515
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 14:51:46,879 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 11: Train Loss: 3.4554, Train Acc: 0.0513, Val Loss: 3.5152, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 14:52:55,764 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 3.469465
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 15:12:20,843 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 12: Train Loss: 3.4515, Train Acc: 0.0223, Val Loss: 3.4745, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 15:13:30,107 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 3.443585
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 15:32:54,928 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 13: Train Loss: 3.4458, Train Acc: 0.0424, Val Loss: 3.5416, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 15:34:04,671 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 3.328412
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 15:53:29,729 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 14: Train Loss: 3.3904, Train Acc: 0.0469, Val Loss: 3.4013, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 15:54:39,123 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 3.382583
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 16:14:09,741 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 15: Train Loss: 3.3967, Train Acc: 0.0357, Val Loss: 3.2983, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 16:15:18,623 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 3.334141
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 16:34:52,176 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 16: Train Loss: 3.4069, Train Acc: 0.0402, Val Loss: 3.4005, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 16:36:01,743 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 3.401282
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 16:55:26,868 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 17: Train Loss: 3.4138, Train Acc: 0.0446, Val Loss: 3.4373, Val Acc: 0.0337
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 16:56:36,482 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 3.340891
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 17:16:01,855 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 18: Train Loss: 3.3964, Train Acc: 0.0402, Val Loss: 3.3700, Val Acc: 0.0337
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 17:17:11,615 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 3.275938
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 17:36:36,973 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 19: Train Loss: 3.4081, Train Acc: 0.0424, Val Loss: 3.4600, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 17:37:47,521 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 3.475480
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 17:57:12,312 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 20: Train Loss: 3.4039, Train Acc: 0.0446, Val Loss: 3.3014, Val Acc: 0.0449
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_120713.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_175712.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_175712.pkl
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 17:58:22,831 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 3.310673
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 18:17:48,769 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 21: Train Loss: 3.4015, Train Acc: 0.0402, Val Loss: 3.4873, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 18:18:58,830 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 3.339899
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 18:38:22,239 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 22: Train Loss: 3.4267, Train Acc: 0.0424, Val Loss: 3.3669, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 18:39:30,848 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 3.314743
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 18:58:56,244 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 23: Train Loss: 3.3946, Train Acc: 0.0379, Val Loss: 3.3031, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 19:00:05,347 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 3.385855
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 19:19:33,037 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 24: Train Loss: 3.3884, Train Acc: 0.0469, Val Loss: 3.2570, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 19:20:41,982 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 3.244304
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 19:40:08,023 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 25: Train Loss: 3.3923, Train Acc: 0.0603, Val Loss: 3.2753, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 19:41:18,052 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 3.339931
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 20:00:42,356 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 26: Train Loss: 3.3681, Train Acc: 0.0491, Val Loss: 3.2754, Val Acc: 0.0337
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 20:01:51,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 3.274096
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 20:21:15,413 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 27: Train Loss: 3.3480, Train Acc: 0.0446, Val Loss: 3.2654, Val Acc: 0.0674
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_202115.pkl
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_143110.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_202115.pkl
+2025-11-24 20:21:15,470 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 27
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_143111.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_202115.pkl
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 20:22:25,795 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 3.430324
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 20:41:50,608 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 28: Train Loss: 3.3827, Train Acc: 0.0335, Val Loss: 3.2501, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 20:43:00,209 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 3.300437
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 21:02:27,717 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 29: Train Loss: 3.3421, Train Acc: 0.0335, Val Loss: 3.2374, Val Acc: 0.0449
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 21:03:37,108 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 3.221597
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 4/4 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 32/32 successful extractions
+[DEBUG] Chaotic features: 25/25 successful extractions
+[DEBUG] Chaotic features: 1/1 successful extractions
+[DEBUG] Chaotic features: 16/16 successful extractions
+2025-11-24 21:23:00,615 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 30: Train Loss: 3.3733, Train Acc: 0.0402, Val Loss: 3.2625, Val Acc: 0.0449
+Removed old checkpoint: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_175712.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_212300.pkl
+Checkpoint saved: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20251124_104407/checkpoint_epoch_0000_20251124_212300.pkl
+[DEBUG] Chaotic features: 32/32 successful extractions
+2025-11-24 21:24:09,781 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 3.285766

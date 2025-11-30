@@ -538,8 +538,12 @@ class TraditionalMLPBaseline(nn.Module):
         
         print("=== TraditionalMLPBaseline Initial ===")
     
-    def forward(self, audio: torch.Tensor) -> torch.Tensor:
+    def forward(self, audio: torch.Tensor, targets=None, debug=False) -> torch.Tensor:
         """Forward pass through traditional-MLP baseline."""
+        
+        if debug:
+            print(f"TraditionalMLPBaseline - Input audio shape: {audio.shape}")
+            print(f"Input audio device: {audio.device}")
         
         # Extract traditional features
         if self.feature_extractor is None:
@@ -559,6 +563,7 @@ class TraditionalMLPBaseline(nn.Module):
                     audio_np = single_audio.detach().cpu().numpy()
                     feats = self.feature_extractor.extract(audio_np)
                     # Convert to tensor: feats shape is [n_mels/n_mfcc, time_steps]
+                    # 关键修复：确保张量在正确的设备上
                     feats = torch.tensor(feats, dtype=torch.float32, device=audio.device)
                     
                     # CRITICAL: Pool over time dimension to get fixed-size feature
@@ -567,13 +572,29 @@ class TraditionalMLPBaseline(nn.Module):
                         feats = torch.mean(feats, dim=-1)
                 else:
                     feats = self.feature_extractor.extract(single_audio)
+                    # 关键修复：确保张量在正确的设备上
                     if len(feats.shape) == 2:
-                        feats = torch.mean(torch.tensor(feats), dim=-1)
+                        feats = torch.mean(torch.tensor(feats, device=audio.device), dim=-1)
+                    else:
+                        feats = torch.tensor(feats, device=audio.device)
                 
                 features_list.append(feats)
             
             # Stack into batch: [batch_size, feature_dim]
             features = torch.stack(features_list, dim=0)
+        
+        if debug:
+            print(f"TraditionalMLPBaseline - Features shape: {features.shape}")
+            print(f"Features device: {features.device}")
+            print(f"Classifier device: {next(self.classifier.parameters()).device}")
+        
+        # 确保特征在正确的设备上（额外检查）
+        if features.device != audio.device:
+            features = features.to(audio.device)
+        
+        # 确保分类器在正确的设备上
+        if next(self.classifier.parameters()).device != audio.device:
+            self.classifier = self.classifier.to(audio.device)
         
         # Ensure 2D shape [batch_size, feature_dim] for classifier
         if len(features.shape) > 2:
@@ -584,9 +605,13 @@ class TraditionalMLPBaseline(nn.Module):
         # Classify using MLP
         logits = self.classifier(features)
         
+        if debug:
+            print(f"TraditionalMLPBaseline - Output logits shape: {logits.shape}")
+            print(f"Output logits device: {logits.device}")
+        
         return logits
 
-
+    
 class HybridModelManager:
     """
     Manager class for creating and managing different hybrid model configurations.

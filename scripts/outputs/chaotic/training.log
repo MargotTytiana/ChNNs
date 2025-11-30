@@ -4760,3 +4760,3217 @@ RuntimeError: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwor
 2025-11-20 14:55:16,315 - chaotic_trainer - INFO - Model parameters: 273,865 (trainable: 273,865)
 2025-11-20 14:55:16,315 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
 2025-11-20 14:55:16,315 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-21 10:35:59,931 - chaotic_trainer - INFO - ============================================================
+2025-11-21 10:35:59,940 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-21 10:35:59,940 - chaotic_trainer - INFO - ============================================================
+2025-11-21 10:35:59,940 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-21 10:35:59,940 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 510704508928, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - 
+============================================================
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - ============================================================
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-21 10:35:59,987 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-21 10:36:00,013 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-21 10:36:56,889 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-21 10:36:56,889 - chaotic_trainer - INFO - Model parameters: 246,473 (trainable: 246,473)
+2025-11-21 10:36:56,890 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-21 10:36:56,890 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-21 10:38:08,329 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: mat1 and mat2 shapes cannot be multiplied (32x60 and 64x512)
+2025-11-21 10:38:08,334 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 610, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 381, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 398, in forward_pass
+    logits = self.model(audio, labels=targets if training else None)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 574, in forward
+    speaker_embeddings = self.speaker_embedding(pooled_features)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 134, in forward
+    embeddings = self.embedding_network(features)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (32x60 and 64x512)
+
+2025-11-21 10:38:08,337 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-21 10:38:08,338 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-21 10:38:08,338 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-21 10:38:08,338 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-21 10:38:08,385 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-21 10:38:08,385 - chaotic_trainer - INFO - Reports generated:
+2025-11-21 10:38:08,385 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-21 10:38:08,385 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-21 10:38:08,385 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-21 10:38:08,385 - chaotic_trainer - INFO - ============================================================
+2025-11-21 10:40:09,720 - chaotic_trainer - INFO - ============================================================
+2025-11-21 10:40:09,720 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-21 10:40:09,720 - chaotic_trainer - INFO - ============================================================
+2025-11-21 10:40:09,720 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-21 10:40:09,720 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 511798341632, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - 
+============================================================
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - ============================================================
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-21 10:40:09,767 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-21 10:40:09,777 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-21 10:40:41,866 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-21 10:40:41,866 - chaotic_trainer - INFO - Model parameters: 244,425 (trainable: 244,425)
+2025-11-21 10:40:41,866 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-21 10:40:41,866 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-21 11:25:40,937 - chaotic_trainer - INFO - ============================================================
+2025-11-21 11:25:40,951 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-21 11:25:40,951 - chaotic_trainer - INFO - ============================================================
+2025-11-21 11:25:40,951 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-21 11:25:40,951 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-21 11:25:41,492 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 519756185600, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - 
+============================================================
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - ============================================================
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-21 11:25:41,493 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-21 11:25:41,570 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-21 11:26:36,375 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-21 11:26:36,375 - chaotic_trainer - INFO - Model parameters: 244,425 (trainable: 244,425)
+2025-11-21 11:26:36,375 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-21 11:26:36,376 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-21 18:39:52,995 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2025-11-21 18:44:34,009 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-21 18:49:04,736 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.0424, Loss: nan, Time: 26051.4s
+2025-11-21 18:49:04,805 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-21 18:49:04,806 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.0424 ± 0.0000
+2025-11-21 18:49:04,806 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-21 18:49:04,807 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-21 18:49:06,743 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-21 18:49:06,744 - chaotic_trainer - INFO - Reports generated:
+2025-11-21 18:49:06,744 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-21 18:49:06,744 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-21 18:49:06,744 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-21 18:49:06,744 - chaotic_trainer - INFO - ============================================================
+2025-11-22 09:37:59,164 - chaotic_trainer - INFO - ============================================================
+2025-11-22 09:37:59,177 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-22 09:37:59,177 - chaotic_trainer - INFO - ============================================================
+2025-11-22 09:37:59,177 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-22 09:37:59,178 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-22 09:37:59,856 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g5301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285734912, 'available_memory': 522869399552, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-22 09:37:59,856 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-22 09:37:59,856 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-22 09:37:59,857 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-22 09:37:59,857 - chaotic_trainer - INFO - 
+============================================================
+2025-11-22 09:37:59,857 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-22 09:37:59,857 - chaotic_trainer - INFO - ============================================================
+2025-11-22 09:37:59,857 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-22 09:37:59,857 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-22 09:37:59,906 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-22 09:38:50,682 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-22 09:38:50,682 - chaotic_trainer - INFO - Model parameters: 244,425 (trainable: 244,425)
+2025-11-22 09:38:50,683 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-22 09:38:50,683 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-22 10:44:31,150 - chaotic_trainer - INFO - ============================================================
+2025-11-22 10:44:31,152 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-22 10:44:31,152 - chaotic_trainer - INFO - ============================================================
+2025-11-22 10:44:31,152 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-22 10:44:31,152 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-22 10:44:31,691 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g5301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285734912, 'available_memory': 503707926528, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-22 10:44:31,691 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-22 10:44:31,692 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-22 10:44:31,692 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-22 10:44:31,692 - chaotic_trainer - INFO - 
+============================================================
+2025-11-22 10:44:31,692 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-22 10:44:31,692 - chaotic_trainer - INFO - ============================================================
+2025-11-22 10:44:31,692 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-22 10:44:31,692 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-22 10:44:31,752 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-22 10:45:22,734 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-22 10:45:22,734 - chaotic_trainer - INFO - Model parameters: 244,425 (trainable: 244,425)
+2025-11-22 10:45:22,734 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-22 10:45:22,734 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-22 15:44:04,090 - chaotic_trainer - INFO - ============================================================
+2025-11-22 15:44:04,105 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-22 15:44:04,105 - chaotic_trainer - INFO - ============================================================
+2025-11-22 15:44:04,105 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-22 15:44:04,105 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g5301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285734912, 'available_memory': 498506334208, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - 
+============================================================
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - ============================================================
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-22 15:44:04,584 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-22 15:44:04,633 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-22 15:44:57,422 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-22 15:44:57,422 - chaotic_trainer - INFO - Model parameters: 351,145 (trainable: 351,145)
+2025-11-22 15:44:57,422 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-22 15:44:57,422 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-22 23:07:00,593 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2025-11-22 23:11:46,287 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-23 18:10:04,467 - chaotic_trainer - INFO - ============================================================
+2025-11-23 18:10:04,479 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-23 18:10:04,479 - chaotic_trainer - INFO - ============================================================
+2025-11-23 18:10:04,479 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-23 18:10:04,479 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 518064615424, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - 
+============================================================
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - ============================================================
+2025-11-23 18:10:05,087 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-23 18:10:05,088 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-23 18:10:05,143 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-23 18:10:57,929 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-23 18:10:57,929 - chaotic_trainer - INFO - Model parameters: 385,961 (trainable: 385,961)
+2025-11-23 18:10:57,929 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-23 18:10:57,929 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-23 18:12:10,155 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: mat1 and mat2 shapes cannot be multiplied (32x117 and 128x512)
+2025-11-23 18:12:10,159 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 610, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 381, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 398, in forward_pass
+    logits = self.model(audio, labels=targets if training else None)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 553, in forward
+    speaker_embeddings = self.speaker_embedding(pooled_features)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 134, in forward
+    embeddings = self.embedding_network(features)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (32x117 and 128x512)
+
+2025-11-23 18:12:10,163 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-23 18:12:10,164 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-23 18:12:10,164 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-23 18:12:10,164 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-23 18:12:10,215 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-23 18:12:10,215 - chaotic_trainer - INFO - Reports generated:
+2025-11-23 18:12:10,215 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-23 18:12:10,216 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-23 18:12:10,216 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-23 18:12:10,216 - chaotic_trainer - INFO - ============================================================
+2025-11-23 18:18:56,408 - chaotic_trainer - INFO - ============================================================
+2025-11-23 18:18:56,422 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-23 18:18:56,422 - chaotic_trainer - INFO - ============================================================
+2025-11-23 18:18:56,422 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-23 18:18:56,422 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-23 18:18:56,945 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g3101.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283695104, 'available_memory': 504149012480, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-23 18:18:56,945 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-23 18:18:56,946 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-23 18:18:56,946 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-23 18:18:56,946 - chaotic_trainer - INFO - 
+============================================================
+2025-11-23 18:18:56,946 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-23 18:18:56,946 - chaotic_trainer - INFO - ============================================================
+2025-11-23 18:18:56,946 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-23 18:18:56,946 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-23 18:18:57,002 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-23 18:19:48,678 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-23 18:19:48,679 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-23 18:19:48,679 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-23 18:19:48,679 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-23 19:26:22,481 - chaotic_trainer - INFO - ============================================================
+2025-11-23 19:26:22,493 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-23 19:26:22,493 - chaotic_trainer - INFO - ============================================================
+2025-11-23 19:26:22,493 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-23 19:26:22,493 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+2025-11-23 19:26:23,221 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1201.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285800448, 'available_memory': 502106103808, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-23 19:26:23,221 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-23 19:26:23,221 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-23 19:26:23,222 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-23 19:26:23,222 - chaotic_trainer - INFO - 
+============================================================
+2025-11-23 19:26:23,222 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-23 19:26:23,222 - chaotic_trainer - INFO - ============================================================
+2025-11-23 19:26:23,222 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-23 19:26:23,222 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-23 19:26:23,271 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-23 19:27:17,369 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-23 19:27:17,370 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-23 19:27:17,370 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-23 19:27:17,370 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-24 03:03:23,480 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 03:08:19,286 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-24 03:13:05,585 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.0424, Loss: 3.3282, Time: 27420.2s
+2025-11-24 03:13:05,661 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-24 03:13:05,661 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.0424 ± 0.0000
+2025-11-24 03:13:05,661 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-24 03:13:05,662 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-24 03:13:07,697 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-24 03:13:07,698 - chaotic_trainer - INFO - Reports generated:
+2025-11-24 03:13:07,698 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-24 03:13:07,698 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-24 03:13:07,698 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-24 03:13:07,698 - chaotic_trainer - INFO - ============================================================
+2025-11-24 10:44:07,129 - chaotic_trainer - INFO - ============================================================
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - ============================================================
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-24 10:44:07,150 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g3102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283723776, 'available_memory': 522031304704, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-24 10:44:07,656 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - 
+============================================================
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - ============================================================
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 10:44:07,657 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-24 10:44:07,710 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-24 10:44:58,116 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-24 22:33:36,250 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:33:36,266 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-24 22:33:36,266 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:33:36,266 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-24 22:33:36,266 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-24 22:33:36,315 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 516695220224, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-24 22:33:36,315 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-24 22:33:36,316 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-24 22:33:36,316 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-24 22:33:36,316 - chaotic_trainer - INFO - 
+============================================================
+2025-11-24 22:33:36,316 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-24 22:33:36,316 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:33:36,316 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:33:36,316 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-24 22:33:36,350 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:34:29,987 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-24 22:34:29,988 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-24 22:34:29,988 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-24 22:34:29,988 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-24 22:34:29,990 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: name 'batch_iterator' is not defined
+2025-11-24 22:34:29,994 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 625, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 373, in train_epoch
+    for batch_idx, batch in enumerate(batch_iterator):
+                                      ^^^^^^^^^^^^^^
+NameError: name 'batch_iterator' is not defined
+
+2025-11-24 22:34:29,994 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-24 22:34:29,994 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-24 22:34:29,994 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-24 22:34:29,994 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-24 22:34:30,039 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-24 22:34:30,039 - chaotic_trainer - INFO - Reports generated:
+2025-11-24 22:34:30,039 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-24 22:34:30,039 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-24 22:34:30,039 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-24 22:34:30,039 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:38:45,045 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:38:45,046 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-24 22:38:45,046 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:38:45,046 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-24 22:38:45,046 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-24 22:38:45,092 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 516678328320, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - 
+============================================================
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:38:45,093 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-24 22:38:45,104 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:39:17,068 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-24 22:39:17,069 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-24 22:39:17,069 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-24 22:39:17,069 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-24 22:39:17,070 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: name 'tqdm' is not defined
+2025-11-24 22:39:17,072 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 630, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 373, in train_epoch
+    batch_iterator = tqdm(
+                     ^^^^
+NameError: name 'tqdm' is not defined
+
+2025-11-24 22:39:17,072 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-24 22:39:17,072 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-24 22:39:17,072 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-24 22:39:17,072 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-24 22:39:17,115 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-24 22:39:17,115 - chaotic_trainer - INFO - Reports generated:
+2025-11-24 22:39:17,115 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-24 22:39:17,115 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-24 22:39:17,115 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-24 22:39:17,115 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:41:05,247 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:41:05,247 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-24 22:41:05,247 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:41:05,248 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-24 22:41:05,248 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 516678238208, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - 
+============================================================
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:41:05,292 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-24 22:41:05,303 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:41:36,931 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-24 22:41:36,931 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-24 22:41:36,931 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-24 22:41:36,931 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-24 22:41:36,933 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: 'ChaoticExperiment' object has no attribute 'verbose'
+2025-11-24 22:41:36,934 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 631, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 377, in train_epoch
+    disable=not self.verbose)
+                ^^^^^^^^^^^^
+AttributeError: 'ChaoticExperiment' object has no attribute 'verbose'
+
+2025-11-24 22:41:36,934 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-24 22:41:36,934 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-24 22:41:36,934 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-24 22:41:36,934 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-24 22:41:36,981 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-24 22:41:36,981 - chaotic_trainer - INFO - Reports generated:
+2025-11-24 22:41:36,981 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-24 22:41:36,981 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-24 22:41:36,981 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-24 22:41:36,981 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:43:43,833 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:43:43,833 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-24 22:43:43,833 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:43:43,833 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-24 22:43:43,833 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-24 22:43:43,879 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 516675100672, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-24 22:43:43,879 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-24 22:43:43,879 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-24 22:43:43,880 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-24 22:43:43,880 - chaotic_trainer - INFO - 
+============================================================
+2025-11-24 22:43:43,880 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-24 22:43:43,880 - chaotic_trainer - INFO - ============================================================
+2025-11-24 22:43:43,880 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:43:43,880 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-24 22:43:43,890 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-24 22:44:15,887 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-24 22:44:15,888 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-24 22:44:15,888 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-24 22:44:15,888 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-24 22:46:36,773 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument target in method wrapper_CUDA_nll_loss_forward)
+2025-11-24 22:46:36,776 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 634, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 460, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 405, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 404, in forward_pass
+    loss = self.criterion(logits, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/loss.py", line 1297, in forward
+    return F.cross_entropy(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/functional.py", line 3494, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument target in method wrapper_CUDA_nll_loss_forward)
+
+2025-11-24 22:46:36,782 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-24 22:46:36,782 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-24 22:46:36,782 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-24 22:46:36,782 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-24 22:46:36,827 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-24 22:46:36,827 - chaotic_trainer - INFO - Reports generated:
+2025-11-24 22:46:36,827 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-24 22:46:36,827 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-24 22:46:36,828 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-24 22:46:36,828 - chaotic_trainer - INFO - ============================================================
+2025-11-25 11:08:28,623 - chaotic_trainer - INFO - ============================================================
+2025-11-25 11:08:28,638 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-25 11:08:28,638 - chaotic_trainer - INFO - ============================================================
+2025-11-25 11:08:28,638 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-25 11:08:28,638 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 507093069824, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - 
+============================================================
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - ============================================================
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 11:08:28,686 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-25 11:08:28,722 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 11:09:19,141 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-25 11:09:19,141 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-25 11:09:19,141 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-25 11:09:19,141 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-25 12:25:02,972 - chaotic_trainer - INFO - ============================================================
+2025-11-25 12:25:02,981 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-25 12:25:02,981 - chaotic_trainer - INFO - ============================================================
+2025-11-25 12:25:02,981 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-25 12:25:02,981 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-25 12:25:03,314 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 521028964352, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-25 12:25:03,314 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-25 12:25:03,314 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-25 12:25:03,314 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-25 12:25:03,315 - chaotic_trainer - INFO - 
+============================================================
+2025-11-25 12:25:03,315 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-25 12:25:03,315 - chaotic_trainer - INFO - ============================================================
+2025-11-25 12:25:03,315 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 12:25:03,315 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-25 12:25:03,352 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 12:25:54,169 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-25 12:25:54,169 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-25 12:25:54,169 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-25 12:25:54,169 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-25 12:31:40,363 - chaotic_trainer - INFO - ============================================================
+2025-11-25 12:31:40,364 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-25 12:31:40,364 - chaotic_trainer - INFO - ============================================================
+2025-11-25 12:31:40,364 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-25 12:31:40,364 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 520833708032, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - 
+============================================================
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - ============================================================
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 12:31:40,413 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-25 12:31:40,423 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 12:32:12,164 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-25 12:32:12,165 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-25 12:32:12,165 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-25 12:32:12,165 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-25 16:04:06,596 - chaotic_trainer - INFO - ============================================================
+2025-11-25 16:04:06,609 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-25 16:04:06,609 - chaotic_trainer - INFO - ============================================================
+2025-11-25 16:04:06,609 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-25 16:04:06,609 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 512226111488, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - 
+============================================================
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - ============================================================
+2025-11-25 16:04:06,657 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 16:04:06,658 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-25 16:04:06,669 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 16:04:51,457 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-25 16:04:51,457 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-25 16:04:51,457 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-25 16:04:51,457 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-25 16:32:12,257 - chaotic_trainer - INFO - ============================================================
+2025-11-25 16:32:12,267 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-25 16:32:12,267 - chaotic_trainer - INFO - ============================================================
+2025-11-25 16:32:12,267 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-25 16:32:12,267 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-25 16:32:12,742 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g3301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285173760, 'available_memory': 514304815104, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-25 16:32:12,742 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-25 16:32:12,742 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-25 16:32:12,742 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-25 16:32:12,742 - chaotic_trainer - INFO - 
+============================================================
+2025-11-25 16:32:12,743 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-25 16:32:12,743 - chaotic_trainer - INFO - ============================================================
+2025-11-25 16:32:12,743 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 16:32:12,743 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-25 16:32:12,802 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-25 16:33:04,357 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-25 16:33:04,357 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-25 16:33:04,357 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-25 16:33:04,357 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-25 16:34:01,122 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: mat1 and mat2 shapes cannot be multiplied (32x115 and 117x512)
+2025-11-25 16:34:01,127 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 634, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 463, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 396, in train_epoch
+    _ = self.model(audio, targets, debug=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 587, in forward
+    speaker_embeddings = self.speaker_embedding(pooled_features)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 134, in forward
+    embeddings = self.embedding_network(features)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (32x115 and 117x512)
+
+2025-11-25 16:34:01,129 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-25 16:34:01,129 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-25 16:34:01,129 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-25 16:34:01,129 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-25 16:34:01,193 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-25 16:34:01,193 - chaotic_trainer - INFO - Reports generated:
+2025-11-25 16:34:01,193 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-25 16:34:01,193 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-25 16:34:01,193 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-25 16:34:01,193 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:04:03,007 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:04:03,056 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-26 12:04:03,056 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:04:03,056 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-26 12:04:03,056 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g3102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283723776, 'available_memory': 517894565888, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - 
+============================================================
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:04:03,580 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-26 12:04:03,662 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:04:56,889 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-26 12:04:56,889 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-26 12:04:56,889 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-26 12:04:56,889 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-26 12:05:54,074 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: mat1 and mat2 shapes cannot be multiplied (32x115 and 117x512)
+2025-11-26 12:05:54,099 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 556, in train_single_experiment
+    experiment.train(remaining_epochs)
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 634, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 533, in monitored_train_epoch
+    metrics = original_train_epoch()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 463, in train_epoch
+    epoch_metrics = super().train_epoch()
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 396, in train_epoch
+    _ = self.model(audio, targets, debug=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 587, in forward
+    speaker_embeddings = self.speaker_embedding(pooled_features)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 134, in forward
+    embeddings = self.embedding_network(features)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (32x115 and 117x512)
+
+2025-11-26 12:05:54,101 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-26 12:05:54,101 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-11-26 12:05:54,101 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-26 12:05:54,101 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-26 12:05:54,164 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-26 12:05:54,164 - chaotic_trainer - INFO - Reports generated:
+2025-11-26 12:05:54,164 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-26 12:05:54,164 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-26 12:05:54,164 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-26 12:05:54,164 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:12:42,405 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:12:42,437 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-26 12:12:42,437 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:12:42,437 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-26 12:12:42,437 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-26 12:12:42,541 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g3102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283723776, 'available_memory': 518193946624, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-26 12:12:42,541 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-26 12:12:42,541 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-26 12:12:42,541 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-26 12:12:42,541 - chaotic_trainer - INFO - 
+============================================================
+2025-11-26 12:12:42,541 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-26 12:12:42,541 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:12:42,542 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:12:42,542 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-26 12:12:42,567 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:12:58,113 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:12:58,114 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-26 12:12:58,114 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:12:58,114 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-26 12:12:58,115 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6101.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 521051709440, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - 
+============================================================
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:12:58,830 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:12:58,831 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-26 12:12:58,868 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:13:15,833 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-26 12:13:15,834 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-26 12:13:15,834 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-26 12:13:15,834 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-26 12:13:43,343 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:13:43,343 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-26 12:13:43,343 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:13:43,343 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-26 12:13:43,344 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-26 12:13:43,454 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g3102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283723776, 'available_memory': 518371831808, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-26 12:13:43,454 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-26 12:13:43,454 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-26 12:13:43,454 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-26 12:13:43,454 - chaotic_trainer - INFO - 
+============================================================
+2025-11-26 12:13:43,454 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-26 12:13:43,454 - chaotic_trainer - INFO - ============================================================
+2025-11-26 12:13:43,455 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:13:43,455 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-26 12:13:43,467 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 12:14:17,306 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-26 12:14:17,306 - chaotic_trainer - INFO - Model parameters: 380,329 (trainable: 380,329)
+2025-11-26 12:14:17,306 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-26 12:14:17,306 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-26 22:37:00,861 - chaotic_trainer - INFO - ============================================================
+2025-11-26 22:37:00,870 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-26 22:37:00,870 - chaotic_trainer - INFO - ============================================================
+2025-11-26 22:37:00,870 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-26 22:37:00,870 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1201.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285800448, 'available_memory': 518303735808, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - 
+============================================================
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - ============================================================
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 22:37:01,383 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-26 22:37:01,449 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-26 22:37:54,117 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-26 22:37:54,118 - chaotic_trainer - INFO - Model parameters: 446,147 (trainable: 446,147)
+2025-11-26 22:37:54,118 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-26 22:37:54,118 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-27 12:15:32,733 - chaotic_trainer - INFO - ============================================================
+2025-11-27 12:15:32,761 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-27 12:15:32,761 - chaotic_trainer - INFO - ============================================================
+2025-11-27 12:15:32,761 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-27 12:15:32,761 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0001,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-27 12:15:33,272 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g4101.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283707392, 'available_memory': 518248673280, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-27 12:15:33,272 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-27 12:15:33,273 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-27 12:15:33,273 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-27 12:15:33,273 - chaotic_trainer - INFO - 
+============================================================
+2025-11-27 12:15:33,273 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-27 12:15:33,273 - chaotic_trainer - INFO - ============================================================
+2025-11-27 12:15:33,273 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-27 12:15:33,273 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-27 12:15:33,330 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-27 12:16:26,457 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-27 12:16:26,457 - chaotic_trainer - INFO - Model parameters: 446,147 (trainable: 446,147)
+2025-11-27 12:16:26,457 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-27 12:16:26,457 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-28 01:43:42,359 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2025-11-28 01:47:31,052 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-28 01:51:07,355 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.0424, Loss: 4.2274, Time: 97600.9s
+2025-11-28 01:51:07,422 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-28 01:51:07,422 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.0424 ± 0.0000
+2025-11-28 01:51:07,422 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-28 01:51:07,423 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-28 01:51:09,664 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-28 01:51:09,664 - chaotic_trainer - INFO - Reports generated:
+2025-11-28 01:51:09,664 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-28 01:51:09,664 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-28 01:51:09,664 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-28 01:51:09,664 - chaotic_trainer - INFO - ============================================================
+2025-11-28 12:38:54,968 - chaotic_trainer - INFO - ============================================================
+2025-11-28 12:38:54,985 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-28 12:38:54,985 - chaotic_trainer - INFO - ============================================================
+2025-11-28 12:38:54,985 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-28 12:38:54,985 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 487582130176, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - 
+============================================================
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - ============================================================
+2025-11-28 12:38:55,029 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-28 12:38:55,030 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-28 12:38:55,048 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-28 12:47:04,072 - chaotic_trainer - WARNING - Diagnosis found issues! Check output above.
+2025-11-28 12:47:04,087 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-28 12:47:04,087 - chaotic_trainer - INFO - Model parameters: 499,289 (trainable: 499,289)
+2025-11-28 12:47:04,087 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-28 12:47:04,087 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-28 12:58:57,867 - chaotic_trainer - INFO - ============================================================
+2025-11-28 12:58:57,878 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-28 12:58:57,878 - chaotic_trainer - INFO - ============================================================
+2025-11-28 12:58:57,879 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-28 12:58:57,879 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-28 12:58:58,426 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1201.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285800448, 'available_memory': 501880418304, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-28 12:58:58,426 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-28 12:58:58,426 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-11-28 12:58:58,426 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-28 12:58:58,426 - chaotic_trainer - INFO - 
+============================================================
+2025-11-28 12:58:58,427 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-11-28 12:58:58,427 - chaotic_trainer - INFO - ============================================================
+2025-11-28 12:58:58,427 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-11-28 12:58:58,427 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-11-28 12:58:58,481 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-11-28 13:07:10,200 - chaotic_trainer - WARNING - Diagnosis found issues! Check output above.
+2025-11-28 13:07:10,231 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-28 13:07:10,232 - chaotic_trainer - INFO - Model parameters: 499,289 (trainable: 499,289)
+2025-11-28 13:07:10,232 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-28 13:07:10,232 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-28 15:54:44,070 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2025-11-28 15:58:35,509 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-28 16:02:14,745 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.0593, Loss: 3.1854, Time: 99550.7s
+2025-11-28 16:02:14,812 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-28 16:02:14,813 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.0593 ± 0.0000
+2025-11-28 16:02:14,813 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-28 16:02:14,814 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-28 16:02:16,847 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-28 16:02:16,847 - chaotic_trainer - INFO - Reports generated:
+2025-11-28 16:02:16,847 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-28 16:02:16,847 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-28 16:02:16,848 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-28 16:02:16,848 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:13:10,262 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:13:10,277 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 11:13:10,277 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:13:10,277 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 11:13:10,277 - chaotic_trainer - INFO - Configuration: {
+  "experiment": {
+    "name": "chaotic_network_experiment",
+    "description": "Full chaotic neural network for speaker recognition"
+  },
+  "base_config": "base_config.yaml",
+  "model": {
+    "type": "chaotic_network",
+    "chaotic_network": {
+      "embedding": {
+        "system_type": "lorenz",
+        "evolution_time": 1.0,
+        "coupling_strength": 2.0
+      },
+      "attractor_pooling": {
+        "correlation_dimension": {
+          "num_radii": 100
+        }
+      },
+      "speaker_embedding": {
+        "embedding_dim": 512,
+        "hidden_dims": [
+          1024,
+          512,
+          256
+        ]
+      }
+    }
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "num_epochs": 200,
+    "optimizer": {
+      "type": "adamw",
+      "adamw": {
+        "weight_decay": "1e-4"
+      }
+    },
+    "scheduler": {
+      "type": "plateau",
+      "plateau": {
+        "patience": 50,
+        "factor": 0.7
+      }
+    }
+  },
+  "features": {
+    "chaotic": {
+      "mlsa": {
+        "scales": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "max_lyapunov_steps": 2000
+      }
+    }
+  },
+  "epochs": 100,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "optimize_parameters": true
+}
+2025-11-29 11:13:10,818 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 514079211520, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 11:13:10,818 - chaotic_trainer - ERROR - Missing required config key: num_speakers
+2025-11-29 11:13:53,904 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:13:53,905 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 11:13:53,906 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:13:53,906 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 11:13:53,906 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-29 11:13:54,009 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 513856987136, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 11:13:54,009 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-29 11:13:54,010 - chaotic_trainer - INFO - Systems: ['rossler']
+2025-11-29 11:13:54,010 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-29 11:13:54,010 - chaotic_trainer - INFO - 
+============================================================
+2025-11-29 11:13:54,010 - chaotic_trainer - INFO - TRAINING: ROSSLER + FULL_CHAOTIC
+2025-11-29 11:13:54,010 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:13:54,010 - chaotic_trainer - INFO - Training chaotic_rossler_full_chaotic_run_0...
+2025-11-29 11:13:54,010 - chaotic_trainer - INFO - Optimizing parameters for rossler system...
+2025-11-29 11:13:54,073 - chaotic_trainer - INFO - Setting up chaotic_rossler_full_chaotic_run_0...
+2025-11-29 11:15:25,090 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:15:25,093 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 11:15:25,093 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:15:25,093 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 11:15:25,093 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-29 11:15:25,583 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g2101.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283572224, 'available_memory': 508457463808, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 11:15:25,583 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-29 11:15:25,583 - chaotic_trainer - INFO - Systems: ['mackey_glass']
+2025-11-29 11:15:25,583 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-29 11:15:25,583 - chaotic_trainer - INFO - 
+============================================================
+2025-11-29 11:15:25,583 - chaotic_trainer - INFO - TRAINING: MACKEY_GLASS + FULL_CHAOTIC
+2025-11-29 11:15:25,583 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:15:25,584 - chaotic_trainer - INFO - Training chaotic_mackey_glass_full_chaotic_run_0...
+2025-11-29 11:15:25,584 - chaotic_trainer - INFO - Optimizing parameters for mackey_glass system...
+2025-11-29 11:15:25,618 - chaotic_trainer - INFO - Setting up chaotic_mackey_glass_full_chaotic_run_0...
+2025-11-29 11:16:23,999 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:16:24,002 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 11:16:24,002 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:16:24,002 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 11:16:24,002 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-29 11:16:24,390 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g4102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285157376, 'available_memory': 513195540480, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - Systems: ['chua']
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - 
+============================================================
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - TRAINING: CHUA + FULL_CHAOTIC
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - Training chaotic_chua_full_chaotic_run_0...
+2025-11-29 11:16:24,391 - chaotic_trainer - INFO - Optimizing parameters for chua system...
+2025-11-29 11:16:24,436 - chaotic_trainer - INFO - Setting up chaotic_chua_full_chaotic_run_0...
+2025-11-29 11:18:57,261 - chaotic_trainer - ERROR - Failed to train chaotic_mackey_glass_full_chaotic_run_0: cannot access local variable 'sigma' where it is not associated with a value
+2025-11-29 11:18:57,275 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 423, in train_single_experiment
+    passed = run_full_diagnosis(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 457, in run_full_diagnosis
+    results['optimization'] = diagnose_optimization(model, optimizer, sample_input, sample_labels)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 338, in diagnose_optimization
+    logits = model(sample_input, labels=sample_labels)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 580, in forward
+    chaotic_trajectories = self.chaotic_embedding(chaotic_features)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 294, in forward
+    params = self._adapt_parameters(features)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 273, in _adapt_parameters
+    return torch.stack([sigma, rho, beta], dim=1)
+                        ^^^^^
+UnboundLocalError: cannot access local variable 'sigma' where it is not associated with a value
+
+2025-11-29 11:18:57,277 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-29 11:18:57,277 - chaotic_trainer - WARNING - No successful runs for mackey_glass + full_chaotic
+2025-11-29 11:18:57,277 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-29 11:18:57,278 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-29 11:18:57,334 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-29 11:18:57,334 - chaotic_trainer - INFO - Reports generated:
+2025-11-29 11:18:57,334 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-29 11:18:57,334 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-29 11:18:57,334 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-29 11:18:57,334 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:19:53,816 - chaotic_trainer - ERROR - Failed to train chaotic_chua_full_chaotic_run_0: cannot access local variable 'sigma' where it is not associated with a value
+2025-11-29 11:19:53,841 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 423, in train_single_experiment
+    passed = run_full_diagnosis(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 457, in run_full_diagnosis
+    results['optimization'] = diagnose_optimization(model, optimizer, sample_input, sample_labels)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 338, in diagnose_optimization
+    logits = model(sample_input, labels=sample_labels)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 580, in forward
+    chaotic_trajectories = self.chaotic_embedding(chaotic_features)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 294, in forward
+    params = self._adapt_parameters(features)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 273, in _adapt_parameters
+    return torch.stack([sigma, rho, beta], dim=1)
+                        ^^^^^
+UnboundLocalError: cannot access local variable 'sigma' where it is not associated with a value
+
+2025-11-29 11:19:53,844 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-29 11:19:53,844 - chaotic_trainer - WARNING - No successful runs for chua + full_chaotic
+2025-11-29 11:19:53,844 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-29 11:19:53,844 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-29 11:19:53,902 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-29 11:19:53,903 - chaotic_trainer - INFO - Reports generated:
+2025-11-29 11:19:53,903 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-29 11:19:53,903 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-29 11:19:53,903 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-29 11:19:53,903 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:22:02,297 - chaotic_trainer - WARNING - Diagnosis found issues! Check output above.
+2025-11-29 11:22:02,310 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-29 11:22:02,310 - chaotic_trainer - INFO - Model parameters: 499,289 (trainable: 499,289)
+2025-11-29 11:22:02,310 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-29 11:22:02,310 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-29 11:26:28,920 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:26:28,922 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 11:26:28,922 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:26:28,923 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 11:26:28,923 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-29 11:26:29,025 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g4102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285157376, 'available_memory': 513306791936, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 11:26:29,025 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-29 11:26:29,025 - chaotic_trainer - INFO - Systems: ['mackey_glass']
+2025-11-29 11:26:29,025 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-29 11:26:29,025 - chaotic_trainer - INFO - 
+============================================================
+2025-11-29 11:26:29,025 - chaotic_trainer - INFO - TRAINING: MACKEY_GLASS + FULL_CHAOTIC
+2025-11-29 11:26:29,026 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:26:29,026 - chaotic_trainer - INFO - Training chaotic_mackey_glass_full_chaotic_run_0...
+2025-11-29 11:26:29,026 - chaotic_trainer - INFO - Optimizing parameters for mackey_glass system...
+2025-11-29 11:26:29,040 - chaotic_trainer - INFO - Setting up chaotic_mackey_glass_full_chaotic_run_0...
+2025-11-29 11:26:29,095 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:26:29,098 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 11:26:29,098 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:26:29,098 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 11:26:29,098 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-29 11:26:29,202 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g2101.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283572224, 'available_memory': 508357259264, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 11:26:29,202 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-29 11:26:29,202 - chaotic_trainer - INFO - Systems: ['chua']
+2025-11-29 11:26:29,202 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-29 11:26:29,202 - chaotic_trainer - INFO - 
+============================================================
+2025-11-29 11:26:29,202 - chaotic_trainer - INFO - TRAINING: CHUA + FULL_CHAOTIC
+2025-11-29 11:26:29,202 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:26:29,203 - chaotic_trainer - INFO - Training chaotic_chua_full_chaotic_run_0...
+2025-11-29 11:26:29,203 - chaotic_trainer - INFO - Optimizing parameters for chua system...
+2025-11-29 11:26:29,231 - chaotic_trainer - INFO - Setting up chaotic_chua_full_chaotic_run_0...
+2025-11-29 11:29:45,951 - chaotic_trainer - ERROR - Failed to train chaotic_mackey_glass_full_chaotic_run_0: Unsupported system type: mackey_glass
+2025-11-29 11:29:45,956 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 423, in train_single_experiment
+    passed = run_full_diagnosis(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 457, in run_full_diagnosis
+    results['optimization'] = diagnose_optimization(model, optimizer, sample_input, sample_labels)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 338, in diagnose_optimization
+    logits = model(sample_input, labels=sample_labels)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 580, in forward
+    chaotic_trajectories = self.chaotic_embedding(chaotic_features)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 318, in forward
+    trajectory = self._generate_trajectory(initial_states, couplings, params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 244, in _generate_trajectory
+    state = self._runge_kutta_4(state, couplings, params)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 199, in _runge_kutta_4
+    raise ValueError(f"Unsupported system type: {self.system_type}")
+ValueError: Unsupported system type: mackey_glass
+
+2025-11-29 11:29:45,959 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-29 11:29:45,959 - chaotic_trainer - WARNING - No successful runs for mackey_glass + full_chaotic
+2025-11-29 11:29:45,959 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-29 11:29:45,959 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-29 11:29:46,021 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-29 11:29:46,021 - chaotic_trainer - INFO - Reports generated:
+2025-11-29 11:29:46,021 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-29 11:29:46,021 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-29 11:29:46,021 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-29 11:29:46,021 - chaotic_trainer - INFO - ============================================================
+2025-11-29 11:29:46,636 - chaotic_trainer - ERROR - Failed to train chaotic_chua_full_chaotic_run_0: Unsupported system type: chua
+2025-11-29 11:29:46,643 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 423, in train_single_experiment
+    passed = run_full_diagnosis(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 457, in run_full_diagnosis
+    results['optimization'] = diagnose_optimization(model, optimizer, sample_input, sample_labels)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/diagnose_chaotic_training.py", line 338, in diagnose_optimization
+    logits = model(sample_input, labels=sample_labels)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 580, in forward
+    chaotic_trajectories = self.chaotic_embedding(chaotic_features)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 318, in forward
+    trajectory = self._generate_trajectory(initial_states, couplings, params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 244, in _generate_trajectory
+    state = self._runge_kutta_4(state, couplings, params)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 199, in _runge_kutta_4
+    raise ValueError(f"Unsupported system type: {self.system_type}")
+ValueError: Unsupported system type: chua
+
+2025-11-29 11:29:46,646 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-29 11:29:46,646 - chaotic_trainer - WARNING - No successful runs for chua + full_chaotic
+2025-11-29 11:29:46,646 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-29 11:29:46,646 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-29 11:29:46,711 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-29 11:29:46,711 - chaotic_trainer - INFO - Reports generated:
+2025-11-29 11:29:46,711 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-29 11:29:46,711 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-29 11:29:46,712 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-29 11:29:46,712 - chaotic_trainer - INFO - ============================================================
+2025-11-29 12:38:11,602 - chaotic_trainer - INFO - ============================================================
+2025-11-29 12:38:11,614 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 12:38:11,614 - chaotic_trainer - INFO - ============================================================
+2025-11-29 12:38:11,615 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 12:38:11,615 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-29 12:38:11,654 - chaotic_trainer - INFO - ============================================================
+2025-11-29 12:38:11,656 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-11-29 12:38:11,656 - chaotic_trainer - INFO - ============================================================
+2025-11-29 12:38:11,656 - chaotic_trainer - INFO - Output directory: outputs/chaotic
+2025-11-29 12:38:11,656 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100
+}
+2025-11-29 12:38:12,128 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g2101.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540283572224, 'available_memory': 508043325440, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 12:38:12,128 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-29 12:38:12,128 - chaotic_trainer - INFO - Systems: ['mackey_glass']
+2025-11-29 12:38:12,128 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g4102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285157376, 'available_memory': 512580890624, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-29 12:38:12,128 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-29 12:38:12,129 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-11-29 12:38:12,130 - chaotic_trainer - INFO - 
+============================================================
+2025-11-29 12:38:12,150 - chaotic_trainer - INFO - Systems: ['chua']
+2025-11-29 12:38:12,152 - chaotic_trainer - INFO - TRAINING: MACKEY_GLASS + FULL_CHAOTIC
+2025-11-29 12:38:12,153 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-11-29 12:38:12,155 - chaotic_trainer - INFO - ============================================================
+2025-11-29 12:38:12,156 - chaotic_trainer - INFO - 
+============================================================
+2025-11-29 12:38:12,157 - chaotic_trainer - INFO - Training chaotic_mackey_glass_full_chaotic_run_0...
+2025-11-29 12:38:12,159 - chaotic_trainer - INFO - TRAINING: CHUA + FULL_CHAOTIC
+2025-11-29 12:38:12,160 - chaotic_trainer - INFO - Optimizing parameters for mackey_glass system...
+2025-11-29 12:38:12,161 - chaotic_trainer - INFO - ============================================================
+2025-11-29 12:38:12,164 - chaotic_trainer - INFO - Training chaotic_chua_full_chaotic_run_0...
+2025-11-29 12:38:12,165 - chaotic_trainer - INFO - Optimizing parameters for chua system...
+2025-11-29 12:38:12,252 - chaotic_trainer - INFO - Setting up chaotic_mackey_glass_full_chaotic_run_0...
+2025-11-29 12:38:12,257 - chaotic_trainer - INFO - Setting up chaotic_chua_full_chaotic_run_0...
+2025-11-29 12:46:19,330 - chaotic_trainer - WARNING - Diagnosis found issues! Check output above.
+2025-11-29 12:46:19,351 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-29 12:46:19,351 - chaotic_trainer - INFO - Model parameters: 499,289 (trainable: 499,289)
+2025-11-29 12:46:19,351 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-29 12:46:19,352 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-29 12:46:32,039 - chaotic_trainer - WARNING - Diagnosis found issues! Check output above.
+2025-11-29 12:46:32,088 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2025-11-29 12:46:32,089 - chaotic_trainer - INFO - Model parameters: 499,289 (trainable: 499,289)
+2025-11-29 12:46:32,089 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2025-11-29 12:46:32,089 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2025-11-29 16:58:54,897 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2025-11-29 17:03:02,247 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-29 17:06:57,565 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.8305, Loss: 0.4724, Time: 100796.4s
+2025-11-29 17:06:57,662 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-29 17:06:57,662 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.8305 ± 0.0000
+2025-11-29 17:06:57,662 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-29 17:06:57,663 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-29 17:06:59,805 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-29 17:06:59,806 - chaotic_trainer - INFO - Reports generated:
+2025-11-29 17:06:59,806 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-29 17:06:59,806 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-29 17:06:59,806 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-29 17:06:59,806 - chaotic_trainer - INFO - ============================================================
+2025-11-30 14:41:36,163 - chaotic_trainer - INFO - Evaluating chaotic_rossler_full_chaotic_run_0...
+2025-11-30 14:45:24,536 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-30 14:48:59,714 - chaotic_trainer - INFO - Completed chaotic_rossler_full_chaotic_run_0: Accuracy: 0.7797, Loss: 0.6451, Time: 98862.1s
+2025-11-30 14:48:59,796 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-30 14:48:59,797 - chaotic_trainer - INFO - rossler + full_chaotic Summary: 0.7797 ± 0.0000
+2025-11-30 14:48:59,797 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-30 14:48:59,798 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-30 14:49:01,809 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-30 14:49:01,809 - chaotic_trainer - INFO - Reports generated:
+2025-11-30 14:49:01,809 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-30 14:49:01,809 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-30 14:49:01,809 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-30 14:49:01,809 - chaotic_trainer - INFO - ============================================================
+2025-11-30 16:09:53,433 - chaotic_trainer - INFO - Evaluating chaotic_chua_full_chaotic_run_0...
+2025-11-30 16:13:41,642 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-30 16:17:17,716 - chaotic_trainer - INFO - Completed chaotic_chua_full_chaotic_run_0: Accuracy: 0.7034, Loss: 0.9532, Time: 99101.2s
+2025-11-30 16:17:17,798 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-30 16:17:17,798 - chaotic_trainer - INFO - chua + full_chaotic Summary: 0.7034 ± 0.0000
+2025-11-30 16:17:17,798 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-30 16:17:17,799 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-30 16:17:19,769 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-30 16:17:19,769 - chaotic_trainer - INFO - Reports generated:
+2025-11-30 16:17:19,769 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-30 16:17:19,769 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-30 16:17:19,770 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-30 16:17:19,770 - chaotic_trainer - INFO - ============================================================
+2025-11-30 16:50:27,917 - chaotic_trainer - INFO - Evaluating chaotic_mackey_glass_full_chaotic_run_0...
+2025-11-30 16:54:22,529 - chaotic_trainer - INFO - Running chaotic analysis...
+2025-11-30 16:58:05,004 - chaotic_trainer - INFO - Completed chaotic_mackey_glass_full_chaotic_run_0: Accuracy: 0.7881, Loss: 0.9162, Time: 101535.7s
+2025-11-30 16:58:05,088 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-11-30 16:58:05,088 - chaotic_trainer - INFO - mackey_glass + full_chaotic Summary: 0.7881 ± 0.0000
+2025-11-30 16:58:05,088 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-11-30 16:58:05,090 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-11-30 16:58:07,262 - chaotic_trainer - INFO - Visualizations saved to: outputs/chaotic/visualizations
+2025-11-30 16:58:07,262 - chaotic_trainer - INFO - Reports generated:
+2025-11-30 16:58:07,262 - chaotic_trainer - INFO -   Text report: outputs/chaotic/chaotic_training_report.txt
+2025-11-30 16:58:07,262 - chaotic_trainer - INFO -   JSON report: outputs/chaotic/chaotic_training_results.json
+2025-11-30 16:58:07,263 - chaotic_trainer - INFO - Chaotic training completed.
+2025-11-30 16:58:07,263 - chaotic_trainer - INFO - ============================================================

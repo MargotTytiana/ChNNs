@@ -1,0 +1,12 @@
+2025-11-30 12:37:00,899 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 12:37:00,900 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 12:37:00,900 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 12:37:00,900 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 13:43:17,578 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system

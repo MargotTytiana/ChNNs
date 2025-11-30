@@ -1,0 +1,171 @@
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:CHAOTIC NEURAL NETWORKS TRAINING
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:Output directory: outputs/chaotic
+INFO:chaotic_trainer:Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.01,
+  "weight_decay": 1e-05,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 20
+  },
+  "epochs": 100
+}
+INFO:chaotic_trainer:System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 519756185600, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+INFO:chaotic_trainer:Training 1 systems × 1 types × 1 runs...
+INFO:chaotic_trainer:Systems: ['lorenz']
+INFO:chaotic_trainer:Model types: ['full_chaotic']
+INFO:chaotic_trainer:
+============================================================
+INFO:chaotic_trainer:TRAINING: LORENZ + FULL_CHAOTIC
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:Training chaotic_lorenz_full_chaotic_run_0...
+INFO:chaotic_trainer:Optimizing parameters for lorenz system...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Device: cuda
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Output directory: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Initialized chaotic network experiment with lorenz system
+INFO:chaotic_trainer:Setting up chaotic_lorenz_full_chaotic_run_0...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Setting up experiment components...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Creating dataloaders...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Detected 26 speakers in dataset
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Dataloaders created:
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  Train: 14 batches
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  Val: 3 batches
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  Test: 4 batches
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Creating model...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Using actual num_speakers from dataset: 26
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Total parameters: 244,425
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Trainable parameters: 244,425
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Creating optimizer...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Optimizer: AdamW
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Creating scheduler...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:T_max not specified for CosineAnnealingLR, using num_epochs: 100
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Scheduler: CosineAnnealingLR
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Creating criterion...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Criterion: CrossEntropyLoss
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Configuration saved to: outputs/chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/config.json
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Experiment setup completed
+INFO:chaotic_trainer:🚀 No checkpoint specified, starting from scratch
+INFO:chaotic_trainer:Model parameters: 244,425 (trainable: 244,425)
+INFO:chaotic_trainer:Training with chaotic dynamics monitoring...
+INFO:chaotic_trainer:Starting training from epoch 0 for 100 more epochs...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Starting training for 100 epochs
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 0: [0/472 (0.0%)]	Loss: 4.870121
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 0: Train Loss: nan, Train Acc: 0.0424, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 0
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 1: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 1: Train Loss: nan, Train Acc: 0.0469, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 2: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 2: Train Loss: nan, Train Acc: 0.0469, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 3: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 3: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 4: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 4: Train Loss: nan, Train Acc: 0.0424, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 5: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 5: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 6: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 6: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 7: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 7: Train Loss: nan, Train Acc: 0.0402, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 8: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 8: Train Loss: nan, Train Acc: 0.0402, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 9: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 9: Train Loss: nan, Train Acc: 0.0469, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 10: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 10: Train Loss: nan, Train Acc: 0.0469, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 11: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 11: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 12: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 12: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 13: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 13: Train Loss: nan, Train Acc: 0.0424, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 14: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 14: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 15: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 15: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 16: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 16: Train Loss: nan, Train Acc: 0.0469, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 17: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 17: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 18: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 18: Train Loss: nan, Train Acc: 0.0446, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 19: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 19: Train Loss: nan, Train Acc: 0.0402, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 20: [0/472 (0.0%)]	Loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 20: Train Loss: nan, Train Acc: 0.0424, Val Loss: nan, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Early stopping triggered at epoch 20
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Running final test evaluation...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Test Results:
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  loss: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  accuracy: 0.0424
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  avg_confidence: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  embedding_diversity: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  embedding_norm_mean: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  embedding_norm_std: nan
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Training completed
+INFO:chaotic_trainer:Evaluating chaotic_lorenz_full_chaotic_run_0...
+INFO:chaotic_trainer:Running chaotic analysis...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Running comprehensive chaotic network analysis...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Analyzing chaotic features and dynamics...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Chaotic analysis completed
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Creating chaotic dynamics visualizations...
+WARNING:experiment_chaotic_lorenz_full_chaotic_run_0:Embedding plotting failed: Input X contains NaN.
+TSNE does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Chaotic network analysis completed
+INFO:chaotic_trainer:Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.0424, Loss: nan, Time: 26051.4s
+INFO:chaotic_trainer:Progress: 1/1 (100.0%)
+INFO:chaotic_trainer:lorenz + full_chaotic Summary: 0.0424 ± 0.0000
+INFO:chaotic_trainer:Analyzing chaotic training results...
+INFO:chaotic_trainer:Generating comprehensive chaotic training report...
+INFO:chaotic_trainer:Visualizations saved to: outputs/chaotic/visualizations
+INFO:chaotic_trainer:Reports generated:
+INFO:chaotic_trainer:  Text report: outputs/chaotic/chaotic_training_report.txt
+INFO:chaotic_trainer:  JSON report: outputs/chaotic/chaotic_training_results.json
+INFO:chaotic_trainer:Chaotic training completed.
+INFO:chaotic_trainer:============================================================

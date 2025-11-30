@@ -485,7 +485,7 @@ class BaselineExperiment(BaseExperiment):
                 self.logger.error(f"❌ FALL LABEL RANGE VERIFICATION FAILED: {e}")
                 import traceback
                 traceback.print_exc()
-                self.logger.info("USING NUMBER "260" instead")
+                self.logger.info("USING NUMBER 260 instead")
                 self.config['num_speakers'] = 260
             
         else:

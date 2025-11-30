@@ -6503,3 +6503,764 @@ Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
 2025-10-01 13:28:00,062 - experiment_baseline_mel_mlp_run_0 - INFO - Training completed
 2025-10-01 13:28:02,668 - experiment_baseline_mel_mlp_run_0 - INFO - Running baseline analysis...
 2025-10-01 13:28:02,670 - experiment_baseline_mel_mlp_run_0 - INFO - Baseline analysis completed
+2025-11-30 12:40:16,924 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-11-30 12:40:16,961 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-11-30 12:40:16,961 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-11-30 12:40:16,961 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 12:40:16,961 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-11-30 12:40:18,363 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-11-30 12:40:18,364 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2025-11-30 12:40:20,410 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 12:40:20,410 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-11-30 12:40:20,410 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-11-30 12:40:20,410 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-11-30 12:43:48,224 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 12:43:48,972 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2025-11-30 12:43:49,622 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-98
+2025-11-30 12:44:22,250 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2025-11-30 12:44:31,158 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2025-11-30 12:44:39,727 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2025-11-30 12:44:49,675 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 12:44:49,675 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2025-11-30 12:44:49,675 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2025-11-30 12:44:49,676 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2025-11-30 12:44:49,676 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2025-11-30 12:44:49,676 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2025-11-30 12:44:49,676 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 12:44:49,676 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2025-11-30 12:44:49,676 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 12:44:49,676 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2025-11-30 12:44:54,770 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-11-30 12:44:54,770 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 65 batches
+2025-11-30 12:44:54,770 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 13 batches
+2025-11-30 12:44:54,770 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 16 batches
+2025-11-30 12:44:57,411 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-11-30 12:44:57,412 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-11-30 12:44:57,412 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-30 12:44:57,477 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-11-30 12:44:57,477 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-11-30 12:44:57,477 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-11-30 12:44:57,535 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2025-11-30 12:44:57,535 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 12:44:57,535 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2025-11-30 12:44:57,535 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2025-11-30 12:44:57,535 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 12:44:57,536 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2025-11-30 12:44:57,541 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2025-11-30 12:44:57,541 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+2025-11-30 12:52:27,543 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-11-30 12:52:27,543 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-11-30 12:52:27,543 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-11-30 12:52:27,543 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 12:52:27,543 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-11-30 12:52:28,124 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-11-30 12:52:28,125 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2025-11-30 12:52:28,973 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 12:52:28,973 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-11-30 12:52:28,974 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-11-30 12:52:28,974 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-11-30 12:52:36,904 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 12:52:36,925 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2025-11-30 12:52:36,964 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-88
+2025-11-30 12:52:37,998 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2025-11-30 12:52:38,896 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 101 batch, current label range: 0-99
+2025-11-30 12:52:39,654 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2025-11-30 12:52:40,116 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([16, 48000])
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([16, 48000])，but baseline type is mel_mlp
+2025-11-30 12:52:40,682 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 12:52:40,683 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2025-11-30 12:52:45,812 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-11-30 12:52:45,813 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 131 batches
+2025-11-30 12:52:45,813 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 25 batches
+2025-11-30 12:52:45,813 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 32 batches
+2025-11-30 12:52:46,970 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-11-30 12:52:46,970 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-11-30 12:52:46,970 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-30 12:52:47,014 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-11-30 12:52:47,014 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-11-30 12:52:47,015 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-11-30 12:52:47,036 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2025-11-30 12:52:47,036 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 12:52:47,036 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2025-11-30 12:52:47,036 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2025-11-30 12:52:47,036 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([16, 48000])
+2025-11-30 12:52:47,036 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([16])
+2025-11-30 12:52:47,039 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2025-11-30 12:52:47,039 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+2025-11-30 12:55:57,133 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-11-30 12:55:57,133 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-11-30 12:55:57,133 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-11-30 12:55:57,133 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 12:55:57,133 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-11-30 12:55:57,735 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-11-30 12:55:57,736 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2025-11-30 12:55:58,356 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 12:55:58,356 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-11-30 12:55:58,356 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-11-30 12:55:58,356 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-11-30 12:56:03,467 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 12:56:03,515 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2025-11-30 12:56:03,571 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-98
+2025-11-30 12:56:05,220 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2025-11-30 12:56:05,634 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2025-11-30 12:56:06,008 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2025-11-30 12:56:06,476 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 12:56:06,476 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2025-11-30 12:56:06,476 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2025-11-30 12:56:06,477 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2025-11-30 12:56:06,477 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2025-11-30 12:56:06,477 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2025-11-30 12:56:06,477 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 12:56:06,477 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2025-11-30 12:56:06,477 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 12:56:06,477 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2025-11-30 12:56:11,601 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-11-30 12:56:11,601 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 65 batches
+2025-11-30 12:56:11,601 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 13 batches
+2025-11-30 12:56:11,601 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 16 batches
+2025-11-30 12:56:12,757 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-11-30 12:56:12,757 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-11-30 12:56:12,758 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-30 12:56:12,803 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-11-30 12:56:12,803 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-11-30 12:56:12,804 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-11-30 12:56:12,842 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2025-11-30 12:56:12,843 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 12:56:12,843 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2025-11-30 12:56:12,843 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2025-11-30 12:56:12,843 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 12:56:12,843 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2025-11-30 12:56:12,846 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2025-11-30 12:56:12,846 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: TraditionalMLPBaseline.forward() takes 2 positional arguments but 3 were given
+2025-11-30 13:01:15,020 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-11-30 13:01:15,020 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-11-30 13:01:15,020 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-11-30 13:01:15,020 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 13:01:15,020 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-11-30 13:01:15,611 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-11-30 13:01:15,611 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2025-11-30 13:01:16,232 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 13:01:16,233 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-11-30 13:01:16,233 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-11-30 13:01:16,233 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-11-30 13:01:21,431 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 13:01:21,474 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2025-11-30 13:01:21,513 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-98
+2025-11-30 13:01:23,001 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2025-11-30 13:01:23,403 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2025-11-30 13:01:23,755 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 13:01:24,189 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2025-11-30 13:01:29,352 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-11-30 13:01:29,353 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 65 batches
+2025-11-30 13:01:29,353 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 13 batches
+2025-11-30 13:01:29,353 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 16 batches
+2025-11-30 13:01:30,495 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-11-30 13:01:30,496 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-11-30 13:01:30,496 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-30 13:01:30,541 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-11-30 13:01:30,541 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-11-30 13:01:30,541 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-11-30 13:01:30,581 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2025-11-30 13:01:30,581 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 13:01:30,581 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2025-11-30 13:01:30,581 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2025-11-30 13:01:30,581 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 13:01:30,581 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2025-11-30 13:01:30,584 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2025-11-30 13:01:30,584 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: TraditionalMLPBaseline.forward() takes 2 positional arguments but 3 were given
+2025-11-30 13:13:34,252 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-11-30 13:13:34,252 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-11-30 13:13:34,252 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-11-30 13:13:34,252 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 13:13:34,252 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-11-30 13:13:34,830 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-11-30 13:13:34,830 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2025-11-30 13:13:35,462 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 13:13:35,463 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-11-30 13:13:35,463 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-11-30 13:13:35,463 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-11-30 13:14:07,347 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 13:14:07,475 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2025-11-30 13:14:07,552 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-98
+2025-11-30 13:14:12,041 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2025-11-30 13:14:12,554 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2025-11-30 13:14:12,906 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 13:14:13,371 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2025-11-30 13:14:18,411 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-11-30 13:14:18,411 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 65 batches
+2025-11-30 13:14:18,411 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 13 batches
+2025-11-30 13:14:18,411 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 16 batches
+2025-11-30 13:14:19,560 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-11-30 13:14:19,560 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-11-30 13:14:19,560 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-30 13:14:19,618 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-11-30 13:14:19,618 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-11-30 13:14:19,619 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-11-30 13:14:19,658 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2025-11-30 13:14:19,658 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 13:14:19,658 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2025-11-30 13:14:19,658 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2025-11-30 13:14:19,658 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 13:14:19,658 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2025-11-30 13:14:19,661 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2025-11-30 13:14:19,662 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+2025-11-30 13:26:24,880 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-11-30 13:26:24,880 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-11-30 13:26:24,880 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-11-30 13:26:24,880 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 13:26:24,880 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-11-30 13:26:25,472 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-11-30 13:26:25,472 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2025-11-30 13:26:26,096 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 13:26:26,096 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-11-30 13:26:26,096 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-11-30 13:26:26,096 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-11-30 13:27:04,185 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 13:27:04,305 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2025-11-30 13:27:04,633 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-98
+2025-11-30 13:27:08,222 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2025-11-30 13:27:08,809 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2025-11-30 13:27:09,161 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2025-11-30 13:27:09,605 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 13:27:09,606 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2025-11-30 13:27:14,756 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-11-30 13:27:14,756 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 65 batches
+2025-11-30 13:27:14,756 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 13 batches
+2025-11-30 13:27:14,756 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 16 batches
+2025-11-30 13:27:15,904 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-11-30 13:27:15,904 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-11-30 13:27:15,904 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-30 13:27:15,949 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-11-30 13:27:15,949 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-11-30 13:27:15,949 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-11-30 13:27:15,988 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2025-11-30 13:27:15,988 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 13:27:15,988 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2025-11-30 13:27:15,988 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2025-11-30 13:27:15,988 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 13:27:15,989 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2025-11-30 13:27:15,991 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2025-11-30 13:27:17,532 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+
+2025-11-30 13:27:17,796 - experiment_baseline_mel_mlp_run_0 - ERROR - Training failed with error: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+2025-11-30 13:32:42,302 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2025-11-30 13:32:42,302 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2025-11-30 13:32:42,302 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: outputs/baselines/experiments/baseline_mel_mlp_run_0
+2025-11-30 13:32:42,302 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2025-11-30 13:32:42,302 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2025-11-30 13:32:42,877 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2025-11-30 13:32:42,877 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2025-11-30 13:32:43,551 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2025-11-30 13:32:43,551 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2025-11-30 13:32:43,552 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2025-11-30 13:32:43,552 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2025-11-30 13:32:48,726 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2025-11-30 13:32:48,769 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2025-11-30 13:32:48,811 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-98
+2025-11-30 13:32:50,622 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2025-11-30 13:32:51,354 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2025-11-30 13:32:51,806 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2025-11-30 13:32:52,260 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2025-11-30 13:32:52,261 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2025-11-30 13:32:52,261 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2025-11-30 13:32:57,429 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2025-11-30 13:32:57,429 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 65 batches
+2025-11-30 13:32:57,429 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 13 batches
+2025-11-30 13:32:57,430 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 16 batches
+2025-11-30 13:32:58,584 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2025-11-30 13:32:58,584 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2025-11-30 13:32:58,584 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2025-11-30 13:32:58,631 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: outputs/baselines/experiments/baseline_mel_mlp_run_0/config.json
+2025-11-30 13:32:58,631 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2025-11-30 13:32:58,631 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2025-11-30 13:32:58,670 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2025-11-30 13:32:58,670 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 13:32:58,670 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2025-11-30 13:32:58,670 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2025-11-30 13:32:58,670 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 13:32:58,671 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2025-11-30 13:32:58,673 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2025-11-30 13:32:59,117 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+
+2025-11-30 13:32:59,382 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [0/2100 (0.0%)]	Loss: 4.661736
+2025-11-30 13:33:12,165 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 0: Train Loss: 4.4487, Train Acc: 0.0428, Val Loss: 4.0185, Val Acc: 0.2125
+2025-11-30 13:33:12,520 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 0
+2025-11-30 13:33:12,707 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [0/2100 (0.0%)]	Loss: 4.046251
+2025-11-30 13:33:24,447 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 1: Train Loss: 3.8901, Train Acc: 0.1596, Val Loss: 3.5082, Val Acc: 0.3950
+2025-11-30 13:33:24,817 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 1
+2025-11-30 13:33:24,976 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [0/2100 (0.0%)]	Loss: 3.720972
+2025-11-30 13:33:38,617 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 2: Train Loss: 3.4543, Train Acc: 0.2433, Val Loss: 3.0318, Val Acc: 0.5050
+2025-11-30 13:33:38,991 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 2
+2025-11-30 13:33:39,151 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [0/2100 (0.0%)]	Loss: 2.986286
+2025-11-30 13:33:51,028 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 3: Train Loss: 3.0390, Train Acc: 0.3399, Val Loss: 2.6421, Val Acc: 0.5950
+2025-11-30 13:33:51,409 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 3
+2025-11-30 13:33:51,579 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [0/2100 (0.0%)]	Loss: 2.775323
+2025-11-30 13:34:03,517 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 4: Train Loss: 2.6914, Train Acc: 0.4067, Val Loss: 2.2480, Val Acc: 0.6850
+2025-11-30 13:34:03,899 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 4
+2025-11-30 13:34:04,064 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [0/2100 (0.0%)]	Loss: 2.661337
+2025-11-30 13:34:15,827 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 5: Train Loss: 2.4168, Train Acc: 0.4721, Val Loss: 1.9598, Val Acc: 0.7300
+2025-11-30 13:34:16,208 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 5
+2025-11-30 13:34:16,369 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [0/2100 (0.0%)]	Loss: 2.223176
+2025-11-30 13:34:28,188 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 6: Train Loss: 2.1644, Train Acc: 0.5221, Val Loss: 1.6862, Val Acc: 0.7450
+2025-11-30 13:34:28,563 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 6
+2025-11-30 13:34:28,738 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 7: [0/2100 (0.0%)]	Loss: 1.863443
+2025-11-30 13:34:40,575 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 7: Train Loss: 1.9558, Train Acc: 0.5543, Val Loss: 1.4821, Val Acc: 0.7950
+2025-11-30 13:34:40,934 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 7
+2025-11-30 13:34:41,097 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 8: [0/2100 (0.0%)]	Loss: 1.836374
+2025-11-30 13:34:52,793 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 8: Train Loss: 1.7968, Train Acc: 0.5990, Val Loss: 1.2492, Val Acc: 0.8350
+2025-11-30 13:34:53,170 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 8
+2025-11-30 13:34:53,333 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 9: [0/2100 (0.0%)]	Loss: 1.718053
+2025-11-30 13:35:05,047 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 9: Train Loss: 1.6344, Train Acc: 0.6144, Val Loss: 1.1333, Val Acc: 0.8500
+2025-11-30 13:35:05,440 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 9
+2025-11-30 13:35:05,617 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 10: [0/2100 (0.0%)]	Loss: 1.604238
+2025-11-30 13:35:17,521 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 10: Train Loss: 1.5539, Train Acc: 0.6274, Val Loss: 0.9858, Val Acc: 0.8775
+2025-11-30 13:35:17,896 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 10
+2025-11-30 13:35:18,097 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 11: [0/2100 (0.0%)]	Loss: 1.468157
+2025-11-30 13:35:29,916 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 11: Train Loss: 1.4452, Train Acc: 0.6562, Val Loss: 0.8628, Val Acc: 0.8950
+2025-11-30 13:35:30,299 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 11
+2025-11-30 13:35:30,464 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 12: [0/2100 (0.0%)]	Loss: 1.587490
+2025-11-30 13:35:42,364 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 12: Train Loss: 1.3512, Train Acc: 0.6793, Val Loss: 0.8381, Val Acc: 0.8600
+2025-11-30 13:35:42,876 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 13: [0/2100 (0.0%)]	Loss: 1.163450
+2025-11-30 13:35:54,644 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 13: Train Loss: 1.2669, Train Acc: 0.6875, Val Loss: 0.7161, Val Acc: 0.9050
+2025-11-30 13:35:55,020 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 13
+2025-11-30 13:35:55,187 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 14: [0/2100 (0.0%)]	Loss: 1.092848
+2025-11-30 13:36:06,921 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 14: Train Loss: 1.1895, Train Acc: 0.7159, Val Loss: 0.6743, Val Acc: 0.9050
+2025-11-30 13:36:07,413 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 15: [0/2100 (0.0%)]	Loss: 1.012440
+2025-11-30 13:36:19,208 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 15: Train Loss: 1.1165, Train Acc: 0.7139, Val Loss: 0.6115, Val Acc: 0.9150
+2025-11-30 13:36:19,586 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 15
+2025-11-30 13:36:19,753 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 16: [0/2100 (0.0%)]	Loss: 0.883561
+2025-11-30 13:36:31,492 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 16: Train Loss: 1.0731, Train Acc: 0.7293, Val Loss: 0.5793, Val Acc: 0.9100
+2025-11-30 13:36:32,001 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 17: [0/2100 (0.0%)]	Loss: 1.047539
+2025-11-30 13:36:43,824 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 17: Train Loss: 1.0227, Train Acc: 0.7332, Val Loss: 0.5139, Val Acc: 0.9200
+2025-11-30 13:36:44,210 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 17
+2025-11-30 13:36:44,379 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 18: [0/2100 (0.0%)]	Loss: 1.087402
+2025-11-30 13:36:56,115 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 18: Train Loss: 0.9780, Train Acc: 0.7471, Val Loss: 0.4791, Val Acc: 0.9175
+2025-11-30 13:36:56,613 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 19: [0/2100 (0.0%)]	Loss: 0.997708
+2025-11-30 13:37:08,437 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 19: Train Loss: 0.9132, Train Acc: 0.7562, Val Loss: 0.4468, Val Acc: 0.9200
+2025-11-30 13:37:08,943 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 20: [0/2100 (0.0%)]	Loss: 0.762785
+2025-11-30 13:37:20,911 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 20: Train Loss: 0.9248, Train Acc: 0.7538, Val Loss: 0.4249, Val Acc: 0.9275
+2025-11-30 13:37:21,317 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 20
+2025-11-30 13:37:21,538 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 21: [0/2100 (0.0%)]	Loss: 0.737418
+2025-11-30 13:37:33,387 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 21: Train Loss: 0.8888, Train Acc: 0.7649, Val Loss: 0.4165, Val Acc: 0.9175
+2025-11-30 13:37:33,925 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 22: [0/2100 (0.0%)]	Loss: 0.847152
+2025-11-30 13:37:45,705 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 22: Train Loss: 0.8571, Train Acc: 0.7702, Val Loss: 0.4035, Val Acc: 0.9375
+2025-11-30 13:37:46,097 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 22
+2025-11-30 13:37:46,278 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 23: [0/2100 (0.0%)]	Loss: 0.832586
+2025-11-30 13:37:58,145 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 23: Train Loss: 0.8418, Train Acc: 0.7822, Val Loss: 0.3745, Val Acc: 0.9300
+2025-11-30 13:37:58,648 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 24: [0/2100 (0.0%)]	Loss: 0.775700
+2025-11-30 13:38:10,514 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 24: Train Loss: 0.8072, Train Acc: 0.7851, Val Loss: 0.3574, Val Acc: 0.9425
+2025-11-30 13:38:10,914 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 24
+2025-11-30 13:38:11,092 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 25: [0/2100 (0.0%)]	Loss: 0.644535
+2025-11-30 13:38:23,041 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 25: Train Loss: 0.7953, Train Acc: 0.7779, Val Loss: 0.3461, Val Acc: 0.9375
+2025-11-30 13:38:23,598 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 26: [0/2100 (0.0%)]	Loss: 0.545391
+2025-11-30 13:38:35,342 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 26: Train Loss: 0.7593, Train Acc: 0.8000, Val Loss: 0.3253, Val Acc: 0.9300
+2025-11-30 13:38:35,832 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 27: [0/2100 (0.0%)]	Loss: 0.558464
+2025-11-30 13:38:47,579 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 27: Train Loss: 0.7518, Train Acc: 0.7865, Val Loss: 0.3192, Val Acc: 0.9400
+2025-11-30 13:38:48,071 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 28: [0/2100 (0.0%)]	Loss: 0.607589
+2025-11-30 13:38:59,976 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 28: Train Loss: 0.7228, Train Acc: 0.7962, Val Loss: 0.3130, Val Acc: 0.9425
+2025-11-30 13:39:00,473 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 29: [0/2100 (0.0%)]	Loss: 0.582451
+2025-11-30 13:39:12,326 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 29: Train Loss: 0.7320, Train Acc: 0.7942, Val Loss: 0.3137, Val Acc: 0.9400
+2025-11-30 13:39:12,848 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 30: [0/2100 (0.0%)]	Loss: 0.701511
+2025-11-30 13:39:24,588 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 30: Train Loss: 0.6442, Train Acc: 0.8255, Val Loss: 0.2770, Val Acc: 0.9450
+2025-11-30 13:39:24,991 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 30
+2025-11-30 13:39:25,220 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 31: [0/2100 (0.0%)]	Loss: 0.517132
+2025-11-30 13:39:36,949 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 31: Train Loss: 0.6066, Train Acc: 0.8327, Val Loss: 0.2532, Val Acc: 0.9500
+2025-11-30 13:39:37,352 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 31
+2025-11-30 13:39:37,528 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 32: [0/2100 (0.0%)]	Loss: 0.430923
+2025-11-30 13:39:49,260 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 32: Train Loss: 0.5795, Train Acc: 0.8466, Val Loss: 0.2315, Val Acc: 0.9600
+2025-11-30 13:39:49,669 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 32
+2025-11-30 13:39:49,860 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 33: [0/2100 (0.0%)]	Loss: 0.607281
+2025-11-30 13:40:01,625 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 33: Train Loss: 0.5946, Train Acc: 0.8317, Val Loss: 0.2284, Val Acc: 0.9675
+2025-11-30 13:40:02,029 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 33
+2025-11-30 13:40:02,207 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 34: [0/2100 (0.0%)]	Loss: 0.563225
+2025-11-30 13:40:13,946 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 34: Train Loss: 0.5612, Train Acc: 0.8500, Val Loss: 0.2282, Val Acc: 0.9600
+2025-11-30 13:40:14,441 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 35: [0/2100 (0.0%)]	Loss: 0.496734
+2025-11-30 13:40:26,180 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 35: Train Loss: 0.5687, Train Acc: 0.8413, Val Loss: 0.2290, Val Acc: 0.9650
+2025-11-30 13:40:26,707 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 36: [0/2100 (0.0%)]	Loss: 0.442285
+2025-11-30 13:40:38,402 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 36: Train Loss: 0.5687, Train Acc: 0.8399, Val Loss: 0.2161, Val Acc: 0.9625
+2025-11-30 13:40:38,894 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 37: [0/2100 (0.0%)]	Loss: 0.472003
+2025-11-30 13:40:50,648 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 37: Train Loss: 0.5276, Train Acc: 0.8620, Val Loss: 0.2072, Val Acc: 0.9600
+2025-11-30 13:40:51,140 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 38: [0/2100 (0.0%)]	Loss: 0.563854
+2025-11-30 13:41:02,888 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 38: Train Loss: 0.5612, Train Acc: 0.8471, Val Loss: 0.2302, Val Acc: 0.9550
+2025-11-30 13:41:03,400 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 39: [0/2100 (0.0%)]	Loss: 0.433996
+2025-11-30 13:41:15,099 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 39: Train Loss: 0.5479, Train Acc: 0.8438, Val Loss: 0.2187, Val Acc: 0.9675
+2025-11-30 13:41:15,591 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 40: [0/2100 (0.0%)]	Loss: 0.553196
+2025-11-30 13:41:27,405 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 40: Train Loss: 0.5146, Train Acc: 0.8553, Val Loss: 0.1940, Val Acc: 0.9675
+2025-11-30 13:41:27,962 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 41: [0/2100 (0.0%)]	Loss: 0.722999
+2025-11-30 13:41:39,735 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 41: Train Loss: 0.5040, Train Acc: 0.8524, Val Loss: 0.1941, Val Acc: 0.9675
+2025-11-30 13:41:40,229 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 42: [0/2100 (0.0%)]	Loss: 0.751938
+2025-11-30 13:41:51,881 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 42: Train Loss: 0.4869, Train Acc: 0.8740, Val Loss: 0.1933, Val Acc: 0.9675
+2025-11-30 13:41:52,404 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 43: [0/2100 (0.0%)]	Loss: 0.476641
+2025-11-30 13:42:04,241 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 43: Train Loss: 0.5127, Train Acc: 0.8639, Val Loss: 0.1981, Val Acc: 0.9600
+2025-11-30 13:42:04,767 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 44: [0/2100 (0.0%)]	Loss: 0.680677
+2025-11-30 13:42:16,485 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 44: Train Loss: 0.4844, Train Acc: 0.8683, Val Loss: 0.1777, Val Acc: 0.9675
+2025-11-30 13:42:16,980 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 45: [0/2100 (0.0%)]	Loss: 0.449054
+2025-11-30 13:42:28,736 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 45: Train Loss: 0.4700, Train Acc: 0.8745, Val Loss: 0.1826, Val Acc: 0.9625
+2025-11-30 13:42:29,271 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 46: [0/2100 (0.0%)]	Loss: 0.244548
+2025-11-30 13:42:40,985 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 46: Train Loss: 0.4766, Train Acc: 0.8663, Val Loss: 0.1860, Val Acc: 0.9650
+2025-11-30 13:42:41,484 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 47: [0/2100 (0.0%)]	Loss: 0.291004
+2025-11-30 13:42:53,208 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 47: Train Loss: 0.4822, Train Acc: 0.8644, Val Loss: 0.1848, Val Acc: 0.9625
+2025-11-30 13:42:53,762 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 48: [0/2100 (0.0%)]	Loss: 0.311765
+2025-11-30 13:43:05,570 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 48: Train Loss: 0.4828, Train Acc: 0.8635, Val Loss: 0.1870, Val Acc: 0.9650
+2025-11-30 13:43:05,958 - experiment_baseline_mel_mlp_run_0 - INFO - Early stopping triggered at epoch 48
+2025-11-30 13:43:05,980 - experiment_baseline_mel_mlp_run_0 - INFO - Running final test evaluation...
+2025-11-30 13:43:09,609 - experiment_baseline_mel_mlp_run_0 - INFO - Test Results:
+2025-11-30 13:43:09,609 - experiment_baseline_mel_mlp_run_0 - INFO -   loss: 0.2055
+2025-11-30 13:43:09,609 - experiment_baseline_mel_mlp_run_0 - INFO -   accuracy: 0.9520
+2025-11-30 13:43:09,609 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_macro: 0.9591
+2025-11-30 13:43:09,609 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_macro: 0.9520
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_macro: 0.9517
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_weighted: 0.9591
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_weighted: 0.9520
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_weighted: 0.9517
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_0: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_0: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_0: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_1: 0.8333
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_1: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_1: 0.9091
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_2: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_2: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_2: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_3: 1.0000
+2025-11-30 13:43:09,610 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_3: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_3: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_4: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_4: 0.8000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_4: 0.8889
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_5: 0.8333
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_5: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_5: 0.9091
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_6: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_6: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_6: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_7: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_7: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_7: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_8: 1.0000
+2025-11-30 13:43:09,611 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_8: 0.8000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_8: 0.8889
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_9: 0.8333
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_9: 1.0000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_9: 0.9091
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_10: 1.0000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_10: 1.0000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_10: 1.0000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_11: 1.0000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_11: 1.0000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_11: 1.0000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_12: 0.5000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_12: 0.8000
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_12: 0.6154
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_13: 0.8333
+2025-11-30 13:43:09,612 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_13: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_13: 0.9091
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_14: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_14: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_14: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_15: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_15: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_15: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_16: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_16: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_16: 1.0000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_17: 0.6667
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_17: 0.4000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_17: 0.5000
+2025-11-30 13:43:09,613 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_18: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_18: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_18: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_19: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_19: 0.8000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_19: 0.8889
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_20: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_20: 0.8000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_20: 0.8889
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_21: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_21: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_21: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_22: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_22: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_22: 1.0000
+2025-11-30 13:43:09,614 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_23: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_23: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_23: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_24: 0.8333
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_24: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_24: 0.9091
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_25: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_25: 0.8000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_25: 0.8889
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_26: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_26: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_26: 1.0000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_27: 0.7500
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_27: 0.6000
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_27: 0.6667
+2025-11-30 13:43:09,615 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_28: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_28: 0.8000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_28: 0.8889
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_29: 0.8333
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_29: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_29: 0.9091
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_30: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_30: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_30: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_31: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_31: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_31: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_32: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_32: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_32: 1.0000
+2025-11-30 13:43:09,616 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_33: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_33: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_33: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_34: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_34: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_34: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_35: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_35: 0.6000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_35: 0.7500
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_36: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_36: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_36: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_37: 1.0000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_37: 0.8000
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_37: 0.8889
+2025-11-30 13:43:09,617 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_38: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_38: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_38: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_39: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_39: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_39: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_40: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_40: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_40: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_41: 0.8000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_41: 0.8000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_41: 0.8000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_42: 1.0000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_42: 0.8000
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_42: 0.8889
+2025-11-30 13:43:09,618 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_43: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_43: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_43: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_44: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_44: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_44: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_45: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_45: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_45: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_46: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_46: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_46: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_47: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_47: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_47: 1.0000
+2025-11-30 13:43:09,619 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_48: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_48: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_48: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_49: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_49: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_49: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_50: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_50: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_50: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_51: 0.7143
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_51: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_51: 0.8333
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_52: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_52: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_52: 1.0000
+2025-11-30 13:43:09,620 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_53: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_53: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_53: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_54: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_54: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_54: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_55: 0.8333
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_55: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_55: 0.9091
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_56: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_56: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_56: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_57: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_57: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_57: 1.0000
+2025-11-30 13:43:09,621 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_58: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_58: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_58: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_59: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_59: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_59: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_60: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_60: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_60: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_61: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_61: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_61: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_62: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_62: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_62: 1.0000
+2025-11-30 13:43:09,622 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_63: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_63: 0.8000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_63: 0.8889
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_64: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_64: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_64: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_65: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_65: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_65: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_66: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_66: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_66: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_67: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_67: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_67: 1.0000
+2025-11-30 13:43:09,623 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_68: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_68: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_68: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_69: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_69: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_69: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_70: 0.8000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_70: 0.8000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_70: 0.8000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_71: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_71: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_71: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_72: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_72: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_72: 1.0000
+2025-11-30 13:43:09,624 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_73: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_73: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_73: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_74: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_74: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_74: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_75: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_75: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_75: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_76: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_76: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_76: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_77: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_77: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_77: 1.0000
+2025-11-30 13:43:09,625 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_78: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_78: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_78: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_79: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_79: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_79: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_80: 0.8333
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_80: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_80: 0.9091
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_81: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_81: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_81: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_82: 1.0000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_82: 0.8000
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_82: 0.8889
+2025-11-30 13:43:09,626 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_83: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_83: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_83: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_84: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_84: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_84: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_85: 0.8333
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_85: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_85: 0.9091
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_86: 1.0000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_86: 0.8000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_86: 0.8889
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_87: 0.8000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_87: 0.8000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_87: 0.8000
+2025-11-30 13:43:09,627 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_88: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_88: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_88: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_89: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_89: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_89: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_90: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_90: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_90: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_91: 0.6667
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_91: 0.8000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_91: 0.7273
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_92: 0.7143
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_92: 1.0000
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_92: 0.8333
+2025-11-30 13:43:09,628 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_93: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_93: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_93: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_94: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_94: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_94: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_95: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_95: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_95: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_96: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_96: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_96: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_97: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_97: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_97: 1.0000
+2025-11-30 13:43:09,629 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_98: 1.0000
+2025-11-30 13:43:09,630 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_98: 1.0000
+2025-11-30 13:43:09,630 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_98: 1.0000
+2025-11-30 13:43:09,630 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_99: 1.0000
+2025-11-30 13:43:09,630 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_99: 0.8000
+2025-11-30 13:43:09,630 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_99: 0.8889
+2025-11-30 13:43:09,630 - experiment_baseline_mel_mlp_run_0 - INFO -   balanced_accuracy: 0.9520
+2025-11-30 13:43:09,632 - experiment_baseline_mel_mlp_run_0 - INFO - Training completed
+2025-11-30 13:43:12,071 - experiment_baseline_mel_mlp_run_0 - INFO - Running baseline analysis...
+2025-11-30 13:43:12,083 - experiment_baseline_mel_mlp_run_0 - INFO - Baseline analysis completed

@@ -30,7 +30,7 @@ model:
 # Training adjustments for chaotic network
 training:
   batch_size: 16  # Smaller batch for stability
-  learning_rate: 0.01  # Lower learning rate
+  learning_rate: 0.001  # Lower learning rate
   num_epochs: 200  # More epochs needed
   
   # Specialized optimizer for chaotic systems
@@ -43,7 +43,7 @@ training:
   scheduler:
     type: "plateau"
     plateau:
-      patience: 15
+      patience: 50
       factor: 0.7
 
 # Feature configuration for chaotic approach

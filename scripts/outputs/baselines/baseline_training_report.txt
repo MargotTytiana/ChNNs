@@ -1,9 +1,9 @@
 BASELINE MODELS TRAINING REPORT
 ==================================================
-Generated: 2025-10-04 15:39:34
+Generated: 2025-11-30 13:43:12
 Configuration: {
   "num_speakers": 100,
-  "batch_size": 16,
+  "batch_size": 32,
   "num_epochs": 100,
   "learning_rate": 0.001,
   "weight_decay": 0.0001,
@@ -43,18 +43,18 @@ SUMMARY STATISTICS
 Total experiments: 1
 Successful experiments: 1
 Failed experiments: 0
-Total training time: 1343.2s (0.37h)
+Total training time: 627.3s (0.17h)
 
 METHOD RESULTS
 ---------------
 
-MFCC_CNN:
-  Accuracy: 0.9080 ± 0.0000 [nan, nan]
-  Loss: 0.2976 ± 0.0000
-  Training Time: 1343.2s ± 0.0s
+MEL_MLP:
+  Accuracy: 0.9520 ± 0.0000 [nan, nan]
+  Loss: 0.2055 ± 0.0000
+  Training Time: 627.3s ± 0.0s
   Number of runs: 1
 
 BEST METHODS
 ------------
-Best Accuracy: mfcc_cnn (0.9080)
-Most Efficient: mfcc_cnn (1343.2s)
+Best Accuracy: mel_mlp (0.9520)
+Most Efficient: mel_mlp (627.3s)
