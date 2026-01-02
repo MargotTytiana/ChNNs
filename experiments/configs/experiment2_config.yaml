@@ -1,0 +1,80 @@
+# experiments/configs/experiment2_config.yaml
+# Experiment 2: Noise Robustness Testing
+# Tests trained models under various noise conditions
+
+experiment:
+  name: "experiment2_noise_robustness"
+  description: "Test model robustness under various noise conditions"
+  
+seed: 42
+
+# Data Configuration
+data:
+  dataset: "librispeech"
+  data_dir: "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2"
+  sample_rate: 16000
+  max_audio_length: 3.0
+  batch_size: 32
+  num_speakers: 26
+
+# Noise Configuration
+noise:
+  # Noise types to test
+  types:
+    - gaussian    # Additive White Gaussian Noise (AWGN)
+    - babble      # Multi-speaker background noise
+    - cafe        # Coffee shop ambient
+    - street      # Street/traffic noise
+    - pink        # Pink noise (1/f)
+  
+  # SNR levels to test (in dB)
+  # Higher = less noise, Lower = more noise
+  snr_levels:
+    - 20    # Mild noise
+    - 15    # Light noise
+    - 10    # Moderate noise
+    - 5     # Heavy noise
+    - 0     # Very heavy noise (equal power)
+
+# Model configurations with checkpoint paths
+# Update these paths to match your trained model locations
+models:
+  mel_mlp:
+    enabled: true
+    type: "baseline"
+    baseline_type: "mel_mlp"
+    n_mels: 80
+    hidden_dims: [512, 256, 128]
+    dropout_rate: 0.3
+    use_batch_norm: true
+    # Path to trained model checkpoint
+    checkpoint_path: "./outputs/experiment1_comparison/mel_mlp/exp1_mel_mlp/checkpoints/best_model.pth"
+  
+  mfcc_mlp:
+    enabled: true
+    type: "baseline"
+    baseline_type: "mfcc_mlp"
+    n_mfcc: 40
+    hidden_dims: [512, 256, 128]
+    dropout_rate: 0.3
+    use_batch_norm: true
+    checkpoint_path: "./outputs/experiment1_comparison/mfcc_mlp/exp1_mfcc_mlp/checkpoints/best_model.pth"
+  
+  chaotic_hybrid:
+    enabled: true
+    type: "chaotic"
+    chaotic_system: "lorenz"
+    use_gradient_fix: true
+    checkpoint_path: "./outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/best_model.pth"
+
+# Output Configuration
+output:
+  base_dir: "./outputs/experiment2_noise_robustness"
+  save_plots: true
+  save_detailed_results: true
+
+# Visualization Configuration  
+visualization:
+  plot_accuracy_curves: true
+  plot_degradation_heatmap: true
+  compare_models: true

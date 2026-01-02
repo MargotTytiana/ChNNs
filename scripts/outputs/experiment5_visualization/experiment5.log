@@ -1,0 +1,101 @@
+2025-12-02 12:23:43 - experiment5 - INFO - Loading dataset...
+2025-12-02 12:24:08 - experiment5 - INFO - Test samples: 118
+2025-12-02 12:24:08 - experiment5 - INFO - Number of speakers: 26
+2025-12-02 12:24:08 - experiment5 - INFO - 
+============================================================
+2025-12-02 12:24:08 - experiment5 - INFO - Analyzing: MEL_MLP
+2025-12-02 12:24:08 - experiment5 - INFO - ============================================================
+2025-12-02 12:24:08 - experiment5 - INFO - Checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2025-12-02 12:24:09 - experiment5 - INFO - Extracting features...
+2025-12-02 12:24:16 - experiment5 - INFO - Features shape: (118, 100)
+2025-12-02 12:24:16 - experiment5 - INFO - 
+1. Computing feature statistics...
+2025-12-02 12:24:16 - experiment5 - INFO -    Feature dim: 100
+2025-12-02 12:24:16 - experiment5 - INFO -    Mean: -2.7980, Std: 1.7762
+2025-12-02 12:24:16 - experiment5 - INFO - 
+2. Computing cluster quality metrics...
+2025-12-02 12:24:16 - experiment5 - INFO -    Silhouette score: 0.2596
+2025-12-02 12:24:16 - experiment5 - INFO -    Calinski-Harabasz: 9.23
+2025-12-02 12:24:16 - experiment5 - INFO -    Davies-Bouldin: 1.4061
+2025-12-02 12:24:16 - experiment5 - INFO - 
+3. Computing class separation...
+2025-12-02 12:24:16 - experiment5 - INFO -    Intra-class dist: 3.2578
+2025-12-02 12:24:16 - experiment5 - INFO -    Inter-class dist: 11.8109
+2025-12-02 12:24:16 - experiment5 - INFO -    Separation ratio: 3.6255
+2025-12-02 12:24:16 - experiment5 - INFO - 
+4. Computing t-SNE...
+2025-12-02 12:24:17 - experiment5 - INFO -    Saved: outputs/experiment5_visualization/mel_mlp_tsne.png
+2025-12-02 12:24:17 - experiment5 - INFO - 
+5. Computing UMAP...
+2025-12-02 12:24:23 - experiment5 - INFO -    Saved: outputs/experiment5_visualization/mel_mlp_umap.png
+2025-12-02 12:24:23 - experiment5 - INFO - 
+6. Plotting class separation...
+2025-12-02 12:24:23 - experiment5 - INFO -    Saved: outputs/experiment5_visualization/mel_mlp_distances.png
+2025-12-02 12:24:23 - experiment5 - INFO - 
+==========================================================================================
+2025-12-02 12:24:23 - experiment5 - INFO - FEATURE ANALYSIS SUMMARY
+2025-12-02 12:24:23 - experiment5 - INFO - ==========================================================================================
+2025-12-02 12:24:23 - experiment5 - INFO - Model          Silhouette     CH Index     DB Index   Sep. Ratio
+2025-12-02 12:24:23 - experiment5 - INFO - ------------------------------------------------------------------------------------------
+2025-12-02 12:24:23 - experiment5 - INFO - mel_mlp            0.2596         9.23       1.4061       3.6255
+2025-12-02 12:24:23 - experiment5 - INFO - ==========================================================================================
+2025-12-02 12:24:23 - experiment5 - INFO - Note: Silhouette [-1,1] higher=better, CH higher=better, DB lower=better
+2025-12-02 12:24:23 - experiment5 - INFO - 
+Results saved to: outputs/experiment5_visualization/visualization_results.json
+2025-12-02 12:24:23 - experiment5 - INFO - 
+Generated plots:
+2025-12-02 12:24:23 - experiment5 - INFO -   - mel_mlp_tsne.png
+2025-12-02 12:24:23 - experiment5 - INFO -   - mel_mlp_distances.png
+2025-12-02 12:24:23 - experiment5 - INFO -   - mel_mlp_umap.png
+2025-12-02 12:24:47 - experiment5 - INFO - Loading dataset...
+2025-12-02 12:24:47 - experiment5 - INFO - Test samples: 118
+2025-12-02 12:24:47 - experiment5 - INFO - Number of speakers: 26
+2025-12-02 12:24:47 - experiment5 - INFO - 
+============================================================
+2025-12-02 12:24:47 - experiment5 - INFO - Analyzing: MFCC_MLP
+2025-12-02 12:24:47 - experiment5 - INFO - ============================================================
+2025-12-02 12:24:47 - experiment5 - INFO - Checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2025-12-02 12:24:48 - experiment5 - INFO - Extracting features...
+2025-12-02 12:24:49 - experiment5 - INFO - Features shape: (118, 100)
+2025-12-02 12:24:49 - experiment5 - INFO - 
+1. Computing feature statistics...
+2025-12-02 12:24:49 - experiment5 - INFO -    Feature dim: 100
+2025-12-02 12:24:49 - experiment5 - INFO -    Mean: -3.8712, Std: 2.1786
+2025-12-02 12:24:49 - experiment5 - INFO - 
+2. Computing cluster quality metrics...
+2025-12-02 12:24:49 - experiment5 - INFO -    Silhouette score: 0.3482
+2025-12-02 12:24:49 - experiment5 - INFO -    Calinski-Harabasz: 12.21
+2025-12-02 12:24:49 - experiment5 - INFO -    Davies-Bouldin: 1.0688
+2025-12-02 12:24:49 - experiment5 - INFO - 
+3. Computing class separation...
+2025-12-02 12:24:49 - experiment5 - INFO -    Intra-class dist: 3.3777
+2025-12-02 12:24:49 - experiment5 - INFO -    Inter-class dist: 14.9601
+2025-12-02 12:24:49 - experiment5 - INFO -    Separation ratio: 4.4290
+2025-12-02 12:24:49 - experiment5 - INFO - 
+4. Computing t-SNE...
+2025-12-02 12:24:50 - experiment5 - INFO -    Saved: outputs/experiment5_visualization/mfcc_mlp_tsne.png
+2025-12-02 12:24:50 - experiment5 - INFO - 
+5. Computing UMAP...
+2025-12-02 12:24:56 - experiment5 - INFO -    Saved: outputs/experiment5_visualization/mfcc_mlp_umap.png
+2025-12-02 12:24:56 - experiment5 - INFO - 
+6. Plotting class separation...
+2025-12-02 12:24:56 - experiment5 - INFO -    Saved: outputs/experiment5_visualization/mfcc_mlp_distances.png
+2025-12-02 12:24:56 - experiment5 - INFO - 
+==========================================================================================
+2025-12-02 12:24:56 - experiment5 - INFO - FEATURE ANALYSIS SUMMARY
+2025-12-02 12:24:56 - experiment5 - INFO - ==========================================================================================
+2025-12-02 12:24:56 - experiment5 - INFO - Model          Silhouette     CH Index     DB Index   Sep. Ratio
+2025-12-02 12:24:56 - experiment5 - INFO - ------------------------------------------------------------------------------------------
+2025-12-02 12:24:56 - experiment5 - INFO - mfcc_mlp           0.3482        12.21       1.0688       4.4290
+2025-12-02 12:24:56 - experiment5 - INFO - ==========================================================================================
+2025-12-02 12:24:56 - experiment5 - INFO - Note: Silhouette [-1,1] higher=better, CH higher=better, DB lower=better
+2025-12-02 12:24:56 - experiment5 - INFO - 
+Results saved to: outputs/experiment5_visualization/visualization_results.json
+2025-12-02 12:24:56 - experiment5 - INFO - 
+Generated plots:
+2025-12-02 12:24:56 - experiment5 - INFO -   - mel_mlp_tsne.png
+2025-12-02 12:24:56 - experiment5 - INFO -   - mel_mlp_distances.png
+2025-12-02 12:24:56 - experiment5 - INFO -   - mfcc_mlp_tsne.png
+2025-12-02 12:24:56 - experiment5 - INFO -   - mfcc_mlp_umap.png
+2025-12-02 12:24:56 - experiment5 - INFO -   - mel_mlp_umap.png
+2025-12-02 12:24:56 - experiment5 - INFO -   - mfcc_mlp_distances.png

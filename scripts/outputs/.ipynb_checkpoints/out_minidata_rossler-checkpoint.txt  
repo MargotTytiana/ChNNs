@@ -1,0 +1,72 @@
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:CHAOTIC NEURAL NETWORKS TRAINING
+INFO:chaotic_trainer:============================================================
+INFO:chaotic_trainer:Output directory: outputs/chaotic
+INFO:chaotic_trainer:Configuration: {
+  "experiment": {
+    "name": "chaotic_network_experiment",
+    "description": "Full chaotic neural network for speaker recognition"
+  },
+  "base_config": "base_config.yaml",
+  "model": {
+    "type": "chaotic_network",
+    "chaotic_network": {
+      "embedding": {
+        "system_type": "lorenz",
+        "evolution_time": 1.0,
+        "coupling_strength": 2.0
+      },
+      "attractor_pooling": {
+        "correlation_dimension": {
+          "num_radii": 100
+        }
+      },
+      "speaker_embedding": {
+        "embedding_dim": 512,
+        "hidden_dims": [
+          1024,
+          512,
+          256
+        ]
+      }
+    }
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "num_epochs": 200,
+    "optimizer": {
+      "type": "adamw",
+      "adamw": {
+        "weight_decay": "1e-4"
+      }
+    },
+    "scheduler": {
+      "type": "plateau",
+      "plateau": {
+        "patience": 50,
+        "factor": 0.7
+      }
+    }
+  },
+  "features": {
+    "chaotic": {
+      "mlsa": {
+        "scales": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "max_lyapunov_steps": 2000
+      }
+    }
+  },
+  "epochs": 100,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "optimize_parameters": true
+}
+INFO:chaotic_trainer:System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/appl/soft/ai/wrap/pytorch-2.7/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 514079211520, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+ERROR:chaotic_trainer:Missing required config key: num_speakers

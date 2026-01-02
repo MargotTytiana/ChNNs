@@ -1,0 +1,101 @@
+CHAOTIC NEURAL NETWORKS TRAINING REPORT
+============================================================
+Generated: 2025-12-16 16:59:54
+Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "plda",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "differentiable_features": {
+    "enabled": true,
+    "lyapunov_dim": 8,
+    "rqa_dim": 6,
+    "additional_stats": true
+  },
+  "adversarial_training": {
+    "enabled": true,
+    "perturbation_scale": 0.1,
+    "warmup_epochs": 5,
+    "adversarial_weight": 0.3
+  },
+  "sync_loss": {
+    "enabled": true,
+    "sync_weight": 0.1,
+    "desync_weight": 0.1,
+    "margin": 1.0,
+    "sample_ratio": 0.3
+  },
+  "use_bifurcation_control": true,
+  "epochs": 20,
+  "delay_method": "autocorr",
+  "frame_length": 400,
+  "hop_length": 160
+}
+
+EXECUTIVE SUMMARY
+-----------------
+Total experiments: 0
+Successful experiments: -1
+Success rate: -100.0%
+
+CHAOTIC SYSTEMS COMPARISON
+---------------------------
+MODEL TYPES COMPARISON
+----------------------
+
+FAILED EXPERIMENTS ANALYSIS
+---------------------------
+Unknown: 1 failures
+  lorenz + full_chaotic: Unknown classifier type: plda
+
+RECOMMENDATIONS
+---------------
+3. Consider parameter optimization for failed experiments
+4. Monitor chaotic dynamics for early stopping criteria

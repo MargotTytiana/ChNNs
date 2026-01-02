@@ -1,0 +1,458 @@
+2025-12-01 23:20:23 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:20:23 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-01 23:20:23 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:20:23 - chaotic_exp - INFO - Device: cuda
+2025-12-01 23:20:23 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-01 23:20:23 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-01 23:20:23 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-01 23:20:42 - chaotic_exp - INFO - Test samples: 118
+2025-12-01 23:20:42 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-01 23:20:42 - chaotic_exp - ERROR - Failed to load model: ChaoticSpeakerNetwork not available
+2025-12-01 23:20:42 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 945, in main
+    model = load_chaotic_model(checkpoint_path, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 198, in load_chaotic_model
+    raise ImportError("ChaoticSpeakerNetwork not available")
+ImportError: ChaoticSpeakerNetwork not available
+
+2025-12-01 23:20:42 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:20:42 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-01 23:20:42 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:20:42 - chaotic_exp - ERROR - ChaoticSpeakerNetwork not available!
+2025-12-01 23:20:42 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:20:42 - chaotic_exp - INFO - ALL EXPERIMENTS COMPLETED
+2025-12-01 23:20:42 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:20:42 - chaotic_exp - INFO - Results saved to: outputs/chaotic_experiments
+2025-12-01 23:24:49 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:24:49 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-01 23:24:49 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:24:49 - chaotic_exp - INFO - Device: cuda
+2025-12-01 23:24:49 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-01 23:24:49 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-01 23:24:49 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-01 23:24:49 - chaotic_exp - INFO - Test samples: 118
+2025-12-01 23:24:49 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-01 23:24:50 - chaotic_exp - ERROR - Failed to load model: Invalid magic number; corrupt file?
+2025-12-01 23:24:50 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 955, in main
+    model = load_chaotic_model(checkpoint_path, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 206, in load_chaotic_model
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/serialization.py", line 1549, in load
+    return _legacy_load(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/serialization.py", line 1799, in _legacy_load
+    raise RuntimeError("Invalid magic number; corrupt file?")
+RuntimeError: Invalid magic number; corrupt file?
+
+2025-12-01 23:24:50 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:24:50 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-01 23:24:50 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:24:50 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-01 23:25:00 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-01 23:28:03 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:28:03 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-01 23:28:03 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:28:03 - chaotic_exp - INFO - Device: cuda
+2025-12-01 23:28:03 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-01 23:28:03 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-01 23:28:03 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-01 23:28:04 - chaotic_exp - INFO - Test samples: 118
+2025-12-01 23:28:04 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-01 23:28:21 - chaotic_exp - ERROR - Failed to load model: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	Missing key(s) in state_dict: "mix_alpha", "chaotic_embedding.initial_state_mapper.0.weight", "chaotic_embedding.initial_state_mapper.0.bias", "chaotic_embedding.initial_state_mapper.2.weight", "chaotic_embedding.initial_state_mapper.2.bias", "chaotic_embedding.coupling_mapper.0.weight", "chaotic_embedding.coupling_mapper.0.bias", "chaotic_embedding.coupling_mapper.2.weight", "chaotic_embedding.coupling_mapper.2.bias", "chaotic_embedding.param_adapter.0.weight", "chaotic_embedding.param_adapter.0.bias", "chaotic_embedding.param_adapter.2.weight", "chaotic_embedding.param_adapter.2.bias", "speaker_embedding.embedding_network.0.weight", "speaker_embedding.embedding_network.0.bias", "speaker_embedding.embedding_network.1.weight", "speaker_embedding.embedding_network.1.bias", "speaker_embedding.embedding_network.1.running_mean", "speaker_embedding.embedding_network.1.running_var", "speaker_embedding.embedding_network.4.weight", "speaker_embedding.embedding_network.4.bias", "speaker_embedding.embedding_network.5.weight", "speaker_embedding.embedding_network.5.bias", "speaker_embedding.embedding_network.5.running_mean", "speaker_embedding.embedding_network.5.running_var", "speaker_embedding.embedding_network.8.weight", "speaker_embedding.embedding_network.8.bias", "speaker_embedding.embedding_network.9.weight", "speaker_embedding.embedding_network.9.bias", "speaker_embedding.embedding_network.9.running_mean", "speaker_embedding.embedding_network.9.running_var", "speaker_embedding.embedding_network.12.weight", "speaker_embedding.embedding_network.12.bias", "classifier.classifier.0.weight", "classifier.classifier.0.bias", "classifier.classifier.3.weight", "classifier.classifier.3.bias", "feature_projection.0.weight", "feature_projection.0.bias", "feature_projection.1.weight", "feature_projection.1.bias", "feature_projection.4.weight", "feature_projection.4.bias", "raw_audio_encoder.0.weight", "raw_audio_encoder.0.bias", "raw_audio_encoder.1.weight", "raw_audio_encoder.1.bias", "raw_audio_encoder.1.running_mean", "raw_audio_encoder.1.running_var", "raw_audio_encoder.3.weight", "raw_audio_encoder.3.bias", "raw_audio_encoder.4.weight", "raw_audio_encoder.4.bias", "raw_audio_encoder.4.running_mean", "raw_audio_encoder.4.running_var", "raw_audio_encoder.6.weight", "raw_audio_encoder.6.bias", "raw_audio_encoder.7.weight", "raw_audio_encoder.7.bias", "raw_audio_encoder.7.running_mean", "raw_audio_encoder.7.running_var", "raw_audio_projection.weight", "raw_audio_projection.bias". 
+	Unexpected key(s) in state_dict: "epoch", "model_state_dict", "optimizer_state_dict", "scheduler_state_dict", "experiment_state", "config", "best_metric", "best_epoch". 
+2025-12-01 23:28:21 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 1007, in main
+    model = load_chaotic_model(checkpoint_path, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 285, in load_chaotic_model
+    model.load_state_dict(checkpoint['model'])
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	Missing key(s) in state_dict: "mix_alpha", "chaotic_embedding.initial_state_mapper.0.weight", "chaotic_embedding.initial_state_mapper.0.bias", "chaotic_embedding.initial_state_mapper.2.weight", "chaotic_embedding.initial_state_mapper.2.bias", "chaotic_embedding.coupling_mapper.0.weight", "chaotic_embedding.coupling_mapper.0.bias", "chaotic_embedding.coupling_mapper.2.weight", "chaotic_embedding.coupling_mapper.2.bias", "chaotic_embedding.param_adapter.0.weight", "chaotic_embedding.param_adapter.0.bias", "chaotic_embedding.param_adapter.2.weight", "chaotic_embedding.param_adapter.2.bias", "speaker_embedding.embedding_network.0.weight", "speaker_embedding.embedding_network.0.bias", "speaker_embedding.embedding_network.1.weight", "speaker_embedding.embedding_network.1.bias", "speaker_embedding.embedding_network.1.running_mean", "speaker_embedding.embedding_network.1.running_var", "speaker_embedding.embedding_network.4.weight", "speaker_embedding.embedding_network.4.bias", "speaker_embedding.embedding_network.5.weight", "speaker_embedding.embedding_network.5.bias", "speaker_embedding.embedding_network.5.running_mean", "speaker_embedding.embedding_network.5.running_var", "speaker_embedding.embedding_network.8.weight", "speaker_embedding.embedding_network.8.bias", "speaker_embedding.embedding_network.9.weight", "speaker_embedding.embedding_network.9.bias", "speaker_embedding.embedding_network.9.running_mean", "speaker_embedding.embedding_network.9.running_var", "speaker_embedding.embedding_network.12.weight", "speaker_embedding.embedding_network.12.bias", "classifier.classifier.0.weight", "classifier.classifier.0.bias", "classifier.classifier.3.weight", "classifier.classifier.3.bias", "feature_projection.0.weight", "feature_projection.0.bias", "feature_projection.1.weight", "feature_projection.1.bias", "feature_projection.4.weight", "feature_projection.4.bias", "raw_audio_encoder.0.weight", "raw_audio_encoder.0.bias", "raw_audio_encoder.1.weight", "raw_audio_encoder.1.bias", "raw_audio_encoder.1.running_mean", "raw_audio_encoder.1.running_var", "raw_audio_encoder.3.weight", "raw_audio_encoder.3.bias", "raw_audio_encoder.4.weight", "raw_audio_encoder.4.bias", "raw_audio_encoder.4.running_mean", "raw_audio_encoder.4.running_var", "raw_audio_encoder.6.weight", "raw_audio_encoder.6.bias", "raw_audio_encoder.7.weight", "raw_audio_encoder.7.bias", "raw_audio_encoder.7.running_mean", "raw_audio_encoder.7.running_var", "raw_audio_projection.weight", "raw_audio_projection.bias". 
+	Unexpected key(s) in state_dict: "epoch", "model_state_dict", "optimizer_state_dict", "scheduler_state_dict", "experiment_state", "config", "best_metric", "best_epoch". 
+
+2025-12-01 23:28:21 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:28:21 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-01 23:28:21 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:28:21 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-01 23:28:22 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-01 23:49:01 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:49:01 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-01 23:49:01 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:49:01 - chaotic_exp - INFO - Device: cuda
+2025-12-01 23:49:01 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-01 23:49:01 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-01 23:49:01 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-01 23:49:01 - chaotic_exp - INFO - Test samples: 118
+2025-12-01 23:49:01 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-01 23:49:18 - chaotic_exp - INFO - Model loaded successfully!
+2025-12-01 23:49:18 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:49:18 - chaotic_exp - INFO - EXPERIMENT 2: NOISE ROBUSTNESS (Chaotic Model)
+2025-12-01 23:49:18 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:49:18 - chaotic_exp - INFO - 
+Evaluating on CLEAN data...
+2025-12-01 23:49:48 - chaotic_exp - ERROR - Experiment 2 failed: index 0 is out of bounds for dimension 1 with size 0
+2025-12-01 23:49:48 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 1063, in main
+    results = run_experiment2_chaotic(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 407, in run_experiment2_chaotic
+    clean_acc = evaluate_model(model, test_loader, device)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 458, in evaluate_model
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 580, in forward
+    chaotic_trajectories = self.chaotic_embedding(chaotic_features)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 509, in forward
+    trajectory = self._generate_trajectory(initial_states, couplings, params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 423, in _generate_trajectory
+    trajectory[:, 0, :] = state
+    ~~~~~~~~~~^^^^^^^^^
+IndexError: index 0 is out of bounds for dimension 1 with size 0
+
+2025-12-01 23:49:48 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:49:48 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-01 23:49:48 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:49:48 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-01 23:49:49 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-01 23:51:38 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:51:38 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-01 23:51:38 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:51:38 - chaotic_exp - INFO - Device: cuda
+2025-12-01 23:51:38 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-01 23:51:38 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-01 23:51:38 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-01 23:51:39 - chaotic_exp - INFO - Test samples: 118
+2025-12-01 23:51:39 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-01 23:51:56 - chaotic_exp - INFO - Model loaded successfully!
+2025-12-01 23:51:56 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:51:56 - chaotic_exp - INFO - EXPERIMENT 2: NOISE ROBUSTNESS (Chaotic Model)
+2025-12-01 23:51:56 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:51:56 - chaotic_exp - INFO - 
+Evaluating on CLEAN data...
+2025-12-01 23:52:25 - chaotic_exp - ERROR - Experiment 2 failed: index 0 is out of bounds for dimension 1 with size 0
+2025-12-01 23:52:25 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 1081, in main
+    results = run_experiment2_chaotic(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 425, in run_experiment2_chaotic
+    clean_acc = evaluate_model(model, test_loader, device)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 476, in evaluate_model
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 580, in forward
+    chaotic_trajectories = self.chaotic_embedding(chaotic_features)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 509, in forward
+    trajectory = self._generate_trajectory(initial_states, couplings, params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/chaotic_embedding.py", line 423, in _generate_trajectory
+    trajectory[:, 0, :] = state
+    ~~~~~~~~~~^^^^^^^^^
+IndexError: index 0 is out of bounds for dimension 1 with size 0
+
+2025-12-01 23:52:25 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:52:25 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-01 23:52:25 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:52:25 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-01 23:52:25 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-01 23:58:12 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:58:12 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-01 23:58:12 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:58:12 - chaotic_exp - INFO - Device: cuda
+2025-12-01 23:58:12 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-01 23:58:13 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-01 23:58:13 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-01 23:58:13 - chaotic_exp - INFO - Test samples: 118
+2025-12-01 23:58:13 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-01 23:58:30 - chaotic_exp - ERROR - Failed to load model: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	size mismatch for speaker_embedding.embedding_network.12.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([256, 128]).
+	size mismatch for speaker_embedding.embedding_network.12.bias: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([256]).
+2025-12-01 23:58:30 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 396, in load_chaotic_model
+    model.load_state_dict(state_dict, strict=True)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	Missing key(s) in state_dict: "classifier.classifier.0.weight", "classifier.classifier.0.bias", "classifier.classifier.3.weight", "classifier.classifier.3.bias". 
+	Unexpected key(s) in state_dict: "classifier.weight". 
+	size mismatch for speaker_embedding.embedding_network.12.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([256, 128]).
+	size mismatch for speaker_embedding.embedding_network.12.bias: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([256]).
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 1111, in main
+    model = load_chaotic_model(checkpoint_path, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 400, in load_chaotic_model
+    missing, unexpected = model.load_state_dict(state_dict, strict=False)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	size mismatch for speaker_embedding.embedding_network.12.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([256, 128]).
+	size mismatch for speaker_embedding.embedding_network.12.bias: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([256]).
+
+2025-12-01 23:58:30 - chaotic_exp - INFO - 
+======================================================================
+2025-12-01 23:58:30 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-01 23:58:30 - chaotic_exp - INFO - ======================================================================
+2025-12-01 23:58:30 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-01 23:58:31 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-02 00:01:27 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:01:27 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-02 00:01:27 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:01:27 - chaotic_exp - INFO - Device: cuda
+2025-12-02 00:01:27 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-02 00:01:27 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-02 00:01:27 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-02 00:01:27 - chaotic_exp - INFO - Test samples: 118
+2025-12-02 00:01:27 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-02 00:01:27 - chaotic_exp - ERROR - Failed to load model: ChaoticSpeakerRecognitionNetwork.__init__() got an unexpected keyword argument 'coupling_strength'
+2025-12-02 00:01:27 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 1142, in main
+    model = load_chaotic_model(checkpoint_path, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 377, in load_chaotic_model
+    model = ChaoticSpeakerRecognitionNetwork(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ChaoticSpeakerRecognitionNetwork.__init__() got an unexpected keyword argument 'coupling_strength'
+
+2025-12-02 00:01:27 - chaotic_exp - INFO - 
+======================================================================
+2025-12-02 00:01:27 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-02 00:01:27 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:01:28 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-02 00:01:28 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-02 00:02:58 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:02:58 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-02 00:02:58 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:02:58 - chaotic_exp - INFO - Device: cuda
+2025-12-02 00:02:58 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-02 00:02:58 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-02 00:02:58 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-02 00:02:58 - chaotic_exp - INFO - Test samples: 118
+2025-12-02 00:02:58 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-02 00:03:29 - chaotic_exp - ERROR - Failed to load model: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	size mismatch for speaker_embedding.embedding_network.0.weight: copying a param with shape torch.Size([512, 117]) from checkpoint, the shape in current model is torch.Size([64, 117]).
+	size mismatch for speaker_embedding.embedding_network.0.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.weight: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.running_mean: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.running_var: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.4.weight: copying a param with shape torch.Size([256, 512]) from checkpoint, the shape in current model is torch.Size([32, 64]).
+	size mismatch for speaker_embedding.embedding_network.4.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.weight: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.running_mean: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.running_var: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.8.weight: copying a param with shape torch.Size([128, 256]) from checkpoint, the shape in current model is torch.Size([128, 32]).
+2025-12-02 00:03:29 - chaotic_exp - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 428, in load_chaotic_model
+    model.load_state_dict(state_dict, strict=True)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	Unexpected key(s) in state_dict: "speaker_embedding.embedding_network.9.weight", "speaker_embedding.embedding_network.9.bias", "speaker_embedding.embedding_network.9.running_mean", "speaker_embedding.embedding_network.9.running_var", "speaker_embedding.embedding_network.9.num_batches_tracked", "speaker_embedding.embedding_network.12.weight", "speaker_embedding.embedding_network.12.bias". 
+	size mismatch for speaker_embedding.embedding_network.0.weight: copying a param with shape torch.Size([512, 117]) from checkpoint, the shape in current model is torch.Size([64, 117]).
+	size mismatch for speaker_embedding.embedding_network.0.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.weight: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.running_mean: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.running_var: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.4.weight: copying a param with shape torch.Size([256, 512]) from checkpoint, the shape in current model is torch.Size([32, 64]).
+	size mismatch for speaker_embedding.embedding_network.4.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.weight: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.running_mean: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.running_var: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.8.weight: copying a param with shape torch.Size([128, 256]) from checkpoint, the shape in current model is torch.Size([128, 32]).
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 1154, in main
+    model = load_chaotic_model(checkpoint_path, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 444, in load_chaotic_model
+    raise e2
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_chaotic_experiments.py", line 434, in load_chaotic_model
+    missing, unexpected = model.load_state_dict(state_dict, strict=False)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for ChaoticSpeakerRecognitionNetwork:
+	size mismatch for speaker_embedding.embedding_network.0.weight: copying a param with shape torch.Size([512, 117]) from checkpoint, the shape in current model is torch.Size([64, 117]).
+	size mismatch for speaker_embedding.embedding_network.0.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.weight: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.running_mean: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.1.running_var: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for speaker_embedding.embedding_network.4.weight: copying a param with shape torch.Size([256, 512]) from checkpoint, the shape in current model is torch.Size([32, 64]).
+	size mismatch for speaker_embedding.embedding_network.4.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.weight: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.running_mean: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.5.running_var: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for speaker_embedding.embedding_network.8.weight: copying a param with shape torch.Size([128, 256]) from checkpoint, the shape in current model is torch.Size([128, 32]).
+
+2025-12-02 00:03:29 - chaotic_exp - INFO - 
+======================================================================
+2025-12-02 00:03:29 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-02 00:03:29 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:03:30 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-02 00:03:30 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-02 00:05:49 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:05:49 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-02 00:05:49 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:05:49 - chaotic_exp - INFO - Device: cuda
+2025-12-02 00:05:49 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-02 00:05:49 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-02 00:05:49 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-02 00:05:50 - chaotic_exp - INFO - Test samples: 118
+2025-12-02 00:05:50 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-02 00:06:21 - chaotic_exp - INFO - Model loaded successfully!
+2025-12-02 00:06:21 - chaotic_exp - INFO - 
+======================================================================
+2025-12-02 00:06:21 - chaotic_exp - INFO - EXPERIMENT 2: NOISE ROBUSTNESS (Chaotic Model)
+2025-12-02 00:06:21 - chaotic_exp - INFO - ======================================================================
+2025-12-02 00:06:21 - chaotic_exp - INFO - 
+Evaluating on CLEAN data...
+2025-12-02 00:09:45 - chaotic_exp - INFO - Clean accuracy: 59.32%
+2025-12-02 00:09:45 - chaotic_exp - INFO - 
+--- Noise: GAUSSIAN ---
+2025-12-02 04:19:58 - chaotic_exp - INFO - ======================================================================
+2025-12-02 04:19:58 - chaotic_exp - INFO - CHAOTIC MODEL EXPERIMENTS
+2025-12-02 04:19:58 - chaotic_exp - INFO - ======================================================================
+2025-12-02 04:19:58 - chaotic_exp - INFO - Device: cuda
+2025-12-02 04:19:58 - chaotic_exp - INFO - Experiments: [2, 3, 4, 5]
+2025-12-02 04:19:58 - chaotic_exp - INFO - Checkpoint: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/checkpoints/exp_20251130_185504/checkpoint_epoch_0000_20251201_195739.pkl
+2025-12-02 04:19:58 - chaotic_exp - INFO - 
+Loading dataset...
+2025-12-02 04:20:16 - chaotic_exp - INFO - Test samples: 118
+2025-12-02 04:20:16 - chaotic_exp - INFO - 
+Loading chaotic model...
+2025-12-02 04:20:47 - chaotic_exp - INFO - Model loaded successfully!
+2025-12-02 04:20:47 - chaotic_exp - INFO - 
+======================================================================
+2025-12-02 04:20:47 - chaotic_exp - INFO - EXPERIMENT 2: NOISE ROBUSTNESS (Chaotic Model)
+2025-12-02 04:20:47 - chaotic_exp - INFO - ======================================================================
+2025-12-02 04:20:47 - chaotic_exp - INFO - 
+Evaluating on CLEAN data...
+2025-12-02 04:24:12 - chaotic_exp - INFO - Clean accuracy: 59.32%
+2025-12-02 04:24:12 - chaotic_exp - INFO - 
+--- Noise: GAUSSIAN ---
+2025-12-02 04:27:37 - chaotic_exp - INFO -   SNR= 20dB: 55.08% (drop: +4.24%)
+2025-12-02 04:31:01 - chaotic_exp - INFO -   SNR= 15dB: 52.54% (drop: +6.78%)
+2025-12-02 04:34:26 - chaotic_exp - INFO -   SNR= 10dB: 37.29% (drop: +22.03%)
+2025-12-02 04:37:50 - chaotic_exp - INFO -   SNR=  5dB: 15.25% (drop: +44.07%)
+2025-12-02 04:41:15 - chaotic_exp - INFO -   SNR=  0dB:  6.78% (drop: +52.54%)
+2025-12-02 04:41:15 - chaotic_exp - INFO - 
+--- Noise: BABBLE ---
+2025-12-02 04:44:41 - chaotic_exp - INFO -   SNR= 20dB: 60.17% (drop: -0.85%)
+2025-12-02 04:48:07 - chaotic_exp - INFO -   SNR= 15dB: 59.32% (drop: +0.00%)
+2025-12-02 04:51:34 - chaotic_exp - INFO -   SNR= 10dB: 44.92% (drop: +14.41%)
+2025-12-02 04:55:00 - chaotic_exp - INFO -   SNR=  5dB: 34.75% (drop: +24.58%)
+2025-12-02 04:58:27 - chaotic_exp - INFO -   SNR=  0dB: 26.27% (drop: +33.05%)
+2025-12-02 04:58:27 - chaotic_exp - INFO - 
+--- Noise: CAFE ---
+2025-12-02 05:01:55 - chaotic_exp - INFO -   SNR= 20dB: 56.78% (drop: +2.54%)
+2025-12-02 05:05:25 - chaotic_exp - INFO -   SNR= 15dB: 52.54% (drop: +6.78%)
+2025-12-02 05:08:54 - chaotic_exp - INFO -   SNR= 10dB: 37.29% (drop: +22.03%)
+2025-12-02 05:12:24 - chaotic_exp - INFO -   SNR=  5dB: 15.25% (drop: +44.07%)
+2025-12-02 05:15:53 - chaotic_exp - INFO -   SNR=  0dB:  7.63% (drop: +51.69%)
+2025-12-02 05:15:53 - chaotic_exp - INFO - 
+--- Noise: STREET ---
+2025-12-02 05:19:16 - chaotic_exp - INFO -   SNR= 20dB: 59.32% (drop: +0.00%)
+2025-12-02 05:22:38 - chaotic_exp - INFO -   SNR= 15dB: 58.47% (drop: +0.85%)
+2025-12-02 05:26:00 - chaotic_exp - INFO -   SNR= 10dB: 52.54% (drop: +6.78%)
+2025-12-02 05:29:25 - chaotic_exp - INFO -   SNR=  5dB: 44.92% (drop: +14.41%)
+2025-12-02 05:32:48 - chaotic_exp - INFO -   SNR=  0dB: 22.88% (drop: +36.44%)
+2025-12-02 05:32:48 - chaotic_exp - INFO - 
+Results saved to: outputs/chaotic_experiments/exp2_noise_results.json
+2025-12-02 05:32:48 - chaotic_exp - INFO - 
+======================================================================
+2025-12-02 05:32:48 - chaotic_exp - INFO - EXPERIMENT 3: FEW-SHOT LEARNING (Chaotic Model)
+2025-12-02 05:32:48 - chaotic_exp - INFO - ======================================================================
+2025-12-02 05:33:05 - chaotic_exp - INFO - 
+Samples per speaker: 1
+2025-12-02 05:33:13 - chaotic_exp - INFO -   Run 1: 26 samples
+2025-12-02 06:30:02 - chaotic_exp - INFO -     Val: 6.74%, Test: 0.85%
+2025-12-02 06:30:12 - chaotic_exp - INFO -   Run 2: 26 samples
+2025-12-02 07:26:55 - chaotic_exp - INFO -     Val: 4.49%, Test: 4.24%
+2025-12-02 07:27:03 - chaotic_exp - INFO -   Run 3: 26 samples
+2025-12-02 08:24:05 - chaotic_exp - INFO -     Val: 4.49%, Test: 4.24%
+2025-12-02 08:24:05 - chaotic_exp - INFO -   → Mean Test Acc: 3.11% ± 1.60%
+2025-12-02 08:24:05 - chaotic_exp - INFO - 
+Samples per speaker: 2
+2025-12-02 08:24:08 - chaotic_exp - INFO -   Run 1: 52 samples
+2025-12-02 09:32:42 - chaotic_exp - INFO -     Val: 4.49%, Test: 4.24%
+2025-12-02 09:32:51 - chaotic_exp - INFO -   Run 2: 52 samples

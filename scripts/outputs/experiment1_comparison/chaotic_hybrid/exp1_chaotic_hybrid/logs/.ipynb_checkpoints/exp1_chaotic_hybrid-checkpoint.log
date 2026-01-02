@@ -1,0 +1,47 @@
+2025-11-30 12:37:00,899 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 12:37:00,900 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 12:37:00,900 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 12:37:00,900 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 13:00:05,944 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 13:43:17,578 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 18:55:04,748 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Setting up experiment components...
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Creating dataloaders...
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Detected 26 speakers in dataset
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Dataloaders created:
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO -   Train: 14 batches
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO -   Val: 3 batches
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO -   Test: 4 batches
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Creating model...
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Using actual num_speakers from dataset: 26
+2025-11-30 18:55:52,409 - experiment_exp1_chaotic_hybrid - INFO - Total parameters: 413,631
+2025-11-30 18:55:52,409 - experiment_exp1_chaotic_hybrid - INFO - Trainable parameters: 413,631
+2025-11-30 18:55:52,409 - experiment_exp1_chaotic_hybrid - INFO - Creating optimizer...
+2025-11-30 18:55:54,927 - experiment_exp1_chaotic_hybrid - INFO - Optimizer: AdamW
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - INFO - Creating scheduler...
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - WARNING - Unknown scheduler type: reduce_on_plateau, no scheduler will be used
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - INFO - Creating criterion...
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - INFO - Criterion: CrossEntropyLoss
+2025-11-30 18:55:54,983 - experiment_exp1_chaotic_hybrid - INFO - Configuration saved to: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/config.json
+2025-11-30 18:55:54,983 - experiment_exp1_chaotic_hybrid - INFO - Experiment setup completed
+2025-11-30 18:55:54,983 - experiment_exp1_chaotic_hybrid - INFO - Starting training for 100 epochs
+2025-11-30 18:55:55,667 - experiment_exp1_chaotic_hybrid - INFO - 
+================================================================================
+2025-11-30 18:55:55,667 - experiment_exp1_chaotic_hybrid - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO - ================================================================================
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO - Batch Info:
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO -   Targets shape: torch.Size([32])
+2025-11-30 18:55:55,675 - experiment_exp1_chaotic_hybrid - INFO -   Targets (first 8): tensor([18, 18, 12, 20, 15,  3,  9,  5], device='cuda:0')
+2025-11-30 18:56:53,053 - experiment_exp1_chaotic_hybrid - INFO - ================================================================================
+
+2025-11-30 18:57:48,610 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 6.579050

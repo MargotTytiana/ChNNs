@@ -1,0 +1,70 @@
+2025-12-01 19:14:52 - experiment4 - INFO - ======================================================================
+2025-12-01 19:14:52 - experiment4 - INFO - EXPERIMENT 4: COMPUTATIONAL EFFICIENCY EVALUATION
+2025-12-01 19:14:52 - experiment4 - INFO - ======================================================================
+2025-12-01 19:14:52 - experiment4 - INFO - Device: cuda
+2025-12-01 19:14:52 - experiment4 - INFO - Input length: 48000 samples (3.0s)
+2025-12-01 19:14:52 - experiment4 - INFO - Batch size: 32
+2025-12-01 19:14:52 - experiment4 - INFO - Loading dataset for benchmarking...
+2025-12-01 19:14:54 - experiment4 - INFO - Dataset loaded: 472 samples
+2025-12-01 19:14:54 - experiment4 - INFO - 
+============================================================
+2025-12-01 19:14:54 - experiment4 - INFO - Profiling: MEL_MLP
+2025-12-01 19:14:54 - experiment4 - INFO - ============================================================
+2025-12-01 19:14:55 - experiment4 - INFO - 
+1. Counting parameters...
+2025-12-01 19:14:55 - experiment4 - INFO -    Total: 69,284
+2025-12-01 19:14:55 - experiment4 - INFO -    Trainable: 69,284
+2025-12-01 19:14:55 - experiment4 - INFO - 
+2. Estimating FLOPs...
+2025-12-01 19:14:55 - experiment4 - INFO -    FLOPs: 135.68 KFLOPs
+2025-12-01 19:14:55 - experiment4 - INFO - 
+3. Measuring inference time...
+2025-12-01 19:14:56 - experiment4 - INFO -    Single sample: 4.61 ± 0.07 ms
+2025-12-01 19:15:10 - experiment4 - INFO -    Batch (32): 128.78 ± 0.82 ms
+2025-12-01 19:15:10 - experiment4 - INFO -    Throughput: 248.5 samples/sec
+2025-12-01 19:15:10 - experiment4 - INFO - 
+4. Measuring training step time...
+2025-12-01 19:15:15 - experiment4 - INFO -    Step time: 131.73 ± 0.26 ms
+2025-12-01 19:15:15 - experiment4 - INFO -    Throughput: 242.9 samples/sec
+2025-12-01 19:15:15 - experiment4 - INFO - 
+5. Measuring memory usage...
+2025-12-01 19:15:16 - experiment4 - INFO -    Model: 16.5 MB
+2025-12-01 19:15:16 - experiment4 - INFO -    Inference peak: 23.5 MB
+2025-12-01 19:15:16 - experiment4 - INFO -    Training peak: 23.6 MB
+2025-12-01 19:15:16 - experiment4 - INFO - 
+============================================================
+2025-12-01 19:15:16 - experiment4 - INFO - Profiling: MFCC_MLP
+2025-12-01 19:15:16 - experiment4 - INFO - ============================================================
+2025-12-01 19:15:16 - experiment4 - INFO - 
+1. Counting parameters...
+2025-12-01 19:15:16 - experiment4 - INFO -    Total: 69,284
+2025-12-01 19:15:16 - experiment4 - INFO -    Trainable: 69,284
+2025-12-01 19:15:16 - experiment4 - INFO - 
+2. Estimating FLOPs...
+2025-12-01 19:15:16 - experiment4 - INFO -    FLOPs: 135.68 KFLOPs
+2025-12-01 19:15:16 - experiment4 - INFO - 
+3. Measuring inference time...
+2025-12-01 19:15:17 - experiment4 - INFO -    Single sample: 4.62 ± 0.02 ms
+2025-12-01 19:15:31 - experiment4 - INFO -    Batch (32): 128.48 ± 0.14 ms
+2025-12-01 19:15:31 - experiment4 - INFO -    Throughput: 249.1 samples/sec
+2025-12-01 19:15:31 - experiment4 - INFO - 
+4. Measuring training step time...
+2025-12-01 19:15:35 - experiment4 - INFO -    Step time: 131.79 ± 0.35 ms
+2025-12-01 19:15:35 - experiment4 - INFO -    Throughput: 242.8 samples/sec
+2025-12-01 19:15:35 - experiment4 - INFO - 
+5. Measuring memory usage...
+2025-12-01 19:15:35 - experiment4 - INFO -    Model: 16.5 MB
+2025-12-01 19:15:35 - experiment4 - INFO -    Inference peak: 23.5 MB
+2025-12-01 19:15:35 - experiment4 - INFO -    Training peak: 23.6 MB
+2025-12-01 19:15:35 - experiment4 - INFO - 
+==========================================================================================
+2025-12-01 19:15:35 - experiment4 - INFO - COMPUTATIONAL EFFICIENCY SUMMARY
+2025-12-01 19:15:35 - experiment4 - INFO - ==========================================================================================
+2025-12-01 19:15:35 - experiment4 - INFO - Model              Params        FLOPs    Infer(ms)    Train(ms)   Memory(MB)
+2025-12-01 19:15:35 - experiment4 - INFO - ------------------------------------------------------------------------------------------
+2025-12-01 19:15:35 - experiment4 - INFO - mel_mlp             69.3K 135.68 KFLOPs      128.78      131.73        23.6
+2025-12-01 19:15:35 - experiment4 - INFO - mfcc_mlp            69.3K 135.68 KFLOPs      128.48      131.79        23.6
+2025-12-01 19:15:35 - experiment4 - INFO - ==========================================================================================
+2025-12-01 19:15:35 - experiment4 - INFO - Note: Infer/Train times are per batch, Memory is peak during training
+2025-12-01 19:15:35 - experiment4 - INFO - 
+Results saved to: outputs/experiment4_efficiency/efficiency_results.json

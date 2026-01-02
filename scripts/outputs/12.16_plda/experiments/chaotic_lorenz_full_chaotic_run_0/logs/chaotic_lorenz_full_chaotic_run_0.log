@@ -1,0 +1,13 @@
+2025-12-16 16:59:02,087 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+2025-12-16 16:59:02,087 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Device: cuda
+2025-12-16 16:59:02,087 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/outputs/12.16_plda/experiments/chaotic_lorenz_full_chaotic_run_0
+2025-12-16 16:59:02,088 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with lorenz system
+2025-12-16 16:59:02,088 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Setting up experiment components...
+2025-12-16 16:59:02,088 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating dataloaders...
+2025-12-16 16:59:24,179 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2025-12-16 16:59:24,179 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Dataloaders created:
+2025-12-16 16:59:24,179 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Train: 14 batches
+2025-12-16 16:59:24,179 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Val: 3 batches
+2025-12-16 16:59:24,179 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Test: 4 batches
+2025-12-16 16:59:24,179 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating model...
+2025-12-16 16:59:24,180 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26

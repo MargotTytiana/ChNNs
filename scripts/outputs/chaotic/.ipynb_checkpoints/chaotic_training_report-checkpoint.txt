@@ -1,0 +1,96 @@
+CHAOTIC NEURAL NETWORKS TRAINING REPORT
+============================================================
+Generated: 2025-11-30 16:58:05
+Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "linear",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "epochs": 100,
+  "delay_method": "autocorr",
+  "frame_length": 400,
+  "hop_length": 160
+}
+
+EXECUTIVE SUMMARY
+-----------------
+Total experiments: 1
+Successful experiments: 1
+Success rate: 100.0%
+Best configuration: mackey_glass + full_chaotic (0.7881)
+
+CHAOTIC SYSTEMS COMPARISON
+---------------------------
+MACKEY_GLASS:
+  Accuracy: 0.7881 ± 0.0000 [nan, nan]
+  Training Time: 101535.7s ± 0.0s
+  Success Rate: 100.0%
+  Experiments: 1
+
+MODEL TYPES COMPARISON
+----------------------
+full_chaotic: 0.7881 ± 0.0000
+
+CHAOTIC DYNAMICS ANALYSIS
+-------------------------
+Key dynamics trends observed during training:
+  trajectory_std: {'decreasing': 1}
+  feature_diversity: {'increasing': 1}
+  divergence_rate: {'increasing': 1}
+  trajectory_range: {'decreasing': 1}
+  feature_magnitude: {'increasing': 1}
+  embedding_separation: {'increasing': 1}
+
+RECOMMENDATIONS
+---------------
+1. Best performing system: mackey_glass with full_chaotic
+2. Most stable system: mackey_glass (lowest variance)
+3. Consider parameter optimization for failed experiments
+4. Monitor chaotic dynamics for early stopping criteria

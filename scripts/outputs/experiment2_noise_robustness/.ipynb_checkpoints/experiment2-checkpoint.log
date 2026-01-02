@@ -1,0 +1,312 @@
+2025-12-01 13:36:45,609 - experiment2 - INFO - ======================================================================
+2025-12-01 13:36:45,610 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2025-12-01 13:36:45,610 - experiment2 - INFO - ======================================================================
+2025-12-01 13:36:45,610 - experiment2 - INFO - Device: cuda
+2025-12-01 13:36:45,610 - experiment2 - INFO - Noise types: ['gaussian', 'babble', 'cafe', 'street']
+2025-12-01 13:36:45,610 - experiment2 - INFO - SNR levels: [20, 15, 10, 5, 0]
+2025-12-01 13:36:45,610 - experiment2 - INFO - 
+Loading test dataset...
+2025-12-01 13:39:46,022 - experiment2 - INFO - ======================================================================
+2025-12-01 13:39:46,023 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2025-12-01 13:39:46,023 - experiment2 - INFO - ======================================================================
+2025-12-01 13:39:46,023 - experiment2 - INFO - Device: cuda
+2025-12-01 13:39:46,023 - experiment2 - INFO - Noise types: ['gaussian', 'babble', 'cafe', 'street']
+2025-12-01 13:39:46,023 - experiment2 - INFO - SNR levels: [20, 15, 10, 5, 0]
+2025-12-01 13:39:46,023 - experiment2 - INFO - 
+Loading test dataset...
+2025-12-01 13:39:46,025 - experiment2 - INFO - Test samples: 160
+2025-12-01 13:39:46,025 - experiment2 - INFO - Number of speakers: 10
+2025-12-01 13:39:46,082 - experiment2 - INFO - 
+Found models: []
+2025-12-01 13:39:46,082 - experiment2 - ERROR - No model checkpoints found!
+2025-12-01 13:39:46,082 - experiment2 - INFO - Searched in: outputs/experiment1_comparison
+2025-12-01 13:40:39,044 - experiment2 - INFO - ======================================================================
+2025-12-01 13:40:39,044 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2025-12-01 13:40:39,044 - experiment2 - INFO - ======================================================================
+2025-12-01 13:40:39,045 - experiment2 - INFO - Device: cuda
+2025-12-01 13:40:39,045 - experiment2 - INFO - Noise types: ['gaussian', 'babble', 'cafe', 'street']
+2025-12-01 13:40:39,045 - experiment2 - INFO - SNR levels: [20, 15, 10, 5, 0]
+2025-12-01 13:40:39,045 - experiment2 - INFO - 
+Loading test dataset...
+2025-12-01 13:40:56,406 - experiment2 - INFO - Test samples: 118
+2025-12-01 13:40:56,406 - experiment2 - INFO - Number of speakers: 26
+2025-12-01 13:40:56,463 - experiment2 - INFO - 
+Found models: []
+2025-12-01 13:40:56,463 - experiment2 - ERROR - No model checkpoints found!
+2025-12-01 13:40:56,463 - experiment2 - INFO - Searched in: outputs/experiment1_comparison
+2025-12-01 13:42:29,983 - experiment2 - INFO - ======================================================================
+2025-12-01 13:42:29,984 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2025-12-01 13:42:29,984 - experiment2 - INFO - ======================================================================
+2025-12-01 13:42:29,984 - experiment2 - INFO - Device: cuda
+2025-12-01 13:42:29,984 - experiment2 - INFO - Noise types: ['gaussian', 'babble', 'cafe', 'street']
+2025-12-01 13:42:29,984 - experiment2 - INFO - SNR levels: [20, 15, 10, 5, 0]
+2025-12-01 13:42:29,984 - experiment2 - INFO - 
+Loading test dataset...
+2025-12-01 13:42:30,376 - experiment2 - INFO - Test samples: 118
+2025-12-01 13:42:30,376 - experiment2 - INFO - Number of speakers: 26
+2025-12-01 13:42:30,433 - experiment2 - INFO - 
+Found models: []
+2025-12-01 13:42:30,434 - experiment2 - ERROR - No model checkpoints found!
+2025-12-01 13:42:30,434 - experiment2 - INFO - Searched in: /scratch/project_2003370/yueyao/Model/scripts/outputs/experiment1_comparison
+2025-12-01 14:20:15,806 - experiment2 - INFO - ======================================================================
+2025-12-01 14:20:15,806 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2025-12-01 14:20:15,806 - experiment2 - INFO - ======================================================================
+2025-12-01 14:20:15,806 - experiment2 - INFO - Device: cuda
+2025-12-01 14:20:15,806 - experiment2 - INFO - Noise types: ['gaussian', 'babble', 'cafe', 'street']
+2025-12-01 14:20:15,806 - experiment2 - INFO - SNR levels: [20, 15, 10, 5, 0]
+2025-12-01 14:20:15,806 - experiment2 - INFO - 
+Loading test dataset...
+2025-12-01 14:20:16,195 - experiment2 - INFO - Test samples: 118
+2025-12-01 14:20:16,195 - experiment2 - INFO - Number of speakers: 26
+2025-12-01 14:20:16,197 - experiment2 - INFO - Found mel_mlp checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2025-12-01 14:20:16,198 - experiment2 - INFO - Found mfcc_mlp checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2025-12-01 14:20:16,198 - experiment2 - INFO - 
+Found 2 models: ['mel_mlp', 'mfcc_mlp']
+2025-12-01 14:20:16,198 - experiment2 - INFO - 
+============================================================
+2025-12-01 14:20:16,198 - experiment2 - INFO - Testing: mel_mlp
+2025-12-01 14:20:16,198 - experiment2 - INFO - Checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2025-12-01 14:20:16,198 - experiment2 - INFO - ============================================================
+2025-12-01 14:20:18,414 - experiment2 - INFO - 
+Evaluating on CLEAN data...
+2025-12-01 14:20:19,470 - experiment2 - INFO - Clean accuracy: 94.07%
+2025-12-01 14:20:19,470 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2025-12-01 14:20:19,814 - experiment2 - ERROR - Error testing mel_mlp: stack expects each tensor to be equal size, but got [120896] at entry 0 and [69696] at entry 1
+2025-12-01 14:20:19,818 - experiment2 - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 387, in run_experiment2
+    metrics = evaluate_model_on_loader(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 115, in evaluate_model_on_loader
+    for batch in pbar:
+                 ^^^^
+  File "/usr/local/lib/python3.12/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+               ^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/dataloader.py", line 789, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 398, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 212, in collate
+    collate(samples, collate_fn_map=collate_fn_map)
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 155, in collate
+    return collate_fn_map[elem_type](batch, collate_fn_map=collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 272, in collate_tensor_fn
+    return torch.stack(batch, 0, out=out)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: stack expects each tensor to be equal size, but got [120896] at entry 0 and [69696] at entry 1
+
+2025-12-01 14:20:19,818 - experiment2 - INFO - 
+============================================================
+2025-12-01 14:20:19,818 - experiment2 - INFO - Testing: mfcc_mlp
+2025-12-01 14:20:19,818 - experiment2 - INFO - Checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2025-12-01 14:20:19,818 - experiment2 - INFO - ============================================================
+2025-12-01 14:20:19,831 - experiment2 - INFO - 
+Evaluating on CLEAN data...
+2025-12-01 14:20:20,396 - experiment2 - INFO - Clean accuracy: 99.15%
+2025-12-01 14:20:20,397 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2025-12-01 14:20:20,563 - experiment2 - ERROR - Error testing mfcc_mlp: stack expects each tensor to be equal size, but got [120896] at entry 0 and [69696] at entry 1
+2025-12-01 14:20:20,564 - experiment2 - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 387, in run_experiment2
+    metrics = evaluate_model_on_loader(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 115, in evaluate_model_on_loader
+    for batch in pbar:
+                 ^^^^
+  File "/usr/local/lib/python3.12/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+               ^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/dataloader.py", line 789, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 398, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 212, in collate
+    collate(samples, collate_fn_map=collate_fn_map)
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 155, in collate
+    return collate_fn_map[elem_type](batch, collate_fn_map=collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/utils/data/_utils/collate.py", line 272, in collate_tensor_fn
+    return torch.stack(batch, 0, out=out)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: stack expects each tensor to be equal size, but got [120896] at entry 0 and [69696] at entry 1
+
+2025-12-01 14:20:20,564 - experiment2 - INFO - 
+==========================================================================================
+2025-12-01 14:20:20,564 - experiment2 - INFO - NOISE ROBUSTNESS COMPARISON SUMMARY
+2025-12-01 14:20:20,564 - experiment2 - INFO - ==========================================================================================
+2025-12-01 14:20:20,564 - experiment2 - INFO - Noise Type   SNR(dB) 
+2025-12-01 14:20:20,564 - experiment2 - INFO - ------------------------------------------------------------------------------------------
+2025-12-01 14:20:20,564 - experiment2 - INFO - Clean        -       
+2025-12-01 14:20:20,564 - experiment2 - INFO - ------------------------------------------------------------------------------------------
+2025-12-01 14:20:20,565 - experiment2 - INFO - gaussian     20      
+2025-12-01 14:20:20,565 - experiment2 - INFO - gaussian     15      
+2025-12-01 14:20:20,565 - experiment2 - INFO - gaussian     10      
+2025-12-01 14:20:20,565 - experiment2 - INFO - gaussian     5       
+2025-12-01 14:20:20,565 - experiment2 - INFO - gaussian     0       
+2025-12-01 14:20:20,565 - experiment2 - INFO - 
+2025-12-01 14:20:20,565 - experiment2 - INFO - babble       20      
+2025-12-01 14:20:20,565 - experiment2 - INFO - babble       15      
+2025-12-01 14:20:20,565 - experiment2 - INFO - babble       10      
+2025-12-01 14:20:20,565 - experiment2 - INFO - babble       5       
+2025-12-01 14:20:20,565 - experiment2 - INFO - babble       0       
+2025-12-01 14:20:20,565 - experiment2 - INFO - 
+2025-12-01 14:20:20,565 - experiment2 - INFO - cafe         20      
+2025-12-01 14:20:20,565 - experiment2 - INFO - cafe         15      
+2025-12-01 14:20:20,565 - experiment2 - INFO - cafe         10      
+2025-12-01 14:20:20,565 - experiment2 - INFO - cafe         5       
+2025-12-01 14:20:20,565 - experiment2 - INFO - cafe         0       
+2025-12-01 14:20:20,566 - experiment2 - INFO - 
+2025-12-01 14:20:20,566 - experiment2 - INFO - street       20      
+2025-12-01 14:20:20,566 - experiment2 - INFO - street       15      
+2025-12-01 14:20:20,566 - experiment2 - INFO - street       10      
+2025-12-01 14:20:20,566 - experiment2 - INFO - street       5       
+2025-12-01 14:20:20,566 - experiment2 - INFO - street       0       
+2025-12-01 14:20:20,566 - experiment2 - INFO - 
+2025-12-01 14:20:20,566 - experiment2 - INFO - ==========================================================================================
+2025-12-01 14:20:20,566 - experiment2 - INFO - 
+AVERAGE ACCURACY DEGRADATION (Clean - Noisy):
+2025-12-01 14:20:20,568 - experiment2 - INFO - 
+Results saved to: outputs/experiment2_noise_robustness/noise_robustness_results.json
+2025-12-01 14:27:28,280 - experiment2 - INFO - ======================================================================
+2025-12-01 14:27:28,281 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2025-12-01 14:27:28,281 - experiment2 - INFO - ======================================================================
+2025-12-01 14:27:28,281 - experiment2 - INFO - Device: cuda
+2025-12-01 14:27:28,281 - experiment2 - INFO - Noise types: ['gaussian', 'babble', 'cafe', 'street']
+2025-12-01 14:27:28,281 - experiment2 - INFO - SNR levels: [20, 15, 10, 5, 0]
+2025-12-01 14:27:28,281 - experiment2 - INFO - 
+Loading test dataset...
+2025-12-01 14:27:28,662 - experiment2 - INFO - Test samples: 118
+2025-12-01 14:27:28,662 - experiment2 - INFO - Number of speakers: 26
+2025-12-01 14:27:28,664 - experiment2 - INFO - Found mel_mlp checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2025-12-01 14:27:28,665 - experiment2 - INFO - Found mfcc_mlp checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2025-12-01 14:27:28,665 - experiment2 - INFO - 
+Found 2 models: ['mel_mlp', 'mfcc_mlp']
+2025-12-01 14:27:28,665 - experiment2 - INFO - 
+============================================================
+2025-12-01 14:27:28,665 - experiment2 - INFO - Testing: mel_mlp
+2025-12-01 14:27:28,665 - experiment2 - INFO - Checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2025-12-01 14:27:28,665 - experiment2 - INFO - ============================================================
+2025-12-01 14:27:30,682 - experiment2 - INFO - 
+Evaluating on CLEAN data...
+2025-12-01 14:27:31,646 - experiment2 - INFO - Clean accuracy: 94.07%
+2025-12-01 14:27:31,646 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2025-12-01 14:27:32,754 - experiment2 - INFO -   SNR= 20dB: 27.97% (drop: +66.10%)
+2025-12-01 14:27:33,859 - experiment2 - INFO -   SNR= 15dB: 15.25% (drop: +78.81%)
+2025-12-01 14:27:34,966 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +78.81%)
+2025-12-01 14:27:36,067 - experiment2 - INFO -   SNR=  5dB: 14.41% (drop: +79.66%)
+2025-12-01 14:27:37,163 - experiment2 - INFO -   SNR=  0dB:  7.63% (drop: +86.44%)
+2025-12-01 14:27:37,164 - experiment2 - INFO - 
+--- Noise: BABBLE ---
+2025-12-01 14:27:42,053 - experiment2 - INFO -   SNR= 20dB: 72.03% (drop: +22.03%)
+2025-12-01 14:27:46,941 - experiment2 - INFO -   SNR= 15dB: 37.29% (drop: +56.78%)
+2025-12-01 14:27:51,840 - experiment2 - INFO -   SNR= 10dB: 23.73% (drop: +70.34%)
+2025-12-01 14:27:56,723 - experiment2 - INFO -   SNR=  5dB: 11.02% (drop: +83.05%)
+2025-12-01 14:28:01,603 - experiment2 - INFO -   SNR=  0dB:  8.47% (drop: +85.59%)
+2025-12-01 14:28:01,603 - experiment2 - INFO - 
+--- Noise: CAFE ---
+2025-12-01 14:28:07,488 - experiment2 - INFO -   SNR= 20dB: 28.81% (drop: +65.25%)
+2025-12-01 14:28:13,374 - experiment2 - INFO -   SNR= 15dB: 15.25% (drop: +78.81%)
+2025-12-01 14:28:19,252 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +78.81%)
+2025-12-01 14:28:25,138 - experiment2 - INFO -   SNR=  5dB: 14.41% (drop: +79.66%)
+2025-12-01 14:28:31,027 - experiment2 - INFO -   SNR=  0dB:  8.47% (drop: +85.59%)
+2025-12-01 14:28:31,028 - experiment2 - INFO - 
+--- Noise: STREET ---
+2025-12-01 14:28:32,837 - experiment2 - INFO -   SNR= 20dB: 49.15% (drop: +44.92%)
+2025-12-01 14:28:34,657 - experiment2 - INFO -   SNR= 15dB: 32.20% (drop: +61.86%)
+2025-12-01 14:28:36,469 - experiment2 - INFO -   SNR= 10dB: 16.95% (drop: +77.12%)
+2025-12-01 14:28:38,274 - experiment2 - INFO -   SNR=  5dB: 15.25% (drop: +78.81%)
+2025-12-01 14:28:40,083 - experiment2 - INFO -   SNR=  0dB: 10.17% (drop: +83.90%)
+2025-12-01 14:28:40,083 - experiment2 - INFO - 
+============================================================
+2025-12-01 14:28:40,084 - experiment2 - INFO - Testing: mfcc_mlp
+2025-12-01 14:28:40,084 - experiment2 - INFO - Checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2025-12-01 14:28:40,084 - experiment2 - INFO - ============================================================
+2025-12-01 14:28:40,100 - experiment2 - INFO - 
+Evaluating on CLEAN data...
+2025-12-01 14:28:40,675 - experiment2 - INFO - Clean accuracy: 99.15%
+2025-12-01 14:28:40,675 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2025-12-01 14:28:41,780 - experiment2 - INFO -   SNR= 20dB: 27.97% (drop: +71.19%)
+2025-12-01 14:28:42,883 - experiment2 - INFO -   SNR= 15dB: 16.95% (drop: +82.20%)
+2025-12-01 14:28:43,988 - experiment2 - INFO -   SNR= 10dB: 13.56% (drop: +85.59%)
+2025-12-01 14:28:45,097 - experiment2 - INFO -   SNR=  5dB: 11.02% (drop: +88.14%)
+2025-12-01 14:28:46,198 - experiment2 - INFO -   SNR=  0dB:  9.32% (drop: +89.83%)
+2025-12-01 14:28:46,198 - experiment2 - INFO - 
+--- Noise: BABBLE ---
+2025-12-01 14:28:51,139 - experiment2 - INFO -   SNR= 20dB: 70.34% (drop: +28.81%)
+2025-12-01 14:28:56,076 - experiment2 - INFO -   SNR= 15dB: 34.75% (drop: +64.41%)
+2025-12-01 14:29:01,015 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +83.90%)
+2025-12-01 14:29:05,956 - experiment2 - INFO -   SNR=  5dB: 10.17% (drop: +88.98%)
+2025-12-01 14:29:10,892 - experiment2 - INFO -   SNR=  0dB:  8.47% (drop: +90.68%)
+2025-12-01 14:29:10,892 - experiment2 - INFO - 
+--- Noise: CAFE ---
+2025-12-01 14:29:16,836 - experiment2 - INFO -   SNR= 20dB: 28.81% (drop: +70.34%)
+2025-12-01 14:29:22,774 - experiment2 - INFO -   SNR= 15dB: 16.10% (drop: +83.05%)
+2025-12-01 14:29:28,726 - experiment2 - INFO -   SNR= 10dB: 13.56% (drop: +85.59%)
+2025-12-01 14:29:34,680 - experiment2 - INFO -   SNR=  5dB: 11.02% (drop: +88.14%)
+2025-12-01 14:29:40,627 - experiment2 - INFO -   SNR=  0dB:  8.47% (drop: +90.68%)
+2025-12-01 14:29:40,627 - experiment2 - INFO - 
+--- Noise: STREET ---
+2025-12-01 14:29:42,444 - experiment2 - INFO -   SNR= 20dB: 52.54% (drop: +46.61%)
+2025-12-01 14:29:44,260 - experiment2 - INFO -   SNR= 15dB: 29.66% (drop: +69.49%)
+2025-12-01 14:29:46,069 - experiment2 - INFO -   SNR= 10dB: 16.95% (drop: +82.20%)
+2025-12-01 14:29:47,879 - experiment2 - INFO -   SNR=  5dB: 15.25% (drop: +83.90%)
+2025-12-01 14:29:49,694 - experiment2 - INFO -   SNR=  0dB: 12.71% (drop: +86.44%)
+2025-12-01 14:29:49,695 - experiment2 - INFO - 
+==========================================================================================
+2025-12-01 14:29:49,695 - experiment2 - INFO - NOISE ROBUSTNESS COMPARISON SUMMARY
+2025-12-01 14:29:49,695 - experiment2 - INFO - ==========================================================================================
+2025-12-01 14:29:49,695 - experiment2 - INFO - Noise Type   SNR(dB)       mel_mlp     mfcc_mlp
+2025-12-01 14:29:49,695 - experiment2 - INFO - ------------------------------------------------------------------------------------------
+2025-12-01 14:29:49,695 - experiment2 - INFO - Clean        -              94.07%       99.15%
+2025-12-01 14:29:49,695 - experiment2 - INFO - ------------------------------------------------------------------------------------------
+2025-12-01 14:29:49,695 - experiment2 - INFO - gaussian     20             27.97%       27.97%
+2025-12-01 14:29:49,695 - experiment2 - INFO - gaussian     15             15.25%       16.95%
+2025-12-01 14:29:49,695 - experiment2 - INFO - gaussian     10             15.25%       13.56%
+2025-12-01 14:29:49,695 - experiment2 - INFO - gaussian     5              14.41%       11.02%
+2025-12-01 14:29:49,695 - experiment2 - INFO - gaussian     0               7.63%        9.32%
+2025-12-01 14:29:49,696 - experiment2 - INFO - 
+2025-12-01 14:29:49,696 - experiment2 - INFO - babble       20             72.03%       70.34%
+2025-12-01 14:29:49,696 - experiment2 - INFO - babble       15             37.29%       34.75%
+2025-12-01 14:29:49,696 - experiment2 - INFO - babble       10             23.73%       15.25%
+2025-12-01 14:29:49,696 - experiment2 - INFO - babble       5              11.02%       10.17%
+2025-12-01 14:29:49,696 - experiment2 - INFO - babble       0               8.47%        8.47%
+2025-12-01 14:29:49,696 - experiment2 - INFO - 
+2025-12-01 14:29:49,696 - experiment2 - INFO - cafe         20             28.81%       28.81%
+2025-12-01 14:29:49,696 - experiment2 - INFO - cafe         15             15.25%       16.10%
+2025-12-01 14:29:49,696 - experiment2 - INFO - cafe         10             15.25%       13.56%
+2025-12-01 14:29:49,696 - experiment2 - INFO - cafe         5              14.41%       11.02%
+2025-12-01 14:29:49,696 - experiment2 - INFO - cafe         0               8.47%        8.47%
+2025-12-01 14:29:49,696 - experiment2 - INFO - 
+2025-12-01 14:29:49,697 - experiment2 - INFO - street       20             49.15%       52.54%
+2025-12-01 14:29:49,697 - experiment2 - INFO - street       15             32.20%       29.66%
+2025-12-01 14:29:49,697 - experiment2 - INFO - street       10             16.95%       16.95%
+2025-12-01 14:29:49,697 - experiment2 - INFO - street       5              15.25%       15.25%
+2025-12-01 14:29:49,697 - experiment2 - INFO - street       0              10.17%       12.71%
+2025-12-01 14:29:49,697 - experiment2 - INFO - 
+2025-12-01 14:29:49,697 - experiment2 - INFO - ==========================================================================================
+2025-12-01 14:29:49,697 - experiment2 - INFO - 
+AVERAGE ACCURACY DEGRADATION (Clean - Noisy):
+2025-12-01 14:29:49,697 - experiment2 - INFO -   mel_mlp: +72.12%
+2025-12-01 14:29:49,697 - experiment2 - INFO -   mfcc_mlp: +78.01%
+2025-12-01 14:29:49,700 - experiment2 - INFO - 
+Results saved to: outputs/experiment2_noise_robustness/noise_robustness_results.json

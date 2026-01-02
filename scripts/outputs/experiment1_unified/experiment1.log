@@ -1,0 +1,161 @@
+2025-12-01 14:14:23 - experiment1 - INFO - ======================================================================
+2025-12-01 14:14:23 - experiment1 - INFO - EXPERIMENT 1: UNIFIED BASELINE COMPARISON
+2025-12-01 14:14:23 - experiment1 - INFO - ======================================================================
+2025-12-01 14:14:23 - experiment1 - INFO - Device: cuda
+2025-12-01 14:14:23 - experiment1 - INFO - Seed: 42
+2025-12-01 14:14:23 - experiment1 - INFO - Models: ['mel_mlp', 'mfcc_mlp']
+2025-12-01 14:14:23 - experiment1 - INFO - ======================================================================
+2025-12-01 14:14:23 - experiment1 - INFO - Loading dataset...
+2025-12-01 14:14:23 - experiment1 - INFO - Data dir: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2025-12-01 14:14:23 - experiment1 - INFO - ======================================================================
+2025-12-01 14:14:23 - experiment1 - INFO - Train samples: 472
+2025-12-01 14:14:23 - experiment1 - INFO - Val samples: 89
+2025-12-01 14:14:23 - experiment1 - INFO - Test samples: 118
+2025-12-01 14:14:23 - experiment1 - INFO - Number of speakers: 26
+2025-12-01 14:14:23 - experiment1 - INFO - 
+======================================================================
+2025-12-01 14:14:23 - experiment1 - INFO - Training model: MEL_MLP
+2025-12-01 14:14:23 - experiment1 - INFO - ======================================================================
+2025-12-01 14:14:26 - experiment1 - INFO - Model parameters: 69,284 (trainable: 69,284)
+2025-12-01 14:14:30 - experiment1 - INFO - Starting training for 100 epochs...
+2025-12-01 14:14:30 - experiment1 - INFO - Early stopping patience: 20
+2025-12-01 14:14:45 - experiment1 - INFO -   ★ New best model saved! Val Acc: 25.84%
+2025-12-01 14:14:45 - experiment1 - INFO - Epoch   1/100 | Train Loss: 4.4339, Acc: 6.03% | Val Loss: 4.2222, Acc: 25.84% | LR: 1.00e-03
+2025-12-01 14:14:48 - experiment1 - INFO -   ★ New best model saved! Val Acc: 43.82%
+2025-12-01 14:14:48 - experiment1 - INFO - Epoch   2/100 | Train Loss: 3.7054, Acc: 26.56% | Val Loss: 3.4863, Acc: 43.82% | LR: 1.00e-03
+2025-12-01 14:14:51 - experiment1 - INFO -   ★ New best model saved! Val Acc: 61.80%
+2025-12-01 14:14:51 - experiment1 - INFO - Epoch   3/100 | Train Loss: 3.1552, Acc: 39.96% | Val Loss: 2.8807, Acc: 61.80% | LR: 1.00e-03
+2025-12-01 14:14:54 - experiment1 - INFO -   ★ New best model saved! Val Acc: 68.54%
+2025-12-01 14:14:54 - experiment1 - INFO - Epoch   4/100 | Train Loss: 2.7325, Acc: 50.67% | Val Loss: 2.3961, Acc: 68.54% | LR: 1.00e-03
+2025-12-01 14:14:56 - experiment1 - INFO -   ★ New best model saved! Val Acc: 76.40%
+2025-12-01 14:14:56 - experiment1 - INFO - Epoch   5/100 | Train Loss: 2.3203, Acc: 60.94% | Val Loss: 2.1083, Acc: 76.40% | LR: 1.00e-03
+2025-12-01 14:14:59 - experiment1 - INFO -   ★ New best model saved! Val Acc: 77.53%
+2025-12-01 14:14:59 - experiment1 - INFO - Epoch   6/100 | Train Loss: 1.9946, Acc: 68.53% | Val Loss: 1.7992, Acc: 77.53% | LR: 1.00e-03
+2025-12-01 14:15:01 - experiment1 - INFO -   ★ New best model saved! Val Acc: 85.39%
+2025-12-01 14:15:01 - experiment1 - INFO - Epoch   7/100 | Train Loss: 1.7815, Acc: 71.88% | Val Loss: 1.4886, Acc: 85.39% | LR: 1.00e-03
+2025-12-01 14:15:04 - experiment1 - INFO - Epoch   8/100 | Train Loss: 1.6104, Acc: 74.55% | Val Loss: 1.3187, Acc: 85.39% | LR: 1.00e-03
+2025-12-01 14:15:07 - experiment1 - INFO -   ★ New best model saved! Val Acc: 92.13%
+2025-12-01 14:15:07 - experiment1 - INFO - Epoch   9/100 | Train Loss: 1.3700, Acc: 78.35% | Val Loss: 1.1060, Acc: 92.13% | LR: 1.00e-03
+2025-12-01 14:15:09 - experiment1 - INFO -   ★ New best model saved! Val Acc: 93.26%
+2025-12-01 14:15:09 - experiment1 - INFO - Epoch  10/100 | Train Loss: 1.2457, Acc: 81.03% | Val Loss: 0.8942, Acc: 93.26% | LR: 1.00e-03
+2025-12-01 14:15:12 - experiment1 - INFO - Epoch  11/100 | Train Loss: 1.0633, Acc: 84.82% | Val Loss: 0.8193, Acc: 92.13% | LR: 1.00e-03
+2025-12-01 14:15:14 - experiment1 - INFO - Epoch  12/100 | Train Loss: 0.9826, Acc: 84.82% | Val Loss: 0.7260, Acc: 92.13% | LR: 1.00e-03
+2025-12-01 14:15:17 - experiment1 - INFO -   ★ New best model saved! Val Acc: 94.38%
+2025-12-01 14:15:17 - experiment1 - INFO - Epoch  13/100 | Train Loss: 0.8946, Acc: 86.61% | Val Loss: 0.6391, Acc: 94.38% | LR: 1.00e-03
+2025-12-01 14:15:19 - experiment1 - INFO -   ★ New best model saved! Val Acc: 95.51%
+2025-12-01 14:15:19 - experiment1 - INFO - Epoch  14/100 | Train Loss: 0.8121, Acc: 89.51% | Val Loss: 0.5173, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:15:22 - experiment1 - INFO - Epoch  15/100 | Train Loss: 0.7738, Acc: 89.51% | Val Loss: 0.4558, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:15:25 - experiment1 - INFO -   ★ New best model saved! Val Acc: 100.00%
+2025-12-01 14:15:25 - experiment1 - INFO - Epoch  16/100 | Train Loss: 0.6826, Acc: 89.51% | Val Loss: 0.3970, Acc: 100.00% | LR: 1.00e-03
+2025-12-01 14:15:27 - experiment1 - INFO - Epoch  17/100 | Train Loss: 0.6468, Acc: 90.85% | Val Loss: 0.4779, Acc: 93.26% | LR: 1.00e-03
+2025-12-01 14:15:30 - experiment1 - INFO - Epoch  18/100 | Train Loss: 0.6096, Acc: 91.07% | Val Loss: 0.3125, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:15:32 - experiment1 - INFO - Epoch  19/100 | Train Loss: 0.5279, Acc: 92.63% | Val Loss: 0.3185, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:15:35 - experiment1 - INFO - Epoch  20/100 | Train Loss: 0.5161, Acc: 92.19% | Val Loss: 0.2515, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:15:38 - experiment1 - INFO - Epoch  21/100 | Train Loss: 0.4861, Acc: 92.19% | Val Loss: 0.2641, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:15:40 - experiment1 - INFO - Epoch  22/100 | Train Loss: 0.4810, Acc: 92.63% | Val Loss: 0.2004, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:15:43 - experiment1 - INFO - Epoch  23/100 | Train Loss: 0.4380, Acc: 93.75% | Val Loss: 0.2094, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:15:45 - experiment1 - INFO - Epoch  24/100 | Train Loss: 0.4058, Acc: 94.87% | Val Loss: 0.1960, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:15:48 - experiment1 - INFO - Epoch  25/100 | Train Loss: 0.3753, Acc: 92.86% | Val Loss: 0.1584, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:15:51 - experiment1 - INFO - Epoch  26/100 | Train Loss: 0.3215, Acc: 94.87% | Val Loss: 0.1618, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:15:53 - experiment1 - INFO - Epoch  27/100 | Train Loss: 0.3431, Acc: 93.97% | Val Loss: 0.1659, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:15:56 - experiment1 - INFO - Epoch  28/100 | Train Loss: 0.3246, Acc: 94.87% | Val Loss: 0.1461, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:15:58 - experiment1 - INFO - Epoch  29/100 | Train Loss: 0.3158, Acc: 94.64% | Val Loss: 0.1609, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:16:01 - experiment1 - INFO - Epoch  30/100 | Train Loss: 0.3013, Acc: 94.87% | Val Loss: 0.1557, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:16:03 - experiment1 - INFO - Epoch  31/100 | Train Loss: 0.3061, Acc: 94.20% | Val Loss: 0.1680, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:16:06 - experiment1 - INFO - Epoch  32/100 | Train Loss: 0.3389, Acc: 92.63% | Val Loss: 0.1105, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:16:09 - experiment1 - INFO - Epoch  33/100 | Train Loss: 0.3142, Acc: 95.09% | Val Loss: 0.1291, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:16:11 - experiment1 - INFO - Epoch  34/100 | Train Loss: 0.2089, Acc: 96.21% | Val Loss: 0.1155, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:16:14 - experiment1 - INFO - Epoch  35/100 | Train Loss: 0.2389, Acc: 96.43% | Val Loss: 0.1729, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:16:16 - experiment1 - INFO - Epoch  36/100 | Train Loss: 0.2534, Acc: 94.87% | Val Loss: 0.0905, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:16:16 - experiment1 - INFO - Early stopping triggered at epoch 36
+2025-12-01 14:16:16 - experiment1 - INFO - 
+Running final test evaluation...
+2025-12-01 14:16:20 - experiment1 - INFO - Test Results: Loss=0.4609, Accuracy=94.07%
+2025-12-01 14:16:20 - experiment1 - INFO - ✓ mel_mlp completed: Test Acc = 94.07%
+2025-12-01 14:16:20 - experiment1 - INFO - 
+======================================================================
+2025-12-01 14:16:20 - experiment1 - INFO - Training model: MFCC_MLP
+2025-12-01 14:16:20 - experiment1 - INFO - ======================================================================
+2025-12-01 14:16:20 - experiment1 - INFO - Model parameters: 69,284 (trainable: 69,284)
+2025-12-01 14:16:20 - experiment1 - INFO - Starting training for 100 epochs...
+2025-12-01 14:16:20 - experiment1 - INFO - Early stopping patience: 20
+2025-12-01 14:16:22 - experiment1 - INFO -   ★ New best model saved! Val Acc: 22.47%
+2025-12-01 14:16:22 - experiment1 - INFO - Epoch   1/100 | Train Loss: 4.4509, Acc: 6.92% | Val Loss: 4.2082, Acc: 22.47% | LR: 1.00e-03
+2025-12-01 14:16:25 - experiment1 - INFO -   ★ New best model saved! Val Acc: 37.08%
+2025-12-01 14:16:25 - experiment1 - INFO - Epoch   2/100 | Train Loss: 3.7277, Acc: 24.33% | Val Loss: 3.5329, Acc: 37.08% | LR: 1.00e-03
+2025-12-01 14:16:28 - experiment1 - INFO -   ★ New best model saved! Val Acc: 57.30%
+2025-12-01 14:16:28 - experiment1 - INFO - Epoch   3/100 | Train Loss: 3.2072, Acc: 35.71% | Val Loss: 2.9821, Acc: 57.30% | LR: 1.00e-03
+2025-12-01 14:16:30 - experiment1 - INFO -   ★ New best model saved! Val Acc: 74.16%
+2025-12-01 14:16:30 - experiment1 - INFO - Epoch   4/100 | Train Loss: 2.7660, Acc: 50.22% | Val Loss: 2.5187, Acc: 74.16% | LR: 1.00e-03
+2025-12-01 14:16:33 - experiment1 - INFO -   ★ New best model saved! Val Acc: 77.53%
+2025-12-01 14:16:33 - experiment1 - INFO - Epoch   5/100 | Train Loss: 2.3711, Acc: 61.61% | Val Loss: 2.1267, Acc: 77.53% | LR: 1.00e-03
+2025-12-01 14:16:36 - experiment1 - INFO -   ★ New best model saved! Val Acc: 80.90%
+2025-12-01 14:16:36 - experiment1 - INFO - Epoch   6/100 | Train Loss: 2.1137, Acc: 65.62% | Val Loss: 1.8502, Acc: 80.90% | LR: 1.00e-03
+2025-12-01 14:16:38 - experiment1 - INFO - Epoch   7/100 | Train Loss: 1.8375, Acc: 69.87% | Val Loss: 1.5677, Acc: 79.78% | LR: 1.00e-03
+2025-12-01 14:16:41 - experiment1 - INFO -   ★ New best model saved! Val Acc: 88.76%
+2025-12-01 14:16:41 - experiment1 - INFO - Epoch   8/100 | Train Loss: 1.6193, Acc: 76.12% | Val Loss: 1.3039, Acc: 88.76% | LR: 1.00e-03
+2025-12-01 14:16:43 - experiment1 - INFO - Epoch   9/100 | Train Loss: 1.4290, Acc: 79.02% | Val Loss: 1.1260, Acc: 87.64% | LR: 1.00e-03
+2025-12-01 14:16:46 - experiment1 - INFO -   ★ New best model saved! Val Acc: 89.89%
+2025-12-01 14:16:46 - experiment1 - INFO - Epoch  10/100 | Train Loss: 1.2985, Acc: 83.04% | Val Loss: 0.9605, Acc: 89.89% | LR: 1.00e-03
+2025-12-01 14:16:49 - experiment1 - INFO -   ★ New best model saved! Val Acc: 93.26%
+2025-12-01 14:16:49 - experiment1 - INFO - Epoch  11/100 | Train Loss: 1.1430, Acc: 81.70% | Val Loss: 0.8145, Acc: 93.26% | LR: 1.00e-03
+2025-12-01 14:16:51 - experiment1 - INFO - Epoch  12/100 | Train Loss: 1.0336, Acc: 84.15% | Val Loss: 0.7282, Acc: 91.01% | LR: 1.00e-03
+2025-12-01 14:16:54 - experiment1 - INFO -   ★ New best model saved! Val Acc: 96.63%
+2025-12-01 14:16:54 - experiment1 - INFO - Epoch  13/100 | Train Loss: 0.9140, Acc: 85.71% | Val Loss: 0.6293, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:16:56 - experiment1 - INFO - Epoch  14/100 | Train Loss: 0.8997, Acc: 84.60% | Val Loss: 0.5768, Acc: 93.26% | LR: 1.00e-03
+2025-12-01 14:16:59 - experiment1 - INFO - Epoch  15/100 | Train Loss: 0.7625, Acc: 90.18% | Val Loss: 0.4820, Acc: 94.38% | LR: 1.00e-03
+2025-12-01 14:17:02 - experiment1 - INFO - Epoch  16/100 | Train Loss: 0.7227, Acc: 90.62% | Val Loss: 0.4286, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:17:04 - experiment1 - INFO -   ★ New best model saved! Val Acc: 97.75%
+2025-12-01 14:17:04 - experiment1 - INFO - Epoch  17/100 | Train Loss: 0.6171, Acc: 91.07% | Val Loss: 0.3727, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:07 - experiment1 - INFO - Epoch  18/100 | Train Loss: 0.5791, Acc: 92.41% | Val Loss: 0.3225, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:17:10 - experiment1 - INFO - Epoch  19/100 | Train Loss: 0.5777, Acc: 92.63% | Val Loss: 0.2796, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:12 - experiment1 - INFO - Epoch  20/100 | Train Loss: 0.5125, Acc: 92.86% | Val Loss: 0.3198, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:17:15 - experiment1 - INFO - Epoch  21/100 | Train Loss: 0.5088, Acc: 92.41% | Val Loss: 0.2372, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:18 - experiment1 - INFO - Epoch  22/100 | Train Loss: 0.4121, Acc: 95.09% | Val Loss: 0.2476, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:17:20 - experiment1 - INFO - Epoch  23/100 | Train Loss: 0.4147, Acc: 94.20% | Val Loss: 0.2842, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:17:23 - experiment1 - INFO - Epoch  24/100 | Train Loss: 0.4254, Acc: 92.86% | Val Loss: 0.2038, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:25 - experiment1 - INFO - Epoch  25/100 | Train Loss: 0.3575, Acc: 94.87% | Val Loss: 0.1945, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:17:28 - experiment1 - INFO - Epoch  26/100 | Train Loss: 0.4040, Acc: 93.75% | Val Loss: 0.1862, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:17:31 - experiment1 - INFO - Epoch  27/100 | Train Loss: 0.3767, Acc: 93.53% | Val Loss: 0.1643, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:17:33 - experiment1 - INFO -   ★ New best model saved! Val Acc: 100.00%
+2025-12-01 14:17:33 - experiment1 - INFO - Epoch  28/100 | Train Loss: 0.3577, Acc: 93.75% | Val Loss: 0.1211, Acc: 100.00% | LR: 1.00e-03
+2025-12-01 14:17:36 - experiment1 - INFO - Epoch  29/100 | Train Loss: 0.3300, Acc: 93.75% | Val Loss: 0.1366, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:39 - experiment1 - INFO - Epoch  30/100 | Train Loss: 0.2737, Acc: 94.87% | Val Loss: 0.1341, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:41 - experiment1 - INFO - Epoch  31/100 | Train Loss: 0.3179, Acc: 94.87% | Val Loss: 0.1922, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:17:44 - experiment1 - INFO - Epoch  32/100 | Train Loss: 0.2773, Acc: 95.31% | Val Loss: 0.1255, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:17:47 - experiment1 - INFO - Epoch  33/100 | Train Loss: 0.2783, Acc: 95.31% | Val Loss: 0.1428, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:17:49 - experiment1 - INFO - Epoch  34/100 | Train Loss: 0.2493, Acc: 96.21% | Val Loss: 0.1227, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:52 - experiment1 - INFO - Epoch  35/100 | Train Loss: 0.2721, Acc: 95.09% | Val Loss: 0.1192, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:17:54 - experiment1 - INFO - Epoch  36/100 | Train Loss: 0.2639, Acc: 95.54% | Val Loss: 0.0857, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:17:57 - experiment1 - INFO - Epoch  37/100 | Train Loss: 0.2634, Acc: 94.64% | Val Loss: 0.1080, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:18:00 - experiment1 - INFO - Epoch  38/100 | Train Loss: 0.2210, Acc: 96.43% | Val Loss: 0.0786, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:18:02 - experiment1 - INFO - Epoch  39/100 | Train Loss: 0.2244, Acc: 95.76% | Val Loss: 0.1096, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:18:05 - experiment1 - INFO - Epoch  40/100 | Train Loss: 0.2204, Acc: 95.76% | Val Loss: 0.1242, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:18:08 - experiment1 - INFO - Epoch  41/100 | Train Loss: 0.2095, Acc: 94.87% | Val Loss: 0.1187, Acc: 96.63% | LR: 1.00e-03
+2025-12-01 14:18:10 - experiment1 - INFO - Epoch  42/100 | Train Loss: 0.2462, Acc: 93.75% | Val Loss: 0.1157, Acc: 97.75% | LR: 1.00e-03
+2025-12-01 14:18:13 - experiment1 - INFO - Epoch  43/100 | Train Loss: 0.2275, Acc: 95.54% | Val Loss: 0.0951, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:18:16 - experiment1 - INFO - Epoch  44/100 | Train Loss: 0.2661, Acc: 93.75% | Val Loss: 0.1405, Acc: 95.51% | LR: 1.00e-03
+2025-12-01 14:18:18 - experiment1 - INFO - Epoch  45/100 | Train Loss: 0.2668, Acc: 93.30% | Val Loss: 0.0752, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:18:21 - experiment1 - INFO - Epoch  46/100 | Train Loss: 0.2670, Acc: 92.86% | Val Loss: 0.0483, Acc: 100.00% | LR: 1.00e-03
+2025-12-01 14:18:23 - experiment1 - INFO - Epoch  47/100 | Train Loss: 0.1844, Acc: 96.43% | Val Loss: 0.0992, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:18:26 - experiment1 - INFO - Epoch  48/100 | Train Loss: 0.2011, Acc: 95.98% | Val Loss: 0.1105, Acc: 98.88% | LR: 1.00e-03
+2025-12-01 14:18:26 - experiment1 - INFO - Early stopping triggered at epoch 48
+2025-12-01 14:18:26 - experiment1 - INFO - 
+Running final test evaluation...
+2025-12-01 14:18:27 - experiment1 - INFO - Test Results: Loss=0.1280, Accuracy=99.15%
+2025-12-01 14:18:27 - experiment1 - INFO - ✓ mfcc_mlp completed: Test Acc = 99.15%
+2025-12-01 14:18:27 - experiment1 - INFO - 
+======================================================================
+2025-12-01 14:18:27 - experiment1 - INFO - EXPERIMENT 1 SUMMARY
+2025-12-01 14:18:27 - experiment1 - INFO - ======================================================================
+2025-12-01 14:18:27 - experiment1 - INFO - Model              Val Acc   Test Acc   Time (min)       Params
+2025-12-01 14:18:27 - experiment1 - INFO - -----------------------------------------------------------------
+2025-12-01 14:18:27 - experiment1 - INFO - mel_mlp            100.00%     94.07%         1.8       69,284
+2025-12-01 14:18:27 - experiment1 - INFO - mfcc_mlp           100.00%     99.15%         2.1       69,284
+2025-12-01 14:18:27 - experiment1 - INFO - =================================================================
+2025-12-01 14:18:27 - experiment1 - INFO - 
+Summary saved to: outputs/experiment1_unified/experiment1_summary.json
+2025-12-01 14:18:27 - experiment1 - INFO - 
+Checkpoint locations:
+2025-12-01 14:18:27 - experiment1 - INFO -   mel_mlp: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2025-12-01 14:18:27 - experiment1 - INFO -   mfcc_mlp: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth

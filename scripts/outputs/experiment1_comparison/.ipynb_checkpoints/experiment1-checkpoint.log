@@ -1,0 +1,186 @@
+2025-11-30 12:37:00,669 - experiment1 - INFO - 
+######################################################################
+2025-11-30 12:37:00,669 - experiment1 - INFO - # Model: mel_mlp
+2025-11-30 12:37:00,669 - experiment1 - INFO - ######################################################################
+
+2025-11-30 12:37:00,670 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,670 - experiment1 - INFO - Running baseline model: mel_mlp
+2025-11-30 12:37:00,670 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,863 - experiment1 - ERROR - Failed to run mel_mlp: 'BaselineExperiment' object has no attribute 'run'
+2025-11-30 12:37:00,863 - experiment1 - INFO - 
+######################################################################
+2025-11-30 12:37:00,863 - experiment1 - INFO - # Model: mfcc_mlp
+2025-11-30 12:37:00,863 - experiment1 - INFO - ######################################################################
+
+2025-11-30 12:37:00,863 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,863 - experiment1 - INFO - Running baseline model: mfcc_mlp
+2025-11-30 12:37:00,863 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,872 - experiment1 - ERROR - Failed to run mfcc_mlp: 'BaselineExperiment' object has no attribute 'run'
+2025-11-30 12:37:00,872 - experiment1 - INFO - 
+######################################################################
+2025-11-30 12:37:00,872 - experiment1 - INFO - # Model: chaotic_lorenz
+2025-11-30 12:37:00,872 - experiment1 - INFO - ######################################################################
+
+2025-11-30 12:37:00,872 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,872 - experiment1 - INFO - Running chaotic model: chaotic_lorenz
+2025-11-30 12:37:00,872 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,891 - experiment1 - ERROR - Failed to run chaotic_lorenz: 'ChaoticExperiment' object has no attribute 'run'
+2025-11-30 12:37:00,891 - experiment1 - INFO - 
+######################################################################
+2025-11-30 12:37:00,891 - experiment1 - INFO - # Model: chaotic_hybrid
+2025-11-30 12:37:00,891 - experiment1 - INFO - ######################################################################
+
+2025-11-30 12:37:00,892 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,892 - experiment1 - INFO - Running chaotic model: chaotic_hybrid
+2025-11-30 12:37:00,892 - experiment1 - INFO - ============================================================
+2025-11-30 12:37:00,900 - experiment1 - ERROR - Failed to run chaotic_hybrid: 'ChaoticExperiment' object has no attribute 'run'
+2025-11-30 12:37:00,901 - experiment1 - INFO - Results saved to outputs/experiment1_comparison/comparison_results.json
+2025-11-30 12:37:00,901 - experiment1 - INFO - 
+================================================================================
+2025-11-30 12:37:00,902 - experiment1 - INFO - EXPERIMENT 1: STANDARD PERFORMANCE COMPARISON
+2025-11-30 12:37:00,902 - experiment1 - INFO - ================================================================================
+2025-11-30 12:37:00,902 - experiment1 - INFO - Model                   Val Acc   Test Acc        EER  Time(min)
+2025-11-30 12:37:00,902 - experiment1 - INFO - --------------------------------------------------------------------------------
+2025-11-30 12:37:00,902 - experiment1 - INFO - mel_mlp                   ERROR
+2025-11-30 12:37:00,902 - experiment1 - INFO - mfcc_mlp                  ERROR
+2025-11-30 12:37:00,902 - experiment1 - INFO - chaotic_lorenz            ERROR
+2025-11-30 12:37:00,902 - experiment1 - INFO - chaotic_hybrid            ERROR
+2025-11-30 12:37:00,902 - experiment1 - INFO - ================================================================================
+2025-11-30 12:39:28,218 - experiment1 - INFO - ============================================================
+2025-11-30 12:39:28,218 - experiment1 - INFO - Running baseline model: mel_mlp
+2025-11-30 12:39:28,218 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,830 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:00:05,830 - experiment1 - INFO - # Model: mel_mlp
+2025-11-30 13:00:05,830 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:00:05,830 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,830 - experiment1 - INFO - Running baseline model: mel_mlp
+2025-11-30 13:00:05,830 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,920 - experiment1 - ERROR - Failed to run mel_mlp: 'BaselineExperiment' object has no attribute 'run'
+2025-11-30 13:00:05,920 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:00:05,920 - experiment1 - INFO - # Model: mfcc_mlp
+2025-11-30 13:00:05,920 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:00:05,920 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,920 - experiment1 - INFO - Running baseline model: mfcc_mlp
+2025-11-30 13:00:05,920 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,926 - experiment1 - ERROR - Failed to run mfcc_mlp: 'BaselineExperiment' object has no attribute 'run'
+2025-11-30 13:00:05,926 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:00:05,926 - experiment1 - INFO - # Model: chaotic_lorenz
+2025-11-30 13:00:05,926 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:00:05,926 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,926 - experiment1 - INFO - Running chaotic model: chaotic_lorenz
+2025-11-30 13:00:05,926 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,938 - experiment1 - ERROR - Failed to run chaotic_lorenz: 'ChaoticExperiment' object has no attribute 'run'
+2025-11-30 13:00:05,939 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:00:05,939 - experiment1 - INFO - # Model: chaotic_hybrid
+2025-11-30 13:00:05,939 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:00:05,939 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,939 - experiment1 - INFO - Running chaotic model: chaotic_hybrid
+2025-11-30 13:00:05,939 - experiment1 - INFO - ============================================================
+2025-11-30 13:00:05,944 - experiment1 - ERROR - Failed to run chaotic_hybrid: 'ChaoticExperiment' object has no attribute 'run'
+2025-11-30 13:00:05,946 - experiment1 - INFO - Results saved to outputs/experiment1_comparison/comparison_results.json
+2025-11-30 13:00:05,946 - experiment1 - INFO - 
+================================================================================
+2025-11-30 13:00:05,946 - experiment1 - INFO - EXPERIMENT 1: STANDARD PERFORMANCE COMPARISON
+2025-11-30 13:00:05,946 - experiment1 - INFO - ================================================================================
+2025-11-30 13:00:05,946 - experiment1 - INFO - Model                   Val Acc   Test Acc        EER  Time(min)
+2025-11-30 13:00:05,946 - experiment1 - INFO - --------------------------------------------------------------------------------
+2025-11-30 13:00:05,946 - experiment1 - INFO - mel_mlp                   ERROR
+2025-11-30 13:00:05,946 - experiment1 - INFO - mfcc_mlp                  ERROR
+2025-11-30 13:00:05,946 - experiment1 - INFO - chaotic_lorenz            ERROR
+2025-11-30 13:00:05,946 - experiment1 - INFO - chaotic_hybrid            ERROR
+2025-11-30 13:00:05,946 - experiment1 - INFO - ================================================================================
+2025-11-30 13:43:17,446 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:43:17,447 - experiment1 - INFO - # Model: mel_mlp
+2025-11-30 13:43:17,447 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:43:17,447 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,447 - experiment1 - INFO - Running baseline model: mel_mlp
+2025-11-30 13:43:17,447 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,536 - experiment1 - ERROR - Failed to run mel_mlp: 'BaselineExperiment' object has no attribute 'run'
+2025-11-30 13:43:17,536 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:43:17,536 - experiment1 - INFO - # Model: mfcc_mlp
+2025-11-30 13:43:17,536 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:43:17,536 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,536 - experiment1 - INFO - Running baseline model: mfcc_mlp
+2025-11-30 13:43:17,536 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,555 - experiment1 - ERROR - Failed to run mfcc_mlp: 'BaselineExperiment' object has no attribute 'run'
+2025-11-30 13:43:17,555 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:43:17,555 - experiment1 - INFO - # Model: chaotic_lorenz
+2025-11-30 13:43:17,555 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:43:17,555 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,555 - experiment1 - INFO - Running chaotic model: chaotic_lorenz
+2025-11-30 13:43:17,555 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,573 - experiment1 - ERROR - Failed to run chaotic_lorenz: 'ChaoticExperiment' object has no attribute 'run'
+2025-11-30 13:43:17,573 - experiment1 - INFO - 
+######################################################################
+2025-11-30 13:43:17,573 - experiment1 - INFO - # Model: chaotic_hybrid
+2025-11-30 13:43:17,573 - experiment1 - INFO - ######################################################################
+
+2025-11-30 13:43:17,573 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,573 - experiment1 - INFO - Running chaotic model: chaotic_hybrid
+2025-11-30 13:43:17,573 - experiment1 - INFO - ============================================================
+2025-11-30 13:43:17,586 - experiment1 - ERROR - Failed to run chaotic_hybrid: 'ChaoticExperiment' object has no attribute 'run'
+2025-11-30 13:43:17,587 - experiment1 - INFO - Results saved to outputs/experiment1_comparison/comparison_results.json
+2025-11-30 13:43:17,587 - experiment1 - INFO - 
+================================================================================
+2025-11-30 13:43:17,587 - experiment1 - INFO - EXPERIMENT 1: STANDARD PERFORMANCE COMPARISON
+2025-11-30 13:43:17,587 - experiment1 - INFO - ================================================================================
+2025-11-30 13:43:17,587 - experiment1 - INFO - Model                   Val Acc   Test Acc        EER  Time(min)
+2025-11-30 13:43:17,587 - experiment1 - INFO - --------------------------------------------------------------------------------
+2025-11-30 13:43:17,587 - experiment1 - INFO - mel_mlp                   ERROR
+2025-11-30 13:43:17,587 - experiment1 - INFO - mfcc_mlp                  ERROR
+2025-11-30 13:43:17,587 - experiment1 - INFO - chaotic_lorenz            ERROR
+2025-11-30 13:43:17,588 - experiment1 - INFO - chaotic_hybrid            ERROR
+2025-11-30 13:43:17,588 - experiment1 - INFO - ================================================================================
+2025-11-30 17:54:50,512 - experiment1 - INFO - ======================================================================
+2025-11-30 17:54:50,522 - experiment1 - INFO - EXPERIMENT 1: STANDARD PERFORMANCE COMPARISON
+2025-11-30 17:54:50,522 - experiment1 - INFO - ======================================================================
+2025-11-30 17:54:50,522 - experiment1 - INFO - Output directory: outputs/experiment1_comparison
+2025-11-30 17:54:50,522 - experiment1 - INFO - Device: cuda
+2025-11-30 17:54:50,522 - experiment1 - INFO - Seed: 42
+2025-11-30 17:54:50,573 - experiment1 - INFO - System: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 503452090368, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'b46c7adfcaddae8b24ac954590d7972bc218a475', 'branch': 'origin', 'is_dirty': True}}
+2025-11-30 17:54:50,573 - experiment1 - INFO - 
+Running 4 models: ['mel_mlp', 'mfcc_mlp', 'chaotic_lorenz', 'chaotic_hybrid']
+2025-11-30 17:54:50,573 - experiment1 - INFO - 
+######################################################################
+2025-11-30 17:54:50,573 - experiment1 - INFO - # [1/4] Model: mel_mlp
+2025-11-30 17:54:50,573 - experiment1 - INFO - ######################################################################
+2025-11-30 17:54:50,573 - experiment1 - INFO - 
+============================================================
+2025-11-30 17:54:50,573 - experiment1 - INFO - Running BASELINE model: mel_mlp
+2025-11-30 17:54:50,573 - experiment1 - INFO - Type: mel_mlp
+2025-11-30 17:54:50,573 - experiment1 - INFO - ============================================================
+2025-11-30 17:59:48,155 - experiment1 - INFO - ✓ Completed mel_mlp in 5.0 minutes
+2025-11-30 17:59:48,155 - experiment1 - INFO - 
+######################################################################
+2025-11-30 17:59:48,155 - experiment1 - INFO - # [2/4] Model: mfcc_mlp
+2025-11-30 17:59:48,155 - experiment1 - INFO - ######################################################################
+2025-11-30 17:59:48,156 - experiment1 - INFO - 
+============================================================
+2025-11-30 17:59:48,156 - experiment1 - INFO - Running BASELINE model: mfcc_mlp
+2025-11-30 17:59:48,156 - experiment1 - INFO - Type: mfcc_mlp
+2025-11-30 17:59:48,156 - experiment1 - INFO - ============================================================
+2025-11-30 18:04:13,912 - experiment1 - INFO - ✓ Completed mfcc_mlp in 4.4 minutes
+2025-11-30 18:04:13,912 - experiment1 - INFO - 
+######################################################################
+2025-11-30 18:04:13,912 - experiment1 - INFO - # [3/4] Model: chaotic_lorenz
+2025-11-30 18:04:13,912 - experiment1 - INFO - ######################################################################
+2025-11-30 18:04:13,912 - experiment1 - INFO - 
+============================================================
+2025-11-30 18:04:13,912 - experiment1 - INFO - Running CHAOTIC model: chaotic_lorenz
+2025-11-30 18:04:13,912 - experiment1 - INFO - System: lorenz
+2025-11-30 18:04:13,912 - experiment1 - INFO - Gradient Fix: True
+2025-11-30 18:04:13,912 - experiment1 - INFO - ============================================================

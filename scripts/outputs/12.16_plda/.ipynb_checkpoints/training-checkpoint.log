@@ -1,0 +1,118 @@
+2025-12-16 16:59:02,028 - chaotic_trainer - INFO - ============================================================
+2025-12-16 16:59:02,029 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2025-12-16 16:59:02,029 - chaotic_trainer - INFO - ============================================================
+2025-12-16 16:59:02,029 - chaotic_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/outputs/12.16_plda
+2025-12-16 16:59:02,030 - chaotic_trainer - INFO - Configuration: {
+  "chaotic_system": "lorenz",
+  "model_type": "full_chaotic",
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.005,
+  "weight_decay": 1e-06,
+  "gradient_clipping": 1.0,
+  "embedding_dim": 10,
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "plda",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimize_parameters": true,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "linear",
+    "params": {
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 50
+  },
+  "differentiable_features": {
+    "enabled": true,
+    "lyapunov_dim": 8,
+    "rqa_dim": 6,
+    "additional_stats": true
+  },
+  "adversarial_training": {
+    "enabled": true,
+    "perturbation_scale": 0.1,
+    "warmup_epochs": 5,
+    "adversarial_weight": 0.3
+  },
+  "sync_loss": {
+    "enabled": true,
+    "sync_weight": 0.1,
+    "desync_weight": 0.1,
+    "margin": 1.0,
+    "sample_ratio": 0.3
+  },
+  "use_bifurcation_control": true,
+  "epochs": 20
+}
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g6301.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285816832, 'available_memory': 503595638784, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': 'daa24a287a80c85ef3adb8a50c43cdc3cd2f14ce', 'branch': 'origin', 'is_dirty': True}}
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - Systems: ['lorenz']
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - 
+============================================================
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - ============================================================
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2025-12-16 16:59:02,075 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2025-12-16 16:59:02,088 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2025-12-16 16:59:54,481 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: Unknown classifier type: plda
+2025-12-16 16:59:54,483 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 418, in train_single_experiment
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 314, in setup
+    self.model = self.create_model()
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 199, in create_model
+    model = ChaoticSpeakerRecognitionNetwork(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 295, in __init__
+    self._initialize_components()
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 476, in _initialize_components
+    self.classifier = EnhancedChaoticClassifier(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 176, in __init__
+    raise ValueError(f"Unknown classifier type: {classifier_type}")
+ValueError: Unknown classifier type: plda
+
+2025-12-16 16:59:54,483 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2025-12-16 16:59:54,483 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2025-12-16 16:59:54,483 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2025-12-16 16:59:54,484 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2025-12-16 16:59:54,535 - chaotic_trainer - INFO - Visualizations saved to: /scratch/project_2003370/yueyao/Model/scripts/outputs/12.16_plda/visualizations
+2025-12-16 16:59:54,535 - chaotic_trainer - INFO - Reports generated:
+2025-12-16 16:59:54,535 - chaotic_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/outputs/12.16_plda/chaotic_training_report.txt
+2025-12-16 16:59:54,535 - chaotic_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/outputs/12.16_plda/chaotic_training_results.json
+2025-12-16 16:59:54,535 - chaotic_trainer - INFO - Chaotic training completed.
+2025-12-16 16:59:54,535 - chaotic_trainer - INFO - ============================================================
