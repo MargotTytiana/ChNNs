@@ -1,0 +1,385 @@
+# ============================================================================
+# C-HiLAP Chaotic Neural Network Configuration
+# Complete configuration for speaker recognition with chaos theory
+# ============================================================================
+
+# ============ EXPERIMENT INFORMATION ============
+experiment:
+  name: "chaotic_speaker_recognition"
+  description: "Chaotic Hierarchical Attractor Propagation for robust speaker recognition"
+  version: "2.0"
+  author: "C-HiLAP Project"
+  
+# ============ DATA CONFIGURATION ============
+data:
+  # Dataset path (LibriSpeech format)
+  data_dir: "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2"
+  
+  # Dataset splits
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  
+  # Data loading
+  num_workers: 4
+  pin_memory: true
+  prefetch_factor: 2
+  
+  # Caching
+  cache_features: false
+  cache_dir: "./cache"
+
+# ============ AUDIO PROCESSING ============
+audio:
+  sample_rate: 16000
+  max_audio_length: 3.0  # seconds
+  min_audio_length: 0.5  # seconds
+  
+  # Frame-level processing
+  frame_length: 400      # 25ms at 16kHz
+  hop_length: 160        # 10ms at 16kHz
+  
+  # Preprocessing
+  normalize: true
+  remove_silence: false
+  
+  # Augmentation (during training)
+  augmentation:
+    enabled: false
+    noise_injection: 0.005
+    time_stretch_range: [0.9, 1.1]
+    pitch_shift_range: [-2, 2]
+
+# ============ MODEL CONFIGURATION ============
+model:
+  type: "full_chaotic"  # Options: full_chaotic, traditional_chaotic, chaotic_mlp
+  
+  # Number of speakers (will be auto-detected from dataset if not specified)
+  num_speakers: 251
+  
+  # -------- Phase Space Reconstruction --------
+  phase_space:
+    embedding_dim: 10          # Takens embedding dimension
+    delay_method: "autocorr"    # Options: autocorr, mutual_info, first_minimum
+    dimension_method: "false_neighbors"        # Options: false_neighbors (default), cao
+    fixed_delay: 30          # If set, overrides delay_method
+    
+  # -------- Chaotic Feature Extraction --------
+  chaotic_features:
+    # MLSA (Multi-scale Lyapunov Spectrum Analysis)
+    mlsa:
+      scales: 5                 # Number of scales
+      max_lyapunov_steps: 1000
+      
+    # RQA (Recurrence Quantification Analysis)  
+    rqa:
+      radius_ratio: 0.1
+      min_line_length: 2
+      
+  # -------- Chaotic Embedding Layer --------
+  chaotic_embedding:
+    system_type: "lorenz"       # Options: lorenz, rossler, mackey_glass, chua
+    evolution_time: 0.5         # Integration time (seconds)
+    time_step: 0.01             # RK4 integration step
+    coupling_strength: 1.0
+    noise_level: 0.001
+    
+    # Lorenz system parameters (default)
+    lorenz:
+      sigma: 10.0
+      rho: 28.0
+      beta: 2.6667
+      
+    # Rossler system parameters
+    rossler:
+      a: 0.2
+      b: 0.2
+      c: 5.7
+      
+  # -------- Attractor Pooling --------
+  attractor_pooling:
+    type: "comprehensive"       # Options: topological, statistical, comprehensive
+    
+    # Topological features
+    correlation_dimension:
+      num_radii: 50
+      
+  # -------- Speaker Embedding --------
+  speaker_embedding:
+    dim: 256                    # Output embedding dimension
+    hidden_dims: [512, 256, 128]
+    dropout_rate: 0.3
+    use_batch_norm: true
+    
+  # -------- Classifier --------
+  classifier:
+    # Options: linear, cosine, angular, plda
+    type: "plda"
+    
+    # For cosine/angular classifier
+    temperature: 30.0
+    margin: 0.35
+    
+    # For PLDA classifier (if type: plda)
+    plda:
+      latent_dim: 128
+      use_length_norm: true
+
+# ============ OPTIONAL MODULES ============
+optional_modules:
+  # Bifurcation Control Module
+  bifurcation_control:
+    enabled: true
+    num_regimes: 4
+    hidden_dim: 32
+    control_strength: 0.5
+    learnable_boundaries: true
+    
+  # Differentiable Chaotic Features (replaces NumPy-based MLSA/RQA)
+  differentiable_features:
+    enabled: true
+    lyapunov_dim: 8
+    rqa_dim: 6
+    additional_stats: true
+
+# ============ LOSS FUNCTIONS ============
+loss:
+  # Primary classification loss
+  classification:
+    type: "cross_entropy"       # Options: cross_entropy, focal, label_smoothing
+    label_smoothing: 0.0
+    
+  # -------- Lyapunov Stability Regularization --------
+  stability:
+    enabled: true
+    weight: 0.1
+    
+    # Target Lyapunov exponent range (ensures chaotic but stable)
+    target_lyapunov_range: [0.1, 2.0]
+    
+    # Maximum trajectory norm (prevents explosion)
+    trajectory_bound: 50.0
+    
+    # Minimum trajectory std (prevents collapse)
+    collapse_threshold: 0.1
+    
+    # Embedding diversity weight (prevents mode collapse)
+    diversity_weight: 0.05
+    
+  # -------- Phase Synchronization Loss --------
+  synchronization:
+    enabled: false
+    
+    # Weight for same-speaker synchronization
+    sync_weight: 0.1
+    
+    # Weight for different-speaker desynchronization
+    desync_weight: 0.1
+    
+    # Contrastive margin
+    margin: 1.0
+    
+    # Efficiency: sample ratio of pairs
+    sample_ratio: 0.3
+    
+    # Distance metric
+    distance_type: "euclidean"  # Options: euclidean, cosine
+    
+  # -------- Adversarial Training --------
+  adversarial:
+    enabled: true
+    
+    # Warmup: disable adversarial training for first N epochs
+    warmup_epochs: 5
+    
+    # Perturbation scale
+    perturbation_scale: 0.1
+    
+    # What to perturb
+    parameter_noise: true
+    trajectory_noise: true
+    
+    # Adversarial loss weight
+    weight: 0.3
+
+# ============ TRAINING CONFIGURATION ============
+training:
+  # Basic settings
+  batch_size: 32
+  num_epochs: 100
+  
+  # Gradient settings (important for chaotic systems)
+  gradient_clipping: 1.0
+  gradient_accumulation_steps: 1
+  
+  # Mixed precision
+  mixed_precision: false
+  
+  # Optimizer
+  optimizer:
+    type: "adamw"               # Options: adam, adamw, sgd, rmsprop
+    learning_rate: 0.0005       # Lower LR for chaotic systems
+    weight_decay: 0.0001
+    
+    # Adam/AdamW specific
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    
+    # SGD specific (if type: sgd)
+    momentum: 0.9
+    nesterov: true
+    
+  # Learning rate scheduler
+  scheduler:
+    type: "cosine"              # Options: cosine, step, plateau, linear, warmup_cosine
+    
+    # Cosine annealing
+    T_max: 100                  # Will be set to num_epochs if not specified
+    eta_min: 1.0e-6
+    
+    # Step scheduler (if type: step)
+    step_size: 30
+    gamma: 0.1
+    
+    # Plateau scheduler (if type: plateau)
+    patience: 10
+    factor: 0.5
+    min_lr: 1.0e-7
+    
+    # Warmup (if type: warmup_cosine)
+    warmup_epochs: 5
+    warmup_start_lr: 1.0e-6
+    
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 30
+    min_delta: 0.001
+    monitor: "val_accuracy"     # Options: val_loss, val_accuracy
+    mode: "max"                 # Options: min, max
+    
+  # Checkpointing
+  checkpoint:
+    save_best_only: true
+    save_frequency: 10          # Save every N epochs
+    max_to_keep: 3
+
+# ============ EVALUATION CONFIGURATION ============
+evaluation:
+  # Metrics to compute
+  metrics:
+    - accuracy
+    - top5_accuracy
+    - eer                       # Equal Error Rate
+    - dcf                       # Detection Cost Function
+    
+  # Evaluation frequency
+  eval_frequency: 1             # Evaluate every N epochs
+  
+  # Visualization
+  visualization:
+    enabled: true
+    plot_confusion_matrix: true
+    plot_embeddings: true       # t-SNE/UMAP visualization
+    plot_attractors: true       # Chaotic attractor visualization
+    
+# ============ LOGGING & OUTPUT ============
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  
+  # TensorBoard
+  tensorboard:
+    enabled: true
+    log_dir: "./runs"
+    
+  # Weights & Biases (optional)
+  wandb:
+    enabled: false
+    project: "chaotic-speaker-recognition"
+    entity: null
+    
+  # Console logging frequency
+  log_frequency: 50             # Log every N batches
+
+# Output directory
+output:
+  base_dir: "./experiments/outputs"
+  save_predictions: true
+  save_embeddings: true
+  save_analysis: true
+
+# ============ HARDWARE & REPRODUCIBILITY ============
+hardware:
+  device: "auto"                # Options: auto, cpu, cuda, cuda:0, cuda:1
+  seed: 42
+  deterministic: false          # Set true for exact reproducibility (slower)
+  benchmark: true               # Enable cudnn benchmark (faster but non-deterministic)
+
+# ============ EXPERIMENT PRESETS ============
+# Uncomment one of these to use predefined configurations
+
+# preset: "fast_debug"          # Quick testing with small settings
+# preset: "baseline"            # Standard baseline configuration  
+# preset: "high_performance"    # Maximum performance (slower training)
+# preset: "robust"              # Focus on noise robustness
+
+# -------- Preset Definitions --------
+presets:
+  fast_debug:
+    training:
+      batch_size: 8
+      num_epochs: 5
+    model:
+      speaker_embedding:
+        hidden_dims: [128, 64]
+    loss:
+      adversarial:
+        enabled: false
+      synchronization:
+        enabled: false
+        
+  baseline:
+    model:
+      classifier:
+        type: "linear"
+    loss:
+      stability:
+        enabled: true
+      synchronization:
+        enabled: false
+      adversarial:
+        enabled: false
+        
+  high_performance:
+    model:
+      speaker_embedding:
+        dim: 512
+        hidden_dims: [1024, 512, 256]
+      classifier:
+        type: "cosine"
+    training:
+      num_epochs: 200
+      batch_size: 64
+    loss:
+      stability:
+        enabled: true
+      synchronization:
+        enabled: false
+      adversarial:
+        enabled: true
+        warmup_epochs: 10
+        
+  robust:
+    model:
+      chaotic_embedding:
+        noise_level: 0.01
+    loss:
+      adversarial:
+        enabled: true
+        perturbation_scale: 0.15
+        warmup_epochs: 3
+    audio:
+      augmentation:
+        enabled: true
+        noise_injection: 0.01

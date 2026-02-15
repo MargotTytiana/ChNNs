@@ -417,21 +417,6 @@ class ChaoticTrainingManager:
             
             experiment.setup()
             
-            from diagnose_chaotic_training import run_full_diagnosis
-            
-            # Run diagnosis
-            passed = run_full_diagnosis(
-                model=experiment.model,
-                train_loader=experiment.train_loader,
-                optimizer=experiment.optimizer,
-                device=experiment.device,
-                num_speakers=experiment.config['num_speakers']
-            )
-
-            if not passed:
-                self.logger.warning("Diagnosis found issues! Check output above.")
-
-            
             # ==================== 健壮的检查点恢复逻辑 ====================
             start_epoch = 0
             best_metric = 0.0
@@ -619,7 +604,7 @@ class ChaoticTrainingManager:
                 model_save_path.parent.mkdir(parents=True, exist_ok=True)
                 
                 if hasattr(experiment, 'model'):
-                    experiment.save_checkpoint(str(model_save_path))
+                    # experiment.save_checkpoint(str(model_save_path))
                     results['model_path'] = str(model_save_path)
             
             # Save detailed results
@@ -1104,6 +1089,113 @@ def load_config(config_path: str) -> Dict[str, Any]:
         print(f"Error loading config from {config_path}: {e}")
         return {}
 
+def flatten_config(nested_config: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Convert nested YAML config to flat config expected by training script.
+    Maps new hierarchical structure to legacy flat structure.
+    """
+    flat = {}
+    
+    # Direct copy of nested config for reference
+    flat['_nested'] = nested_config
+    
+    # === Model settings ===
+    model = nested_config.get('model', {})
+    flat['num_speakers'] = model.get('num_speakers', 251)
+    flat['model_type'] = model.get('type', 'full_chaotic')
+    
+    # Phase space
+    phase_space = model.get('phase_space', {})
+    flat['embedding_dim'] = phase_space.get('embedding_dim', 10)
+    flat['delay_method'] = phase_space.get('delay_method', 'autocorr')
+    
+    # Chaotic features
+    chaotic_features = model.get('chaotic_features', {})
+    flat['mlsa_scales'] = chaotic_features.get('mlsa', {}).get('scales', 5)
+    flat['rqa_radius_ratio'] = chaotic_features.get('rqa', {}).get('radius_ratio', 0.1)
+    
+    # Chaotic embedding
+    chaotic_emb = model.get('chaotic_embedding', {})
+    flat['chaotic_system'] = chaotic_emb.get('system_type', 'lorenz')
+    flat['evolution_time'] = chaotic_emb.get('evolution_time', 0.5)
+    flat['time_step'] = chaotic_emb.get('time_step', 0.01)
+    flat['coupling_strength'] = chaotic_emb.get('coupling_strength', 1.0)
+    flat['noise_level'] = chaotic_emb.get('noise_level', 0.001)
+    
+    # Attractor pooling
+    pooling = model.get('attractor_pooling', {})
+    flat['pooling_type'] = pooling.get('type', 'comprehensive')
+    
+    # Speaker embedding
+    speaker_emb = model.get('speaker_embedding', {})
+    flat['speaker_embedding_dim'] = speaker_emb.get('dim', 256)
+    flat['embedding_hidden_dims'] = speaker_emb.get('hidden_dims', [512, 256, 128])
+    
+    # Classifier
+    classifier = model.get('classifier', {})
+    flat['classifier_type'] = classifier.get('type', 'linear')
+    flat['temperature'] = classifier.get('temperature', 30.0)
+    flat['margin'] = classifier.get('margin', 0.35)
+    
+    # === Training settings ===
+    training = nested_config.get('training', {})
+    flat['batch_size'] = training.get('batch_size', 32)
+    flat['num_epochs'] = training.get('num_epochs', 100)
+    flat['learning_rate'] = training.get('optimizer', {}).get('learning_rate', 0.0005)
+    flat['weight_decay'] = training.get('optimizer', {}).get('weight_decay', 0.0001)
+    flat['gradient_clipping'] = training.get('gradient_clipping', 1.0)
+    
+    # Optimizer
+    opt = training.get('optimizer', {})
+    flat['optimizer'] = {
+        'type': opt.get('type', 'adamw'),
+        'params': {
+            'betas': opt.get('betas', [0.9, 0.999]),
+            'eps': opt.get('eps', 1e-8),
+            'weight_decay': opt.get('weight_decay', 0.0001)
+        }
+    }
+    
+    # Scheduler
+    sched = training.get('scheduler', {})
+    flat['scheduler'] = {
+        'type': sched.get('type', 'cosine'),
+        'params': {
+            'T_max': flat['num_epochs'],
+            'eta_min': sched.get('eta_min', 1e-6)
+        }
+    }
+    
+    # Early stopping
+    es = training.get('early_stopping', {})
+    flat['early_stopping'] = {
+        'patience': es.get('patience', 30)
+    }
+    
+    # === Audio settings ===
+    audio = nested_config.get('audio', {})
+    flat['sample_rate'] = audio.get('sample_rate', 16000)
+    flat['max_audio_length'] = audio.get('max_audio_length', 3.0)
+    flat['frame_length'] = audio.get('frame_length', 400)
+    flat['hop_length'] = audio.get('hop_length', 160)
+    
+    # === Data settings ===
+    data = nested_config.get('data', {})
+    flat['data_dir'] = data.get('data_dir', './data')
+    
+    # === Hardware settings ===
+    hardware = nested_config.get('hardware', {})
+    flat['device'] = hardware.get('device', 'auto')
+    flat['seed'] = hardware.get('seed', 42)
+    
+    # === Loss settings ===
+    loss = nested_config.get('loss', {})
+    flat['loss_config'] = loss
+    
+    # === Optional modules ===
+    flat['optional_modules'] = nested_config.get('optional_modules', {})
+    
+    return flat
 
 def create_default_config() -> Dict[str, Any]:
     """Create default chaotic network configuration."""
@@ -1130,7 +1222,7 @@ def create_default_config() -> Dict[str, Any]:
         'pooling_type': 'comprehensive',
         'speaker_embedding_dim': 256,
         'embedding_hidden_dims': [512, 256, 128],
-        'classifier_type': 'linear',
+        'classifier_type': 'plda',
         'temperature': 30.0,
         'margin': 0.35,
         
@@ -1157,7 +1249,30 @@ def create_default_config() -> Dict[str, Any]:
         },
         'early_stopping': {
             'patience': 50
-        }
+        },
+        'differentiable_features': {
+          'enabled': True,  # Set to false to use NumPy-based extraction
+          'lyapunov_dim': 8,
+          'rqa_dim': 6,
+          'additional_stats': True
+        },
+        'adversarial_training': {
+            'enabled': True,
+            'perturbation_scale': 0.1,
+            'warmup_epochs': 5,
+            'adversarial_weight': 0.3
+        },
+        'sync_loss': {
+            'enabled': True,
+            'sync_weight': 0.1,
+            'desync_weight': 0.1,
+            'margin': 1.0,
+            'sample_ratio': 0.3
+        },
+        # Optional Modules
+        'use_bifurcation_control': True,
+        'plda_latent_dim': 128,
+        'plda_length_norm': True,
     }
 
 
@@ -1255,6 +1370,8 @@ Examples:
     # Load configuration
     if args.config:
         config = load_config(args.config)
+        if 'model' in config:
+            config = flatten_config(config)
         if not config:
             print(f"Failed to load config from {args.config}, using defaults")
             config = create_default_config()

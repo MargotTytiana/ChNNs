@@ -10,3 +10,258 @@
 2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
 2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
 2025-11-30 13:43:17,586 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 18:55:04,748 - experiment_exp1_chaotic_hybrid - INFO - Initialized experiment: exp1_chaotic_hybrid
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Device: cuda
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Output directory: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Initialized chaotic network experiment with lorenz system
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Setting up experiment components...
+2025-11-30 18:55:04,761 - experiment_exp1_chaotic_hybrid - INFO - Creating dataloaders...
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Detected 26 speakers in dataset
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Dataloaders created:
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO -   Train: 14 batches
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO -   Val: 3 batches
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO -   Test: 4 batches
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Creating model...
+2025-11-30 18:55:21,429 - experiment_exp1_chaotic_hybrid - INFO - Using actual num_speakers from dataset: 26
+2025-11-30 18:55:52,409 - experiment_exp1_chaotic_hybrid - INFO - Total parameters: 413,631
+2025-11-30 18:55:52,409 - experiment_exp1_chaotic_hybrid - INFO - Trainable parameters: 413,631
+2025-11-30 18:55:52,409 - experiment_exp1_chaotic_hybrid - INFO - Creating optimizer...
+2025-11-30 18:55:54,927 - experiment_exp1_chaotic_hybrid - INFO - Optimizer: AdamW
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - INFO - Creating scheduler...
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - WARNING - Unknown scheduler type: reduce_on_plateau, no scheduler will be used
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - INFO - Creating criterion...
+2025-11-30 18:55:54,928 - experiment_exp1_chaotic_hybrid - INFO - Criterion: CrossEntropyLoss
+2025-11-30 18:55:54,983 - experiment_exp1_chaotic_hybrid - INFO - Configuration saved to: outputs/experiment1_comparison/chaotic_hybrid/exp1_chaotic_hybrid/config.json
+2025-11-30 18:55:54,983 - experiment_exp1_chaotic_hybrid - INFO - Experiment setup completed
+2025-11-30 18:55:54,983 - experiment_exp1_chaotic_hybrid - INFO - Starting training for 100 epochs
+2025-11-30 18:55:55,667 - experiment_exp1_chaotic_hybrid - INFO - 
+================================================================================
+2025-11-30 18:55:55,667 - experiment_exp1_chaotic_hybrid - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO - ================================================================================
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO - Batch Info:
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO -   Audio shape: torch.Size([32, 48000])
+2025-11-30 18:55:55,668 - experiment_exp1_chaotic_hybrid - INFO -   Targets shape: torch.Size([32])
+2025-11-30 18:55:55,675 - experiment_exp1_chaotic_hybrid - INFO -   Targets (first 8): tensor([18, 18, 12, 20, 15,  3,  9,  5], device='cuda:0')
+2025-11-30 18:56:53,053 - experiment_exp1_chaotic_hybrid - INFO - ================================================================================
+
+2025-11-30 18:57:48,610 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 6.579050
+2025-11-30 19:13:22,137 - experiment_exp1_chaotic_hybrid - INFO - Epoch 0: Train Loss: 5.7376, Train Acc: 0.0268, Val Loss: 5.2569, Val Acc: 0.0337
+2025-11-30 19:13:22,223 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 0
+2025-11-30 19:14:17,819 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.825082
+2025-11-30 19:29:49,965 - experiment_exp1_chaotic_hybrid - INFO - Epoch 1: Train Loss: 5.1006, Train Acc: 0.0424, Val Loss: 4.9862, Val Acc: 0.0449
+2025-11-30 19:29:50,035 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 1
+2025-11-30 19:30:45,128 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 4.990210
+2025-11-30 19:46:18,670 - experiment_exp1_chaotic_hybrid - INFO - Epoch 2: Train Loss: 4.8264, Train Acc: 0.0446, Val Loss: 4.2995, Val Acc: 0.0449
+2025-11-30 19:47:13,816 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 4.674354
+2025-11-30 20:02:47,897 - experiment_exp1_chaotic_hybrid - INFO - Epoch 3: Train Loss: 4.4864, Train Acc: 0.0491, Val Loss: 4.1314, Val Acc: 0.0899
+2025-11-30 20:02:47,968 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 3
+2025-11-30 20:03:43,516 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 3.724539
+2025-11-30 20:19:16,541 - experiment_exp1_chaotic_hybrid - INFO - Epoch 4: Train Loss: 4.1096, Train Acc: 0.0848, Val Loss: 4.0669, Val Acc: 0.0562
+2025-11-30 20:20:11,906 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 3.967207
+2025-11-30 20:35:46,180 - experiment_exp1_chaotic_hybrid - INFO - Epoch 5: Train Loss: 3.7033, Train Acc: 0.1049, Val Loss: 4.0374, Val Acc: 0.1124
+2025-11-30 20:35:46,252 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 5
+2025-11-30 20:36:41,535 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 3.224365
+2025-11-30 20:52:14,862 - experiment_exp1_chaotic_hybrid - INFO - Epoch 6: Train Loss: 3.3811, Train Acc: 0.1652, Val Loss: 3.8376, Val Acc: 0.0562
+2025-11-30 20:53:09,742 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 3.821478
+2025-11-30 21:08:44,028 - experiment_exp1_chaotic_hybrid - INFO - Epoch 7: Train Loss: 3.1794, Train Acc: 0.1473, Val Loss: 3.6568, Val Acc: 0.0674
+2025-11-30 21:09:39,092 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 2.756929
+2025-11-30 21:25:13,306 - experiment_exp1_chaotic_hybrid - INFO - Epoch 8: Train Loss: 2.7103, Train Acc: 0.2210, Val Loss: 3.3033, Val Acc: 0.0674
+2025-11-30 21:26:08,670 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 2.402536
+2025-11-30 21:41:43,350 - experiment_exp1_chaotic_hybrid - INFO - Epoch 9: Train Loss: 2.4337, Train Acc: 0.2567, Val Loss: 3.1684, Val Acc: 0.1124
+2025-11-30 21:42:39,046 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 2.444082
+2025-11-30 21:58:13,831 - experiment_exp1_chaotic_hybrid - INFO - Epoch 10: Train Loss: 2.1299, Train Acc: 0.3304, Val Loss: 3.0269, Val Acc: 0.1011
+2025-11-30 21:59:09,235 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.853246
+2025-11-30 22:14:44,672 - experiment_exp1_chaotic_hybrid - INFO - Epoch 11: Train Loss: 1.9351, Train Acc: 0.3906, Val Loss: 3.5083, Val Acc: 0.0899
+2025-11-30 22:15:39,803 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 1.710472
+2025-11-30 22:31:14,476 - experiment_exp1_chaotic_hybrid - INFO - Epoch 12: Train Loss: 1.6622, Train Acc: 0.4799, Val Loss: 3.1377, Val Acc: 0.1910
+2025-11-30 22:31:14,546 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 12
+2025-11-30 22:32:09,634 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 1.486163
+2025-11-30 22:47:44,033 - experiment_exp1_chaotic_hybrid - INFO - Epoch 13: Train Loss: 1.4923, Train Acc: 0.4978, Val Loss: 3.0546, Val Acc: 0.1910
+2025-11-30 22:48:39,395 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 1.305984
+2025-11-30 23:04:14,551 - experiment_exp1_chaotic_hybrid - INFO - Epoch 14: Train Loss: 1.2991, Train Acc: 0.5871, Val Loss: 2.8326, Val Acc: 0.2584
+2025-11-30 23:04:14,622 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 14
+2025-11-30 23:05:09,996 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 1.065560
+2025-11-30 23:20:44,940 - experiment_exp1_chaotic_hybrid - INFO - Epoch 15: Train Loss: 1.1616, Train Acc: 0.6272, Val Loss: 3.4444, Val Acc: 0.1124
+2025-11-30 23:21:39,883 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.989284
+2025-11-30 23:37:13,824 - experiment_exp1_chaotic_hybrid - INFO - Epoch 16: Train Loss: 0.9575, Train Acc: 0.7009, Val Loss: 3.8184, Val Acc: 0.1124
+2025-11-30 23:38:09,101 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.594823
+2025-11-30 23:53:44,449 - experiment_exp1_chaotic_hybrid - INFO - Epoch 17: Train Loss: 0.9279, Train Acc: 0.7031, Val Loss: 2.6786, Val Acc: 0.2135
+2025-11-30 23:54:39,580 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.637564
+2025-12-01 00:10:13,730 - experiment_exp1_chaotic_hybrid - INFO - Epoch 18: Train Loss: 0.7535, Train Acc: 0.7478, Val Loss: 3.9423, Val Acc: 0.0449
+2025-12-01 00:11:09,253 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 1.037261
+2025-12-01 00:26:44,533 - experiment_exp1_chaotic_hybrid - INFO - Epoch 19: Train Loss: 0.7563, Train Acc: 0.7344, Val Loss: 3.4840, Val Acc: 0.1685
+2025-12-01 00:27:39,855 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.979947
+2025-12-01 00:43:15,516 - experiment_exp1_chaotic_hybrid - INFO - Epoch 20: Train Loss: 0.6059, Train Acc: 0.8013, Val Loss: 2.6996, Val Acc: 0.2247
+2025-12-01 00:44:10,678 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.724090
+2025-12-01 00:59:44,372 - experiment_exp1_chaotic_hybrid - INFO - Epoch 21: Train Loss: 0.6604, Train Acc: 0.7768, Val Loss: 3.0655, Val Acc: 0.2472
+2025-12-01 01:00:39,311 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.553844
+2025-12-01 01:16:11,977 - experiment_exp1_chaotic_hybrid - INFO - Epoch 22: Train Loss: 0.6159, Train Acc: 0.7679, Val Loss: 3.6943, Val Acc: 0.1910
+2025-12-01 01:17:07,126 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.509601
+2025-12-01 01:32:40,326 - experiment_exp1_chaotic_hybrid - INFO - Epoch 23: Train Loss: 0.5163, Train Acc: 0.8237, Val Loss: 3.9479, Val Acc: 0.1685
+2025-12-01 01:33:35,562 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.543002
+2025-12-01 01:49:07,942 - experiment_exp1_chaotic_hybrid - INFO - Epoch 24: Train Loss: 0.5361, Train Acc: 0.8326, Val Loss: 3.1995, Val Acc: 0.2472
+2025-12-01 01:50:03,289 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.219192
+2025-12-01 02:05:36,929 - experiment_exp1_chaotic_hybrid - INFO - Epoch 25: Train Loss: 0.4018, Train Acc: 0.8705, Val Loss: 3.2471, Val Acc: 0.2360
+2025-12-01 02:06:31,958 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.341353
+2025-12-01 02:22:06,373 - experiment_exp1_chaotic_hybrid - INFO - Epoch 26: Train Loss: 0.3821, Train Acc: 0.8817, Val Loss: 1.8590, Val Acc: 0.4944
+2025-12-01 02:22:06,444 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 26
+2025-12-01 02:23:01,507 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.373558
+2025-12-01 02:38:35,218 - experiment_exp1_chaotic_hybrid - INFO - Epoch 27: Train Loss: 0.3497, Train Acc: 0.8929, Val Loss: 2.9169, Val Acc: 0.3820
+2025-12-01 02:39:30,163 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.342401
+2025-12-01 02:55:04,453 - experiment_exp1_chaotic_hybrid - INFO - Epoch 28: Train Loss: 0.3067, Train Acc: 0.8951, Val Loss: 1.5227, Val Acc: 0.5955
+2025-12-01 02:55:04,524 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 28
+2025-12-01 02:55:59,835 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.202212
+2025-12-01 03:11:34,042 - experiment_exp1_chaotic_hybrid - INFO - Epoch 29: Train Loss: 0.3598, Train Acc: 0.8906, Val Loss: 0.5751, Val Acc: 0.8090
+2025-12-01 03:11:34,113 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 29
+2025-12-01 03:12:29,640 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.134677
+2025-12-01 03:28:05,557 - experiment_exp1_chaotic_hybrid - INFO - Epoch 30: Train Loss: 0.3275, Train Acc: 0.9062, Val Loss: 0.8941, Val Acc: 0.7528
+2025-12-01 03:29:00,417 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.326357
+2025-12-01 03:44:33,854 - experiment_exp1_chaotic_hybrid - INFO - Epoch 31: Train Loss: 0.2762, Train Acc: 0.9196, Val Loss: 1.6814, Val Acc: 0.5506
+2025-12-01 03:45:29,231 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.216725
+2025-12-01 04:01:04,580 - experiment_exp1_chaotic_hybrid - INFO - Epoch 32: Train Loss: 0.2622, Train Acc: 0.9062, Val Loss: 2.3138, Val Acc: 0.3371
+2025-12-01 04:01:59,774 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.260107
+2025-12-01 04:17:35,054 - experiment_exp1_chaotic_hybrid - INFO - Epoch 33: Train Loss: 0.2367, Train Acc: 0.9308, Val Loss: 1.0095, Val Acc: 0.6854
+2025-12-01 04:18:30,712 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.371380
+2025-12-01 04:34:07,317 - experiment_exp1_chaotic_hybrid - INFO - Epoch 34: Train Loss: 0.1970, Train Acc: 0.9308, Val Loss: 0.9403, Val Acc: 0.7079
+2025-12-01 04:35:02,601 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.365446
+2025-12-01 04:50:37,609 - experiment_exp1_chaotic_hybrid - INFO - Epoch 35: Train Loss: 0.1880, Train Acc: 0.9330, Val Loss: 1.0152, Val Acc: 0.6966
+2025-12-01 04:51:32,559 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.314068
+2025-12-01 05:07:06,887 - experiment_exp1_chaotic_hybrid - INFO - Epoch 36: Train Loss: 0.2258, Train Acc: 0.9219, Val Loss: 0.5385, Val Acc: 0.8539
+2025-12-01 05:07:06,956 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 36
+2025-12-01 05:08:02,209 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.129234
+2025-12-01 05:23:36,819 - experiment_exp1_chaotic_hybrid - INFO - Epoch 37: Train Loss: 0.2319, Train Acc: 0.9196, Val Loss: 0.7398, Val Acc: 0.7978
+2025-12-01 05:24:32,131 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.318708
+2025-12-01 05:40:07,815 - experiment_exp1_chaotic_hybrid - INFO - Epoch 38: Train Loss: 0.2348, Train Acc: 0.9152, Val Loss: 2.1475, Val Acc: 0.4831
+2025-12-01 05:41:03,041 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.464636
+2025-12-01 05:56:38,024 - experiment_exp1_chaotic_hybrid - INFO - Epoch 39: Train Loss: 0.2137, Train Acc: 0.9286, Val Loss: 1.2071, Val Acc: 0.7528
+2025-12-01 05:57:33,199 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.113391
+2025-12-01 06:13:08,669 - experiment_exp1_chaotic_hybrid - INFO - Epoch 40: Train Loss: 0.1776, Train Acc: 0.9353, Val Loss: 1.7575, Val Acc: 0.5618
+2025-12-01 06:14:03,761 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.129249
+2025-12-01 06:29:36,962 - experiment_exp1_chaotic_hybrid - INFO - Epoch 41: Train Loss: 0.1435, Train Acc: 0.9643, Val Loss: 1.7115, Val Acc: 0.6517
+2025-12-01 06:30:31,939 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.163605
+2025-12-01 06:46:06,519 - experiment_exp1_chaotic_hybrid - INFO - Epoch 42: Train Loss: 0.1961, Train Acc: 0.9353, Val Loss: 1.3829, Val Acc: 0.6404
+2025-12-01 06:47:01,803 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.065582
+2025-12-01 07:02:35,545 - experiment_exp1_chaotic_hybrid - INFO - Epoch 43: Train Loss: 0.1413, Train Acc: 0.9643, Val Loss: 2.2617, Val Acc: 0.4831
+2025-12-01 07:03:30,669 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.156688
+2025-12-01 07:19:03,490 - experiment_exp1_chaotic_hybrid - INFO - Epoch 44: Train Loss: 0.1590, Train Acc: 0.9554, Val Loss: 0.4690, Val Acc: 0.8764
+2025-12-01 07:19:03,561 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 44
+2025-12-01 07:19:58,994 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.121868
+2025-12-01 07:35:32,030 - experiment_exp1_chaotic_hybrid - INFO - Epoch 45: Train Loss: 0.1303, Train Acc: 0.9531, Val Loss: 1.7555, Val Acc: 0.5393
+2025-12-01 07:36:27,224 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.206496
+2025-12-01 07:52:01,101 - experiment_exp1_chaotic_hybrid - INFO - Epoch 46: Train Loss: 0.1210, Train Acc: 0.9576, Val Loss: 1.3964, Val Acc: 0.6966
+2025-12-01 07:52:55,976 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.126915
+2025-12-01 08:08:29,825 - experiment_exp1_chaotic_hybrid - INFO - Epoch 47: Train Loss: 0.1094, Train Acc: 0.9643, Val Loss: 0.9092, Val Acc: 0.7865
+2025-12-01 08:09:25,090 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.115738
+2025-12-01 08:24:58,104 - experiment_exp1_chaotic_hybrid - INFO - Epoch 48: Train Loss: 0.1265, Train Acc: 0.9487, Val Loss: 0.7061, Val Acc: 0.8090
+2025-12-01 08:25:53,380 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.208159
+2025-12-01 08:41:24,175 - experiment_exp1_chaotic_hybrid - INFO - Epoch 49: Train Loss: 0.1395, Train Acc: 0.9531, Val Loss: 0.9228, Val Acc: 0.7753
+2025-12-01 08:42:19,510 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.058903
+2025-12-01 08:57:52,783 - experiment_exp1_chaotic_hybrid - INFO - Epoch 50: Train Loss: 0.1007, Train Acc: 0.9621, Val Loss: 1.5058, Val Acc: 0.6067
+2025-12-01 08:58:47,391 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.125224
+2025-12-01 09:14:18,385 - experiment_exp1_chaotic_hybrid - INFO - Epoch 51: Train Loss: 0.1136, Train Acc: 0.9665, Val Loss: 2.0066, Val Acc: 0.5843
+2025-12-01 09:15:13,417 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.167046
+2025-12-01 09:30:48,804 - experiment_exp1_chaotic_hybrid - INFO - Epoch 52: Train Loss: 0.1361, Train Acc: 0.9554, Val Loss: 1.4460, Val Acc: 0.6180
+2025-12-01 09:31:44,275 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.137600
+2025-12-01 09:47:18,286 - experiment_exp1_chaotic_hybrid - INFO - Epoch 53: Train Loss: 0.1079, Train Acc: 0.9621, Val Loss: 1.2202, Val Acc: 0.7191
+2025-12-01 09:48:13,524 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.078697
+2025-12-01 10:03:48,762 - experiment_exp1_chaotic_hybrid - INFO - Epoch 54: Train Loss: 0.1056, Train Acc: 0.9598, Val Loss: 1.8582, Val Acc: 0.6180
+2025-12-01 10:04:44,043 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.020265
+2025-12-01 10:20:18,682 - experiment_exp1_chaotic_hybrid - INFO - Epoch 55: Train Loss: 0.0945, Train Acc: 0.9754, Val Loss: 3.1926, Val Acc: 0.3708
+2025-12-01 10:21:14,190 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.063347
+2025-12-01 10:36:48,895 - experiment_exp1_chaotic_hybrid - INFO - Epoch 56: Train Loss: 0.1216, Train Acc: 0.9598, Val Loss: 2.4905, Val Acc: 0.5730
+2025-12-01 10:37:44,272 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.148976
+2025-12-01 10:53:17,448 - experiment_exp1_chaotic_hybrid - INFO - Epoch 57: Train Loss: 0.1139, Train Acc: 0.9621, Val Loss: 1.8317, Val Acc: 0.5393
+2025-12-01 10:54:12,792 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.073868
+2025-12-01 11:09:46,683 - experiment_exp1_chaotic_hybrid - INFO - Epoch 58: Train Loss: 0.0883, Train Acc: 0.9576, Val Loss: 0.7560, Val Acc: 0.7753
+2025-12-01 11:10:41,895 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.154824
+2025-12-01 11:26:16,570 - experiment_exp1_chaotic_hybrid - INFO - Epoch 59: Train Loss: 0.0865, Train Acc: 0.9710, Val Loss: 2.0432, Val Acc: 0.5506
+2025-12-01 11:27:11,896 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.131296
+2025-12-01 11:42:47,297 - experiment_exp1_chaotic_hybrid - INFO - Epoch 60: Train Loss: 0.0741, Train Acc: 0.9754, Val Loss: 3.2180, Val Acc: 0.4607
+2025-12-01 11:43:42,811 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.310347
+2025-12-01 11:59:15,779 - experiment_exp1_chaotic_hybrid - INFO - Epoch 61: Train Loss: 0.0672, Train Acc: 0.9821, Val Loss: 0.7855, Val Acc: 0.7865
+2025-12-01 12:00:10,944 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.010207
+2025-12-01 12:15:45,536 - experiment_exp1_chaotic_hybrid - INFO - Epoch 62: Train Loss: 0.0724, Train Acc: 0.9754, Val Loss: 0.8817, Val Acc: 0.7528
+2025-12-01 12:16:40,732 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.085000
+2025-12-01 12:32:14,160 - experiment_exp1_chaotic_hybrid - INFO - Epoch 63: Train Loss: 0.0737, Train Acc: 0.9799, Val Loss: 0.5900, Val Acc: 0.8315
+2025-12-01 12:33:09,506 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.087637
+2025-12-01 12:48:43,816 - experiment_exp1_chaotic_hybrid - INFO - Epoch 64: Train Loss: 0.0777, Train Acc: 0.9777, Val Loss: 1.5340, Val Acc: 0.7303
+2025-12-01 12:49:39,117 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.173797
+2025-12-01 13:05:12,343 - experiment_exp1_chaotic_hybrid - INFO - Epoch 65: Train Loss: 0.0767, Train Acc: 0.9754, Val Loss: 0.9758, Val Acc: 0.7191
+2025-12-01 13:06:07,862 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.044460
+2025-12-01 13:21:41,599 - experiment_exp1_chaotic_hybrid - INFO - Epoch 66: Train Loss: 0.0608, Train Acc: 0.9799, Val Loss: 0.5039, Val Acc: 0.8876
+2025-12-01 13:21:41,690 - experiment_exp1_chaotic_hybrid - INFO - Saved new best model at epoch 66
+2025-12-01 13:22:36,869 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.181785
+2025-12-01 13:38:10,538 - experiment_exp1_chaotic_hybrid - INFO - Epoch 67: Train Loss: 0.1016, Train Acc: 0.9710, Val Loss: 1.1166, Val Acc: 0.7528
+2025-12-01 13:39:05,462 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.094941
+2025-12-01 13:54:39,294 - experiment_exp1_chaotic_hybrid - INFO - Epoch 68: Train Loss: 0.0757, Train Acc: 0.9754, Val Loss: 2.4907, Val Acc: 0.5056
+2025-12-01 13:55:34,632 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.070823
+2025-12-01 14:11:09,137 - experiment_exp1_chaotic_hybrid - INFO - Epoch 69: Train Loss: 0.0705, Train Acc: 0.9710, Val Loss: 2.5425, Val Acc: 0.5281
+2025-12-01 14:12:04,479 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.081648
+2025-12-01 14:27:37,795 - experiment_exp1_chaotic_hybrid - INFO - Epoch 70: Train Loss: 0.0418, Train Acc: 0.9866, Val Loss: 1.3081, Val Acc: 0.7079
+2025-12-01 14:28:33,279 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.083204
+2025-12-01 14:44:08,097 - experiment_exp1_chaotic_hybrid - INFO - Epoch 71: Train Loss: 0.0563, Train Acc: 0.9799, Val Loss: 1.3947, Val Acc: 0.6180
+2025-12-01 14:45:03,303 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.040557
+2025-12-01 15:00:37,949 - experiment_exp1_chaotic_hybrid - INFO - Epoch 72: Train Loss: 0.0903, Train Acc: 0.9665, Val Loss: 2.8613, Val Acc: 0.5618
+2025-12-01 15:01:32,977 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.065383
+2025-12-01 15:17:06,358 - experiment_exp1_chaotic_hybrid - INFO - Epoch 73: Train Loss: 0.0747, Train Acc: 0.9821, Val Loss: 2.5242, Val Acc: 0.5618
+2025-12-01 15:18:01,689 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.041177
+2025-12-01 15:33:36,747 - experiment_exp1_chaotic_hybrid - INFO - Epoch 74: Train Loss: 0.0830, Train Acc: 0.9777, Val Loss: 1.8103, Val Acc: 0.6517
+2025-12-01 15:34:32,231 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.017069
+2025-12-01 15:50:07,418 - experiment_exp1_chaotic_hybrid - INFO - Epoch 75: Train Loss: 0.0819, Train Acc: 0.9688, Val Loss: 0.9666, Val Acc: 0.7865
+2025-12-01 15:51:02,942 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.007087
+2025-12-01 16:06:36,842 - experiment_exp1_chaotic_hybrid - INFO - Epoch 76: Train Loss: 0.0604, Train Acc: 0.9799, Val Loss: 2.1279, Val Acc: 0.6404
+2025-12-01 16:07:31,939 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.009981
+2025-12-01 16:23:07,408 - experiment_exp1_chaotic_hybrid - INFO - Epoch 77: Train Loss: 0.0550, Train Acc: 0.9754, Val Loss: 1.6455, Val Acc: 0.7079
+2025-12-01 16:24:02,750 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.041084
+2025-12-01 16:39:37,049 - experiment_exp1_chaotic_hybrid - INFO - Epoch 78: Train Loss: 0.0812, Train Acc: 0.9665, Val Loss: 1.2881, Val Acc: 0.7303
+2025-12-01 16:40:32,195 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.014794
+2025-12-01 16:56:07,499 - experiment_exp1_chaotic_hybrid - INFO - Epoch 79: Train Loss: 0.0302, Train Acc: 0.9911, Val Loss: 2.6517, Val Acc: 0.5281
+2025-12-01 16:57:02,717 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.015252
+2025-12-01 17:12:38,411 - experiment_exp1_chaotic_hybrid - INFO - Epoch 80: Train Loss: 0.0469, Train Acc: 0.9866, Val Loss: 2.5026, Val Acc: 0.5056
+2025-12-01 17:13:33,820 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.138355
+2025-12-01 17:29:07,993 - experiment_exp1_chaotic_hybrid - INFO - Epoch 81: Train Loss: 0.0693, Train Acc: 0.9754, Val Loss: 1.1966, Val Acc: 0.7079
+2025-12-01 17:30:03,138 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.060471
+2025-12-01 17:45:37,633 - experiment_exp1_chaotic_hybrid - INFO - Epoch 82: Train Loss: 0.0654, Train Acc: 0.9754, Val Loss: 1.8242, Val Acc: 0.5955
+2025-12-01 17:46:32,976 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.112610
+2025-12-01 18:02:07,495 - experiment_exp1_chaotic_hybrid - INFO - Epoch 83: Train Loss: 0.0587, Train Acc: 0.9754, Val Loss: 3.2098, Val Acc: 0.4831
+2025-12-01 18:03:02,891 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.028346
+2025-12-01 18:18:38,730 - experiment_exp1_chaotic_hybrid - INFO - Epoch 84: Train Loss: 0.0269, Train Acc: 0.9911, Val Loss: 0.8166, Val Acc: 0.8202
+2025-12-01 18:19:34,042 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.035709
+2025-12-01 18:35:08,991 - experiment_exp1_chaotic_hybrid - INFO - Epoch 85: Train Loss: 0.0645, Train Acc: 0.9799, Val Loss: 0.7330, Val Acc: 0.8202
+2025-12-01 18:36:04,392 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.012437
+2025-12-01 18:51:40,139 - experiment_exp1_chaotic_hybrid - INFO - Epoch 86: Train Loss: 0.0389, Train Acc: 0.9888, Val Loss: 3.6552, Val Acc: 0.4045
+2025-12-01 18:52:35,281 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.008828
+2025-12-01 19:08:09,023 - experiment_exp1_chaotic_hybrid - INFO - Epoch 87: Train Loss: 0.0562, Train Acc: 0.9777, Val Loss: 2.3580, Val Acc: 0.5506
+2025-12-01 19:09:04,296 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.105198
+2025-12-01 19:24:38,479 - experiment_exp1_chaotic_hybrid - INFO - Epoch 88: Train Loss: 0.0442, Train Acc: 0.9821, Val Loss: 2.5982, Val Acc: 0.5730
+2025-12-01 19:25:33,724 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.020607
+2025-12-01 19:41:08,352 - experiment_exp1_chaotic_hybrid - INFO - Epoch 89: Train Loss: 0.0709, Train Acc: 0.9844, Val Loss: 1.6953, Val Acc: 0.6742
+2025-12-01 19:42:03,930 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.041276
+2025-12-01 19:57:38,950 - experiment_exp1_chaotic_hybrid - INFO - Epoch 90: Train Loss: 0.0507, Train Acc: 0.9844, Val Loss: 1.9913, Val Acc: 0.5506
+2025-12-01 19:58:34,832 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.017931
+2025-12-01 20:14:08,169 - experiment_exp1_chaotic_hybrid - INFO - Epoch 91: Train Loss: 0.0384, Train Acc: 0.9844, Val Loss: 2.2558, Val Acc: 0.6067
+2025-12-01 20:15:03,169 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.036091
+2025-12-01 20:30:37,999 - experiment_exp1_chaotic_hybrid - INFO - Epoch 92: Train Loss: 0.0336, Train Acc: 0.9866, Val Loss: 2.4580, Val Acc: 0.5843
+2025-12-01 20:31:33,047 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.040737
+2025-12-01 20:47:05,773 - experiment_exp1_chaotic_hybrid - INFO - Epoch 93: Train Loss: 0.0310, Train Acc: 0.9844, Val Loss: 0.4482, Val Acc: 0.8764
+2025-12-01 20:48:00,936 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.056898
+2025-12-01 21:03:33,903 - experiment_exp1_chaotic_hybrid - INFO - Epoch 94: Train Loss: 0.0334, Train Acc: 0.9911, Val Loss: 1.9671, Val Acc: 0.6067
+2025-12-01 21:04:29,184 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.021486
+2025-12-01 21:20:02,916 - experiment_exp1_chaotic_hybrid - INFO - Epoch 95: Train Loss: 0.0561, Train Acc: 0.9844, Val Loss: 2.5014, Val Acc: 0.6180
+2025-12-01 21:20:57,961 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.007365
+2025-12-01 21:36:30,801 - experiment_exp1_chaotic_hybrid - INFO - Epoch 96: Train Loss: 0.0500, Train Acc: 0.9821, Val Loss: 1.7183, Val Acc: 0.6404
+2025-12-01 21:37:26,139 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.006592
+2025-12-01 21:52:58,728 - experiment_exp1_chaotic_hybrid - INFO - Epoch 97: Train Loss: 0.0246, Train Acc: 0.9933, Val Loss: 1.6495, Val Acc: 0.6742
+2025-12-01 21:53:53,646 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.033604
+2025-12-01 22:09:27,002 - experiment_exp1_chaotic_hybrid - INFO - Epoch 98: Train Loss: 0.0436, Train Acc: 0.9866, Val Loss: 2.3853, Val Acc: 0.6067
+2025-12-01 22:10:22,624 - experiment_exp1_chaotic_hybrid - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.025487
+2025-12-01 22:25:55,830 - experiment_exp1_chaotic_hybrid - INFO - Epoch 99: Train Loss: 0.0475, Train Acc: 0.9888, Val Loss: 1.4492, Val Acc: 0.7416
+2025-12-01 22:25:55,856 - experiment_exp1_chaotic_hybrid - INFO - Running final test evaluation...
+2025-12-01 22:29:48,671 - experiment_exp1_chaotic_hybrid - INFO - Test Results:
+2025-12-01 22:29:48,671 - experiment_exp1_chaotic_hybrid - INFO -   loss: 1.3480
+2025-12-01 22:29:48,672 - experiment_exp1_chaotic_hybrid - INFO -   accuracy: 0.6949
+2025-12-01 22:29:48,672 - experiment_exp1_chaotic_hybrid - INFO -   avg_confidence: 0.9826
+2025-12-01 22:29:48,672 - experiment_exp1_chaotic_hybrid - INFO -   embedding_diversity: 0.0781
+2025-12-01 22:29:48,672 - experiment_exp1_chaotic_hybrid - INFO -   embedding_norm_mean: 1.0000
+2025-12-01 22:29:48,672 - experiment_exp1_chaotic_hybrid - INFO -   embedding_norm_std: 0.0000
+2025-12-01 22:29:48,674 - experiment_exp1_chaotic_hybrid - INFO - Training completed

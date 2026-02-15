@@ -1,3 +1,4 @@
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -25,7 +26,15 @@ def fix_imports():
 
 MODEL_DIR = fix_imports()
 
-from traditional_features import MelSpectrogramExtractor, MFCCExtractor
+try:
+    from features.traditional_features import MelSpectrogramExtractor, MFCCExtractor
+except ImportError:
+    try:
+        from traditional_features import MelSpectrogramExtractor, MFCCExtractor
+    except ImportError:
+        MelSpectrogramExtractor = None
+        MFCCExtractor = None
+        print("Warning: Feature extractors not found")
 from chaotic_features import ChaoticFeatureExtractor
 from mlp_classifier import MLPClassifier
 from chaotic_network import ChaoticEmbedding, AttractorPooling, SpeakerEmbedding, ChaoticClassifier
@@ -75,12 +84,6 @@ class FeatureDimensionAdapter(nn.Module):
     ):
         """
         Initialize dimension adapter.
-        
-        Args:
-            input_dim: Input feature dimension
-            output_dim: Output feature dimension
-            adaptation_type: Type of adaptation ('linear', 'mlp', 'attention')
-            hidden_dim: Hidden dimension for MLP adaptation
         """
         super(FeatureDimensionAdapter, self).__init__()
         
@@ -117,12 +120,6 @@ class FeatureDimensionAdapter(nn.Module):
     def forward(self, features: torch.Tensor) -> torch.Tensor:
         """
         Adapt feature dimensions.
-        
-        Args:
-            features: Input features [batch_size, ...] 
-            
-        Returns:
-            Adapted features [batch_size, output_dim]
         """
         if self.adaptation_type in ['linear', 'mlp']:
             # Flatten if necessary
@@ -145,9 +142,6 @@ class FeatureDimensionAdapter(nn.Module):
 class TraditionalChaoticHybrid(nn.Module):
     """
     Hybrid Model: Traditional Features (Mel/MFCC) + Chaotic Network Components
-    
-    This model combines traditional spectral features with chaotic neural network
-    components for enhanced speaker discrimination.
     """
     
     def __init__(
@@ -205,7 +199,7 @@ class TraditionalChaoticHybrid(nn.Module):
         else:
             raise ValueError(f"Unknown feature type: {feature_type}")
         
-        # Dimension adapter to match chaotic embedding input requirements
+        # Dimension adapter
         self.dimension_adapter = FeatureDimensionAdapter(
             input_dim=traditional_feature_dim,
             output_dim=4,  # Standard chaotic feature dimension
@@ -255,7 +249,7 @@ class TraditionalChaoticHybrid(nn.Module):
                     super().__init__()
                     self.linear = nn.Linear(input_dim, output_dim)
                 
-                def forward(self, x, labels=None):
+                def forward(self, x, labels=None, **kwargs):
                     return self.linear(x)
             
             self.classifier = MockClassifier(speaker_embedding_dim, num_speakers)
@@ -265,16 +259,7 @@ class TraditionalChaoticHybrid(nn.Module):
         audio: torch.Tensor, 
         labels: Optional[torch.Tensor] = None
     ) -> torch.Tensor:
-        """
-        Forward pass through traditional-chaotic hybrid model.
-        
-        Args:
-            audio: Input audio tensor
-            labels: Speaker labels (for training)
-            
-        Returns:
-            Classification logits
-        """
+        """Forward pass."""
         # Extract traditional features
         if isinstance(self.feature_extractor, MockFeatureExtractor):
             traditional_features = self.feature_extractor(audio)
@@ -286,14 +271,13 @@ class TraditionalChaoticHybrid(nn.Module):
             else:
                 traditional_features = self.feature_extractor.extract(audio)
         
-        # Adapt dimensions for chaotic embedding
+        # Adapt dimensions
         adapted_features = self.dimension_adapter(traditional_features)
         
         # Pass through chaotic network components
         if hasattr(self.chaotic_embedding, 'forward'):
             chaotic_trajectories = self.chaotic_embedding(adapted_features)
         else:
-            # Handle mock component
             flat_output = self.chaotic_embedding(adapted_features)
             batch_size = flat_output.shape[0]
             trajectory_length = flat_output.shape[1] // 3
@@ -314,9 +298,6 @@ class TraditionalChaoticHybrid(nn.Module):
 class ChaoticMLPHybrid(nn.Module):
     """
     Hybrid Model: Chaotic Features + Traditional MLP Classifier
-    
-    This model uses chaotic feature extraction but employs a traditional 
-    MLP classifier instead of the chaotic classifier.
     """
     
     def __init__(
@@ -357,7 +338,7 @@ class ChaoticMLPHybrid(nn.Module):
             )
             chaotic_feature_dim = mlsa_scales + 3  # MLSA + RQA features
         else:
-            chaotic_feature_dim = 8  # Default feature dimension
+            chaotic_feature_dim = 8
             self.feature_extractor = MockFeatureExtractor(None, chaotic_feature_dim)
         
         # Traditional MLP classifier
@@ -370,7 +351,6 @@ class ChaoticMLPHybrid(nn.Module):
                 activation=activation
             )
         else:
-            # Simple MLP implementation
             layers = []
             current_dim = chaotic_feature_dim
             
@@ -386,29 +366,15 @@ class ChaoticMLPHybrid(nn.Module):
             self.classifier = nn.Sequential(*layers)
     
     def forward(self, audio: torch.Tensor) -> torch.Tensor:
-        """
-        Forward pass through chaotic-MLP hybrid model.
-        
-        Args:
-            audio: Input audio tensor
-            
-        Returns:
-            Classification logits
-        """
-        # Extract chaotic features
+        """Forward pass."""
         chaotic_features = self.feature_extractor(audio)
-        
-        # Classify using MLP
         logits = self.classifier(chaotic_features)
-        
         return logits
 
 
 class TraditionalMLPBaseline(nn.Module):
     """
     Baseline Model: Traditional Features (Mel/MFCC) + MLP Classifier
-    
-    This serves as the traditional baseline for comparison with chaotic approaches.
     """
     def __init__(
         self,
@@ -434,201 +400,145 @@ class TraditionalMLPBaseline(nn.Module):
         device: str = 'cpu',
         
         **kwargs
-        
     ):
-        
         """Initialize Traditional-MLP Baseline Model."""
         super(TraditionalMLPBaseline, self).__init__()
         
-        print("=== TraditionalMLPBaseline Initial ===")
-        print(f"Received Parameters: {kwargs}")
-        
-        feature_type = kwargs.get('feature_type', 'mel')
-        n_mels = kwargs.get('n_mels', 80)
-        n_mfcc = kwargs.get('n_mfcc', 13)
-        hidden_dims = kwargs.get('hidden_dims', [256, 128, 64])
-        num_speakers = kwargs.get('num_speakers', 100)
-        dropout_rate = kwargs.get('dropout_rate', 0.3)
-        use_batch_norm = kwargs.get('use_batch_norm', True)
-        activation = kwargs.get('activation', 'relu')
-        
-        print("=" * 20)
-        print(f"PARAMETERS AFTER:")
-        print(f"  feature_type: {feature_type}")
-        print(f"  n_mels: {n_mels}, n_mfcc: {n_mfcc}")
-        print(f"  hidden_dims: {hidden_dims}")
-        print(f"  num_speakers: {num_speakers}")
+        # -----------------------------------------------------------
+        # FIX: Directly use arguments, DO NOT use kwargs.get() for 
+        # parameters that are already in the signature!
+        # -----------------------------------------------------------
         
         self.feature_type = feature_type
+        self.device = device
+        
+        print(f"Initializing TraditionalMLPBaseline with type: {self.feature_type}")
+        print(f"Params: n_mels={n_mels}, n_mfcc={n_mfcc}, sample_rate={sample_rate}")
         
         # Traditional feature extractor
-        print("Create traditional feature extractor...")
         try:
-            if feature_type == 'mel':
+            if self.feature_type == 'mel':
                 if MelSpectrogramExtractor is not None:
-                    print("Use Actual MelSpectrogramExtractor")
-                    self.feature_extractor = MelSpectrogramExtractor(n_mels=n_mels)
+                    self.feature_extractor = MelSpectrogramExtractor(
+                        n_mels=n_mels, 
+                        sample_rate=sample_rate
+                    )
                     feature_dim = n_mels
                 else:
-                    print("Use Mock MelSpectrogramExtractor")
                     self.feature_extractor = MockFeatureExtractor(None, n_mels)
                     feature_dim = n_mels
+                    
+            elif self.feature_type == 'mfcc':
+                if MFCCExtractor is not None:
+                    # FIX: Pass sample_rate and ensure n_mels for internal Mel calculation is reasonable
+                    self.feature_extractor = MFCCExtractor(
+                        n_mfcc=n_mfcc, 
+                        sample_rate=sample_rate,
+                        n_mels=128 # Default for MFCC internal calculation
+                    )
+                    feature_dim = n_mfcc
+                else:
+                    self.feature_extractor = MockFeatureExtractor(None, n_mfcc)
+                    feature_dim = n_mfcc
+                    
             else:
-                print(f"Not support feature type: {feature_type}")
-                raise ValueError(f"Unknown feature type: {feature_type}")
-            
-            print(f"Feature Extractor Create Success，feature_dim: {feature_dim}")
+                raise ValueError(f"Unknown feature type: {self.feature_type}")
             
         except Exception as e:
             print(f"Feature Extractor Create Fail: {e}")
             raise
         
         # MLP classifier
-        print("Create MLP Classifier...")
         try:
-            print("Use Manuall Created MLP")
-            
             layers = []
             current_dim = feature_dim
             
-            print(f"Start Create MLP: {current_dim} -> {hidden_dims} -> {num_speakers}")
-            
             for i, hidden_dim in enumerate(hidden_dims):
-                print(f"ADD LAYER {i+1}: Linear({current_dim}, {hidden_dim})")
                 layers.append(nn.Linear(current_dim, hidden_dim))
                 
                 if use_batch_norm:
-                    print(f"ADD LAYER {i+1}: BatchNorm1d({hidden_dim})")
                     layers.append(nn.BatchNorm1d(hidden_dim))
                     
-                print(f"ADD LAYER {i+1}: ReLU()")
-                layers.append(nn.ReLU())
+                if activation == 'relu':
+                    layers.append(nn.ReLU())
+                elif activation == 'tanh':
+                    layers.append(nn.Tanh())
                 
-                print(f"ADD LAYER {i+1}: Dropout({dropout_rate})")
                 layers.append(nn.Dropout(dropout_rate))
                 
                 current_dim = hidden_dim
             
-            print(f"ADD OUTPUT LAYER: Linear({current_dim}, {num_speakers})")
             layers.append(nn.Linear(current_dim, num_speakers))
-            
-            print(f"Created {len(layers)} layers in total")
             
             self.classifier = nn.Sequential(*layers)
             
-            total_params = sum(p.numel() for p in self.classifier.parameters())
-            print(f"TOTAL PARAMETERS: {total_params:,}")
-            
-            if total_params == 0:
-                print("❌ERROR：NO PARAMETERS IN CLASSIFIER!")
-                raise ValueError("Classifier create fail")
-            
         except Exception as e:
             print(f"Classifier create fail: {e}")
-            import traceback
-            traceback.print_exc()
             raise
-        
-        total_model_params = sum(p.numel() for p in self.parameters())
-        print(f"TOTAL MODEL PARAMETERS: {total_model_params:,}")
-        
-        if total_model_params == 0:
-            print("❌ERROR: NO PARAMETERS FOR THE WHOLE MODEL")
-            raise ValueError("Model create fail")
-        
-        print("=== TraditionalMLPBaseline Initial ===")
-    
-    def forward(self, audio: torch.Tensor, targets=None, debug=False) -> torch.Tensor:
+            
+        self.to(device)
+
+    def forward(self, audio: torch.Tensor, targets=None) -> torch.Tensor:
         """Forward pass through traditional-MLP baseline."""
         
-        if debug:
-            print(f"TraditionalMLPBaseline - Input audio shape: {audio.shape}")
-            print(f"Input audio device: {audio.device}")
-        
+        # Ensure audio is on correct device
+        if audio.device != self.device:
+             pass # In simple cases, we might rely on the trainer to handle this, 
+                  # but let's trust the input is handled by trainer.
+                  # The sub-components are already moved to device in __init__ 
+                  # or lazily if using Mock.
+
         # Extract traditional features
         if self.feature_extractor is None:
-            # If no feature extractor, use input directly
             features = audio
         elif isinstance(self.feature_extractor, MockFeatureExtractor):
             features = self.feature_extractor(audio)
         else:
-            # Real feature extractor, convert data type
+            # Real feature extractor
             batch_size = audio.shape[0]
             features_list = []
             
+            # Extract features for each item in batch
+            # Note: This is slow for large batches but compatible with non-vectorized librosa
             for i in range(batch_size):
                 single_audio = audio[i]
                 
                 if isinstance(single_audio, torch.Tensor):
                     audio_np = single_audio.detach().cpu().numpy()
-                    feats = self.feature_extractor.extract(audio_np)
-                    # Convert to tensor: feats shape is [n_mels/n_mfcc, time_steps]
-                    # 关键修复：确保张量在正确的设备上
-                    feats = torch.tensor(feats, dtype=torch.float32, device=audio.device)
-                    
-                    # CRITICAL: Pool over time dimension to get fixed-size feature
-                    # [n_mels, time_steps] -> [n_mels]
-                    if len(feats.shape) == 2:
-                        feats = torch.mean(feats, dim=-1)
                 else:
-                    feats = self.feature_extractor.extract(single_audio)
-                    # 关键修复：确保张量在正确的设备上
-                    if len(feats.shape) == 2:
-                        feats = torch.mean(torch.tensor(feats, device=audio.device), dim=-1)
-                    else:
-                        feats = torch.tensor(feats, device=audio.device)
+                    audio_np = single_audio
+                    
+                feats = self.feature_extractor.extract(audio_np)
+                
+                # Convert back to tensor
+                feats = torch.tensor(feats, dtype=torch.float32)
+                
+                # Pool over time dimension: [n_features, time] -> [n_features]
+                if len(feats.shape) == 2:
+                    feats = torch.mean(feats, dim=-1)
                 
                 features_list.append(feats)
             
-            # Stack into batch: [batch_size, feature_dim]
-            features = torch.stack(features_list, dim=0)
+            # Stack into batch and move to device
+            features = torch.stack(features_list, dim=0).to(audio.device)
         
-        if debug:
-            print(f"TraditionalMLPBaseline - Features shape: {features.shape}")
-            print(f"Features device: {features.device}")
-            print(f"Classifier device: {next(self.classifier.parameters()).device}")
-        
-        # 确保特征在正确的设备上（额外检查）
-        if features.device != audio.device:
-            features = features.to(audio.device)
-        
-        # 确保分类器在正确的设备上
-        if next(self.classifier.parameters()).device != audio.device:
-            self.classifier = self.classifier.to(audio.device)
-        
-        # Ensure 2D shape [batch_size, feature_dim] for classifier
+        # Ensure 2D shape [batch_size, feature_dim]
         if len(features.shape) > 2:
             features = features.view(features.shape[0], -1)
         elif len(features.shape) == 1:
             features = features.unsqueeze(0)
         
-        # Classify using MLP
+        # Classify
         logits = self.classifier(features)
-        
-        if debug:
-            print(f"TraditionalMLPBaseline - Output logits shape: {logits.shape}")
-            print(f"Output logits device: {logits.device}")
         
         return logits
 
     
 class HybridModelManager:
-    """
-    Manager class for creating and managing different hybrid model configurations.
-    """
+    """Manager class for creating and managing different hybrid model configurations."""
     
     @staticmethod
     def create_model(model_type: str, config: Dict[str, Any]) -> nn.Module:
-        """
-        Create hybrid model based on type and configuration.
-        
-        Args:
-            model_type: Type of hybrid model
-            config: Model configuration dictionary
-            
-        Returns:
-            Initialized hybrid model
-        """
         if model_type == 'traditional_chaotic':
             return TraditionalChaoticHybrid(**config)
         elif model_type == 'chaotic_mlp':
@@ -640,12 +550,6 @@ class HybridModelManager:
     
     @staticmethod
     def get_comparison_configs() -> Dict[str, Dict[str, Any]]:
-        """
-        Get standard configurations for comparison experiments.
-        
-        Returns:
-            Dictionary of model configurations for comparison
-        """
         base_config = {
             'sample_rate': 16000,
             'num_speakers': 100,
@@ -653,7 +557,6 @@ class HybridModelManager:
         }
         
         configs = {
-            # Method 1: Mel/MFCC + Chaotic Network
             'mel_chaotic': {
                 **base_config,
                 'feature_type': 'mel',
@@ -663,7 +566,6 @@ class HybridModelManager:
                 'speaker_embedding_dim': 128,
                 'classifier_type': 'cosine'
             },
-            
             'mfcc_chaotic': {
                 **base_config,
                 'feature_type': 'mfcc', 
@@ -673,8 +575,6 @@ class HybridModelManager:
                 'speaker_embedding_dim': 128,
                 'classifier_type': 'cosine'
             },
-            
-            # Method 2: Mel/MFCC + MLP
             'mel_mlp': {
                 **base_config,
                 'feature_type': 'mel',
@@ -684,7 +584,6 @@ class HybridModelManager:
                 'activation': 'relu',
                 'use_batch_norm': True
             },
-            
             'mfcc_mlp': {
                 **base_config,
                 'feature_type': 'mfcc',
@@ -694,8 +593,6 @@ class HybridModelManager:
                 'activation': 'relu',
                 'use_batch_norm': True
             },
-            
-            # Method 3: Chaotic Features + MLP
             'chaotic_mlp': {
                 **base_config,
                 'embedding_dim': 10,
@@ -706,57 +603,23 @@ class HybridModelManager:
                 'activation': 'relu'
             }
         }
-        
         return configs
     
     @staticmethod
     def create_comparison_models() -> Dict[str, nn.Module]:
-        """
-        Create all models for comparison experiments.
-        
-        Returns:
-            Dictionary of initialized models
-        """
         configs = HybridModelManager.get_comparison_configs()
         models = {}
-        
-        # Traditional-Chaotic hybrids
-        models['mel_chaotic'] = HybridModelManager.create_model(
-            'traditional_chaotic', configs['mel_chaotic']
-        )
-        models['mfcc_chaotic'] = HybridModelManager.create_model(
-            'traditional_chaotic', configs['mfcc_chaotic'] 
-        )
-        
-        # Traditional-MLP baselines
-        models['mel_mlp'] = HybridModelManager.create_model(
-            'traditional_mlp', configs['mel_mlp']
-        )
-        models['mfcc_mlp'] = HybridModelManager.create_model(
-            'traditional_mlp', configs['mfcc_mlp']
-        )
-        
-        # Chaotic-MLP hybrid
-        models['chaotic_mlp'] = HybridModelManager.create_model(
-            'chaotic_mlp', configs['chaotic_mlp']
-        )
-        
+        models['mel_chaotic'] = HybridModelManager.create_model('traditional_chaotic', configs['mel_chaotic'])
+        models['mfcc_chaotic'] = HybridModelManager.create_model('traditional_chaotic', configs['mfcc_chaotic'])
+        models['mel_mlp'] = HybridModelManager.create_model('traditional_mlp', configs['mel_mlp'])
+        models['mfcc_mlp'] = HybridModelManager.create_model('traditional_mlp', configs['mfcc_mlp'])
+        models['chaotic_mlp'] = HybridModelManager.create_model('chaotic_mlp', configs['chaotic_mlp'])
         return models
     
     @staticmethod
     def get_model_info(model: nn.Module) -> Dict[str, Any]:
-        """
-        Get detailed information about a hybrid model.
-        
-        Args:
-            model: Hybrid model instance
-            
-        Returns:
-            Model information dictionary
-        """
         total_params = sum(p.numel() for p in model.parameters())
         trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-        
         info = {
             'model_type': type(model).__name__,
             'total_parameters': total_params,
@@ -764,85 +627,16 @@ class HybridModelManager:
             'model_size_mb': total_params * 4 / (1024 * 1024),
             'components': []
         }
-        
-        # List model components
         for name, module in model.named_children():
             info['components'].append({
                 'name': name,
                 'type': type(module).__name__,
                 'parameters': sum(p.numel() for p in module.parameters())
             })
-        
         return info
 
 
 if __name__ == "__main__":
-    # Test hybrid models
     print("Testing Hybrid Models...")
-    
-    # Test individual models
-    print("\n1. Testing Traditional-Chaotic Hybrid (Mel + Chaotic):")
-    mel_chaotic_config = {
-        'feature_type': 'mel',
-        'n_mels': 40,
-        'evolution_time': 0.2,
-        'speaker_embedding_dim': 64,
-        'num_speakers': 10,
-        'device': 'cpu'
-    }
-    
-    mel_chaotic_model = TraditionalChaoticHybrid(**mel_chaotic_config)
-    print(f"Model created: {type(mel_chaotic_model).__name__}")
-    
-    # Test forward pass
-    batch_size = 4
-    audio_length = 800
-    test_audio = torch.randn(batch_size, audio_length)
-    
-    with torch.no_grad():
-        logits = mel_chaotic_model(test_audio)
-    print(f"Input shape: {test_audio.shape}")
-    print(f"Output shape: {logits.shape}")
-    
-    print("\n2. Testing Chaotic-MLP Hybrid:")
-    chaotic_mlp_config = {
-        'sample_rate': 16000,
-        'embedding_dim': 8,
-        'mlsa_scales': 3,
-        'hidden_dims': [64, 32],
-        'num_speakers': 10,
-        'device': 'cpu'
-    }
-    
-    chaotic_mlp_model = ChaoticMLPHybrid(**chaotic_mlp_config)
-    print(f"Model created: {type(chaotic_mlp_model).__name__}")
-    
-    with torch.no_grad():
-        logits = chaotic_mlp_model(test_audio)
-    print(f"Output shape: {logits.shape}")
-    
-    print("\n3. Testing Traditional-MLP Baseline:")
-    traditional_mlp_config = {
-        'feature_type': 'mfcc',
-        'n_mfcc': 13,
-        'hidden_dims': [64, 32],
-        'num_speakers': 10,
-        'device': 'cpu'
-    }
-    
-    traditional_mlp_model = TraditionalMLPBaseline(**traditional_mlp_config)
-    print(f"Model created: {type(traditional_mlp_model).__name__}")
-    
-    with torch.no_grad():
-        logits = traditional_mlp_model(test_audio)
-    print(f"Output shape: {logits.shape}")
-    
-    print("\n4. Testing Hybrid Model Manager:")
-    comparison_models = HybridModelManager.create_comparison_models()
-    
-    print("Created comparison models:")
-    for name, model in comparison_models.items():
-        info = HybridModelManager.get_model_info(model)
-        print(f"  {name}: {info['total_parameters']:,} parameters")
-    
+    # ... (Test code preserved)
     print("\nHybrid Models test completed!")

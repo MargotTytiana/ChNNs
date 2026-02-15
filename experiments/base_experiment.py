@@ -393,7 +393,7 @@ class BaseExperiment(ABC):
                     self.logger.info(f"  Targets (first 8): {targets[:8]}")
                 
                 with torch.no_grad():
-                    _ = self.model(audio, targets, debug=True)
+                    _ = self.model(audio, targets)
                 
                 self.logger.info("="*80 + "\n")
             # ========== DEBUG 代码结束 ==========
@@ -408,11 +408,27 @@ class BaseExperiment(ABC):
             loss.backward()
             
             # Gradient clipping if specified
-            if self.config.get('gradient_clipping'):
-                torch.nn.utils.clip_grad_norm_(
-                    self.model.parameters(), 
-                    self.config['gradient_clipping']
-                )
+            clip_config = self.config.get('gradient_clipping')
+            
+            if clip_config:
+                # 情况 1: 配置是字典 (例如: {'enabled': True, 'max_norm': 1.0})
+                if isinstance(clip_config, dict):
+                    if clip_config.get('enabled', False):
+                        max_norm = clip_config.get('max_norm', 1.0)
+                        torch.nn.utils.clip_grad_norm_(
+                            self.model.parameters(), 
+                            max_norm
+                        )
+                
+                # 情况 2: 配置直接是数值 (例如: 1.0)
+                else:
+                    try:
+                        torch.nn.utils.clip_grad_norm_(
+                            self.model.parameters(), 
+                            float(clip_config)
+                        )
+                    except (ValueError, TypeError):
+                        pass # 忽略无效配置
 
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
             
@@ -741,32 +757,49 @@ class BaseExperiment(ABC):
         epochs_without_improvement = epoch - self.state.best_epoch
         
         return epochs_without_improvement >= patience
+
     
     def save_checkpoint(self, epoch: int, is_best: bool = False):
-        """Save model checkpoint."""
-        checkpoint_state = {
-            'epoch': epoch,
-            'model_state_dict': self.model.state_dict(),
-            'optimizer_state_dict': self.optimizer.state_dict(),
-            'scheduler_state_dict': self.scheduler.state_dict() if self.scheduler else None,
-            'experiment_state': self.state.to_dict(),
-            'config': self.config,
-            'best_metric': self.state.best_metric,
-            'best_epoch': self.state.best_epoch
+        """Save model checkpoint - FIXED VERSION."""
+        # Prepare metrics
+        checkpoint_metrics = {
+            'loss': self.state.train_losses[-1] if self.state.train_losses else 0,
+            'accuracy': self.state.best_metric,
+            'epoch': epoch
         }
         
         # Save regular checkpoint
-        filename = f'checkpoint_epoch_{epoch}.pth'
-        self.checkpoint_manager.save_checkpoint(checkpoint_state, filename)
+        self.checkpoint_manager.save_checkpoint(
+            model=self.model,  # ← KEY FIX: Pass model object, NOT dict
+            optimizer=self.optimizer,
+            scheduler=self.scheduler,
+            epoch=epoch,
+            metrics=checkpoint_metrics,
+            checkpoint_name=f'checkpoint_epoch_{int(epoch):04d}'
+        )
         
-        # Save best checkpoint
+        # Save best checkpoint - CRITICAL FIX
         if is_best:
-            self.checkpoint_manager.save_checkpoint(checkpoint_state, 'best_model.pth')
+            self.checkpoint_manager.save_checkpoint(
+                model=self.model,  # ← KEY FIX: was checkpoint_state (dict) before
+                optimizer=self.optimizer,
+                scheduler=self.scheduler,
+                epoch=epoch,
+                metrics={'metric': self.state.best_metric},
+                checkpoint_name='best_model'  # Will become best_model.pt
+            )
             self.logger.info(f"Saved new best model at epoch {epoch}")
         
         # Save latest checkpoint
-        self.checkpoint_manager.save_checkpoint(checkpoint_state, 'latest.pth')
-    
+        self.checkpoint_manager.save_checkpoint(
+            model=self.model,  # ← KEY FIX
+            optimizer=self.optimizer,
+            scheduler=self.scheduler,
+            epoch=epoch,
+            metrics=checkpoint_metrics,
+            checkpoint_name='latest'
+        )
+        
     def load_checkpoint(self, checkpoint_path: str):
         """Load model from checkpoint."""
         checkpoint = torch.load(checkpoint_path, map_location=self.device)

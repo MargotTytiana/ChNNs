@@ -1,0 +1,92 @@
+# Short Utterance Testing Configuration - For Testing Pre-trained Models
+# This configuration is optimized for testing your already-trained models
+
+seed: 42
+
+# Audio processing configuration (match training)
+audio:
+  sample_rate: 16000
+  max_audio_length: 3.0
+  min_audio_length: 0.5
+  frame_length: 400
+  hop_length: 160
+  normalize: true
+
+# Dataset configuration - ADJUST THESE PATHS
+dataset:
+  path: "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2"
+  num_speakers: 26  # Must match training
+  min_samples_per_speaker: 2
+  max_samples_per_speaker: 30
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+
+# Models to test
+# IMPORTANT: Set paths to your pre-trained models
+models:
+  # Your trained C-HiLAP model
+  C-HiLAP:
+    type: "chaotic"
+    checkpoint: "/scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt"
+    params:
+      input_dim: 10
+      embedding_dim: 256
+      hidden_dims: [512, 256, 128]
+      dropout_rate: 0.3
+      use_batch_norm: true
+      classifier_type: "cosine"
+      temperature: 30.0
+      mlsa_scales: 5
+      rqa_radius_ratio: 0.1
+      use_diff_chaos: true
+
+# If you want to compare with baselines, you can add them here
+# But training them from scratch takes time, so it's optional
+  
+  MFCC-MLP:
+    type: "baseline"
+    checkpoint: null  # Will train if null
+    feature_type: "mfcc"
+    params:
+      n_mfcc: 40
+      hidden_dims: [512, 256]
+      dropout: 0.3
+
+# Short utterance testing configuration
+short_utterance_test:
+  # Durations to test (in seconds)
+  durations: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+  
+  # Audio settings
+  sample_rate: 16000
+  
+  # Evaluation settings
+  batch_size: 32
+  num_repetitions: 10  # Number of random crops per sample
+  device: "cpu"
+  
+  # Crop mode
+  crop_mode: "random"
+
+# Training configuration (only needed if training baselines)
+training:
+  num_epochs: 50  # Reduced for faster baseline training
+  batch_size: 32
+  learning_rate: 0.001
+  optimizer: "adam"
+  early_stopping_patience: 15
+  gradient_clipping: 1.0
+
+# Output configuration
+output:
+  save_models: false  # Don't save since we're loading pre-trained
+  save_figures: true
+  figure_format: "png"
+  figure_dpi: 300
+
+# Logging
+logging:
+  level: "INFO"
+  save_training_logs: true
+  log_interval: 10

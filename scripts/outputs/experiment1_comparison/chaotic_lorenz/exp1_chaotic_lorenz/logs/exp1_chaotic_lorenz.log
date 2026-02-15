@@ -45,3 +45,9 @@
 2025-11-30 18:05:43,167 - experiment_exp1_chaotic_lorenz - INFO - ================================================================================
 
 2025-11-30 18:06:39,587 - experiment_exp1_chaotic_lorenz - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 5.806885
+2025-11-30 18:22:13,759 - experiment_exp1_chaotic_lorenz - INFO - Epoch 0: Train Loss: 5.8117, Train Acc: 0.0558, Val Loss: 6.3677, Val Acc: 0.0112
+2025-11-30 18:22:13,827 - experiment_exp1_chaotic_lorenz - INFO - Saved new best model at epoch 0
+2025-11-30 18:23:09,305 - experiment_exp1_chaotic_lorenz - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 5.597723
+2025-11-30 18:38:43,006 - experiment_exp1_chaotic_lorenz - INFO - Epoch 1: Train Loss: 5.0862, Train Acc: 0.0424, Val Loss: 4.4320, Val Acc: 0.0449
+2025-11-30 18:38:43,078 - experiment_exp1_chaotic_lorenz - INFO - Saved new best model at epoch 1
+2025-11-30 18:39:38,623 - experiment_exp1_chaotic_lorenz - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 4.055458

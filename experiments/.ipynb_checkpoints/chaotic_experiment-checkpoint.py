@@ -49,6 +49,66 @@ from traditional_features import MelSpectrogramExtractor, MFCCExtractor
 from dataset_loader import create_speaker_dataloaders, LibriSpeechChaoticDataset
 from chaotic_network import ChaoticSpeakerRecognitionNetwork
 
+
+# =============================================================================
+# Helper function to create sync loss
+# =============================================================================
+def create_sync_loss(sync_config: Dict[str, Any]):
+    """
+    Factory function to create appropriate sync loss based on config.
+    """
+    try:
+        mode = sync_config.get('mode', 'standard')
+        use_surgery = sync_config.get('use_gradient_surgery', False)
+        warmup_epochs = sync_config.get('warmup_epochs', 0)  # 提取 warmup_epochs
+        
+        if mode == 'hierarchical':
+            from sync_loss_extensions import HierarchicalSyncLoss
+            return HierarchicalSyncLoss(
+                sync_weight=sync_config.get('sync_weight', 0.1),
+                desync_weight=sync_config.get('desync_weight', 0.1),
+                margin=sync_config.get('margin', 1.0),
+                sample_ratio=sync_config.get('sample_ratio', 0.3),
+                normalize=True,
+                warmup_epochs=warmup_epochs  # ← 添加
+            )
+        
+        elif use_surgery:
+            from sync_loss_extensions import SyncLossWithGradientSurgery
+            return SyncLossWithGradientSurgery(
+                sync_weight=sync_config.get('sync_weight', 0.1),
+                desync_weight=sync_config.get('desync_weight', 0.1),
+                margin=sync_config.get('margin', 5.0),
+                sample_ratio=sync_config.get('sample_ratio', 0.3),
+                use_gradient_surgery=True,
+                warmup_epochs=warmup_epochs  # ← 添加
+            )
+    
+        else:
+            from sync_loss_extensions import ScheduledSyncLoss
+            return ScheduledSyncLoss(
+                sync_weight=sync_config.get('sync_weight', 0.1),
+                desync_weight=sync_config.get('desync_weight', 0.1),
+                margin=sync_config.get('margin', 5.0),
+                sample_ratio=sync_config.get('sample_ratio', 0.3),
+                schedule_mode=sync_config.get('schedule_mode', 'none'),
+                phase1_epochs=sync_config.get('phase1_epochs', 50),
+                warmup_epochs=warmup_epochs  # ← 添加这行！
+            )
+            
+    except ImportError as e:
+        print(f"[SYNC LOSS] Could not import sync_loss_extensions: {e}")
+        try:
+            from chaotic_network import PhaseSynchronizationLoss
+            return PhaseSynchronizationLoss(
+                sync_weight=sync_config.get('sync_weight', 0.1),
+                desync_weight=sync_config.get('desync_weight', 0.1),
+                margin=sync_config.get('margin', 5.0)
+            )
+        except ImportError:
+            return None
+
+
 class ChaoticExperiment(BaseExperiment):
     """
     Chaotic Network Experiment for robust speaker recognition using chaos theory.
@@ -59,6 +119,12 @@ class ChaoticExperiment(BaseExperiment):
     3. Chaotic embedding layer
     4. Strange attractor pooling
     5. Speaker embedding and classification
+    
+    Supports:
+    - Synchronization loss with warmup
+    - Lyapunov stability regularization
+    - Adversarial training
+    - Gradient conflict analysis
     """
     
     def __init__(
@@ -80,6 +146,14 @@ class ChaoticExperiment(BaseExperiment):
             seed: Random seed
         """
         super().__init__(config, experiment_name, output_dir, device, seed)
+
+        # 设置日志级别为DEBUG
+        import logging
+        self.logger.setLevel(logging.DEBUG)
+        
+        # 确保有控制台处理器
+        for handler in self.logger.handlers:
+            handler.setLevel(logging.DEBUG)
         
         # Validate chaotic-specific config
         self._validate_config()
@@ -94,6 +168,33 @@ class ChaoticExperiment(BaseExperiment):
             'lyapunov_exponents': [],
             'embedding_quality': []
         }
+        
+        # ============ ADVERSARIAL TRAINING SETUP ============
+        self.adversarial_augmentor = None  # Will be initialized after model creation
+        self.current_epoch = 0  # Track for warmup
+        
+        # ============ PHASE SYNCHRONIZATION LOSS SETUP ============
+        # Will be initialized on first use
+        # FIX: Safe config access with fallback
+        loss_config = config.get('loss', config.get('loss_config', {}))
+        sync_config = loss_config.get('synchronization', {})
+        
+        if sync_config.get('enabled', False):
+            self.sync_loss = create_sync_loss(sync_config)
+            self.sync_loss_mode = sync_config.get('mode', 'standard')
+            self.sync_weight = sync_config.get('sync_weight', 0.1)
+            self.desync_weight = sync_config.get('desync_weight', 0.1)
+            self.logger.info(f"[SYNC LOSS] Enabled with mode: {self.sync_loss_mode}")
+            if sync_config.get('warmup_epochs', 0) > 0:
+                self.logger.info(f"[SYNC LOSS] Warmup epochs: {sync_config.get('warmup_epochs')}")
+        else:
+            self.sync_loss = None
+            self.sync_loss_mode = None
+            self.sync_weight = 0.0
+            self.desync_weight = 0.0
+
+        # ============ LYAPUNOV STABILITY LOSS SETUP ============
+        self.stability_loss_fn = None  # Will be initialized on first use
         
         self.logger.info(f"Initialized chaotic network experiment with {config['chaotic_system']} system")
     
@@ -150,6 +251,35 @@ class ChaoticExperiment(BaseExperiment):
         # Training specific defaults
         self.config.setdefault('gradient_clipping', 1.0)  # Important for chaotic systems
         self.config.setdefault('adaptive_embedding', False)
+        
+        # ============ ADVERSARIAL TRAINING CONFIG ============
+        self.config.setdefault('adversarial_training', {
+            'enabled': True,
+            'perturbation_scale': 0.1,
+            'parameter_noise': True,
+            'trajectory_noise': True,
+            'adversarial_weight': 0.3,
+            'warmup_epochs': 5  # Start adversarial training after warmup
+        })
+        
+        # ============ PHASE SYNCHRONIZATION LOSS CONFIG ============
+        self.config.setdefault('sync_loss', {
+            'enabled': True,
+            'sync_weight': 0.1,
+            'desync_weight': 0.1,
+            'margin': 5.0,
+            'sample_ratio': 0.3  # Sample 30% of pairs for efficiency
+        })
+        
+        # ============ LYAPUNOV STABILITY REGULARIZATION CONFIG ============
+        self.config.setdefault('stability_loss', {
+            'enabled': True,
+            'target_lyapunov_range': [0.1, 2.0],
+            'trajectory_bound': 50.0,
+            'stability_weight': 0.1,
+            'diversity_weight': 0.05,
+            'collapse_threshold': 0.1
+        })
     
     def create_model(self) -> nn.Module:
         """Create chaotic network model based on configuration."""
@@ -257,12 +387,8 @@ class ChaoticExperiment(BaseExperiment):
                 train_split=self.config.get('train_split', 0.7),
                 val_split=self.config.get('val_split', 0.15),
                 seed=self.seed,
-                # Chaotic-specific preprocessing
-                # apply_chaotic_preprocessing=True,
-                # embedding_dim=self.config['embedding_dim']
             )
             # CRITICAL: Extract actual number of speakers from dataset
-            # Assuming the dataset has a way to report this
             try:
                 if hasattr(train_loader.dataset, 'num_speakers'):
                     self.actual_num_speakers = train_loader.dataset.num_speakers
@@ -279,7 +405,6 @@ class ChaoticExperiment(BaseExperiment):
                 
             except Exception as e:
                 self.logger.warning(f"Could not detect num_speakers: {e}")
-                # Use a safe default
                 self.actual_num_speakers = 251
         else:
             # Create mock data loaders
@@ -313,23 +438,21 @@ class ChaoticExperiment(BaseExperiment):
     def create_optimizer(self, model: nn.Module) -> optim.Optimizer:
         """Create optimizer optimized for chaotic networks."""
         optimizer_config = self.config.get('optimizer', {})
+        
+        if isinstance(optimizer_config, str):
+            optimizer_config = {'type': optimizer_config}
+        
+        # 这里的 .get() 现在可以安全调用了
         optimizer_type = optimizer_config.get('type', 'adamw').lower()
         
         if optimizer_type == 'adamw':
-            # Get additional parameters from config
             extra_params = optimizer_config.get('params', {})
-            
-            # Create base parameters
             optimizer_params = {
                 'lr': self.config['learning_rate'],
                 'weight_decay': self.config['weight_decay']
             }
-            
-            # Add betas only if not in extra_params
             if 'betas' not in extra_params:
                 optimizer_params['betas'] = (0.9, 0.999)
-            
-            # Merge with extra parameters (extra_params will override defaults)
             optimizer_params.update(extra_params)
             
             optimizer = optim.AdamW(
@@ -373,14 +496,24 @@ class ChaoticExperiment(BaseExperiment):
             )
         
         return optimizer
+
+    # =========================================================================
+    # CORE TRAINING METHODS WITH SYNC LOSS AND WARMUP SUPPORT
+    # =========================================================================
     
-    def forward_pass(
+    def process_batch(
         self, 
         batch: Tuple[torch.Tensor, torch.Tensor], 
         training: bool = True
     ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """
-        Perform forward pass through chaotic network.
+        Process batch with synchronization loss and stability regularization.
+        
+        This is the core method that implements:
+        - Standard forward pass
+        - Adversarial training (with warmup)
+        - Phase synchronization loss (with warmup)
+        - Lyapunov stability regularization
         
         Args:
             batch: Tuple of (audio, speaker_labels)
@@ -390,27 +523,280 @@ class ChaoticExperiment(BaseExperiment):
             Tuple of (loss, predictions, targets)
         """
         audio, targets = batch
+
+        # FIX: Initialize intermediates to avoid UnboundLocalError
+        intermediates = None
         
         # CRITICAL: Move tensors to correct device
         audio = audio.to(self.device)
         targets = targets.to(self.device)
         
-        # Forward pass through chaotic network
-        if hasattr(self.model, 'forward') and 'labels' in self.model.forward.__code__.co_varnames:
-            # Full chaotic network with labels support
-            logits = self.model(audio, labels=targets if training else None)
-        else:
-            # Standard forward pass
-            logits = self.model(audio)
+        # ============ LAZY INIT ADVERSARIAL AUGMENTOR ============
+        loss_config = self.config.get('loss_config', self.config.get('loss', {}))
+        adv_config = loss_config.get('adversarial', {})
+        if self.adversarial_augmentor is None and adv_config.get('enabled', False):
+            try:
+                from chaotic_network import AdversarialChaoticAugmentation
+                self.adversarial_augmentor = AdversarialChaoticAugmentation(
+                    perturbation_scale=adv_config.get('perturbation_scale', 0.1),
+                    parameter_noise=adv_config.get('parameter_noise', True),
+                    trajectory_noise=adv_config.get('trajectory_noise', True)
+                )
+                self.logger.info("[ADVERSARIAL] Initialized AdversarialChaoticAugmentation")
+            except ImportError as e:
+                self.logger.warning(f"[ADVERSARIAL] Could not import AdversarialChaoticAugmentation: {e}")
+                adv_config['enabled'] = False
         
-        # Compute loss
-        loss = self.criterion(logits, targets)
+        # ============ STANDARD FORWARD PASS ============
+        use_adversarial = (
+            training and 
+            adv_config.get('enabled', False) and 
+            self.adversarial_augmentor is not None and
+            self.current_epoch >= adv_config.get('warmup_epochs', 5)
+        )
+        
+        if use_adversarial and hasattr(self.model, 'forward'):
+            # Get clean forward pass with intermediates
+            logits_clean, intermediates = self.model(
+                audio, 
+                labels=targets, 
+                return_intermediates=True
+            )
+            
+            # ============ ADVERSARIAL AUGMENTATION ============
+            trajectories = intermediates.get('chaotic_trajectories', None)
+            chaotic_features = intermediates.get('chaotic_features', None)
+            
+            if trajectories is not None:
+                # Generate adversarial perturbation
+                _, perturbed_traj = self.adversarial_augmentor(
+                    chaotic_embedding=self.model.chaotic_embedding if hasattr(self.model, 'chaotic_embedding') else None,
+                    features=chaotic_features,
+                    original_trajectory=trajectories
+                )
+                
+                # Compute adversarial loss on perturbed trajectory
+                if hasattr(self.model, 'attractor_pooling') and hasattr(self.model, 'speaker_embedding'):
+                    pooled_perturbed = self.model.attractor_pooling(perturbed_traj)
+                    
+                    # Mix with raw features if available
+                    if hasattr(self.model, 'mix_alpha') and intermediates.get('raw_features') is not None:
+                        raw_feat = intermediates['raw_features']
+                        if raw_feat.shape[-1] != pooled_perturbed.shape[-1]:
+                            if hasattr(self.model, '_raw_feat_adjust'):
+                                raw_feat = self.model._raw_feat_adjust(raw_feat)
+                        alpha = torch.sigmoid(self.model.mix_alpha)
+                        pooled_perturbed = alpha * pooled_perturbed + (1 - alpha) * raw_feat
+                    
+                    embed_perturbed = self.model.speaker_embedding(pooled_perturbed)
+                    logits_perturbed = self.model.classifier(embed_perturbed, targets)
+                    
+                    # Adversarial loss: consistency between clean and perturbed
+                    adv_weight = adv_config.get('adversarial_weight', 0.3)
+                    loss_clean = self.criterion(logits_clean, targets)
+                    loss_perturbed = self.criterion(logits_perturbed, targets)
+                    
+                    # KL divergence for consistency
+                    probs_clean = torch.softmax(logits_clean, dim=1)
+                    probs_perturbed = torch.softmax(logits_perturbed, dim=1)
+                    kl_loss = torch.nn.functional.kl_div(
+                        probs_perturbed.log(), probs_clean, reduction='batchmean'
+                    )
+                    
+                    # Combined loss
+                    loss = loss_clean + adv_weight * (loss_perturbed + 0.1 * kl_loss)
+                    logits = logits_clean
+                else:
+                    loss = self.criterion(logits_clean, targets)
+                    logits = logits_clean
+            else:
+                loss = self.criterion(logits_clean, targets)
+                logits = logits_clean
+        else:
+            # Standard forward pass (no adversarial training)
+            # FIX: Always get intermediates for sync loss computation
+            if hasattr(self.model, 'forward') and 'return_intermediates' in self.model.forward.__code__.co_varnames:
+                logits, intermediates = self.model(audio, labels=targets if training else None, return_intermediates=True)
+            elif hasattr(self.model, 'forward') and 'labels' in self.model.forward.__code__.co_varnames:
+                logits = self.model(audio, labels=targets if training else None)
+                intermediates = None
+            else:
+                logits = self.model(audio)
+                intermediates = None
+            
+            loss = self.criterion(logits, targets)
+        
+        # ============ PHASE SYNCHRONIZATION LOSS ============
+        loss_sync = torch.tensor(0.0, device=self.device)
+        
+        loss_config = self.config.get('loss_config', self.config.get('loss', {}))
+        sync_config = loss_config.get('synchronization', {})
+        
+        if training and sync_config.get('enabled', False):
+            # Lazy initialization of sync loss
+            if self.sync_loss is None:
+                self.sync_loss = create_sync_loss(sync_config)
+                if self.sync_loss is not None:
+                    self.logger.info(f"[SYNC LOSS] Initialized sync loss module")
+
+            if self.sync_loss is not None:
+                try:
+                    # FIX: Ensure intermediates are available
+                    if intermediates is None:
+                        _, intermediates = self.model(audio, labels=targets, return_intermediates=True)
+                    
+                    trajectories = intermediates.get('chaotic_trajectories', None)
+
+                    if trajectories is not None and trajectories.shape[0] > 1:
+                        # Check sync loss type and call appropriate method
+                        try:
+                            from sync_loss_extensions import SyncLossWithGradientSurgery, ScheduledSyncLoss, HierarchicalSyncLoss
+                        except ImportError:
+                            SyncLossWithGradientSurgery = None
+                            ScheduledSyncLoss = None
+                            HierarchicalSyncLoss = None
+                        
+                        if SyncLossWithGradientSurgery and isinstance(self.sync_loss, SyncLossWithGradientSurgery):
+                            # Check warmup
+                            if hasattr(self.sync_loss, 'is_active') and not self.sync_loss.is_active():
+                                loss_sync = torch.tensor(0.0, device=self.device)
+                            else:
+                                # Gradient surgery mode
+                                loss_sync = self.sync_loss.forward_with_surgery(self.model, trajectories, targets)
+                                
+                                # Log gradient conflict stats
+                                if hasattr(self.sync_loss, 'last_conflict_stats') and self.sync_loss.last_conflict_stats:
+                                    stats = self.sync_loss.last_conflict_stats
+                                    self.logger.info(f"[GRADIENT CONFLICT] "
+                                                    f"conflict_ratio={stats.get('conflict_ratio', 0):.3f}, "
+                                                    f"avg_cos_sim={stats.get('avg_cos_sim', 0):.3f}")
+                        
+                        elif ScheduledSyncLoss and isinstance(self.sync_loss, ScheduledSyncLoss):
+                            loss_sync = self.sync_loss(trajectories, targets)
+                        
+                        elif HierarchicalSyncLoss and isinstance(self.sync_loss, HierarchicalSyncLoss):
+                            # 从intermediates中获取embeddings
+                            embeddings = intermediates.get('speaker_embeddings', None)
+                            if embeddings is not None:
+                                loss_sync = self.sync_loss(trajectories, embeddings, targets)
+                            else:
+                                self.logger.warning("[SYNC LOSS] No embeddings found for HierarchicalSyncLoss")
+                                loss_sync = torch.tensor(0.0, device=self.device)
+                        
+                        else:
+                            # Original PhaseSynchronizationLoss
+                            sync_losses = self.sync_loss(trajectories, targets)
+                            loss_sync = sync_losses.get('total_sync', torch.tensor(0.0, device=self.device))
+                                        
+                except Exception as e:
+                    self.logger.warning(f"[SYNC LOSS] Error computing sync loss: {e}")
+                    import traceback
+                    self.logger.debug(traceback.format_exc())
+                    
+        # ============ H1: GRADIENT CONFLICT ANALYSIS ============
+        analysis_config = self.config.get('_nested', {}).get('analysis', {})
+        gradient_conflict_config = analysis_config.get('gradient_conflict', {})
+        
+        if training and gradient_conflict_config.get('enabled', False) and loss_sync.item() > 0:
+            log_freq = gradient_conflict_config.get('log_frequency', 1)
+            batch_count = getattr(self, '_epoch_batch_count', 0)
+            if batch_count % log_freq == 0:
+                try:
+                    # Use the existing analyze_gradient_conflict method
+                    conflict_results = self.analyze_gradient_conflict(audio, targets)
+                    if conflict_results:
+                        self.logger.info(
+                            f"[H1 CE-SYNC CONFLICT] "
+                            f"conflict_ratio={conflict_results['conflict_ratio']:.4f}, "
+                            f"avg_cos_sim={conflict_results['avg_cosine']:.4f}, "
+                            f"num_params={conflict_results['num_params_analyzed']}"
+                        )
+                except Exception as e:
+                    self.logger.debug(f"[H1] Conflict analysis error: {e}")
+                    
+        # Add sync loss to total
+        loss = loss + loss_sync
+
+        if hasattr(self, '_epoch_sync_loss_sum'):
+            # 使用 .item() 获取标量值，避免显存泄漏
+            self._epoch_sync_loss_sum += loss_sync.item()
+            if hasattr(self, '_epoch_batch_count'):
+                self._epoch_batch_count += 1
+            else:
+                self._epoch_batch_count = 1
+                
+        # ============ LYAPUNOV STABILITY REGULARIZATION ============
+        stab_config = loss_config.get('stability', {})
+        if training and stab_config.get('enabled', False):
+            # Lazy initialization
+            if self.stability_loss_fn is None:
+                try:
+                    from chaotic_network import LyapunovStabilityLoss
+                    lyap_range = stab_config.get('target_lyapunov_range', [0.1, 2.0])
+                    self.stability_loss_fn = LyapunovStabilityLoss(
+                        target_lyapunov_range=tuple(lyap_range),
+                        trajectory_bound=stab_config.get('trajectory_bound', 50.0),
+                        stability_weight=stab_config.get('stability_weight', 0.1),
+                        diversity_weight=stab_config.get('diversity_weight', 0.05),
+                        collapse_threshold=stab_config.get('collapse_threshold', 0.1)
+                    )
+                    self.logger.info("[STABILITY] Initialized LyapunovStabilityLoss")
+                except ImportError as e:
+                    self.logger.warning(f"[STABILITY] Could not import: {e}")
+                    stab_config['enabled'] = False
+            
+            # Compute stability loss
+            if self.stability_loss_fn is not None:
+                try:
+                    # Get trajectories and embeddings
+                    if intermediates is None:
+                        _, intermediates = self.model(audio, labels=targets, return_intermediates=True)
+                    
+                    trajectories = intermediates.get('chaotic_trajectories', None)
+                    embeddings = intermediates.get('speaker_embeddings', None)
+                    
+                    if trajectories is not None:
+                        stability_losses = self.stability_loss_fn(trajectories, embeddings)
+                        loss = loss + stability_losses['total_stability']
+                        
+                        # Log diagnostics periodically
+                        if hasattr(self, '_stab_log_counter'):
+                            self._stab_log_counter += 1
+                        else:
+                            self._stab_log_counter = 0
+                        
+                        if self._stab_log_counter % 100 == 0:
+                            self.logger.debug(
+                                f"[STABILITY] lyap={stability_losses['mean_lyapunov']:.3f}, "
+                                f"max_norm={stability_losses['max_trajectory_norm']:.1f}, "
+                                f"min_std={stability_losses['min_trajectory_std']:.3f}"
+                            )
+                except Exception as e:
+                    pass  # Skip stability loss if it fails
         
         # Get predictions
         with torch.no_grad():
             predictions = torch.argmax(logits, dim=1)
         
         return loss, predictions, targets
+    
+    def forward_pass(
+        self, 
+        batch: Tuple[torch.Tensor, torch.Tensor], 
+        training: bool = True
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """
+        Perform forward pass through chaotic network.
+        Delegates to process_batch for full functionality.
+        
+        Args:
+            batch: Tuple of (audio, speaker_labels)
+            training: Whether in training mode
+            
+        Returns:
+            Tuple of (loss, predictions, targets)
+        """
+        return self.process_batch(batch, training)
     
     def calculate_metrics(
         self, 
@@ -425,13 +811,12 @@ class ChaoticExperiment(BaseExperiment):
         with torch.no_grad():
             # Prediction confidence analysis
             if hasattr(self.model, 'predict'):
-                # Get confidence scores
-                sample_audio = torch.randn(1, 8000).to(self.device)  # Sample for confidence analysis
+                sample_audio = torch.randn(1, 8000).to(self.device)
                 try:
                     _, confidence = self.model.predict(sample_audio)
                     metrics['avg_confidence'] = confidence.mean().item()
                 except:
-                    pass  # Skip if predict method fails
+                    pass
             
             # Embedding quality metrics
             if hasattr(self.model, 'extract_embeddings'):
@@ -442,7 +827,6 @@ class ChaoticExperiment(BaseExperiment):
                     # Embedding diversity (average pairwise distance)
                     if embeddings.shape[0] > 1:
                         pairwise_distances = torch.cdist(embeddings, embeddings, p=2)
-                        # Exclude diagonal (distance to self)
                         mask = ~torch.eye(embeddings.shape[0], dtype=bool, device=self.device)
                         avg_distance = pairwise_distances[mask].mean().item()
                         metrics['embedding_diversity'] = avg_distance
@@ -453,20 +837,203 @@ class ChaoticExperiment(BaseExperiment):
                     metrics['embedding_norm_std'] = embedding_norms.std().item()
                     
                 except:
-                    pass  # Skip if extraction fails
+                    pass
         
         return metrics
     
     def train_epoch(self) -> Dict[str, float]:
-        """Train epoch with chaotic network specific monitoring."""
-        # Call parent train_epoch
+        """Train epoch with chaotic network specific monitoring and warmup support."""
+        # ============ UPDATE EPOCH COUNTER FOR WARMUP ============
+        self.current_epoch = self.state.epoch
+        
+        # ============ DYNAMIC WARMUP: ACTIVATE BASED ON ACCURACY ============
+        if hasattr(self, 'sync_loss') and self.sync_loss is not None:
+            loss_config = self.config.get('loss_config', self.config.get('loss', {}))
+            sync_config = loss_config.get('synchronization', {})
+            
+            # Check if dynamic warmup is enabled
+            if sync_config.get('dynamic_warmup', False):
+                threshold = sync_config.get('activation_accuracy', 0.7)
+                
+                # Check last epoch's training accuracy
+                if hasattr(self.state, 'train_accuracies') and len(self.state.train_accuracies) > 0:
+                    last_acc = self.state.train_accuracies[-1]
+                elif hasattr(self, '_last_train_acc'):
+                    last_acc = self._last_train_acc
+                else:
+                    last_acc = 0.0
+                
+                # Activate sync loss when accuracy threshold is reached
+                if last_acc >= threshold and not getattr(self, '_sync_dynamically_activated', False):
+                    # Force activation by setting warmup_epochs to 0
+                    if hasattr(self.sync_loss, 'warmup_epochs'):
+                        old_warmup = self.sync_loss.warmup_epochs
+                        self.sync_loss.warmup_epochs = 0
+                        self.sync_loss.current_epoch = 0  # Reset to trigger activation
+                    self._sync_dynamically_activated = True
+                    self.logger.info(f"[SYNC LOSS] Dynamic activation triggered at epoch {self.current_epoch}")
+                    self.logger.info(f"[SYNC LOSS] Train accuracy {last_acc:.2%} >= threshold {threshold:.2%}")
+            
+            # Update sync loss epoch counter
+            if hasattr(self.sync_loss, 'set_epoch'):
+                self.sync_loss.set_epoch(self.current_epoch)
+                
+            self._epoch_sync_loss_sum = 0.0
+            self._epoch_batch_count = 0
+            
+            # Log warmup status (only for fixed warmup mode)
+            if not sync_config.get('dynamic_warmup', False):
+                if hasattr(self.sync_loss, 'warmup_epochs'):
+                    warmup = self.sync_loss.warmup_epochs
+                    if self.current_epoch < warmup:
+                        self.logger.info(f"[SYNC LOSS] Warmup: epoch {self.current_epoch+1}/{warmup}")
+                    elif self.current_epoch == warmup:
+                        self.logger.info("[SYNC LOSS] Warmup complete, synchronization loss activated!")
+        
+        # ============ GRADIENT CONFLICT ANALYSIS ============
+        analysis_config = self.config.get('analysis', {}).get('gradient_conflict', {})
+        if analysis_config.get('enabled', False):
+            log_freq = analysis_config.get('log_frequency', 10)
+            
+            if self.current_epoch % log_freq == 0:
+                try:
+                    sample_batch = next(iter(self.train_loader))
+                    audio, labels = sample_batch
+                    
+                    conflict_results = self.analyze_gradient_conflict(audio, labels)
+                    if conflict_results:
+                        self.logger.info(f"[GRADIENT ANALYSIS] Epoch {self.current_epoch}:")
+                        self.logger.info(f"  Avg cosine similarity: {conflict_results['avg_cosine']:.4f}")
+                        self.logger.info(f"  Conflict ratio: {conflict_results['conflict_ratio']:.2%}")
+                        
+                        if hasattr(self, 'writer') and self.writer is not None:
+
+                        
+                            self.writer.add_scalar('Gradient/avg_cosine', conflict_results['avg_cosine'], self.current_epoch)
+
+                        
+                            self.writer.add_scalar('Gradient/conflict_ratio', conflict_results['conflict_ratio'], self.current_epoch)
+                except Exception as e:
+                    self.logger.error(f"[GRADIENT ANALYSIS] Error: {e}")
+    
+        # ============ CALL PARENT TRAIN EPOCH ============
         epoch_metrics = super().train_epoch()
         
-        # Add chaotic system monitoring
+        # ============ STORE ACCURACY FOR DYNAMIC WARMUP ============
+        if 'accuracy' in epoch_metrics:
+            self._last_train_acc = epoch_metrics['accuracy']
+
+        # === 【新增代码 3】计算平均值并打印日志 ===
+        if hasattr(self, '_epoch_sync_loss_sum') and getattr(self, '_epoch_batch_count', 0) > 0:
+            # 计算平均 Loss
+            avg_sync_loss = self._epoch_sync_loss_sum / self._epoch_batch_count
+            
+            if self.sync_loss is not None:
+                # 获取当前权重
+                s_w = getattr(self.sync_loss, 'current_sync_weight', getattr(self.sync_loss, 'sync_weight', 0.0))
+                d_w = getattr(self.sync_loss, 'current_desync_weight', getattr(self.sync_loss, 'desync_weight', 0.0))
+                
+                # 按格式打印
+                self.logger.info(f"[SYNC DEBUG] Epoch {self.current_epoch}: sync_weight={s_w}, desync_weight={d_w}, loss_sync={avg_sync_loss:.6f}")
+        # ========================================
+        
+        # ============ CHAOTIC DYNAMICS MONITORING ============
         if hasattr(self.model, 'forward') and hasattr(self.model, 'chaotic_embedding'):
             self._monitor_chaotic_dynamics()
         
         return epoch_metrics
+    
+    def analyze_gradient_conflict(
+        self, 
+        audio: torch.Tensor, 
+        labels: torch.Tensor
+    ) -> Optional[Dict[str, float]]:
+        """
+        Analyze gradient conflict between CE loss and sync loss.
+        
+        Args:
+            audio: Input audio tensor
+            labels: Target labels
+            
+        Returns:
+            Dictionary with conflict statistics or None if analysis fails
+        """
+        if self.sync_loss is None:
+            return None
+        
+        try:
+            audio = audio.to(self.device)
+            labels = labels.to(self.device)
+            
+            self.model.train()
+            
+            # Get intermediates
+            logits, intermediates = self.model(audio, labels=labels, return_intermediates=True)
+            trajectories = intermediates.get('chaotic_trajectories', None)
+            
+            if trajectories is None:
+                return None
+            
+            # Compute CE loss gradients
+            self.model.zero_grad()
+            ce_loss = self.criterion(logits, labels)
+            ce_loss.backward(retain_graph=True)
+            
+            grad_ce = {}
+            for name, param in self.model.named_parameters():
+                if param.grad is not None:
+                    grad_ce[name] = param.grad.clone()
+            
+            # Compute sync loss gradients
+            self.model.zero_grad()
+            
+            if hasattr(self.sync_loss, '_compute_sync_loss'):
+                sync_loss = self.sync_loss._compute_sync_loss(trajectories, labels)
+            else:
+                sync_result = self.sync_loss(trajectories, labels)
+                if isinstance(sync_result, dict):
+                    sync_loss = sync_result.get('total_sync', torch.tensor(0.0))
+                else:
+                    sync_loss = sync_result
+            
+            if sync_loss.requires_grad:
+                sync_loss.backward(retain_graph=True)
+            
+            grad_sync = {}
+            for name, param in self.model.named_parameters():
+                if param.grad is not None:
+                    grad_sync[name] = param.grad.clone()
+            
+            # Compute conflict statistics
+            cosine_sims = []
+            conflicts = 0
+            total = 0
+            
+            for name in grad_ce:
+                if name in grad_sync:
+                    g1 = grad_ce[name].flatten()
+                    g2 = grad_sync[name].flatten()
+                    
+                    if g1.norm() > 1e-8 and g2.norm() > 1e-8:
+                        cos_sim = torch.nn.functional.cosine_similarity(g1.unsqueeze(0), g2.unsqueeze(0)).item()
+                        cosine_sims.append(cos_sim)
+                        
+                        if cos_sim < 0:
+                            conflicts += 1
+                        total += 1
+            
+            if total == 0:
+                return None
+            
+            return {
+                'avg_cosine': np.mean(cosine_sims),
+                'conflict_ratio': conflicts / total,
+                'num_params_analyzed': total
+            }
+            
+        except Exception as e:
+            self.logger.debug(f"Gradient conflict analysis failed: {e}")
+            return None
     
     def _monitor_chaotic_dynamics(self):
         """Monitor chaotic dynamics during training."""
@@ -474,7 +1041,7 @@ class ChaoticExperiment(BaseExperiment):
             # Sample a batch for analysis
             sample_batch = next(iter(self.val_loader))
             sample_audio, _ = sample_batch
-            sample_audio = sample_audio[:4].to(self.device)  # Small batch for analysis
+            sample_audio = sample_audio[:4].to(self.device)
             
             with torch.no_grad():
                 if hasattr(self.model, 'forward'):
@@ -484,14 +1051,12 @@ class ChaoticExperiment(BaseExperiment):
                     if 'chaotic_trajectories' in intermediates:
                         trajectories = intermediates['chaotic_trajectories']
                         
-                        # Calculate basic trajectory statistics
                         trajectory_std = torch.std(trajectories).item()
                         trajectory_range = (torch.max(trajectories) - torch.min(trajectories)).item()
                         
                         self.chaotic_metrics['trajectory_std'] = trajectory_std
                         self.chaotic_metrics['trajectory_range'] = trajectory_range
                         
-                        # Log to tensorboard
                         self.writer.add_scalar('Chaotic/trajectory_std', trajectory_std, self.state.epoch)
                         self.writer.add_scalar('Chaotic/trajectory_range', trajectory_range, self.state.epoch)
                     
@@ -504,6 +1069,10 @@ class ChaoticExperiment(BaseExperiment):
                         
         except Exception as e:
             self.logger.debug(f"Chaotic monitoring failed: {e}")
+    
+    # =========================================================================
+    # ANALYSIS METHODS
+    # =========================================================================
     
     def analyze_chaotic_features(self, num_samples: int = 100) -> Dict[str, Any]:
         """Comprehensive analysis of chaotic features and dynamics."""
@@ -566,7 +1135,6 @@ class ChaoticExperiment(BaseExperiment):
         # Save analysis results
         analysis_file = os.path.join(self.results_dir, 'chaotic_analysis.json')
         with open(analysis_file, 'w') as f:
-            # Convert tensors to lists for JSON serialization
             json_results = self._convert_tensors_for_json(analysis_results)
             json.dump(json_results, f, indent=2)
         
@@ -580,13 +1148,10 @@ class ChaoticExperiment(BaseExperiment):
         
         analysis = {}
         
-        # Basic statistics
         analysis['mean'] = phase_space_data.mean().item()
         analysis['std'] = phase_space_data.std().item()
         analysis['min'] = phase_space_data.min().item()
         analysis['max'] = phase_space_data.max().item()
-        
-        # Dimensionality analysis
         analysis['shape'] = list(phase_space_data.shape)
         analysis['effective_dim'] = self._estimate_effective_dimension(phase_space_data)
         
@@ -599,7 +1164,6 @@ class ChaoticExperiment(BaseExperiment):
         
         analysis = {}
         
-        # Feature statistics per dimension
         analysis['per_dim_stats'] = []
         for dim in range(features.shape[-1]):
             dim_data = features[..., dim]
@@ -611,7 +1175,6 @@ class ChaoticExperiment(BaseExperiment):
             }
             analysis['per_dim_stats'].append(dim_stats)
         
-        # Overall feature diversity
         analysis['feature_diversity'] = torch.std(features, dim=0).mean().item()
         analysis['feature_range'] = (features.max() - features.min()).item()
         
@@ -624,17 +1187,14 @@ class ChaoticExperiment(BaseExperiment):
         
         analysis = {}
         
-        # Trajectory statistics
         analysis['num_trajectories'] = trajectories.shape[0]
         analysis['trajectory_length'] = trajectories.shape[1] if len(trajectories.shape) > 1 else 0
         analysis['state_dimension'] = trajectories.shape[2] if len(trajectories.shape) > 2 else 0
         
-        # Trajectory properties
         trajectory_norms = torch.norm(trajectories, dim=-1)
         analysis['avg_trajectory_norm'] = trajectory_norms.mean().item()
         analysis['trajectory_norm_std'] = trajectory_norms.std().item()
         
-        # Path length analysis
         if len(trajectories.shape) == 3 and trajectories.shape[1] > 1:
             diffs = torch.diff(trajectories, dim=1)
             path_lengths = torch.norm(diffs, dim=-1).sum(dim=1)
@@ -650,14 +1210,10 @@ class ChaoticExperiment(BaseExperiment):
         
         analysis = {}
         
-        # Feature dimensionality
         analysis['feature_dim'] = pooled_features.shape[-1] if len(pooled_features.shape) > 0 else 0
-        
-        # Feature statistics
         analysis['mean'] = pooled_features.mean().item()
         analysis['std'] = pooled_features.std().item()
         
-        # Per-feature analysis
         if len(pooled_features.shape) > 1:
             per_feature_std = torch.std(pooled_features, dim=0)
             analysis['per_feature_std'] = per_feature_std.tolist()
@@ -676,16 +1232,13 @@ class ChaoticExperiment(BaseExperiment):
         
         analysis = {}
         
-        # Embedding properties
         analysis['embedding_dim'] = embeddings.shape[-1] if len(embeddings.shape) > 0 else 0
         analysis['num_embeddings'] = embeddings.shape[0] if len(embeddings.shape) > 0 else 0
         
-        # Embedding norms (should be normalized)
         embedding_norms = torch.norm(embeddings, dim=-1)
         analysis['norm_mean'] = embedding_norms.mean().item()
         analysis['norm_std'] = embedding_norms.std().item()
         
-        # Inter-class and intra-class distances
         if len(set(labels)) > 1 and len(embeddings.shape) > 1:
             unique_labels = list(set(labels))
             intra_class_distances = []
@@ -695,12 +1248,10 @@ class ChaoticExperiment(BaseExperiment):
                 label_indices = [i for i, l in enumerate(labels) if l == label]
                 if len(label_indices) > 1:
                     label_embeddings = embeddings[label_indices]
-                    # Intra-class distances
                     pairwise_dist = torch.cdist(label_embeddings, label_embeddings, p=2)
                     mask = ~torch.eye(len(label_indices), dtype=bool)
                     intra_class_distances.extend(pairwise_dist[mask].tolist())
                 
-                # Inter-class distances
                 other_indices = [i for i, l in enumerate(labels) if l != label]
                 if other_indices and label_indices:
                     label_embeddings = embeddings[label_indices]
@@ -720,7 +1271,6 @@ class ChaoticExperiment(BaseExperiment):
                     'std': np.std(inter_class_distances)
                 }
             
-            # Separation ratio
             if intra_class_distances and inter_class_distances:
                 separation_ratio = np.mean(inter_class_distances) / np.mean(intra_class_distances)
                 analysis['separation_ratio'] = separation_ratio
@@ -730,24 +1280,18 @@ class ChaoticExperiment(BaseExperiment):
     def _estimate_effective_dimension(self, data: torch.Tensor) -> float:
         """Estimate effective dimension of data using PCA."""
         try:
-            # Flatten data for PCA analysis
             if len(data.shape) > 2:
                 data_flat = data.view(data.shape[0], -1)
             else:
                 data_flat = data
             
-            # Center the data
             data_centered = data_flat - data_flat.mean(dim=0, keepdim=True)
-            
-            # Compute SVD
             U, S, V = torch.svd(data_centered)
             
-            # Compute explained variance ratio
             explained_variance = S ** 2
             total_variance = explained_variance.sum()
             explained_ratio = explained_variance / total_variance
             
-            # Find effective dimension (95% variance)
             cumsum_ratio = torch.cumsum(explained_ratio, dim=0)
             effective_dim = (cumsum_ratio < 0.95).sum().item() + 1
             
@@ -767,6 +1311,10 @@ class ChaoticExperiment(BaseExperiment):
         else:
             return obj
     
+    # =========================================================================
+    # VISUALIZATION METHODS
+    # =========================================================================
+    
     def visualize_chaotic_dynamics(self, save_plots: bool = True) -> Dict[str, str]:
         """Create visualizations of chaotic dynamics."""
         if not save_plots:
@@ -779,7 +1327,6 @@ class ChaoticExperiment(BaseExperiment):
         os.makedirs(plots_dir, exist_ok=True)
         
         try:
-            # Sample data for visualization
             sample_batch = next(iter(self.test_loader))
             sample_audio, sample_labels = sample_batch
             sample_audio = sample_audio[:8].to(self.device)
@@ -788,7 +1335,6 @@ class ChaoticExperiment(BaseExperiment):
                 if hasattr(self.model, 'forward'):
                     _, intermediates = self.model(sample_audio, return_intermediates=True)
                     
-                    # Plot chaotic trajectories
                     if 'chaotic_trajectories' in intermediates:
                         trajectory_plot = self._plot_trajectories(
                             intermediates['chaotic_trajectories'],
@@ -797,7 +1343,6 @@ class ChaoticExperiment(BaseExperiment):
                         if trajectory_plot:
                             plot_paths['trajectories'] = trajectory_plot
                     
-                    # Plot feature distributions
                     if 'pooled_features' in intermediates:
                         feature_plot = self._plot_feature_distributions(
                             intermediates['pooled_features'],
@@ -806,7 +1351,6 @@ class ChaoticExperiment(BaseExperiment):
                         if feature_plot:
                             plot_paths['features'] = feature_plot
                     
-                    # Plot embeddings
                     if 'speaker_embeddings' in intermediates:
                         embedding_plot = self._plot_embeddings(
                             intermediates['speaker_embeddings'],
@@ -830,7 +1374,6 @@ class ChaoticExperiment(BaseExperiment):
             
             fig = plt.figure(figsize=(15, 5))
             
-            # Plot first 3 trajectories
             for i in range(min(3, trajectories_cpu.shape[0])):
                 ax = fig.add_subplot(1, 3, i+1, projection='3d')
                 traj = trajectories_cpu[i]
@@ -861,7 +1404,6 @@ class ChaoticExperiment(BaseExperiment):
     def _plot_feature_distributions(self, features: torch.Tensor, save_path: str) -> Optional[str]:
         """Plot distribution of pooled features."""
         try:
-            
             features_cpu = features.cpu().numpy()
             
             fig, axes = plt.subplots(2, 3, figsize=(15, 10))
@@ -875,7 +1417,6 @@ class ChaoticExperiment(BaseExperiment):
                 ax.set_ylabel('Count')
                 ax.grid(True, alpha=0.3)
             
-            # Hide unused subplots
             for i in range(features_cpu.shape[1], len(axes)):
                 axes[i].set_visible(False)
             
@@ -904,11 +1445,9 @@ class ChaoticExperiment(BaseExperiment):
             embeddings_cpu = embeddings.cpu().numpy()
             labels_cpu = labels.cpu().numpy()
             
-            # Use t-SNE for dimensionality reduction
             tsne = TSNE(n_components=2, random_state=42, perplexity=min(30, len(embeddings_cpu)-1))
             embeddings_2d = tsne.fit_transform(embeddings_cpu)
             
-            # Create scatter plot
             fig, ax = plt.subplots(figsize=(10, 8))
             
             unique_labels = np.unique(labels_cpu)
@@ -950,7 +1489,6 @@ class ChaoticExperiment(BaseExperiment):
         
         analysis_results = {}
         
-        # Model complexity analysis
         total_params = sum(p.numel() for p in self.model.parameters())
         trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
         
@@ -960,7 +1498,6 @@ class ChaoticExperiment(BaseExperiment):
             'model_size_mb': total_params * 4 / (1024 * 1024)
         }
         
-        # Chaotic system configuration
         analysis_results['chaotic_config'] = {
             'system_type': self.config['chaotic_system'],
             'evolution_time': self.config['evolution_time'],
@@ -969,15 +1506,12 @@ class ChaoticExperiment(BaseExperiment):
             'pooling_type': self.config['pooling_type']
         }
         
-        # Feature analysis
         feature_analysis = self.analyze_chaotic_features(num_samples=200)
         analysis_results['feature_analysis'] = feature_analysis
         
-        # Create visualizations
         visualization_paths = self.visualize_chaotic_dynamics(save_plots=True)
         analysis_results['visualizations'] = visualization_paths
         
-        # Training dynamics
         analysis_results['training_dynamics'] = {
             'best_epoch': self.state.best_epoch,
             'best_metric': self.state.best_metric,
@@ -985,7 +1519,6 @@ class ChaoticExperiment(BaseExperiment):
             'chaotic_metrics': self.chaotic_metrics
         }
         
-        # Save comprehensive analysis
         analysis_file = os.path.join(self.results_dir, 'comprehensive_chaotic_analysis.json')
         with open(analysis_file, 'w') as f:
             json_results = self._convert_tensors_for_json(analysis_results)
@@ -1016,7 +1549,6 @@ def create_chaotic_experiments(base_config: Dict[str, Any]) -> Dict[str, Chaotic
             config['chaotic_system'] = system
             config['model_type'] = model_type
             
-            # Adjust parameters based on system
             if system == 'lorenz':
                 config['evolution_time'] = 0.5
                 config['coupling_strength'] = 1.0
@@ -1037,12 +1569,10 @@ def create_chaotic_experiments(base_config: Dict[str, Any]) -> Dict[str, Chaotic
 
 
 if __name__ == "__main__":
-    print(f"✓ Project Root: {PROJECT_ROOT}")
-    print(f"✓ Import Manager: {USING_IMPORT_MANAGER}")
-    print(f"✓ Module imports successful")
-    # Example usage and testing
+    print(f"Project Root: {PROJECT_ROOT}")
+    print(f"Import Manager: {USING_IMPORT_MANAGER}")
+    print(f"Module imports successful")
     
-    # Test configuration
     test_config = {
         'chaotic_system': 'lorenz',
         'model_type': 'full_chaotic',
@@ -1057,75 +1587,28 @@ if __name__ == "__main__":
         'classifier_type': 'cosine',
         'sample_rate': 16000,
         'primary_metric': 'accuracy',
-        'log_interval': 5
+        'log_interval': 5,
+        'loss_config': {
+            'synchronization': {
+                'enabled': True,
+                'sync_weight': 0.1,
+                'desync_weight': 0.1,
+                'margin': 5.0,
+                'warmup_epochs': 50
+            }
+        }
     }
     
-    print("Testing ChaoticExperiment...")
+    print("Testing ChaoticExperiment with warmup support...")
     
-    # Test single experiment
     experiment = ChaoticExperiment(
         config=test_config,
-        experiment_name='test_chaotic_lorenz'
+        experiment_name='test_chaotic_lorenz_warmup'
     )
-
-    # 1. Before training, verify gradient flow:
-    def verify_gradients(model, sample_batch, device):
-        """Quick gradient verification."""
-        model.train()
-        model.zero_grad()
     
-        audio, labels = sample_batch
-        audio = audio.to(device)
-        labels = labels.to(device)
-    
-        logits = model(audio, labels=labels)
-        loss = F.cross_entropy(logits, labels)
-        loss.backward()
-    
-        # Check gradient statistics
-        total_grad = 0
-        zero_grad_count = 0
-        for name, param in model.named_parameters():
-            if param.grad is not None:
-                grad_norm = param.grad.norm().item()
-                total_grad += grad_norm
-                if grad_norm == 0:
-                    zero_grad_count += 1
-    
-        print(f"[GRADIENT CHECK] Total grad norm: {total_grad:.4f}")
-        print(f"[GRADIENT CHECK] Zero gradient params: {zero_grad_count}")
-    
-        return total_grad > 0
-    
-    print("Setting up experiment...")
-    experiment.setup()
-    
-    # 验证梯度流
-    sample_batch = next(iter(self.train_loader))
-    if not self._verify_gradients(sample_batch):
-        self.logger.error("Gradient flow is broken!")
-    
-    print("Running chaotic analysis...")
-    analysis = experiment.run_chaotic_analysis()
-    print(f"Model parameters: {analysis['model_complexity']['total_parameters']:,}")
-    
-    print("Training for 2 epochs...")
-    experiment.train(num_epochs=2)
-    
-    print("Chaotic experiment test completed!")
-    
-    # Test multiple experiments creation
-    print("\nTesting multiple chaotic experiments creation...")
-    base_config = {
-        'num_speakers': 5,
-        'batch_size': 4,
-        'learning_rate': 0.0005,
-        'sample_rate': 16000
-    }
-    
-    chaotic_experiments = create_chaotic_experiments(base_config)
-    print(f"Created {len(chaotic_experiments)} chaotic experiments:")
-    for name in chaotic_experiments.keys():
-        print(f"  - {name}")
-    
-    print("All tests completed successfully!")
+    print("ChaoticExperiment initialized successfully!")
+    print(f"Sync loss enabled: {experiment.sync_loss is not None}")
+    if experiment.sync_loss is not None:
+        print(f"Sync loss type: {type(experiment.sync_loss).__name__}")
+        if hasattr(experiment.sync_loss, 'warmup_epochs'):
+            print(f"Warmup epochs: {experiment.sync_loss.warmup_epochs}")

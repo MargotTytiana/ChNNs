@@ -1,0 +1,987 @@
+2026-01-25 07:50:32,737 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 07:50:32,737 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 07:50:32,737 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 07:52:29,974 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 07:52:29,974 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 07:52:29,974 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:33:36,164 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:33:36,174 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:33:36,174 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:33:36,174 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:36:45,170 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:36:45,170 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:36:45,170 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:36:45,170 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:36:45,170 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 09:39:18,220 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:39:18,220 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:39:18,220 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:39:18,220 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:39:18,220 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 09:39:18,252 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:39:18,252 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 09:39:18,348 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 09:39:18,349 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 09:39:18,349 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 09:39:18,349 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 09:39:18,738 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 09:39:20,481 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 09:39:20,685 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 09:39:23,083 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 09:39:23,502 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 09:39:23,599 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 09:39:23,599 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 09:39:23,599 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 09:39:23,599 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 09:39:23,599 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 09:39:23,599 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 09:39:23,599 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 09:39:23,600 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 09:39:23,990 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 09:39:23,990 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 09:39:23,990 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 09:39:23,990 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 09:43:45,767 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:43:45,767 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:43:45,768 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:43:45,768 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:43:45,768 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 09:43:45,799 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:43:45,800 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 09:43:45,898 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 09:43:45,898 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 09:43:45,898 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 09:43:45,898 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 09:43:46,284 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 09:43:46,319 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 09:43:46,347 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 09:43:46,678 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 09:43:46,748 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 09:43:46,849 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 09:43:47,236 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 09:43:47,236 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 09:43:47,236 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 09:43:47,236 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 09:43:48,356 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 09:43:48,356 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 09:43:48,357 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 09:43:48,401 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 09:43:48,401 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 09:46:04,062 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:46:04,062 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:46:04,062 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:46:04,062 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:46:04,062 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 09:46:04,094 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:46:04,094 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 09:46:04,191 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 09:46:04,191 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 09:46:04,192 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 09:46:04,192 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 09:46:04,579 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 09:46:04,613 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 09:46:04,643 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 09:46:04,991 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 09:46:05,063 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 09:46:05,160 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 09:46:05,161 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 09:46:05,161 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 09:46:05,161 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 09:46:05,161 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 09:46:05,161 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 09:46:05,161 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 09:46:05,161 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 09:46:05,551 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 09:46:05,551 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 09:46:05,551 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 09:46:05,551 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 09:46:06,662 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 09:46:06,662 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 09:46:06,662 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 09:46:06,707 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 09:46:06,707 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 09:48:59,410 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:48:59,410 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:48:59,410 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:48:59,410 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:48:59,410 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 09:48:59,442 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:48:59,442 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 09:48:59,543 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 09:48:59,543 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 09:48:59,543 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 09:48:59,543 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 09:48:59,931 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 09:48:59,965 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 09:48:59,993 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 09:49:00,320 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 09:49:00,393 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 09:49:00,490 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 09:49:00,872 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 09:49:00,872 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 09:49:00,872 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 09:49:00,872 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 09:49:01,981 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 09:49:01,982 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 09:49:01,982 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 09:49:02,026 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 09:49:02,026 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 09:52:46,319 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:52:46,320 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:52:46,320 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:52:46,320 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:52:46,320 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 09:52:46,351 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:52:46,352 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 09:52:46,449 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 09:52:46,450 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 09:52:46,450 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 09:52:46,450 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 09:52:46,833 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 09:52:46,867 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 09:52:46,896 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 09:52:47,238 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 09:52:47,306 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 09:52:47,401 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 09:52:47,401 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 09:52:47,401 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 09:52:47,401 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 09:52:47,401 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 09:52:47,401 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 09:52:47,401 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 09:52:47,402 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 09:52:47,784 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 09:52:47,784 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 09:52:47,784 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 09:52:47,784 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 09:52:48,914 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 09:52:48,914 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 09:52:48,914 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 09:52:48,958 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 09:52:48,958 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 09:56:55,741 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 09:56:55,741 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 09:56:55,741 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 09:56:55,741 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 09:56:55,741 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 09:56:55,773 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:56:55,773 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 09:56:55,878 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 09:56:55,878 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 09:56:55,878 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 09:56:55,878 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 09:56:56,263 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 09:56:56,297 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 09:56:56,327 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 09:56:56,662 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 09:56:56,731 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 09:56:56,825 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 09:56:57,214 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 09:56:57,214 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 09:56:57,214 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 09:56:57,214 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 09:56:58,333 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 09:56:58,334 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 09:56:58,334 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 09:56:58,377 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 09:56:58,377 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 09:56:58,378 - experiment_baseline_experiment - INFO - Starting training for 50 epochs
+2026-01-25 09:56:58,415 - experiment_baseline_experiment - INFO - 
+================================================================================
+2026-01-25 09:56:58,415 - experiment_baseline_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 09:56:58,415 - experiment_baseline_experiment - INFO - ================================================================================
+2026-01-25 09:56:58,415 - experiment_baseline_experiment - INFO - Batch Info:
+2026-01-25 09:56:58,415 - experiment_baseline_experiment - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-25 09:56:58,415 - experiment_baseline_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 09:56:58,418 - experiment_baseline_experiment - INFO -   Targets (first 8): tensor([22, 25, 15,  2, 21,  6,  7,  3], device='cuda:0')
+2026-01-25 09:56:58,418 - experiment_baseline_experiment - ERROR - Training failed with error: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+2026-01-25 10:04:06,477 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 10:04:06,477 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 10:04:06,477 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 10:04:06,477 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 10:04:06,478 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 10:04:06,509 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 10:04:06,509 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 10:04:06,607 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 10:04:06,607 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 10:04:06,607 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 10:04:06,608 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 10:04:06,990 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 10:04:07,024 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 10:04:07,053 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 10:04:07,386 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 10:04:07,454 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 10:04:07,550 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 10:04:07,941 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 10:04:07,941 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 10:04:07,941 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 10:04:07,941 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 10:04:09,046 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 10:04:09,046 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 10:04:09,047 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 10:04:09,093 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 10:04:09,093 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 10:04:09,093 - experiment_baseline_experiment - INFO - Starting training for 50 epochs
+2026-01-25 10:04:09,129 - experiment_baseline_experiment - INFO - 
+================================================================================
+2026-01-25 10:04:09,129 - experiment_baseline_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 10:04:09,129 - experiment_baseline_experiment - INFO - ================================================================================
+2026-01-25 10:04:09,129 - experiment_baseline_experiment - INFO - Batch Info:
+2026-01-25 10:04:09,129 - experiment_baseline_experiment - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-25 10:04:09,129 - experiment_baseline_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 10:04:09,132 - experiment_baseline_experiment - INFO -   Targets (first 8): tensor([22, 25, 15,  2, 21,  6,  7,  3], device='cuda:0')
+2026-01-25 10:04:09,132 - experiment_baseline_experiment - ERROR - Training failed with error: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+2026-01-25 10:08:42,816 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 10:08:42,816 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 10:08:42,816 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 10:08:42,817 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 10:08:42,817 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 10:08:42,848 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 10:08:42,848 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 10:08:42,951 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 10:08:42,952 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 10:08:42,952 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 10:08:42,952 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 10:08:43,335 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 10:08:43,370 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 10:08:43,399 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 10:08:43,726 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 10:08:43,795 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 10:08:43,896 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 10:08:43,896 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 10:08:43,897 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 10:08:43,897 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 10:08:43,897 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 10:08:43,897 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 10:08:43,897 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 10:08:43,897 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 10:08:44,281 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 10:08:44,281 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 10:08:44,281 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 10:08:44,281 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 10:08:45,393 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 10:08:45,394 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 10:08:45,394 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 10:08:45,439 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 10:08:45,440 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 10:08:45,440 - experiment_baseline_experiment - INFO - Starting training for 50 epochs
+2026-01-25 10:08:45,477 - experiment_baseline_experiment - INFO - 
+================================================================================
+2026-01-25 10:08:45,477 - experiment_baseline_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 10:08:45,477 - experiment_baseline_experiment - INFO - ================================================================================
+2026-01-25 10:08:45,477 - experiment_baseline_experiment - INFO - Batch Info:
+2026-01-25 10:08:45,477 - experiment_baseline_experiment - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-25 10:08:45,478 - experiment_baseline_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 10:08:45,481 - experiment_baseline_experiment - INFO -   Targets (first 8): tensor([22, 25, 15,  2, 21,  6,  7,  3], device='cuda:0')
+2026-01-25 10:08:46,704 - experiment_baseline_experiment - INFO - ================================================================================
+
+2026-01-25 10:08:47,101 - experiment_baseline_experiment - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 3.283899
+2026-01-25 10:08:50,666 - experiment_baseline_experiment - INFO - Epoch 0: Train Loss: 2.8138, Train Acc: 0.2746, Val Loss: 2.5076, Val Acc: 0.3820
+2026-01-25 10:08:50,775 - experiment_baseline_experiment - INFO - Saved new best model at epoch 0
+2026-01-25 10:08:50,992 - experiment_baseline_experiment - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 1.868009
+2026-01-25 10:08:53,966 - experiment_baseline_experiment - INFO - Epoch 1: Train Loss: 1.8601, Train Acc: 0.5871, Val Loss: 1.4978, Val Acc: 0.7416
+2026-01-25 10:08:54,076 - experiment_baseline_experiment - INFO - Saved new best model at epoch 1
+2026-01-25 10:08:54,271 - experiment_baseline_experiment - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 1.469020
+2026-01-25 10:08:57,261 - experiment_baseline_experiment - INFO - Epoch 2: Train Loss: 1.2961, Train Acc: 0.8036, Val Loss: 0.9580, Val Acc: 0.8427
+2026-01-25 10:08:57,370 - experiment_baseline_experiment - INFO - Saved new best model at epoch 2
+2026-01-25 10:08:57,564 - experiment_baseline_experiment - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 1.090078
+2026-01-25 10:09:00,543 - experiment_baseline_experiment - INFO - Epoch 3: Train Loss: 0.8501, Train Acc: 0.8862, Val Loss: 0.6243, Val Acc: 0.9438
+2026-01-25 10:09:00,652 - experiment_baseline_experiment - INFO - Saved new best model at epoch 3
+2026-01-25 10:09:00,848 - experiment_baseline_experiment - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 0.699299
+2026-01-25 10:09:03,820 - experiment_baseline_experiment - INFO - Epoch 4: Train Loss: 0.5807, Train Acc: 0.9353, Val Loss: 0.4116, Val Acc: 0.9663
+2026-01-25 10:09:03,930 - experiment_baseline_experiment - INFO - Saved new best model at epoch 4
+2026-01-25 10:09:04,125 - experiment_baseline_experiment - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 0.413657
+2026-01-25 10:09:07,108 - experiment_baseline_experiment - INFO - Epoch 5: Train Loss: 0.4138, Train Acc: 0.9643, Val Loss: 0.2996, Val Acc: 0.9775
+2026-01-25 10:09:07,217 - experiment_baseline_experiment - INFO - Saved new best model at epoch 5
+2026-01-25 10:09:07,411 - experiment_baseline_experiment - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 0.398272
+2026-01-25 10:09:10,391 - experiment_baseline_experiment - INFO - Epoch 6: Train Loss: 0.2837, Train Acc: 0.9710, Val Loss: 0.2103, Val Acc: 0.9888
+2026-01-25 10:09:10,501 - experiment_baseline_experiment - INFO - Saved new best model at epoch 6
+2026-01-25 10:09:10,696 - experiment_baseline_experiment - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 0.228590
+2026-01-25 10:09:13,662 - experiment_baseline_experiment - INFO - Epoch 7: Train Loss: 0.2186, Train Acc: 0.9821, Val Loss: 0.1865, Val Acc: 0.9775
+2026-01-25 10:09:13,935 - experiment_baseline_experiment - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.163015
+2026-01-25 10:09:16,902 - experiment_baseline_experiment - INFO - Epoch 8: Train Loss: 0.1703, Train Acc: 0.9821, Val Loss: 0.1444, Val Acc: 1.0000
+2026-01-25 10:09:17,011 - experiment_baseline_experiment - INFO - Saved new best model at epoch 8
+2026-01-25 10:09:17,208 - experiment_baseline_experiment - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.153566
+2026-01-25 10:09:20,175 - experiment_baseline_experiment - INFO - Epoch 9: Train Loss: 0.1452, Train Acc: 0.9866, Val Loss: 0.1311, Val Acc: 0.9888
+2026-01-25 10:09:20,448 - experiment_baseline_experiment - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.083021
+2026-01-25 10:09:23,444 - experiment_baseline_experiment - INFO - Epoch 10: Train Loss: 0.1196, Train Acc: 0.9799, Val Loss: 0.1073, Val Acc: 1.0000
+2026-01-25 10:09:23,737 - experiment_baseline_experiment - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.094142
+2026-01-25 10:09:26,718 - experiment_baseline_experiment - INFO - Epoch 11: Train Loss: 0.0981, Train Acc: 0.9844, Val Loss: 0.0932, Val Acc: 0.9888
+2026-01-25 10:09:26,998 - experiment_baseline_experiment - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.063012
+2026-01-25 10:09:29,968 - experiment_baseline_experiment - INFO - Epoch 12: Train Loss: 0.0757, Train Acc: 0.9933, Val Loss: 0.0891, Val Acc: 0.9888
+2026-01-25 10:09:30,239 - experiment_baseline_experiment - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.037490
+2026-01-25 10:09:33,222 - experiment_baseline_experiment - INFO - Epoch 13: Train Loss: 0.0594, Train Acc: 0.9933, Val Loss: 0.0861, Val Acc: 0.9775
+2026-01-25 10:09:33,494 - experiment_baseline_experiment - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.096437
+2026-01-25 10:09:36,468 - experiment_baseline_experiment - INFO - Epoch 14: Train Loss: 0.0606, Train Acc: 0.9933, Val Loss: 0.0896, Val Acc: 0.9775
+2026-01-25 10:09:36,739 - experiment_baseline_experiment - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.095745
+2026-01-25 10:09:39,717 - experiment_baseline_experiment - INFO - Epoch 15: Train Loss: 0.0681, Train Acc: 0.9866, Val Loss: 0.0488, Val Acc: 1.0000
+2026-01-25 10:09:39,989 - experiment_baseline_experiment - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.023335
+2026-01-25 10:09:42,973 - experiment_baseline_experiment - INFO - Epoch 16: Train Loss: 0.0383, Train Acc: 1.0000, Val Loss: 0.0539, Val Acc: 1.0000
+2026-01-25 10:09:43,243 - experiment_baseline_experiment - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.019048
+2026-01-25 10:09:46,217 - experiment_baseline_experiment - INFO - Epoch 17: Train Loss: 0.0325, Train Acc: 1.0000, Val Loss: 0.0598, Val Acc: 0.9775
+2026-01-25 10:09:46,489 - experiment_baseline_experiment - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.021412
+2026-01-25 10:09:49,468 - experiment_baseline_experiment - INFO - Epoch 18: Train Loss: 0.0321, Train Acc: 0.9978, Val Loss: 0.0499, Val Acc: 0.9888
+2026-01-25 10:09:49,741 - experiment_baseline_experiment - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.032940
+2026-01-25 10:09:52,726 - experiment_baseline_experiment - INFO - Epoch 19: Train Loss: 0.0354, Train Acc: 0.9955, Val Loss: 0.0450, Val Acc: 1.0000
+2026-01-25 10:09:53,000 - experiment_baseline_experiment - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.020046
+2026-01-25 10:09:55,983 - experiment_baseline_experiment - INFO - Epoch 20: Train Loss: 0.0344, Train Acc: 0.9978, Val Loss: 0.0608, Val Acc: 0.9775
+2026-01-25 10:09:56,283 - experiment_baseline_experiment - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.011938
+2026-01-25 10:09:59,263 - experiment_baseline_experiment - INFO - Epoch 21: Train Loss: 0.0247, Train Acc: 0.9978, Val Loss: 0.0349, Val Acc: 1.0000
+2026-01-25 10:09:59,543 - experiment_baseline_experiment - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.024308
+2026-01-25 10:10:02,568 - experiment_baseline_experiment - INFO - Epoch 22: Train Loss: 0.0293, Train Acc: 0.9978, Val Loss: 0.0463, Val Acc: 1.0000
+2026-01-25 10:10:02,854 - experiment_baseline_experiment - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.055056
+2026-01-25 10:10:05,840 - experiment_baseline_experiment - INFO - Epoch 23: Train Loss: 0.0395, Train Acc: 0.9933, Val Loss: 0.0358, Val Acc: 1.0000
+2026-01-25 10:10:06,124 - experiment_baseline_experiment - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.027782
+2026-01-25 10:10:09,106 - experiment_baseline_experiment - INFO - Epoch 24: Train Loss: 0.0181, Train Acc: 0.9978, Val Loss: 0.0394, Val Acc: 1.0000
+2026-01-25 10:10:09,384 - experiment_baseline_experiment - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.013054
+2026-01-25 10:10:12,368 - experiment_baseline_experiment - INFO - Epoch 25: Train Loss: 0.0254, Train Acc: 0.9955, Val Loss: 0.0374, Val Acc: 0.9888
+2026-01-25 10:10:12,640 - experiment_baseline_experiment - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.086428
+2026-01-25 10:10:15,611 - experiment_baseline_experiment - INFO - Epoch 26: Train Loss: 0.0231, Train Acc: 0.9955, Val Loss: 0.0258, Val Acc: 1.0000
+2026-01-25 10:10:15,886 - experiment_baseline_experiment - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.023997
+2026-01-25 10:10:18,859 - experiment_baseline_experiment - INFO - Epoch 27: Train Loss: 0.0171, Train Acc: 1.0000, Val Loss: 0.0400, Val Acc: 1.0000
+2026-01-25 10:10:19,131 - experiment_baseline_experiment - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.018087
+2026-01-25 10:10:22,111 - experiment_baseline_experiment - INFO - Epoch 28: Train Loss: 0.0193, Train Acc: 1.0000, Val Loss: 0.0264, Val Acc: 1.0000
+2026-01-25 10:10:22,382 - experiment_baseline_experiment - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.007771
+2026-01-25 10:10:25,358 - experiment_baseline_experiment - INFO - Epoch 29: Train Loss: 0.0168, Train Acc: 0.9978, Val Loss: 0.0527, Val Acc: 0.9888
+2026-01-25 10:10:25,628 - experiment_baseline_experiment - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.008610
+2026-01-25 10:10:28,607 - experiment_baseline_experiment - INFO - Epoch 30: Train Loss: 0.0155, Train Acc: 1.0000, Val Loss: 0.0264, Val Acc: 0.9888
+2026-01-25 10:10:28,904 - experiment_baseline_experiment - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.010973
+2026-01-25 10:10:31,894 - experiment_baseline_experiment - INFO - Epoch 31: Train Loss: 0.0159, Train Acc: 1.0000, Val Loss: 0.0294, Val Acc: 1.0000
+2026-01-25 10:10:32,166 - experiment_baseline_experiment - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.023963
+2026-01-25 10:10:35,143 - experiment_baseline_experiment - INFO - Epoch 32: Train Loss: 0.0168, Train Acc: 0.9978, Val Loss: 0.0228, Val Acc: 1.0000
+2026-01-25 10:10:35,415 - experiment_baseline_experiment - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.012215
+2026-01-25 10:10:38,401 - experiment_baseline_experiment - INFO - Epoch 33: Train Loss: 0.0218, Train Acc: 0.9978, Val Loss: 0.0173, Val Acc: 1.0000
+2026-01-25 10:10:38,673 - experiment_baseline_experiment - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.007015
+2026-01-25 10:10:41,653 - experiment_baseline_experiment - INFO - Epoch 34: Train Loss: 0.0086, Train Acc: 1.0000, Val Loss: 0.0197, Val Acc: 1.0000
+2026-01-25 10:10:41,937 - experiment_baseline_experiment - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.023317
+2026-01-25 10:10:44,922 - experiment_baseline_experiment - INFO - Epoch 35: Train Loss: 0.0123, Train Acc: 1.0000, Val Loss: 0.0229, Val Acc: 1.0000
+2026-01-25 10:10:45,197 - experiment_baseline_experiment - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.006898
+2026-01-25 10:10:48,187 - experiment_baseline_experiment - INFO - Epoch 36: Train Loss: 0.0143, Train Acc: 1.0000, Val Loss: 0.0185, Val Acc: 1.0000
+2026-01-25 10:10:48,460 - experiment_baseline_experiment - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.006353
+2026-01-25 10:10:51,452 - experiment_baseline_experiment - INFO - Epoch 37: Train Loss: 0.0140, Train Acc: 0.9978, Val Loss: 0.0198, Val Acc: 1.0000
+2026-01-25 10:10:51,730 - experiment_baseline_experiment - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.008342
+2026-01-25 10:10:54,714 - experiment_baseline_experiment - INFO - Epoch 38: Train Loss: 0.0120, Train Acc: 0.9978, Val Loss: 0.0286, Val Acc: 1.0000
+2026-01-25 10:10:54,992 - experiment_baseline_experiment - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.012556
+2026-01-25 10:10:57,986 - experiment_baseline_experiment - INFO - Epoch 39: Train Loss: 0.0150, Train Acc: 0.9978, Val Loss: 0.0198, Val Acc: 1.0000
+2026-01-25 10:10:58,258 - experiment_baseline_experiment - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.006167
+2026-01-25 10:11:01,255 - experiment_baseline_experiment - INFO - Epoch 40: Train Loss: 0.0091, Train Acc: 0.9978, Val Loss: 0.0214, Val Acc: 1.0000
+2026-01-25 10:11:01,575 - experiment_baseline_experiment - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.013950
+2026-01-25 10:11:04,566 - experiment_baseline_experiment - INFO - Epoch 41: Train Loss: 0.0088, Train Acc: 1.0000, Val Loss: 0.0191, Val Acc: 1.0000
+2026-01-25 10:11:04,837 - experiment_baseline_experiment - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.005652
+2026-01-25 10:11:07,839 - experiment_baseline_experiment - INFO - Epoch 42: Train Loss: 0.0121, Train Acc: 0.9978, Val Loss: 0.0133, Val Acc: 1.0000
+2026-01-25 10:11:08,113 - experiment_baseline_experiment - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.006999
+2026-01-25 10:11:11,134 - experiment_baseline_experiment - INFO - Epoch 43: Train Loss: 0.0179, Train Acc: 0.9955, Val Loss: 0.0147, Val Acc: 1.0000
+2026-01-25 10:11:11,407 - experiment_baseline_experiment - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.017472
+2026-01-25 10:11:14,407 - experiment_baseline_experiment - INFO - Epoch 44: Train Loss: 0.0142, Train Acc: 0.9978, Val Loss: 0.0204, Val Acc: 1.0000
+2026-01-25 10:11:14,688 - experiment_baseline_experiment - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.002530
+2026-01-25 10:11:17,679 - experiment_baseline_experiment - INFO - Epoch 45: Train Loss: 0.0093, Train Acc: 1.0000, Val Loss: 0.0189, Val Acc: 1.0000
+2026-01-25 10:11:17,962 - experiment_baseline_experiment - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.006761
+2026-01-25 10:11:20,954 - experiment_baseline_experiment - INFO - Epoch 46: Train Loss: 0.0189, Train Acc: 0.9955, Val Loss: 0.0154, Val Acc: 1.0000
+2026-01-25 10:11:21,226 - experiment_baseline_experiment - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.007503
+2026-01-25 10:11:24,215 - experiment_baseline_experiment - INFO - Epoch 47: Train Loss: 0.0115, Train Acc: 0.9978, Val Loss: 0.0207, Val Acc: 1.0000
+2026-01-25 10:11:24,487 - experiment_baseline_experiment - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.004035
+2026-01-25 10:11:27,476 - experiment_baseline_experiment - INFO - Epoch 48: Train Loss: 0.0049, Train Acc: 1.0000, Val Loss: 0.0168, Val Acc: 1.0000
+2026-01-25 10:11:27,749 - experiment_baseline_experiment - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.002969
+2026-01-25 10:11:30,736 - experiment_baseline_experiment - INFO - Epoch 49: Train Loss: 0.0067, Train Acc: 1.0000, Val Loss: 0.0608, Val Acc: 0.9775
+2026-01-25 10:11:30,829 - experiment_baseline_experiment - INFO - Running final test evaluation...
+2026-01-25 10:11:31,537 - experiment_baseline_experiment - INFO - Test Results:
+2026-01-25 10:11:31,537 - experiment_baseline_experiment - INFO -   loss: 0.0476
+2026-01-25 10:11:31,537 - experiment_baseline_experiment - INFO -   accuracy: 0.9831
+2026-01-25 10:11:31,537 - experiment_baseline_experiment - INFO -   precision_macro: 0.9872
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   recall_macro: 0.9795
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   f1_macro: 0.9810
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   precision_weighted: 0.9859
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   recall_weighted: 0.9831
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   f1_weighted: 0.9825
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   precision_class_0: 0.8333
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   recall_class_0: 1.0000
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   f1_class_0: 0.9091
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   precision_class_1: 1.0000
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   recall_class_1: 1.0000
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   f1_class_1: 1.0000
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   precision_class_2: 1.0000
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   recall_class_2: 1.0000
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   f1_class_2: 1.0000
+2026-01-25 10:11:31,538 - experiment_baseline_experiment - INFO -   precision_class_3: 0.8333
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   recall_class_3: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   f1_class_3: 0.9091
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   precision_class_4: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   recall_class_4: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   f1_class_4: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   precision_class_5: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   recall_class_5: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   f1_class_5: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   precision_class_6: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   recall_class_6: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   f1_class_6: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   precision_class_7: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   recall_class_7: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   f1_class_7: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   precision_class_8: 1.0000
+2026-01-25 10:11:31,539 - experiment_baseline_experiment - INFO -   recall_class_8: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   f1_class_8: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   precision_class_9: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   recall_class_9: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   f1_class_9: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   precision_class_10: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   recall_class_10: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   f1_class_10: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   precision_class_11: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   recall_class_11: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   f1_class_11: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   precision_class_12: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   recall_class_12: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   f1_class_12: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   precision_class_13: 1.0000
+2026-01-25 10:11:31,540 - experiment_baseline_experiment - INFO -   recall_class_13: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   f1_class_13: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   precision_class_14: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   recall_class_14: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   f1_class_14: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   precision_class_15: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   recall_class_15: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   f1_class_15: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   precision_class_16: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   recall_class_16: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   f1_class_16: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   precision_class_17: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   recall_class_17: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   f1_class_17: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   precision_class_18: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   recall_class_18: 1.0000
+2026-01-25 10:11:31,541 - experiment_baseline_experiment - INFO -   f1_class_18: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   precision_class_19: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   recall_class_19: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   f1_class_19: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   precision_class_20: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   recall_class_20: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   f1_class_20: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   precision_class_21: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   recall_class_21: 0.8000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   f1_class_21: 0.8889
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   precision_class_22: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   recall_class_22: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   f1_class_22: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   precision_class_23: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   recall_class_23: 1.0000
+2026-01-25 10:11:31,542 - experiment_baseline_experiment - INFO -   f1_class_23: 1.0000
+2026-01-25 10:11:31,543 - experiment_baseline_experiment - INFO -   precision_class_24: 1.0000
+2026-01-25 10:11:31,543 - experiment_baseline_experiment - INFO -   recall_class_24: 1.0000
+2026-01-25 10:11:31,543 - experiment_baseline_experiment - INFO -   f1_class_24: 1.0000
+2026-01-25 10:11:31,543 - experiment_baseline_experiment - INFO -   precision_class_25: 1.0000
+2026-01-25 10:11:31,543 - experiment_baseline_experiment - INFO -   recall_class_25: 0.6667
+2026-01-25 10:11:31,543 - experiment_baseline_experiment - INFO -   f1_class_25: 0.8000
+2026-01-25 10:11:31,543 - experiment_baseline_experiment - INFO -   balanced_accuracy: 0.9795
+2026-01-25 10:11:31,545 - experiment_baseline_experiment - INFO - Training completed
+2026-01-25 16:49:19,480 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 16:49:19,498 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 16:49:19,499 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 16:49:19,499 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 16:49:19,499 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 16:49:19,531 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 16:49:19,532 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 16:49:19,624 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 16:49:19,624 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 16:49:19,624 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 16:49:19,624 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 16:49:20,009 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 16:49:20,604 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 16:49:21,155 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 16:49:28,167 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 16:49:29,813 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 16:49:31,369 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 16:49:31,369 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 16:49:31,369 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 16:49:31,369 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 16:49:31,369 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 16:49:31,370 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 16:49:31,370 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 16:49:31,370 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 16:49:31,750 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 16:49:31,751 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 16:49:31,751 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 16:49:31,751 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 16:49:34,208 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 16:49:34,208 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 16:49:34,208 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 16:49:34,251 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 16:49:34,251 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 16:49:34,252 - experiment_baseline_experiment - INFO - Starting training for 50 epochs
+2026-01-25 16:49:34,286 - experiment_baseline_experiment - INFO - 
+================================================================================
+2026-01-25 16:49:34,286 - experiment_baseline_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 16:49:34,286 - experiment_baseline_experiment - INFO - ================================================================================
+2026-01-25 16:49:34,286 - experiment_baseline_experiment - INFO - Batch Info:
+2026-01-25 16:49:34,287 - experiment_baseline_experiment - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-25 16:49:34,287 - experiment_baseline_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 16:49:34,290 - experiment_baseline_experiment - INFO -   Targets (first 8): tensor([22, 25, 15,  2, 21,  6,  7,  3], device='cuda:0')
+2026-01-25 16:49:37,039 - experiment_baseline_experiment - INFO - ================================================================================
+
+2026-01-25 16:49:37,622 - experiment_baseline_experiment - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 3.283899
+2026-01-25 16:49:41,247 - experiment_baseline_experiment - INFO - Epoch 0: Train Loss: 2.8138, Train Acc: 0.2746, Val Loss: 2.5076, Val Acc: 0.3820
+2026-01-25 16:49:41,380 - experiment_baseline_experiment - INFO - Saved new best model at epoch 0
+2026-01-25 16:49:41,597 - experiment_baseline_experiment - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 1.868009
+2026-01-25 16:49:44,648 - experiment_baseline_experiment - INFO - Epoch 1: Train Loss: 1.8601, Train Acc: 0.5871, Val Loss: 1.4978, Val Acc: 0.7416
+2026-01-25 16:49:44,776 - experiment_baseline_experiment - INFO - Saved new best model at epoch 1
+2026-01-25 16:49:44,974 - experiment_baseline_experiment - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 1.469020
+2026-01-25 16:49:48,186 - experiment_baseline_experiment - INFO - Epoch 2: Train Loss: 1.2961, Train Acc: 0.8036, Val Loss: 0.9580, Val Acc: 0.8427
+2026-01-25 16:49:48,310 - experiment_baseline_experiment - INFO - Saved new best model at epoch 2
+2026-01-25 16:49:48,509 - experiment_baseline_experiment - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 1.090078
+2026-01-25 16:49:51,552 - experiment_baseline_experiment - INFO - Epoch 3: Train Loss: 0.8501, Train Acc: 0.8862, Val Loss: 0.6243, Val Acc: 0.9438
+2026-01-25 16:49:51,680 - experiment_baseline_experiment - INFO - Saved new best model at epoch 3
+2026-01-25 16:49:51,879 - experiment_baseline_experiment - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 0.699299
+2026-01-25 16:49:54,936 - experiment_baseline_experiment - INFO - Epoch 4: Train Loss: 0.5807, Train Acc: 0.9353, Val Loss: 0.4116, Val Acc: 0.9663
+2026-01-25 16:49:55,061 - experiment_baseline_experiment - INFO - Saved new best model at epoch 4
+2026-01-25 16:49:55,259 - experiment_baseline_experiment - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 0.413657
+2026-01-25 16:49:58,301 - experiment_baseline_experiment - INFO - Epoch 5: Train Loss: 0.4138, Train Acc: 0.9643, Val Loss: 0.2996, Val Acc: 0.9775
+2026-01-25 16:49:58,427 - experiment_baseline_experiment - INFO - Saved new best model at epoch 5
+2026-01-25 16:49:58,626 - experiment_baseline_experiment - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 0.398272
+2026-01-25 16:50:01,673 - experiment_baseline_experiment - INFO - Epoch 6: Train Loss: 0.2837, Train Acc: 0.9710, Val Loss: 0.2103, Val Acc: 0.9888
+2026-01-25 16:50:01,799 - experiment_baseline_experiment - INFO - Saved new best model at epoch 6
+2026-01-25 16:50:01,997 - experiment_baseline_experiment - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 0.228590
+2026-01-25 16:50:05,038 - experiment_baseline_experiment - INFO - Epoch 7: Train Loss: 0.2186, Train Acc: 0.9821, Val Loss: 0.1865, Val Acc: 0.9775
+2026-01-25 16:50:05,334 - experiment_baseline_experiment - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.163015
+2026-01-25 16:50:08,373 - experiment_baseline_experiment - INFO - Epoch 8: Train Loss: 0.1703, Train Acc: 0.9821, Val Loss: 0.1444, Val Acc: 1.0000
+2026-01-25 16:50:08,499 - experiment_baseline_experiment - INFO - Saved new best model at epoch 8
+2026-01-25 16:50:08,700 - experiment_baseline_experiment - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.153566
+2026-01-25 16:50:11,746 - experiment_baseline_experiment - INFO - Epoch 9: Train Loss: 0.1452, Train Acc: 0.9866, Val Loss: 0.1311, Val Acc: 0.9888
+2026-01-25 16:50:12,038 - experiment_baseline_experiment - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.083021
+2026-01-25 16:50:15,093 - experiment_baseline_experiment - INFO - Epoch 10: Train Loss: 0.1196, Train Acc: 0.9799, Val Loss: 0.1073, Val Acc: 1.0000
+2026-01-25 16:50:15,416 - experiment_baseline_experiment - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.094142
+2026-01-25 16:50:18,454 - experiment_baseline_experiment - INFO - Epoch 11: Train Loss: 0.0981, Train Acc: 0.9844, Val Loss: 0.0932, Val Acc: 0.9888
+2026-01-25 16:50:18,754 - experiment_baseline_experiment - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.063012
+2026-01-25 16:50:21,806 - experiment_baseline_experiment - INFO - Epoch 12: Train Loss: 0.0757, Train Acc: 0.9933, Val Loss: 0.0891, Val Acc: 0.9888
+2026-01-25 16:50:22,101 - experiment_baseline_experiment - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.037490
+2026-01-25 16:50:25,177 - experiment_baseline_experiment - INFO - Epoch 13: Train Loss: 0.0594, Train Acc: 0.9933, Val Loss: 0.0861, Val Acc: 0.9775
+2026-01-25 16:50:25,471 - experiment_baseline_experiment - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.096437
+2026-01-25 16:50:28,515 - experiment_baseline_experiment - INFO - Epoch 14: Train Loss: 0.0606, Train Acc: 0.9933, Val Loss: 0.0896, Val Acc: 0.9775
+2026-01-25 16:50:28,806 - experiment_baseline_experiment - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.095745
+2026-01-25 16:50:31,856 - experiment_baseline_experiment - INFO - Epoch 15: Train Loss: 0.0681, Train Acc: 0.9866, Val Loss: 0.0488, Val Acc: 1.0000
+2026-01-25 16:50:32,147 - experiment_baseline_experiment - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.023335
+2026-01-25 16:50:35,191 - experiment_baseline_experiment - INFO - Epoch 16: Train Loss: 0.0383, Train Acc: 1.0000, Val Loss: 0.0539, Val Acc: 1.0000
+2026-01-25 16:50:35,481 - experiment_baseline_experiment - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.019048
+2026-01-25 16:50:38,525 - experiment_baseline_experiment - INFO - Epoch 17: Train Loss: 0.0325, Train Acc: 1.0000, Val Loss: 0.0598, Val Acc: 0.9775
+2026-01-25 16:50:38,815 - experiment_baseline_experiment - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.021412
+2026-01-25 16:50:41,855 - experiment_baseline_experiment - INFO - Epoch 18: Train Loss: 0.0321, Train Acc: 0.9978, Val Loss: 0.0499, Val Acc: 0.9888
+2026-01-25 16:50:42,147 - experiment_baseline_experiment - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.032940
+2026-01-25 16:50:45,189 - experiment_baseline_experiment - INFO - Epoch 19: Train Loss: 0.0354, Train Acc: 0.9955, Val Loss: 0.0450, Val Acc: 1.0000
+2026-01-25 16:50:45,481 - experiment_baseline_experiment - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.020046
+2026-01-25 16:50:48,518 - experiment_baseline_experiment - INFO - Epoch 20: Train Loss: 0.0344, Train Acc: 0.9978, Val Loss: 0.0608, Val Acc: 0.9775
+2026-01-25 16:50:48,834 - experiment_baseline_experiment - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.011938
+2026-01-25 16:50:51,878 - experiment_baseline_experiment - INFO - Epoch 21: Train Loss: 0.0247, Train Acc: 0.9978, Val Loss: 0.0349, Val Acc: 1.0000
+2026-01-25 16:50:52,172 - experiment_baseline_experiment - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.024308
+2026-01-25 16:50:55,242 - experiment_baseline_experiment - INFO - Epoch 22: Train Loss: 0.0293, Train Acc: 0.9978, Val Loss: 0.0463, Val Acc: 1.0000
+2026-01-25 16:50:55,544 - experiment_baseline_experiment - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.055056
+2026-01-25 16:50:58,594 - experiment_baseline_experiment - INFO - Epoch 23: Train Loss: 0.0395, Train Acc: 0.9933, Val Loss: 0.0358, Val Acc: 1.0000
+2026-01-25 16:50:58,887 - experiment_baseline_experiment - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.027782
+2026-01-25 16:51:01,959 - experiment_baseline_experiment - INFO - Epoch 24: Train Loss: 0.0181, Train Acc: 0.9978, Val Loss: 0.0394, Val Acc: 1.0000
+2026-01-25 16:51:02,251 - experiment_baseline_experiment - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.013054
+2026-01-25 16:51:05,309 - experiment_baseline_experiment - INFO - Epoch 25: Train Loss: 0.0254, Train Acc: 0.9955, Val Loss: 0.0374, Val Acc: 0.9888
+2026-01-25 16:51:05,600 - experiment_baseline_experiment - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.086428
+2026-01-25 16:51:08,659 - experiment_baseline_experiment - INFO - Epoch 26: Train Loss: 0.0231, Train Acc: 0.9955, Val Loss: 0.0258, Val Acc: 1.0000
+2026-01-25 16:51:08,952 - experiment_baseline_experiment - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.023997
+2026-01-25 16:51:11,998 - experiment_baseline_experiment - INFO - Epoch 27: Train Loss: 0.0171, Train Acc: 1.0000, Val Loss: 0.0400, Val Acc: 1.0000
+2026-01-25 16:51:12,291 - experiment_baseline_experiment - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.018087
+2026-01-25 16:51:15,368 - experiment_baseline_experiment - INFO - Epoch 28: Train Loss: 0.0193, Train Acc: 1.0000, Val Loss: 0.0264, Val Acc: 1.0000
+2026-01-25 16:51:15,661 - experiment_baseline_experiment - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.007771
+2026-01-25 16:51:18,727 - experiment_baseline_experiment - INFO - Epoch 29: Train Loss: 0.0168, Train Acc: 0.9978, Val Loss: 0.0527, Val Acc: 0.9888
+2026-01-25 16:51:19,021 - experiment_baseline_experiment - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.008610
+2026-01-25 16:51:22,079 - experiment_baseline_experiment - INFO - Epoch 30: Train Loss: 0.0155, Train Acc: 1.0000, Val Loss: 0.0264, Val Acc: 0.9888
+2026-01-25 16:51:22,398 - experiment_baseline_experiment - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.010973
+2026-01-25 16:51:25,465 - experiment_baseline_experiment - INFO - Epoch 31: Train Loss: 0.0159, Train Acc: 1.0000, Val Loss: 0.0294, Val Acc: 1.0000
+2026-01-25 16:51:25,759 - experiment_baseline_experiment - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.023963
+2026-01-25 16:51:28,819 - experiment_baseline_experiment - INFO - Epoch 32: Train Loss: 0.0168, Train Acc: 0.9978, Val Loss: 0.0228, Val Acc: 1.0000
+2026-01-25 16:51:29,112 - experiment_baseline_experiment - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.012215
+2026-01-25 16:51:32,178 - experiment_baseline_experiment - INFO - Epoch 33: Train Loss: 0.0218, Train Acc: 0.9978, Val Loss: 0.0173, Val Acc: 1.0000
+2026-01-25 16:51:32,472 - experiment_baseline_experiment - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.007015
+2026-01-25 16:51:35,528 - experiment_baseline_experiment - INFO - Epoch 34: Train Loss: 0.0086, Train Acc: 1.0000, Val Loss: 0.0197, Val Acc: 1.0000
+2026-01-25 16:51:35,835 - experiment_baseline_experiment - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.023317
+2026-01-25 16:51:38,882 - experiment_baseline_experiment - INFO - Epoch 35: Train Loss: 0.0123, Train Acc: 1.0000, Val Loss: 0.0229, Val Acc: 1.0000
+2026-01-25 16:51:39,174 - experiment_baseline_experiment - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.006898
+2026-01-25 16:51:42,243 - experiment_baseline_experiment - INFO - Epoch 36: Train Loss: 0.0143, Train Acc: 1.0000, Val Loss: 0.0185, Val Acc: 1.0000
+2026-01-25 16:51:42,539 - experiment_baseline_experiment - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.006353
+2026-01-25 16:51:45,589 - experiment_baseline_experiment - INFO - Epoch 37: Train Loss: 0.0140, Train Acc: 0.9978, Val Loss: 0.0198, Val Acc: 1.0000
+2026-01-25 16:51:45,883 - experiment_baseline_experiment - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.008342
+2026-01-25 16:51:48,929 - experiment_baseline_experiment - INFO - Epoch 38: Train Loss: 0.0120, Train Acc: 0.9978, Val Loss: 0.0286, Val Acc: 1.0000
+2026-01-25 16:51:49,221 - experiment_baseline_experiment - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.012556
+2026-01-25 16:51:52,279 - experiment_baseline_experiment - INFO - Epoch 39: Train Loss: 0.0150, Train Acc: 0.9978, Val Loss: 0.0198, Val Acc: 1.0000
+2026-01-25 16:51:52,572 - experiment_baseline_experiment - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.006167
+2026-01-25 16:51:55,632 - experiment_baseline_experiment - INFO - Epoch 40: Train Loss: 0.0091, Train Acc: 0.9978, Val Loss: 0.0214, Val Acc: 1.0000
+2026-01-25 16:51:55,950 - experiment_baseline_experiment - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.013950
+2026-01-25 16:51:58,999 - experiment_baseline_experiment - INFO - Epoch 41: Train Loss: 0.0088, Train Acc: 1.0000, Val Loss: 0.0191, Val Acc: 1.0000
+2026-01-25 16:51:59,291 - experiment_baseline_experiment - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.005652
+2026-01-25 16:52:02,334 - experiment_baseline_experiment - INFO - Epoch 42: Train Loss: 0.0121, Train Acc: 0.9978, Val Loss: 0.0133, Val Acc: 1.0000
+2026-01-25 16:52:02,627 - experiment_baseline_experiment - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.006999
+2026-01-25 16:52:05,676 - experiment_baseline_experiment - INFO - Epoch 43: Train Loss: 0.0179, Train Acc: 0.9955, Val Loss: 0.0147, Val Acc: 1.0000
+2026-01-25 16:52:05,968 - experiment_baseline_experiment - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.017472
+2026-01-25 16:52:09,017 - experiment_baseline_experiment - INFO - Epoch 44: Train Loss: 0.0142, Train Acc: 0.9978, Val Loss: 0.0204, Val Acc: 1.0000
+2026-01-25 16:52:09,311 - experiment_baseline_experiment - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.002530
+2026-01-25 16:52:12,376 - experiment_baseline_experiment - INFO - Epoch 45: Train Loss: 0.0093, Train Acc: 1.0000, Val Loss: 0.0189, Val Acc: 1.0000
+2026-01-25 16:52:12,677 - experiment_baseline_experiment - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.006761
+2026-01-25 16:52:15,733 - experiment_baseline_experiment - INFO - Epoch 46: Train Loss: 0.0189, Train Acc: 0.9955, Val Loss: 0.0154, Val Acc: 1.0000
+2026-01-25 16:52:16,024 - experiment_baseline_experiment - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.007503
+2026-01-25 16:52:19,059 - experiment_baseline_experiment - INFO - Epoch 47: Train Loss: 0.0115, Train Acc: 0.9978, Val Loss: 0.0207, Val Acc: 1.0000
+2026-01-25 16:52:19,349 - experiment_baseline_experiment - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.004035
+2026-01-25 16:52:22,397 - experiment_baseline_experiment - INFO - Epoch 48: Train Loss: 0.0049, Train Acc: 1.0000, Val Loss: 0.0168, Val Acc: 1.0000
+2026-01-25 16:52:22,689 - experiment_baseline_experiment - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.002969
+2026-01-25 16:52:25,752 - experiment_baseline_experiment - INFO - Epoch 49: Train Loss: 0.0067, Train Acc: 1.0000, Val Loss: 0.0608, Val Acc: 0.9775
+2026-01-25 16:52:25,862 - experiment_baseline_experiment - INFO - Running final test evaluation...
+2026-01-25 16:52:26,578 - experiment_baseline_experiment - INFO - Test Results:
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   loss: 0.0476
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   accuracy: 0.9831
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   precision_macro: 0.9872
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   recall_macro: 0.9795
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   f1_macro: 0.9810
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   precision_weighted: 0.9859
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   recall_weighted: 0.9831
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   f1_weighted: 0.9825
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   precision_class_0: 0.8333
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   recall_class_0: 1.0000
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   f1_class_0: 0.9091
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   precision_class_1: 1.0000
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   recall_class_1: 1.0000
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   f1_class_1: 1.0000
+2026-01-25 16:52:26,579 - experiment_baseline_experiment - INFO -   precision_class_2: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   recall_class_2: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   f1_class_2: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   precision_class_3: 0.8333
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   recall_class_3: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   f1_class_3: 0.9091
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   precision_class_4: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   recall_class_4: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   f1_class_4: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   precision_class_5: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   recall_class_5: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   f1_class_5: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   precision_class_6: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   recall_class_6: 1.0000
+2026-01-25 16:52:26,580 - experiment_baseline_experiment - INFO -   f1_class_6: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   precision_class_7: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   recall_class_7: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   f1_class_7: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   precision_class_8: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   recall_class_8: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   f1_class_8: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   precision_class_9: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   recall_class_9: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   f1_class_9: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   precision_class_10: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   recall_class_10: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   f1_class_10: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   precision_class_11: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   recall_class_11: 1.0000
+2026-01-25 16:52:26,581 - experiment_baseline_experiment - INFO -   f1_class_11: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   precision_class_12: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   recall_class_12: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   f1_class_12: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   precision_class_13: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   recall_class_13: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   f1_class_13: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   precision_class_14: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   recall_class_14: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   f1_class_14: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   precision_class_15: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   recall_class_15: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   f1_class_15: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   precision_class_16: 1.0000
+2026-01-25 16:52:26,582 - experiment_baseline_experiment - INFO -   recall_class_16: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   f1_class_16: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   precision_class_17: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   recall_class_17: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   f1_class_17: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   precision_class_18: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   recall_class_18: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   f1_class_18: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   precision_class_19: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   recall_class_19: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   f1_class_19: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   precision_class_20: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   recall_class_20: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   f1_class_20: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   precision_class_21: 1.0000
+2026-01-25 16:52:26,583 - experiment_baseline_experiment - INFO -   recall_class_21: 0.8000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   f1_class_21: 0.8889
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   precision_class_22: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   recall_class_22: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   f1_class_22: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   precision_class_23: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   recall_class_23: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   f1_class_23: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   precision_class_24: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   recall_class_24: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   f1_class_24: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   precision_class_25: 1.0000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   recall_class_25: 0.6667
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   f1_class_25: 0.8000
+2026-01-25 16:52:26,584 - experiment_baseline_experiment - INFO -   balanced_accuracy: 0.9795
+2026-01-25 16:52:26,586 - experiment_baseline_experiment - INFO - Training completed
+2026-01-25 16:55:44,977 - experiment_baseline_experiment - INFO - Initialized experiment: baseline_experiment
+2026-01-25 16:55:44,977 - experiment_baseline_experiment - INFO - Device: cuda
+2026-01-25 16:55:44,977 - experiment_baseline_experiment - INFO - Output directory: ./experiments/outputs/baseline_experiment
+2026-01-25 16:55:44,977 - experiment_baseline_experiment - INFO - Initialized mfcc_mlp baseline experiment
+2026-01-25 16:55:44,977 - experiment_baseline_experiment - INFO - Setting up experiment components...
+2026-01-25 16:55:45,009 - experiment_baseline_experiment - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 16:55:45,009 - experiment_baseline_experiment - INFO - FOUND FLAC FILES: 1089
+2026-01-25 16:55:45,104 - experiment_baseline_experiment - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-25 16:55:45,104 - experiment_baseline_experiment - INFO - Model created and moved to device: cuda:0
+2026-01-25 16:55:45,104 - experiment_baseline_experiment - INFO - Total parameters: 160,538
+2026-01-25 16:55:45,104 - experiment_baseline_experiment - INFO - Trainable parameters: 160,538
+2026-01-25 16:55:45,486 - experiment_baseline_experiment - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-25 16:55:45,518 - experiment_baseline_experiment - INFO - Scanning the Training Dataset...
+2026-01-25 16:55:45,546 - experiment_baseline_experiment - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-01-25 16:55:45,860 - experiment_baseline_experiment - INFO - Scanning the Val Dataset...
+2026-01-25 16:55:45,926 - experiment_baseline_experiment - INFO - Scanning the Test Dataset...
+2026-01-25 16:55:46,020 - experiment_baseline_experiment - INFO - ===== Dataset Labels Analysis =====
+2026-01-25 16:55:46,021 - experiment_baseline_experiment - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-25 16:55:46,021 - experiment_baseline_experiment - INFO - LABEL RANGE: 0 to 25
+2026-01-25 16:55:46,021 - experiment_baseline_experiment - INFO - ACTUAL SPEAKERS: 26
+2026-01-25 16:55:46,021 - experiment_baseline_experiment - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-25 16:55:46,021 - experiment_baseline_experiment - INFO - SPEAKER NUMBER IN CONFIG: 26
+2026-01-25 16:55:46,021 - experiment_baseline_experiment - INFO - BASELINE TYPE: mfcc_mlp
+2026-01-25 16:55:46,021 - experiment_baseline_experiment - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 26 category
+2026-01-25 16:55:46,407 - experiment_baseline_experiment - INFO - Dataloaders created:
+2026-01-25 16:55:46,407 - experiment_baseline_experiment - INFO -   Train: 14 batches
+2026-01-25 16:55:46,407 - experiment_baseline_experiment - INFO -   Val: 3 batches
+2026-01-25 16:55:46,407 - experiment_baseline_experiment - INFO -   Test: 4 batches
+2026-01-25 16:55:47,485 - experiment_baseline_experiment - INFO - Optimizer: Adam
+2026-01-25 16:55:47,486 - experiment_baseline_experiment - INFO - Scheduler: ReduceLROnPlateau
+2026-01-25 16:55:47,486 - experiment_baseline_experiment - INFO - Criterion: CrossEntropyLoss
+2026-01-25 16:55:47,529 - experiment_baseline_experiment - INFO - Configuration saved to: ./experiments/outputs/baseline_experiment/config.json
+2026-01-25 16:55:47,529 - experiment_baseline_experiment - INFO - Experiment setup completed
+2026-01-25 16:55:47,529 - experiment_baseline_experiment - INFO - Starting training for 50 epochs
+2026-01-25 16:55:47,556 - experiment_baseline_experiment - INFO - 
+================================================================================
+2026-01-25 16:55:47,557 - experiment_baseline_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 16:55:47,557 - experiment_baseline_experiment - INFO - ================================================================================
+2026-01-25 16:55:47,557 - experiment_baseline_experiment - INFO - Batch Info:
+2026-01-25 16:55:47,557 - experiment_baseline_experiment - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-25 16:55:47,557 - experiment_baseline_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 16:55:47,560 - experiment_baseline_experiment - INFO -   Targets (first 8): tensor([22, 25, 15,  2, 21,  6,  7,  3], device='cuda:0')
+2026-01-25 16:55:48,803 - experiment_baseline_experiment - INFO - ================================================================================
+
+2026-01-25 16:55:49,225 - experiment_baseline_experiment - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 3.283899
+2026-01-25 16:55:53,248 - experiment_baseline_experiment - INFO - Epoch 0: Train Loss: 2.8138, Train Acc: 0.2746, Val Loss: 2.5076, Val Acc: 0.3820
+2026-01-25 16:55:53,367 - experiment_baseline_experiment - INFO - Saved new best model at epoch 0
+2026-01-25 16:55:53,716 - experiment_baseline_experiment - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 1.868009
+2026-01-25 16:55:57,885 - experiment_baseline_experiment - INFO - Epoch 1: Train Loss: 1.8601, Train Acc: 0.5871, Val Loss: 1.4978, Val Acc: 0.7416
+2026-01-25 16:55:57,996 - experiment_baseline_experiment - INFO - Saved new best model at epoch 1
+2026-01-25 16:55:58,193 - experiment_baseline_experiment - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 1.469020
+2026-01-25 16:56:01,227 - experiment_baseline_experiment - INFO - Epoch 2: Train Loss: 1.2961, Train Acc: 0.8036, Val Loss: 0.9580, Val Acc: 0.8427
+2026-01-25 16:56:01,335 - experiment_baseline_experiment - INFO - Saved new best model at epoch 2
+2026-01-25 16:56:01,535 - experiment_baseline_experiment - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 1.090078
+2026-01-25 16:56:04,572 - experiment_baseline_experiment - INFO - Epoch 3: Train Loss: 0.8501, Train Acc: 0.8862, Val Loss: 0.6243, Val Acc: 0.9438
+2026-01-25 16:56:04,686 - experiment_baseline_experiment - INFO - Saved new best model at epoch 3
+2026-01-25 16:56:04,886 - experiment_baseline_experiment - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 0.699299
+2026-01-25 16:56:07,933 - experiment_baseline_experiment - INFO - Epoch 4: Train Loss: 0.5807, Train Acc: 0.9353, Val Loss: 0.4116, Val Acc: 0.9663
+2026-01-25 16:56:08,041 - experiment_baseline_experiment - INFO - Saved new best model at epoch 4
+2026-01-25 16:56:08,240 - experiment_baseline_experiment - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 0.413657
+2026-01-25 16:56:11,282 - experiment_baseline_experiment - INFO - Epoch 5: Train Loss: 0.4138, Train Acc: 0.9643, Val Loss: 0.2996, Val Acc: 0.9775
+2026-01-25 16:56:11,391 - experiment_baseline_experiment - INFO - Saved new best model at epoch 5
+2026-01-25 16:56:11,592 - experiment_baseline_experiment - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 0.398272
+2026-01-25 16:56:14,636 - experiment_baseline_experiment - INFO - Epoch 6: Train Loss: 0.2837, Train Acc: 0.9710, Val Loss: 0.2103, Val Acc: 0.9888
+2026-01-25 16:56:14,745 - experiment_baseline_experiment - INFO - Saved new best model at epoch 6
+2026-01-25 16:56:14,944 - experiment_baseline_experiment - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 0.228590
+2026-01-25 16:56:17,984 - experiment_baseline_experiment - INFO - Epoch 7: Train Loss: 0.2186, Train Acc: 0.9821, Val Loss: 0.1865, Val Acc: 0.9775
+2026-01-25 16:56:18,263 - experiment_baseline_experiment - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.163015
+2026-01-25 16:56:21,311 - experiment_baseline_experiment - INFO - Epoch 8: Train Loss: 0.1703, Train Acc: 0.9821, Val Loss: 0.1444, Val Acc: 1.0000
+2026-01-25 16:56:21,420 - experiment_baseline_experiment - INFO - Saved new best model at epoch 8
+2026-01-25 16:56:21,623 - experiment_baseline_experiment - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.153566
+2026-01-25 16:56:24,665 - experiment_baseline_experiment - INFO - Epoch 9: Train Loss: 0.1452, Train Acc: 0.9866, Val Loss: 0.1311, Val Acc: 0.9888
+2026-01-25 16:56:24,939 - experiment_baseline_experiment - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.083021
+2026-01-25 16:56:27,984 - experiment_baseline_experiment - INFO - Epoch 10: Train Loss: 0.1196, Train Acc: 0.9799, Val Loss: 0.1073, Val Acc: 1.0000
+2026-01-25 16:56:28,281 - experiment_baseline_experiment - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.094142
+2026-01-25 16:56:31,330 - experiment_baseline_experiment - INFO - Epoch 11: Train Loss: 0.0981, Train Acc: 0.9844, Val Loss: 0.0932, Val Acc: 0.9888
+2026-01-25 16:56:31,614 - experiment_baseline_experiment - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.063012
+2026-01-25 16:56:34,661 - experiment_baseline_experiment - INFO - Epoch 12: Train Loss: 0.0757, Train Acc: 0.9933, Val Loss: 0.0891, Val Acc: 0.9888
+2026-01-25 16:56:34,935 - experiment_baseline_experiment - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.037490
+2026-01-25 16:56:37,994 - experiment_baseline_experiment - INFO - Epoch 13: Train Loss: 0.0594, Train Acc: 0.9933, Val Loss: 0.0861, Val Acc: 0.9775
+2026-01-25 16:56:38,269 - experiment_baseline_experiment - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.096437
+2026-01-25 16:56:41,316 - experiment_baseline_experiment - INFO - Epoch 14: Train Loss: 0.0606, Train Acc: 0.9933, Val Loss: 0.0896, Val Acc: 0.9775
+2026-01-25 16:56:41,592 - experiment_baseline_experiment - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.095745
+2026-01-25 16:56:44,638 - experiment_baseline_experiment - INFO - Epoch 15: Train Loss: 0.0681, Train Acc: 0.9866, Val Loss: 0.0488, Val Acc: 1.0000
+2026-01-25 16:56:44,913 - experiment_baseline_experiment - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.023335
+2026-01-25 16:56:47,960 - experiment_baseline_experiment - INFO - Epoch 16: Train Loss: 0.0383, Train Acc: 1.0000, Val Loss: 0.0539, Val Acc: 1.0000
+2026-01-25 16:56:48,237 - experiment_baseline_experiment - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.019048
+2026-01-25 16:56:51,288 - experiment_baseline_experiment - INFO - Epoch 17: Train Loss: 0.0325, Train Acc: 1.0000, Val Loss: 0.0598, Val Acc: 0.9775
+2026-01-25 16:56:51,563 - experiment_baseline_experiment - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.021412
+2026-01-25 16:56:54,607 - experiment_baseline_experiment - INFO - Epoch 18: Train Loss: 0.0321, Train Acc: 0.9978, Val Loss: 0.0499, Val Acc: 0.9888
+2026-01-25 16:56:54,883 - experiment_baseline_experiment - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.032940
+2026-01-25 16:56:57,935 - experiment_baseline_experiment - INFO - Epoch 19: Train Loss: 0.0354, Train Acc: 0.9955, Val Loss: 0.0450, Val Acc: 1.0000
+2026-01-25 16:56:58,212 - experiment_baseline_experiment - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.020046
+2026-01-25 16:57:01,262 - experiment_baseline_experiment - INFO - Epoch 20: Train Loss: 0.0344, Train Acc: 0.9978, Val Loss: 0.0608, Val Acc: 0.9775
+2026-01-25 16:57:01,564 - experiment_baseline_experiment - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.011938
+2026-01-25 16:57:04,614 - experiment_baseline_experiment - INFO - Epoch 21: Train Loss: 0.0247, Train Acc: 0.9978, Val Loss: 0.0349, Val Acc: 1.0000
+2026-01-25 16:57:04,891 - experiment_baseline_experiment - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.024308
+2026-01-25 16:57:07,944 - experiment_baseline_experiment - INFO - Epoch 22: Train Loss: 0.0293, Train Acc: 0.9978, Val Loss: 0.0463, Val Acc: 1.0000
+2026-01-25 16:57:08,232 - experiment_baseline_experiment - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.055056
+2026-01-25 16:57:11,295 - experiment_baseline_experiment - INFO - Epoch 23: Train Loss: 0.0395, Train Acc: 0.9933, Val Loss: 0.0358, Val Acc: 1.0000
+2026-01-25 16:57:11,574 - experiment_baseline_experiment - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.027782
+2026-01-25 16:57:14,627 - experiment_baseline_experiment - INFO - Epoch 24: Train Loss: 0.0181, Train Acc: 0.9978, Val Loss: 0.0394, Val Acc: 1.0000
+2026-01-25 16:57:14,905 - experiment_baseline_experiment - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.013054
+2026-01-25 16:57:17,967 - experiment_baseline_experiment - INFO - Epoch 25: Train Loss: 0.0254, Train Acc: 0.9955, Val Loss: 0.0374, Val Acc: 0.9888
+2026-01-25 16:57:18,243 - experiment_baseline_experiment - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.086428
+2026-01-25 16:57:21,293 - experiment_baseline_experiment - INFO - Epoch 26: Train Loss: 0.0231, Train Acc: 0.9955, Val Loss: 0.0258, Val Acc: 1.0000
+2026-01-25 16:57:21,570 - experiment_baseline_experiment - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.023997
+2026-01-25 16:57:24,618 - experiment_baseline_experiment - INFO - Epoch 27: Train Loss: 0.0171, Train Acc: 1.0000, Val Loss: 0.0400, Val Acc: 1.0000
+2026-01-25 16:57:24,894 - experiment_baseline_experiment - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.018087
+2026-01-25 16:57:27,948 - experiment_baseline_experiment - INFO - Epoch 28: Train Loss: 0.0193, Train Acc: 1.0000, Val Loss: 0.0264, Val Acc: 1.0000
+2026-01-25 16:57:28,223 - experiment_baseline_experiment - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.007771
+2026-01-25 16:57:31,290 - experiment_baseline_experiment - INFO - Epoch 29: Train Loss: 0.0168, Train Acc: 0.9978, Val Loss: 0.0527, Val Acc: 0.9888
+2026-01-25 16:57:31,566 - experiment_baseline_experiment - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.008610
+2026-01-25 16:57:34,614 - experiment_baseline_experiment - INFO - Epoch 30: Train Loss: 0.0155, Train Acc: 1.0000, Val Loss: 0.0264, Val Acc: 0.9888
+2026-01-25 16:57:34,916 - experiment_baseline_experiment - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.010973
+2026-01-25 16:57:37,963 - experiment_baseline_experiment - INFO - Epoch 31: Train Loss: 0.0159, Train Acc: 1.0000, Val Loss: 0.0294, Val Acc: 1.0000
+2026-01-25 16:57:38,245 - experiment_baseline_experiment - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.023963
+2026-01-25 16:57:41,308 - experiment_baseline_experiment - INFO - Epoch 32: Train Loss: 0.0168, Train Acc: 0.9978, Val Loss: 0.0228, Val Acc: 1.0000
+2026-01-25 16:57:41,585 - experiment_baseline_experiment - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.012215
+2026-01-25 16:57:44,640 - experiment_baseline_experiment - INFO - Epoch 33: Train Loss: 0.0218, Train Acc: 0.9978, Val Loss: 0.0173, Val Acc: 1.0000
+2026-01-25 16:57:44,916 - experiment_baseline_experiment - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.007015
+2026-01-25 16:57:47,971 - experiment_baseline_experiment - INFO - Epoch 34: Train Loss: 0.0086, Train Acc: 1.0000, Val Loss: 0.0197, Val Acc: 1.0000
+2026-01-25 16:57:48,262 - experiment_baseline_experiment - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.023317
+2026-01-25 16:57:51,327 - experiment_baseline_experiment - INFO - Epoch 35: Train Loss: 0.0123, Train Acc: 1.0000, Val Loss: 0.0229, Val Acc: 1.0000
+2026-01-25 16:57:51,604 - experiment_baseline_experiment - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.006898
+2026-01-25 16:57:54,665 - experiment_baseline_experiment - INFO - Epoch 36: Train Loss: 0.0143, Train Acc: 1.0000, Val Loss: 0.0185, Val Acc: 1.0000
+2026-01-25 16:57:54,940 - experiment_baseline_experiment - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.006353
+2026-01-25 16:57:57,983 - experiment_baseline_experiment - INFO - Epoch 37: Train Loss: 0.0140, Train Acc: 0.9978, Val Loss: 0.0198, Val Acc: 1.0000
+2026-01-25 16:57:58,258 - experiment_baseline_experiment - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.008342
+2026-01-25 16:58:01,304 - experiment_baseline_experiment - INFO - Epoch 38: Train Loss: 0.0120, Train Acc: 0.9978, Val Loss: 0.0286, Val Acc: 1.0000
+2026-01-25 16:58:01,581 - experiment_baseline_experiment - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.012556
+2026-01-25 16:58:04,628 - experiment_baseline_experiment - INFO - Epoch 39: Train Loss: 0.0150, Train Acc: 0.9978, Val Loss: 0.0198, Val Acc: 1.0000
+2026-01-25 16:58:04,905 - experiment_baseline_experiment - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.006167
+2026-01-25 16:58:07,953 - experiment_baseline_experiment - INFO - Epoch 40: Train Loss: 0.0091, Train Acc: 0.9978, Val Loss: 0.0214, Val Acc: 1.0000
+2026-01-25 16:58:08,258 - experiment_baseline_experiment - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.013950
+2026-01-25 16:58:11,299 - experiment_baseline_experiment - INFO - Epoch 41: Train Loss: 0.0088, Train Acc: 1.0000, Val Loss: 0.0191, Val Acc: 1.0000
+2026-01-25 16:58:11,584 - experiment_baseline_experiment - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.005652
+2026-01-25 16:58:14,638 - experiment_baseline_experiment - INFO - Epoch 42: Train Loss: 0.0121, Train Acc: 0.9978, Val Loss: 0.0133, Val Acc: 1.0000
+2026-01-25 16:58:14,913 - experiment_baseline_experiment - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.006999
+2026-01-25 16:58:17,971 - experiment_baseline_experiment - INFO - Epoch 43: Train Loss: 0.0179, Train Acc: 0.9955, Val Loss: 0.0147, Val Acc: 1.0000
+2026-01-25 16:58:18,252 - experiment_baseline_experiment - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.017472
+2026-01-25 16:58:21,311 - experiment_baseline_experiment - INFO - Epoch 44: Train Loss: 0.0142, Train Acc: 0.9978, Val Loss: 0.0204, Val Acc: 1.0000
+2026-01-25 16:58:21,587 - experiment_baseline_experiment - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.002530
+2026-01-25 16:58:24,629 - experiment_baseline_experiment - INFO - Epoch 45: Train Loss: 0.0093, Train Acc: 1.0000, Val Loss: 0.0189, Val Acc: 1.0000
+2026-01-25 16:58:24,916 - experiment_baseline_experiment - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.006761
+2026-01-25 16:58:27,962 - experiment_baseline_experiment - INFO - Epoch 46: Train Loss: 0.0189, Train Acc: 0.9955, Val Loss: 0.0154, Val Acc: 1.0000
+2026-01-25 16:58:28,243 - experiment_baseline_experiment - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.007503
+2026-01-25 16:58:31,282 - experiment_baseline_experiment - INFO - Epoch 47: Train Loss: 0.0115, Train Acc: 0.9978, Val Loss: 0.0207, Val Acc: 1.0000
+2026-01-25 16:58:31,555 - experiment_baseline_experiment - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.004035
+2026-01-25 16:58:34,593 - experiment_baseline_experiment - INFO - Epoch 48: Train Loss: 0.0049, Train Acc: 1.0000, Val Loss: 0.0168, Val Acc: 1.0000
+2026-01-25 16:58:34,869 - experiment_baseline_experiment - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.002969
+2026-01-25 16:58:37,903 - experiment_baseline_experiment - INFO - Epoch 49: Train Loss: 0.0067, Train Acc: 1.0000, Val Loss: 0.0608, Val Acc: 0.9775
+2026-01-25 16:58:37,998 - experiment_baseline_experiment - INFO - Running final test evaluation...
+2026-01-25 16:58:38,705 - experiment_baseline_experiment - INFO - Test Results:
+2026-01-25 16:58:38,705 - experiment_baseline_experiment - INFO -   loss: 0.0476
+2026-01-25 16:58:38,705 - experiment_baseline_experiment - INFO -   accuracy: 0.9831
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   precision_macro: 0.9872
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   recall_macro: 0.9795
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   f1_macro: 0.9810
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   precision_weighted: 0.9859
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   recall_weighted: 0.9831
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   f1_weighted: 0.9825
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   precision_class_0: 0.8333
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   recall_class_0: 1.0000
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   f1_class_0: 0.9091
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   precision_class_1: 1.0000
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   recall_class_1: 1.0000
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   f1_class_1: 1.0000
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   precision_class_2: 1.0000
+2026-01-25 16:58:38,706 - experiment_baseline_experiment - INFO -   recall_class_2: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   f1_class_2: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   precision_class_3: 0.8333
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   recall_class_3: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   f1_class_3: 0.9091
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   precision_class_4: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   recall_class_4: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   f1_class_4: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   precision_class_5: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   recall_class_5: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   f1_class_5: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   precision_class_6: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   recall_class_6: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   f1_class_6: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   precision_class_7: 1.0000
+2026-01-25 16:58:38,707 - experiment_baseline_experiment - INFO -   recall_class_7: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   f1_class_7: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   precision_class_8: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   recall_class_8: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   f1_class_8: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   precision_class_9: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   recall_class_9: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   f1_class_9: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   precision_class_10: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   recall_class_10: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   f1_class_10: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   precision_class_11: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   recall_class_11: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   f1_class_11: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   precision_class_12: 1.0000
+2026-01-25 16:58:38,708 - experiment_baseline_experiment - INFO -   recall_class_12: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   f1_class_12: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   precision_class_13: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   recall_class_13: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   f1_class_13: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   precision_class_14: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   recall_class_14: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   f1_class_14: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   precision_class_15: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   recall_class_15: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   f1_class_15: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   precision_class_16: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   recall_class_16: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   f1_class_16: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   precision_class_17: 1.0000
+2026-01-25 16:58:38,709 - experiment_baseline_experiment - INFO -   recall_class_17: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   f1_class_17: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   precision_class_18: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   recall_class_18: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   f1_class_18: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   precision_class_19: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   recall_class_19: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   f1_class_19: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   precision_class_20: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   recall_class_20: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   f1_class_20: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   precision_class_21: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   recall_class_21: 0.8000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   f1_class_21: 0.8889
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   precision_class_22: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   recall_class_22: 1.0000
+2026-01-25 16:58:38,710 - experiment_baseline_experiment - INFO -   f1_class_22: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   precision_class_23: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   recall_class_23: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   f1_class_23: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   precision_class_24: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   recall_class_24: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   f1_class_24: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   precision_class_25: 1.0000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   recall_class_25: 0.6667
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   f1_class_25: 0.8000
+2026-01-25 16:58:38,711 - experiment_baseline_experiment - INFO -   balanced_accuracy: 0.9795
+2026-01-25 16:58:38,713 - experiment_baseline_experiment - INFO - Training completed

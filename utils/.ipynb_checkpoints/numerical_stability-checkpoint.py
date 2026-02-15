@@ -20,7 +20,6 @@ import os
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 
-
 @dataclass
 class NumericalConfig:
     """Configuration for numerical stability parameters."""
@@ -549,21 +548,40 @@ def create_stable_config(precision: str = 'float64',
 
 
 def safe_divide(numerator: Union[float, np.ndarray], 
-               denominator: Union[float, np.ndarray],
-               default_value: float = 0.0,
-               tolerance: float = 1e-15) -> Union[float, np.ndarray]:
+                denominator: Union[float, np.ndarray],
+                default: float = 0.0,  # 关键修改：将 default_value 改为 default
+                tolerance: float = 1e-15) -> Union[float, np.ndarray]:
     """Safe division with handling of near-zero denominators."""
-    if isinstance(denominator, np.ndarray):
-        result = np.full_like(numerator, default_value, dtype=float)
-        safe_mask = np.abs(denominator) > tolerance
-        result[safe_mask] = numerator[safe_mask] / denominator[safe_mask]
+    
+    # 处理 NumPy 数组的情况
+    if isinstance(denominator, np.ndarray) or isinstance(numerator, np.ndarray):
+        # 确保输入转为 array (防止一个是 list 一个是 array 的混合情况)
+        num = np.asanyarray(numerator)
+        den = np.asanyarray(denominator)
+        
+        # 创建结果容器，填充默认值
+        # 注意：如果 numerator 是标量，full_like 需要根据 denominator 的形状创建
+        target_shape = den.shape if isinstance(denominator, np.ndarray) else num.shape
+        result = np.full(target_shape, default, dtype=float)
+        
+        # 计算掩码：分母绝对值 > 容差 的位置是安全的
+        safe_mask = np.abs(den) > tolerance
+        
+        # 只在安全位置执行除法
+        # 注意：需要处理形状广播 (broadcasting)
+        if safe_mask.any():
+            # 这里的切片操作在广播不匹配时可能会有问题，更稳健的写法是 np.where
+            # 使用 np.divide 的 where 参数更高效且安全
+            np.divide(num, den, out=result, where=safe_mask)
+            
         return result
+
+    # 处理标量的情况
     else:
         if abs(denominator) > tolerance:
             return numerator / denominator
         else:
-            return default_value
-
+            return default
 
 def safe_log(x: Union[float, np.ndarray], 
             minimum_value: float = 1e-15) -> Union[float, np.ndarray]:

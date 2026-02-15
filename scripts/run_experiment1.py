@@ -1,565 +1,703 @@
 #!/usr/bin/env python3
 """
-Experiment 1: Standard Performance Comparison Runner
+Experiment 1: Unified Training Script for Baseline Comparison
 
-This script runs a fair comparison between baseline and chaotic models
-under identical training conditions.
+This script trains all models (baseline and chaotic) under identical conditions
+for fair comparison. All checkpoints are saved in a unified format.
+
+Features:
+- Unified data loading for all models
+- Consistent checkpoint format (.pth with best_model.pth)
+- Same training hyperparameters
+- Comprehensive logging and result saving
 
 Usage:
-    python scripts/run_experiment1.py --all
-    python scripts/run_experiment1.py --model mel_mlp
-    python scripts/run_experiment1.py --model chaotic_hybrid
-    python scripts/run_experiment1.py --list  # Show available models
+    python run_experiment1.py --all
+    python run_experiment1.py --model mel_mlp
+    python run_experiment1.py --model mfcc_mlp
+    python run_experiment1.py --list
 """
 
 import os
 import sys
 import argparse
-import yaml
 import json
 import time
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, Any, List, Optional
-import torch
+from typing import Dict, Any, List, Optional, Tuple
 import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+import logging
+import importlib
+import sys
 
-# Fix imports
-def fix_imports():
+# 清除可能的缓存
+for mod_name in list(sys.modules.keys()):
+    if 'hybrid_models' in mod_name or 'traditional_features' in mod_name:
+        del sys.modules[mod_name]
+# ============================================================
+# Setup Imports
+# ============================================================
+def setup_imports():
+    """Setup Python path for project imports."""
     current_file = Path(__file__).resolve()
-    model_dir = current_file.parent.parent
+    
+    # scripts/run_experiment1.py -> Model/
+    project_root = current_file.parent.parent
+    
     paths = [
-        str(model_dir),
-        str(model_dir / 'experiments'),
-        str(model_dir / 'models'),
-        str(model_dir / 'features'),
-        str(model_dir / 'data'),
-        str(model_dir / 'utils'),
-        str(model_dir / 'evaluation'),
-        str(model_dir / 'core')
+        str(project_root),
+        str(project_root / 'experiments'),
+        str(project_root / 'models'),
+        str(project_root / 'features'),
+        str(project_root / 'data'),
+        str(project_root / 'utils'),
+        str(project_root / 'evaluation'),
+        str(project_root / 'core')
     ]
+    
     for path in paths:
         if os.path.exists(path) and path not in sys.path:
             sys.path.insert(0, path)
-    return model_dir
-
-MODEL_DIR = fix_imports()
-
-# Import project modules
-try:
-    from baseline_experiment import BaselineExperiment
-    from chaotic_experiment import ChaoticExperiment
-    from reproducibility import set_seed, get_system_info
-    from logger import setup_logger
-except ImportError as e:
-    print(f"Import error: {e}")
-    print("Please ensure all required modules are in the correct directories")
-    sys.exit(1)
-
-
-class Experiment1Runner:
-    """
-    Runner for Experiment 1: Standard Performance Comparison
     
-    Manages the execution of multiple models under identical conditions
-    and generates comparison reports.
-    """
+    return project_root
+
+PROJECT_ROOT = setup_imports()
+
+# Import project modules - use correct module names
+from data.dataset_loader import create_speaker_dataloaders
+from models.hybrid_models import TraditionalMLPBaseline
+from utils.reproducibility import set_seed
+from features.traditional_features import MelSpectrogramExtractor, MFCCExtractor
+
+# ============================================================
+# Configuration
+# ============================================================
+DEFAULT_CONFIG = {
+    # Data settings
+    'data_dir': '/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2',
+    'sample_rate': 16000,
+    'max_length': 3.0,
+    'train_split': 0.7,
+    'val_split': 0.15,
+    
+    # Training settings
+    'batch_size': 32,
+    'num_epochs': 100,
+    'learning_rate': 0.001,
+    'weight_decay': 1e-4,
+    'early_stopping_patience': 20,
+    'scheduler_patience': 10,
+    'scheduler_factor': 0.5,
+    
+    # Model settings
+    'hidden_dims': [512, 256, 128],
+    'dropout_rate': 0.3,
+    'use_batch_norm': True,
+    
+    # Output settings
+    'output_dir': './outputs/experiment1_unified',
+    'seed': 42,
+}
+
+
+# ============================================================
+# Logger Setup
+# ============================================================
+def setup_logger(name: str, log_file: str = None, level: int = logging.INFO) -> logging.Logger:
+    """Setup a logger with console and file handlers."""
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    logger.handlers = []  # Clear existing handlers
+    
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+    
+    # Console handler
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(level)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+    
+    # File handler
+    if log_file:
+        os.makedirs(os.path.dirname(log_file), exist_ok=True)
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setLevel(level)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+    
+    return logger
+
+
+# ============================================================
+# Trainer Class
+# ============================================================
+class UnifiedTrainer:
+    """Unified trainer for all model types."""
     
     def __init__(
         self,
-        config_path: str,
-        output_dir: Optional[str] = None,
-        device: str = 'auto'
+        model: nn.Module,
+        train_loader: DataLoader,
+        val_loader: DataLoader,
+        test_loader: DataLoader,
+        config: Dict[str, Any],
+        model_name: str,
+        output_dir: Path,
+        device: str,
+        logger: logging.Logger
     ):
-        """
-        Initialize the experiment runner.
+        self.model = model.to(device)
+        self.train_loader = train_loader
+        self.val_loader = val_loader
+        self.test_loader = test_loader
+        self.config = config
+        self.model_name = model_name
+        self.output_dir = output_dir
+        self.device = device
+        self.logger = logger
         
-        Args:
-            config_path: Path to experiment configuration YAML
-            output_dir: Override output directory
-            device: Device to use ('auto', 'cpu', 'cuda')
-        """
-        # Load configuration
-        with open(config_path, 'r') as f:
-            self.config = yaml.safe_load(f)
+        # Create output directories
+        self.checkpoint_dir = output_dir / 'checkpoints'
+        self.checkpoint_dir.mkdir(parents=True, exist_ok=True)
         
-        # Set output directory
-        self.output_dir = Path(output_dir or self.config['output']['base_dir'])
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Setup logging
-        self.logger = setup_logger(
-            name='experiment1',
-            log_file=str(self.output_dir / 'experiment1.log'),
-            level='INFO'
+        # Setup optimizer and scheduler
+        self.optimizer = optim.AdamW(
+            model.parameters(),
+            lr=config['learning_rate'],
+            weight_decay=config['weight_decay']
         )
         
-        # Set device
-        if device == 'auto':
-            self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        else:
-            self.device = device
-        
-        # Initialize results storage
-        self.results = {}
-        self.seed = self.config['experiment'].get('seed', 42)
-        
-        # Log initialization
-        self.logger.info("=" * 70)
-        self.logger.info("EXPERIMENT 1: STANDARD PERFORMANCE COMPARISON")
-        self.logger.info("=" * 70)
-        self.logger.info(f"Output directory: {self.output_dir}")
-        self.logger.info(f"Device: {self.device}")
-        self.logger.info(f"Seed: {self.seed}")
-        
-        # Log system info
-        try:
-            sys_info = get_system_info()
-            self.logger.info(f"System: {sys_info}")
-        except:
-            pass
-    
-    def get_enabled_models(self) -> List[str]:
-        """Get list of enabled models from config."""
-        enabled = []
-        for name, cfg in self.config['models'].items():
-            if cfg.get('enabled', True):
-                enabled.append(name)
-        return enabled
-    
-    def _build_experiment_config(
-        self,
-        model_name: str,
-        model_config: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Build complete experiment configuration for a model."""
-        # Start with data config
-        exp_config = dict(self.config['data'])
-        
-        # Add training config
-        exp_config.update(self.config['training'])
-        
-        # Add model-specific config
-        if model_config['type'] == 'baseline':
-            exp_config['baseline_type'] = model_config['baseline_type']
-            exp_config.update(model_config.get('feature_config', {}))
-            exp_config.update(model_config.get('model_config', {}))
-        else:
-            # Chaotic model
-            exp_config['chaotic_system'] = model_config.get('chaotic_system', 'lorenz')
-            exp_config['model_type'] = model_config.get('model_type', 'full_chaotic')
-            exp_config['use_gradient_fix'] = model_config.get('use_gradient_fix', True)
-            exp_config['mix_alpha'] = model_config.get('mix_alpha', 0.3)
-            
-            # Phase space config
-            if 'phase_space' in model_config:
-                exp_config['embedding_dim'] = model_config['phase_space'].get('embedding_dim', 10)
-            
-            # Chaotic embedding config
-            if 'chaotic_embedding' in model_config:
-                exp_config['evolution_time'] = model_config['chaotic_embedding'].get('evolution_time', 0.5)
-                exp_config['time_step'] = model_config['chaotic_embedding'].get('time_step', 0.01)
-            
-            # Pooling config
-            if 'attractor_pooling' in model_config:
-                exp_config['pooling_type'] = model_config['attractor_pooling'].get('pooling_type', 'comprehensive')
-            
-            # Classifier config
-            if 'classifier' in model_config:
-                exp_config['speaker_embedding_dim'] = model_config['classifier'].get('speaker_embedding_dim', 256)
-                exp_config['hidden_dims'] = model_config['classifier'].get('hidden_dims', [512, 256, 128])
-        
-        # Placeholder for num_speakers (will be detected from dataset)
-        exp_config['num_speakers'] = 26
-        
-        return exp_config
-    
-    def run_baseline_model(
-        self,
-        model_name: str,
-        model_config: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Run a baseline model experiment."""
-        self.logger.info(f"\n{'='*60}")
-        self.logger.info(f"Running BASELINE model: {model_name}")
-        self.logger.info(f"Type: {model_config.get('baseline_type')}")
-        self.logger.info(f"{'='*60}")
-        
-        # Set seed for reproducibility
-        set_seed(self.seed)
-        
-        # Build config
-        exp_config = self._build_experiment_config(model_name, model_config)
-        
-        # Get num_epochs from config
-        num_epochs = self.config['training'].get('num_epochs', 100)
-        
-        # Create experiment
-        experiment = BaselineExperiment(
-            config=exp_config,
-            experiment_name=f"exp1_{model_name}",
-            output_dir=str(self.output_dir / model_name),
-            device=self.device,
-            seed=self.seed
+        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+            self.optimizer,
+            mode='min',
+            patience=config['scheduler_patience'],
+            factor=config['scheduler_factor'],
+            min_lr=1e-6
         )
         
-        # Setup and train (not run!)
-        experiment.setup()
-        experiment.train(num_epochs=num_epochs)
+        self.criterion = nn.CrossEntropyLoss()
         
-        # Collect results
-        results = self._collect_experiment_results(experiment)
-        
-        return results
+        # Training state
+        self.best_val_acc = 0.0
+        self.best_epoch = 0
+        self.patience_counter = 0
+        self.history = {
+            'train_loss': [], 'train_acc': [],
+            'val_loss': [], 'val_acc': []
+        }
     
-    def run_chaotic_model(
-        self,
-        model_name: str,
-        model_config: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Run a chaotic model experiment."""
-        self.logger.info(f"\n{'='*60}")
-        self.logger.info(f"Running CHAOTIC model: {model_name}")
-        self.logger.info(f"System: {model_config.get('chaotic_system', 'lorenz')}")
-        self.logger.info(f"Gradient Fix: {model_config.get('use_gradient_fix', True)}")
-        self.logger.info(f"{'='*60}")
+    def train_epoch(self) -> Tuple[float, float]:
+        """Train for one epoch."""
+        self.model.train()
+        total_loss = 0.0
+        correct = 0
+        total = 0
         
-        # Set seed for reproducibility
-        set_seed(self.seed)
+        pbar = tqdm(self.train_loader, desc='Training', leave=False)
+        for batch in pbar:
+            # Unpack batch
+            if len(batch) == 3:
+                audio, labels, _ = batch
+            else:
+                audio, labels = batch[0], batch[1]
+            
+            audio = audio.to(self.device)
+            labels = labels.to(self.device)
+            
+            # Forward pass
+            self.optimizer.zero_grad()
+            outputs = self.model(audio)
+            
+            if isinstance(outputs, tuple):
+                logits = outputs[0]
+            else:
+                logits = outputs
+            
+            loss = self.criterion(logits, labels)
+            
+            # Backward pass
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+            self.optimizer.step()
+            
+            # Statistics
+            total_loss += loss.item() * audio.size(0)
+            _, predicted = torch.max(logits, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+            
+            pbar.set_postfix({'loss': loss.item(), 'acc': correct/total})
         
-        # Build config
-        exp_config = self._build_experiment_config(model_name, model_config)
+        avg_loss = total_loss / total
+        accuracy = correct / total
         
-        # Get num_epochs from config
-        num_epochs = self.config['training'].get('num_epochs', 100)
-        
-        # Create experiment
-        experiment = ChaoticExperiment(
-            config=exp_config,
-            experiment_name=f"exp1_{model_name}",
-            output_dir=str(self.output_dir / model_name),
-            device=self.device,
-            seed=self.seed
-        )
-        
-        # Setup and train (not run!)
-        experiment.setup()
-        experiment.train(num_epochs=num_epochs)
-        
-        # Collect results
-        results = self._collect_experiment_results(experiment)
-        
-        return results
+        return avg_loss, accuracy
     
-    def _collect_experiment_results(self, experiment) -> Dict[str, Any]:
-        """Collect results from a completed experiment."""
-        results = {
-            'status': experiment.state.status,
-            'best_epoch': experiment.state.best_epoch,
-            'best_metric': experiment.state.best_metric,
-            'total_epochs': experiment.state.epoch + 1,
+    def validate(self, loader: DataLoader, desc: str = 'Validation') -> Tuple[float, float]:
+        """Validate the model."""
+        self.model.eval()
+        total_loss = 0.0
+        correct = 0
+        total = 0
+        
+        with torch.no_grad():
+            for batch in tqdm(loader, desc=desc, leave=False):
+                if len(batch) == 3:
+                    audio, labels, _ = batch
+                else:
+                    audio, labels = batch[0], batch[1]
+                
+                audio = audio.to(self.device)
+                labels = labels.to(self.device)
+                
+                outputs = self.model(audio)
+                if isinstance(outputs, tuple):
+                    logits = outputs[0]
+                else:
+                    logits = outputs
+                
+                loss = self.criterion(logits, labels)
+                
+                total_loss += loss.item() * audio.size(0)
+                _, predicted = torch.max(logits, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+        
+        avg_loss = total_loss / total
+        accuracy = correct / total
+        
+        return avg_loss, accuracy
+    
+    def save_checkpoint(self, epoch: int, is_best: bool = False):
+        """Save checkpoint in unified format."""
+        checkpoint = {
+            'epoch': epoch,
+            'model_state_dict': self.model.state_dict(),
+            'optimizer_state_dict': self.optimizer.state_dict(),
+            'scheduler_state_dict': self.scheduler.state_dict(),
+            'best_val_acc': self.best_val_acc,
+            'best_epoch': self.best_epoch,
+            'config': self.config,
+            'model_name': self.model_name,
+            'history': self.history
         }
         
-        # Get validation metrics
-        if experiment.state.val_metrics:
-            last_val = experiment.state.val_metrics[-1]
-            results['val_accuracy'] = last_val.get('accuracy', 0)
-            results['val_loss'] = last_val.get('loss', 0)
-            
-            # Find best validation accuracy
-            best_val_acc = max(
-                [m.get('accuracy', 0) for m in experiment.state.val_metrics],
-                default=0
-            )
-            results['best_val_accuracy'] = best_val_acc
+        # Save latest checkpoint
+        latest_path = self.checkpoint_dir / 'latest_checkpoint.pth'
+        torch.save(checkpoint, latest_path)
         
-        # Run final test if not already done
-        try:
-            test_metrics = experiment.test()
-            results['test_accuracy'] = test_metrics.get('accuracy', 0)
-            results['test_loss'] = test_metrics.get('loss', 0)
-            results['eer'] = test_metrics.get('eer', 0)
-        except Exception as e:
-            self.logger.warning(f"Could not run test: {e}")
-            results['test_accuracy'] = 0
-            results['test_error'] = str(e)
-        
-        return results
+        # Save best model
+        if is_best:
+            best_path = self.checkpoint_dir / 'best_model.pth'
+            torch.save(checkpoint, best_path)
+            self.logger.info(f"  ★ New best model saved! Val Acc: {self.best_val_acc*100:.2f}%")
     
-    def run_single(self, model_name: str) -> Dict[str, Any]:
-        """Run a single model by name."""
-        if model_name not in self.config['models']:
-            available = list(self.config['models'].keys())
-            raise ValueError(f"Unknown model '{model_name}'. Available: {available}")
+    def train(self) -> Dict[str, Any]:
+        """Full training loop."""
+        num_epochs = self.config['num_epochs']
+        patience = self.config['early_stopping_patience']
         
-        model_config = self.config['models'][model_name]
-        
-        # Check if model is enabled
-        if not model_config.get('enabled', True):
-            self.logger.info(f"Skipping disabled model: {model_name}")
-            return {'status': 'skipped', 'reason': 'disabled in config'}
+        self.logger.info(f"Starting training for {num_epochs} epochs...")
+        self.logger.info(f"Early stopping patience: {patience}")
         
         start_time = time.time()
         
-        try:
-            if model_config['type'] == 'baseline':
-                results = self.run_baseline_model(model_name, model_config)
+        for epoch in range(num_epochs):
+            # Train
+            train_loss, train_acc = self.train_epoch()
+            
+            # Validate
+            val_loss, val_acc = self.validate(self.val_loader)
+            
+            # Update scheduler
+            self.scheduler.step(val_loss)
+            
+            # Record history
+            self.history['train_loss'].append(train_loss)
+            self.history['train_acc'].append(train_acc)
+            self.history['val_loss'].append(val_loss)
+            self.history['val_acc'].append(val_acc)
+            
+            # Check for improvement
+            is_best = val_acc > self.best_val_acc
+            if is_best:
+                self.best_val_acc = val_acc
+                self.best_epoch = epoch
+                self.patience_counter = 0
             else:
-                results = self.run_chaotic_model(model_name, model_config)
+                self.patience_counter += 1
             
-            elapsed = time.time() - start_time
-            results['training_time_seconds'] = elapsed
-            results['training_time_minutes'] = elapsed / 60
+            # Save checkpoint
+            self.save_checkpoint(epoch, is_best)
             
-        except Exception as e:
-            import traceback
-            self.logger.error(f"Error running {model_name}: {e}")
-            self.logger.error(traceback.format_exc())
-            results = {
-                'status': 'failed',
-                'error': str(e),
-                'training_time_seconds': time.time() - start_time
-            }
+            # Log progress
+            lr = self.optimizer.param_groups[0]['lr']
+            self.logger.info(
+                f"Epoch {epoch+1:3d}/{num_epochs} | "
+                f"Train Loss: {train_loss:.4f}, Acc: {train_acc*100:.2f}% | "
+                f"Val Loss: {val_loss:.4f}, Acc: {val_acc*100:.2f}% | "
+                f"LR: {lr:.2e}"
+            )
+            
+            # Early stopping
+            if self.patience_counter >= patience:
+                self.logger.info(f"Early stopping triggered at epoch {epoch+1}")
+                break
         
-        self.results[model_name] = results
+        training_time = time.time() - start_time
         
-        # Save individual results
-        self._save_model_results(model_name, results)
+        # Final test evaluation
+        self.logger.info("\nRunning final test evaluation...")
+        
+        # Load best model for testing
+        best_ckpt = torch.load(self.checkpoint_dir / 'best_model.pth', weights_only=False)
+        self.model.load_state_dict(best_ckpt['model_state_dict'])
+        
+        test_loss, test_acc = self.validate(self.test_loader, desc='Testing')
+        
+        self.logger.info(f"Test Results: Loss={test_loss:.4f}, Accuracy={test_acc*100:.2f}%")
+        
+        # Compile results
+        results = {
+            'model_name': self.model_name,
+            'status': 'completed',
+            'best_epoch': self.best_epoch + 1,
+            'best_val_acc': self.best_val_acc,
+            'test_loss': test_loss,
+            'test_acc': test_acc,
+            'total_epochs': epoch + 1,
+            'training_time_seconds': training_time,
+            'training_time_minutes': training_time / 60,
+            'history': self.history
+        }
+        
+        # Save results
+        results_path = self.output_dir / 'results.json'
+        with open(results_path, 'w') as f:
+            json.dump(results, f, indent=2)
+        
+        return results
+
+
+# ============================================================
+# Model Factory
+# ============================================================
+def create_model(
+    model_type: str,
+    num_speakers: int,
+    config: Dict[str, Any],
+    device: str
+) -> nn.Module:
+    """Create model based on type."""
+    
+    if model_type == 'mel_mlp':
+        model = TraditionalMLPBaseline(
+            feature_type='mel',
+            n_mels=80,
+            n_mfcc=40,
+            sample_rate=config['sample_rate'],
+            hidden_dims=config['hidden_dims'],
+            dropout_rate=config['dropout_rate'],
+            use_batch_norm=config['use_batch_norm'],
+            num_speakers=num_speakers,
+            device=device
+        )
+    elif model_type == 'mfcc_mlp':
+        model = TraditionalMLPBaseline(
+            feature_type='mfcc',
+            n_mels=80,
+            n_mfcc=40,
+            sample_rate=config['sample_rate'],
+            hidden_dims=config['hidden_dims'],
+            dropout_rate=config['dropout_rate'],
+            use_batch_norm=config['use_batch_norm'],
+            num_speakers=num_speakers,
+            device=device
+        )
+    else:
+        raise ValueError(f"Unknown model type: {model_type}")
+    
+    return model
+
+
+# ============================================================
+# Main Experiment Runner
+# ============================================================
+class Experiment1Runner:
+    """Main runner for Experiment 1."""
+    
+    AVAILABLE_MODELS = ['mel_mlp', 'mfcc_mlp']
+    
+    def __init__(self, config: Dict[str, Any]):
+        self.config = config
+        self.output_dir = Path(config['output_dir'])
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Setup logger
+        self.logger = setup_logger(
+            'experiment1',
+            str(self.output_dir / 'experiment1.log')
+        )
+        
+        # Set device
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        
+        # Set seed
+        set_seed(config['seed'])
+        
+        # Results storage
+        self.results = {}
+        
+        # Data loaders (created once, shared by all models)
+        self.train_loader = None
+        self.val_loader = None
+        self.test_loader = None
+        self.num_speakers = None
+    
+    def setup_data(self):
+        """Setup data loaders (once for all models)."""
+        self.logger.info("=" * 70)
+        self.logger.info("Loading dataset...")
+        self.logger.info(f"Data dir: {self.config['data_dir']}")
+        self.logger.info("=" * 70)
+        
+        self.train_loader, self.val_loader, self.test_loader = create_speaker_dataloaders(
+            data_dir=self.config['data_dir'],
+            batch_size=self.config['batch_size'],
+            sample_rate=self.config['sample_rate'],
+            max_length=self.config['max_length'],
+            train_split=self.config['train_split'],
+            val_split=self.config['val_split'],
+            seed=self.config['seed']
+        )
+        
+        # Get number of speakers
+        self.num_speakers = 26  # Default
+        try:
+            if hasattr(self.train_loader.dataset, 'num_classes'):
+                self.num_speakers = self.train_loader.dataset.num_classes
+        except:
+            pass
+        
+        self.logger.info(f"Train samples: {len(self.train_loader.dataset)}")
+        self.logger.info(f"Val samples: {len(self.val_loader.dataset)}")
+        self.logger.info(f"Test samples: {len(self.test_loader.dataset)}")
+        self.logger.info(f"Number of speakers: {self.num_speakers}")
+    
+    def train_model(self, model_type: str) -> Dict[str, Any]:
+        """Train a single model."""
+        self.logger.info("\n" + "=" * 70)
+        self.logger.info(f"Training model: {model_type.upper()}")
+        self.logger.info("=" * 70)
+        
+        # Create model output directory
+        model_output_dir = self.output_dir / model_type
+        model_output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create model
+        model = create_model(
+            model_type=model_type,
+            num_speakers=self.num_speakers,
+            config=self.config,
+            device=self.device
+        )
+        
+        # Count parameters
+        num_params = sum(p.numel() for p in model.parameters())
+        trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        self.logger.info(f"Model parameters: {num_params:,} (trainable: {trainable_params:,})")
+        
+        # Create trainer
+        trainer = UnifiedTrainer(
+            model=model,
+            train_loader=self.train_loader,
+            val_loader=self.val_loader,
+            test_loader=self.test_loader,
+            config=self.config,
+            model_name=model_type,
+            output_dir=model_output_dir,
+            device=self.device,
+            logger=self.logger
+        )
+        
+        # Train
+        results = trainer.train()
+        results['num_parameters'] = num_params
         
         return results
     
-    def run_all(self) -> Dict[str, Dict]:
-        """Run all enabled models."""
-        enabled_models = self.get_enabled_models()
+    def run_single(self, model_type: str):
+        """Run training for a single model."""
+        if self.train_loader is None:
+            self.setup_data()
         
-        self.logger.info(f"\nRunning {len(enabled_models)} models: {enabled_models}")
+        results = self.train_model(model_type)
+        self.results[model_type] = results
         
-        for i, model_name in enumerate(enabled_models):
-            self.logger.info(f"\n{'#'*70}")
-            self.logger.info(f"# [{i+1}/{len(enabled_models)}] Model: {model_name}")
-            self.logger.info(f"{'#'*70}")
-            
-            results = self.run_single(model_name)
-            
-            if results.get('status') == 'failed':
-                self.logger.error(f"✗ Failed {model_name}: {results.get('error', 'Unknown error')}")
-            else:
-                train_time = results.get('training_time_minutes', 0)
-                self.logger.info(f"✓ Completed {model_name} in {train_time:.1f} minutes")
+        return results
+    
+    def run_all(self):
+        """Run training for all models."""
+        self.logger.info("=" * 70)
+        self.logger.info("EXPERIMENT 1: UNIFIED BASELINE COMPARISON")
+        self.logger.info("=" * 70)
+        self.logger.info(f"Device: {self.device}")
+        self.logger.info(f"Seed: {self.config['seed']}")
+        self.logger.info(f"Models: {self.AVAILABLE_MODELS}")
         
-        # Generate comparison report
-        self._save_comparison_results()
-        self._print_comparison_table()
-        self._generate_summary_report()
+        # Setup data once
+        self.setup_data()
+        
+        # Train each model
+        for model_type in self.AVAILABLE_MODELS:
+            try:
+                results = self.train_model(model_type)
+                self.results[model_type] = results
+                self.logger.info(f"✓ {model_type} completed: Test Acc = {results['test_acc']*100:.2f}%")
+            except Exception as e:
+                self.logger.error(f"✗ {model_type} failed: {e}")
+                import traceback
+                self.logger.error(traceback.format_exc())
+                self.results[model_type] = {'status': 'failed', 'error': str(e)}
+        
+        # Generate summary
+        self._generate_summary()
         
         return self.results
     
-    def _save_model_results(self, model_name: str, results: Dict):
-        """Save individual model results."""
-        results_dir = self.output_dir / model_name / 'results'
-        results_dir.mkdir(parents=True, exist_ok=True)
+    def _generate_summary(self):
+        """Generate experiment summary."""
+        self.logger.info("\n" + "=" * 70)
+        self.logger.info("EXPERIMENT 1 SUMMARY")
+        self.logger.info("=" * 70)
         
-        results_path = results_dir / 'final_results.json'
-        with open(results_path, 'w') as f:
-            json.dump(results, f, indent=2, default=str)
-    
-    def _save_comparison_results(self):
-        """Save comparison results to JSON."""
-        results_path = self.output_dir / 'comparison_results.json'
+        summary_lines = []
+        summary_lines.append(f"{'Model':<15} {'Val Acc':>10} {'Test Acc':>10} {'Time (min)':>12} {'Params':>12}")
+        summary_lines.append("-" * 65)
         
-        # Add metadata
-        output = {
-            'experiment': 'Experiment 1: Standard Performance Comparison',
+        for model_name, results in self.results.items():
+            if results.get('status') == 'failed':
+                summary_lines.append(f"{model_name:<15} {'ERROR':>10}")
+            else:
+                val_acc = results.get('best_val_acc', 0) * 100
+                test_acc = results.get('test_acc', 0) * 100
+                time_min = results.get('training_time_minutes', 0)
+                params = results.get('num_parameters', 0)
+                summary_lines.append(
+                    f"{model_name:<15} {val_acc:>9.2f}% {test_acc:>9.2f}% {time_min:>11.1f} {params:>12,}"
+                )
+        
+        summary_lines.append("=" * 65)
+        
+        for line in summary_lines:
+            self.logger.info(line)
+        
+        # Save summary
+        summary = {
+            'experiment': 'Experiment 1: Unified Baseline Comparison',
             'timestamp': datetime.now().isoformat(),
-            'seed': self.seed,
-            'device': self.device,
-            'config': self.config['experiment'],
-            'results': self.results
+            'config': self.config,
+            'results': self.results,
+            'summary_table': summary_lines
         }
         
-        with open(results_path, 'w') as f:
-            json.dump(output, f, indent=2, default=str)
+        summary_path = self.output_dir / 'experiment1_summary.json'
+        with open(summary_path, 'w') as f:
+            json.dump(summary, f, indent=2, default=str)
         
-        self.logger.info(f"\nComparison results saved to: {results_path}")
-    
-    def _print_comparison_table(self):
-        """Print comparison table to console and log."""
-        self.logger.info("\n" + "=" * 90)
-        self.logger.info("EXPERIMENT 1 RESULTS: STANDARD PERFORMANCE COMPARISON")
-        self.logger.info("=" * 90)
+        self.logger.info(f"\nSummary saved to: {summary_path}")
         
-        # Header
-        header = f"{'Model':<20} {'Type':<10} {'Val Acc':>10} {'Test Acc':>10} {'EER':>8} {'Time(min)':>10}"
-        self.logger.info(header)
-        self.logger.info("-" * 90)
-        
-        # Results rows
-        for model_name, results in self.results.items():
-            model_type = self.config['models'][model_name]['type']
-            
-            if 'error' in results:
-                self.logger.info(f"{model_name:<20} {model_type:<10} {'FAILED':>10}")
-                continue
-            
-            # Extract metrics (handle different result formats)
-            val_acc = results.get('best_val_accuracy', 
-                     results.get('val_accuracy', 0))
-            if isinstance(val_acc, dict):
-                val_acc = val_acc.get('accuracy', 0)
-            val_acc = float(val_acc) * 100
-            
-            test_acc = results.get('test_accuracy', 
-                      results.get('final_test_accuracy', 0))
-            if isinstance(test_acc, dict):
-                test_acc = test_acc.get('accuracy', 0)
-            test_acc = float(test_acc) * 100
-            
-            eer = results.get('eer', results.get('test_eer', 0))
-            eer = float(eer) * 100
-            
-            train_time = results.get('training_time_minutes', 
-                        results.get('training_time', 0) / 60)
-            
-            self.logger.info(
-                f"{model_name:<20} {model_type:<10} "
-                f"{val_acc:>9.2f}% {test_acc:>9.2f}% "
-                f"{eer:>7.2f}% {train_time:>10.1f}"
-            )
-        
-        self.logger.info("=" * 90)
-    
-    def _generate_summary_report(self):
-        """Generate a text summary report."""
-        report_path = self.output_dir / 'experiment1_summary.txt'
-        
-        with open(report_path, 'w') as f:
-            f.write("=" * 70 + "\n")
-            f.write("EXPERIMENT 1: STANDARD PERFORMANCE COMPARISON - SUMMARY REPORT\n")
-            f.write("=" * 70 + "\n\n")
-            
-            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"Seed: {self.seed}\n")
-            f.write(f"Device: {self.device}\n\n")
-            
-            f.write("-" * 70 + "\n")
-            f.write("RESULTS\n")
-            f.write("-" * 70 + "\n\n")
-            
-            # Find best model
-            best_model = None
-            best_acc = 0
-            
-            for model_name, results in self.results.items():
-                if 'error' in results:
-                    continue
-                
-                val_acc = results.get('best_val_accuracy', 
-                         results.get('val_accuracy', 0))
-                if isinstance(val_acc, dict):
-                    val_acc = val_acc.get('accuracy', 0)
-                
-                if val_acc > best_acc:
-                    best_acc = val_acc
-                    best_model = model_name
-                
-                f.write(f"Model: {model_name}\n")
-                f.write(f"  Validation Accuracy: {float(val_acc)*100:.2f}%\n")
-                
-                test_acc = results.get('test_accuracy', 0)
-                if isinstance(test_acc, dict):
-                    test_acc = test_acc.get('accuracy', 0)
-                f.write(f"  Test Accuracy: {float(test_acc)*100:.2f}%\n")
-                
-                train_time = results.get('training_time_minutes', 0)
-                f.write(f"  Training Time: {train_time:.1f} minutes\n")
-                f.write("\n")
-            
-            f.write("-" * 70 + "\n")
-            f.write("CONCLUSION\n")
-            f.write("-" * 70 + "\n\n")
-            
-            if best_model:
-                f.write(f"Best performing model: {best_model}\n")
-                f.write(f"Best validation accuracy: {best_acc*100:.2f}%\n")
-            
-            f.write("\n" + "=" * 70 + "\n")
-        
-        self.logger.info(f"Summary report saved to: {report_path}")
+        # Print checkpoint locations
+        self.logger.info("\nCheckpoint locations:")
+        for model_name in self.results.keys():
+            if self.results[model_name].get('status') != 'failed':
+                ckpt_path = self.output_dir / model_name / 'checkpoints' / 'best_model.pth'
+                self.logger.info(f"  {model_name}: {ckpt_path}")
 
 
+# ============================================================
+# Main Entry Point
+# ============================================================
 def main():
     parser = argparse.ArgumentParser(
-        description='Experiment 1: Standard Performance Comparison',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-    python run_experiment1.py --all
-    python run_experiment1.py --model mel_mlp
-    python run_experiment1.py --model chaotic_hybrid
-    python run_experiment1.py --list
-        """
+        description='Experiment 1: Unified Baseline Comparison',
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
     
     parser.add_argument(
-        '--config', type=str,
-        default='experiments/configs/experiment1_config.yaml',
-        help='Path to experiment configuration file'
-    )
-    parser.add_argument(
-        '--model', type=str, default=None,
-        help='Run specific model (e.g., mel_mlp, mfcc_mlp, chaotic_hybrid)'
-    )
-    parser.add_argument(
         '--all', action='store_true',
-        help='Run all enabled models'
+        help='Train all models'
+    )
+    parser.add_argument(
+        '--model', type=str, choices=['mel_mlp', 'mfcc_mlp'],
+        help='Train a specific model'
     )
     parser.add_argument(
         '--list', action='store_true',
         help='List available models'
     )
     parser.add_argument(
-        '--output_dir', type=str, default=None,
-        help='Override output directory'
+        '--data_dir', type=str,
+        default=DEFAULT_CONFIG['data_dir'],
+        help='Path to dataset'
     )
     parser.add_argument(
-        '--device', type=str, default='auto',
-        choices=['auto', 'cpu', 'cuda'],
-        help='Device to use for training'
+        '--output_dir', type=str,
+        default=DEFAULT_CONFIG['output_dir'],
+        help='Output directory'
+    )
+    parser.add_argument(
+        '--epochs', type=int,
+        default=DEFAULT_CONFIG['num_epochs'],
+        help='Number of training epochs'
+    )
+    parser.add_argument(
+        '--batch_size', type=int,
+        default=DEFAULT_CONFIG['batch_size'],
+        help='Batch size'
+    )
+    parser.add_argument(
+        '--seed', type=int,
+        default=DEFAULT_CONFIG['seed'],
+        help='Random seed'
     )
     
     args = parser.parse_args()
     
-    # Check config exists
-    if not os.path.exists(args.config):
-        print(f"Error: Config file not found: {args.config}")
-        print("Please create the config file or specify correct path with --config")
-        sys.exit(1)
-    
-    # Initialize runner
-    runner = Experiment1Runner(
-        config_path=args.config,
-        output_dir=args.output_dir,
-        device=args.device
-    )
-    
     if args.list:
-        print("\nAvailable models:")
-        for name, cfg in runner.config['models'].items():
-            status = "✓ enabled" if cfg.get('enabled', True) else "✗ disabled"
-            print(f"  {name:<20} [{cfg['type']}] {status}")
+        print("Available models:")
+        for model in Experiment1Runner.AVAILABLE_MODELS:
+            print(f"  - {model}")
         return
     
-    if args.model:
-        print(f"\nRunning single model: {args.model}")
-        results = runner.run_single(args.model)
-        print(f"\nResults for {args.model}:")
-        print(json.dumps(results, indent=2, default=str))
-    elif args.all:
-        print("\nRunning all enabled models...")
+    # Update config with command line arguments
+    config = DEFAULT_CONFIG.copy()
+    config['data_dir'] = args.data_dir
+    config['output_dir'] = args.output_dir
+    config['num_epochs'] = args.epochs
+    config['batch_size'] = args.batch_size
+    config['seed'] = args.seed
+    
+    # Create runner
+    runner = Experiment1Runner(config)
+    
+    if args.all:
         runner.run_all()
+    elif args.model:
+        runner.run_single(args.model)
     else:
+        print("Please specify --all to train all models or --model <name> to train a specific model")
+        print("Use --list to see available models")
         parser.print_help()
-        print("\n⚠️  Please specify --model <name> or --all")
 
 
 if __name__ == "__main__":

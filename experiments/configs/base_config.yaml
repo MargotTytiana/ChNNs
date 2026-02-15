@@ -99,7 +99,7 @@ model:
   chaotic_network:
     # Chaotic embedding layer
     embedding:
-      system_type: "lorenz"  # Options: "lorenz", "rossler", "mackey_glass"
+      system_type: "lorenz"  # Options: "lorenz", "rossler", "mackey_glass", "chua"
       evolution_time: 0.5  # seconds
       time_step: 0.01
       coupling_strength: 1.0

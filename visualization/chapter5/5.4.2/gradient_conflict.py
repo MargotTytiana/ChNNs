@@ -1,0 +1,1903 @@
+import re
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# ==========================================
+# 1. 数据准备
+# ==========================================
+# 将您的完整控制台日志内容粘贴到下方的 raw_log 变量中
+# 或者从文件读取: with open('training_log.txt', 'r') as f: raw_log = f.read()
+raw_log = """
+2026-01-24 08:42:58,695 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:================================================================================
+
+2026-01-24 08:42:59,897 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6059, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6059, num_params=32
+2026-01-24 08:43:00,139 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.626441
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 0: [0/472 (0.0%)]	Loss: 4.626441
+2026-01-24 08:43:00,926 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.4217, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.4217, num_params=32
+2026-01-24 08:43:01,880 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4983, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4983, num_params=32
+2026-01-24 08:43:02,820 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4282, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4282, num_params=32
+2026-01-24 08:43:03,780 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3488, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3488, num_params=32
+2026-01-24 08:43:04,736 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1894, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1894, num_params=32
+2026-01-24 08:43:05,676 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4606, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4606, num_params=32
+2026-01-24 08:43:06,628 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4445, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4445, num_params=32
+2026-01-24 08:43:07,568 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4274, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4274, num_params=32
+2026-01-24 08:43:08,527 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.3291, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.3291, num_params=32
+2026-01-24 08:43:09,480 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6892, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6892, num_params=32
+2026-01-24 08:43:10,430 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7446, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7446, num_params=32
+2026-01-24 08:43:11,374 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1289, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1289, num_params=32
+2026-01-24 08:43:12,326 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0906, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0906, num_params=32
+2026-01-24 08:43:12,694 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.1, desync_weight=0.0, loss_sync=0.028357
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 0: sync_weight=0.1, desync_weight=0.0, loss_sync=0.028357
+2026-01-24 08:43:13,889 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 4.2717, Train Acc: 0.0759, Val Loss: 4.2069, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 0: Train Loss: 4.2717, Train Acc: 0.0759, Val Loss: 4.2069, Val Acc: 0.0449
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084313.pkl
+2026-01-24 08:43:13,966 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 0
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084313.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084314.pkl
+2026-01-24 08:43:15,042 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2070, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2070, num_params=32
+2026-01-24 08:43:15,233 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 3.089082
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 1: [0/472 (0.0%)]	Loss: 3.089082
+2026-01-24 08:43:15,989 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3149, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3149, num_params=32
+2026-01-24 08:43:16,942 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5296, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5296, num_params=32
+2026-01-24 08:43:17,897 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5346, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5346, num_params=32
+2026-01-24 08:43:18,851 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.2875, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.2875, num_params=32
+2026-01-24 08:43:19,801 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.9030, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.9030, num_params=32
+2026-01-24 08:43:20,751 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4971, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4971, num_params=32
+2026-01-24 08:43:21,702 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8991, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8991, num_params=32
+2026-01-24 08:43:22,666 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.3471, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.3471, num_params=32
+2026-01-24 08:43:23,628 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3208, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3208, num_params=32
+2026-01-24 08:43:24,583 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6272, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6272, num_params=32
+2026-01-24 08:43:25,534 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8112, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8112, num_params=32
+2026-01-24 08:43:26,489 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.1273, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.1273, num_params=32
+2026-01-24 08:43:27,441 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4310, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4310, num_params=32
+2026-01-24 08:43:27,803 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.1, desync_weight=0.0, loss_sync=0.007560
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 1: sync_weight=0.1, desync_weight=0.0, loss_sync=0.007560
+2026-01-24 08:43:28,980 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 3.0242, Train Acc: 0.1875, Val Loss: 3.9729, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 1: Train Loss: 3.0242, Train Acc: 0.1875, Val Loss: 3.9729, Val Acc: 0.0449
+2026-01-24 08:43:29,947 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3446, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3446, num_params=32
+2026-01-24 08:43:30,137 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 2.094236
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 2: [0/472 (0.0%)]	Loss: 2.094236
+2026-01-24 08:43:30,895 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7296, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7296, num_params=32
+2026-01-24 08:43:31,848 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.3255, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.3255, num_params=32
+2026-01-24 08:43:33,284 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0806, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0806, num_params=32
+2026-01-24 08:43:34,235 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3025, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3025, num_params=32
+2026-01-24 08:43:35,187 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0122, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0122, num_params=32
+2026-01-24 08:43:36,138 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2844, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2844, num_params=32
+2026-01-24 08:43:37,095 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.2958, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.2958, num_params=32
+2026-01-24 08:43:38,049 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.2982, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.2982, num_params=32
+2026-01-24 08:43:39,197 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8833, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8833, num_params=32
+2026-01-24 08:43:40,148 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.4207, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.4207, num_params=32
+2026-01-24 08:43:41,103 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1366, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1366, num_params=32
+2026-01-24 08:43:42,054 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.7109, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.7109, num_params=32
+2026-01-24 08:43:42,422 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004678
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 2: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004678
+2026-01-24 08:43:43,609 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 2.4041, Train Acc: 0.2991, Val Loss: 4.1403, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 2: Train Loss: 2.4041, Train Acc: 0.2991, Val Loss: 4.1403, Val Acc: 0.0449
+2026-01-24 08:43:44,568 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6299, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6299, num_params=32
+2026-01-24 08:43:44,758 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.214976
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 3: [0/472 (0.0%)]	Loss: 2.214976
+2026-01-24 08:43:45,505 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7917, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7917, num_params=32
+2026-01-24 08:43:46,439 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7117, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7117, num_params=32
+2026-01-24 08:43:47,386 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.7958, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.7958, num_params=32
+2026-01-24 08:43:48,350 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.5114, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.5114, num_params=32
+2026-01-24 08:43:49,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.0747, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.0747, num_params=32
+2026-01-24 08:43:50,395 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7524, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7524, num_params=32
+2026-01-24 08:43:51,335 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.3849, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.3849, num_params=32
+2026-01-24 08:43:52,273 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2380, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2380, num_params=32
+2026-01-24 08:43:53,221 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5057, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5057, num_params=32
+2026-01-24 08:43:54,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4726, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4726, num_params=32
+2026-01-24 08:43:55,101 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5860, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5860, num_params=32
+2026-01-24 08:43:56,040 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0202, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0202, num_params=32
+2026-01-24 08:43:56,980 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6566, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6566, num_params=32
+2026-01-24 08:43:57,341 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.1, desync_weight=0.0, loss_sync=0.005871
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 3: sync_weight=0.1, desync_weight=0.0, loss_sync=0.005871
+2026-01-24 08:43:58,529 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 1.8190, Train Acc: 0.4598, Val Loss: 3.9048, Val Acc: 0.1011
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 3: Train Loss: 1.8190, Train Acc: 0.4598, Val Loss: 3.9048, Val Acc: 0.1011
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0003.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084313.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084358.pkl
+2026-01-24 08:43:58,616 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 3
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 3
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084358.pkl
+2026-01-24 08:43:59,632 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1230, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1230, num_params=32
+2026-01-24 08:43:59,822 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 1.662653
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 4: [0/472 (0.0%)]	Loss: 1.662653
+2026-01-24 08:44:00,576 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0134, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0134, num_params=32
+2026-01-24 08:44:01,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7344, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7344, num_params=32
+2026-01-24 08:44:02,447 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3986, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3986, num_params=32
+2026-01-24 08:44:03,385 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2020, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2020, num_params=32
+2026-01-24 08:44:04,335 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4997, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4997, num_params=32
+2026-01-24 08:44:05,273 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.3997, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.3997, num_params=32
+2026-01-24 08:44:06,209 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.6666, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.6666, num_params=32
+2026-01-24 08:44:07,148 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2629, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2629, num_params=32
+2026-01-24 08:44:08,087 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3129, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3129, num_params=32
+2026-01-24 08:44:09,500 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9076, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9076, num_params=32
+2026-01-24 08:44:10,437 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2722, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2722, num_params=32
+2026-01-24 08:44:11,374 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2628, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2628, num_params=32
+2026-01-24 08:44:11,734 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.1, desync_weight=0.0, loss_sync=0.006350
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 4: sync_weight=0.1, desync_weight=0.0, loss_sync=0.006350
+2026-01-24 08:44:12,895 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 1.5233, Train Acc: 0.5647, Val Loss: 4.2296, Val Acc: 0.1236
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 4: Train Loss: 1.5233, Train Acc: 0.5647, Val Loss: 4.2296, Val Acc: 0.1236
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0004.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084314.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084412.pkl
+2026-01-24 08:44:12,978 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 4
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 4
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0003.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084412.pkl
+2026-01-24 08:44:13,996 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8778, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8778, num_params=32
+2026-01-24 08:44:14,187 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 1.170298
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 5: [0/472 (0.0%)]	Loss: 1.170298
+2026-01-24 08:44:14,947 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.1816, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.1816, num_params=32
+2026-01-24 08:44:15,895 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.2676, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.2676, num_params=32
+2026-01-24 08:44:16,849 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2094, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2094, num_params=32
+2026-01-24 08:44:17,800 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.4321, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.4321, num_params=32
+2026-01-24 08:44:18,744 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.2267, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.2267, num_params=32
+2026-01-24 08:44:19,697 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4982, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4982, num_params=32
+2026-01-24 08:44:20,648 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5478, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5478, num_params=32
+2026-01-24 08:44:21,602 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3449, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3449, num_params=32
+2026-01-24 08:44:22,556 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5621, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5621, num_params=32
+2026-01-24 08:44:23,508 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5716, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5716, num_params=32
+2026-01-24 08:44:24,461 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8644, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8644, num_params=32
+2026-01-24 08:44:25,414 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0483, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0483, num_params=32
+2026-01-24 08:44:26,368 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0682, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0682, num_params=32
+2026-01-24 08:44:26,728 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.1, desync_weight=0.0, loss_sync=0.005049
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 5: sync_weight=0.1, desync_weight=0.0, loss_sync=0.005049
+2026-01-24 08:44:27,876 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 1.2072, Train Acc: 0.6317, Val Loss: 4.4638, Val Acc: 0.0562
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 5: Train Loss: 1.2072, Train Acc: 0.6317, Val Loss: 4.4638, Val Acc: 0.0562
+2026-01-24 08:44:28,834 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.6385, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.6385, num_params=32
+2026-01-24 08:44:29,024 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.032214
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 6: [0/472 (0.0%)]	Loss: 1.032214
+2026-01-24 08:44:29,768 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.3419, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.3419, num_params=32
+2026-01-24 08:44:30,713 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5350, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5350, num_params=32
+2026-01-24 08:44:31,662 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2443, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2443, num_params=32
+2026-01-24 08:44:32,604 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2634, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2634, num_params=32
+2026-01-24 08:44:33,544 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4493, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4493, num_params=32
+2026-01-24 08:44:34,481 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0257, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0257, num_params=32
+2026-01-24 08:44:35,419 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0450, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0450, num_params=32
+2026-01-24 08:44:36,358 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0333, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0333, num_params=32
+2026-01-24 08:44:37,300 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3507, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3507, num_params=32
+2026-01-24 08:44:38,239 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5813, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5813, num_params=32
+2026-01-24 08:44:39,180 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3318, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3318, num_params=32
+2026-01-24 08:44:40,120 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.3303, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.3303, num_params=32
+2026-01-24 08:44:41,060 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.1487, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.1487, num_params=32
+2026-01-24 08:44:41,420 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.1, desync_weight=0.0, loss_sync=0.005893
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 6: sync_weight=0.1, desync_weight=0.0, loss_sync=0.005893
+2026-01-24 08:44:42,573 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 1.1883, Train Acc: 0.6272, Val Loss: 4.4828, Val Acc: 0.1124
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 6: Train Loss: 1.1883, Train Acc: 0.6272, Val Loss: 4.4828, Val Acc: 0.1124
+2026-01-24 08:44:43,544 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6265, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6265, num_params=32
+2026-01-24 08:44:43,734 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.033814
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 7: [0/472 (0.0%)]	Loss: 1.033814
+2026-01-24 08:44:44,493 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1292, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1292, num_params=32
+2026-01-24 08:44:45,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.6365, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.6365, num_params=32
+2026-01-24 08:44:46,395 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5794, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5794, num_params=32
+2026-01-24 08:44:47,350 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6536, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6536, num_params=32
+2026-01-24 08:44:48,301 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6327, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6327, num_params=32
+2026-01-24 08:44:49,253 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1940, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1940, num_params=32
+2026-01-24 08:44:50,205 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7035, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7035, num_params=32
+2026-01-24 08:44:51,156 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5609, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5609, num_params=32
+2026-01-24 08:44:52,112 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0256, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0256, num_params=32
+2026-01-24 08:44:53,063 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4383, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4383, num_params=32
+2026-01-24 08:44:54,015 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3252, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3252, num_params=32
+2026-01-24 08:44:54,967 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7872, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7872, num_params=32
+2026-01-24 08:44:55,918 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5641, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5641, num_params=32
+2026-01-24 08:44:56,280 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004702
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 7: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004702
+2026-01-24 08:44:57,450 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 0.9680, Train Acc: 0.6808, Val Loss: 5.2918, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 7: Train Loss: 0.9680, Train Acc: 0.6808, Val Loss: 5.2918, Val Acc: 0.0449
+2026-01-24 08:44:58,429 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7828, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7828, num_params=32
+2026-01-24 08:44:58,619 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.583846
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 8: [0/472 (0.0%)]	Loss: 0.583846
+2026-01-24 08:44:59,837 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0401, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0401, num_params=32
+2026-01-24 08:45:00,778 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.3086, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.3086, num_params=32
+2026-01-24 08:45:01,731 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5228, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5228, num_params=32
+2026-01-24 08:45:02,673 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1835, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1835, num_params=32
+2026-01-24 08:45:03,616 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3236, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3236, num_params=32
+2026-01-24 08:45:04,558 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2485, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2485, num_params=32
+2026-01-24 08:45:05,502 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3057, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3057, num_params=32
+2026-01-24 08:45:06,441 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.6028, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.6028, num_params=32
+2026-01-24 08:45:07,380 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4187, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4187, num_params=32
+2026-01-24 08:45:08,320 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6126, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6126, num_params=32
+2026-01-24 08:45:09,261 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1271, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1271, num_params=32
+2026-01-24 08:45:10,201 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3856, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3856, num_params=32
+2026-01-24 08:45:10,561 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004022
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 8: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004022
+2026-01-24 08:45:11,804 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 0.7350, Train Acc: 0.7812, Val Loss: 5.4103, Val Acc: 0.0787
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 8: Train Loss: 0.7350, Train Acc: 0.7812, Val Loss: 5.4103, Val Acc: 0.0787
+2026-01-24 08:45:12,778 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0056, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0056, num_params=32
+2026-01-24 08:45:12,969 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.679369
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 9: [0/472 (0.0%)]	Loss: 0.679369
+2026-01-24 08:45:13,728 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6580, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6580, num_params=32
+2026-01-24 08:45:14,678 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.7046, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.7046, num_params=32
+2026-01-24 08:45:15,631 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3966, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3966, num_params=32
+2026-01-24 08:45:16,588 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.7848, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.7848, num_params=32
+2026-01-24 08:45:17,542 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5959, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5959, num_params=32
+2026-01-24 08:45:18,494 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4750, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4750, num_params=32
+2026-01-24 08:45:19,444 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0230, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0230, num_params=32
+2026-01-24 08:45:20,397 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.4455, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.4455, num_params=32
+2026-01-24 08:45:21,350 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5154, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5154, num_params=32
+2026-01-24 08:45:22,303 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8702, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8702, num_params=32
+2026-01-24 08:45:23,255 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4871, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4871, num_params=32
+2026-01-24 08:45:24,208 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3877, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3877, num_params=32
+2026-01-24 08:45:25,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5595, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5595, num_params=32
+2026-01-24 08:45:25,517 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.1, desync_weight=0.0, loss_sync=0.006081
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 9: sync_weight=0.1, desync_weight=0.0, loss_sync=0.006081
+2026-01-24 08:45:26,696 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 9: Train Loss: 0.7243, Train Acc: 0.7723, Val Loss: 5.7290, Val Acc: 0.0562
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 9: Train Loss: 0.7243, Train Acc: 0.7723, Val Loss: 5.7290, Val Acc: 0.0562
+2026-01-24 08:45:27,670 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0883, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0883, num_params=32
+2026-01-24 08:45:27,859 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.379258
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 10: [0/472 (0.0%)]	Loss: 0.379258
+2026-01-24 08:45:28,617 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0821, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0821, num_params=32
+2026-01-24 08:45:29,567 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8958, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8958, num_params=32
+2026-01-24 08:45:30,514 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5934, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5934, num_params=32
+2026-01-24 08:45:31,468 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.6107, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.6107, num_params=32
+2026-01-24 08:45:32,419 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.5030, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.5030, num_params=32
+2026-01-24 08:45:33,369 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3064, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3064, num_params=32
+2026-01-24 08:45:34,319 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5678, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5678, num_params=32
+2026-01-24 08:45:35,272 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3966, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3966, num_params=32
+2026-01-24 08:45:36,223 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0845, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0845, num_params=32
+2026-01-24 08:45:37,174 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4294, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4294, num_params=32
+2026-01-24 08:45:38,124 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.1077, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.1077, num_params=32
+2026-01-24 08:45:39,075 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8628, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8628, num_params=32
+2026-01-24 08:45:40,027 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4286, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4286, num_params=32
+2026-01-24 08:45:40,382 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002981
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 10: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002981
+2026-01-24 08:45:41,569 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 10: Train Loss: 0.6252, Train Acc: 0.8013, Val Loss: 4.4194, Val Acc: 0.1348
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 10: Train Loss: 0.6252, Train Acc: 0.8013, Val Loss: 4.4194, Val Acc: 0.1348
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084358.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0010.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084541.pkl
+2026-01-24 08:45:41,654 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 10
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 10
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0004.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084541.pkl
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084412.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0010.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084541.pkl
+2026-01-24 08:45:42,763 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4620, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4620, num_params=32
+2026-01-24 08:45:42,954 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.471538
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 11: [0/472 (0.0%)]	Loss: 0.471538
+2026-01-24 08:45:43,719 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.2121, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.2121, num_params=32
+2026-01-24 08:45:44,670 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2321, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2321, num_params=32
+2026-01-24 08:45:45,621 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2334, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2334, num_params=32
+2026-01-24 08:45:46,575 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5453, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5453, num_params=32
+2026-01-24 08:45:47,535 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6128, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6128, num_params=32
+2026-01-24 08:45:48,489 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6949, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6949, num_params=32
+2026-01-24 08:45:49,444 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.7195, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.7195, num_params=32
+2026-01-24 08:45:50,398 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5277, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5277, num_params=32
+2026-01-24 08:45:51,351 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.3114, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.3114, num_params=32
+2026-01-24 08:45:52,302 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6984, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6984, num_params=32
+2026-01-24 08:45:53,453 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2880, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2880, num_params=32
+2026-01-24 08:45:54,408 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2222, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2222, num_params=32
+2026-01-24 08:45:55,723 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004496
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 11: sync_weight=0.1, desync_weight=0.0, loss_sync=0.004496
+2026-01-24 08:45:56,930 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 11: Train Loss: 0.5634, Train Acc: 0.8237, Val Loss: 4.7737, Val Acc: 0.1011
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 11: Train Loss: 0.5634, Train Acc: 0.8237, Val Loss: 4.7737, Val Acc: 0.1011
+2026-01-24 08:45:57,904 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3770, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3770, num_params=32
+2026-01-24 08:45:58,094 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.568308
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 12: [0/472 (0.0%)]	Loss: 0.568308
+2026-01-24 08:45:58,850 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1302, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1302, num_params=32
+2026-01-24 08:45:59,800 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3855, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3855, num_params=32
+2026-01-24 08:46:00,752 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7379, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7379, num_params=32
+2026-01-24 08:46:01,713 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3796, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3796, num_params=32
+2026-01-24 08:46:02,665 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4545, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4545, num_params=32
+2026-01-24 08:46:03,615 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8713, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8713, num_params=32
+2026-01-24 08:46:04,558 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2058, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2058, num_params=32
+2026-01-24 08:46:05,497 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5795, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5795, num_params=32
+2026-01-24 08:46:06,435 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0360, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0360, num_params=32
+2026-01-24 08:46:08,305 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0074, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0074, num_params=32
+2026-01-24 08:46:09,245 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3975, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3975, num_params=32
+2026-01-24 08:46:10,183 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4861, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4861, num_params=32
+2026-01-24 08:46:10,535 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.1, desync_weight=0.0, loss_sync=0.003208
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 12: sync_weight=0.1, desync_weight=0.0, loss_sync=0.003208
+2026-01-24 08:46:11,714 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 12: Train Loss: 0.5607, Train Acc: 0.8170, Val Loss: 7.1904, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 12: Train Loss: 0.5607, Train Acc: 0.8170, Val Loss: 7.1904, Val Acc: 0.0449
+2026-01-24 08:46:12,685 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2250, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2250, num_params=32
+2026-01-24 08:46:12,876 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.401046
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 13: [0/472 (0.0%)]	Loss: 0.401046
+2026-01-24 08:46:13,637 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2035, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2035, num_params=32
+2026-01-24 08:46:14,587 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.0605, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.0605, num_params=32
+2026-01-24 08:46:15,545 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4784, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4784, num_params=32
+2026-01-24 08:46:16,499 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0801, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0801, num_params=32
+2026-01-24 08:46:17,453 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1474, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1474, num_params=32
+2026-01-24 08:46:18,405 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4458, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4458, num_params=32
+2026-01-24 08:46:19,357 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5049, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5049, num_params=32
+2026-01-24 08:46:20,310 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4132, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4132, num_params=32
+2026-01-24 08:46:21,267 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0628, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0628, num_params=32
+2026-01-24 08:46:22,220 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2686, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2686, num_params=32
+2026-01-24 08:46:23,180 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8601, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8601, num_params=32
+2026-01-24 08:46:24,616 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8350, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8350, num_params=32
+2026-01-24 08:46:24,978 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002304
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 13: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002304
+2026-01-24 08:46:26,154 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 13: Train Loss: 0.4263, Train Acc: 0.8571, Val Loss: 6.9727, Val Acc: 0.0449
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 13: Train Loss: 0.4263, Train Acc: 0.8571, Val Loss: 6.9727, Val Acc: 0.0449
+2026-01-24 08:46:27,128 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7041, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7041, num_params=32
+2026-01-24 08:46:27,319 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.714275
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 14: [0/472 (0.0%)]	Loss: 0.714275
+2026-01-24 08:46:28,079 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8986, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8986, num_params=32
+2026-01-24 08:46:29,035 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4521, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4521, num_params=32
+2026-01-24 08:46:29,988 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.1211, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.1211, num_params=32
+2026-01-24 08:46:30,944 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5141, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5141, num_params=32
+2026-01-24 08:46:31,897 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.2646, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.2646, num_params=32
+2026-01-24 08:46:32,850 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4988, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4988, num_params=32
+2026-01-24 08:46:33,799 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3832, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3832, num_params=32
+2026-01-24 08:46:34,751 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5947, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5947, num_params=32
+2026-01-24 08:46:35,704 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3020, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3020, num_params=32
+2026-01-24 08:46:36,661 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4278, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4278, num_params=32
+2026-01-24 08:46:37,615 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4174, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4174, num_params=32
+2026-01-24 08:46:38,570 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2508, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2508, num_params=32
+2026-01-24 08:46:39,522 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5122, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5122, num_params=32
+2026-01-24 08:46:39,881 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002577
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 14: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002577
+2026-01-24 08:46:41,076 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 14: Train Loss: 0.3899, Train Acc: 0.8884, Val Loss: 5.8913, Val Acc: 0.0562
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 14: Train Loss: 0.3899, Train Acc: 0.8884, Val Loss: 5.8913, Val Acc: 0.0562
+2026-01-24 08:46:42,049 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1658, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1658, num_params=32
+2026-01-24 08:46:42,239 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.357675
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 15: [0/472 (0.0%)]	Loss: 0.357675
+2026-01-24 08:46:42,988 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.1656, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.1656, num_params=32
+2026-01-24 08:46:43,928 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.2357, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.2357, num_params=32
+2026-01-24 08:46:44,886 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1337, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1337, num_params=32
+2026-01-24 08:46:45,844 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0358, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0358, num_params=32
+2026-01-24 08:46:46,790 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3583, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3583, num_params=32
+2026-01-24 08:46:47,729 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0761, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0761, num_params=32
+2026-01-24 08:46:48,679 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2169, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2169, num_params=32
+2026-01-24 08:46:50,571 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1221, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1221, num_params=32
+2026-01-24 08:46:51,513 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2956, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2956, num_params=32
+2026-01-24 08:46:52,462 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3848, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3848, num_params=32
+2026-01-24 08:46:53,402 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5614, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5614, num_params=32
+2026-01-24 08:46:54,350 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5866, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5866, num_params=32
+2026-01-24 08:46:54,712 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002738
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 15: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002738
+2026-01-24 08:46:55,924 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 15: Train Loss: 0.4073, Train Acc: 0.8638, Val Loss: 5.0719, Val Acc: 0.1236
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 15: Train Loss: 0.4073, Train Acc: 0.8638, Val Loss: 5.0719, Val Acc: 0.1236
+2026-01-24 08:46:56,897 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5451, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5451, num_params=32
+2026-01-24 08:46:57,086 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.444384
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 16: [0/472 (0.0%)]	Loss: 0.444384
+2026-01-24 08:46:57,850 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2445, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2445, num_params=32
+2026-01-24 08:46:58,801 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3779, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3779, num_params=32
+2026-01-24 08:46:59,751 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7704, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7704, num_params=32
+2026-01-24 08:47:00,708 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.5086, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.5086, num_params=32
+2026-01-24 08:47:01,670 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8423, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.8423, num_params=32
+2026-01-24 08:47:02,623 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2549, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2549, num_params=32
+2026-01-24 08:47:03,587 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8680, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8680, num_params=32
+2026-01-24 08:47:04,562 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2355, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2355, num_params=32
+2026-01-24 08:47:05,528 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2429, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2429, num_params=32
+2026-01-24 08:47:06,490 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3071, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3071, num_params=32
+2026-01-24 08:47:07,449 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3760, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3760, num_params=32
+2026-01-24 08:47:08,413 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6618, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6618, num_params=32
+2026-01-24 08:47:09,377 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1043, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1043, num_params=32
+2026-01-24 08:47:09,736 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001900
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 16: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001900
+2026-01-24 08:47:10,942 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 16: Train Loss: 0.4231, Train Acc: 0.8594, Val Loss: 4.0791, Val Acc: 0.1798
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 16: Train Loss: 0.4231, Train Acc: 0.8594, Val Loss: 4.0791, Val Acc: 0.1798
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0010.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0016.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084541.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084710.pkl
+2026-01-24 08:47:11,029 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 16
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 16
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084711.pkl
+2026-01-24 08:47:12,043 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2627, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2627, num_params=32
+2026-01-24 08:47:12,234 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.431066
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 17: [0/472 (0.0%)]	Loss: 0.431066
+2026-01-24 08:47:12,988 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3242, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3242, num_params=32
+2026-01-24 08:47:13,960 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0466, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0466, num_params=32
+2026-01-24 08:47:14,920 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4557, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4557, num_params=32
+2026-01-24 08:47:16,344 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4526, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4526, num_params=32
+2026-01-24 08:47:17,296 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2366, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2366, num_params=32
+2026-01-24 08:47:18,233 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5570, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5570, num_params=32
+2026-01-24 08:47:19,180 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.3762, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.3762, num_params=32
+2026-01-24 08:47:20,123 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3573, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3573, num_params=32
+2026-01-24 08:47:21,064 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4358, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4358, num_params=32
+2026-01-24 08:47:22,004 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2557, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2557, num_params=32
+2026-01-24 08:47:22,942 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2447, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2447, num_params=32
+2026-01-24 08:47:23,880 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1721, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1721, num_params=32
+2026-01-24 08:47:24,231 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001868
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 17: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001868
+2026-01-24 08:47:25,392 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 17: Train Loss: 0.3549, Train Acc: 0.8951, Val Loss: 2.8288, Val Acc: 0.3483
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 17: Train Loss: 0.3549, Train Acc: 0.8951, Val Loss: 2.8288, Val Acc: 0.3483
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0017.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084725.pkl
+2026-01-24 08:47:25,472 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 17
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 17
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0016.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084725.pkl
+2026-01-24 08:47:26,496 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2898, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2898, num_params=32
+2026-01-24 08:47:26,687 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.312965
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 18: [0/472 (0.0%)]	Loss: 0.312965
+2026-01-24 08:47:27,448 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0814, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0814, num_params=32
+2026-01-24 08:47:28,397 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3988, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3988, num_params=32
+2026-01-24 08:47:29,349 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2758, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2758, num_params=32
+2026-01-24 08:47:30,784 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4807, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4807, num_params=32
+2026-01-24 08:47:31,736 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4140, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4140, num_params=32
+2026-01-24 08:47:32,688 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4115, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4115, num_params=32
+2026-01-24 08:47:33,641 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7967, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7967, num_params=32
+2026-01-24 08:47:34,594 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2357, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2357, num_params=32
+2026-01-24 08:47:35,547 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7559, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7559, num_params=32
+2026-01-24 08:47:36,497 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3638, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3638, num_params=32
+2026-01-24 08:47:37,453 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5446, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5446, num_params=32
+2026-01-24 08:47:38,404 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3677, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3677, num_params=32
+2026-01-24 08:47:38,768 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002063
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 18: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002063
+2026-01-24 08:47:39,938 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 18: Train Loss: 0.3568, Train Acc: 0.8906, Val Loss: 5.7517, Val Acc: 0.0787
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 18: Train Loss: 0.3568, Train Acc: 0.8906, Val Loss: 5.7517, Val Acc: 0.0787
+2026-01-24 08:47:40,935 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6614, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6614, num_params=32
+2026-01-24 08:47:41,126 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.177295
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 19: [0/472 (0.0%)]	Loss: 0.177295
+2026-01-24 08:47:41,883 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0090, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0090, num_params=32
+2026-01-24 08:47:42,833 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0359, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0359, num_params=32
+2026-01-24 08:47:43,785 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4878, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4878, num_params=32
+2026-01-24 08:47:44,728 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1127, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1127, num_params=32
+2026-01-24 08:47:45,673 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5553, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5553, num_params=32
+2026-01-24 08:47:46,611 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.1461, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.1461, num_params=32
+2026-01-24 08:47:47,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2694, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2694, num_params=32
+2026-01-24 08:47:48,488 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7669, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7669, num_params=32
+2026-01-24 08:47:49,426 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2444, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2444, num_params=32
+2026-01-24 08:47:50,363 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.6154, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.6154, num_params=32
+2026-01-24 08:47:51,301 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0907, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0907, num_params=32
+2026-01-24 08:47:52,240 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3523, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3523, num_params=32
+2026-01-24 08:47:53,177 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5470, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5470, num_params=32
+2026-01-24 08:47:53,529 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002508
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 19: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002508
+2026-01-24 08:47:54,726 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 19: Train Loss: 0.2344, Train Acc: 0.9308, Val Loss: 5.7208, Val Acc: 0.1348
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 19: Train Loss: 0.2344, Train Acc: 0.9308, Val Loss: 5.7208, Val Acc: 0.1348
+2026-01-24 08:47:55,705 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4600, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4600, num_params=32
+2026-01-24 08:47:55,895 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.239700
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 20: [0/472 (0.0%)]	Loss: 0.239700
+2026-01-24 08:47:56,657 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3412, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3412, num_params=32
+2026-01-24 08:47:57,607 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4517, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4517, num_params=32
+2026-01-24 08:47:58,557 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1592, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1592, num_params=32
+2026-01-24 08:47:59,498 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6782, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6782, num_params=32
+2026-01-24 08:48:00,439 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6710, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6710, num_params=32
+2026-01-24 08:48:01,566 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4803, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4803, num_params=32
+2026-01-24 08:48:02,507 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5519, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5519, num_params=32
+2026-01-24 08:48:03,447 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6107, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6107, num_params=32
+2026-01-24 08:48:04,390 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5014, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5014, num_params=32
+2026-01-24 08:48:05,331 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.0903, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.0903, num_params=32
+2026-01-24 08:48:06,268 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6465, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6465, num_params=32
+2026-01-24 08:48:07,206 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.3133, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.3133, num_params=32
+2026-01-24 08:48:08,146 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3388, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3388, num_params=32
+2026-01-24 08:48:08,513 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002732
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 20: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002732
+2026-01-24 08:48:09,685 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 20: Train Loss: 0.3114, Train Acc: 0.9085, Val Loss: 2.8721, Val Acc: 0.3371
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 20: Train Loss: 0.3114, Train Acc: 0.9085, Val Loss: 2.8721, Val Acc: 0.3371
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084710.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0020.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084711.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084809.pkl
+2026-01-24 08:48:10,741 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0067, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0067, num_params=32
+2026-01-24 08:48:10,932 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.174167
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 21: [0/472 (0.0%)]	Loss: 0.174167
+2026-01-24 08:48:11,694 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6211, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6211, num_params=32
+2026-01-24 08:48:12,644 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5446, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5446, num_params=32
+2026-01-24 08:48:13,590 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.1418, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.1418, num_params=32
+2026-01-24 08:48:14,529 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5384, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5384, num_params=32
+2026-01-24 08:48:15,479 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9073, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9073, num_params=32
+2026-01-24 08:48:16,417 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7339, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7339, num_params=32
+2026-01-24 08:48:17,361 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.0269, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.0269, num_params=32
+2026-01-24 08:48:18,300 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0465, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0465, num_params=32
+2026-01-24 08:48:19,239 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2852, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2852, num_params=32
+2026-01-24 08:48:20,179 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0775, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0775, num_params=32
+2026-01-24 08:48:21,119 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6036, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6036, num_params=32
+2026-01-24 08:48:22,055 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2259, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2259, num_params=32
+2026-01-24 08:48:22,994 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8327, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8327, num_params=32
+2026-01-24 08:48:23,347 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.1, desync_weight=0.0, loss_sync=0.003484
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 21: sync_weight=0.1, desync_weight=0.0, loss_sync=0.003484
+2026-01-24 08:48:24,510 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 21: Train Loss: 0.2916, Train Acc: 0.9152, Val Loss: 2.4379, Val Acc: 0.3596
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 21: Train Loss: 0.2916, Train Acc: 0.9152, Val Loss: 2.4379, Val Acc: 0.3596
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0017.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0021.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084725.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084824.pkl
+2026-01-24 08:48:24,598 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 21
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 21
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084824.pkl
+2026-01-24 08:48:25,632 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7421, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7421, num_params=32
+2026-01-24 08:48:25,822 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.099076
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 22: [0/472 (0.0%)]	Loss: 0.099076
+2026-01-24 08:48:26,586 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4572, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.4572, num_params=32
+2026-01-24 08:48:27,541 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7120, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7120, num_params=32
+2026-01-24 08:48:28,492 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4089, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4089, num_params=32
+2026-01-24 08:48:29,448 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4600, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4600, num_params=32
+2026-01-24 08:48:30,395 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4707, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4707, num_params=32
+2026-01-24 08:48:31,355 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7424, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.7424, num_params=32
+2026-01-24 08:48:32,308 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9133, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9133, num_params=32
+2026-01-24 08:48:33,259 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7581, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7581, num_params=32
+2026-01-24 08:48:34,221 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5251, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5251, num_params=32
+2026-01-24 08:48:35,175 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2609, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2609, num_params=32
+2026-01-24 08:48:36,127 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.6048, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.6048, num_params=32
+2026-01-24 08:48:37,091 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.4706, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.4706, num_params=32
+2026-01-24 08:48:38,052 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.1838, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.1838, num_params=32
+2026-01-24 08:48:38,413 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002953
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 22: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002953
+2026-01-24 08:48:39,583 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 22: Train Loss: 0.1971, Train Acc: 0.9375, Val Loss: 2.3445, Val Acc: 0.3933
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 22: Train Loss: 0.1971, Train Acc: 0.9375, Val Loss: 2.3445, Val Acc: 0.3933
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0020.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0022.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084809.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084839.pkl
+2026-01-24 08:48:39,670 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 22
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 22
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0021.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084839.pkl
+2026-01-24 08:48:40,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5258, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5258, num_params=32
+2026-01-24 08:48:40,892 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.285682
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 23: [0/472 (0.0%)]	Loss: 0.285682
+2026-01-24 08:48:41,650 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0372, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0372, num_params=32
+2026-01-24 08:48:42,603 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0064, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0064, num_params=32
+2026-01-24 08:48:43,564 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5127, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5127, num_params=32
+2026-01-24 08:48:44,527 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.2346, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.2346, num_params=32
+2026-01-24 08:48:45,482 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5161, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5161, num_params=32
+2026-01-24 08:48:46,442 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3353, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3353, num_params=32
+2026-01-24 08:48:47,393 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4783, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4783, num_params=32
+2026-01-24 08:48:48,354 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1336, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1336, num_params=32
+2026-01-24 08:48:49,306 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7535, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7535, num_params=32
+2026-01-24 08:48:50,260 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3019, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3019, num_params=32
+2026-01-24 08:48:51,212 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5919, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5919, num_params=32
+2026-01-24 08:48:52,174 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3427, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3427, num_params=32
+2026-01-24 08:48:53,129 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.1214, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.1214, num_params=32
+2026-01-24 08:48:53,487 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002247
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 23: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002247
+2026-01-24 08:48:54,675 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 23: Train Loss: 0.2413, Train Acc: 0.9219, Val Loss: 5.3829, Val Acc: 0.1910
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 23: Train Loss: 0.2413, Train Acc: 0.9219, Val Loss: 5.3829, Val Acc: 0.1910
+2026-01-24 08:48:55,648 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4683, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4683, num_params=32
+2026-01-24 08:48:55,839 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.141515
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 24: [0/472 (0.0%)]	Loss: 0.141515
+2026-01-24 08:48:56,609 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1491, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1491, num_params=32
+2026-01-24 08:48:57,564 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.6126, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.6126, num_params=32
+2026-01-24 08:48:58,515 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.1934, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.1934, num_params=32
+2026-01-24 08:48:59,468 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3798, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3798, num_params=32
+2026-01-24 08:49:00,418 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0039, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0039, num_params=32
+2026-01-24 08:49:01,375 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0568, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0568, num_params=32
+2026-01-24 08:49:02,326 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4665, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4665, num_params=32
+2026-01-24 08:49:03,279 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4144, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4144, num_params=32
+2026-01-24 08:49:04,231 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0738, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0738, num_params=32
+2026-01-24 08:49:05,184 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1477, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1477, num_params=32
+2026-01-24 08:49:06,132 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3282, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3282, num_params=32
+2026-01-24 08:49:07,084 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8142, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8142, num_params=32
+2026-01-24 08:49:08,036 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3723, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3723, num_params=32
+2026-01-24 08:49:08,394 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 24: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001929
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 24: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001929
+2026-01-24 08:49:09,608 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 24: Train Loss: 0.2028, Train Acc: 0.9464, Val Loss: 3.2260, Val Acc: 0.3034
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 24: Train Loss: 0.2028, Train Acc: 0.9464, Val Loss: 3.2260, Val Acc: 0.3034
+2026-01-24 08:49:10,611 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4397, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4397, num_params=32
+2026-01-24 08:49:10,801 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.128724
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 25: [0/472 (0.0%)]	Loss: 0.128724
+2026-01-24 08:49:11,559 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7198, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7198, num_params=32
+2026-01-24 08:49:12,511 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5596, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5596, num_params=32
+2026-01-24 08:49:13,943 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4251, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4251, num_params=32
+2026-01-24 08:49:14,899 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3619, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3619, num_params=32
+2026-01-24 08:49:15,850 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6193, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6193, num_params=32
+2026-01-24 08:49:16,804 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0834, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0834, num_params=32
+2026-01-24 08:49:17,758 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.4677, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.4677, num_params=32
+2026-01-24 08:49:18,708 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.1939, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.1939, num_params=32
+2026-01-24 08:49:19,660 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0778, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0778, num_params=32
+2026-01-24 08:49:20,612 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2127, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2127, num_params=32
+2026-01-24 08:49:21,567 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5157, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.5157, num_params=32
+2026-01-24 08:49:22,523 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1894, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1894, num_params=32
+2026-01-24 08:49:22,884 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 25: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001858
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 25: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001858
+2026-01-24 08:49:24,055 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 25: Train Loss: 0.1540, Train Acc: 0.9598, Val Loss: 1.9435, Val Acc: 0.5056
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 25: Train Loss: 0.1540, Train Acc: 0.9598, Val Loss: 1.9435, Val Acc: 0.5056
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084824.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0025.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084924.pkl
+2026-01-24 08:49:24,139 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 25
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 25
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0022.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084924.pkl
+2026-01-24 08:49:25,165 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5751, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5751, num_params=32
+2026-01-24 08:49:25,357 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.070875
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 26: [0/472 (0.0%)]	Loss: 0.070875
+2026-01-24 08:49:26,116 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.4240, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.4240, num_params=32
+2026-01-24 08:49:27,069 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0400, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0400, num_params=32
+2026-01-24 08:49:28,023 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4706, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4706, num_params=32
+2026-01-24 08:49:28,981 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1614, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1614, num_params=32
+2026-01-24 08:49:29,934 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2285, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2285, num_params=32
+2026-01-24 08:49:30,886 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4182, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4182, num_params=32
+2026-01-24 08:49:31,835 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0336, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0336, num_params=32
+2026-01-24 08:49:32,788 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0102, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0102, num_params=32
+2026-01-24 08:49:33,742 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6979, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6979, num_params=32
+2026-01-24 08:49:35,175 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4532, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4532, num_params=32
+2026-01-24 08:49:36,130 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.5756, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.5756, num_params=32
+2026-01-24 08:49:37,087 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0771, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0771, num_params=32
+2026-01-24 08:49:37,448 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 26: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002401
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 26: sync_weight=0.1, desync_weight=0.0, loss_sync=0.002401
+2026-01-24 08:49:38,614 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 26: Train Loss: 0.1805, Train Acc: 0.9420, Val Loss: 5.6973, Val Acc: 0.1348
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 26: Train Loss: 0.1805, Train Acc: 0.9420, Val Loss: 5.6973, Val Acc: 0.1348
+2026-01-24 08:49:39,625 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.7548, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.7548, num_params=32
+2026-01-24 08:49:39,816 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.127691
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 27: [0/472 (0.0%)]	Loss: 0.127691
+2026-01-24 08:49:40,572 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.0925, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.0925, num_params=32
+2026-01-24 08:49:41,526 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.5965, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.5965, num_params=32
+2026-01-24 08:49:42,479 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3616, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3616, num_params=32
+2026-01-24 08:49:43,432 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0324, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0324, num_params=32
+2026-01-24 08:49:44,383 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3256, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3256, num_params=32
+2026-01-24 08:49:45,333 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.5527, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.5527, num_params=32
+2026-01-24 08:49:47,231 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2742, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2742, num_params=32
+2026-01-24 08:49:48,182 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4936, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4936, num_params=32
+2026-01-24 08:49:49,135 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1577, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1577, num_params=32
+2026-01-24 08:49:50,087 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4725, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4725, num_params=32
+2026-01-24 08:49:51,040 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=-0.0142, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=-0.0142, num_params=32
+2026-01-24 08:49:51,992 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.2966, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.2966, num_params=32
+2026-01-24 08:49:52,355 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 27: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001935
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 27: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001935
+2026-01-24 08:49:53,540 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 27: Train Loss: 0.1656, Train Acc: 0.9420, Val Loss: 2.5113, Val Acc: 0.4157
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 27: Train Loss: 0.1656, Train Acc: 0.9420, Val Loss: 2.5113, Val Acc: 0.4157
+2026-01-24 08:49:54,528 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5400, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5400, num_params=32
+2026-01-24 08:49:54,717 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.074667
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 28: [0/472 (0.0%)]	Loss: 0.074667
+2026-01-24 08:49:55,463 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3481, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3481, num_params=32
+2026-01-24 08:49:56,406 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0841, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0841, num_params=32
+2026-01-24 08:49:57,351 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4125, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4125, num_params=32
+2026-01-24 08:49:58,780 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5503, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5503, num_params=32
+2026-01-24 08:49:59,716 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7874, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7874, num_params=32
+2026-01-24 08:50:00,662 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2664, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2664, num_params=32
+2026-01-24 08:50:01,610 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1304, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1304, num_params=32
+2026-01-24 08:50:02,548 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4128, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.4128, num_params=32
+2026-01-24 08:50:03,485 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1896, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1896, num_params=32
+2026-01-24 08:50:04,433 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3312, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3312, num_params=32
+2026-01-24 08:50:05,375 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7256, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7256, num_params=32
+2026-01-24 08:50:06,313 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1513, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1513, num_params=32
+2026-01-24 08:50:06,677 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 28: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001894
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 28: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001894
+2026-01-24 08:50:07,865 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 28: Train Loss: 0.1377, Train Acc: 0.9598, Val Loss: 4.6418, Val Acc: 0.2584
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 28: Train Loss: 0.1377, Train Acc: 0.9598, Val Loss: 4.6418, Val Acc: 0.2584
+2026-01-24 08:50:09,045 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.3383, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.3383, num_params=32
+2026-01-24 08:50:09,236 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.176785
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 29: [0/472 (0.0%)]	Loss: 0.176785
+2026-01-24 08:50:09,994 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0756, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0756, num_params=32
+2026-01-24 08:50:10,952 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.3976, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.3976, num_params=32
+2026-01-24 08:50:11,897 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3041, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3041, num_params=32
+2026-01-24 08:50:12,838 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2438, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2438, num_params=32
+2026-01-24 08:50:13,788 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6861, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6861, num_params=32
+2026-01-24 08:50:14,723 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5459, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5459, num_params=32
+2026-01-24 08:50:15,659 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.1279, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.1279, num_params=32
+2026-01-24 08:50:16,598 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4038, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4038, num_params=32
+2026-01-24 08:50:17,538 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6189, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6189, num_params=32
+2026-01-24 08:50:18,474 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6462, num_params=17
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6462, num_params=17
+2026-01-24 08:50:19,412 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5927, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5927, num_params=32
+2026-01-24 08:50:20,350 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4481, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4481, num_params=32
+2026-01-24 08:50:21,290 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.3426, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.3426, num_params=32
+2026-01-24 08:50:21,659 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 29: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001934
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 29: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001934
+2026-01-24 08:50:22,837 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 29: Train Loss: 0.1352, Train Acc: 0.9576, Val Loss: 2.5149, Val Acc: 0.4831
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 29: Train Loss: 0.1352, Train Acc: 0.9576, Val Loss: 2.5149, Val Acc: 0.4831
+2026-01-24 08:50:23,794 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3536, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3536, num_params=32
+2026-01-24 08:50:23,985 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.076739
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 30: [0/472 (0.0%)]	Loss: 0.076739
+2026-01-24 08:50:25,678 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.5888, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.5888, num_params=32
+2026-01-24 08:50:26,625 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5910, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.5910, num_params=32
+2026-01-24 08:50:27,591 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5017, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5017, num_params=32
+2026-01-24 08:50:28,548 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2080, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.2080, num_params=32
+2026-01-24 08:50:29,509 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8165, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8165, num_params=32
+2026-01-24 08:50:30,459 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4868, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4868, num_params=32
+2026-01-24 08:50:31,419 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5657, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5657, num_params=32
+2026-01-24 08:50:32,368 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2531, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2531, num_params=32
+2026-01-24 08:50:34,763 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6715, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6715, num_params=32
+2026-01-24 08:50:35,724 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3338, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3338, num_params=32
+2026-01-24 08:50:36,080 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 30: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001741
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 30: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001741
+2026-01-24 08:50:37,261 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 30: Train Loss: 0.1071, Train Acc: 0.9754, Val Loss: 2.5201, Val Acc: 0.4831
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 30: Train Loss: 0.1071, Train Acc: 0.9754, Val Loss: 2.5201, Val Acc: 0.4831
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084839.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0030.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085037.pkl
+2026-01-24 08:50:38,348 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6552, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.6552, num_params=32
+2026-01-24 08:50:38,538 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.157988
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 31: [0/472 (0.0%)]	Loss: 0.157988
+2026-01-24 08:50:39,297 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.1676, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.1676, num_params=32
+2026-01-24 08:50:40,234 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0076, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0076, num_params=32
+2026-01-24 08:50:41,175 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2369, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2369, num_params=32
+2026-01-24 08:50:42,601 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5697, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5697, num_params=32
+2026-01-24 08:50:43,540 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5809, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5809, num_params=32
+2026-01-24 08:50:44,476 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3057, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3057, num_params=32
+2026-01-24 08:50:45,428 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4341, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4341, num_params=32
+2026-01-24 08:50:46,367 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1702, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1702, num_params=32
+2026-01-24 08:50:47,316 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8651, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8651, num_params=32
+2026-01-24 08:50:48,258 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0597, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0597, num_params=32
+2026-01-24 08:50:49,209 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5259, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5259, num_params=32
+2026-01-24 08:50:50,149 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2430, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2430, num_params=32
+2026-01-24 08:50:50,503 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 31: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001856
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 31: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001856
+2026-01-24 08:50:51,654 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 31: Train Loss: 0.1243, Train Acc: 0.9732, Val Loss: 0.6717, Val Acc: 0.8202
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 31: Train Loss: 0.1243, Train Acc: 0.9732, Val Loss: 0.6717, Val Acc: 0.8202
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0025.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0031.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_084924.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085051.pkl
+2026-01-24 08:50:51,743 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 31
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 31
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085051.pkl
+2026-01-24 08:50:52,521 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.061593
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 32: [0/472 (0.0%)]	Loss: 0.061593
+2026-01-24 08:50:53,765 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3735, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3735, num_params=32
+2026-01-24 08:50:54,718 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.0863, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.0863, num_params=32
+2026-01-24 08:50:55,673 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.5497, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.5497, num_params=32
+2026-01-24 08:50:56,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6034, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6034, num_params=32
+2026-01-24 08:50:57,574 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0554, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0554, num_params=32
+2026-01-24 08:50:58,521 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2200, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2200, num_params=32
+2026-01-24 08:50:59,460 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0706, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0706, num_params=32
+2026-01-24 08:51:00,402 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.5896, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.5896, num_params=32
+2026-01-24 08:51:01,343 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=-0.1577, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=-0.1577, num_params=32
+2026-01-24 08:51:02,283 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.5076, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.5076, num_params=32
+2026-01-24 08:51:03,222 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3602, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3602, num_params=32
+2026-01-24 08:51:04,163 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6196, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6196, num_params=32
+2026-01-24 08:51:04,522 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 32: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001595
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 32: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001595
+2026-01-24 08:51:05,696 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 32: Train Loss: 0.0972, Train Acc: 0.9732, Val Loss: 0.9369, Val Acc: 0.7191
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 32: Train Loss: 0.0972, Train Acc: 0.9732, Val Loss: 0.9369, Val Acc: 0.7191
+2026-01-24 08:51:06,687 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1819, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1819, num_params=32
+2026-01-24 08:51:06,877 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.110622
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 33: [0/472 (0.0%)]	Loss: 0.110622
+2026-01-24 08:51:07,623 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6834, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.6834, num_params=32
+2026-01-24 08:51:09,506 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.4196, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.4196, num_params=32
+2026-01-24 08:51:10,458 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0793, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0793, num_params=32
+2026-01-24 08:51:11,412 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2733, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2733, num_params=32
+2026-01-24 08:51:12,363 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3387, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3387, num_params=32
+2026-01-24 08:51:13,318 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2389, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2389, num_params=32
+2026-01-24 08:51:14,270 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3390, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.3390, num_params=32
+2026-01-24 08:51:15,223 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4699, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.4699, num_params=32
+2026-01-24 08:51:17,128 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5008, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5008, num_params=32
+2026-01-24 08:51:18,080 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2064, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2064, num_params=32
+2026-01-24 08:51:19,033 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0229, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0229, num_params=32
+2026-01-24 08:51:19,391 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 33: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001903
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 33: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001903
+2026-01-24 08:51:20,570 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 33: Train Loss: 0.0999, Train Acc: 0.9643, Val Loss: 1.0053, Val Acc: 0.7303
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 33: Train Loss: 0.0999, Train Acc: 0.9643, Val Loss: 1.0053, Val Acc: 0.7303
+2026-01-24 08:51:21,554 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.3290, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.3290, num_params=32
+2026-01-24 08:51:21,745 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.025856
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 34: [0/472 (0.0%)]	Loss: 0.025856
+2026-01-24 08:51:22,512 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4450, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.4450, num_params=32
+2026-01-24 08:51:23,460 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4940, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.4940, num_params=32
+2026-01-24 08:51:24,410 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.3014, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.3014, num_params=32
+2026-01-24 08:51:25,364 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1248, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1248, num_params=32
+2026-01-24 08:51:26,316 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2186, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2186, num_params=32
+2026-01-24 08:51:27,254 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.6137, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.6137, num_params=32
+2026-01-24 08:51:28,195 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5064, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5064, num_params=32
+2026-01-24 08:51:29,136 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.1537, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.1537, num_params=32
+2026-01-24 08:51:30,074 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1518, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1518, num_params=32
+2026-01-24 08:51:31,013 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7370, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.7370, num_params=32
+2026-01-24 08:51:31,951 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8076, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8076, num_params=32
+2026-01-24 08:51:32,890 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5072, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5072, num_params=32
+2026-01-24 08:51:33,723 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 34: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001534
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 34: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001534
+2026-01-24 08:51:34,919 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 34: Train Loss: 0.0695, Train Acc: 0.9933, Val Loss: 0.5140, Val Acc: 0.8090
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 34: Train Loss: 0.0695, Train Acc: 0.9933, Val Loss: 0.5140, Val Acc: 0.8090
+2026-01-24 08:51:35,891 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0189, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0189, num_params=32
+2026-01-24 08:51:36,082 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.054401
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 35: [0/472 (0.0%)]	Loss: 0.054401
+2026-01-24 08:51:36,835 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2408, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2408, num_params=32
+2026-01-24 08:51:37,775 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1615, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1615, num_params=32
+2026-01-24 08:51:38,716 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3398, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.3398, num_params=32
+2026-01-24 08:51:39,666 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5661, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5661, num_params=32
+2026-01-24 08:51:40,616 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1583, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.1583, num_params=32
+2026-01-24 08:51:41,566 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2567, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2567, num_params=32
+2026-01-24 08:51:42,516 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0455, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.0455, num_params=32
+2026-01-24 08:51:44,412 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1509, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1509, num_params=32
+2026-01-24 08:51:45,364 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2176, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2176, num_params=32
+2026-01-24 08:51:46,315 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2058, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2058, num_params=32
+2026-01-24 08:51:47,267 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4525, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4525, num_params=32
+2026-01-24 08:51:48,218 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1451, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.1451, num_params=32
+2026-01-24 08:51:48,579 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 35: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001537
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 35: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001537
+2026-01-24 08:51:49,769 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 35: Train Loss: 0.1307, Train Acc: 0.9665, Val Loss: 1.2764, Val Acc: 0.6854
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 35: Train Loss: 0.1307, Train Acc: 0.9665, Val Loss: 1.2764, Val Acc: 0.6854
+2026-01-24 08:51:50,768 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3634, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3634, num_params=32
+2026-01-24 08:51:50,959 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.079693
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 36: [0/472 (0.0%)]	Loss: 0.079693
+2026-01-24 08:51:51,719 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6070, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.6070, num_params=32
+2026-01-24 08:51:52,680 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.5263, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.5263, num_params=32
+2026-01-24 08:51:53,633 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1596, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1596, num_params=32
+2026-01-24 08:51:54,599 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2295, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2295, num_params=32
+2026-01-24 08:51:55,552 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8559, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8559, num_params=32
+2026-01-24 08:51:56,503 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.3257, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.3257, num_params=32
+2026-01-24 08:51:57,456 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3609, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3609, num_params=32
+2026-01-24 08:51:58,421 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.3749, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.3749, num_params=32
+2026-01-24 08:51:59,374 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0854, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0854, num_params=32
+2026-01-24 08:52:00,338 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3850, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.3850, num_params=32
+2026-01-24 08:52:01,293 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4531, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4531, num_params=32
+2026-01-24 08:52:02,247 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0175, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0175, num_params=32
+2026-01-24 08:52:03,207 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3984, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3984, num_params=32
+2026-01-24 08:52:03,564 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 36: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001761
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 36: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001761
+2026-01-24 08:52:04,765 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 36: Train Loss: 0.0946, Train Acc: 0.9754, Val Loss: 0.4678, Val Acc: 0.8652
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 36: Train Loss: 0.0946, Train Acc: 0.9754, Val Loss: 0.4678, Val Acc: 0.8652
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0030.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0036.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085037.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085204.pkl
+2026-01-24 08:52:04,855 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 36
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 36
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0031.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085204.pkl
+2026-01-24 08:52:05,869 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2419, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2419, num_params=32
+2026-01-24 08:52:06,060 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.095062
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 37: [0/472 (0.0%)]	Loss: 0.095062
+2026-01-24 08:52:06,807 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6596, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.6596, num_params=32
+2026-01-24 08:52:07,763 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2572, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2572, num_params=32
+2026-01-24 08:52:08,711 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6218, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6218, num_params=32
+2026-01-24 08:52:09,665 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0627, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0627, num_params=32
+2026-01-24 08:52:10,605 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8131, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8131, num_params=32
+2026-01-24 08:52:11,553 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5404, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5404, num_params=32
+2026-01-24 08:52:12,492 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5923, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5923, num_params=32
+2026-01-24 08:52:13,445 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.1385, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.1385, num_params=32
+2026-01-24 08:52:14,384 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2256, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2256, num_params=32
+2026-01-24 08:52:15,332 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1405, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1405, num_params=32
+2026-01-24 08:52:16,272 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0290, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0290, num_params=32
+2026-01-24 08:52:17,233 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.3850, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.3850, num_params=32
+2026-01-24 08:52:18,186 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5624, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.5624, num_params=32
+2026-01-24 08:52:18,544 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 37: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001856
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 37: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001856
+2026-01-24 08:52:19,726 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 37: Train Loss: 0.1057, Train Acc: 0.9710, Val Loss: 0.2101, Val Acc: 0.9326
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 37: Train Loss: 0.1057, Train Acc: 0.9710, Val Loss: 0.2101, Val Acc: 0.9326
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085051.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0037.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085219.pkl
+2026-01-24 08:52:19,812 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 37
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 37
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0036.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085219.pkl
+2026-01-24 08:52:20,843 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1010, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1010, num_params=32
+2026-01-24 08:52:21,034 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.055220
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 38: [0/472 (0.0%)]	Loss: 0.055220
+2026-01-24 08:52:21,797 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0971, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0971, num_params=32
+2026-01-24 08:52:22,938 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4891, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4891, num_params=32
+2026-01-24 08:52:24,811 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2845, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2845, num_params=32
+2026-01-24 08:52:25,766 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2073, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2073, num_params=32
+2026-01-24 08:52:26,705 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2985, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2985, num_params=32
+2026-01-24 08:52:28,118 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3043, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3043, num_params=32
+2026-01-24 08:52:29,059 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1646, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1646, num_params=32
+2026-01-24 08:52:30,001 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4627, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4627, num_params=32
+2026-01-24 08:52:30,948 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1644, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.1644, num_params=32
+2026-01-24 08:52:31,890 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.1183, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.1183, num_params=32
+2026-01-24 08:52:32,832 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3506, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3506, num_params=32
+2026-01-24 08:52:33,195 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 38: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001454
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 38: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001454
+2026-01-24 08:52:34,347 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 38: Train Loss: 0.0710, Train Acc: 0.9799, Val Loss: 0.1158, Val Acc: 0.9438
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 38: Train Loss: 0.0710, Train Acc: 0.9799, Val Loss: 0.1158, Val Acc: 0.9438
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085204.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0038.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085234.pkl
+2026-01-24 08:52:34,432 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 38
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 38
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0037.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085234.pkl
+2026-01-24 08:52:35,465 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6022, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6022, num_params=32
+2026-01-24 08:52:35,656 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.098990
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 39: [0/472 (0.0%)]	Loss: 0.098990
+2026-01-24 08:52:36,412 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1538, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.1538, num_params=32
+2026-01-24 08:52:37,853 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6533, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6533, num_params=32
+2026-01-24 08:52:38,814 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1664, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=-0.1664, num_params=32
+2026-01-24 08:52:39,762 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0703, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0703, num_params=32
+2026-01-24 08:52:40,714 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.2884, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.2884, num_params=32
+2026-01-24 08:52:41,668 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3064, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.3064, num_params=32
+2026-01-24 08:52:42,611 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0336, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0336, num_params=32
+2026-01-24 08:52:43,548 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.4811, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.4811, num_params=32
+2026-01-24 08:52:44,489 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.3675, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.3675, num_params=32
+2026-01-24 08:52:45,430 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5339, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5339, num_params=32
+2026-01-24 08:52:46,369 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.1500, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.1500, num_params=32
+2026-01-24 08:52:47,309 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0177, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0177, num_params=32
+2026-01-24 08:52:47,663 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 39: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001755
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 39: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001755
+2026-01-24 08:52:48,864 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 39: Train Loss: 0.0829, Train Acc: 0.9799, Val Loss: 0.1367, Val Acc: 0.9101
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 39: Train Loss: 0.0829, Train Acc: 0.9799, Val Loss: 0.1367, Val Acc: 0.9101
+2026-01-24 08:52:49,824 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.4369, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0625, avg_cos_sim=0.4369, num_params=32
+2026-01-24 08:52:50,014 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.106209
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 40: [0/472 (0.0%)]	Loss: 0.106209
+2026-01-24 08:52:50,762 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.5502, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.5502, num_params=32
+2026-01-24 08:52:51,704 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0742, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.0742, num_params=32
+2026-01-24 08:52:52,652 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1839, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1839, num_params=32
+2026-01-24 08:52:55,463 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5951, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5951, num_params=32
+2026-01-24 08:52:56,876 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3610, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3610, num_params=32
+2026-01-24 08:52:57,815 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1468, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1468, num_params=32
+2026-01-24 08:52:58,755 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.9403, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.9403, num_params=32
+2026-01-24 08:52:59,695 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2523, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2523, num_params=32
+2026-01-24 08:53:00,635 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.5626, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.5626, num_params=32
+2026-01-24 08:53:01,583 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6353, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6353, num_params=32
+2026-01-24 08:53:01,938 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 40: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001312
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 40: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001312
+2026-01-24 08:53:03,088 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 40: Train Loss: 0.0876, Train Acc: 0.9754, Val Loss: 0.2278, Val Acc: 0.9438
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 40: Train Loss: 0.0876, Train Acc: 0.9754, Val Loss: 0.2278, Val Acc: 0.9438
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085219.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0040.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085303.pkl
+2026-01-24 08:53:04,129 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2000, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.2000, num_params=32
+2026-01-24 08:53:04,319 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.073500
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 41: [0/472 (0.0%)]	Loss: 0.073500
+2026-01-24 08:53:06,014 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.5847, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.5847, num_params=32
+2026-01-24 08:53:06,962 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5822, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.5822, num_params=32
+2026-01-24 08:53:07,909 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2860, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2860, num_params=32
+2026-01-24 08:53:08,851 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0034, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0034, num_params=32
+2026-01-24 08:53:09,789 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0980, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0980, num_params=32
+2026-01-24 08:53:10,728 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4725, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4725, num_params=32
+2026-01-24 08:53:11,676 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6189, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.6189, num_params=32
+2026-01-24 08:53:12,619 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5141, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5141, num_params=32
+2026-01-24 08:53:13,560 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2298, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2298, num_params=32
+2026-01-24 08:53:14,506 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6770, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6770, num_params=32
+2026-01-24 08:53:15,446 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3018, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3018, num_params=32
+2026-01-24 08:53:16,387 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.2022, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.2022, num_params=32
+2026-01-24 08:53:16,745 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 41: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001729
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 41: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001729
+2026-01-24 08:53:17,920 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 41: Train Loss: 0.0601, Train Acc: 0.9866, Val Loss: 0.1557, Val Acc: 0.9326
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 41: Train Loss: 0.0601, Train Acc: 0.9866, Val Loss: 0.1557, Val Acc: 0.9326
+2026-01-24 08:53:18,887 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.2984, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.2984, num_params=32
+2026-01-24 08:53:19,077 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.045577
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 42: [0/472 (0.0%)]	Loss: 0.045577
+2026-01-24 08:53:19,842 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5571, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.5571, num_params=32
+2026-01-24 08:53:21,271 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0279, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0279, num_params=32
+2026-01-24 08:53:22,220 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2415, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2415, num_params=32
+2026-01-24 08:53:23,167 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1376, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1376, num_params=32
+2026-01-24 08:53:24,103 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.2041, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.2041, num_params=32
+2026-01-24 08:53:25,511 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2727, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.2727, num_params=32
+2026-01-24 08:53:26,447 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5967, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.5967, num_params=32
+2026-01-24 08:53:27,383 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4830, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4830, num_params=32
+2026-01-24 08:53:28,321 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4166, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4166, num_params=32
+2026-01-24 08:53:29,259 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6371, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6371, num_params=32
+2026-01-24 08:53:30,196 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2744, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2744, num_params=32
+2026-01-24 08:53:30,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 42: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001314
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 42: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001314
+2026-01-24 08:53:31,710 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 42: Train Loss: 0.0691, Train Acc: 0.9799, Val Loss: 0.1536, Val Acc: 0.9438
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 42: Train Loss: 0.0691, Train Acc: 0.9799, Val Loss: 0.1536, Val Acc: 0.9438
+2026-01-24 08:53:32,690 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2443, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2443, num_params=32
+2026-01-24 08:53:32,881 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.091847
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 43: [0/472 (0.0%)]	Loss: 0.091847
+2026-01-24 08:53:35,505 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1438, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1438, num_params=32
+2026-01-24 08:53:36,460 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0183, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=0.0183, num_params=32
+2026-01-24 08:53:37,419 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4185, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4185, num_params=32
+2026-01-24 08:53:38,848 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3111, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.3111, num_params=32
+2026-01-24 08:53:39,799 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0070, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=-0.0070, num_params=32
+2026-01-24 08:53:40,751 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=-0.0405, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=-0.0405, num_params=32
+2026-01-24 08:53:41,698 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8419, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.8419, num_params=32
+2026-01-24 08:53:42,635 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1290, avg_cos_sim=0.2367, num_params=31
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1290, avg_cos_sim=0.2367, num_params=31
+2026-01-24 08:53:43,575 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2691, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3125, avg_cos_sim=0.2691, num_params=32
+2026-01-24 08:53:44,513 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.1506, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.1506, num_params=32
+2026-01-24 08:53:44,873 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 43: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001725
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 43: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001725
+2026-01-24 08:53:46,069 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 43: Train Loss: 0.0621, Train Acc: 0.9866, Val Loss: 0.0827, Val Acc: 0.9663
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 43: Train Loss: 0.0621, Train Acc: 0.9866, Val Loss: 0.0827, Val Acc: 0.9663
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0038.pt
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0043.pt
+Removed old checkpoint: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085234.pkl
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085346.pkl
+2026-01-24 08:53:46,159 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 43
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Saved new best model at epoch 43
+Checkpoint saved: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260124_084151/checkpoint_epoch_0000_20260124_085346.pkl
+2026-01-24 08:53:47,226 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3568, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.3568, num_params=32
+2026-01-24 08:53:47,420 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.111512
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 44: [0/472 (0.0%)]	Loss: 0.111512
+2026-01-24 08:53:48,189 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4195, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.4195, num_params=32
+2026-01-24 08:53:49,149 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=0.0008, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5938, avg_cos_sim=0.0008, num_params=32
+2026-01-24 08:53:50,590 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0062, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5625, avg_cos_sim=0.0062, num_params=32
+2026-01-24 08:53:51,544 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2508, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2508, num_params=32
+2026-01-24 08:53:52,497 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7503, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7503, num_params=32
+2026-01-24 08:53:53,462 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2657, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.2657, num_params=32
+2026-01-24 08:53:54,413 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4926, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.4926, num_params=32
+2026-01-24 08:53:55,367 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4374, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1562, avg_cos_sim=0.4374, num_params=32
+2026-01-24 08:53:56,319 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4116, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.4116, num_params=32
+2026-01-24 08:53:57,274 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.6098, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.6098, num_params=32
+2026-01-24 08:53:58,235 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.5753, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.5753, num_params=32
+2026-01-24 08:53:59,190 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2655, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2655, num_params=32
+2026-01-24 08:53:59,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 44: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001297
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 44: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001297
+2026-01-24 08:54:00,722 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 44: Train Loss: 0.0775, Train Acc: 0.9754, Val Loss: 0.0844, Val Acc: 0.9551
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 44: Train Loss: 0.0775, Train Acc: 0.9754, Val Loss: 0.0844, Val Acc: 0.9551
+2026-01-24 08:54:01,701 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.1227, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.1227, num_params=32
+2026-01-24 08:54:01,891 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.066663
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 45: [0/472 (0.0%)]	Loss: 0.066663
+2026-01-24 08:54:02,638 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0152, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=0.0152, num_params=32
+2026-01-24 08:54:03,579 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4292, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.4292, num_params=32
+2026-01-24 08:54:05,000 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.2309, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.2309, num_params=32
+2026-01-24 08:54:05,939 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7873, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7873, num_params=32
+2026-01-24 08:54:07,819 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7323, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7323, num_params=32
+2026-01-24 08:54:08,761 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1564, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1564, num_params=32
+2026-01-24 08:54:09,707 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1193, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.1193, num_params=32
+2026-01-24 08:54:10,644 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.4721, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2812, avg_cos_sim=0.4721, num_params=32
+2026-01-24 08:54:12,061 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3030, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3030, num_params=32
+2026-01-24 08:54:13,007 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2095, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3750, avg_cos_sim=0.2095, num_params=32
+2026-01-24 08:54:13,362 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 45: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001323
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 45: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001323
+2026-01-24 08:54:14,588 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 45: Train Loss: 0.1062, Train Acc: 0.9643, Val Loss: 0.0832, Val Acc: 0.9663
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 45: Train Loss: 0.1062, Train Acc: 0.9643, Val Loss: 0.0832, Val Acc: 0.9663
+2026-01-24 08:54:15,582 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.1610, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.1610, num_params=32
+2026-01-24 08:54:15,772 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.038326
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 46: [0/472 (0.0%)]	Loss: 0.038326
+2026-01-24 08:54:16,522 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.1553, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2500, avg_cos_sim=0.1553, num_params=32
+2026-01-24 08:54:17,463 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0804, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.0804, num_params=32
+2026-01-24 08:54:18,404 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.1807, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=0.1807, num_params=32
+2026-01-24 08:54:19,357 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0546, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0546, num_params=32
+2026-01-24 08:54:20,297 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9310, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0000, avg_cos_sim=0.9310, num_params=32
+2026-01-24 08:54:21,236 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6988, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8750, avg_cos_sim=-0.6988, num_params=32
+2026-01-24 08:54:22,173 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3854, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3854, num_params=32
+2026-01-24 08:54:23,114 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1316, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.1316, num_params=32
+2026-01-24 08:54:24,055 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2956, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.3438, avg_cos_sim=0.2956, num_params=32
+2026-01-24 08:54:24,996 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7674, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.7674, num_params=32
+2026-01-24 08:54:26,410 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8104, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=1.0000, avg_cos_sim=-0.8104, num_params=32
+2026-01-24 08:54:27,350 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0074, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0074, num_params=32
+2026-01-24 08:54:27,704 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 46: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001555
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 46: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001555
+2026-01-24 08:54:28,859 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 46: Train Loss: 0.0789, Train Acc: 0.9732, Val Loss: 0.0835, Val Acc: 0.9663
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 46: Train Loss: 0.0789, Train Acc: 0.9732, Val Loss: 0.0835, Val Acc: 0.9663
+2026-01-24 08:54:30,043 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.077173
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 47: [0/472 (0.0%)]	Loss: 0.077173
+2026-01-24 08:54:30,803 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4934, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.4934, num_params=32
+2026-01-24 08:54:31,964 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0645, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.0645, num_params=32
+2026-01-24 08:54:33,870 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0751, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0751, num_params=32
+2026-01-24 08:54:34,822 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3006, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3006, num_params=32
+2026-01-24 08:54:35,773 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6260, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6260, num_params=32
+2026-01-24 08:54:36,727 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2645, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7500, avg_cos_sim=-0.2645, num_params=32
+2026-01-24 08:54:37,685 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0826, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0826, num_params=32
+2026-01-24 08:54:38,639 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5457, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8125, avg_cos_sim=-0.5457, num_params=32
+2026-01-24 08:54:39,591 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5614, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0312, avg_cos_sim=0.5614, num_params=32
+2026-01-24 08:54:40,546 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0624, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4688, avg_cos_sim=-0.0624, num_params=32
+2026-01-24 08:54:41,508 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3493, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.3493, num_params=32
+2026-01-24 08:54:42,463 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3138, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3138, num_params=32
+2026-01-24 08:54:42,826 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 47: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001497
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 47: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001497
+2026-01-24 08:54:44,031 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 47: Train Loss: 0.0530, Train Acc: 0.9911, Val Loss: 0.0831, Val Acc: 0.9663
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 47: Train Loss: 0.0530, Train Acc: 0.9911, Val Loss: 0.0831, Val Acc: 0.9663
+2026-01-24 08:54:45,216 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.039606
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 48: [0/472 (0.0%)]	Loss: 0.039606
+2026-01-24 08:54:45,975 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7836, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9375, avg_cos_sim=-0.7836, num_params=32
+2026-01-24 08:54:46,914 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6102, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9062, avg_cos_sim=-0.6102, num_params=32
+2026-01-24 08:54:47,863 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0930, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=0.0930, num_params=32
+2026-01-24 08:54:48,807 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.5807, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.2188, avg_cos_sim=0.5807, num_params=32
+2026-01-24 08:54:49,755 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.1345, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.1345, num_params=32
+2026-01-24 08:54:50,694 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0035, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4375, avg_cos_sim=0.0035, num_params=32
+2026-01-24 08:54:51,633 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.0676, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6562, avg_cos_sim=-0.0676, num_params=32
+2026-01-24 08:54:52,574 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.0576, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.0576, num_params=32
+2026-01-24 08:54:53,986 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5132, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.8438, avg_cos_sim=-0.5132, num_params=32
+2026-01-24 08:54:54,925 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.1993, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7812, avg_cos_sim=-0.1993, num_params=32
+2026-01-24 08:54:55,863 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5280, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5280, num_params=32
+2026-01-24 08:54:56,806 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0041, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5000, avg_cos_sim=-0.0041, num_params=32
+2026-01-24 08:54:57,165 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 48: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001640
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 48: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001640
+2026-01-24 08:54:58,344 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 48: Train Loss: 0.0491, Train Acc: 0.9911, Val Loss: 0.0745, Val Acc: 0.9663
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 48: Train Loss: 0.0491, Train Acc: 0.9911, Val Loss: 0.0745, Val Acc: 0.9663
+2026-01-24 08:54:59,327 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2667, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.2667, num_params=32
+2026-01-24 08:54:59,517 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.014462
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Train Epoch 49: [0/472 (0.0%)]	Loss: 0.014462
+2026-01-24 08:55:00,276 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3328, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6875, avg_cos_sim=-0.3328, num_params=32
+2026-01-24 08:55:01,239 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.0008, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.4062, avg_cos_sim=-0.0008, num_params=32
+2026-01-24 08:55:03,139 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7826, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.7826, num_params=32
+2026-01-24 08:55:04,578 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5383, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.5383, num_params=32
+2026-01-24 08:55:05,532 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3420, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.7188, avg_cos_sim=-0.3420, num_params=32
+2026-01-24 08:55:06,492 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5236, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1250, avg_cos_sim=0.5236, num_params=32
+2026-01-24 08:55:07,446 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3128, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.1875, avg_cos_sim=0.3128, num_params=32
+2026-01-24 08:55:08,400 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.1165, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.5312, avg_cos_sim=-0.1165, num_params=32
+2026-01-24 08:55:09,365 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2268, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.6250, avg_cos_sim=-0.2268, num_params=32
+2026-01-24 08:55:10,316 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6120, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.0938, avg_cos_sim=0.6120, num_params=32
+2026-01-24 08:55:11,269 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.5936, num_params=32
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[H1 CE-SYNC CONFLICT] conflict_ratio=0.9688, avg_cos_sim=-0.5936, num_params=32
+2026-01-24 08:55:11,629 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 49: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001490
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:[SYNC DEBUG] Epoch 49: sync_weight=0.1, desync_weight=0.0, loss_sync=0.001490
+2026-01-24 08:55:12,847 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 49: Train Loss: 0.0490, Train Acc: 0.9911, Val Loss: 0.0877, Val Acc: 0.9438
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Epoch 49: Train Loss: 0.0490, Train Acc: 0.9911, Val Loss: 0.0877, Val Acc: 0.9438
+2026-01-24 08:55:12,851 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Running final test evaluation...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Running final test evaluation...
+2026-01-24 08:55:14,290 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Test Results:
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Test Results:
+2026-01-24 08:55:14,291 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   loss: 0.2197
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  loss: 0.2197
+2026-01-24 08:55:14,291 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   accuracy: 0.9576
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  accuracy: 0.9576
+2026-01-24 08:55:14,291 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   avg_confidence: 0.7103
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  avg_confidence: 0.7103
+2026-01-24 08:55:14,291 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_diversity: 0.1738
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  embedding_diversity: 0.1738
+2026-01-24 08:55:14,291 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_mean: 1.0000
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  embedding_norm_mean: 1.0000
+2026-01-24 08:55:14,291 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_std: 0.0000
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:  embedding_norm_std: 0.0000
+2026-01-24 08:55:14,293 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Training completed
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Training completed
+2026-01-24 08:55:14,293 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+INFO:chaotic_trainer:Evaluating chaotic_lorenz_full_chaotic_run_0...
+2026-01-24 08:55:15,051 - chaotic_trainer - INFO - Running chaotic analysis...
+INFO:chaotic_trainer:Running chaotic analysis...
+2026-01-24 08:55:15,051 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Running comprehensive chaotic network analysis...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Running comprehensive chaotic network analysis...
+2026-01-24 08:55:15,052 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Analyzing chaotic features and dynamics...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Analyzing chaotic features and dynamics...
+2026-01-24 08:55:16,075 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Chaotic analysis completed
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Chaotic analysis completed
+2026-01-24 08:55:16,077 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating chaotic dynamics visualizations...
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Creating chaotic dynamics visualizations...
+2026-01-24 08:55:18,517 - experiment_chaotic_lorenz_full_chaotic_run_0 - WARNING - Embedding plotting failed: boolean index did not match indexed array along dimension 0; dimension is 8 but corresponding boolean dimension is 32
+WARNING:experiment_chaotic_lorenz_full_chaotic_run_0:Embedding plotting failed: boolean index did not match indexed array along dimension 0; dimension is 8 but corresponding boolean dimension is 32
+2026-01-24 08:55:18,524 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Chaotic network analysis completed
+INFO:experiment_chaotic_lorenz_full_chaotic_run_0:Chaotic network analysis completed
+2026-01-24 08:55:18,524 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.9576, Loss: 0.2197, Time: 803.2s
+INFO:chaotic_trainer:Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.9576, Loss: 0.2197, Time: 803.2s
+2026-01-24 08:55:18,531 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+INFO:chaotic_trainer:Progress: 1/1 (100.0%)
+2026-01-24 08:55:18,531 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.9576 ± 0.0000
+INFO:chaotic_trainer:lorenz + full_chaotic Summary: 0.9576 ± 0.0000
+2026-01-24 08:55:18,532 - chaotic_trainer - INFO - Analyzing chaotic training results...
+INFO:chaotic_trainer:Analyzing chaotic training results...
+2026-01-24 08:55:18,533 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+INFO:chaotic_trainer:Generating comprehensive chaotic training report...
+2026-01-24 08:55:20,221 - chaotic_trainer - INFO - Visualizations saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/visualizations
+INFO:chaotic_trainer:Visualizations saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/visualizations
+2026-01-24 08:55:20,221 - chaotic_trainer - INFO - Reports generated:
+INFO:chaotic_trainer:Reports generated:
+2026-01-24 08:55:20,222 - chaotic_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/chaotic_training_report.txt
+INFO:chaotic_trainer:  Text report: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/chaotic_training_report.txt
+2026-01-24 08:55:20,222 - chaotic_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/chaotic_training_results.json
+INFO:chaotic_trainer:  JSON report: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/chaotic_training_results.json
+
+"""
+
+def parse_training_log(log_text):
+    """
+    解析日志，提取每个Epoch的余弦相似度数据
+    """
+    epoch_data = {}
+    current_epoch = -1
+    
+    # 正则表达式匹配 Epoch 标记和冲突数据
+    # 匹配: Train Epoch 0: ...
+    epoch_pattern = re.compile(r"Train Epoch (\d+):")
+    # 匹配: [H1 CE-SYNC CONFLICT] ... avg_cos_sim=-0.3607
+    conflict_pattern = re.compile(r"\[H1 CE-SYNC CONFLICT\].*avg_cos_sim=([-+]?\d*\.\d+)")
+    
+    lines = log_text.split('\n')
+    
+    # 第一次遍历：确定Epoch范围（有些日志可能先打印Conflict再打印Epoch start，需校准）
+    # 这里采用一种简单的策略：遇到 Train Epoch X 就切换当前 Epoch
+    # 如果日志中 Conflict 在 Epoch 标记之前（例如 Batch 0），则归入 Epoch 0
+    
+    current_epoch = 0 # 默认为0，直到遇到新的标记
+    
+    for line in lines:
+        # 检查是否进入新 Epoch
+        epoch_match = epoch_pattern.search(line)
+        if epoch_match:
+            current_epoch = int(epoch_match.group(1))
+            if current_epoch not in epoch_data:
+                epoch_data[current_epoch] = []
+            continue
+            
+        # 提取余弦相似度
+        conflict_match = conflict_pattern.search(line)
+        if conflict_match:
+            cos_sim = float(conflict_match.group(1))
+            if current_epoch not in epoch_data:
+                epoch_data[current_epoch] = []
+            epoch_data[current_epoch].append(cos_sim)
+            
+    return epoch_data
+
+# ==========================================
+# 2. 数据处理
+# ==========================================
+
+# 为了演示，如果 raw_log 为空，我们使用模拟数据（符合您日志的统计特征）
+if "H1 CE-SYNC CONFLICT" not in raw_log:
+    print("未检测到日志内容，使用模拟数据生成示例图...")
+    epochs = np.arange(50)
+    # 模拟数据：均值在 0 附近波动，标准差较大，显示冲突持续存在
+    means = np.random.normal(loc=0.05, scale=0.1, size=50) 
+    stds = np.random.uniform(low=0.4, high=0.6, size=50)
+else:
+    print("正在解析日志数据...")
+    data = parse_training_log(raw_log)
+    epochs = sorted(data.keys())
+    means = []
+    stds = []
+    
+    for e in epochs:
+        values = data[e]
+        if len(values) > 0:
+            means.append(np.mean(values))
+            stds.append(np.std(values))
+        else:
+            # 处理空数据的情况（如果有）
+            means.append(0)
+            stds.append(0)
+            
+    epochs = np.array(epochs)
+    means = np.array(means)
+    stds = np.array(stds)
+
+# ==========================================
+# 3. 绘图 (学术风格)
+# ==========================================
+# 设置风格
+sns.set_theme(style="whitegrid")
+plt.rcParams['font.family'] = 'serif' # 使用衬线字体（如Times New Roman风格）
+plt.rcParams['font.size'] = 12
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# 绘制零线（基准线）
+ax.axhline(y=0, color='black', linestyle='--', linewidth=1, alpha=0.5, label='Orthogonal (No Correlation)')
+
+# 绘制标准差阴影区域
+ax.fill_between(epochs, means - stds, means + stds, color='#e74c3c', alpha=0.2, label='Standard Deviation')
+
+# 绘制均值曲线
+ax.plot(epochs, means, color='#c0392b', linewidth=2, label='Mean Cosine Similarity')
+
+# 设置图表细节
+ax.set_title('Evolution of Gradient Cosine Similarity (CE vs. Sync)', fontsize=14, pad=15, fontweight='bold')
+ax.set_xlabel('Training Epoch', fontsize=12)
+ax.set_ylabel('Cosine Similarity', fontsize=12)
+ax.set_xlim(0, max(epochs))
+ax.set_ylim(-1.0, 1.0) # 余弦相似度范围
+
+# 添加区域标注
+ax.text(max(epochs)*0.02, 0.8, 'Cooperative Region\n(Sim > 0)', color='green', fontsize=10, alpha=0.6)
+ax.text(max(epochs)*0.02, -0.8, 'Conflicting Region\n(Sim < 0)', color='red', fontsize=10, alpha=0.6)
+
+# 图例
+ax.legend(loc='upper right', frameon=True, framealpha=0.9)
+
+# 布局调整
+plt.tight_layout()
+
+# 保存或显示
+save_path = 'figure_5_x_gradient_conflict.png'
+plt.savefig(save_path, dpi=300)
+print(f"图像已保存至: {save_path}")
+plt.show()

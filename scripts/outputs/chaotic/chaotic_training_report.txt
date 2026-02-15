@@ -1,6 +1,6 @@
 CHAOTIC NEURAL NETWORKS TRAINING REPORT
 ============================================================
-Generated: 2025-11-30 16:58:05
+Generated: 2025-12-16 13:48:01
 Configuration: {
   "chaotic_system": "lorenz",
   "model_type": "full_chaotic",
@@ -53,7 +53,19 @@ Configuration: {
   "early_stopping": {
     "patience": 50
   },
-  "epochs": 100,
+  "differentiable_features": {
+    "enabled": true,
+    "lyapunov_dim": 8,
+    "rqa_dim": 6,
+    "additional_stats": true
+  },
+  "adversarial_training": {
+    "enabled": true,
+    "perturbation_scale": 0.1,
+    "warmup_epochs": 5,
+    "adversarial_weight": 0.3
+  },
+  "epochs": 20,
   "delay_method": "autocorr",
   "frame_length": 400,
   "hop_length": 160
@@ -64,33 +76,33 @@ EXECUTIVE SUMMARY
 Total experiments: 1
 Successful experiments: 1
 Success rate: 100.0%
-Best configuration: mackey_glass + full_chaotic (0.7881)
+Best configuration: lorenz + full_chaotic (0.8390)
 
 CHAOTIC SYSTEMS COMPARISON
 ---------------------------
-MACKEY_GLASS:
-  Accuracy: 0.7881 ± 0.0000 [nan, nan]
-  Training Time: 101535.7s ± 0.0s
+LORENZ:
+  Accuracy: 0.8390 ± 0.0000 [nan, nan]
+  Training Time: 698.0s ± 0.0s
   Success Rate: 100.0%
   Experiments: 1
 
 MODEL TYPES COMPARISON
 ----------------------
-full_chaotic: 0.7881 ± 0.0000
+full_chaotic: 0.8390 ± 0.0000
 
 CHAOTIC DYNAMICS ANALYSIS
 -------------------------
 Key dynamics trends observed during training:
-  trajectory_std: {'decreasing': 1}
-  feature_diversity: {'increasing': 1}
-  divergence_rate: {'increasing': 1}
-  trajectory_range: {'decreasing': 1}
-  feature_magnitude: {'increasing': 1}
   embedding_separation: {'increasing': 1}
+  trajectory_std: {'increasing': 1}
+  feature_diversity: {'increasing': 1}
+  trajectory_range: {'increasing': 1}
+  divergence_rate: {'increasing': 1}
+  feature_magnitude: {'increasing': 1}
 
 RECOMMENDATIONS
 ---------------
-1. Best performing system: mackey_glass with full_chaotic
-2. Most stable system: mackey_glass (lowest variance)
+1. Best performing system: lorenz with full_chaotic
+2. Most stable system: lorenz (lowest variance)
 3. Consider parameter optimization for failed experiments
 4. Monitor chaotic dynamics for early stopping criteria

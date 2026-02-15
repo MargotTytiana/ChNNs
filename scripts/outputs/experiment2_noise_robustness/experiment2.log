@@ -310,3 +310,354 @@ AVERAGE ACCURACY DEGRADATION (Clean - Noisy):
 2025-12-01 14:29:49,697 - experiment2 - INFO -   mfcc_mlp: +78.01%
 2025-12-01 14:29:49,700 - experiment2 - INFO - 
 Results saved to: outputs/experiment2_noise_robustness/noise_robustness_results.json
+2026-01-17 11:04:55,694 - experiment2 - INFO - ======================================================================
+2026-01-17 11:04:55,712 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2026-01-17 11:04:55,712 - experiment2 - INFO - ======================================================================
+2026-01-17 11:04:55,712 - experiment2 - INFO - Device: cuda
+2026-01-17 11:04:55,712 - experiment2 - INFO - Noise types: ['gaussian', 'babble', 'cafe', 'street']
+2026-01-17 11:04:55,712 - experiment2 - INFO - SNR levels: [20, 15, 10, 5, 0]
+2026-01-17 11:04:55,713 - experiment2 - INFO - 
+Loading test dataset...
+2026-01-17 11:04:56,089 - experiment2 - INFO - Test samples: 118
+2026-01-17 11:04:56,089 - experiment2 - INFO - Number of speakers: 26
+2026-01-17 11:04:56,091 - experiment2 - INFO - Found mel_mlp checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2026-01-17 11:04:56,092 - experiment2 - INFO - Found mfcc_mlp checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2026-01-17 11:04:56,092 - experiment2 - INFO - 
+Found 2 models: ['mel_mlp', 'mfcc_mlp']
+2026-01-17 11:04:56,092 - experiment2 - INFO - 
+============================================================
+2026-01-17 11:04:56,092 - experiment2 - INFO - Testing: mel_mlp
+2026-01-17 11:04:56,092 - experiment2 - INFO - Checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2026-01-17 11:04:56,092 - experiment2 - INFO - ============================================================
+2026-01-17 11:04:58,816 - experiment2 - INFO - 
+Evaluating on CLEAN data...
+2026-01-17 11:05:00,020 - experiment2 - INFO - Clean accuracy: 94.07%
+2026-01-17 11:05:00,020 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2026-01-17 11:05:01,327 - experiment2 - INFO -   SNR= 20dB: 27.97% (drop: +66.10%)
+2026-01-17 11:05:02,459 - experiment2 - INFO -   SNR= 15dB: 15.25% (drop: +78.81%)
+2026-01-17 11:05:03,573 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +78.81%)
+2026-01-17 11:05:04,939 - experiment2 - INFO -   SNR=  5dB: 14.41% (drop: +79.66%)
+2026-01-17 11:05:06,696 - experiment2 - INFO -   SNR=  0dB:  7.63% (drop: +86.44%)
+2026-01-17 11:05:06,697 - experiment2 - INFO - 
+--- Noise: BABBLE ---
+2026-01-17 11:05:12,931 - experiment2 - INFO -   SNR= 20dB: 72.03% (drop: +22.03%)
+2026-01-17 11:05:19,239 - experiment2 - INFO -   SNR= 15dB: 37.29% (drop: +56.78%)
+2026-01-17 11:05:25,582 - experiment2 - INFO -   SNR= 10dB: 23.73% (drop: +70.34%)
+2026-01-17 11:05:31,575 - experiment2 - INFO -   SNR=  5dB: 11.02% (drop: +83.05%)
+2026-01-17 11:05:36,672 - experiment2 - INFO -   SNR=  0dB:  8.47% (drop: +85.59%)
+2026-01-17 11:05:36,672 - experiment2 - INFO - 
+--- Noise: CAFE ---
+2026-01-17 11:05:43,114 - experiment2 - INFO -   SNR= 20dB: 28.81% (drop: +65.25%)
+2026-01-17 11:05:49,634 - experiment2 - INFO -   SNR= 15dB: 15.25% (drop: +78.81%)
+2026-01-17 11:05:55,926 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +78.81%)
+2026-01-17 11:06:03,095 - experiment2 - INFO -   SNR=  5dB: 14.41% (drop: +79.66%)
+2026-01-17 11:06:09,385 - experiment2 - INFO -   SNR=  0dB:  8.47% (drop: +85.59%)
+2026-01-17 11:06:09,385 - experiment2 - INFO - 
+--- Noise: STREET ---
+2026-01-17 11:06:11,291 - experiment2 - INFO -   SNR= 20dB: 49.15% (drop: +44.92%)
+2026-01-17 11:06:13,429 - experiment2 - INFO -   SNR= 15dB: 32.20% (drop: +61.86%)
+2026-01-17 11:06:15,697 - experiment2 - INFO -   SNR= 10dB: 16.95% (drop: +77.12%)
+2026-01-17 11:06:17,714 - experiment2 - INFO -   SNR=  5dB: 15.25% (drop: +78.81%)
+2026-01-17 11:06:19,747 - experiment2 - INFO -   SNR=  0dB: 10.17% (drop: +83.90%)
+2026-01-17 11:06:19,747 - experiment2 - INFO - 
+============================================================
+2026-01-17 11:06:19,747 - experiment2 - INFO - Testing: mfcc_mlp
+2026-01-17 11:06:19,747 - experiment2 - INFO - Checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2026-01-17 11:06:19,747 - experiment2 - INFO - ============================================================
+2026-01-17 11:06:19,781 - experiment2 - INFO - 
+Evaluating on CLEAN data...
+2026-01-17 11:06:21,057 - experiment2 - INFO - Clean accuracy: 94.07%
+2026-01-17 11:06:21,057 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2026-01-17 11:06:22,417 - experiment2 - INFO -   SNR= 20dB: 28.81% (drop: +65.25%)
+2026-01-17 11:06:24,215 - experiment2 - INFO -   SNR= 15dB: 15.25% (drop: +78.81%)
+2026-01-17 11:06:25,880 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +78.81%)
+2026-01-17 11:06:27,517 - experiment2 - INFO -   SNR=  5dB: 12.71% (drop: +81.36%)
+2026-01-17 11:06:28,878 - experiment2 - INFO -   SNR=  0dB: 11.02% (drop: +83.05%)
+2026-01-17 11:06:28,878 - experiment2 - INFO - 
+--- Noise: BABBLE ---
+2026-01-17 11:06:34,302 - experiment2 - INFO -   SNR= 20dB: 72.03% (drop: +22.03%)
+2026-01-17 11:06:39,939 - experiment2 - INFO -   SNR= 15dB: 37.29% (drop: +56.78%)
+2026-01-17 11:06:45,487 - experiment2 - INFO -   SNR= 10dB: 24.58% (drop: +69.49%)
+2026-01-17 11:06:50,642 - experiment2 - INFO -   SNR=  5dB: 11.02% (drop: +83.05%)
+2026-01-17 11:06:56,069 - experiment2 - INFO -   SNR=  0dB:  8.47% (drop: +85.59%)
+2026-01-17 11:06:56,070 - experiment2 - INFO - 
+--- Noise: CAFE ---
+2026-01-17 11:07:03,231 - experiment2 - INFO -   SNR= 20dB: 29.66% (drop: +64.41%)
+2026-01-17 11:07:10,113 - experiment2 - INFO -   SNR= 15dB: 15.25% (drop: +78.81%)
+2026-01-17 11:07:17,130 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +78.81%)
+2026-01-17 11:07:23,580 - experiment2 - INFO -   SNR=  5dB: 13.56% (drop: +80.51%)
+2026-01-17 11:07:29,660 - experiment2 - INFO -   SNR=  0dB:  9.32% (drop: +84.75%)
+2026-01-17 11:07:29,661 - experiment2 - INFO - 
+--- Noise: STREET ---
+2026-01-17 11:07:31,601 - experiment2 - INFO -   SNR= 20dB: 49.15% (drop: +44.92%)
+2026-01-17 11:07:33,536 - experiment2 - INFO -   SNR= 15dB: 31.36% (drop: +62.71%)
+2026-01-17 11:07:35,575 - experiment2 - INFO -   SNR= 10dB: 17.80% (drop: +76.27%)
+2026-01-17 11:07:37,626 - experiment2 - INFO -   SNR=  5dB: 14.41% (drop: +79.66%)
+2026-01-17 11:07:39,613 - experiment2 - INFO -   SNR=  0dB: 11.86% (drop: +82.20%)
+2026-01-17 11:07:39,613 - experiment2 - INFO - 
+==========================================================================================
+2026-01-17 11:07:39,613 - experiment2 - INFO - NOISE ROBUSTNESS COMPARISON SUMMARY
+2026-01-17 11:07:39,613 - experiment2 - INFO - ==========================================================================================
+2026-01-17 11:07:39,613 - experiment2 - INFO - Noise Type   SNR(dB)       mel_mlp     mfcc_mlp
+2026-01-17 11:07:39,613 - experiment2 - INFO - ------------------------------------------------------------------------------------------
+2026-01-17 11:07:39,613 - experiment2 - INFO - Clean        -              94.07%       94.07%
+2026-01-17 11:07:39,613 - experiment2 - INFO - ------------------------------------------------------------------------------------------
+2026-01-17 11:07:39,613 - experiment2 - INFO - gaussian     20             27.97%       28.81%
+2026-01-17 11:07:39,614 - experiment2 - INFO - gaussian     15             15.25%       15.25%
+2026-01-17 11:07:39,614 - experiment2 - INFO - gaussian     10             15.25%       15.25%
+2026-01-17 11:07:39,614 - experiment2 - INFO - gaussian     5              14.41%       12.71%
+2026-01-17 11:07:39,614 - experiment2 - INFO - gaussian     0               7.63%       11.02%
+2026-01-17 11:07:39,614 - experiment2 - INFO - 
+2026-01-17 11:07:39,614 - experiment2 - INFO - babble       20             72.03%       72.03%
+2026-01-17 11:07:39,614 - experiment2 - INFO - babble       15             37.29%       37.29%
+2026-01-17 11:07:39,614 - experiment2 - INFO - babble       10             23.73%       24.58%
+2026-01-17 11:07:39,614 - experiment2 - INFO - babble       5              11.02%       11.02%
+2026-01-17 11:07:39,614 - experiment2 - INFO - babble       0               8.47%        8.47%
+2026-01-17 11:07:39,614 - experiment2 - INFO - 
+2026-01-17 11:07:39,614 - experiment2 - INFO - cafe         20             28.81%       29.66%
+2026-01-17 11:07:39,614 - experiment2 - INFO - cafe         15             15.25%       15.25%
+2026-01-17 11:07:39,614 - experiment2 - INFO - cafe         10             15.25%       15.25%
+2026-01-17 11:07:39,615 - experiment2 - INFO - cafe         5              14.41%       13.56%
+2026-01-17 11:07:39,615 - experiment2 - INFO - cafe         0               8.47%        9.32%
+2026-01-17 11:07:39,615 - experiment2 - INFO - 
+2026-01-17 11:07:39,615 - experiment2 - INFO - street       20             49.15%       49.15%
+2026-01-17 11:07:39,615 - experiment2 - INFO - street       15             32.20%       31.36%
+2026-01-17 11:07:39,615 - experiment2 - INFO - street       10             16.95%       17.80%
+2026-01-17 11:07:39,615 - experiment2 - INFO - street       5              15.25%       14.41%
+2026-01-17 11:07:39,615 - experiment2 - INFO - street       0              10.17%       11.86%
+2026-01-17 11:07:39,615 - experiment2 - INFO - 
+2026-01-17 11:07:39,615 - experiment2 - INFO - ==========================================================================================
+2026-01-17 11:07:39,615 - experiment2 - INFO - 
+AVERAGE ACCURACY DEGRADATION (Clean - Noisy):
+2026-01-17 11:07:39,615 - experiment2 - INFO -   mel_mlp: +72.12%
+2026-01-17 11:07:39,615 - experiment2 - INFO -   mfcc_mlp: +71.86%
+2026-01-17 11:07:39,627 - experiment2 - INFO - 
+Results saved to: outputs/experiment2_noise_robustness/noise_robustness_results.json
+2026-01-17 18:19:09,296 - experiment2 - INFO - ======================================================================
+2026-01-17 18:19:09,316 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2026-01-17 18:19:09,317 - experiment2 - INFO - ======================================================================
+2026-01-17 18:19:09,317 - experiment2 - INFO - Noise Augmentor initialized successfully
+2026-01-17 18:19:09,317 - experiment2 - INFO - 
+Loading test dataset...
+2026-01-17 18:19:22,426 - experiment2 - INFO - Test samples: 118
+2026-01-17 18:19:22,427 - experiment2 - INFO - Found mel_mlp checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2026-01-17 18:19:22,427 - experiment2 - INFO - Found mfcc_mlp checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2026-01-17 18:19:22,427 - experiment2 - INFO - 
+============================================================
+2026-01-17 18:19:22,427 - experiment2 - INFO - Testing: mel_mlp
+2026-01-17 18:19:22,427 - experiment2 - INFO - ============================================================
+2026-01-17 18:19:23,481 - experiment2 - ERROR - Error testing mel_mlp: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([251, 128]) from checkpoint, the shape in current model is torch.Size([26, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([251]) from checkpoint, the shape in current model is torch.Size([26]).
+2026-01-17 18:19:23,485 - experiment2 - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 267, in load_baseline_model
+    model.load_state_dict(state_dict)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([251, 128]) from checkpoint, the shape in current model is torch.Size([26, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([251]) from checkpoint, the shape in current model is torch.Size([26]).
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 372, in run_experiment2
+    model = load_baseline_model(ckpt_path, model_name, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 271, in load_baseline_model
+    model.load_state_dict(state_dict, strict=False)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([251, 128]) from checkpoint, the shape in current model is torch.Size([26, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([251]) from checkpoint, the shape in current model is torch.Size([26]).
+
+2026-01-17 18:19:23,485 - experiment2 - INFO - 
+============================================================
+2026-01-17 18:19:23,485 - experiment2 - INFO - Testing: mfcc_mlp
+2026-01-17 18:19:23,485 - experiment2 - INFO - ============================================================
+2026-01-17 18:19:23,531 - experiment2 - INFO - Evaluating on CLEAN data...
+2026-01-17 18:19:26,877 - experiment2 - INFO - Clean accuracy: 99.15%
+2026-01-17 18:19:26,878 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2026-01-17 18:19:29,237 - experiment2 - INFO -   SNR= 20dB: 28.81% (drop: +70.34%)
+2026-01-17 18:19:31,456 - experiment2 - INFO -   SNR= 15dB: 11.02% (drop: +88.14%)
+2026-01-17 18:19:33,546 - experiment2 - INFO -   SNR= 10dB: 11.02% (drop: +88.14%)
+2026-01-17 18:19:35,520 - experiment2 - INFO -   SNR=  5dB:  7.63% (drop: +91.53%)
+2026-01-17 18:19:37,442 - experiment2 - INFO -   SNR=  0dB:  5.08% (drop: +94.07%)
+2026-01-17 18:19:37,443 - experiment2 - INFO - 
+--- Noise: BABBLE ---
+2026-01-17 18:19:43,585 - experiment2 - INFO -   SNR= 20dB: 68.64% (drop: +30.51%)
+2026-01-17 18:19:50,850 - experiment2 - INFO -   SNR= 15dB: 39.83% (drop: +59.32%)
+2026-01-17 18:19:57,966 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +83.90%)
+2026-01-17 18:20:04,521 - experiment2 - INFO -   SNR=  5dB:  7.63% (drop: +91.53%)
+2026-01-17 18:20:10,095 - experiment2 - INFO -   SNR=  0dB:  4.24% (drop: +94.92%)
+2026-01-17 18:20:10,095 - experiment2 - INFO - 
+--- Noise: CAFE ---
+2026-01-17 18:20:16,644 - experiment2 - INFO -   SNR= 20dB: 30.51% (drop: +68.64%)
+2026-01-17 18:20:23,408 - experiment2 - INFO -   SNR= 15dB: 13.56% (drop: +85.59%)
+2026-01-17 18:20:30,136 - experiment2 - INFO -   SNR= 10dB: 11.02% (drop: +88.14%)
+2026-01-17 18:20:36,894 - experiment2 - INFO -   SNR=  5dB:  9.32% (drop: +89.83%)
+2026-01-17 18:20:43,977 - experiment2 - INFO -   SNR=  0dB:  5.08% (drop: +94.07%)
+2026-01-17 18:20:43,977 - experiment2 - INFO - 
+--- Noise: STREET ---
+2026-01-17 18:20:46,276 - experiment2 - INFO -   SNR= 20dB: 59.32% (drop: +39.83%)
+2026-01-17 18:20:48,621 - experiment2 - INFO -   SNR= 15dB: 35.59% (drop: +63.56%)
+2026-01-17 18:20:51,030 - experiment2 - INFO -   SNR= 10dB: 17.80% (drop: +81.36%)
+2026-01-17 18:20:53,844 - experiment2 - INFO -   SNR=  5dB: 11.02% (drop: +88.14%)
+2026-01-17 18:20:56,874 - experiment2 - INFO -   SNR=  0dB: 10.17% (drop: +88.98%)
+2026-01-17 18:20:56,879 - experiment2 - INFO - 
+Experiment completed. Results saved to: outputs/experiment2_noise_robustness/noise_robustness_results.json
+2026-01-17 18:22:29,609 - experiment2 - INFO - ======================================================================
+2026-01-17 18:22:29,609 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2026-01-17 18:22:29,609 - experiment2 - INFO - ======================================================================
+2026-01-17 18:22:29,610 - experiment2 - INFO - Noise Augmentor initialized successfully
+2026-01-17 18:22:29,610 - experiment2 - INFO - 
+Loading test dataset...
+2026-01-17 18:22:30,132 - experiment2 - INFO - Test dataset samples: 118
+2026-01-17 18:22:30,132 - experiment2 - INFO - Test dataset speakers: 26
+2026-01-17 18:22:30,133 - experiment2 - INFO - Found mel_mlp checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2026-01-17 18:22:30,133 - experiment2 - INFO - Found mfcc_mlp checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2026-01-17 18:22:30,133 - experiment2 - INFO - 
+============================================================
+2026-01-17 18:22:30,133 - experiment2 - INFO - Testing: mel_mlp
+2026-01-17 18:22:30,133 - experiment2 - INFO - ============================================================
+2026-01-17 18:22:31,080 - experiment2 - INFO - Evaluating on CLEAN data...
+2026-01-17 18:22:32,318 - experiment2 - INFO - Clean accuracy: 0.85%
+2026-01-17 18:22:32,318 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2026-01-17 18:22:34,343 - experiment2 - INFO -   SNR= 20dB:  0.00% (drop: +0.85%)
+2026-01-17 18:22:37,263 - experiment2 - INFO -   SNR= 15dB:  0.00% (drop: +0.85%)
+2026-01-17 18:22:38,817 - experiment2 - INFO -   SNR= 10dB:  0.00% (drop: +0.85%)
+2026-01-17 18:22:40,629 - experiment2 - INFO -   SNR=  5dB:  0.00% (drop: +0.85%)
+2026-01-17 18:22:42,567 - experiment2 - INFO -   SNR=  0dB:  0.00% (drop: +0.85%)
+2026-01-17 18:22:42,567 - experiment2 - INFO - 
+--- Noise: BABBLE ---
+2026-01-17 18:22:49,501 - experiment2 - INFO -   SNR= 20dB:  0.00% (drop: +0.85%)
+2026-01-17 18:22:55,852 - experiment2 - INFO -   SNR= 15dB:  0.00% (drop: +0.85%)
+2026-01-17 18:23:03,123 - experiment2 - INFO -   SNR= 10dB:  2.54% (drop: -1.69%)
+2026-01-17 18:23:09,423 - experiment2 - INFO -   SNR=  5dB:  2.54% (drop: -1.69%)
+2026-01-17 18:23:16,271 - experiment2 - INFO -   SNR=  0dB:  0.00% (drop: +0.85%)
+2026-01-17 18:23:16,271 - experiment2 - INFO - 
+--- Noise: CAFE ---
+2026-01-17 18:23:24,146 - experiment2 - INFO -   SNR= 20dB:  0.00% (drop: +0.85%)
+2026-01-17 18:23:31,319 - experiment2 - INFO -   SNR= 15dB:  0.00% (drop: +0.85%)
+2026-01-17 18:23:42,595 - experiment2 - INFO -   SNR= 10dB:  0.00% (drop: +0.85%)
+2026-01-17 18:23:51,704 - experiment2 - INFO -   SNR=  5dB:  0.00% (drop: +0.85%)
+2026-01-17 18:24:00,136 - experiment2 - INFO -   SNR=  0dB:  0.00% (drop: +0.85%)
+2026-01-17 18:24:00,137 - experiment2 - INFO - 
+--- Noise: STREET ---
+2026-01-17 18:24:02,850 - experiment2 - INFO -   SNR= 20dB:  0.00% (drop: +0.85%)
+2026-01-17 18:24:05,516 - experiment2 - INFO -   SNR= 15dB:  0.00% (drop: +0.85%)
+2026-01-17 18:24:08,364 - experiment2 - INFO -   SNR= 10dB:  0.00% (drop: +0.85%)
+2026-01-17 18:24:11,015 - experiment2 - INFO -   SNR=  5dB:  0.00% (drop: +0.85%)
+2026-01-17 18:24:13,677 - experiment2 - INFO -   SNR=  0dB:  0.00% (drop: +0.85%)
+2026-01-17 18:24:13,677 - experiment2 - INFO - 
+============================================================
+2026-01-17 18:24:13,677 - experiment2 - INFO - Testing: mfcc_mlp
+2026-01-17 18:24:13,677 - experiment2 - INFO - ============================================================
+2026-01-17 18:24:13,699 - experiment2 - ERROR - Error testing mfcc_mlp: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([26, 128]) from checkpoint, the shape in current model is torch.Size([128, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([26]) from checkpoint, the shape in current model is torch.Size([128]).
+2026-01-17 18:24:13,700 - experiment2 - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 285, in load_baseline_model
+    model.load_state_dict(state_dict, strict=True)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([26, 128]) from checkpoint, the shape in current model is torch.Size([128, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([26]) from checkpoint, the shape in current model is torch.Size([128]).
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 393, in run_experiment2
+    model = load_baseline_model(ckpt_path, model_name, dataset_num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 290, in load_baseline_model
+    model.load_state_dict(state_dict, strict=False)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([26, 128]) from checkpoint, the shape in current model is torch.Size([128, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([26]) from checkpoint, the shape in current model is torch.Size([128]).
+
+2026-01-17 18:24:13,703 - experiment2 - INFO - 
+Experiment completed. Results saved to: outputs/experiment2_noise_robustness/noise_robustness_results.json
+2026-01-17 18:25:35,663 - experiment2 - INFO - ======================================================================
+2026-01-17 18:25:35,663 - experiment2 - INFO - EXPERIMENT 2: NOISE ROBUSTNESS TESTING
+2026-01-17 18:25:35,663 - experiment2 - INFO - ======================================================================
+2026-01-17 18:25:35,664 - experiment2 - INFO - Noise Augmentor initialized successfully
+2026-01-17 18:25:35,664 - experiment2 - INFO - 
+Loading test dataset...
+2026-01-17 18:25:36,247 - experiment2 - INFO - Test samples: 118
+2026-01-17 18:25:36,247 - experiment2 - INFO - Found mel_mlp checkpoint: outputs/experiment1_unified/mel_mlp/checkpoints/best_model.pth
+2026-01-17 18:25:36,247 - experiment2 - INFO - Found mfcc_mlp checkpoint: outputs/experiment1_unified/mfcc_mlp/checkpoints/best_model.pth
+2026-01-17 18:25:36,248 - experiment2 - INFO - 
+============================================================
+2026-01-17 18:25:36,248 - experiment2 - INFO - Testing: mel_mlp
+2026-01-17 18:25:36,248 - experiment2 - INFO - ============================================================
+2026-01-17 18:25:37,696 - experiment2 - ERROR - Error testing mel_mlp: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([251, 128]) from checkpoint, the shape in current model is torch.Size([26, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([251]) from checkpoint, the shape in current model is torch.Size([26]).
+2026-01-17 18:25:37,698 - experiment2 - ERROR - Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 267, in load_baseline_model
+    model.load_state_dict(state_dict)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([251, 128]) from checkpoint, the shape in current model is torch.Size([26, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([251]) from checkpoint, the shape in current model is torch.Size([26]).
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 372, in run_experiment2
+    model = load_baseline_model(ckpt_path, model_name, num_speakers, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/scripts/run_experiment2_simple.py", line 271, in load_baseline_model
+    model.load_state_dict(state_dict, strict=False)
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 2593, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TraditionalMLPBaseline:
+	size mismatch for classifier.12.weight: copying a param with shape torch.Size([251, 128]) from checkpoint, the shape in current model is torch.Size([26, 128]).
+	size mismatch for classifier.12.bias: copying a param with shape torch.Size([251]) from checkpoint, the shape in current model is torch.Size([26]).
+
+2026-01-17 18:25:37,698 - experiment2 - INFO - 
+============================================================
+2026-01-17 18:25:37,698 - experiment2 - INFO - Testing: mfcc_mlp
+2026-01-17 18:25:37,698 - experiment2 - INFO - ============================================================
+2026-01-17 18:25:37,719 - experiment2 - INFO - Evaluating on CLEAN data...
+2026-01-17 18:25:39,122 - experiment2 - INFO - Clean accuracy: 99.15%
+2026-01-17 18:25:39,122 - experiment2 - INFO - 
+--- Noise: GAUSSIAN ---
+2026-01-17 18:25:40,980 - experiment2 - INFO -   SNR= 20dB: 28.81% (drop: +70.34%)
+2026-01-17 18:25:43,180 - experiment2 - INFO -   SNR= 15dB: 11.02% (drop: +88.14%)
+2026-01-17 18:25:46,682 - experiment2 - INFO -   SNR= 10dB: 11.02% (drop: +88.14%)
+2026-01-17 18:25:50,100 - experiment2 - INFO -   SNR=  5dB:  7.63% (drop: +91.53%)
+2026-01-17 18:25:53,453 - experiment2 - INFO -   SNR=  0dB:  5.08% (drop: +94.07%)
+2026-01-17 18:25:53,453 - experiment2 - INFO - 
+--- Noise: BABBLE ---
+2026-01-17 18:26:07,181 - experiment2 - INFO -   SNR= 20dB: 68.64% (drop: +30.51%)
+2026-01-17 18:26:20,195 - experiment2 - INFO -   SNR= 15dB: 39.83% (drop: +59.32%)
+2026-01-17 18:26:29,889 - experiment2 - INFO -   SNR= 10dB: 15.25% (drop: +83.90%)
+2026-01-17 18:26:37,048 - experiment2 - INFO -   SNR=  5dB:  7.63% (drop: +91.53%)
+2026-01-17 18:26:45,100 - experiment2 - INFO -   SNR=  0dB:  4.24% (drop: +94.92%)
+2026-01-17 18:26:45,100 - experiment2 - INFO - 
+--- Noise: CAFE ---
+2026-01-17 18:26:54,107 - experiment2 - INFO -   SNR= 20dB: 30.51% (drop: +68.64%)
+2026-01-17 18:27:03,583 - experiment2 - INFO -   SNR= 15dB: 13.56% (drop: +85.59%)
+2026-01-17 18:27:12,663 - experiment2 - INFO -   SNR= 10dB: 11.02% (drop: +88.14%)
+2026-01-17 18:27:21,190 - experiment2 - INFO -   SNR=  5dB:  9.32% (drop: +89.83%)
+2026-01-17 18:27:29,119 - experiment2 - INFO -   SNR=  0dB:  5.08% (drop: +94.07%)
+2026-01-17 18:27:29,119 - experiment2 - INFO - 
+--- Noise: STREET ---
+2026-01-17 18:27:32,013 - experiment2 - INFO -   SNR= 20dB: 59.32% (drop: +39.83%)
+2026-01-17 18:27:34,855 - experiment2 - INFO -   SNR= 15dB: 35.59% (drop: +63.56%)
+2026-01-17 18:27:37,595 - experiment2 - INFO -   SNR= 10dB: 17.80% (drop: +81.36%)
+2026-01-17 18:27:40,184 - experiment2 - INFO -   SNR=  5dB: 11.02% (drop: +88.14%)
+2026-01-17 18:27:42,612 - experiment2 - INFO -   SNR=  0dB: 10.17% (drop: +88.98%)
+2026-01-17 18:27:42,616 - experiment2 - INFO - 
+Experiment completed. Results saved to: outputs/experiment2_noise_robustness/noise_robustness_results.json

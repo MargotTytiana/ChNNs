@@ -1,0 +1,125 @@
+# ============================================================================
+# Hypothesis 2c: Sync weight too tiny - Test with 0.05
+# ============================================================================
+
+experiment:
+  name: "H2c_sync_weight_0.05"
+  description: "Test if reducing sync weight to 0.05 improves performance"
+
+data:
+  data_dir: "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2"
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  num_workers: 4
+  pin_memory: true
+
+audio:
+  sample_rate: 16000
+  max_audio_length: 3.0
+  min_audio_length: 0.5
+  frame_length: 400
+  hop_length: 160
+  normalize: true
+
+model:
+  type: "full_chaotic"
+  num_speakers: 251
+  
+  phase_space:
+    embedding_dim: 10
+    delay_method: "autocorr"
+    
+  chaotic_features:
+    mlsa:
+      scales: 5
+    rqa:
+      radius_ratio: 0.1
+      
+  chaotic_embedding:
+    system_type: "lorenz"
+    evolution_time: 0.5
+    time_step: 0.01
+    lorenz:
+      sigma: 10.0
+      rho: 28.0
+      beta: 2.6667
+      
+  attractor_pooling:
+    type: "comprehensive"
+    
+  speaker_embedding:
+    dim: 256
+    hidden_dims: [512, 256, 128]
+    dropout_rate: 0.3
+    use_batch_norm: true
+    
+  classifier:
+    type: "cosine"
+    temperature: 30.0
+
+optional_modules:
+  bifurcation_control:
+    enabled: false
+  differentiable_features:
+    enabled: true
+
+# ============ KEY: TINY SYNC WEIGHT ============
+loss:
+  classification:
+    type: "cross_entropy"
+    
+  stability:
+    enabled: true
+    weight: 0.1
+    target_lyapunov_range: [0.1, 2.0]
+    trajectory_bound: 50.0
+    collapse_threshold: 0.1
+    diversity_weight: 0.05
+    
+  synchronization:
+    enabled: true
+    sync_weight: 0.05
+    desync_weight: 0.0
+    margin: 5.0
+    sample_ratio: 0.3
+    distance_type: "euclidean"
+    
+  adversarial:
+    enabled: true
+    warmup_epochs: 5
+    perturbation_scale: 0.1
+    weight: 0.3
+
+training:
+  batch_size: 32
+  num_epochs: 100
+  gradient_clipping: 1.0
+  
+  optimizer:
+    type: "adamw"
+    learning_rate: 0.0005
+    weight_decay: 0.0001
+    betas: [0.9, 0.999]
+    
+  scheduler:
+    type: "cosine"
+    T_max: 100
+    eta_min: 1.0e-6
+    
+  early_stopping:
+    enabled: true
+    patience: 30
+    monitor: "val_accuracy"
+    mode: "max"
+    
+  checkpoint:
+    save_best_only: true
+    save_frequency: 10
+
+hardware:
+  device: "auto"
+  seed: 42
+
+output:
+  base_dir: "./experiments/outputs/hypothesis_H2b"

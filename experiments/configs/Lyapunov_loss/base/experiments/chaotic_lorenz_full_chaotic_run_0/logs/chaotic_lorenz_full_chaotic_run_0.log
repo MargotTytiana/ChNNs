@@ -1,0 +1,510 @@
+2026-01-24 09:56:29,516 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+2026-01-24 09:56:29,517 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Device: cuda
+2026-01-24 09:56:29,517 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0
+2026-01-24 09:56:29,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-01-24 09:56:29,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-24 09:56:29,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-01-24 09:56:29,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-01-24 09:56:33,248 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-01-24 09:56:33,248 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-01-24 09:56:33,248 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-01-24 09:56:33,248 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-01-24 09:56:33,248 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-01-24 09:56:33,248 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating model...
+2026-01-24 09:56:33,248 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-01-24 09:57:39,577 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Total parameters: 520,511
+2026-01-24 09:57:39,577 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Trainable parameters: 520,511
+2026-01-24 09:57:39,577 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating optimizer...
+2026-01-24 09:57:40,714 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2026-01-24 09:57:40,714 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating scheduler...
+2026-01-24 09:57:40,714 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2026-01-24 09:57:40,714 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating criterion...
+2026-01-24 09:57:40,714 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-01-24 09:57:40,764 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0/config.json
+2026-01-24 09:57:40,764 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Experiment setup completed
+2026-01-24 09:57:40,765 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Starting training for 50 epochs
+2026-01-24 09:57:40,765 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-01-24 09:57:46,673 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - 
+================================================================================
+2026-01-24 09:57:46,674 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-24 09:57:46,674 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+2026-01-24 09:57:46,674 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Batch Info:
+2026-01-24 09:57:46,674 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-24 09:57:46,674 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-01-24 09:57:46,678 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([24, 16, 12, 13,  9,  3, 12,  1], device='cuda:0')
+2026-01-24 09:57:47,302 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+
+2026-01-24 09:57:47,441 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-01-24 09:57:47,533 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.095, max_norm=48.2, min_std=7.916
+2026-01-24 09:57:48,224 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.583617
+2026-01-24 09:57:52,591 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:57:55,068 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 4.4208, Train Acc: 0.0513, Val Loss: 4.0202, Val Acc: 0.0449
+2026-01-24 09:57:55,145 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+2026-01-24 09:57:55,954 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.155750
+2026-01-24 09:58:01,020 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:02,250 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 3.7061, Train Acc: 0.1116, Val Loss: 4.4415, Val Acc: 0.0449
+2026-01-24 09:58:02,778 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 2.408326
+2026-01-24 09:58:07,064 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:08,259 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 2.7660, Train Acc: 0.2433, Val Loss: 5.0786, Val Acc: 0.0449
+2026-01-24 09:58:08,780 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.793128
+2026-01-24 09:58:13,090 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:14,358 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 2.1392, Train Acc: 0.3996, Val Loss: 4.8085, Val Acc: 0.0449
+2026-01-24 09:58:14,889 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 1.602030
+2026-01-24 09:58:19,191 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:20,393 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 1.6609, Train Acc: 0.4955, Val Loss: 5.0489, Val Acc: 0.0449
+2026-01-24 09:58:20,923 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 1.756377
+2026-01-24 09:58:25,235 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:26,431 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 1.3814, Train Acc: 0.5848, Val Loss: 5.8698, Val Acc: 0.0449
+2026-01-24 09:58:26,955 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.074149
+2026-01-24 09:58:31,206 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:32,417 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 1.1946, Train Acc: 0.6250, Val Loss: 5.0672, Val Acc: 0.0674
+2026-01-24 09:58:32,500 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 6
+2026-01-24 09:58:33,077 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 0.866942
+2026-01-24 09:58:33,522 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.010, max_norm=47.4, min_std=11.304
+2026-01-24 09:58:37,328 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:38,534 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 0.8839, Train Acc: 0.7277, Val Loss: 5.9582, Val Acc: 0.0449
+2026-01-24 09:58:39,070 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.516830
+2026-01-24 09:58:43,349 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:44,551 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 0.8486, Train Acc: 0.7522, Val Loss: 5.4029, Val Acc: 0.0449
+2026-01-24 09:58:45,080 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.543458
+2026-01-24 09:58:49,389 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:50,578 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 9: Train Loss: 0.7132, Train Acc: 0.7857, Val Loss: 7.2491, Val Acc: 0.0449
+2026-01-24 09:58:51,102 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.358285
+2026-01-24 09:58:55,452 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:58:56,682 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 10: Train Loss: 0.6488, Train Acc: 0.8036, Val Loss: 5.0899, Val Acc: 0.0674
+2026-01-24 09:58:57,284 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.363054
+2026-01-24 09:59:01,648 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:59:02,859 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 11: Train Loss: 0.5663, Train Acc: 0.8125, Val Loss: 5.1305, Val Acc: 0.0787
+2026-01-24 09:59:02,946 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 11
+2026-01-24 09:59:03,536 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.357098
+2026-01-24 09:59:07,798 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:59:08,983 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 12: Train Loss: 0.5511, Train Acc: 0.8281, Val Loss: 5.5066, Val Acc: 0.0899
+2026-01-24 09:59:09,066 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 12
+2026-01-24 09:59:09,670 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.185753
+2026-01-24 09:59:13,965 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 09:59:15,250 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 13: Train Loss: 0.5275, Train Acc: 0.8304, Val Loss: 5.5402, Val Acc: 0.0449
+2026-01-24 09:59:15,786 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.310993
+2026-01-24 09:59:16,864 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.009, max_norm=46.1, min_std=11.030
+2026-01-24 09:59:45,232 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+2026-01-24 09:59:45,232 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Device: cuda
+2026-01-24 09:59:45,232 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0
+2026-01-24 09:59:45,233 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-01-24 09:59:45,233 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-24 09:59:45,233 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-01-24 09:59:45,233 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-01-24 09:59:45,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-01-24 09:59:45,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-01-24 09:59:45,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-01-24 09:59:45,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-01-24 09:59:45,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-01-24 09:59:45,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating model...
+2026-01-24 09:59:45,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-01-24 10:00:52,198 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Total parameters: 520,511
+2026-01-24 10:00:52,198 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Trainable parameters: 520,511
+2026-01-24 10:00:52,198 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating optimizer...
+2026-01-24 10:00:53,329 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2026-01-24 10:00:53,329 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating scheduler...
+2026-01-24 10:00:53,329 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2026-01-24 10:00:53,329 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating criterion...
+2026-01-24 10:00:53,329 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-01-24 10:00:53,376 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0/config.json
+2026-01-24 10:00:53,376 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Experiment setup completed
+2026-01-24 10:00:53,377 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Starting training for 50 epochs
+2026-01-24 10:00:53,377 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-01-24 10:00:53,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - 
+================================================================================
+2026-01-24 10:00:53,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-24 10:00:53,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+2026-01-24 10:00:53,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Batch Info:
+2026-01-24 10:00:53,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-24 10:00:53,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-01-24 10:00:53,523 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([24, 16, 12, 13,  9,  3, 12,  1], device='cuda:0')
+2026-01-24 10:00:54,091 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+
+2026-01-24 10:00:54,229 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-01-24 10:00:54,235 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.095, max_norm=48.2, min_std=7.916
+2026-01-24 10:00:54,896 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.583617
+2026-01-24 10:00:59,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:00,417 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 4.4208, Train Acc: 0.0513, Val Loss: 4.0202, Val Acc: 0.0449
+2026-01-24 10:01:00,494 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+2026-01-24 10:01:01,150 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.155750
+2026-01-24 10:01:05,403 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:06,644 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 3.7061, Train Acc: 0.1116, Val Loss: 4.4415, Val Acc: 0.0449
+2026-01-24 10:01:07,188 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 2.408326
+2026-01-24 10:01:11,455 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:12,695 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 2.7660, Train Acc: 0.2433, Val Loss: 5.0786, Val Acc: 0.0449
+2026-01-24 10:01:13,252 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.793128
+2026-01-24 10:01:17,583 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:18,824 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 2.1392, Train Acc: 0.3996, Val Loss: 4.8085, Val Acc: 0.0449
+2026-01-24 10:01:19,376 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 1.602030
+2026-01-24 10:01:23,712 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:24,991 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 1.6609, Train Acc: 0.4955, Val Loss: 5.0489, Val Acc: 0.0449
+2026-01-24 10:01:25,527 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 1.756377
+2026-01-24 10:01:29,899 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:31,155 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 1.3814, Train Acc: 0.5848, Val Loss: 5.8698, Val Acc: 0.0449
+2026-01-24 10:01:31,692 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.074149
+2026-01-24 10:01:35,974 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:37,224 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 1.1946, Train Acc: 0.6250, Val Loss: 5.0672, Val Acc: 0.0674
+2026-01-24 10:01:37,305 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 6
+2026-01-24 10:01:37,884 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 0.866942
+2026-01-24 10:01:38,322 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.010, max_norm=47.4, min_std=11.304
+2026-01-24 10:01:42,099 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:43,310 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 0.8839, Train Acc: 0.7277, Val Loss: 5.9582, Val Acc: 0.0449
+2026-01-24 10:01:43,865 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.516830
+2026-01-24 10:01:48,107 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:49,384 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 0.8486, Train Acc: 0.7522, Val Loss: 5.4029, Val Acc: 0.0449
+2026-01-24 10:01:49,947 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.543458
+2026-01-24 10:01:54,292 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:01:55,518 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 9: Train Loss: 0.7132, Train Acc: 0.7857, Val Loss: 7.2491, Val Acc: 0.0449
+2026-01-24 10:01:56,062 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.358285
+2026-01-24 10:02:00,383 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:01,617 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 10: Train Loss: 0.6488, Train Acc: 0.8036, Val Loss: 5.0899, Val Acc: 0.0674
+2026-01-24 10:02:02,257 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.363054
+2026-01-24 10:02:06,468 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:07,693 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 11: Train Loss: 0.5663, Train Acc: 0.8125, Val Loss: 5.1305, Val Acc: 0.0787
+2026-01-24 10:02:07,774 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 11
+2026-01-24 10:02:08,348 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.357098
+2026-01-24 10:02:12,671 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:13,908 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 12: Train Loss: 0.5511, Train Acc: 0.8281, Val Loss: 5.5066, Val Acc: 0.0899
+2026-01-24 10:02:13,989 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 12
+2026-01-24 10:02:14,570 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.185753
+2026-01-24 10:02:18,849 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:20,061 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 13: Train Loss: 0.5275, Train Acc: 0.8304, Val Loss: 5.5402, Val Acc: 0.0449
+2026-01-24 10:02:20,609 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.310993
+2026-01-24 10:02:21,698 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.009, max_norm=46.1, min_std=11.030
+2026-01-24 10:02:24,935 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:26,194 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 14: Train Loss: 0.4477, Train Acc: 0.8661, Val Loss: 5.8941, Val Acc: 0.0449
+2026-01-24 10:02:26,735 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.272321
+2026-01-24 10:02:31,261 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:32,510 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 15: Train Loss: 0.4147, Train Acc: 0.8884, Val Loss: 5.8614, Val Acc: 0.0449
+2026-01-24 10:02:33,058 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.505865
+2026-01-24 10:02:37,318 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:38,586 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 16: Train Loss: 0.4318, Train Acc: 0.8750, Val Loss: 5.9872, Val Acc: 0.0787
+2026-01-24 10:02:39,132 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.118555
+2026-01-24 10:02:43,444 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:44,676 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 17: Train Loss: 0.3291, Train Acc: 0.8929, Val Loss: 6.3315, Val Acc: 0.0449
+2026-01-24 10:02:45,226 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.364512
+2026-01-24 10:02:49,470 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:50,679 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 18: Train Loss: 0.2663, Train Acc: 0.9263, Val Loss: 5.9342, Val Acc: 0.0449
+2026-01-24 10:02:51,231 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.230059
+2026-01-24 10:02:55,530 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:02:56,751 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 19: Train Loss: 0.2729, Train Acc: 0.9263, Val Loss: 5.8999, Val Acc: 0.0562
+2026-01-24 10:02:57,303 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.382189
+2026-01-24 10:03:01,545 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:02,779 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 20: Train Loss: 0.2844, Train Acc: 0.9129, Val Loss: 5.4363, Val Acc: 0.1461
+2026-01-24 10:03:02,858 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 20
+2026-01-24 10:03:03,513 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.209654
+2026-01-24 10:03:05,223 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.018, max_norm=33.2, min_std=7.519
+2026-01-24 10:03:07,776 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:09,079 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 21: Train Loss: 0.3441, Train Acc: 0.8817, Val Loss: 5.2172, Val Acc: 0.0787
+2026-01-24 10:03:09,639 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.115996
+2026-01-24 10:03:13,966 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:15,192 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 22: Train Loss: 0.2362, Train Acc: 0.9241, Val Loss: 6.9451, Val Acc: 0.0449
+2026-01-24 10:03:15,720 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.307760
+2026-01-24 10:03:20,013 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:21,259 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 23: Train Loss: 0.2239, Train Acc: 0.9420, Val Loss: 6.1607, Val Acc: 0.0562
+2026-01-24 10:03:21,807 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.145701
+2026-01-24 10:03:26,108 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 24: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:27,337 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 24: Train Loss: 0.1940, Train Acc: 0.9464, Val Loss: 6.5175, Val Acc: 0.0449
+2026-01-24 10:03:27,880 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.201348
+2026-01-24 10:03:32,151 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 25: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:33,368 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 25: Train Loss: 0.1884, Train Acc: 0.9487, Val Loss: 6.3704, Val Acc: 0.0899
+2026-01-24 10:03:33,920 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.178538
+2026-01-24 10:03:38,288 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 26: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:39,602 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 26: Train Loss: 0.1813, Train Acc: 0.9487, Val Loss: 3.8045, Val Acc: 0.2472
+2026-01-24 10:03:39,683 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 26
+2026-01-24 10:03:40,271 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.199335
+2026-01-24 10:03:44,684 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 27: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:45,938 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 27: Train Loss: 0.1721, Train Acc: 0.9554, Val Loss: 6.4724, Val Acc: 0.0449
+2026-01-24 10:03:46,464 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.289271
+2026-01-24 10:03:48,828 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.015, max_norm=38.6, min_std=8.981
+2026-01-24 10:03:50,800 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 28: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:52,051 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 28: Train Loss: 0.1481, Train Acc: 0.9531, Val Loss: 5.3553, Val Acc: 0.1124
+2026-01-24 10:03:52,581 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.263844
+2026-01-24 10:03:56,930 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 29: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:03:58,133 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 29: Train Loss: 0.1619, Train Acc: 0.9554, Val Loss: 4.2950, Val Acc: 0.1685
+2026-01-24 10:03:58,667 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.132705
+2026-01-24 10:04:03,099 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 30: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:04,366 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 30: Train Loss: 0.1464, Train Acc: 0.9554, Val Loss: 3.4202, Val Acc: 0.3034
+2026-01-24 10:04:04,441 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 30
+2026-01-24 10:04:05,114 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.131553
+2026-01-24 10:04:09,354 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 31: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:10,615 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 31: Train Loss: 0.1508, Train Acc: 0.9598, Val Loss: 3.2387, Val Acc: 0.3258
+2026-01-24 10:04:10,696 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 31
+2026-01-24 10:04:11,340 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.056519
+2026-01-24 10:04:15,622 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 32: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:16,849 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 32: Train Loss: 0.1320, Train Acc: 0.9732, Val Loss: 6.5432, Val Acc: 0.0562
+2026-01-24 10:04:17,401 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.178293
+2026-01-24 10:04:21,725 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 33: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:23,013 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 33: Train Loss: 0.1093, Train Acc: 0.9643, Val Loss: 6.5216, Val Acc: 0.0562
+2026-01-24 10:04:23,552 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.043838
+2026-01-24 10:04:27,876 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 34: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:29,133 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 34: Train Loss: 0.0947, Train Acc: 0.9710, Val Loss: 4.2058, Val Acc: 0.1910
+2026-01-24 10:04:29,685 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.041859
+2026-01-24 10:04:32,683 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.016, max_norm=37.3, min_std=8.658
+2026-01-24 10:04:34,006 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 35: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:35,242 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 35: Train Loss: 0.1313, Train Acc: 0.9710, Val Loss: 1.6723, Val Acc: 0.5393
+2026-01-24 10:04:35,316 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 35
+2026-01-24 10:04:35,883 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.038695
+2026-01-24 10:04:40,228 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 36: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:41,493 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 36: Train Loss: 0.0938, Train Acc: 0.9710, Val Loss: 4.2257, Val Acc: 0.1910
+2026-01-24 10:04:42,057 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.061167
+2026-01-24 10:04:46,446 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 37: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:47,691 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 37: Train Loss: 0.1190, Train Acc: 0.9732, Val Loss: 2.0224, Val Acc: 0.4719
+2026-01-24 10:04:48,246 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.207935
+2026-01-24 10:04:52,571 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 38: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:53,802 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 38: Train Loss: 0.0929, Train Acc: 0.9777, Val Loss: 5.7791, Val Acc: 0.0899
+2026-01-24 10:04:54,340 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.143185
+2026-01-24 10:04:58,636 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 39: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:04:59,876 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 39: Train Loss: 0.1084, Train Acc: 0.9710, Val Loss: 7.7895, Val Acc: 0.0449
+2026-01-24 10:05:00,404 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.050862
+2026-01-24 10:05:04,688 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 40: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:05,900 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 40: Train Loss: 0.0697, Train Acc: 0.9888, Val Loss: 5.1754, Val Acc: 0.1685
+2026-01-24 10:05:06,529 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.057018
+2026-01-24 10:05:10,737 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 41: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:11,922 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 41: Train Loss: 0.0757, Train Acc: 0.9844, Val Loss: 3.8557, Val Acc: 0.3258
+2026-01-24 10:05:12,487 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.039619
+2026-01-24 10:05:16,079 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.016, max_norm=35.7, min_std=8.213
+2026-01-24 10:05:16,755 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 42: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:18,002 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 42: Train Loss: 0.0890, Train Acc: 0.9754, Val Loss: 0.8554, Val Acc: 0.7753
+2026-01-24 10:05:18,083 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 42
+2026-01-24 10:05:18,695 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.170759
+2026-01-24 10:05:22,929 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 43: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:24,177 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 43: Train Loss: 0.0798, Train Acc: 0.9866, Val Loss: 1.3369, Val Acc: 0.6404
+2026-01-24 10:05:24,747 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.193657
+2026-01-24 10:05:29,053 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 44: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:30,321 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 44: Train Loss: 0.0790, Train Acc: 0.9799, Val Loss: 0.3578, Val Acc: 0.8764
+2026-01-24 10:05:30,401 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 44
+2026-01-24 10:05:30,967 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.050154
+2026-01-24 10:05:35,275 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 45: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:36,545 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 45: Train Loss: 0.0816, Train Acc: 0.9844, Val Loss: 0.0734, Val Acc: 0.9888
+2026-01-24 10:05:36,628 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 45
+2026-01-24 10:05:37,210 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.030212
+2026-01-24 10:05:41,572 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 46: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:42,795 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 46: Train Loss: 0.0689, Train Acc: 0.9844, Val Loss: 0.0469, Val Acc: 0.9888
+2026-01-24 10:05:43,356 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.050077
+2026-01-24 10:05:47,666 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 47: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:48,936 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 47: Train Loss: 0.0691, Train Acc: 0.9844, Val Loss: 0.0550, Val Acc: 0.9888
+2026-01-24 10:05:49,489 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.105678
+2026-01-24 10:05:53,824 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 48: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:05:55,104 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 48: Train Loss: 0.0685, Train Acc: 0.9844, Val Loss: 0.0603, Val Acc: 0.9888
+2026-01-24 10:05:55,649 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.029532
+2026-01-24 10:05:59,950 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 49: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:06:01,187 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 49: Train Loss: 0.0468, Train Acc: 0.9955, Val Loss: 0.0689, Val Acc: 0.9888
+2026-01-24 10:06:01,192 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Running final test evaluation...
+2026-01-24 10:06:03,442 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Test Results:
+2026-01-24 10:06:03,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   loss: 0.2262
+2026-01-24 10:06:03,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   accuracy: 0.9492
+2026-01-24 10:06:03,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   avg_confidence: 0.9951
+2026-01-24 10:06:03,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_diversity: 0.1899
+2026-01-24 10:06:03,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_mean: 1.0000
+2026-01-24 10:06:03,443 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_std: 0.0000
+2026-01-24 10:06:03,445 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Training completed
+2026-01-24 10:06:04,216 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Running comprehensive chaotic network analysis...
+2026-01-24 10:06:04,217 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Analyzing chaotic features and dynamics...
+2026-01-24 10:06:04,892 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Chaotic analysis completed
+2026-01-24 10:06:04,893 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating chaotic dynamics visualizations...
+2026-01-24 10:06:07,583 - experiment_chaotic_lorenz_full_chaotic_run_0 - WARNING - Embedding plotting failed: boolean index did not match indexed array along dimension 0; dimension is 8 but corresponding boolean dimension is 32
+2026-01-24 10:06:07,589 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Chaotic network analysis completed
+2026-01-24 10:08:28,306 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+2026-01-24 10:08:28,306 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Device: cuda
+2026-01-24 10:08:28,306 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0
+2026-01-24 10:08:28,307 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-01-24 10:08:28,307 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-24 10:08:28,307 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-01-24 10:08:28,307 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-01-24 10:08:28,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-01-24 10:08:28,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-01-24 10:08:28,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-01-24 10:08:28,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-01-24 10:08:28,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-01-24 10:08:28,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating model...
+2026-01-24 10:08:28,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-01-24 10:09:34,150 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Total parameters: 520,511
+2026-01-24 10:09:34,150 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Trainable parameters: 520,511
+2026-01-24 10:09:34,150 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating optimizer...
+2026-01-24 10:09:35,554 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2026-01-24 10:09:35,555 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating scheduler...
+2026-01-24 10:09:35,555 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2026-01-24 10:09:35,555 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating criterion...
+2026-01-24 10:09:35,555 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-01-24 10:09:35,606 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0/config.json
+2026-01-24 10:09:35,606 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Experiment setup completed
+2026-01-24 10:09:35,607 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2026-01-24 10:09:35,607 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-01-24 10:09:35,746 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - 
+================================================================================
+2026-01-24 10:09:35,746 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-24 10:09:35,746 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+2026-01-24 10:09:35,746 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Batch Info:
+2026-01-24 10:09:35,746 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-24 10:09:35,747 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-01-24 10:09:35,752 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([24, 16, 12, 13,  9,  3, 12,  1], device='cuda:0')
+2026-01-24 10:09:36,341 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+
+2026-01-24 10:09:36,481 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-01-24 10:09:36,487 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.095, max_norm=48.2, min_std=7.916
+2026-01-24 10:09:37,153 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.583617
+2026-01-24 10:09:41,496 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:09:42,786 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 4.4208, Train Acc: 0.0513, Val Loss: 4.0202, Val Acc: 0.0449
+2026-01-24 10:09:42,863 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+2026-01-24 10:09:43,515 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.155750
+2026-01-24 10:09:47,859 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:09:49,145 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 3.6521, Train Acc: 0.0960, Val Loss: 4.3036, Val Acc: 0.0449
+2026-01-24 10:09:49,689 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 2.200318
+2026-01-24 10:09:54,135 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:09:55,410 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 2.7359, Train Acc: 0.2455, Val Loss: 4.7843, Val Acc: 0.0787
+2026-01-24 10:09:55,493 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 2
+2026-01-24 10:09:56,057 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.575588
+2026-01-24 10:10:00,385 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:01,653 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 2.0882, Train Acc: 0.4129, Val Loss: 5.0839, Val Acc: 0.0899
+2026-01-24 10:10:01,730 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 3
+2026-01-24 10:10:02,291 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 1.653221
+2026-01-24 10:10:06,587 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:07,853 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 1.6448, Train Acc: 0.4978, Val Loss: 5.5361, Val Acc: 0.0449
+2026-01-24 10:10:08,396 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.061043
+2026-01-24 10:10:12,680 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:13,900 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 1.3430, Train Acc: 0.5804, Val Loss: 5.0784, Val Acc: 0.0449
+2026-01-24 10:10:14,445 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.153966
+2026-01-24 10:10:18,694 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:19,924 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 1.2144, Train Acc: 0.6071, Val Loss: 5.4864, Val Acc: 0.0449
+2026-01-24 10:10:20,473 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 0.893912
+2026-01-24 10:10:20,906 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.010, max_norm=48.2, min_std=11.549
+2026-01-24 10:10:24,697 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:25,962 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 0.8907, Train Acc: 0.7165, Val Loss: 4.8711, Val Acc: 0.0449
+2026-01-24 10:10:26,515 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.708832
+2026-01-24 10:10:30,810 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:32,094 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 0.8480, Train Acc: 0.7188, Val Loss: 5.8816, Val Acc: 0.0449
+2026-01-24 10:10:32,638 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.517218
+2026-01-24 10:10:36,949 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:38,192 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 9: Train Loss: 0.7265, Train Acc: 0.7746, Val Loss: 4.9376, Val Acc: 0.0562
+2026-01-24 10:10:38,726 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.326698
+2026-01-24 10:10:43,029 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:44,363 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 10: Train Loss: 0.5797, Train Acc: 0.8058, Val Loss: 6.0099, Val Acc: 0.0449
+2026-01-24 10:10:44,975 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.504162
+2026-01-24 10:10:49,271 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:50,510 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 11: Train Loss: 0.5248, Train Acc: 0.8281, Val Loss: 5.7276, Val Acc: 0.0899
+2026-01-24 10:10:51,050 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.576075
+2026-01-24 10:10:55,409 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:10:56,666 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 12: Train Loss: 0.6156, Train Acc: 0.8237, Val Loss: 7.7275, Val Acc: 0.0449
+2026-01-24 10:10:57,205 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.259618
+2026-01-24 10:11:01,508 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:02,759 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 13: Train Loss: 0.4816, Train Acc: 0.8482, Val Loss: 6.4709, Val Acc: 0.0449
+2026-01-24 10:11:03,344 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.444016
+2026-01-24 10:11:04,409 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.011, max_norm=44.9, min_std=10.690
+2026-01-24 10:11:07,564 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:08,785 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 14: Train Loss: 0.4294, Train Acc: 0.8705, Val Loss: 7.1889, Val Acc: 0.0449
+2026-01-24 10:11:09,344 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.283185
+2026-01-24 10:11:13,690 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:14,927 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 15: Train Loss: 0.3819, Train Acc: 0.8884, Val Loss: 6.9261, Val Acc: 0.0449
+2026-01-24 10:11:15,474 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.547027
+2026-01-24 10:11:19,771 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:21,037 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 16: Train Loss: 0.4139, Train Acc: 0.8616, Val Loss: 6.6365, Val Acc: 0.0449
+2026-01-24 10:11:21,584 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.312904
+2026-01-24 10:11:26,065 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:27,321 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 17: Train Loss: 0.3334, Train Acc: 0.8951, Val Loss: 6.4295, Val Acc: 0.0449
+2026-01-24 10:11:27,854 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.397257
+2026-01-24 10:11:32,213 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:33,493 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 18: Train Loss: 0.2670, Train Acc: 0.9152, Val Loss: 6.6315, Val Acc: 0.0449
+2026-01-24 10:11:34,054 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.253522
+2026-01-24 10:11:38,358 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:39,595 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 19: Train Loss: 0.2673, Train Acc: 0.9152, Val Loss: 6.6487, Val Acc: 0.0449
+2026-01-24 10:11:40,117 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.477119
+2026-01-24 10:11:44,404 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:45,678 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 20: Train Loss: 0.2678, Train Acc: 0.9152, Val Loss: 5.6333, Val Acc: 0.0899
+2026-01-24 10:11:46,282 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.193062
+2026-01-24 10:11:47,980 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.017, max_norm=35.7, min_std=8.215
+2026-01-24 10:11:50,558 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:51,843 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 21: Train Loss: 0.2782, Train Acc: 0.9174, Val Loss: 8.5715, Val Acc: 0.0449
+2026-01-24 10:11:52,392 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.101054
+2026-01-24 10:11:56,743 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:11:58,081 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 22: Train Loss: 0.2490, Train Acc: 0.9241, Val Loss: 7.0899, Val Acc: 0.0449
+2026-01-24 10:11:58,625 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.496119
+2026-01-24 10:12:02,987 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:12:04,238 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 23: Train Loss: 0.2418, Train Acc: 0.9308, Val Loss: 6.6776, Val Acc: 0.0674
+2026-01-24 10:12:04,240 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Early stopping triggered at epoch 23
+2026-01-24 10:12:04,242 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Running final test evaluation...
+2026-01-24 10:12:05,025 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Test Results:
+2026-01-24 10:12:05,025 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   loss: 6.8490
+2026-01-24 10:12:05,025 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   accuracy: 0.0678
+2026-01-24 10:12:05,025 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   avg_confidence: 0.9985
+2026-01-24 10:12:05,025 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_diversity: 0.2003
+2026-01-24 10:12:05,025 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_mean: 1.0000
+2026-01-24 10:12:05,025 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   embedding_norm_std: 0.0000
+2026-01-24 10:12:05,027 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Training completed
+2026-01-24 10:12:05,797 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Running comprehensive chaotic network analysis...
+2026-01-24 10:12:05,798 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Analyzing chaotic features and dynamics...
+2026-01-24 10:12:06,458 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Chaotic analysis completed
+2026-01-24 10:12:06,460 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating chaotic dynamics visualizations...
+2026-01-24 10:12:08,694 - experiment_chaotic_lorenz_full_chaotic_run_0 - WARNING - Embedding plotting failed: boolean index did not match indexed array along dimension 0; dimension is 8 but corresponding boolean dimension is 32
+2026-01-24 10:12:08,700 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Chaotic network analysis completed
+2026-01-24 10:13:54,160 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_lorenz_full_chaotic_run_0
+2026-01-24 10:13:54,160 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Device: cuda
+2026-01-24 10:13:54,160 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0
+2026-01-24 10:13:54,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-01-24 10:13:54,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-24 10:13:54,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-01-24 10:13:54,162 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-01-24 10:13:54,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-01-24 10:13:54,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-01-24 10:13:54,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-01-24 10:13:54,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-01-24 10:13:54,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-01-24 10:13:54,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating model...
+2026-01-24 10:13:54,550 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-01-24 10:15:00,917 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Total parameters: 520,511
+2026-01-24 10:15:00,917 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Trainable parameters: 520,511
+2026-01-24 10:15:00,917 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating optimizer...
+2026-01-24 10:15:02,048 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2026-01-24 10:15:02,049 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating scheduler...
+2026-01-24 10:15:02,049 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2026-01-24 10:15:02,049 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Creating criterion...
+2026-01-24 10:15:02,049 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-01-24 10:15:02,097 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Lyapunov_loss/base/experiments/chaotic_lorenz_full_chaotic_run_0/config.json
+2026-01-24 10:15:02,097 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Experiment setup completed
+2026-01-24 10:15:02,098 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2026-01-24 10:15:02,098 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-01-24 10:15:02,238 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - 
+================================================================================
+2026-01-24 10:15:02,238 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-24 10:15:02,238 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+2026-01-24 10:15:02,238 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Batch Info:
+2026-01-24 10:15:02,238 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-24 10:15:02,238 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-01-24 10:15:02,243 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([24, 16, 12, 13,  9,  3, 12,  1], device='cuda:0')
+2026-01-24 10:15:02,822 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - ================================================================================
+
+2026-01-24 10:15:02,961 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-01-24 10:15:02,968 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.095, max_norm=48.2, min_std=7.916
+2026-01-24 10:15:03,795 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.583617
+2026-01-24 10:15:08,288 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:09,628 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 0: Train Loss: 4.4208, Train Acc: 0.0513, Val Loss: 4.0202, Val Acc: 0.0449
+2026-01-24 10:15:09,705 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 0
+2026-01-24 10:15:10,351 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.155750
+2026-01-24 10:15:14,826 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:16,170 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 1: Train Loss: 3.6521, Train Acc: 0.0960, Val Loss: 4.3036, Val Acc: 0.0449
+2026-01-24 10:15:16,737 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 2.200318
+2026-01-24 10:15:21,585 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:22,888 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 2: Train Loss: 2.7359, Train Acc: 0.2455, Val Loss: 4.7843, Val Acc: 0.0787
+2026-01-24 10:15:22,968 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 2
+2026-01-24 10:15:23,599 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.575588
+2026-01-24 10:15:27,957 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:29,226 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 3: Train Loss: 2.0882, Train Acc: 0.4129, Val Loss: 5.0839, Val Acc: 0.0899
+2026-01-24 10:15:29,301 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Saved new best model at epoch 3
+2026-01-24 10:15:29,904 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 1.653221
+2026-01-24 10:15:34,200 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:35,472 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 4: Train Loss: 1.6448, Train Acc: 0.4978, Val Loss: 5.5361, Val Acc: 0.0449
+2026-01-24 10:15:36,004 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.061043
+2026-01-24 10:15:40,391 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:41,677 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 5: Train Loss: 1.3430, Train Acc: 0.5804, Val Loss: 5.0784, Val Acc: 0.0449
+2026-01-24 10:15:42,243 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.153966
+2026-01-24 10:15:46,526 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:47,816 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 6: Train Loss: 1.2144, Train Acc: 0.6071, Val Loss: 5.4864, Val Acc: 0.0449
+2026-01-24 10:15:48,348 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 0.893912
+2026-01-24 10:15:48,784 - experiment_chaotic_lorenz_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=0.010, max_norm=48.2, min_std=11.549
+2026-01-24 10:15:52,699 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:15:53,948 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 7: Train Loss: 0.8907, Train Acc: 0.7165, Val Loss: 4.8711, Val Acc: 0.0449
+2026-01-24 10:15:54,489 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 0.708832
+2026-01-24 10:15:58,757 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.0, desync_weight=0.0, loss_sync=0.000000
+2026-01-24 10:16:00,023 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Epoch 8: Train Loss: 0.8480, Train Acc: 0.7188, Val Loss: 5.8816, Val Acc: 0.0449
+2026-01-24 10:16:00,613 - experiment_chaotic_lorenz_full_chaotic_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 0.517218

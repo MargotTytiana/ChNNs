@@ -47,7 +47,8 @@ class ChaoticEmbedding(nn.Module):
         beta: float = 8/3,
         coupling_strength: float = 1.0,
         noise_level: float = 0.0,
-        device: str = 'cpu'
+        device: str = 'cpu',
+        use_bifurcation_control: bool = False
     ):
         """
         Initialize the Chaotic Embedding Layer.
@@ -94,27 +95,47 @@ class ChaoticEmbedding(nn.Module):
         # For Mackey-Glass: we use time-delay embedding to create 3D trajectory
         # The delays for embedding: [0, tau/3, 2*tau/3]
         self.mg_embedding_delays = [0, self.mg_delay_steps // 3, 2 * self.mg_delay_steps // 3]
+
+        # Add after self.param_adapter definition
+        if use_bifurcation_control:
+            self.bifurcation_net = nn.Sequential(
+                nn.Linear(input_dim, 16),
+                nn.ReLU(),
+                nn.Linear(16, 1),
+                nn.Sigmoid()  # Output in [0, 1]
+            )
+            self.use_bifurcation_control = True
+        else:
+            self.bifurcation_net = None
+            self.use_bifurcation_control = False
         
         # Feature mapping networks
         self.initial_state_mapper = nn.Sequential(
-            nn.Linear(input_dim, 16),
-            nn.Tanh(),
-            nn.Linear(16, self.state_dim),
+            nn.Linear(input_dim, 128),  # ← 从16增加到128
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, self.state_dim),
             nn.Tanh()
         )
         
         self.coupling_mapper = nn.Sequential(
-            nn.Linear(input_dim, 8),
-            nn.Tanh(),
-            nn.Linear(8, self.state_dim),
+            nn.Linear(input_dim, 64),  # ← 从8增加到64
+            nn.ReLU(),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Linear(32, self.state_dim),
             nn.Tanh()
         )
         
-        # Parameter adaptation network
         self.param_adapter = nn.Sequential(
-            nn.Linear(input_dim, 8),
+            nn.Linear(input_dim, 64),  # ← 从8增加到64
             nn.ReLU(),
-            nn.Linear(8, 3),  # Adapt sigma, rho, beta
+            nn.Dropout(0.1),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Linear(32, 3),
             nn.Sigmoid()
         )
         
@@ -452,6 +473,21 @@ class ChaoticEmbedding(nn.Module):
             sigma = self.sigma * (0.5 + param_scales[:, 0])  # 5-15
             rho = self.rho * (0.5 + param_scales[:, 1])      # 14-42
             beta = self.beta * (0.5 + param_scales[:, 2])    # 1.3-4.0
+            
+            # FIX v2: Bifurcation control as MODULATION, not replacement
+            # This preserves the learned param_adapter mapping while adding
+            # bifurcation-aware adjustment
+            if self.use_bifurcation_control and self.bifurcation_net is not None:
+                regime_signal = self.bifurcation_net(features).squeeze(-1)  # [batch], in [0, 1]
+                
+                # Option A: Multiplicative modulation (±20%)
+                # modulation_factor in [0.8, 1.2]
+                modulation_factor = 0.8 + 0.4 * regime_signal
+                rho = rho * modulation_factor
+                
+                # Clamp to safe chaotic range
+                rho = torch.clamp(rho, min=20.0, max=50.0)
+            
             return torch.stack([sigma, rho, beta], dim=1)
             
         elif self.system_type == 'rossler':
@@ -596,6 +632,20 @@ class AdaptiveChaoticEmbedding(ChaoticEmbedding):
             sigma = self.sigma_base * (0.5 + param_scales[:, 0])
             rho = self.rho_base * (0.5 + param_scales[:, 1])
             beta = self.beta_base * (0.5 + param_scales[:, 2])
+            
+            # FIX v2: Bifurcation control as MODULATION, not replacement
+            if self.use_bifurcation_control and self.bifurcation_net is not None:
+                regime_signal = self.bifurcation_net(features).squeeze(-1)  # [batch], in [0, 1]
+                
+                # Multiplicative modulation (±20%)
+                modulation_factor = 0.8 + 0.4 * regime_signal
+                rho = rho * modulation_factor
+                
+                # Clamp to safe chaotic range
+                rho = torch.clamp(rho, min=20.0, max=50.0)
+            
+            return torch.stack([sigma, rho, beta], dim=1)
+            
         else:
             sigma = param_scales[:, 0]
             rho = param_scales[:, 1] 

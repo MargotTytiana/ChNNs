@@ -258,8 +258,13 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         num_speakers: int = 251,  # Default to actual dataset size
         classifier_type: str = 'linear',
         
+        # Optional modules
+        use_bifurcation_control: bool = False,  # NEW: Enable bifurcation control
+        
         # Device
-        device: str = 'cpu'
+        device: str = 'cpu',
+
+        fixed_delay: int = 10
     ):
         super(ChaoticSpeakerRecognitionNetwork, self).__init__()
         
@@ -269,6 +274,7 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         self.hop_length = hop_length
         self.embedding_dim = embedding_dim
         self.delay_method = delay_method
+        self.fixed_delay = fixed_delay
         self.mlsa_scales = mlsa_scales
         self.rqa_radius_ratio = rqa_radius_ratio
         self.chaotic_system = chaotic_system
@@ -286,6 +292,7 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         self.num_speakers = num_speakers
         self.classifier_type = classifier_type
         self.device = device
+        self.use_bifurcation_control = use_bifurcation_control  # NEW
         
         # Initialize components
         self._initialize_components()
@@ -336,19 +343,25 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         # Phase space reconstruction - FIX CONFIGURATION
         from core.phase_space_reconstruction import EmbeddingConfig
         
-        # CRITICAL: Explicitly set embedding dimension
         phase_space_config = EmbeddingConfig()
-        phase_space_config.embedding_dim = self.embedding_dim  # Should be 10
-        phase_space_config.delay = 1  # Explicit delay
+        phase_space_config.max_dimension = self.embedding_dim
         
-        print(f"[CONFIG DEBUG] Setting phase space dimension to: {self.embedding_dim}")
+        # Get delay and dimension methods from config (with defaults)
+        self.delay_method = getattr(self, 'delay_method', 'autocorr')
+        self.dimension_method = getattr(self, 'dimension_method', 'false_neighbors')
+        
+        print(f"[CONFIG DEBUG] Phase space: dim={self.embedding_dim}, "
+              f"delay_method={self.delay_method}, dimension_method={self.dimension_method}")
         
         base_reconstructor = PhaseSpaceReconstructor(config=phase_space_config)
         
         self.phase_space = BatchPhaseSpaceReconstructor(
             reconstructor=base_reconstructor,
             fixed_output_length=200,
-            device=self.device
+            device=self.device,
+            delay_method=self.delay_method,
+            dimension_method=self.dimension_method,
+            fixed_delay=self.fixed_delay
         )
         
         # MLSA extractor
@@ -426,13 +439,22 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         
         # Chaotic embedding layer
         if ChaoticEmbedding is not None:
+            # FIX: Use self.use_bifurcation_control directly (already set from __init__ parameter)
+            # Previous bug: was re-reading from self.config which doesn't exist
             self.chaotic_embedding = ChaoticEmbedding(
                 input_dim=chaotic_feature_dim,
                 system_type=self.chaotic_system,
                 evolution_time=self.evolution_time,
                 time_step=self.time_step,
-                device=self.device
+                device=self.device,
+                use_bifurcation_control=self.use_bifurcation_control  # FIX: use instance variable
             )
+            print(f"[NETWORK DEBUG] ChaoticEmbedding created with:")
+            print(f"  use_bifurcation_control={self.use_bifurcation_control}")
+            _bif_exists = hasattr(self.chaotic_embedding, 'bifurcation_net') and self.chaotic_embedding.bifurcation_net is not None
+            print(f"  bifurcation_net exists: {_bif_exists}")
+            if _bif_exists:
+                print(f"  bifurcation_net: {self.chaotic_embedding.bifurcation_net}")
         else:
             trajectory_dim = int(self.evolution_time / self.time_step) * 3
             self.chaotic_embedding = MockComponent(None, trajectory_dim)
@@ -471,6 +493,39 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
             nn.Dropout(0.1),
             nn.Linear(chaotic_feature_dim, chaotic_feature_dim)
         )
+        
+        # ============ DIFFERENTIABLE CHAOTIC FEATURES ============
+        # Fully differentiable replacement for NumPy-based MLSA/RQA
+        try:
+            # Try core subdirectory first, then root directory
+            try:
+                from core.differentiable_chaos_features import DifferentiableChaoticFeatures
+            except ImportError:
+                from differentiable_chaos_features import DifferentiableChaoticFeatures
+            
+            self.diff_chaos_features = DifferentiableChaoticFeatures(
+                input_dim=self.embedding_dim,  # phase space dimension
+                lyapunov_dim=self.mlsa_feature_dim,
+                rqa_dim=self.rqa_feature_dim,
+                additional_stats=True
+            )
+            self.use_differentiable_features = True
+            
+            # === FIX: Pre-register projection layer in __init__ ===
+            diff_output_dim = self.diff_chaos_features.output_dim
+            expected_dim = self.mlsa_feature_dim + self.rqa_feature_dim
+            
+            if diff_output_dim != expected_dim:
+                self.diff_feat_projection = nn.Linear(diff_output_dim, expected_dim)
+                print(f"[INIT] Registered diff_feat_projection: {diff_output_dim} -> {expected_dim}")
+            else:
+                self.diff_feat_projection = nn.Identity()
+            
+            print(f"[GRADIENT FIX] Differentiable chaos features enabled: output_dim={self.diff_chaos_features.output_dim}")
+        except ImportError as e:
+            print(f"[WARNING] DifferentiableChaoticFeatures not available: {e}")
+            self.use_differentiable_features = False
+            self.diff_feat_projection = None
         
     def extract_chaotic_features(self, phase_space_data: torch.Tensor) -> torch.Tensor:
         """Extract chaotic features using MLSA and RQA with gradient preservation."""
@@ -542,7 +597,19 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
     
         batch_size = audio.shape[0]
         device = audio.device
-    
+
+        # --- 强力补丁：强制对齐子模块设备 ---
+        if hasattr(self, 'diff_feat_projection') and self.diff_feat_projection is not None:
+            self.diff_feat_projection.to(device) # 强制将投影层移动到 cuda:0
+            
+        if hasattr(self, 'diff_chaos_features'):
+            self.diff_chaos_features.to(device) # 确保微分特征提取器也在 cuda:0
+            
+        if hasattr(self, 'raw_audio_encoder'):
+            self.raw_audio_encoder.to(device)
+            self.raw_audio_projection.to(device)
+        # ----------------------------------
+        
         if debug:
             print("\n" + "="*60)
             print("FIXED FORWARD PASS - GRADIENT AWARE")
@@ -568,9 +635,22 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
         if debug:
             print(f"Phase space: shape={phase_space_data.shape}")
     
-        # Chaotic features (numpy-based, no gradients)
-        chaotic_features = self.extract_chaotic_features(phase_space_data)
-        chaotic_features = self.feature_projection(chaotic_features)
+        # ============ CHAOTIC FEATURES WITH GRADIENT FLOW ============
+        if hasattr(self, 'use_differentiable_features') and self.use_differentiable_features:
+            # Use differentiable chaos features (GRADIENT FLOWS!)
+            chaotic_features = self.diff_chaos_features(phase_space_data)
+            
+            # Use pre-registered projection layer
+            if self.diff_feat_projection is not None:
+                chaotic_features = self.diff_feat_projection(chaotic_features)
+            
+            if debug:
+                print(f"[DIFF] Chaotic features: shape={chaotic_features.shape}, "
+                      f"requires_grad={chaotic_features.requires_grad}")
+        else:
+            # Fallback: NumPy-based extraction (no gradients)
+            chaotic_features = self.extract_chaotic_features(phase_space_data)
+            chaotic_features = self.feature_projection(chaotic_features)
     
         if debug:
             print(f"Chaotic features (projected): shape={chaotic_features.shape}")
@@ -591,18 +671,32 @@ class ChaoticSpeakerRecognitionNetwork(nn.Module):
     
         # ========== GRADIENT FIX: Combine chaotic and differentiable paths ==========
         if raw_feat is not None:
+            # 获取输入音频当前的设备 (应当是 cuda:0)
+            target_device = audio.device
+            
+            # 强制确保融合参数 alpha 在正确的设备上
+            self.mix_alpha.data = self.mix_alpha.data.to(target_device)
+            
+            # 确保 raw_feat 在正确的设备上
+            raw_feat = raw_feat.to(target_device)
+
             # Ensure dimensions match
             if raw_feat.shape[-1] != pooled_features.shape[-1]:
-                # Adjust projection if needed
                 if not hasattr(self, '_raw_feat_adjust'):
                     self._raw_feat_adjust = nn.Linear(
                         raw_feat.shape[-1], pooled_features.shape[-1]
-                    ).to(device)
+                    ).to(target_device) # 显式移动
+                
+                # 再次确认调整层也在正确的设备
+                self._raw_feat_adjust.to(target_device)
                 raw_feat = self._raw_feat_adjust(raw_feat)
     
             # Learnable combination
             alpha = torch.sigmoid(self.mix_alpha)
+            # 此时 pooled_features, alpha, raw_feat 均在 target_device 上
             pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+
+            
     
             if debug:
                 print(f"Mixed features: alpha={alpha.item():.4f}")
@@ -723,42 +817,36 @@ class BatchPhaseSpaceReconstructor(nn.Module):
     """Batch-enabled wrapper for PhaseSpaceReconstructor."""
     
     def __init__(self, reconstructor: PhaseSpaceReconstructor, 
-                 fixed_output_length: int = 100,
-                 device: str = 'cpu'):
+                 fixed_output_length: int = 200,
+                 device: str = 'cpu',
+                 delay_method: str = 'autocorr',
+                 dimension_method: str = 'false_neighbors',
+                 fixed_delay: int = None):
         super().__init__()
         self.reconstructor = reconstructor
+        self.delay_method = delay_method
+        self.dimension_method = dimension_method
+        self.fixed_delay = fixed_delay if fixed_delay is not None else 10
         self.fixed_output_length = fixed_output_length
         self.device = device
         
     def forward(self, audio_batch: torch.Tensor) -> torch.Tensor:
-        """Process a batch of audio signals."""
-        batch_size = audio_batch.shape[0]
-        results = []
-        
-        for i in range(batch_size):
-            single_audio = audio_batch[i].cpu().numpy()
+            """Process a batch of audio signals."""
+            batch_size = audio_batch.shape[0]
+            results = []
             
-            # CRITICAL FIX: Force use of our corrected fallback method
-            # Skip the reconstructor since it's returning wrong dimension (2 instead of 10)
-            embedded_tensor = self._create_fallback_embedding(audio_batch[i])
+            for i in range(batch_size):
+                embedded_tensor = self._create_fallback_embedding(audio_batch[i])
+                results.append(embedded_tensor)
             
-            if i == 0:  # Debug for first sample
-                print(f"[PHASE SPACE FIX] Using corrected fallback: shape={embedded_tensor.shape}")
-            
-            results.append(embedded_tensor)
+            standardized = self._standardize_length(results)
         
-        standardized = self._standardize_length(results)
-        
-        # DEBUG: Final output shape
-        if batch_size > 0:
-            print(f"[PHASE SPACE FIX] Final standardized shape: {standardized.shape}")
-        
-        return standardized.to(self.device)
+            return standardized.to(audio_batch.device)
     
     def _create_fallback_embedding(self, audio: torch.Tensor) -> torch.Tensor:
         """Create simple fallback phase space embedding with CORRECT dimension."""
-        delay = 10
-        dim = 10  # CRITICAL FIX: Changed from 3 to 10 to match expected dimension
+        delay = getattr(self, 'fixed_delay', None) or 10
+        dim = getattr(self.reconstructor.config, 'max_dimension', 10)
         
         audio_np = audio.cpu().numpy()
         n_points = len(audio_np) - (dim - 1) * delay
@@ -809,20 +897,746 @@ def create_chaotic_speaker_network(config: Dict) -> ChaoticSpeakerRecognitionNet
     """
     return ChaoticSpeakerRecognitionNetwork(**config)
 
-# 在文件末尾，create_chaotic_speaker_network 函数之后添加：
-
-# ============== 向后兼容性别名 ==============
-# 为了兼容 hybrid_models.py 的导入
 SpeakerEmbedding = EnhancedSpeakerEmbedding
 ChaoticClassifier = EnhancedChaoticClassifier
 
-# 导出所有需要的类
+
+# ============================================================
+# ADVERSARIAL CHAOTIC AUGMENTATION
+# ============================================================
+
+class AdversarialChaoticAugmentation(nn.Module):
+    """
+    Adversarial Chaos Injection for robust training.
+    
+    Adds controlled perturbations to chaotic system parameters
+    or trajectories during training to improve model robustness.
+    """
+    
+    def __init__(
+        self,
+        perturbation_scale: float = 0.1,
+        parameter_noise: bool = True,
+        trajectory_noise: bool = True,
+        adversarial_steps: int = 1
+    ):
+        super().__init__()
+        self.perturbation_scale = perturbation_scale
+        self.parameter_noise = parameter_noise
+        self.trajectory_noise = trajectory_noise
+        self.adversarial_steps = adversarial_steps
+        
+    def perturb_parameters(
+        self, 
+        params: torch.Tensor,
+        grad_direction: torch.Tensor = None
+    ) -> torch.Tensor:
+        """Add adversarial perturbation to chaotic system parameters."""
+        if grad_direction is not None:
+            perturbation = self.perturbation_scale * torch.sign(grad_direction)
+        else:
+            perturbation = self.perturbation_scale * torch.randn_like(params)
+        return params + perturbation
+    
+    def perturb_trajectory(
+        self, 
+        trajectory: torch.Tensor,
+        epsilon: float = None
+    ) -> torch.Tensor:
+        """Add noise to trajectory for robustness."""
+        eps = epsilon if epsilon else self.perturbation_scale * 0.1
+        noise = eps * torch.randn_like(trajectory)
+        return trajectory + noise
+    
+    def forward(
+        self,
+        chaotic_embedding: nn.Module = None,
+        features: torch.Tensor = None,
+        original_trajectory: torch.Tensor = None
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Generate adversarially perturbed trajectories.
+        
+        Returns:
+            Tuple of (clean_trajectory, perturbed_trajectory)
+        """
+        if not self.training:
+            return original_trajectory, original_trajectory
+        
+        if original_trajectory is None and chaotic_embedding is not None and features is not None:
+            with torch.no_grad():
+                clean_trajectory = chaotic_embedding(features)
+        else:
+            clean_trajectory = original_trajectory
+        
+        if clean_trajectory is None:
+            raise ValueError("Either original_trajectory or (chaotic_embedding + features) must be provided")
+        
+        perturbed = clean_trajectory.clone()
+        
+        if self.trajectory_noise:
+            perturbed = self.perturb_trajectory(perturbed)
+        
+        return clean_trajectory, perturbed
+
+
+# ============================================================
+# LYAPUNOV STABILITY REGULARIZATION
+# ============================================================
+
+class LyapunovStabilityLoss(nn.Module):
+    """
+    Lyapunov Stability Regularization Loss.
+    
+    Encourages chaotic trajectories to remain in a bounded, stable
+    attractor region while maintaining positive Lyapunov exponents
+    (i.e., staying chaotic but not exploding or collapsing).
+    
+    This addresses common training issues:
+    - Trajectory explosion (values -> infinity)
+    - Trajectory collapse (values -> constant)
+    - Loss of chaotic dynamics
+    """
+    
+    def __init__(
+        self,
+        target_lyapunov_range: Tuple[float, float] = (0.1, 2.0),
+        trajectory_bound: float = 50.0,
+        stability_weight: float = 0.1,
+        diversity_weight: float = 0.05,
+        collapse_threshold: float = 0.1
+    ):
+        """
+        Args:
+            target_lyapunov_range: (min, max) acceptable Lyapunov exponent range
+            trajectory_bound: Maximum allowed trajectory norm
+            stability_weight: Weight for stability losses
+            diversity_weight: Weight for embedding diversity loss
+            collapse_threshold: Minimum trajectory std to prevent collapse
+        """
+        super().__init__()
+        self.target_lyap_min = target_lyapunov_range[0]
+        self.target_lyap_max = target_lyapunov_range[1]
+        self.trajectory_bound = trajectory_bound
+        self.stability_weight = stability_weight
+        self.diversity_weight = diversity_weight
+        self.collapse_threshold = collapse_threshold
+    
+    def estimate_lyapunov(self, trajectories: torch.Tensor) -> torch.Tensor:
+        """
+        Estimate local Lyapunov exponent from trajectory divergence.
+        
+        Args:
+            trajectories: [batch, time_steps, dim]
+        Returns:
+            lyapunov_estimates: [batch]
+        """
+        # Compute local divergence rate from trajectory differences
+        diffs = trajectories[:, 1:, :] - trajectories[:, :-1, :]  # [batch, T-1, dim]
+        diff_norms = torch.norm(diffs, dim=2) + 1e-8  # [batch, T-1]
+        
+        # Log of expansion rate (proxy for local Lyapunov)
+        # Avoid division by zero
+        ratios = diff_norms[:, 1:] / diff_norms[:, :-1].clamp(min=1e-8)
+        log_expansion = torch.log(ratios.clamp(min=1e-8))
+        
+        # Mean Lyapunov estimate per sample
+        mean_lyapunov = log_expansion.mean(dim=1)  # [batch]
+        
+        return mean_lyapunov
+    
+    def forward(
+        self, 
+        trajectories: torch.Tensor,
+        embeddings: torch.Tensor = None
+    ) -> Dict[str, torch.Tensor]:
+        """
+        Compute stability regularization losses.
+        
+        Args:
+            trajectories: Chaotic trajectories [batch, time_steps, dim]
+            embeddings: Speaker embeddings [batch, embed_dim] (optional)
+            
+        Returns:
+            Dictionary containing individual losses and total
+        """
+        losses = {}
+        batch_size, T, dim = trajectories.shape
+        device = trajectories.device
+        
+        # 1. Boundedness Loss: Penalize trajectories that explode
+        trajectory_norms = torch.norm(trajectories, dim=2)  # [batch, T]
+        max_norms = trajectory_norms.max(dim=1)[0]  # [batch]
+        boundedness_loss = F.relu(max_norms - self.trajectory_bound).mean()
+        losses['boundedness'] = boundedness_loss
+        
+        # 2. Lyapunov Range Loss: Keep Lyapunov in target range
+        mean_lyapunov = self.estimate_lyapunov(trajectories)
+        
+        # Penalize if Lyapunov is too small (not chaotic) or too large (unstable)
+        lyap_too_small = F.relu(self.target_lyap_min - mean_lyapunov)
+        lyap_too_large = F.relu(mean_lyapunov - self.target_lyap_max)
+        lyapunov_loss = (lyap_too_small + lyap_too_large).mean()
+        losses['lyapunov_range'] = lyapunov_loss
+        
+        # 3. Collapse Prevention: Ensure trajectory doesn't collapse to a point
+        trajectory_std = trajectories.std(dim=1).mean(dim=1)  # [batch]
+        collapse_loss = F.relu(self.collapse_threshold - trajectory_std).mean()
+        losses['anti_collapse'] = collapse_loss
+        
+        # 4. NaN/Inf Detection: Heavy penalty for numerical issues
+        has_nan = torch.isnan(trajectories).any()
+        has_inf = torch.isinf(trajectories).any()
+        numerical_loss = torch.tensor(0.0, device=device)
+        if has_nan or has_inf:
+            numerical_loss = torch.tensor(100.0, device=device)
+        losses['numerical_stability'] = numerical_loss
+        
+        # 5. Embedding Diversity (if provided): Prevent mode collapse
+        if embeddings is not None and embeddings.shape[0] > 1:
+            # Pairwise distances between embeddings
+            embed_normalized = F.normalize(embeddings, p=2, dim=1)
+            similarity_matrix = torch.mm(embed_normalized, embed_normalized.t())
+            
+            # Exclude diagonal
+            mask = ~torch.eye(embeddings.shape[0], dtype=torch.bool, device=device)
+            avg_similarity = similarity_matrix[mask].mean()
+            
+            # Penalize high similarity (mode collapse)
+            diversity_loss = F.relu(avg_similarity - 0.5)
+            losses['embedding_diversity'] = diversity_loss * self.diversity_weight
+        else:
+            losses['embedding_diversity'] = torch.tensor(0.0, device=device)
+        
+        # Total stability loss
+        total = (
+            self.stability_weight * boundedness_loss +
+            self.stability_weight * lyapunov_loss +
+            self.stability_weight * collapse_loss +
+            numerical_loss +
+            losses['embedding_diversity']
+        )
+        losses['total_stability'] = total
+        
+        # Add diagnostic info
+        losses['mean_lyapunov'] = mean_lyapunov.mean()
+        losses['max_trajectory_norm'] = max_norms.max()
+        losses['min_trajectory_std'] = trajectory_std.min()
+        
+        return losses
+
+
+# ============================================================
+# PHASE SYNCHRONIZATION LOSS
+# ============================================================
+
+class PhaseSynchronizationLoss(nn.Module):
+    """
+    Phase Synchronization Loss for speaker embedding learning.
+    
+    Encourages trajectories from the same speaker to synchronize,
+    while trajectories from different speakers should remain desynchronized.
+    
+    This leverages the fundamental property of chaotic systems where
+    coupled systems can achieve synchronization under certain conditions.
+    """
+    
+    def __init__(
+        self,
+        sync_weight: float = 0.1,
+        desync_weight: float = 0.1,
+        margin: float = 1.0,
+        distance_type: str = 'euclidean'
+    ):
+        super().__init__()
+        self.sync_weight = sync_weight
+        self.desync_weight = desync_weight
+        self.margin = margin
+        self.distance_type = distance_type
+        
+    def trajectory_distance(
+        self, 
+        traj1: torch.Tensor,
+        traj2: torch.Tensor
+    ) -> torch.Tensor:
+        """
+        Compute synchronization distance between two trajectories.
+        
+        Args:
+            traj1: First trajectory [T, dim]
+            traj2: Second trajectory [T, dim]
+            
+        Returns:
+            Scalar distance value
+        """
+        if self.distance_type == 'euclidean':
+            diff = traj1 - traj2
+            dist = torch.norm(diff, dim=1).mean()
+            
+        elif self.distance_type == 'cosine':
+            traj1_flat = traj1.reshape(traj1.size(0), -1)
+            traj2_flat = traj2.reshape(traj2.size(0), -1)
+            cos_sim = F.cosine_similarity(traj1_flat, traj2_flat, dim=-1)
+            dist = 1 - cos_sim
+            
+        elif self.distance_type == 'manhattan':
+            # manhattan distance
+            diff = torch.abs(traj1 - traj2)
+            dist = diff.sum(dim=-1).mean(dim=-1)
+            
+        else:
+            diff = traj1 - traj2
+            dist = torch.norm(diff, dim=1).mean()
+        return dist
+    
+    def forward(
+        self, 
+        trajectories: torch.Tensor,
+        labels: torch.Tensor,
+        sample_ratio: float = 0.5
+    ) -> Dict[str, torch.Tensor]:
+        """
+        Compute phase synchronization loss.
+        
+        Args:
+            trajectories: Chaotic trajectories [batch, T, dim]
+            labels: Speaker labels [batch]
+            sample_ratio: Ratio of pairs to sample (for efficiency)
+            
+        Returns:
+            Dictionary with sync_loss, desync_loss, and total
+        """
+        batch_size = trajectories.shape[0]
+        device = trajectories.device
+        
+        sync_loss = torch.tensor(0.0, device=device)
+        desync_loss = torch.tensor(0.0, device=device)
+        sync_count = 0
+        desync_count = 0
+        
+        # Sample pairs for efficiency
+        num_pairs = int(batch_size * (batch_size - 1) / 2 * sample_ratio)
+        num_pairs = max(num_pairs, min(10, batch_size * (batch_size - 1) // 2))
+        
+        indices = torch.randperm(batch_size * (batch_size - 1) // 2)[:num_pairs]
+        
+        pair_idx = 0
+        for i in range(batch_size):
+            for j in range(i + 1, batch_size):
+                if pair_idx not in indices:
+                    pair_idx += 1
+                    continue
+                pair_idx += 1
+                
+                dist = self.trajectory_distance(trajectories[i], trajectories[j])
+                
+                if labels[i] == labels[j]:
+                    # Same speaker: encourage synchronization (minimize distance)
+                    sync_loss = sync_loss + dist
+                    sync_count += 1
+                else:
+                    # Different speakers: encourage desynchronization
+                    desync_loss = desync_loss + F.relu(self.margin - dist)
+                    desync_count += 1
+        
+        # Normalize
+        if sync_count > 0:
+            sync_loss = sync_loss / sync_count
+        if desync_count > 0:
+            desync_loss = desync_loss / desync_count
+        
+        total_loss = self.sync_weight * sync_loss + self.desync_weight * desync_loss
+        
+        return {
+            'sync_loss': sync_loss,
+            'desync_loss': desync_loss,
+            'total_sync': total_loss,
+            'sync_pairs': sync_count,
+            'desync_pairs': desync_count
+        }
+
+
+# ============================================================
+# BIFURCATION CONTROL MODULE (Optional - Advanced)
+# ============================================================
+
+class BifurcationControlModule(nn.Module):
+    """
+    Bifurcation Control Module for adaptive chaos regime selection.
+    
+    This module learns to adjust chaotic system parameters to navigate
+    between different dynamical regimes (fixed point, periodic, chaotic)
+    based on input features, potentially improving speaker discrimination.
+    
+    Theory: By controlling the bifurcation parameter (e.g., rho in Lorenz),
+    we can push the system into regimes where speaker-specific features
+    are more distinguishable.
+    """
+    
+    def __init__(
+        self,
+        input_dim: int = 3,
+        hidden_dim: int = 32,
+        num_regimes: int = 4,
+        control_strength: float = 0.5,
+        learnable_boundaries: bool = True
+    ):
+        """
+        Args:
+            input_dim: Dimension of trajectory state (3 for Lorenz)
+            hidden_dim: Hidden layer dimension
+            num_regimes: Number of distinct dynamical regimes to learn
+            control_strength: How strongly to modify trajectories
+            learnable_boundaries: Whether regime boundaries are learnable
+        """
+        super().__init__()
+        self.input_dim = input_dim
+        self.hidden_dim = hidden_dim
+        self.num_regimes = num_regimes
+        self.control_strength = control_strength
+        
+        # Regime classifier: determines which regime the trajectory is in
+        self.regime_classifier = nn.Sequential(
+            nn.Linear(input_dim * 2, hidden_dim),  # mean + std of trajectory
+            nn.ReLU(),
+            nn.Linear(hidden_dim, num_regimes),
+            nn.Softmax(dim=-1)
+        )
+        
+        # Regime-specific transformation parameters
+        # Each regime has its own scaling and bias
+        self.regime_scales = nn.Parameter(torch.ones(num_regimes, input_dim))
+        self.regime_biases = nn.Parameter(torch.zeros(num_regimes, input_dim))
+        
+        # Bifurcation parameter predictor
+        # Predicts adjustment to system parameters based on trajectory
+        self.bifurcation_predictor = nn.Sequential(
+            nn.Linear(input_dim * 2, hidden_dim),
+            nn.Tanh(),
+            nn.Linear(hidden_dim, 3),  # sigma, rho, beta adjustments
+            nn.Tanh()  # Bounded adjustments
+        )
+        
+        # Learnable regime boundaries (in terms of Lyapunov-like measure)
+        if learnable_boundaries:
+            self.regime_boundaries = nn.Parameter(
+                torch.linspace(0, 1, num_regimes + 1)[1:-1]
+            )
+        else:
+            self.register_buffer(
+                'regime_boundaries',
+                torch.linspace(0, 1, num_regimes + 1)[1:-1]
+            )
+        
+        self._init_weights()
+    
+    def _init_weights(self):
+        for m in self.modules():
+            if isinstance(m, nn.Linear):
+                nn.init.xavier_normal_(m.weight)
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias)
+    
+    def compute_trajectory_statistics(
+        self, 
+        trajectory: torch.Tensor
+    ) -> torch.Tensor:
+        """
+        Compute statistics for regime classification.
+        
+        Args:
+            trajectory: [batch, T, dim]
+        Returns:
+            statistics: [batch, dim * 2]
+        """
+        mean = trajectory.mean(dim=1)  # [batch, dim]
+        std = trajectory.std(dim=1)    # [batch, dim]
+        return torch.cat([mean, std], dim=-1)
+    
+    def estimate_local_lyapunov(
+        self, 
+        trajectory: torch.Tensor
+    ) -> torch.Tensor:
+        """
+        Estimate local Lyapunov-like measure for regime detection.
+        
+        Args:
+            trajectory: [batch, T, dim]
+        Returns:
+            lyapunov_estimate: [batch]
+        """
+        # Compute local divergence rate
+        diffs = trajectory[:, 1:, :] - trajectory[:, :-1, :]
+        diff_norms = torch.norm(diffs, dim=2) + 1e-8
+        
+        # Log expansion rate
+        log_expansion = torch.log(diff_norms[:, 1:] / diff_norms[:, :-1].clamp(min=1e-8))
+        
+        # Mean and normalize to [0, 1]
+        lyap = log_expansion.mean(dim=1)
+        lyap_normalized = torch.sigmoid(lyap)
+        
+        return lyap_normalized
+    
+    def forward(
+        self, 
+        trajectory: torch.Tensor,
+        return_regime_info: bool = False
+    ) -> Union[torch.Tensor, Tuple[torch.Tensor, Dict]]:
+        """
+        Apply bifurcation control to trajectory.
+        
+        Args:
+            trajectory: Input trajectory [batch, T, dim]
+            return_regime_info: Whether to return regime information
+            
+        Returns:
+            controlled_trajectory: Modified trajectory [batch, T, dim]
+            regime_info: (optional) Dictionary with regime details
+        """
+        batch_size, T, dim = trajectory.shape
+        
+        # Compute trajectory statistics
+        stats = self.compute_trajectory_statistics(trajectory)
+        
+        # Classify regime
+        regime_probs = self.regime_classifier(stats)  # [batch, num_regimes]
+        
+        # Get regime-specific transformations (soft selection)
+        # [batch, num_regimes] @ [num_regimes, dim] -> [batch, dim]
+        selected_scales = torch.matmul(regime_probs, self.regime_scales)
+        selected_biases = torch.matmul(regime_probs, self.regime_biases)
+        
+        # Apply transformation
+        # Expand to match trajectory shape
+        scales = selected_scales.unsqueeze(1)  # [batch, 1, dim]
+        biases = selected_biases.unsqueeze(1)  # [batch, 1, dim]
+        
+        controlled = trajectory * (1 + self.control_strength * scales) + \
+                     self.control_strength * biases
+        
+        # Predict bifurcation adjustments (for monitoring/analysis)
+        bifurcation_params = self.bifurcation_predictor(stats)
+        
+        if return_regime_info:
+            regime_info = {
+                'regime_probs': regime_probs,
+                'dominant_regime': torch.argmax(regime_probs, dim=1),
+                'bifurcation_adjustments': bifurcation_params,
+                'local_lyapunov': self.estimate_local_lyapunov(trajectory)
+            }
+            return controlled, regime_info
+        
+        return controlled
+    
+    def get_regime_statistics(
+        self, 
+        trajectory: torch.Tensor
+    ) -> Dict[str, torch.Tensor]:
+        """Get detailed regime statistics for analysis."""
+        stats = self.compute_trajectory_statistics(trajectory)
+        regime_probs = self.regime_classifier(stats)
+        lyap = self.estimate_local_lyapunov(trajectory)
+        
+        return {
+            'regime_distribution': regime_probs.mean(dim=0),
+            'mean_lyapunov': lyap.mean(),
+            'lyapunov_std': lyap.std()
+        }
+
+
+# ============================================================
+# PLDA CLASSIFIER (Traditional Method for Comparison)
+# ============================================================
+
+class PLDAClassifier(nn.Module):
+    """
+    Probabilistic Linear Discriminant Analysis (PLDA) Classifier.
+    
+    A traditional speaker verification approach that models speaker
+    embeddings using a generative model with between-speaker and
+    within-speaker variability.
+    
+    This implementation provides a neural approximation of PLDA
+    for end-to-end training compatibility.
+    """
+    
+    def __init__(
+        self,
+        embedding_dim: int = 256,
+        num_speakers: int = 251,
+        latent_dim: int = 128,
+        use_length_norm: bool = True
+    ):
+        """
+        Args:
+            embedding_dim: Input speaker embedding dimension
+            num_speakers: Number of speakers (for enrollment)
+            latent_dim: Dimension of latent speaker space
+            use_length_norm: Whether to apply length normalization
+        """
+        super().__init__()
+        self.embedding_dim = embedding_dim
+        self.num_speakers = num_speakers
+        self.latent_dim = latent_dim
+        self.use_length_norm = use_length_norm
+        
+        # Between-class projection (speaker identity subspace)
+        self.between_class_proj = nn.Linear(embedding_dim, latent_dim, bias=False)
+        
+        # Within-class projection (session/channel variability)
+        self.within_class_proj = nn.Linear(embedding_dim, latent_dim, bias=False)
+        
+        # Global mean (centering)
+        self.register_buffer('global_mean', torch.zeros(embedding_dim))
+        
+        # Speaker centroids for classification
+        self.speaker_centroids = nn.Parameter(torch.randn(num_speakers, latent_dim) * 0.1)
+        
+        # Precision matrices (simplified as diagonal)
+        self.between_precision = nn.Parameter(torch.ones(latent_dim))
+        self.within_precision = nn.Parameter(torch.ones(latent_dim))
+        
+        # Scoring layer
+        self.score_scale = nn.Parameter(torch.tensor(1.0))
+        self.score_bias = nn.Parameter(torch.tensor(0.0))
+        
+        self._init_weights()
+        
+    def _init_weights(self):
+        nn.init.orthogonal_(self.between_class_proj.weight)
+        nn.init.orthogonal_(self.within_class_proj.weight)
+        
+    def length_normalize(self, x: torch.Tensor) -> torch.Tensor:
+        """Apply length normalization."""
+        return F.normalize(x, p=2, dim=-1)
+    
+    def center(self, x: torch.Tensor) -> torch.Tensor:
+        """Center embeddings by subtracting global mean."""
+        return x - self.global_mean
+    
+    def project_to_latent(self, x: torch.Tensor) -> torch.Tensor:
+        """Project embedding to PLDA latent space."""
+        if self.use_length_norm:
+            x = self.length_normalize(x)
+        x = self.center(x)
+        
+        # Combined projection
+        between = self.between_class_proj(x)
+        within = self.within_class_proj(x)
+        
+        # Latent representation emphasizes between-class
+        latent = between + 0.1 * within
+        
+        return latent
+    
+    def compute_llr_scores(
+        self, 
+        embeddings: torch.Tensor,
+        target_speakers: torch.Tensor = None
+    ) -> torch.Tensor:
+        """
+        Compute log-likelihood ratio scores.
+        
+        Args:
+            embeddings: Speaker embeddings [batch, embedding_dim]
+            target_speakers: Target speaker indices [batch] (optional)
+            
+        Returns:
+            scores: LLR scores against all speakers [batch, num_speakers]
+                   or against targets [batch] if target_speakers provided
+        """
+        # Project to latent space
+        latent = self.project_to_latent(embeddings)  # [batch, latent_dim]
+        
+        # Compute distances to all speaker centroids
+        # Using Mahalanobis-like distance with learned precision
+        diff = latent.unsqueeze(1) - self.speaker_centroids.unsqueeze(0)  # [batch, num_speakers, latent_dim]
+        
+        # Weighted squared distance
+        precision = F.softplus(self.between_precision)  # Ensure positive
+        weighted_diff = diff * precision.unsqueeze(0).unsqueeze(0)
+        distances = (weighted_diff * diff).sum(dim=-1)  # [batch, num_speakers]
+        
+        # Convert to scores (negative distance = higher similarity)
+        scores = -distances * self.score_scale + self.score_bias
+        
+        if target_speakers is not None:
+            # Return scores for specific targets
+            batch_idx = torch.arange(embeddings.shape[0], device=embeddings.device)
+            return scores[batch_idx, target_speakers]
+        
+        return scores
+    
+    def forward(
+        self, 
+        embeddings: torch.Tensor,
+        labels: torch.Tensor = None
+    ) -> torch.Tensor:
+        """
+        Forward pass for classification.
+        
+        Args:
+            embeddings: Speaker embeddings [batch, embedding_dim]
+            labels: Speaker labels [batch] (used for training metrics)
+            
+        Returns:
+            logits: Classification logits [batch, num_speakers]
+        """
+        scores = self.compute_llr_scores(embeddings)
+        return scores
+    
+    def verify(
+        self,
+        embedding1: torch.Tensor,
+        embedding2: torch.Tensor,
+        threshold: float = 0.0
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Speaker verification between two embeddings.
+        
+        Args:
+            embedding1: First embedding [batch, embedding_dim]
+            embedding2: Second embedding [batch, embedding_dim]
+            threshold: Decision threshold
+            
+        Returns:
+            decisions: Boolean verification decisions [batch]
+            scores: Verification scores [batch]
+        """
+        latent1 = self.project_to_latent(embedding1)
+        latent2 = self.project_to_latent(embedding2)
+        
+        # Compute similarity score
+        precision = F.softplus(self.between_precision)
+        diff = latent1 - latent2
+        weighted_diff = diff * precision
+        distance = (weighted_diff * diff).sum(dim=-1)
+        
+        scores = -distance * self.score_scale + self.score_bias
+        decisions = scores > threshold
+        
+        return decisions, scores
+    
+    def update_global_mean(self, embeddings: torch.Tensor):
+        """Update global mean from training data (call during training)."""
+        with torch.no_grad():
+            batch_mean = embeddings.mean(dim=0)
+            # Exponential moving average
+            momentum = 0.99
+            self.global_mean = momentum * self.global_mean + (1 - momentum) * batch_mean
+
 __all__ = [
     'ChaoticSpeakerRecognitionNetwork',
     'EnhancedSpeakerEmbedding',
     'EnhancedChaoticClassifier',
-    'SpeakerEmbedding',  # 别名
-    'ChaoticClassifier',  # 别名
+    'AdversarialChaoticAugmentation',
+    'LyapunovStabilityLoss',
+    'PhaseSynchronizationLoss',
+    'BifurcationControlModule',
+    'PLDAClassifier',
+    'SpeakerEmbedding',
+    'ChaoticClassifier',
     'BatchPhaseSpaceReconstructor',
     'create_chaotic_speaker_network'
 ]

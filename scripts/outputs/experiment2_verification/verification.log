@@ -1,0 +1,94 @@
+2026-01-17 18:31:26,195 - exp2_verify - INFO - ============================================================
+2026-01-17 18:31:26,197 - exp2_verify - INFO - EXPERIMENT 2b: ROBUST VERIFICATION
+2026-01-17 18:31:26,197 - exp2_verify - INFO - ============================================================
+2026-01-17 18:31:27,467 - exp2_verify - INFO - 
+Processing mel_mlp...
+2026-01-17 18:31:28,441 - exp2_verify - INFO -   Testing Clean...
+2026-01-17 18:31:30,345 - exp2_verify - INFO -     Clean Gap: 0.3834 (Pos: 0.79, Neg: 0.41)
+2026-01-17 18:31:30,345 - exp2_verify - INFO -   Testing gaussian...
+2026-01-17 18:31:31,596 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2206
+2026-01-17 18:31:32,846 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1527
+2026-01-17 18:31:34,238 - exp2_verify - INFO -     SNR 10dB: Gap: 0.0934
+2026-01-17 18:31:35,542 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0484
+2026-01-17 18:31:36,712 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0227
+2026-01-17 18:31:36,712 - exp2_verify - INFO -   Testing babble...
+2026-01-17 18:31:37,594 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2564
+2026-01-17 18:31:38,625 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1886
+2026-01-17 18:31:40,199 - exp2_verify - INFO -     SNR 10dB: Gap: 0.1236
+2026-01-17 18:31:41,352 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0634
+2026-01-17 18:31:42,343 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0267
+2026-01-17 18:31:42,344 - exp2_verify - INFO -   Testing cafe...
+2026-01-17 18:31:43,526 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2272
+2026-01-17 18:31:44,618 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1572
+2026-01-17 18:31:46,046 - exp2_verify - INFO -     SNR 10dB: Gap: 0.0950
+2026-01-17 18:31:47,134 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0522
+2026-01-17 18:31:48,333 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0231
+2026-01-17 18:31:48,333 - exp2_verify - INFO -   Testing street...
+2026-01-17 18:31:49,422 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2669
+2026-01-17 18:31:50,375 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1965
+2026-01-17 18:31:51,212 - exp2_verify - INFO -     SNR 10dB: Gap: 0.1502
+2026-01-17 18:31:52,142 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0842
+2026-01-17 18:31:53,024 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0442
+2026-01-17 18:31:53,024 - exp2_verify - INFO - 
+Processing mfcc_mlp...
+2026-01-17 18:33:36,329 - exp2_verify - INFO - ============================================================
+2026-01-17 18:33:36,329 - exp2_verify - INFO - EXPERIMENT 2b: ROBUST VERIFICATION
+2026-01-17 18:33:36,329 - exp2_verify - INFO - ============================================================
+2026-01-17 18:33:36,821 - exp2_verify - INFO - 
+Processing mel_mlp...
+2026-01-17 18:33:37,832 - exp2_verify - INFO -   Testing Clean...
+2026-01-17 18:33:39,030 - exp2_verify - INFO -     Clean Gap: 0.3790 (Pos: 0.78, Neg: 0.40)
+2026-01-17 18:33:39,030 - exp2_verify - INFO -   Testing gaussian...
+2026-01-17 18:33:41,487 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2220
+2026-01-17 18:33:43,332 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1584
+2026-01-17 18:33:45,079 - exp2_verify - INFO -     SNR 10dB: Gap: 0.0923
+2026-01-17 18:33:46,826 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0428
+2026-01-17 18:33:48,589 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0184
+2026-01-17 18:33:48,590 - exp2_verify - INFO -   Testing babble...
+2026-01-17 18:33:50,102 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2532
+2026-01-17 18:33:51,357 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1833
+2026-01-17 18:33:52,600 - exp2_verify - INFO -     SNR 10dB: Gap: 0.1129
+2026-01-17 18:33:53,467 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0531
+2026-01-17 18:33:54,650 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0214
+2026-01-17 18:33:54,650 - exp2_verify - INFO -   Testing cafe...
+2026-01-17 18:33:55,666 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2278
+2026-01-17 18:33:56,846 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1636
+2026-01-17 18:33:58,043 - exp2_verify - INFO -     SNR 10dB: Gap: 0.0945
+2026-01-17 18:33:59,262 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0474
+2026-01-17 18:34:00,529 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0189
+2026-01-17 18:34:00,529 - exp2_verify - INFO -   Testing street...
+2026-01-17 18:34:01,796 - exp2_verify - INFO -     SNR 20dB: Gap: 0.2568
+2026-01-17 18:34:03,486 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1884
+2026-01-17 18:34:05,229 - exp2_verify - INFO -     SNR 10dB: Gap: 0.1412
+2026-01-17 18:34:06,641 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0743
+2026-01-17 18:34:08,011 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0329
+2026-01-17 18:34:08,013 - exp2_verify - INFO - 
+Processing mfcc_mlp...
+2026-01-17 18:34:08,058 - exp2_verify - INFO -   Testing Clean...
+2026-01-17 18:34:09,553 - exp2_verify - INFO -     Clean Gap: 0.6418 (Pos: 0.91, Neg: 0.27)
+2026-01-17 18:34:09,558 - exp2_verify - INFO -   Testing gaussian...
+2026-01-17 18:34:10,923 - exp2_verify - INFO -     SNR 20dB: Gap: 0.1821
+2026-01-17 18:34:12,230 - exp2_verify - INFO -     SNR 15dB: Gap: 0.0961
+2026-01-17 18:34:13,722 - exp2_verify - INFO -     SNR 10dB: Gap: 0.0454
+2026-01-17 18:34:15,554 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0192
+2026-01-17 18:34:17,041 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0073
+2026-01-17 18:34:17,042 - exp2_verify - INFO -   Testing babble...
+2026-01-17 18:34:18,170 - exp2_verify - INFO -     SNR 20dB: Gap: 0.3334
+2026-01-17 18:34:19,498 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1860
+2026-01-17 18:34:20,899 - exp2_verify - INFO -     SNR 10dB: Gap: 0.0827
+2026-01-17 18:34:22,684 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0336
+2026-01-17 18:34:24,659 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0118
+2026-01-17 18:34:24,659 - exp2_verify - INFO -   Testing cafe...
+2026-01-17 18:34:26,868 - exp2_verify - INFO -     SNR 20dB: Gap: 0.1926
+2026-01-17 18:34:28,250 - exp2_verify - INFO -     SNR 15dB: Gap: 0.1012
+2026-01-17 18:34:29,495 - exp2_verify - INFO -     SNR 10dB: Gap: 0.0479
+2026-01-17 18:34:30,734 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0202
+2026-01-17 18:34:31,972 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0083
+2026-01-17 18:34:31,973 - exp2_verify - INFO -   Testing street...
+2026-01-17 18:34:34,593 - exp2_verify - INFO -     SNR 20dB: Gap: 0.3353
+2026-01-17 18:34:36,369 - exp2_verify - INFO -     SNR 15dB: Gap: 0.2120
+2026-01-17 18:34:38,093 - exp2_verify - INFO -     SNR 10dB: Gap: 0.1173
+2026-01-17 18:34:40,197 - exp2_verify - INFO -     SNR 5dB: Gap: 0.0634
+2026-01-17 18:34:42,307 - exp2_verify - INFO -     SNR 0dB: Gap: 0.0288
+2026-01-17 18:34:42,319 - exp2_verify - INFO - 
+Saved results to outputs/experiment2_verification/verification_results.json

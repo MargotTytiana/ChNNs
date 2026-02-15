@@ -1,0 +1,60 @@
+BASELINE MODELS TRAINING REPORT
+==================================================
+Generated: 2026-01-13 13:17:08
+Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+
+SUMMARY STATISTICS
+--------------------
+Total experiments: 1
+Successful experiments: 1
+Failed experiments: 0
+Total training time: 123.1s (0.03h)
+
+METHOD RESULTS
+---------------
+
+MEL_MLP:
+  Accuracy: 0.9831 ± 0.0000 [nan, nan]
+  Loss: 0.0783 ± 0.0000
+  Training Time: 123.1s ± 0.0s
+  Number of runs: 1
+
+BEST METHODS
+------------
+Best Accuracy: mel_mlp (0.9831)
+Most Efficient: mel_mlp (123.1s)

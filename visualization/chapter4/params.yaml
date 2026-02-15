@@ -1,0 +1,26 @@
+metadata:
+  data_dir: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+  method: mutual_info
+  n_samples: 100
+  sample_rate: 16000
+recommended:
+  delay_ms: 0.75
+  embedding_dim: 4
+  fixed_delay: 12
+statistics:
+  dimension:
+    max: 4.0
+    mean: 3.68
+    median: 4.0
+    min: 2.0
+    q25: 4.0
+    q75: 4.0
+    std: 0.6615134163416493
+  tau:
+    max: 36.0
+    mean: 13.26
+    median: 12.5
+    min: 3.0
+    q25: 8.75
+    q75: 17.0
+    std: 7.2603305709864205

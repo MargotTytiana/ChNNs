@@ -128,6 +128,13 @@ class DifferentiableChaoticFeatures(nn.Module):
         Returns:
             chaotic_features: [batch, output_dim]
         """
+        # 获取输入张量的设备
+        dev = phase_space.device
+        
+        # 强制确保所有子模块都在同一设备上（针对嵌套模块失效的补丁）
+        self.lyapunov_estimator.to(dev)
+        self.rqa_estimator.to(dev)
+        
         # Ensure correct shape [batch, time, dim]
         if phase_space.shape[1] < phase_space.shape[2]:
             phase_space = phase_space.transpose(1, 2)

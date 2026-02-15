@@ -1,0 +1,236 @@
+2026-02-12 13:49:58,314 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-12 13:49:58,316 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-12 13:49:58,316 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-12 13:56:14,745 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-12 13:56:14,745 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-12 13:56:14,745 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-12 13:56:14,745 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-12 13:57:38,598 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-12 13:57:38,598 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-12 13:57:38,598 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-12 13:57:38,598 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-12 14:32:17,358 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-12 14:32:17,358 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-12 14:32:17,358 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-12 14:32:17,358 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-12 14:32:17,359 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-12 14:32:17,359 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-12 14:32:17,789 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-12 14:32:17,790 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-12 14:32:17,790 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-12 14:32:17,790 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-12 14:32:17,790 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-12 14:32:17,790 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-12 14:32:17,790 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-12 14:33:23,064 - experiment_ablation_minimal - INFO - Total parameters: 500,671
+2026-02-12 14:33:23,064 - experiment_ablation_minimal - INFO - Trainable parameters: 500,671
+2026-02-12 14:33:23,064 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-12 14:33:23,065 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-12 14:33:23,065 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-12 14:33:23,065 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-12 14:33:23,065 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-12 14:33:23,144 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-12 14:33:23,144 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-12 14:33:23,144 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-12 14:33:23,354 - experiment_ablation_minimal - INFO - 
+================================================================================
+2026-02-12 14:33:23,354 - experiment_ablation_minimal - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-12 14:33:23,355 - experiment_ablation_minimal - INFO - ================================================================================
+2026-02-12 14:33:23,355 - experiment_ablation_minimal - INFO - Batch Info:
+2026-02-12 14:33:23,355 - experiment_ablation_minimal - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-12 14:33:23,355 - experiment_ablation_minimal - INFO -   Targets shape: torch.Size([32])
+2026-02-12 14:33:23,356 - experiment_ablation_minimal - INFO -   Targets (first 8): tensor([18, 24,  5, 21, 17, 17, 21,  7], device='cuda:0')
+2026-02-12 14:33:23,425 - experiment_ablation_minimal - ERROR - Training failed with error: tuple index out of range
+2026-02-12 15:10:49,895 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-12 15:10:49,896 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-12 15:10:49,896 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-12 15:10:49,896 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-12 15:10:49,896 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-12 15:14:23,521 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-12 15:14:23,521 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-12 15:14:23,521 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-12 15:14:23,521 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-12 15:14:23,521 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-13 12:09:28,076 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-13 12:09:28,095 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-13 12:09:28,095 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-13 12:09:28,095 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-13 12:09:28,095 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-13 12:09:28,095 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-13 12:09:28,095 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-13 12:09:28,552 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-13 12:09:28,552 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-13 12:09:28,552 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-13 12:09:28,552 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-13 12:09:28,552 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-13 12:09:28,552 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-13 12:09:28,552 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-13 12:10:34,989 - experiment_ablation_minimal - INFO - Total parameters: 500,671
+2026-02-13 12:10:34,989 - experiment_ablation_minimal - INFO - Trainable parameters: 500,671
+2026-02-13 12:10:34,989 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-13 12:10:34,990 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-13 12:10:34,990 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-13 12:10:34,990 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-13 12:10:34,990 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-13 12:10:35,076 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-13 12:10:35,076 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-13 12:10:35,077 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-13 12:10:35,077 - experiment_ablation_minimal - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-02-13 12:10:35,275 - experiment_ablation_minimal - INFO - 
+================================================================================
+2026-02-13 12:10:35,275 - experiment_ablation_minimal - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-13 12:10:35,275 - experiment_ablation_minimal - INFO - ================================================================================
+2026-02-13 12:10:35,275 - experiment_ablation_minimal - INFO - Batch Info:
+2026-02-13 12:10:35,275 - experiment_ablation_minimal - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-13 12:10:35,275 - experiment_ablation_minimal - INFO -   Targets shape: torch.Size([32])
+2026-02-13 12:10:35,276 - experiment_ablation_minimal - INFO -   Targets (first 8): tensor([18, 24,  5, 21, 17, 17, 21,  7], device='cuda:0')
+2026-02-13 12:10:35,446 - experiment_ablation_minimal - ERROR - Training failed with error: CUDA out of memory. Tried to allocate 1098.63 GiB. GPU 0 has a total capacity of 4.75 GiB of which 3.60 GiB is free. Including non-PyTorch memory, this process has 1.14 GiB memory in use. Of the allocated memory 1021.40 MiB is allocated by PyTorch, and 22.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-02-13 12:46:43,151 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-13 12:46:43,151 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-13 12:46:43,151 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-13 12:46:43,151 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-13 12:46:43,151 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-13 12:46:43,152 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-13 12:46:43,152 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-13 12:46:43,586 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-13 12:46:43,586 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-13 12:46:43,586 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-13 12:46:43,586 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-13 12:46:43,586 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-13 12:46:43,586 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-13 12:46:43,586 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-13 12:47:49,537 - experiment_ablation_minimal - INFO - Total parameters: 500,671
+2026-02-13 12:47:49,537 - experiment_ablation_minimal - INFO - Trainable parameters: 500,671
+2026-02-13 12:47:49,537 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-13 12:47:49,537 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-13 12:47:49,537 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-13 12:47:49,537 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-13 12:47:49,537 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-13 12:47:49,614 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-13 12:47:49,614 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-13 12:47:49,614 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-13 12:47:49,615 - experiment_ablation_minimal - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-02-13 12:47:49,796 - experiment_ablation_minimal - INFO - 
+================================================================================
+2026-02-13 12:47:49,796 - experiment_ablation_minimal - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-13 12:47:49,796 - experiment_ablation_minimal - INFO - ================================================================================
+2026-02-13 12:47:49,796 - experiment_ablation_minimal - INFO - Batch Info:
+2026-02-13 12:47:49,796 - experiment_ablation_minimal - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-13 12:47:49,796 - experiment_ablation_minimal - INFO -   Targets shape: torch.Size([32])
+2026-02-13 12:47:49,797 - experiment_ablation_minimal - INFO -   Targets (first 8): tensor([18, 24,  5, 21, 17, 17, 21,  7], device='cuda:0')
+2026-02-13 12:47:49,960 - experiment_ablation_minimal - ERROR - Training failed with error: CUDA out of memory. Tried to allocate 1098.63 GiB. GPU 0 has a total capacity of 4.75 GiB of which 3.61 GiB is free. Including non-PyTorch memory, this process has 1.13 GiB memory in use. Of the allocated memory 1021.17 MiB is allocated by PyTorch, and 20.83 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-02-15 05:03:28,006 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-15 05:03:28,016 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-15 05:03:28,016 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-15 05:03:28,016 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-15 05:03:28,016 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-15 05:03:28,016 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-15 05:03:28,016 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-15 05:03:28,410 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-15 05:03:28,410 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-15 05:03:28,410 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-15 05:03:28,410 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-15 05:03:28,410 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-15 05:03:28,410 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-15 05:03:28,410 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-15 05:04:34,072 - experiment_ablation_minimal - INFO - Total parameters: 500,671
+2026-02-15 05:04:34,072 - experiment_ablation_minimal - INFO - Trainable parameters: 500,671
+2026-02-15 05:04:34,072 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-15 05:04:34,073 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-15 05:04:34,073 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-15 05:04:34,073 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-15 05:04:34,073 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-15 05:04:34,158 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-15 05:04:34,158 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-15 05:04:34,158 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-15 05:04:34,158 - experiment_ablation_minimal - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-02-15 05:04:34,434 - experiment_ablation_minimal - INFO - 
+================================================================================
+2026-02-15 05:04:34,435 - experiment_ablation_minimal - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-15 05:04:34,435 - experiment_ablation_minimal - INFO - ================================================================================
+2026-02-15 05:04:34,435 - experiment_ablation_minimal - INFO - Batch Info:
+2026-02-15 05:04:34,435 - experiment_ablation_minimal - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-15 05:04:34,435 - experiment_ablation_minimal - INFO -   Targets shape: torch.Size([32])
+2026-02-15 05:04:34,436 - experiment_ablation_minimal - INFO -   Targets (first 8): tensor([18, 24,  5, 21, 17, 17, 21,  7], device='cuda:0')
+2026-02-15 05:04:34,511 - experiment_ablation_minimal - INFO - ================================================================================
+
+2026-02-15 05:04:34,571 - experiment_ablation_minimal - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-15 05:04:34,573 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.063, max_norm=48.8, min_std=0.567
+2026-02-15 05:04:34,754 - experiment_ablation_minimal - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 6.509592
+2026-02-15 05:04:38,018 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.1, desync_weight=0.1, loss_sync=0.490322
+2026-02-15 05:04:38,461 - experiment_ablation_minimal - INFO - Epoch 0: Train Loss: 5.8993, Train Acc: 0.0603, Val Loss: 5.2392, Val Acc: 0.0449
+2026-02-15 05:04:38,524 - experiment_ablation_minimal - INFO - Saved new best model at epoch 0
+2026-02-15 05:04:38,555 - experiment_ablation_minimal - ERROR - Training failed with error: name 'checkpoint_state' is not defined
+2026-02-15 05:56:40,270 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-15 05:56:40,270 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-15 05:56:40,270 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-15 05:56:40,270 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-15 05:56:40,270 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-15 05:56:40,271 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-15 05:56:40,271 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-15 05:56:40,665 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-15 05:56:40,665 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-15 05:56:40,665 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-15 05:56:40,665 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-15 05:56:40,665 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-15 05:56:40,665 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-15 05:56:40,665 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-15 05:57:46,216 - experiment_ablation_minimal - INFO - Total parameters: 500,671
+2026-02-15 05:57:46,216 - experiment_ablation_minimal - INFO - Trainable parameters: 500,671
+2026-02-15 05:57:46,216 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-15 05:57:46,216 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-15 05:57:46,216 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-15 05:57:46,216 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-15 05:57:46,216 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-15 05:57:46,305 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-15 05:57:46,306 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-15 05:57:46,306 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-15 05:57:46,306 - experiment_ablation_minimal - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-02-15 05:57:46,528 - experiment_ablation_minimal - INFO - 
+================================================================================
+2026-02-15 05:57:46,529 - experiment_ablation_minimal - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-15 05:57:46,529 - experiment_ablation_minimal - INFO - ================================================================================
+2026-02-15 05:57:46,529 - experiment_ablation_minimal - INFO - Batch Info:
+2026-02-15 05:57:46,529 - experiment_ablation_minimal - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-15 05:57:46,529 - experiment_ablation_minimal - INFO -   Targets shape: torch.Size([32])
+2026-02-15 05:57:46,530 - experiment_ablation_minimal - INFO -   Targets (first 8): tensor([18, 24,  5, 21, 17, 17, 21,  7], device='cuda:0')
+2026-02-15 05:57:46,594 - experiment_ablation_minimal - INFO - ================================================================================
+
+2026-02-15 05:57:46,655 - experiment_ablation_minimal - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-15 05:57:46,656 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.063, max_norm=48.8, min_std=0.567
+2026-02-15 05:57:46,841 - experiment_ablation_minimal - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 6.509592
+2026-02-15 05:57:50,122 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.1, desync_weight=0.1, loss_sync=0.490322
+2026-02-15 05:57:50,543 - experiment_ablation_minimal - INFO - Epoch 0: Train Loss: 5.8993, Train Acc: 0.0603, Val Loss: 5.2392, Val Acc: 0.0449
+2026-02-15 05:57:50,606 - experiment_ablation_minimal - INFO - Saved new best model at epoch 0
+2026-02-15 05:57:50,636 - experiment_ablation_minimal - ERROR - Training failed with error: name 'checkpoint_manager' is not defined
+2026-02-15 06:38:43,438 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-15 06:38:43,438 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-15 06:38:43,438 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-15 07:41:47,883 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-15 07:41:47,897 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-15 07:41:47,897 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-15 07:41:47,898 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-15 07:41:47,898 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-15 07:41:47,898 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-15 07:41:47,898 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-15 07:41:48,303 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-15 07:41:48,303 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-15 07:41:48,303 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-15 07:41:48,304 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-15 07:41:48,304 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-15 07:41:48,304 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-15 07:41:48,304 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-15 07:42:37,843 - experiment_ablation_minimal - INFO - Total parameters: 402,615
+2026-02-15 07:42:37,843 - experiment_ablation_minimal - INFO - Trainable parameters: 402,615
+2026-02-15 07:42:37,843 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-15 07:42:37,843 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-15 07:42:37,843 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-15 07:42:37,843 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-15 07:42:37,844 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-15 07:42:37,921 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-15 07:42:37,921 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-15 07:42:37,921 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-15 07:42:37,921 - experiment_ablation_minimal - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-02-15 12:58:23,996 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-15 12:58:24,012 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-15 12:58:24,012 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal

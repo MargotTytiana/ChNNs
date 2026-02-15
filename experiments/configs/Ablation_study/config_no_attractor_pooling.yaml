@@ -1,0 +1,112 @@
+ablation:
+  baseline_config: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/base_chaotic.yaml
+  type: no_attractor_pooling
+audio:
+  frame_length: 400
+  hop_length: 160
+  max_audio_length: 3.0
+  min_audio_length: 0.5
+  normalize: true
+  sample_rate: 16000
+batch_size: 32
+data:
+  data_dir: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+  num_workers: 4
+  pin_memory: true
+  test_split: 0.15
+  train_split: 0.7
+  val_split: 0.15
+data_dir: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+experiment:
+  description: 'Ablation: no_attractor_pooling removed from 96.61% baseline'
+  name: ablation_no_attractor_pooling
+  version: '2.0'
+hardware:
+  device: auto
+  seed: 42
+loss:
+  adversarial:
+    enabled: false
+    perturbation_scale: 0.1
+    warmup_epochs: 5
+    weight: 0.3
+  classification:
+    type: cross_entropy
+  stability:
+    collapse_threshold: 0.1
+    diversity_weight: 0.05
+    enabled: true
+    target_lyapunov_range:
+    - 0.1
+    - 2.0
+    trajectory_bound: 50.0
+    weight: 0.1
+  synchronization:
+    desync_weight: 0.1
+    dynamic_warmup: false
+    enabled: true
+    sync_weight: 0.1
+    warmup_epochs: 0
+model:
+  attractor_pooling:
+    type: comprehensive
+  chaotic_embedding:
+    evolution_time: 0.5
+    lorenz:
+      beta: 2.6667
+      rho: 28.0
+      sigma: 10.0
+    system_type: lorenz
+    time_step: 0.01
+  chaotic_features:
+    mlsa:
+      scales: 5
+    rqa:
+      radius_ratio: 0.1
+  classifier:
+    temperature: 30.0
+    type: cosine
+  num_speakers: 251
+  phase_space:
+    delay_method: autocorr
+    embedding_dim: 10
+  speaker_embedding:
+    dim: 256
+    dropout_rate: 0.3
+    hidden_dims:
+    - 512
+    - 256
+    - 128
+    use_batch_norm: true
+  type: full_chaotic
+num_speakers: 251
+optional_modules:
+  bifurcation_control:
+    enabled: false
+  differentiable_features:
+    enabled: true
+output:
+  base_dir: ./experiments/outputs/base_chaotic
+training:
+  batch_size: 32
+  checkpoint:
+    save_best_only: true
+    save_frequency: 10
+  early_stopping:
+    enabled: true
+    mode: max
+    monitor: val_accuracy
+    patience: 30
+  gradient_clipping: 1.0
+  num_epochs: 100
+  optimizer:
+    betas:
+    - 0.9
+    - 0.999
+    learning_rate: 0.0005
+    type: adamw
+    weight_decay: 0.0001
+  scheduler:
+    T_max: 100
+    eta_min: 1.0e-06
+    type: cosine

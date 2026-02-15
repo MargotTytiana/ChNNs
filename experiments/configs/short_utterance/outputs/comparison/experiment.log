@@ -1,0 +1,2085 @@
+2026-01-25 07:34:45,352 - short_utterance - INFO - ============================================================
+2026-01-25 07:34:45,352 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 07:34:45,352 - short_utterance - INFO - ============================================================
+2026-01-25 07:34:45,353 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 07:34:45,353 - short_utterance - INFO - Preparing datasets...
+2026-01-25 07:34:45,353 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 07:34:45,745 - short_utterance - INFO - Dataset prepared:
+2026-01-25 07:34:45,745 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 07:34:45,745 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 07:34:45,745 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 07:34:45,745 - short_utterance - INFO -   Speakers: 26
+2026-01-25 07:34:45,746 - short_utterance - INFO - Setting up models...
+2026-01-25 07:34:45,746 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 07:34:45,746 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 07:34:45,858 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 07:34:45,858 - short_utterance - ERROR - Experiment failed: ChaoticSpeakerRecognitionNetwork.__init__() got an unexpected keyword argument 'input_dim'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 610, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 192, in train_or_load_models
+    self.models[model_name] = self._load_model(
+                              ^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 414, in _load_model
+    model = ChaoticSpeakerRecognitionNetwork(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ChaoticSpeakerRecognitionNetwork.__init__() got an unexpected keyword argument 'input_dim'
+2026-01-25 07:37:59,007 - short_utterance - INFO - ============================================================
+2026-01-25 07:37:59,008 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 07:37:59,008 - short_utterance - INFO - ============================================================
+2026-01-25 07:37:59,008 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 07:37:59,008 - short_utterance - INFO - Preparing datasets...
+2026-01-25 07:37:59,008 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 07:38:00,670 - short_utterance - INFO - Dataset prepared:
+2026-01-25 07:38:00,671 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 07:38:00,671 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 07:38:00,671 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 07:38:00,671 - short_utterance - INFO -   Speakers: 26
+2026-01-25 07:38:00,671 - short_utterance - INFO - Setting up models...
+2026-01-25 07:38:00,671 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 07:38:00,671 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 07:38:00,704 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 07:38:00,704 - short_utterance - ERROR - Experiment failed: ChaoticSpeakerRecognitionNetwork.__init__() got an unexpected keyword argument 'hidden_dims'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 610, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 192, in train_or_load_models
+    self.models[model_name] = self._load_model(
+                              ^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 414, in _load_model
+    model = ChaoticSpeakerRecognitionNetwork(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ChaoticSpeakerRecognitionNetwork.__init__() got an unexpected keyword argument 'hidden_dims'
+2026-01-25 07:41:39,206 - short_utterance - INFO - ============================================================
+2026-01-25 07:41:39,207 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 07:41:39,207 - short_utterance - INFO - ============================================================
+2026-01-25 07:41:39,207 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 07:41:39,207 - short_utterance - INFO - Preparing datasets...
+2026-01-25 07:41:39,207 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 07:41:39,590 - short_utterance - INFO - Dataset prepared:
+2026-01-25 07:41:39,590 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 07:41:39,590 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 07:41:39,590 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 07:41:39,590 - short_utterance - INFO -   Speakers: 26
+2026-01-25 07:41:39,590 - short_utterance - INFO - Setting up models...
+2026-01-25 07:41:39,591 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 07:41:39,591 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 07:41:39,623 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 07:41:39,623 - short_utterance - ERROR - Experiment failed: name 'num_speakers' is not defined
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 619, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 192, in train_or_load_models
+    self.models[model_name] = self._load_model(
+                              ^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 415, in _load_model
+    num_speakers=num_speakers,
+                 ^^^^^^^^^^^^
+NameError: name 'num_speakers' is not defined
+2026-01-25 07:42:43,619 - short_utterance - INFO - ============================================================
+2026-01-25 07:42:43,619 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 07:42:43,619 - short_utterance - INFO - ============================================================
+2026-01-25 07:42:43,619 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 07:42:43,619 - short_utterance - INFO - Preparing datasets...
+2026-01-25 07:42:43,619 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 07:42:44,004 - short_utterance - INFO - Dataset prepared:
+2026-01-25 07:42:44,004 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 07:42:44,004 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 07:42:44,004 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 07:42:44,004 - short_utterance - INFO -   Speakers: 26
+2026-01-25 07:42:44,004 - short_utterance - INFO - Setting up models...
+2026-01-25 07:42:44,004 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 07:42:44,004 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 07:42:44,036 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 07:42:44,036 - short_utterance - ERROR - Experiment failed: name 'num_speakers' is not defined
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 619, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 192, in train_or_load_models
+    self.models[model_name] = self._load_model(
+                              ^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 415, in _load_model
+    num_speakers=num_speakers,
+                 ^^^^^^^^^^^^
+NameError: name 'num_speakers' is not defined
+2026-01-25 07:46:53,865 - short_utterance - INFO - ============================================================
+2026-01-25 07:46:53,865 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 07:46:53,865 - short_utterance - INFO - ============================================================
+2026-01-25 07:46:53,866 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 07:46:53,866 - short_utterance - INFO - Preparing datasets...
+2026-01-25 07:46:53,866 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 07:46:54,253 - short_utterance - INFO - Dataset prepared:
+2026-01-25 07:46:54,253 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 07:46:54,253 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 07:46:54,253 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 07:46:54,253 - short_utterance - INFO -   Speakers: 26
+2026-01-25 07:46:54,253 - short_utterance - INFO - Setting up models...
+2026-01-25 07:46:54,253 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 07:46:54,253 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 07:48:00,627 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 07:48:00,628 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/scripts/outputs/experiment1_unified
+2026-01-25 07:48:00,628 - short_utterance - ERROR - Experiment failed: [Errno 21] Is a directory: '/scratch/project_2003370/yueyao/Model/scripts/outputs/experiment1_unified'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 590, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 192, in train_or_load_models
+    self.models[model_name] = self._load_model(
+                              ^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 387, in _load_model
+    checkpoint = torch.load(checkpoint_path, map_location='cpu')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/serialization.py", line 1479, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+IsADirectoryError: [Errno 21] Is a directory: '/scratch/project_2003370/yueyao/Model/scripts/outputs/experiment1_unified'
+2026-01-25 07:49:25,883 - short_utterance - INFO - ============================================================
+2026-01-25 07:49:25,883 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 07:49:25,883 - short_utterance - INFO - ============================================================
+2026-01-25 07:49:25,884 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 07:49:25,884 - short_utterance - INFO - Preparing datasets...
+2026-01-25 07:49:25,884 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 07:49:26,268 - short_utterance - INFO - Dataset prepared:
+2026-01-25 07:49:26,268 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 07:49:26,268 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 07:49:26,268 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 07:49:26,268 - short_utterance - INFO -   Speakers: 26
+2026-01-25 07:49:26,269 - short_utterance - INFO - Setting up models...
+2026-01-25 07:49:26,269 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 07:49:26,269 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 07:50:32,718 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 07:50:32,718 - short_utterance - INFO -   Training new model...
+2026-01-25 07:50:32,737 - short_utterance - ERROR - Experiment failed: Missing required config key: baseline_type
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 590, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 206, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 247, in _train_model
+    experiment = BaselineExperiment(config=exp_config)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 71, in __init__
+    self._validate_config()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 91, in _validate_config
+    raise ValueError(f"Missing required config key: {key}")
+ValueError: Missing required config key: baseline_type
+2026-01-25 07:51:24,070 - short_utterance - INFO - ============================================================
+2026-01-25 07:51:24,070 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 07:51:24,070 - short_utterance - INFO - ============================================================
+2026-01-25 07:51:24,070 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 07:51:24,070 - short_utterance - INFO - Preparing datasets...
+2026-01-25 07:51:24,070 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 07:51:24,458 - short_utterance - INFO - Dataset prepared:
+2026-01-25 07:51:24,458 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 07:51:24,458 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 07:51:24,458 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 07:51:24,458 - short_utterance - INFO -   Speakers: 26
+2026-01-25 07:51:24,458 - short_utterance - INFO - Setting up models...
+2026-01-25 07:51:24,458 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 07:51:24,458 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 07:52:29,957 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 07:52:29,957 - short_utterance - INFO -   Training new model...
+2026-01-25 07:52:29,974 - short_utterance - ERROR - Experiment failed: Missing required config key: baseline_type
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 590, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 206, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 247, in _train_model
+    experiment = BaselineExperiment(config=exp_config)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 71, in __init__
+    self._validate_config()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 91, in _validate_config
+    raise ValueError(f"Missing required config key: {key}")
+ValueError: Missing required config key: baseline_type
+2026-01-25 08:01:38,052 - short_utterance - INFO - ============================================================
+2026-01-25 08:01:38,052 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:01:38,052 - short_utterance - INFO - ============================================================
+2026-01-25 08:01:38,052 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:01:38,053 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:01:38,053 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:01:38,445 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:01:38,445 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:01:38,446 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:01:38,446 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:01:38,446 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:01:38,446 - short_utterance - INFO - Setting up models...
+2026-01-25 08:01:38,446 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:01:38,446 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:01:38,479 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:02:44,224 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:02:44,224 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:02:44,224 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:02:44,224 - short_utterance - INFO - ============================================================
+2026-01-25 08:02:44,224 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:02:45,094 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 583, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 431, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 294, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:05:35,685 - short_utterance - INFO - ============================================================
+2026-01-25 08:05:35,685 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:05:35,686 - short_utterance - INFO - ============================================================
+2026-01-25 08:05:35,686 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:05:35,686 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:05:35,686 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:05:36,070 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:05:36,070 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:05:36,071 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:05:36,071 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:05:36,071 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:05:36,071 - short_utterance - INFO - Setting up models...
+2026-01-25 08:05:36,071 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:05:36,071 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:05:36,104 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:06:42,086 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:06:42,086 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:06:42,086 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:06:42,086 - short_utterance - INFO - ============================================================
+2026-01-25 08:06:42,086 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:06:42,427 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 588, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 436, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 294, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:09:16,380 - short_utterance - INFO - ============================================================
+2026-01-25 08:09:16,380 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:09:16,380 - short_utterance - INFO - ============================================================
+2026-01-25 08:09:16,380 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:09:16,380 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:09:16,380 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:09:16,767 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:09:16,767 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:09:16,767 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:09:16,767 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:09:16,767 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:09:16,767 - short_utterance - INFO - Setting up models...
+2026-01-25 08:09:16,767 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:09:16,767 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:09:16,800 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:10:23,564 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:10:23,564 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:10:23,565 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:10:23,565 - short_utterance - INFO - ============================================================
+2026-01-25 08:10:23,565 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:10:23,900 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 588, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 436, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 296, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:16:11,065 - short_utterance - INFO - ============================================================
+2026-01-25 08:16:11,066 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:16:11,066 - short_utterance - INFO - ============================================================
+2026-01-25 08:16:11,066 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:16:11,066 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:16:11,066 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:16:11,451 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:16:11,451 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:16:11,451 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:16:11,451 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:16:11,451 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:16:11,451 - short_utterance - INFO - Setting up models...
+2026-01-25 08:16:11,451 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:16:11,451 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:16:11,484 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:17:17,435 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:17:17,435 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:17:17,435 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:17:17,435 - short_utterance - INFO - ============================================================
+2026-01-25 08:17:17,435 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:17:17,784 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 592, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 440, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 294, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:21:33,653 - short_utterance - INFO - ============================================================
+2026-01-25 08:21:33,653 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:21:33,653 - short_utterance - INFO - ============================================================
+2026-01-25 08:21:33,653 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:21:33,654 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:21:33,654 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:21:34,045 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:21:34,045 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:21:34,045 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:21:34,045 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:21:34,045 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:21:34,045 - short_utterance - INFO - Setting up models...
+2026-01-25 08:21:34,045 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:21:34,046 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:21:34,078 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:22:40,569 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:22:40,569 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:22:40,569 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:22:40,569 - short_utterance - INFO - ============================================================
+2026-01-25 08:22:40,570 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:22:40,937 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 592, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 440, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 294, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:25:13,298 - short_utterance - INFO - ============================================================
+2026-01-25 08:25:13,299 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:25:13,299 - short_utterance - INFO - ============================================================
+2026-01-25 08:25:13,299 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:25:13,299 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:25:13,299 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:25:13,686 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:25:13,686 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:25:13,686 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:25:13,686 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:25:13,686 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:25:13,686 - short_utterance - INFO - Setting up models...
+2026-01-25 08:25:13,687 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:25:13,687 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:25:13,719 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:26:18,993 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:26:18,994 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:26:18,994 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:26:18,994 - short_utterance - INFO - ============================================================
+2026-01-25 08:26:18,994 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:26:19,330 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 592, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 440, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 301, in compute_duration_performance_curve
+    outputs = model(audio) # 报错发生在这里
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:37:38,308 - short_utterance - INFO - ============================================================
+2026-01-25 08:37:38,308 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:37:38,308 - short_utterance - INFO - ============================================================
+2026-01-25 08:37:38,308 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:37:38,308 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:37:38,308 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:37:38,699 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:37:38,699 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:37:38,699 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:37:38,699 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:37:38,700 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:37:38,700 - short_utterance - INFO - Setting up models...
+2026-01-25 08:37:38,700 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:37:38,700 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:37:38,732 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:38:43,964 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:38:43,965 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:38:43,965 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:38:43,965 - short_utterance - INFO - ============================================================
+2026-01-25 08:38:43,965 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:38:44,309 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 592, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 440, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 283, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:40:25,498 - short_utterance - INFO - ============================================================
+2026-01-25 08:40:25,499 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:40:25,499 - short_utterance - INFO - ============================================================
+2026-01-25 08:40:25,499 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:40:25,499 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:40:25,499 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:40:25,897 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:40:25,897 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:40:25,898 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:40:25,898 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:40:25,898 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:40:25,898 - short_utterance - INFO - Setting up models...
+2026-01-25 08:40:25,898 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:40:25,898 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:40:25,931 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:41:31,787 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:41:31,787 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:41:31,787 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:41:31,788 - short_utterance - INFO - ============================================================
+2026-01-25 08:41:31,788 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:41:32,123 - short_utterance - ERROR - Experiment failed: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 273, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 592, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 440, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 279, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 629, in forward
+    chaotic_features = self.diff_chaos_features(phase_space_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 138, in forward
+    lyap_feat = self.lyapunov_estimator(phase_space)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/core/differentiable_chaos_features.py", line 42, in forward
+    x = self.conv1d(x)  # [batch, 64, 1]
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 375, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/conv.py", line 370, in _conv_forward
+    return F.conv1d(
+           ^^^^^^^^^
+RuntimeError: Input type (torch.FloatTensor) and weight type (torch.cuda.FloatTensor) should be the same or input should be a MKLDNN tensor and weight is a dense tensor
+2026-01-25 08:44:51,030 - short_utterance - INFO - ============================================================
+2026-01-25 08:44:51,031 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:44:51,031 - short_utterance - INFO - ============================================================
+2026-01-25 08:44:51,031 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:44:51,031 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:44:51,031 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:44:51,414 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:44:51,414 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:44:51,414 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:44:51,414 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:44:51,414 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:44:51,414 - short_utterance - INFO - Setting up models...
+2026-01-25 08:44:51,414 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:44:51,414 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:44:51,446 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:45:57,814 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 08:45:57,815 - short_utterance - INFO - 
+============================================================
+2026-01-25 08:45:57,815 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 08:45:57,815 - short_utterance - INFO - ============================================================
+2026-01-25 08:45:57,815 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 08:45:58,830 - short_utterance - ERROR - Experiment failed: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 279, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 633, in forward
+    chaotic_features = self.diff_feat_projection(chaotic_features)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 592, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 440, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 283, in compute_duration_performance_curve
+    outputs = model(audio.to(actual_model_dev))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 633, in forward
+    chaotic_features = self.diff_feat_projection(chaotic_features)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+2026-01-25 08:51:18,535 - short_utterance - INFO - ============================================================
+2026-01-25 08:51:18,535 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:51:18,535 - short_utterance - INFO - ============================================================
+2026-01-25 08:51:18,536 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:51:18,536 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:51:18,536 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:51:18,920 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:51:18,920 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:51:18,920 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:51:18,920 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:51:18,920 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:51:18,920 - short_utterance - INFO - Setting up models...
+2026-01-25 08:51:18,920 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:51:18,920 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 08:51:18,953 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 08:52:24,776 - short_utterance - ERROR - Experiment failed: 'function' object has no attribute 'eval'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 596, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 222, in train_or_load_models
+    self.models[model_name] = self._load_model(
+                              ^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 425, in _load_model
+    model.eval()
+    ^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'eval'
+2026-01-25 08:59:44,199 - short_utterance - INFO - ============================================================
+2026-01-25 08:59:44,199 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 08:59:44,199 - short_utterance - INFO - ============================================================
+2026-01-25 08:59:44,199 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 08:59:44,199 - short_utterance - INFO - Preparing datasets...
+2026-01-25 08:59:44,199 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 08:59:44,663 - short_utterance - INFO - Dataset prepared:
+2026-01-25 08:59:44,664 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 08:59:44,664 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 08:59:44,664 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 08:59:44,664 - short_utterance - INFO -   Speakers: 26
+2026-01-25 08:59:44,664 - short_utterance - INFO - Setting up models...
+2026-01-25 08:59:44,664 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 08:59:44,664 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:00:50,749 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:00:50,749 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:00:50,749 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:00:50,749 - short_utterance - INFO - ============================================================
+2026-01-25 09:00:50,749 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:00:50,846 - short_utterance - ERROR - Experiment failed: not enough values to unpack (expected 2, got 1)
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 566, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 414, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 264, in compute_duration_performance_curve
+    correct, total = 0,
+    ^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2026-01-25 09:03:23,505 - short_utterance - INFO - ============================================================
+2026-01-25 09:03:23,505 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:03:23,505 - short_utterance - INFO - ============================================================
+2026-01-25 09:03:23,505 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:03:23,505 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:03:23,505 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:03:23,890 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:03:23,891 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:03:23,891 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:03:23,891 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:03:23,891 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:03:23,891 - short_utterance - INFO - Setting up models...
+2026-01-25 09:03:23,891 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:03:23,891 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:04:30,503 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:04:30,503 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:04:30,503 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:04:30,503 - short_utterance - INFO - ============================================================
+2026-01-25 09:04:30,503 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:04:30,961 - short_utterance - ERROR - Experiment failed: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 283, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 643, in forward
+    chaotic_features = self.diff_feat_projection(chaotic_features)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 566, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 414, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 290, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 643, in forward
+    chaotic_features = self.diff_feat_projection(chaotic_features)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+2026-01-25 09:08:52,748 - short_utterance - INFO - ============================================================
+2026-01-25 09:08:52,748 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:08:52,748 - short_utterance - INFO - ============================================================
+2026-01-25 09:08:52,748 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:08:52,748 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:08:52,749 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:08:53,134 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:08:53,135 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:08:53,135 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:08:53,135 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:08:53,135 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:08:53,135 - short_utterance - INFO - Setting up models...
+2026-01-25 09:08:53,135 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:08:53,135 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:09:59,624 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:09:59,624 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:09:59,624 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:09:59,624 - short_utterance - INFO - ============================================================
+2026-01-25 09:09:59,624 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:10:00,030 - short_utterance - ERROR - Experiment failed: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 281, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 645, in forward
+    chaotic_features = self.diff_feat_projection(chaotic_features)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 566, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 414, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 286, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 645, in forward
+    chaotic_features = self.diff_feat_projection(chaotic_features)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument mat1 in method wrapper_CUDA_addmm)
+2026-01-25 09:14:30,637 - short_utterance - INFO - ============================================================
+2026-01-25 09:14:30,637 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:14:30,637 - short_utterance - INFO - ============================================================
+2026-01-25 09:14:30,637 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:14:30,637 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:14:30,638 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:14:31,722 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:14:31,722 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:14:31,722 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:14:31,722 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:14:31,722 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:14:31,722 - short_utterance - INFO - Setting up models...
+2026-01-25 09:14:31,722 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:14:31,722 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:15:38,234 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:15:38,234 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:15:38,234 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:15:38,234 - short_utterance - INFO - ============================================================
+2026-01-25 09:15:38,235 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:15:38,873 - short_utterance - ERROR - Experiment failed: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 281, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 685, in forward
+    pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+                      ~~~~~~^~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 566, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 414, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 286, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 685, in forward
+    pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+                      ~~~~~~^~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-01-25 09:19:28,089 - short_utterance - INFO - ============================================================
+2026-01-25 09:19:28,089 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:19:28,089 - short_utterance - INFO - ============================================================
+2026-01-25 09:19:28,090 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:19:28,090 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:19:28,090 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:19:28,475 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:19:28,475 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:19:28,476 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:19:28,476 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:19:28,476 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:19:28,476 - short_utterance - INFO - Setting up models...
+2026-01-25 09:19:28,476 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:19:28,476 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:20:35,261 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:20:35,261 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:20:35,261 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:20:35,261 - short_utterance - INFO - ============================================================
+2026-01-25 09:20:35,261 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:20:35,828 - short_utterance - ERROR - Experiment failed: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 281, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 697, in forward
+    pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+                      ~~~~~~^~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 566, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 414, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 286, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 697, in forward
+    pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+                      ~~~~~~^~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-01-25 09:22:43,338 - short_utterance - INFO - ============================================================
+2026-01-25 09:22:43,338 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:22:43,338 - short_utterance - INFO - ============================================================
+2026-01-25 09:22:43,338 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:22:43,338 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:22:43,338 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:22:43,723 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:22:43,723 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:22:43,723 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:22:43,723 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:22:43,723 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:22:43,723 - short_utterance - INFO - Setting up models...
+2026-01-25 09:22:43,723 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:22:43,723 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:22:43,755 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:23:50,600 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:23:50,601 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:23:50,601 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:23:50,601 - short_utterance - INFO - ============================================================
+2026-01-25 09:23:50,601 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:23:51,158 - short_utterance - ERROR - Experiment failed: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 281, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 697, in forward
+    pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+                      ~~~~~~^~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 582, in run
+    self.evaluate_short_utterances()
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 430, in evaluate_short_utterances
+    results = compute_duration_performance_curve(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_transform.py", line 286, in compute_duration_performance_curve
+    outputs = model(audio)
+              ^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 697, in forward
+    pooled_features = alpha * pooled_features + (1 - alpha) * raw_feat
+                      ~~~~~~^~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-01-25 09:24:45,311 - short_utterance - INFO - ============================================================
+2026-01-25 09:24:45,311 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:24:45,312 - short_utterance - INFO - ============================================================
+2026-01-25 09:24:45,312 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:24:45,312 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:24:45,312 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:24:45,697 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:24:45,697 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:24:45,698 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:24:45,698 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:24:45,698 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:24:45,698 - short_utterance - INFO - Setting up models...
+2026-01-25 09:24:45,698 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:24:45,698 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:24:45,731 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:25:52,556 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:25:52,556 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:25:52,556 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:25:52,556 - short_utterance - INFO - ============================================================
+2026-01-25 09:25:52,556 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:25:57,277 - short_utterance - INFO -   Results for C-HiLAP:
+2026-01-25 09:25:57,278 - short_utterance - INFO -      0.5s:  37.29%
+2026-01-25 09:25:57,278 - short_utterance - INFO -      1.0s:  32.20%
+2026-01-25 09:25:57,278 - short_utterance - INFO -      1.5s:  33.90%
+2026-01-25 09:25:57,278 - short_utterance - INFO -      2.0s:  40.68%
+2026-01-25 09:25:57,278 - short_utterance - INFO -      2.5s:  50.85%
+2026-01-25 09:25:57,278 - short_utterance - INFO -      3.0s:  46.61%
+2026-01-25 09:25:57,278 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:25:57,278 - short_utterance - INFO - ANALYZING RESULTS
+2026-01-25 09:25:57,278 - short_utterance - INFO - ============================================================
+2026-01-25 09:25:57,278 - short_utterance - INFO - 
+Relative Performance (vs longest duration):
+2026-01-25 09:25:57,278 - short_utterance - INFO - 
+C-HiLAP:
+2026-01-25 09:25:57,278 - short_utterance - INFO -    0.5s:  80.00% of max
+2026-01-25 09:25:57,278 - short_utterance - INFO -    1.0s:  69.09% of max
+2026-01-25 09:25:57,278 - short_utterance - INFO -    1.5s:  72.73% of max
+2026-01-25 09:25:57,278 - short_utterance - INFO -    2.0s:  87.27% of max
+2026-01-25 09:25:57,278 - short_utterance - INFO -    2.5s: 109.09% of max
+2026-01-25 09:25:57,279 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 09:25:57,279 - short_utterance - INFO - 
+Performance Degradation (1.0s -> 0.5s):
+2026-01-25 09:25:57,279 - short_utterance - INFO -   C-HiLAP:  -5.08%
+2026-01-25 09:25:57,279 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:25:57,279 - short_utterance - INFO - CREATING VISUALIZATIONS
+2026-01-25 09:25:57,279 - short_utterance - INFO - ============================================================
+2026-01-25 09:25:57,708 - short_utterance - INFO -   Saved: outputs/comparison/figures/duration_performance.png
+2026-01-25 09:25:58,125 - short_utterance - INFO -   Saved: outputs/comparison/figures/relative_performance.png
+2026-01-25 09:25:58,125 - short_utterance - INFO - 
+Saving results...
+2026-01-25 09:25:58,127 - short_utterance - INFO -   Results saved to: outputs/comparison/results/short_utterance_results.json
+2026-01-25 09:25:58,128 - short_utterance - INFO -   Summary saved to: outputs/comparison/results/summary.txt
+2026-01-25 09:25:58,128 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:25:58,128 - short_utterance - INFO - EXPERIMENT COMPLETED SUCCESSFULLY
+2026-01-25 09:25:58,128 - short_utterance - INFO - ============================================================
+2026-01-25 09:27:10,718 - short_utterance - INFO - ============================================================
+2026-01-25 09:27:10,719 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:27:10,719 - short_utterance - INFO - ============================================================
+2026-01-25 09:27:10,719 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:27:10,719 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:27:10,719 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:27:11,105 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:27:11,105 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:27:11,105 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:27:11,105 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:27:11,105 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:27:11,105 - short_utterance - INFO - Setting up models...
+2026-01-25 09:27:11,105 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:27:11,105 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:27:11,137 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:28:17,708 - short_utterance - INFO - 
+Total models prepared: 1
+2026-01-25 09:28:17,708 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:28:17,708 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 09:28:17,708 - short_utterance - INFO - ============================================================
+2026-01-25 09:28:17,708 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 09:28:20,913 - short_utterance - INFO -   Results for C-HiLAP:
+2026-01-25 09:28:20,913 - short_utterance - INFO -      0.5s:  37.29%
+2026-01-25 09:28:20,913 - short_utterance - INFO -      1.0s:  32.20%
+2026-01-25 09:28:20,913 - short_utterance - INFO -      1.5s:  33.90%
+2026-01-25 09:28:20,913 - short_utterance - INFO -      2.0s:  40.68%
+2026-01-25 09:28:20,913 - short_utterance - INFO -      2.5s:  50.85%
+2026-01-25 09:28:20,913 - short_utterance - INFO -      3.0s:  46.61%
+2026-01-25 09:28:20,913 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:28:20,914 - short_utterance - INFO - ANALYZING RESULTS
+2026-01-25 09:28:20,914 - short_utterance - INFO - ============================================================
+2026-01-25 09:28:20,914 - short_utterance - INFO - 
+Relative Performance (vs longest duration):
+2026-01-25 09:28:20,914 - short_utterance - INFO - 
+C-HiLAP:
+2026-01-25 09:28:20,914 - short_utterance - INFO -    0.5s:  80.00% of max
+2026-01-25 09:28:20,914 - short_utterance - INFO -    1.0s:  69.09% of max
+2026-01-25 09:28:20,914 - short_utterance - INFO -    1.5s:  72.73% of max
+2026-01-25 09:28:20,914 - short_utterance - INFO -    2.0s:  87.27% of max
+2026-01-25 09:28:20,914 - short_utterance - INFO -    2.5s: 109.09% of max
+2026-01-25 09:28:20,914 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 09:28:20,914 - short_utterance - INFO - 
+Performance Degradation (1.0s -> 0.5s):
+2026-01-25 09:28:20,914 - short_utterance - INFO -   C-HiLAP:  -5.08%
+2026-01-25 09:28:20,914 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:28:20,914 - short_utterance - INFO - CREATING VISUALIZATIONS
+2026-01-25 09:28:20,914 - short_utterance - INFO - ============================================================
+2026-01-25 09:28:21,344 - short_utterance - INFO -   Saved: outputs/comparison/figures/duration_performance.png
+2026-01-25 09:28:21,759 - short_utterance - INFO -   Saved: outputs/comparison/figures/relative_performance.png
+2026-01-25 09:28:21,759 - short_utterance - INFO - 
+Saving results...
+2026-01-25 09:28:21,760 - short_utterance - INFO -   Results saved to: outputs/comparison/results/short_utterance_results.json
+2026-01-25 09:28:21,762 - short_utterance - INFO -   Summary saved to: outputs/comparison/results/summary.txt
+2026-01-25 09:28:21,762 - short_utterance - INFO - 
+============================================================
+2026-01-25 09:28:21,762 - short_utterance - INFO - EXPERIMENT COMPLETED SUCCESSFULLY
+2026-01-25 09:28:21,762 - short_utterance - INFO - ============================================================
+2026-01-25 09:32:29,901 - short_utterance - INFO - ============================================================
+2026-01-25 09:32:29,901 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:32:29,902 - short_utterance - INFO - ============================================================
+2026-01-25 09:32:29,902 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:32:29,902 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:32:29,902 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:32:30,288 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:32:30,288 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:32:30,288 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:32:30,288 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:32:30,288 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:32:30,288 - short_utterance - INFO - Setting up models...
+2026-01-25 09:32:30,288 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:32:30,288 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:32:30,320 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:33:36,147 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:33:36,148 - short_utterance - INFO -   Training new model...
+2026-01-25 09:33:36,174 - short_utterance - ERROR - Experiment failed: 'NoneType' object has no attribute 'to'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 579, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 320, in _train_model
+    experiment.model = experiment.model.to(experiment.device)
+                       ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'to'
+2026-01-25 09:35:36,113 - short_utterance - INFO - ============================================================
+2026-01-25 09:35:36,113 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:35:36,113 - short_utterance - INFO - ============================================================
+2026-01-25 09:35:36,114 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:35:36,114 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:35:36,114 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:35:36,500 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:35:36,500 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:35:36,500 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:35:36,500 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:35:36,500 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:35:36,500 - short_utterance - INFO - Setting up models...
+2026-01-25 09:35:36,500 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:35:36,500 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:35:36,533 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:36:45,154 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:36:45,154 - short_utterance - INFO -   Training new model...
+2026-01-25 09:36:45,170 - short_utterance - ERROR - Experiment failed: 'data_dir'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 585, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 320, in _train_model
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 842, in setup
+    self._validate_data_path()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 814, in _validate_data_path
+    data_dir = Path(self.config['data_dir'])
+                    ~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'data_dir'
+2026-01-25 09:38:11,637 - short_utterance - INFO - ============================================================
+2026-01-25 09:38:11,637 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:38:11,637 - short_utterance - INFO - ============================================================
+2026-01-25 09:38:11,637 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:38:11,638 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:38:11,638 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:38:12,024 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:38:12,024 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:38:12,024 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:38:12,024 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:38:12,024 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:38:12,024 - short_utterance - INFO - Setting up models...
+2026-01-25 09:38:12,024 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:38:12,024 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:38:12,056 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:39:18,203 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:39:18,204 - short_utterance - INFO -   Training new model...
+2026-01-25 09:39:23,990 - short_utterance - ERROR - Experiment failed: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 586, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 321, in _train_model
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 873, in setup
+    self.optimizer = self.create_optimizer(self.model)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 621, in create_optimizer
+    optimizer_type = optimizer_config.get('type', 'adam').lower()
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+2026-01-25 09:42:38,608 - short_utterance - INFO - ============================================================
+2026-01-25 09:42:38,608 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:42:38,608 - short_utterance - INFO - ============================================================
+2026-01-25 09:42:38,608 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:42:38,608 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:42:38,608 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:42:38,994 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:42:38,994 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:42:38,994 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:42:38,994 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:42:38,995 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:42:38,995 - short_utterance - INFO - Setting up models...
+2026-01-25 09:42:38,995 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:42:38,995 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:42:39,027 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:43:45,751 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:43:45,751 - short_utterance - INFO -   Training new model...
+2026-01-25 09:43:48,401 - short_utterance - ERROR - Experiment failed: 'BaselineExperiment' object has no attribute 'setup_data_loaders'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 599, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 366, in _train_model
+    experiment.setup_data_loaders(train_loader, val_loader, test_loader)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BaselineExperiment' object has no attribute 'setup_data_loaders'. Did you mean: 'create_dataloaders'?
+2026-01-25 09:44:57,031 - short_utterance - INFO - ============================================================
+2026-01-25 09:44:57,032 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:44:57,032 - short_utterance - INFO - ============================================================
+2026-01-25 09:44:57,032 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:44:57,032 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:44:57,032 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:44:57,422 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:44:57,422 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:44:57,422 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:44:57,423 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:44:57,423 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:44:57,423 - short_utterance - INFO - Setting up models...
+2026-01-25 09:44:57,423 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:44:57,423 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:44:57,456 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:46:04,045 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:46:04,046 - short_utterance - INFO -   Training new model...
+2026-01-25 09:46:06,708 - short_utterance - ERROR - Experiment failed: BaselineExperiment.create_dataloaders() takes 1 positional argument but 4 were given
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 599, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 366, in _train_model
+    experiment.create_dataloaders(train_loader, val_loader, test_loader)
+TypeError: BaselineExperiment.create_dataloaders() takes 1 positional argument but 4 were given
+2026-01-25 09:47:52,848 - short_utterance - INFO - ============================================================
+2026-01-25 09:47:52,848 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:47:52,848 - short_utterance - INFO - ============================================================
+2026-01-25 09:47:52,848 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:47:52,848 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:47:52,849 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:47:53,238 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:47:53,238 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:47:53,238 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:47:53,238 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:47:53,238 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:47:53,238 - short_utterance - INFO - Setting up models...
+2026-01-25 09:47:53,238 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:47:53,239 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:47:53,271 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:48:59,393 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:48:59,394 - short_utterance - INFO -   Training new model...
+2026-01-25 09:49:02,026 - short_utterance - INFO -   Training MFCC-MLP...
+2026-01-25 09:49:02,027 - short_utterance - ERROR - Experiment failed: 'BaselineExperiment' object has no attribute 'run'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 599, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 370, in _train_model
+    results = experiment.run()
+              ^^^^^^^^^^^^^^
+AttributeError: 'BaselineExperiment' object has no attribute 'run'
+2026-01-25 09:51:38,938 - short_utterance - INFO - ============================================================
+2026-01-25 09:51:38,938 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:51:38,938 - short_utterance - INFO - ============================================================
+2026-01-25 09:51:38,939 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:51:38,939 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:51:38,939 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:51:39,330 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:51:39,330 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:51:39,330 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:51:39,330 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:51:39,330 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:51:39,330 - short_utterance - INFO - Setting up models...
+2026-01-25 09:51:39,330 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:51:39,331 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:51:39,363 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:52:46,303 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:52:46,303 - short_utterance - INFO -   Training new model...
+2026-01-25 09:52:48,959 - short_utterance - ERROR - Experiment failed: name 'num_epochs' is not defined
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 598, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 369, in _train_model
+    results = experiment.train(num_epochs=num_epochs)
+                                          ^^^^^^^^^^
+NameError: name 'num_epochs' is not defined
+2026-01-25 09:55:48,263 - short_utterance - INFO - ============================================================
+2026-01-25 09:55:48,263 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 09:55:48,263 - short_utterance - INFO - ============================================================
+2026-01-25 09:55:48,263 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 09:55:48,263 - short_utterance - INFO - Preparing datasets...
+2026-01-25 09:55:48,264 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 09:55:48,655 - short_utterance - INFO - Dataset prepared:
+2026-01-25 09:55:48,655 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 09:55:48,655 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 09:55:48,655 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 09:55:48,655 - short_utterance - INFO -   Speakers: 26
+2026-01-25 09:55:48,655 - short_utterance - INFO - Setting up models...
+2026-01-25 09:55:48,655 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 09:55:48,655 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 09:55:48,688 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 09:56:55,724 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 09:56:55,724 - short_utterance - INFO -   Training new model...
+2026-01-25 09:56:58,420 - short_utterance - ERROR - Experiment failed: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 599, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 370, in _train_model
+    results = experiment.train(num_epochs=num_epochs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 396, in train_epoch
+    _ = self.model(audio, targets, debug=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+2026-01-25 10:03:00,730 - short_utterance - INFO - ============================================================
+2026-01-25 10:03:00,730 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 10:03:00,730 - short_utterance - INFO - ============================================================
+2026-01-25 10:03:00,730 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 10:03:00,730 - short_utterance - INFO - Preparing datasets...
+2026-01-25 10:03:00,731 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 10:03:01,114 - short_utterance - INFO - Dataset prepared:
+2026-01-25 10:03:01,115 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 10:03:01,115 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 10:03:01,115 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 10:03:01,115 - short_utterance - INFO -   Speakers: 26
+2026-01-25 10:03:01,115 - short_utterance - INFO - Setting up models...
+2026-01-25 10:03:01,115 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 10:03:01,115 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 10:03:01,148 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 10:04:06,460 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 10:04:06,460 - short_utterance - INFO -   Training new model...
+2026-01-25 10:04:09,134 - short_utterance - ERROR - Experiment failed: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 599, in run
+    self.train_or_load_models(force_retrain=force_retrain)
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 236, in train_or_load_models
+    self.models[model_name] = self._train_model(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/configs/short_utterance/short_utterance_experiment.py", line 370, in _train_model
+    results = experiment.train(num_epochs=num_epochs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 396, in train_epoch
+    _ = self.model(audio, targets, debug=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TraditionalMLPBaseline.forward() got an unexpected keyword argument 'debug'
+2026-01-25 10:07:36,656 - short_utterance - INFO - ============================================================
+2026-01-25 10:07:36,656 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 10:07:36,656 - short_utterance - INFO - ============================================================
+2026-01-25 10:07:36,656 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 10:07:36,657 - short_utterance - INFO - Preparing datasets...
+2026-01-25 10:07:36,657 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 10:07:37,047 - short_utterance - INFO - Dataset prepared:
+2026-01-25 10:07:37,047 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 10:07:37,047 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 10:07:37,047 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 10:07:37,047 - short_utterance - INFO -   Speakers: 26
+2026-01-25 10:07:37,047 - short_utterance - INFO - Setting up models...
+2026-01-25 10:07:37,047 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 10:07:37,048 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 10:07:37,080 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 10:08:42,800 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 10:08:42,800 - short_utterance - INFO -   Training new model...
+2026-01-25 10:11:31,547 - short_utterance - INFO - 
+Total models prepared: 2
+2026-01-25 10:11:31,547 - short_utterance - INFO - 
+============================================================
+2026-01-25 10:11:31,547 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 10:11:31,547 - short_utterance - INFO - ============================================================
+2026-01-25 10:11:31,547 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 10:11:34,768 - short_utterance - INFO -   Results for C-HiLAP:
+2026-01-25 10:11:34,768 - short_utterance - INFO -      0.5s:  37.29%
+2026-01-25 10:11:34,768 - short_utterance - INFO -      1.0s:  32.20%
+2026-01-25 10:11:34,768 - short_utterance - INFO -      1.5s:  33.90%
+2026-01-25 10:11:34,769 - short_utterance - INFO -      2.0s:  40.68%
+2026-01-25 10:11:34,769 - short_utterance - INFO -      2.5s:  50.85%
+2026-01-25 10:11:34,769 - short_utterance - INFO -      3.0s:  46.61%
+2026-01-25 10:11:34,769 - short_utterance - INFO - 
+Evaluating: MFCC-MLP
+2026-01-25 10:11:38,317 - short_utterance - INFO -   Results for MFCC-MLP:
+2026-01-25 10:11:38,318 - short_utterance - INFO -      0.5s:  75.42%
+2026-01-25 10:11:38,318 - short_utterance - INFO -      1.0s:  91.53%
+2026-01-25 10:11:38,318 - short_utterance - INFO -      1.5s:  95.76%
+2026-01-25 10:11:38,318 - short_utterance - INFO -      2.0s:  96.61%
+2026-01-25 10:11:38,318 - short_utterance - INFO -      2.5s:  99.15%
+2026-01-25 10:11:38,318 - short_utterance - INFO -      3.0s:  98.31%
+2026-01-25 10:11:38,318 - short_utterance - INFO - 
+============================================================
+2026-01-25 10:11:38,318 - short_utterance - INFO - ANALYZING RESULTS
+2026-01-25 10:11:38,318 - short_utterance - INFO - ============================================================
+2026-01-25 10:11:38,318 - short_utterance - INFO - 
+Relative Performance (vs longest duration):
+2026-01-25 10:11:38,318 - short_utterance - INFO - 
+C-HiLAP:
+2026-01-25 10:11:38,318 - short_utterance - INFO -    0.5s:  80.00% of max
+2026-01-25 10:11:38,318 - short_utterance - INFO -    1.0s:  69.09% of max
+2026-01-25 10:11:38,318 - short_utterance - INFO -    1.5s:  72.73% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    2.0s:  87.27% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    2.5s: 109.09% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO - 
+MFCC-MLP:
+2026-01-25 10:11:38,319 - short_utterance - INFO -    0.5s:  76.72% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    1.0s:  93.10% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    1.5s:  97.41% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    2.0s:  98.28% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    2.5s: 100.86% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 10:11:38,319 - short_utterance - INFO - 
+Performance Degradation (1.0s -> 0.5s):
+2026-01-25 10:11:38,319 - short_utterance - INFO -   C-HiLAP:  -5.08%
+2026-01-25 10:11:38,319 - short_utterance - INFO -   MFCC-MLP: +16.10%
+2026-01-25 10:11:38,319 - short_utterance - INFO - 
+============================================================
+2026-01-25 10:11:38,319 - short_utterance - INFO - CREATING VISUALIZATIONS
+2026-01-25 10:11:38,320 - short_utterance - INFO - ============================================================
+2026-01-25 10:11:38,766 - short_utterance - INFO -   Saved: outputs/comparison/figures/duration_performance.png
+2026-01-25 10:11:39,201 - short_utterance - INFO -   Saved: outputs/comparison/figures/relative_performance.png
+2026-01-25 10:11:39,201 - short_utterance - INFO - 
+Saving results...
+2026-01-25 10:11:39,203 - short_utterance - INFO -   Results saved to: outputs/comparison/results/short_utterance_results.json
+2026-01-25 10:11:39,204 - short_utterance - INFO -   Summary saved to: outputs/comparison/results/summary.txt
+2026-01-25 10:11:39,204 - short_utterance - INFO - 
+============================================================
+2026-01-25 10:11:39,204 - short_utterance - INFO - EXPERIMENT COMPLETED SUCCESSFULLY
+2026-01-25 10:11:39,204 - short_utterance - INFO - ============================================================
+2026-01-25 16:48:13,215 - short_utterance - INFO - ============================================================
+2026-01-25 16:48:13,234 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 16:48:13,234 - short_utterance - INFO - ============================================================
+2026-01-25 16:48:13,234 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 16:48:13,234 - short_utterance - INFO - Preparing datasets...
+2026-01-25 16:48:13,234 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 16:48:13,618 - short_utterance - INFO - Dataset prepared:
+2026-01-25 16:48:13,619 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 16:48:13,619 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 16:48:13,619 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 16:48:13,619 - short_utterance - INFO -   Speakers: 26
+2026-01-25 16:48:13,619 - short_utterance - INFO - Setting up models...
+2026-01-25 16:48:13,619 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 16:48:13,619 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 16:48:13,649 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 16:49:19,412 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 16:49:19,413 - short_utterance - INFO -   Training new model...
+2026-01-25 16:52:26,588 - short_utterance - INFO - 
+Total models prepared: 2
+2026-01-25 16:52:26,588 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:52:26,588 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 16:52:26,589 - short_utterance - INFO - ============================================================
+2026-01-25 16:52:26,589 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 16:52:29,794 - short_utterance - INFO -   Results for C-HiLAP:
+2026-01-25 16:52:29,794 - short_utterance - INFO -      0.5s:  37.29%
+2026-01-25 16:52:29,794 - short_utterance - INFO -      1.0s:  32.20%
+2026-01-25 16:52:29,794 - short_utterance - INFO -      1.5s:  33.90%
+2026-01-25 16:52:29,794 - short_utterance - INFO -      2.0s:  40.68%
+2026-01-25 16:52:29,794 - short_utterance - INFO -      2.5s:  50.85%
+2026-01-25 16:52:29,794 - short_utterance - INFO -      3.0s:  46.61%
+2026-01-25 16:52:29,794 - short_utterance - INFO - 
+Evaluating: MFCC-MLP
+2026-01-25 16:52:34,150 - short_utterance - INFO -   Results for MFCC-MLP:
+2026-01-25 16:52:34,150 - short_utterance - INFO -      0.5s:  75.42%
+2026-01-25 16:52:34,150 - short_utterance - INFO -      1.0s:  91.53%
+2026-01-25 16:52:34,150 - short_utterance - INFO -      1.5s:  95.76%
+2026-01-25 16:52:34,150 - short_utterance - INFO -      2.0s:  96.61%
+2026-01-25 16:52:34,150 - short_utterance - INFO -      2.5s:  99.15%
+2026-01-25 16:52:34,151 - short_utterance - INFO -      3.0s:  98.31%
+2026-01-25 16:52:34,151 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:52:34,151 - short_utterance - INFO - ANALYZING RESULTS
+2026-01-25 16:52:34,151 - short_utterance - INFO - ============================================================
+2026-01-25 16:52:34,151 - short_utterance - INFO - 
+Relative Performance (vs longest duration):
+2026-01-25 16:52:34,151 - short_utterance - INFO - 
+C-HiLAP:
+2026-01-25 16:52:34,151 - short_utterance - INFO -    0.5s:  80.00% of max
+2026-01-25 16:52:34,151 - short_utterance - INFO -    1.0s:  69.09% of max
+2026-01-25 16:52:34,151 - short_utterance - INFO -    1.5s:  72.73% of max
+2026-01-25 16:52:34,151 - short_utterance - INFO -    2.0s:  87.27% of max
+2026-01-25 16:52:34,151 - short_utterance - INFO -    2.5s: 109.09% of max
+2026-01-25 16:52:34,152 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 16:52:34,152 - short_utterance - INFO - 
+MFCC-MLP:
+2026-01-25 16:52:34,153 - short_utterance - INFO -    0.5s:  76.72% of max
+2026-01-25 16:52:34,153 - short_utterance - INFO -    1.0s:  93.10% of max
+2026-01-25 16:52:34,153 - short_utterance - INFO -    1.5s:  97.41% of max
+2026-01-25 16:52:34,153 - short_utterance - INFO -    2.0s:  98.28% of max
+2026-01-25 16:52:34,153 - short_utterance - INFO -    2.5s: 100.86% of max
+2026-01-25 16:52:34,153 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 16:52:34,153 - short_utterance - INFO - 
+Performance Degradation (1.0s -> 0.5s):
+2026-01-25 16:52:34,153 - short_utterance - INFO -   C-HiLAP:  -5.08%
+2026-01-25 16:52:34,153 - short_utterance - INFO -   MFCC-MLP: +16.10%
+2026-01-25 16:52:34,153 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:52:34,153 - short_utterance - INFO - CREATING VISUALIZATIONS
+2026-01-25 16:52:34,153 - short_utterance - INFO - ============================================================
+2026-01-25 16:52:34,634 - short_utterance - INFO -   Saved: outputs/comparison/figures/duration_performance.png
+2026-01-25 16:52:35,056 - short_utterance - INFO -   Saved: outputs/comparison/figures/relative_performance.png
+2026-01-25 16:52:35,056 - short_utterance - INFO - 
+Saving results...
+2026-01-25 16:52:35,058 - short_utterance - INFO -   Results saved to: outputs/comparison/results/short_utterance_results.json
+2026-01-25 16:52:35,060 - short_utterance - INFO -   Summary saved to: outputs/comparison/results/summary.txt
+2026-01-25 16:52:35,060 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:52:35,060 - short_utterance - INFO - EXPERIMENT COMPLETED SUCCESSFULLY
+2026-01-25 16:52:35,060 - short_utterance - INFO - ============================================================
+2026-01-25 16:54:39,209 - short_utterance - INFO - ============================================================
+2026-01-25 16:54:39,209 - short_utterance - INFO - SHORT UTTERANCE ROBUSTNESS EXPERIMENT
+2026-01-25 16:54:39,209 - short_utterance - INFO - ============================================================
+2026-01-25 16:54:39,210 - short_utterance - INFO - Output: outputs/comparison
+2026-01-25 16:54:39,210 - short_utterance - INFO - Preparing datasets...
+2026-01-25 16:54:39,210 - short_utterance - INFO - Loading dataset from: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-25 16:54:39,598 - short_utterance - INFO - Dataset prepared:
+2026-01-25 16:54:39,598 - short_utterance - INFO -   Train: 472 samples
+2026-01-25 16:54:39,598 - short_utterance - INFO -   Val: 89 samples
+2026-01-25 16:54:39,598 - short_utterance - INFO -   Test: 118 samples
+2026-01-25 16:54:39,598 - short_utterance - INFO -   Speakers: 26
+2026-01-25 16:54:39,598 - short_utterance - INFO - Setting up models...
+2026-01-25 16:54:39,598 - short_utterance - INFO - 
+Processing model: C-HiLAP
+2026-01-25 16:54:39,598 - short_utterance - INFO -   Using checkpoint from config: /scratch/project_2003370/yueyao/Model/experiments/configs/base_chaotic/experiments/chaotic_lorenz_full_chaotic_run_0/checkpoints/exp_20260122_131044/checkpoint_epoch_0092.pt
+2026-01-25 16:54:39,628 - short_utterance - INFO - Using default config for C-HiLAP
+2026-01-25 16:55:44,960 - short_utterance - INFO - 
+Processing model: MFCC-MLP
+2026-01-25 16:55:44,960 - short_utterance - INFO -   Training new model...
+2026-01-25 16:58:38,715 - short_utterance - INFO - 
+Total models prepared: 2
+2026-01-25 16:58:38,715 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:58:38,715 - short_utterance - INFO - EVALUATING SHORT UTTERANCE PERFORMANCE
+2026-01-25 16:58:38,715 - short_utterance - INFO - ============================================================
+2026-01-25 16:58:38,715 - short_utterance - INFO - 
+Evaluating: C-HiLAP
+2026-01-25 16:58:41,898 - short_utterance - INFO -   Results for C-HiLAP:
+2026-01-25 16:58:41,899 - short_utterance - INFO -      0.5s:  37.29%
+2026-01-25 16:58:41,899 - short_utterance - INFO -      1.0s:  32.20%
+2026-01-25 16:58:41,899 - short_utterance - INFO -      1.5s:  33.90%
+2026-01-25 16:58:41,899 - short_utterance - INFO -      2.0s:  40.68%
+2026-01-25 16:58:41,899 - short_utterance - INFO -      2.5s:  50.85%
+2026-01-25 16:58:41,899 - short_utterance - INFO -      3.0s:  46.61%
+2026-01-25 16:58:41,899 - short_utterance - INFO - 
+Evaluating: MFCC-MLP
+2026-01-25 16:58:45,509 - short_utterance - INFO -   Results for MFCC-MLP:
+2026-01-25 16:58:45,509 - short_utterance - INFO -      0.5s:  75.42%
+2026-01-25 16:58:45,510 - short_utterance - INFO -      1.0s:  91.53%
+2026-01-25 16:58:45,510 - short_utterance - INFO -      1.5s:  95.76%
+2026-01-25 16:58:45,510 - short_utterance - INFO -      2.0s:  96.61%
+2026-01-25 16:58:45,510 - short_utterance - INFO -      2.5s:  99.15%
+2026-01-25 16:58:45,510 - short_utterance - INFO -      3.0s:  98.31%
+2026-01-25 16:58:45,510 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:58:45,510 - short_utterance - INFO - ANALYZING RESULTS
+2026-01-25 16:58:45,510 - short_utterance - INFO - ============================================================
+2026-01-25 16:58:45,510 - short_utterance - INFO - 
+Relative Performance (vs longest duration):
+2026-01-25 16:58:45,510 - short_utterance - INFO - 
+C-HiLAP:
+2026-01-25 16:58:45,510 - short_utterance - INFO -    0.5s:  80.00% of max
+2026-01-25 16:58:45,510 - short_utterance - INFO -    1.0s:  69.09% of max
+2026-01-25 16:58:45,510 - short_utterance - INFO -    1.5s:  72.73% of max
+2026-01-25 16:58:45,510 - short_utterance - INFO -    2.0s:  87.27% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO -    2.5s: 109.09% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO - 
+MFCC-MLP:
+2026-01-25 16:58:45,511 - short_utterance - INFO -    0.5s:  76.72% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO -    1.0s:  93.10% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO -    1.5s:  97.41% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO -    2.0s:  98.28% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO -    2.5s: 100.86% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO -    3.0s: 100.00% of max
+2026-01-25 16:58:45,511 - short_utterance - INFO - 
+Performance Degradation (1.0s -> 0.5s):
+2026-01-25 16:58:45,511 - short_utterance - INFO -   C-HiLAP:  -5.08%
+2026-01-25 16:58:45,511 - short_utterance - INFO -   MFCC-MLP: +16.10%
+2026-01-25 16:58:45,511 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:58:45,512 - short_utterance - INFO - CREATING VISUALIZATIONS
+2026-01-25 16:58:45,512 - short_utterance - INFO - ============================================================
+2026-01-25 16:58:45,952 - short_utterance - INFO -   Saved: outputs/comparison/figures/duration_performance.png
+2026-01-25 16:58:46,373 - short_utterance - INFO -   Saved: outputs/comparison/figures/relative_performance.png
+2026-01-25 16:58:46,373 - short_utterance - INFO - 
+Saving results...
+2026-01-25 16:58:46,375 - short_utterance - INFO -   Results saved to: outputs/comparison/results/short_utterance_results.json
+2026-01-25 16:58:46,376 - short_utterance - INFO -   Summary saved to: outputs/comparison/results/summary.txt
+2026-01-25 16:58:46,376 - short_utterance - INFO - 
+============================================================
+2026-01-25 16:58:46,376 - short_utterance - INFO - EXPERIMENT COMPLETED SUCCESSFULLY
+2026-01-25 16:58:46,376 - short_utterance - INFO - ============================================================

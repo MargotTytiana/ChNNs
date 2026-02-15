@@ -1,0 +1,14 @@
+Ablation Study Summary
+Generated: 2026-02-12 15:10:49
+======================================================================
+
+Baseline Best Val Accuracy: 0.00%
+
+Configuration                  Val Acc      Change      
+----------------------------------------------------------------------
+full                           0.00%        —           
+no_phase_space                 0.00%        +0.00%      
+no_chaotic_features            0.00%        +0.00%      
+no_chaotic_embedding           0.00%        +0.00%      
+no_attractor_pooling           0.00%        +0.00%      
+minimal                        0.00%        +0.00%      

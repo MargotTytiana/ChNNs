@@ -240,7 +240,7 @@ class BaselineExperiment(BaseExperiment):
                     nn.Linear(128, num_classes)
                 )
             
-            def forward(self, x):
+            def forward(self, x, targets=None, **kwargs):
                 import torch
                 
                 # Ensure input is on correct device
@@ -667,7 +667,12 @@ class BaselineExperiment(BaseExperiment):
         Returns:
             Tuple of (loss, predictions, targets)
         """
+        # 1. Unpack the batch FIRST
         audio, labels = batch
+        
+        # 2. THEN move to device
+        audio = audio.to(self.device)
+        labels = labels.to(self.device)
         
         # Get current epoch safely
         if hasattr(self.state, 'epoch'):

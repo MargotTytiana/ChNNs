@@ -1,0 +1,45 @@
+2026-01-13 14:23:17,498 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized experiment: baseline_mfcc_cnn_run_0
+2026-01-13 14:23:17,499 - experiment_baseline_mfcc_cnn_run_0 - INFO - Device: cuda
+2026-01-13 14:23:17,499 - experiment_baseline_mfcc_cnn_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_cnn/experiments/baseline_mfcc_cnn_run_0
+2026-01-13 14:23:17,499 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized mfcc_cnn baseline experiment
+2026-01-13 14:23:17,499 - experiment_baseline_mfcc_cnn_run_0 - INFO - Setting up experiment components...
+2026-01-13 14:23:17,531 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-13 14:23:17,531 - experiment_baseline_mfcc_cnn_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-01-13 14:23:17,625 - experiment_baseline_mfcc_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-13 14:23:17,625 - experiment_baseline_mfcc_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2026-01-13 14:23:17,626 - experiment_baseline_mfcc_cnn_run_0 - INFO - Total parameters: 172,516
+2026-01-13 14:23:17,626 - experiment_baseline_mfcc_cnn_run_0 - INFO - Trainable parameters: 172,516
+2026-01-13 14:23:18,016 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-13 14:23:18,050 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Training Dataset...
+2026-01-13 14:23:18,076 - experiment_baseline_mfcc_cnn_run_0 - INFO - Finish Scan 1 batch, current label range: 0-25
+2026-01-13 14:23:18,416 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Val Dataset...
+2026-01-13 14:23:18,484 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Test Dataset...
+2026-01-13 14:23:18,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-01-13 14:23:18,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-01-13 14:23:18,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-01-13 14:23:18,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-01-13 14:23:18,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-01-13 14:23:18,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-01-13 14:23:18,584 - experiment_baseline_mfcc_cnn_run_0 - INFO - BASELINE TYPE: mfcc_cnn
+2026-01-13 14:23:18,584 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-01-13 14:23:18,971 - experiment_baseline_mfcc_cnn_run_0 - INFO - Dataloaders created:
+2026-01-13 14:23:18,972 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Train: 14 batches
+2026-01-13 14:23:18,972 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Val: 3 batches
+2026-01-13 14:23:18,972 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Test: 4 batches
+2026-01-13 14:23:20,075 - experiment_baseline_mfcc_cnn_run_0 - INFO - Optimizer: Adam
+2026-01-13 14:23:20,076 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scheduler: StepLR
+2026-01-13 14:23:20,076 - experiment_baseline_mfcc_cnn_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-01-13 14:23:20,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_cnn/experiments/baseline_mfcc_cnn_run_0/config.json
+2026-01-13 14:23:20,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - Experiment setup completed
+2026-01-13 14:23:20,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - Starting training for 100 epochs
+2026-01-13 14:23:20,156 - experiment_baseline_mfcc_cnn_run_0 - INFO - 
+================================================================================
+2026-01-13 14:23:20,157 - experiment_baseline_mfcc_cnn_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-13 14:23:20,157 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+2026-01-13 14:23:20,157 - experiment_baseline_mfcc_cnn_run_0 - INFO - Batch Info:
+2026-01-13 14:23:20,157 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-01-13 14:23:20,157 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-01-13 14:23:20,160 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets (first 8): tensor([ 8,  7,  0, 19, 15, 18, 16, 24], device='cuda:0')
+2026-01-13 14:23:21,424 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+
+2026-01-13 14:23:21,806 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.644036

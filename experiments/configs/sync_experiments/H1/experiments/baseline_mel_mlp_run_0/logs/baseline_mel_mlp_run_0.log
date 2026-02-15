@@ -1,0 +1,14 @@
+2026-01-13 13:13:36,227 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2026-01-13 13:13:36,228 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2026-01-13 13:13:36,228 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/sync_experiments/H1/experiments/baseline_mel_mlp_run_0
+2026-01-13 13:13:36,228 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2026-01-13 13:13:36,228 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2026-01-13 13:13:36,262 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-01-13 13:13:36,262 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-01-13 13:13:37,476 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-01-13 13:13:37,476 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-01-13 13:13:37,476 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2026-01-13 13:13:37,476 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2026-01-13 13:13:37,871 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-01-13 13:13:38,825 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2026-01-13 13:13:39,587 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 0-24

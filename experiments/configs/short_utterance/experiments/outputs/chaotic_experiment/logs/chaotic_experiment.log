@@ -1,0 +1,201 @@
+2026-01-25 06:39:03,158 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:39:03,159 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:39:03,159 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:41:38,056 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:41:38,056 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:41:38,056 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:42:46,464 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:42:46,464 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:42:46,465 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:44:16,662 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:44:16,662 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:44:16,662 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:45:43,612 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:45:43,612 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:45:43,612 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:45:43,613 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 06:52:23,747 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:52:23,747 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:52:23,747 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:52:23,747 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 06:52:57,280 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:52:57,280 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:52:57,280 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:52:57,280 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 06:54:45,818 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:54:45,818 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:54:45,818 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:54:45,818 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 06:56:15,716 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:56:15,716 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:56:15,716 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:56:15,716 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 06:58:10,861 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 06:58:10,862 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 06:58:10,862 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 06:58:10,862 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 06:58:10,862 - experiment_chaotic_experiment - INFO - Starting training for 50 epochs
+2026-01-25 06:58:10,862 - experiment_chaotic_experiment - ERROR - Training failed with error: 'NoneType' object has no attribute 'train'
+2026-01-25 07:01:23,877 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 07:01:23,877 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 07:01:23,877 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 07:01:23,877 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 07:01:23,878 - experiment_chaotic_experiment - INFO - Manually initializing components for C-HiLAP...
+2026-01-25 07:01:23,878 - experiment_chaotic_experiment - WARNING - Using num_speakers from config: 26
+2026-01-25 07:05:22,410 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 07:05:22,410 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 07:05:22,410 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 07:05:22,410 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 07:05:22,410 - experiment_chaotic_experiment - INFO - Manually initializing components for C-HiLAP...
+2026-01-25 07:05:22,410 - experiment_chaotic_experiment - WARNING - Using num_speakers from config: 26
+2026-01-25 07:06:30,006 - experiment_chaotic_experiment - INFO - Configuration saved to: ./experiments/outputs/chaotic_experiment/config.json
+2026-01-25 07:06:30,006 - experiment_chaotic_experiment - INFO - Starting training for 50 epochs
+2026-01-25 07:06:31,705 - experiment_chaotic_experiment - ERROR - Training failed with error: stack expects each tensor to be equal size, but got [116288] at entry 0 and [137792] at entry 1
+2026-01-25 07:08:15,490 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 07:08:15,490 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 07:08:15,490 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 07:08:15,490 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 07:08:15,491 - experiment_chaotic_experiment - INFO - Manually initializing components for C-HiLAP...
+2026-01-25 07:08:15,491 - experiment_chaotic_experiment - WARNING - Using num_speakers from config: 26
+2026-01-25 07:09:23,419 - experiment_chaotic_experiment - INFO - Configuration saved to: ./experiments/outputs/chaotic_experiment/config.json
+2026-01-25 07:09:23,419 - experiment_chaotic_experiment - INFO - Starting training for 50 epochs
+2026-01-25 07:09:23,462 - experiment_chaotic_experiment - INFO - 
+================================================================================
+2026-01-25 07:09:23,462 - experiment_chaotic_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 07:09:23,462 - experiment_chaotic_experiment - INFO - ================================================================================
+2026-01-25 07:09:23,462 - experiment_chaotic_experiment - INFO - Batch Info:
+2026-01-25 07:09:23,462 - experiment_chaotic_experiment - INFO -   Audio shape: torch.Size([32, 226880])
+2026-01-25 07:09:23,462 - experiment_chaotic_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 07:09:23,466 - experiment_chaotic_experiment - INFO -   Targets (first 8): tensor([18, 18, 21, 21,  5, 15, 13, 13], device='cuda:0')
+2026-01-25 07:09:37,958 - experiment_chaotic_experiment - ERROR - Training failed with error: Given groups=1, weight of size [32, 256, 5], expected input[32, 200, 256] to have 256 channels, but got 200 channels instead
+2026-01-25 07:16:15,737 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 07:16:15,737 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 07:16:15,737 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 07:16:15,737 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 07:16:15,738 - experiment_chaotic_experiment - INFO - Manually initializing components for C-HiLAP...
+2026-01-25 07:16:15,738 - experiment_chaotic_experiment - WARNING - Using num_speakers from config: 26
+2026-01-25 07:17:23,178 - experiment_chaotic_experiment - INFO - Configuration saved to: ./experiments/outputs/chaotic_experiment/config.json
+2026-01-25 07:17:23,178 - experiment_chaotic_experiment - INFO - Starting training for 50 epochs
+2026-01-25 07:17:23,221 - experiment_chaotic_experiment - INFO - 
+================================================================================
+2026-01-25 07:17:23,221 - experiment_chaotic_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 07:17:23,221 - experiment_chaotic_experiment - INFO - ================================================================================
+2026-01-25 07:17:23,221 - experiment_chaotic_experiment - INFO - Batch Info:
+2026-01-25 07:17:23,221 - experiment_chaotic_experiment - INFO -   Audio shape: torch.Size([32, 226880])
+2026-01-25 07:17:23,221 - experiment_chaotic_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 07:17:23,224 - experiment_chaotic_experiment - INFO -   Targets (first 8): tensor([18, 18, 21, 21,  5, 15, 13, 13], device='cuda:0')
+2026-01-25 07:17:37,554 - experiment_chaotic_experiment - ERROR - Training failed with error: Given groups=1, weight of size [32, 256, 5], expected input[32, 200, 256] to have 256 channels, but got 200 channels instead
+2026-01-25 07:21:20,000 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 07:21:20,000 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 07:21:20,000 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 07:21:20,000 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 07:21:20,001 - experiment_chaotic_experiment - INFO - Manually initializing components for C-HiLAP...
+2026-01-25 07:21:20,001 - experiment_chaotic_experiment - WARNING - Using num_speakers from config: 26
+2026-01-25 07:22:25,983 - experiment_chaotic_experiment - INFO - [PATCH] Registered dimension fix hook on diff_chaos_features.lyapunov_estimator
+2026-01-25 07:22:27,168 - experiment_chaotic_experiment - INFO - Configuration saved to: ./experiments/outputs/chaotic_experiment/config.json
+2026-01-25 07:22:27,169 - experiment_chaotic_experiment - INFO - Starting training for 50 epochs
+2026-01-25 07:22:27,210 - experiment_chaotic_experiment - INFO - 
+================================================================================
+2026-01-25 07:22:27,211 - experiment_chaotic_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 07:22:27,211 - experiment_chaotic_experiment - INFO - ================================================================================
+2026-01-25 07:22:27,211 - experiment_chaotic_experiment - INFO - Batch Info:
+2026-01-25 07:22:27,211 - experiment_chaotic_experiment - INFO -   Audio shape: torch.Size([32, 226880])
+2026-01-25 07:22:27,211 - experiment_chaotic_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 07:22:27,214 - experiment_chaotic_experiment - INFO -   Targets (first 8): tensor([18, 18, 21, 21,  5, 15, 13, 13], device='cuda:0')
+2026-01-25 07:22:41,557 - experiment_chaotic_experiment - ERROR - Training failed with error: 'Sequential' object has no attribute 'in_channels'
+2026-01-25 07:26:19,101 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 07:26:19,101 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 07:26:19,101 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 07:26:19,102 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 07:26:19,102 - experiment_chaotic_experiment - INFO - Manually initializing components for C-HiLAP...
+2026-01-25 07:26:19,102 - experiment_chaotic_experiment - WARNING - Using num_speakers from config: 26
+2026-01-25 07:27:25,227 - experiment_chaotic_experiment - INFO - [PATCH] Registered dimension fix hook on diff_chaos_features.lyapunov_estimator
+2026-01-25 07:27:26,388 - experiment_chaotic_experiment - INFO - Configuration saved to: ./experiments/outputs/chaotic_experiment/config.json
+2026-01-25 07:27:26,388 - experiment_chaotic_experiment - INFO - Starting training for 50 epochs
+2026-01-25 07:27:26,430 - experiment_chaotic_experiment - INFO - 
+================================================================================
+2026-01-25 07:27:26,430 - experiment_chaotic_experiment - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-01-25 07:27:26,430 - experiment_chaotic_experiment - INFO - ================================================================================
+2026-01-25 07:27:26,430 - experiment_chaotic_experiment - INFO - Batch Info:
+2026-01-25 07:27:26,430 - experiment_chaotic_experiment - INFO -   Audio shape: torch.Size([32, 226880])
+2026-01-25 07:27:26,430 - experiment_chaotic_experiment - INFO -   Targets shape: torch.Size([32])
+2026-01-25 07:27:26,434 - experiment_chaotic_experiment - INFO -   Targets (first 8): tensor([18, 18, 21, 21,  5, 15, 13, 13], device='cuda:0')
+2026-01-25 07:27:40,822 - experiment_chaotic_experiment - ERROR - Training failed with error: Given groups=1, weight of size [32, 256, 5], expected input[32, 200, 256] to have 256 channels, but got 200 channels instead
+2026-01-25 17:47:12,810 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 17:47:12,821 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 17:47:12,821 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 17:47:59,005 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 17:47:59,006 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 17:47:59,006 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 17:48:20,861 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 17:48:20,861 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 17:48:20,861 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 17:49:42,075 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 17:49:42,075 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 17:49:42,075 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 17:49:42,075 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 17:51:03,517 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 17:51:03,517 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 17:51:03,517 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 17:51:03,518 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 17:54:25,707 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 17:54:25,707 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 17:54:25,707 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 17:54:25,707 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 17:55:02,978 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 17:55:02,978 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 17:55:02,978 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 17:55:02,978 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 17:55:02,980 - experiment_chaotic_experiment - INFO - Detected 10 speakers in dataset
+2026-01-25 18:37:26,646 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 18:37:26,646 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 18:37:26,646 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 18:37:26,646 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 18:38:38,032 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 18:38:38,032 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 18:38:38,032 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 18:38:38,032 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 18:41:19,631 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 18:41:19,632 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 18:41:19,632 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 18:41:19,632 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 18:43:03,132 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 18:43:03,132 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 18:43:03,132 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 18:43:03,132 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 18:44:08,102 - experiment_chaotic_experiment - INFO - Detected 10 speakers in dataset
+2026-01-25 18:46:29,480 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 18:46:29,481 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 18:46:29,481 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 18:46:29,481 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 18:47:34,157 - experiment_chaotic_experiment - INFO - Detected 10 speakers in dataset
+2026-01-25 18:52:13,588 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 18:52:13,588 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 18:52:13,588 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 18:52:13,588 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 18:53:35,619 - experiment_chaotic_experiment - INFO - Detected 26 speakers in dataset
+2026-01-25 18:54:47,448 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 18:54:47,448 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 18:54:47,448 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 18:54:47,449 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 18:55:53,017 - experiment_chaotic_experiment - INFO - Detected 26 speakers in dataset
+2026-01-25 19:11:37,114 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-25 19:11:37,114 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-25 19:11:37,114 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-25 19:11:37,114 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-25 19:12:43,429 - experiment_chaotic_experiment - INFO - Detected 26 speakers in dataset
+2026-01-26 08:22:05,263 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-26 08:22:05,280 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-26 08:22:05,280 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-26 08:22:05,280 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-26 08:23:28,301 - experiment_chaotic_experiment - INFO - Detected 26 speakers in dataset
+2026-01-26 08:25:41,877 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-26 08:25:41,878 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-26 08:25:41,878 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-26 08:25:41,878 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-26 08:26:48,475 - experiment_chaotic_experiment - INFO - Detected 26 speakers in dataset
+2026-01-26 08:40:47,459 - experiment_chaotic_experiment - INFO - Initialized experiment: chaotic_experiment
+2026-01-26 08:40:47,459 - experiment_chaotic_experiment - INFO - Device: cuda
+2026-01-26 08:40:47,459 - experiment_chaotic_experiment - INFO - Output directory: ./experiments/outputs/chaotic_experiment
+2026-01-26 08:40:47,459 - experiment_chaotic_experiment - INFO - Initialized chaotic network experiment with lorenz system
+2026-01-26 08:41:54,499 - experiment_chaotic_experiment - INFO - Detected 26 speakers in dataset

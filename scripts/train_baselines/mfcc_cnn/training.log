@@ -1,0 +1,598 @@
+2026-01-13 13:40:00,699 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:40:00,700 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 13:40:00,700 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:40:00,700 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 13:40:00,700 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 13:40:00,741 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 507535908864, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 13:40:00,741 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 13:40:00,741 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 13:40:00,741 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 13:40:00,741 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 13:40:00,741 - baseline_trainer - INFO - ==================================================
+2026-01-13 13:40:00,741 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 13:40:00,754 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 13:40:03,383 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 13:40:03,383 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 13:40:03,422 - baseline_trainer - ERROR - Failed to train mfcc_cnn (Run 1): BaselineExperiment._create_cnn_model.<locals>.CNNBaseline.forward() got an unexpected keyword argument 'debug'
+2026-01-13 13:40:03,423 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 396, in train_epoch
+    _ = self.model(audio, targets, debug=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BaselineExperiment._create_cnn_model.<locals>.CNNBaseline.forward() got an unexpected keyword argument 'debug'
+
+2026-01-13 13:40:03,426 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 13:40:03,426 - baseline_trainer - WARNING - No successful runs for mfcc_cnn
+2026-01-13 13:40:03,426 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 13:40:03,426 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 13:40:03,472 - baseline_trainer - INFO - Reports saved:
+2026-01-13 13:40:03,472 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 13:40:03,472 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 13:40:03,472 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 13:40:03,472 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:57:17,070 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:57:17,071 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 13:57:17,071 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:57:17,071 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 13:57:17,071 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 13:57:17,118 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 501004783616, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 13:57:17,118 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 13:57:17,118 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 13:57:17,118 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 13:57:17,118 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 13:57:17,118 - baseline_trainer - INFO - ==================================================
+2026-01-13 13:57:17,118 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 13:57:17,129 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 13:57:20,150 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 13:57:20,150 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 13:57:20,189 - baseline_trainer - ERROR - Failed to train mfcc_cnn (Run 1): BaselineExperiment._create_cnn_model.<locals>.CNNBaseline.forward() takes 2 positional arguments but 3 were given
+2026-01-13 13:57:20,190 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 396, in train_epoch
+    _ = self.model(audio, targets)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BaselineExperiment._create_cnn_model.<locals>.CNNBaseline.forward() takes 2 positional arguments but 3 were given
+
+2026-01-13 13:57:20,191 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 13:57:20,191 - baseline_trainer - WARNING - No successful runs for mfcc_cnn
+2026-01-13 13:57:20,191 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 13:57:20,191 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 13:57:20,236 - baseline_trainer - INFO - Reports saved:
+2026-01-13 13:57:20,236 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 13:57:20,236 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 13:57:20,237 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 13:57:20,237 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:58:17,591 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:58:17,592 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 13:58:17,592 - baseline_trainer - INFO - ============================================================
+2026-01-13 13:58:17,592 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 13:58:17,592 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 13:58:17,638 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 500953395200, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 13:58:17,639 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 13:58:17,639 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 13:58:17,639 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 13:58:17,639 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 13:58:17,639 - baseline_trainer - INFO - ==================================================
+2026-01-13 13:58:17,639 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 13:58:17,651 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 13:58:20,379 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 13:58:20,379 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 13:58:22,166 - baseline_trainer - ERROR - Failed to train mfcc_cnn (Run 1): Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument target in method wrapper_CUDA_nll_loss_forward)
+2026-01-13 13:58:22,167 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 405, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 695, in forward_pass
+    loss = self.criterion(logits, labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/modules/loss.py", line 1297, in forward
+    return F.cross_entropy(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib64/python3.12/site-packages/torch/nn/functional.py", line 3494, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument target in method wrapper_CUDA_nll_loss_forward)
+
+2026-01-13 13:58:22,169 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 13:58:22,169 - baseline_trainer - WARNING - No successful runs for mfcc_cnn
+2026-01-13 13:58:22,169 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 13:58:22,169 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 13:58:22,215 - baseline_trainer - INFO - Reports saved:
+2026-01-13 13:58:22,215 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 13:58:22,215 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 13:58:22,215 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 13:58:22,215 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:04:06,698 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:04:06,698 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 14:04:06,698 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:04:06,699 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 14:04:06,699 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 14:04:06,742 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 504090316800, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 14:04:06,742 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 14:04:06,742 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 14:04:06,742 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 14:04:06,742 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 14:04:06,742 - baseline_trainer - INFO - ==================================================
+2026-01-13 14:04:06,742 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 14:04:06,753 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 14:04:09,475 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 14:04:09,475 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 14:04:10,932 - baseline_trainer - ERROR - Failed to train mfcc_cnn (Run 1): cannot access local variable 'audio' where it is not associated with a value
+2026-01-13 14:04:10,933 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 405, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 671, in forward_pass
+    audio = audio.to(self.device)
+            ^^^^^
+UnboundLocalError: cannot access local variable 'audio' where it is not associated with a value
+
+2026-01-13 14:04:10,934 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 14:04:10,934 - baseline_trainer - WARNING - No successful runs for mfcc_cnn
+2026-01-13 14:04:10,934 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 14:04:10,934 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 14:04:10,977 - baseline_trainer - INFO - Reports saved:
+2026-01-13 14:04:10,978 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 14:04:10,978 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 14:04:10,978 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 14:04:10,978 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:16:46,514 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:16:46,514 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 14:16:46,514 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:16:46,514 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 14:16:46,514 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 14:16:46,558 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 502885711872, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 14:16:46,558 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 14:16:46,558 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 14:16:46,558 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 14:16:46,558 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 14:16:46,558 - baseline_trainer - INFO - ==================================================
+2026-01-13 14:16:46,558 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 14:16:46,568 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 14:16:49,221 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 14:16:49,221 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 14:16:50,524 - baseline_trainer - ERROR - Failed to train mfcc_cnn (Run 1): cannot access local variable 'audio' where it is not associated with a value
+2026-01-13 14:16:50,525 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 405, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 671, in forward_pass
+    audio = audio.to(self.device)
+            ^^^^^
+UnboundLocalError: cannot access local variable 'audio' where it is not associated with a value
+
+2026-01-13 14:16:50,526 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 14:16:50,526 - baseline_trainer - WARNING - No successful runs for mfcc_cnn
+2026-01-13 14:16:50,526 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 14:16:50,526 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 14:16:50,570 - baseline_trainer - INFO - Reports saved:
+2026-01-13 14:16:50,570 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 14:16:50,570 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 14:16:50,570 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 14:16:50,570 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:18:56,258 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:18:56,258 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 14:18:56,259 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:18:56,259 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 14:18:56,259 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 14:18:56,301 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 502824554496, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 14:18:56,301 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 14:18:56,301 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 14:18:56,301 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 14:18:56,301 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 14:18:56,301 - baseline_trainer - INFO - ==================================================
+2026-01-13 14:18:56,301 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 14:18:56,312 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 14:18:58,981 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 14:18:58,981 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 14:19:00,290 - baseline_trainer - ERROR - Failed to train mfcc_cnn (Run 1): name 'features' is not defined
+2026-01-13 14:19:00,292 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 367, in train_single_method
+    experiment.train(self.config['num_epochs'])
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 636, in train
+    train_metrics = self.train_epoch()
+                    ^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 405, in train_epoch
+    loss, predictions, targets = self.forward_pass(batch, training=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/baseline_experiment.py", line 691, in forward_pass
+    logits = self.model(features)
+                        ^^^^^^^^
+NameError: name 'features' is not defined
+
+2026-01-13 14:19:00,295 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 14:19:00,295 - baseline_trainer - WARNING - No successful runs for mfcc_cnn
+2026-01-13 14:19:00,295 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 14:19:00,295 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 14:19:00,340 - baseline_trainer - INFO - Reports saved:
+2026-01-13 14:19:00,340 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 14:19:00,340 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 14:19:00,340 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 14:19:00,340 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:19:17,349 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:19:17,350 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 14:19:17,350 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:19:17,350 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 14:19:17,350 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 14:19:17,393 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 502824476672, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 14:19:17,393 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 14:19:17,393 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 14:19:17,393 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 14:19:17,393 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 14:19:17,393 - baseline_trainer - INFO - ==================================================
+2026-01-13 14:19:17,393 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 14:19:17,403 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 14:19:20,022 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 14:19:20,022 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 14:21:34,692 - baseline_trainer - INFO - Evaluating mfcc_cnn...
+2026-01-13 14:21:35,408 - baseline_trainer - INFO - Completed mfcc_cnn (Run 1): Accuracy: 0.9831, Loss: 0.1113, Time: 137.3s
+2026-01-13 14:21:35,462 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 14:21:35,462 - baseline_trainer - INFO - mfcc_cnn Summary: 0.9831 ± 0.0000
+2026-01-13 14:21:35,462 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 14:21:35,463 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 14:21:35,522 - baseline_trainer - INFO - Reports saved:
+2026-01-13 14:21:35,522 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 14:21:35,522 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 14:21:35,522 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 14:21:35,522 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:25:45,587 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:25:45,587 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-01-13 14:25:45,587 - baseline_trainer - INFO - ============================================================
+2026-01-13 14:25:45,587 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn
+2026-01-13 14:25:45,587 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-01-13 14:25:45,629 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285186048, 'available_memory': 499677671424, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '51c92cdc63686073ead2a70ee657542846b3dc20', 'branch': 'origin', 'is_dirty': True}}
+2026-01-13 14:25:45,629 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-01-13 14:25:45,629 - baseline_trainer - INFO - Methods: ['mfcc_cnn']
+2026-01-13 14:25:45,629 - baseline_trainer - INFO - 
+==================================================
+2026-01-13 14:25:45,629 - baseline_trainer - INFO - TRAINING METHOD: MFCC_CNN
+2026-01-13 14:25:45,629 - baseline_trainer - INFO - ==================================================
+2026-01-13 14:25:45,629 - baseline_trainer - INFO - Training mfcc_cnn (Run 1)...
+2026-01-13 14:25:45,639 - baseline_trainer - INFO - Setting up mfcc_cnn...
+2026-01-13 14:25:48,348 - baseline_trainer - INFO - Model parameters: 172,516 (trainable: 172,516)
+2026-01-13 14:25:48,348 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-01-13 14:28:33,370 - baseline_trainer - INFO - Evaluating mfcc_cnn...
+2026-01-13 14:28:34,124 - baseline_trainer - INFO - Completed mfcc_cnn (Run 1): Accuracy: 0.9831, Loss: 0.1113, Time: 167.7s
+2026-01-13 14:28:34,179 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-01-13 14:28:34,179 - baseline_trainer - INFO - mfcc_cnn Summary: 0.9831 ± 0.0000
+2026-01-13 14:28:34,179 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-01-13 14:28:34,180 - baseline_trainer - INFO - Generating baseline training report...
+2026-01-13 14:28:34,235 - baseline_trainer - INFO - Reports saved:
+2026-01-13 14:28:34,235 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_report.txt
+2026-01-13 14:28:34,235 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/baseline_training_results.json
+2026-01-13 14:28:34,236 - baseline_trainer - INFO - Baseline training completed.
+2026-01-13 14:28:34,236 - baseline_trainer - INFO - ============================================================

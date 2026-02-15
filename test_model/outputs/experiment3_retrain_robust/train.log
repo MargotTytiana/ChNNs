@@ -1,0 +1,10 @@
+2026-01-18 11:19:59 - retrain - INFO - STARTING ROBUST RETRAINING
+2026-01-18 11:19:59 - retrain - INFO - Strategy: Use Mel + Chaos Hybrid to prevent collapse.
+2026-01-18 11:19:59 - retrain - INFO - Speakers: 26
+2026-01-18 11:20:01 - retrain - INFO - Starting training for 100 epochs...
+2026-01-18 11:20:01 - retrain - INFO - Early stopping patience: 20
+2026-01-18 11:22:00 - retrain - INFO - STARTING ROBUST RETRAINING (FIXED)
+2026-01-18 11:22:00 - retrain - INFO - Speakers: 26
+2026-01-18 11:22:01 - retrain - INFO - Applying TransposeWrapper to dimension_adapter...
+2026-01-18 11:22:02 - retrain - INFO - Starting training for 100 epochs...
+2026-01-18 11:22:02 - retrain - INFO - Early stopping patience: 20
