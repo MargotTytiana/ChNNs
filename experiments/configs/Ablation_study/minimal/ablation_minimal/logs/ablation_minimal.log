@@ -234,3 +234,748 @@
 2026-02-15 12:58:23,996 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
 2026-02-15 12:58:24,012 - experiment_ablation_minimal - INFO - Device: cuda
 2026-02-15 12:58:24,012 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-15 14:19:49,023 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-15 14:19:49,023 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-15 14:19:49,023 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-15 14:19:49,024 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-15 14:19:49,024 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-15 14:19:49,024 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-15 14:19:49,024 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-15 14:19:49,410 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-15 14:19:49,410 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-15 14:19:49,410 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-15 14:19:49,410 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-15 14:19:49,410 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-15 14:19:49,410 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-15 14:19:49,410 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-15 14:20:54,704 - experiment_ablation_minimal - INFO - Total parameters: 565,119
+2026-02-15 14:20:54,704 - experiment_ablation_minimal - INFO - Trainable parameters: 565,119
+2026-02-15 14:20:54,704 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-15 14:20:54,704 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-15 14:20:54,705 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-15 14:20:54,705 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-15 14:20:54,705 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-15 14:20:54,786 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-15 14:20:54,786 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-15 14:20:54,787 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-15 14:20:54,787 - experiment_ablation_minimal - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-02-15 14:20:54,951 - experiment_ablation_minimal - INFO - 
+================================================================================
+2026-02-15 14:20:54,951 - experiment_ablation_minimal - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-15 14:20:54,952 - experiment_ablation_minimal - INFO - ================================================================================
+2026-02-15 14:20:54,952 - experiment_ablation_minimal - INFO - Batch Info:
+2026-02-15 14:20:54,952 - experiment_ablation_minimal - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-15 14:20:54,952 - experiment_ablation_minimal - INFO -   Targets shape: torch.Size([32])
+2026-02-15 14:20:54,953 - experiment_ablation_minimal - INFO -   Targets (first 8): tensor([20,  0, 14, 25, 24, 15,  3, 10], device='cuda:0')
+2026-02-15 14:20:55,005 - experiment_ablation_minimal - INFO - ================================================================================
+
+2026-02-15 14:20:55,125 - experiment_ablation_minimal - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-15 14:20:55,127 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.079, max_norm=41.4, min_std=0.177
+2026-02-15 14:20:55,484 - experiment_ablation_minimal - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 12.221708
+2026-02-15 14:21:01,775 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.1, desync_weight=0.1, loss_sync=3.117291
+2026-02-15 14:21:02,142 - experiment_ablation_minimal - INFO - Epoch 0: Train Loss: 8.4037, Train Acc: 0.0513, Val Loss: 4.5270, Val Acc: 0.0449
+2026-02-15 14:21:02,212 - experiment_ablation_minimal - INFO - Saved new best model at epoch 0
+2026-02-15 14:21:02,990 - experiment_ablation_minimal - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 7.199095
+2026-02-15 14:21:09,330 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.1, desync_weight=0.1, loss_sync=1.839512
+2026-02-15 14:21:09,715 - experiment_ablation_minimal - INFO - Epoch 1: Train Loss: 6.0557, Train Acc: 0.0826, Val Loss: 3.0450, Val Acc: 0.1573
+2026-02-15 14:21:09,795 - experiment_ablation_minimal - INFO - Saved new best model at epoch 1
+2026-02-15 14:21:10,490 - experiment_ablation_minimal - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 6.334372
+2026-02-15 14:21:16,825 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.1, desync_weight=0.1, loss_sync=1.241147
+2026-02-15 14:21:17,174 - experiment_ablation_minimal - INFO - Epoch 2: Train Loss: 4.7294, Train Acc: 0.1652, Val Loss: 2.6197, Val Acc: 0.3034
+2026-02-15 14:21:17,243 - experiment_ablation_minimal - INFO - Saved new best model at epoch 2
+2026-02-15 14:21:17,943 - experiment_ablation_minimal - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 4.427544
+2026-02-15 14:21:24,476 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.1, desync_weight=0.1, loss_sync=1.146530
+2026-02-15 14:21:24,867 - experiment_ablation_minimal - INFO - Epoch 3: Train Loss: 4.0745, Train Acc: 0.2500, Val Loss: 2.3761, Val Acc: 0.2809
+2026-02-15 14:21:25,527 - experiment_ablation_minimal - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 3.661310
+2026-02-15 14:21:31,864 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.1, desync_weight=0.1, loss_sync=0.748530
+2026-02-15 14:21:32,216 - experiment_ablation_minimal - INFO - Epoch 4: Train Loss: 3.4256, Train Acc: 0.2924, Val Loss: 2.0385, Val Acc: 0.3933
+2026-02-15 14:21:32,290 - experiment_ablation_minimal - INFO - Saved new best model at epoch 4
+2026-02-15 14:21:32,984 - experiment_ablation_minimal - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 3.168359
+2026-02-15 14:21:39,339 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.1, desync_weight=0.1, loss_sync=0.636738
+2026-02-15 14:21:39,695 - experiment_ablation_minimal - INFO - Epoch 5: Train Loss: 2.9632, Train Acc: 0.3482, Val Loss: 1.6034, Val Acc: 0.5169
+2026-02-15 14:21:39,769 - experiment_ablation_minimal - INFO - Saved new best model at epoch 5
+2026-02-15 14:21:40,451 - experiment_ablation_minimal - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 2.684637
+2026-02-15 14:21:46,797 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.1, desync_weight=0.1, loss_sync=0.638232
+2026-02-15 14:21:47,160 - experiment_ablation_minimal - INFO - Epoch 6: Train Loss: 2.4372, Train Acc: 0.4554, Val Loss: 1.6011, Val Acc: 0.5393
+2026-02-15 14:21:47,234 - experiment_ablation_minimal - INFO - Saved new best model at epoch 6
+2026-02-15 14:21:47,942 - experiment_ablation_minimal - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 2.431648
+2026-02-15 14:21:48,539 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.055, max_norm=10.4, min_std=0.903
+2026-02-15 14:21:54,282 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.1, desync_weight=0.1, loss_sync=0.502174
+2026-02-15 14:21:54,682 - experiment_ablation_minimal - INFO - Epoch 7: Train Loss: 1.9623, Train Acc: 0.5558, Val Loss: 0.9500, Val Acc: 0.6854
+2026-02-15 14:21:54,757 - experiment_ablation_minimal - INFO - Saved new best model at epoch 7
+2026-02-15 14:21:55,455 - experiment_ablation_minimal - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.639742
+2026-02-15 14:22:01,745 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.1, desync_weight=0.1, loss_sync=0.488847
+2026-02-15 14:22:02,127 - experiment_ablation_minimal - INFO - Epoch 8: Train Loss: 1.6632, Train Acc: 0.6362, Val Loss: 0.8828, Val Acc: 0.7640
+2026-02-15 14:22:02,202 - experiment_ablation_minimal - INFO - Saved new best model at epoch 8
+2026-02-15 14:22:02,917 - experiment_ablation_minimal - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.701450
+2026-02-15 14:22:09,261 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.1, desync_weight=0.1, loss_sync=0.497907
+2026-02-15 14:22:09,637 - experiment_ablation_minimal - INFO - Epoch 9: Train Loss: 1.6575, Train Acc: 0.6496, Val Loss: 1.1183, Val Acc: 0.6854
+2026-02-15 14:22:10,316 - experiment_ablation_minimal - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.532998
+2026-02-15 14:22:16,643 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.1, desync_weight=0.1, loss_sync=0.504573
+2026-02-15 14:22:17,005 - experiment_ablation_minimal - INFO - Epoch 10: Train Loss: 1.4638, Train Acc: 0.6987, Val Loss: 1.0023, Val Acc: 0.6067
+2026-02-15 14:22:17,738 - experiment_ablation_minimal - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.684585
+2026-02-15 14:22:24,068 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.1, desync_weight=0.1, loss_sync=0.519520
+2026-02-15 14:22:24,420 - experiment_ablation_minimal - INFO - Epoch 11: Train Loss: 1.4341, Train Acc: 0.7321, Val Loss: 0.9291, Val Acc: 0.7191
+2026-02-15 14:22:25,093 - experiment_ablation_minimal - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 1.261686
+2026-02-15 14:22:31,426 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.1, desync_weight=0.1, loss_sync=0.496686
+2026-02-15 14:22:31,780 - experiment_ablation_minimal - INFO - Epoch 12: Train Loss: 1.2586, Train Acc: 0.7455, Val Loss: 0.5857, Val Acc: 0.7865
+2026-02-15 14:22:31,857 - experiment_ablation_minimal - INFO - Saved new best model at epoch 12
+2026-02-15 14:22:32,566 - experiment_ablation_minimal - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 1.455172
+2026-02-15 14:22:38,896 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.1, desync_weight=0.1, loss_sync=0.489091
+2026-02-15 14:22:39,267 - experiment_ablation_minimal - INFO - Epoch 13: Train Loss: 1.0926, Train Acc: 0.8170, Val Loss: 0.4828, Val Acc: 0.7978
+2026-02-15 14:22:39,339 - experiment_ablation_minimal - INFO - Saved new best model at epoch 13
+2026-02-15 14:22:40,038 - experiment_ablation_minimal - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.905563
+2026-02-15 14:22:41,605 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.053, max_norm=5.9, min_std=0.304
+2026-02-15 14:22:46,375 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.1, desync_weight=0.1, loss_sync=0.487775
+2026-02-15 14:22:46,730 - experiment_ablation_minimal - INFO - Epoch 14: Train Loss: 1.0624, Train Acc: 0.8326, Val Loss: 0.5190, Val Acc: 0.8090
+2026-02-15 14:22:46,806 - experiment_ablation_minimal - INFO - Saved new best model at epoch 14
+2026-02-15 14:22:47,501 - experiment_ablation_minimal - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.959131
+2026-02-15 14:22:53,838 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.1, desync_weight=0.1, loss_sync=0.500921
+2026-02-15 14:22:54,197 - experiment_ablation_minimal - INFO - Epoch 15: Train Loss: 1.0044, Train Acc: 0.8460, Val Loss: 0.7564, Val Acc: 0.7865
+2026-02-15 14:22:55,068 - experiment_ablation_minimal - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.959302
+2026-02-15 14:23:01,351 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.1, desync_weight=0.1, loss_sync=0.475176
+2026-02-15 14:23:01,699 - experiment_ablation_minimal - INFO - Epoch 16: Train Loss: 1.0174, Train Acc: 0.8326, Val Loss: 1.0921, Val Acc: 0.6854
+2026-02-15 14:23:02,379 - experiment_ablation_minimal - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.826991
+2026-02-15 14:23:08,723 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.1, desync_weight=0.1, loss_sync=0.492252
+2026-02-15 14:23:09,101 - experiment_ablation_minimal - INFO - Epoch 17: Train Loss: 0.9868, Train Acc: 0.8438, Val Loss: 0.4791, Val Acc: 0.8315
+2026-02-15 14:23:09,176 - experiment_ablation_minimal - INFO - Saved new best model at epoch 17
+2026-02-15 14:23:09,884 - experiment_ablation_minimal - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.988105
+2026-02-15 14:23:16,168 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.1, desync_weight=0.1, loss_sync=0.502792
+2026-02-15 14:23:16,517 - experiment_ablation_minimal - INFO - Epoch 18: Train Loss: 0.9782, Train Acc: 0.8371, Val Loss: 0.8300, Val Acc: 0.8202
+2026-02-15 14:23:17,191 - experiment_ablation_minimal - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.790521
+2026-02-15 14:23:23,479 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.1, desync_weight=0.1, loss_sync=0.472213
+2026-02-15 14:23:23,829 - experiment_ablation_minimal - INFO - Epoch 19: Train Loss: 0.8171, Train Acc: 0.8973, Val Loss: 0.4567, Val Acc: 0.8539
+2026-02-15 14:23:23,906 - experiment_ablation_minimal - INFO - Saved new best model at epoch 19
+2026-02-15 14:23:24,603 - experiment_ablation_minimal - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 1.012711
+2026-02-15 14:23:30,940 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.1, desync_weight=0.1, loss_sync=0.491335
+2026-02-15 14:23:31,286 - experiment_ablation_minimal - INFO - Epoch 20: Train Loss: 0.8673, Train Acc: 0.8705, Val Loss: 1.2489, Val Acc: 0.6742
+2026-02-15 14:23:32,018 - experiment_ablation_minimal - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.767649
+2026-02-15 14:23:34,538 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.042, max_norm=3.8, min_std=0.224
+2026-02-15 14:23:38,294 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.1, desync_weight=0.1, loss_sync=0.484606
+2026-02-15 14:23:38,642 - experiment_ablation_minimal - INFO - Epoch 21: Train Loss: 0.7694, Train Acc: 0.9152, Val Loss: 0.7065, Val Acc: 0.7978
+2026-02-15 14:23:39,316 - experiment_ablation_minimal - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.759571
+2026-02-15 14:23:45,580 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.1, desync_weight=0.1, loss_sync=0.468718
+2026-02-15 14:23:45,926 - experiment_ablation_minimal - INFO - Epoch 22: Train Loss: 0.8172, Train Acc: 0.8862, Val Loss: 0.8956, Val Acc: 0.7640
+2026-02-15 14:23:46,593 - experiment_ablation_minimal - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.840185
+2026-02-15 14:23:52,929 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.1, desync_weight=0.1, loss_sync=0.452586
+2026-02-15 14:23:53,287 - experiment_ablation_minimal - INFO - Epoch 23: Train Loss: 0.7237, Train Acc: 0.9174, Val Loss: 0.3359, Val Acc: 0.8876
+2026-02-15 14:23:53,363 - experiment_ablation_minimal - INFO - Saved new best model at epoch 23
+2026-02-15 14:23:54,070 - experiment_ablation_minimal - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.670049
+2026-02-15 14:24:00,406 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 24: sync_weight=0.1, desync_weight=0.1, loss_sync=0.475242
+2026-02-15 14:24:00,773 - experiment_ablation_minimal - INFO - Epoch 24: Train Loss: 0.7144, Train Acc: 0.9308, Val Loss: 0.4426, Val Acc: 0.8652
+2026-02-15 14:24:01,435 - experiment_ablation_minimal - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.497639
+2026-02-15 14:24:07,708 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 25: sync_weight=0.1, desync_weight=0.1, loss_sync=0.437602
+2026-02-15 14:24:08,059 - experiment_ablation_minimal - INFO - Epoch 25: Train Loss: 0.6395, Train Acc: 0.9397, Val Loss: 0.3602, Val Acc: 0.8539
+2026-02-15 14:24:08,715 - experiment_ablation_minimal - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.619270
+2026-02-15 14:24:15,050 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 26: sync_weight=0.1, desync_weight=0.1, loss_sync=0.449624
+2026-02-15 14:24:15,400 - experiment_ablation_minimal - INFO - Epoch 26: Train Loss: 0.6952, Train Acc: 0.9174, Val Loss: 0.7324, Val Acc: 0.7865
+2026-02-15 14:24:16,057 - experiment_ablation_minimal - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.787425
+2026-02-15 14:24:22,591 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 27: sync_weight=0.1, desync_weight=0.1, loss_sync=0.434644
+2026-02-15 14:24:22,938 - experiment_ablation_minimal - INFO - Epoch 27: Train Loss: 0.6614, Train Acc: 0.9174, Val Loss: 0.2228, Val Acc: 0.9101
+2026-02-15 14:24:23,010 - experiment_ablation_minimal - INFO - Saved new best model at epoch 27
+2026-02-15 14:24:23,690 - experiment_ablation_minimal - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.550099
+2026-02-15 14:24:27,168 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.036, max_norm=2.3, min_std=0.042
+2026-02-15 14:24:29,987 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 28: sync_weight=0.1, desync_weight=0.1, loss_sync=0.415504
+2026-02-15 14:24:30,350 - experiment_ablation_minimal - INFO - Epoch 28: Train Loss: 0.6359, Train Acc: 0.9308, Val Loss: 0.4938, Val Acc: 0.8764
+2026-02-15 14:24:31,004 - experiment_ablation_minimal - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.513977
+2026-02-15 14:24:37,333 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 29: sync_weight=0.1, desync_weight=0.1, loss_sync=0.425468
+2026-02-15 14:24:37,680 - experiment_ablation_minimal - INFO - Epoch 29: Train Loss: 0.5918, Train Acc: 0.9554, Val Loss: 0.5513, Val Acc: 0.8539
+2026-02-15 14:24:38,338 - experiment_ablation_minimal - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.572495
+2026-02-15 14:24:44,693 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 30: sync_weight=0.1, desync_weight=0.1, loss_sync=0.445168
+2026-02-15 14:24:45,041 - experiment_ablation_minimal - INFO - Epoch 30: Train Loss: 0.6273, Train Acc: 0.9487, Val Loss: 1.0057, Val Acc: 0.7416
+2026-02-15 14:24:45,778 - experiment_ablation_minimal - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.454625
+2026-02-15 14:24:52,100 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 31: sync_weight=0.1, desync_weight=0.1, loss_sync=0.423127
+2026-02-15 14:24:52,459 - experiment_ablation_minimal - INFO - Epoch 31: Train Loss: 0.6464, Train Acc: 0.9464, Val Loss: 0.3279, Val Acc: 0.9213
+2026-02-15 14:24:52,534 - experiment_ablation_minimal - INFO - Saved new best model at epoch 31
+2026-02-15 14:24:53,226 - experiment_ablation_minimal - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.591110
+2026-02-15 14:24:59,565 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 32: sync_weight=0.1, desync_weight=0.1, loss_sync=0.418187
+2026-02-15 14:24:59,959 - experiment_ablation_minimal - INFO - Epoch 32: Train Loss: 0.6157, Train Acc: 0.9397, Val Loss: 0.4292, Val Acc: 0.8539
+2026-02-15 14:25:00,622 - experiment_ablation_minimal - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.726812
+2026-02-15 14:25:06,968 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 33: sync_weight=0.1, desync_weight=0.1, loss_sync=0.394071
+2026-02-15 14:25:07,340 - experiment_ablation_minimal - INFO - Epoch 33: Train Loss: 0.6041, Train Acc: 0.9286, Val Loss: 0.2897, Val Acc: 0.8989
+2026-02-15 14:25:08,001 - experiment_ablation_minimal - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.486650
+2026-02-15 14:25:14,301 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 34: sync_weight=0.1, desync_weight=0.1, loss_sync=0.424029
+2026-02-15 14:25:14,669 - experiment_ablation_minimal - INFO - Epoch 34: Train Loss: 0.5770, Train Acc: 0.9509, Val Loss: 0.4693, Val Acc: 0.8539
+2026-02-15 14:25:15,348 - experiment_ablation_minimal - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.499989
+2026-02-15 14:25:19,786 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.045, max_norm=1.9, min_std=0.012
+2026-02-15 14:25:21,650 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 35: sync_weight=0.1, desync_weight=0.1, loss_sync=0.380210
+2026-02-15 14:25:21,998 - experiment_ablation_minimal - INFO - Epoch 35: Train Loss: 0.5294, Train Acc: 0.9688, Val Loss: 0.8082, Val Acc: 0.8315
+2026-02-15 14:25:22,677 - experiment_ablation_minimal - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.712163
+2026-02-15 14:25:29,008 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 36: sync_weight=0.1, desync_weight=0.1, loss_sync=0.425442
+2026-02-15 14:25:29,384 - experiment_ablation_minimal - INFO - Epoch 36: Train Loss: 0.6105, Train Acc: 0.9420, Val Loss: 0.5778, Val Acc: 0.8315
+2026-02-15 14:25:30,067 - experiment_ablation_minimal - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.342539
+2026-02-15 14:25:36,399 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 37: sync_weight=0.1, desync_weight=0.1, loss_sync=0.379485
+2026-02-15 14:25:36,764 - experiment_ablation_minimal - INFO - Epoch 37: Train Loss: 0.5558, Train Acc: 0.9397, Val Loss: 0.4641, Val Acc: 0.9101
+2026-02-15 14:25:37,438 - experiment_ablation_minimal - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.418886
+2026-02-15 14:25:43,763 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 38: sync_weight=0.1, desync_weight=0.1, loss_sync=0.364367
+2026-02-15 14:25:44,128 - experiment_ablation_minimal - INFO - Epoch 38: Train Loss: 0.5001, Train Acc: 0.9621, Val Loss: 0.4566, Val Acc: 0.8764
+2026-02-15 14:25:44,793 - experiment_ablation_minimal - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.396655
+2026-02-15 14:25:51,079 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 39: sync_weight=0.1, desync_weight=0.1, loss_sync=0.392212
+2026-02-15 14:25:51,420 - experiment_ablation_minimal - INFO - Epoch 39: Train Loss: 0.5186, Train Acc: 0.9643, Val Loss: 0.9561, Val Acc: 0.8090
+2026-02-15 14:25:52,068 - experiment_ablation_minimal - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.456958
+2026-02-15 14:25:58,612 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 40: sync_weight=0.1, desync_weight=0.1, loss_sync=0.393262
+2026-02-15 14:25:58,959 - experiment_ablation_minimal - INFO - Epoch 40: Train Loss: 0.5256, Train Acc: 0.9554, Val Loss: 0.3725, Val Acc: 0.8989
+2026-02-15 14:25:59,693 - experiment_ablation_minimal - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.472210
+2026-02-15 14:26:06,033 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 41: sync_weight=0.1, desync_weight=0.1, loss_sync=0.375249
+2026-02-15 14:26:06,402 - experiment_ablation_minimal - INFO - Epoch 41: Train Loss: 0.5025, Train Acc: 0.9531, Val Loss: 0.2353, Val Acc: 0.9213
+2026-02-15 14:26:07,063 - experiment_ablation_minimal - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.405113
+2026-02-15 14:26:12,529 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.040, max_norm=3.9, min_std=0.022
+2026-02-15 14:26:13,435 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 42: sync_weight=0.1, desync_weight=0.1, loss_sync=0.406715
+2026-02-15 14:26:13,792 - experiment_ablation_minimal - INFO - Epoch 42: Train Loss: 0.5027, Train Acc: 0.9754, Val Loss: 0.2819, Val Acc: 0.8989
+2026-02-15 14:26:14,499 - experiment_ablation_minimal - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.590660
+2026-02-15 14:26:20,748 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 43: sync_weight=0.1, desync_weight=0.1, loss_sync=0.393569
+2026-02-15 14:26:21,115 - experiment_ablation_minimal - INFO - Epoch 43: Train Loss: 0.5453, Train Acc: 0.9531, Val Loss: 0.4826, Val Acc: 0.8427
+2026-02-15 14:26:21,775 - experiment_ablation_minimal - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.482968
+2026-02-15 14:26:28,124 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 44: sync_weight=0.1, desync_weight=0.1, loss_sync=0.372783
+2026-02-15 14:26:28,468 - experiment_ablation_minimal - INFO - Epoch 44: Train Loss: 0.4879, Train Acc: 0.9688, Val Loss: 0.4892, Val Acc: 0.8764
+2026-02-15 14:26:29,151 - experiment_ablation_minimal - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.453714
+2026-02-15 14:26:35,481 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 45: sync_weight=0.1, desync_weight=0.1, loss_sync=0.365221
+2026-02-15 14:26:35,828 - experiment_ablation_minimal - INFO - Epoch 45: Train Loss: 0.4828, Train Acc: 0.9710, Val Loss: 0.6244, Val Acc: 0.8427
+2026-02-15 14:26:36,477 - experiment_ablation_minimal - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.463957
+2026-02-15 14:26:42,825 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 46: sync_weight=0.1, desync_weight=0.1, loss_sync=0.387261
+2026-02-15 14:26:43,178 - experiment_ablation_minimal - INFO - Epoch 46: Train Loss: 0.5221, Train Acc: 0.9531, Val Loss: 0.2806, Val Acc: 0.8876
+2026-02-15 14:26:43,835 - experiment_ablation_minimal - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.313277
+2026-02-15 14:26:50,227 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 47: sync_weight=0.1, desync_weight=0.1, loss_sync=0.416868
+2026-02-15 14:26:50,576 - experiment_ablation_minimal - INFO - Epoch 47: Train Loss: 0.5639, Train Acc: 0.9554, Val Loss: 0.5654, Val Acc: 0.8202
+2026-02-15 14:26:51,264 - experiment_ablation_minimal - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.575858
+2026-02-15 14:26:57,616 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 48: sync_weight=0.1, desync_weight=0.1, loss_sync=0.404237
+2026-02-15 14:26:57,968 - experiment_ablation_minimal - INFO - Epoch 48: Train Loss: 0.4952, Train Acc: 0.9643, Val Loss: 0.2973, Val Acc: 0.9326
+2026-02-15 14:26:58,045 - experiment_ablation_minimal - INFO - Saved new best model at epoch 48
+2026-02-15 14:26:58,749 - experiment_ablation_minimal - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.569138
+2026-02-15 14:27:05,038 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 49: sync_weight=0.1, desync_weight=0.1, loss_sync=0.398635
+2026-02-15 14:27:05,375 - experiment_ablation_minimal - INFO - Epoch 49: Train Loss: 0.5020, Train Acc: 0.9799, Val Loss: 0.2996, Val Acc: 0.9101
+2026-02-15 14:27:05,689 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.042, max_norm=3.7, min_std=0.008
+2026-02-15 14:27:06,049 - experiment_ablation_minimal - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.827972
+2026-02-15 14:27:12,399 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 50: sync_weight=0.1, desync_weight=0.1, loss_sync=0.413176
+2026-02-15 14:27:12,776 - experiment_ablation_minimal - INFO - Epoch 50: Train Loss: 0.5173, Train Acc: 0.9710, Val Loss: 0.3903, Val Acc: 0.9101
+2026-02-15 14:27:13,509 - experiment_ablation_minimal - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.602178
+2026-02-15 14:27:19,867 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 51: sync_weight=0.1, desync_weight=0.1, loss_sync=0.390208
+2026-02-15 14:27:20,229 - experiment_ablation_minimal - INFO - Epoch 51: Train Loss: 0.4836, Train Acc: 0.9777, Val Loss: 0.2041, Val Acc: 0.9213
+2026-02-15 14:27:20,897 - experiment_ablation_minimal - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.411336
+2026-02-15 14:27:27,242 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 52: sync_weight=0.1, desync_weight=0.1, loss_sync=0.365955
+2026-02-15 14:27:27,594 - experiment_ablation_minimal - INFO - Epoch 52: Train Loss: 0.4466, Train Acc: 0.9777, Val Loss: 0.2891, Val Acc: 0.8764
+2026-02-15 14:27:28,279 - experiment_ablation_minimal - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.465454
+2026-02-15 14:27:34,753 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 53: sync_weight=0.1, desync_weight=0.1, loss_sync=0.379928
+2026-02-15 14:27:35,103 - experiment_ablation_minimal - INFO - Epoch 53: Train Loss: 0.4566, Train Acc: 0.9866, Val Loss: 0.4515, Val Acc: 0.8764
+2026-02-15 14:27:35,768 - experiment_ablation_minimal - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.475443
+2026-02-15 14:27:42,111 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 54: sync_weight=0.1, desync_weight=0.1, loss_sync=0.411011
+2026-02-15 14:27:42,472 - experiment_ablation_minimal - INFO - Epoch 54: Train Loss: 0.4987, Train Acc: 0.9754, Val Loss: 0.3815, Val Acc: 0.8652
+2026-02-15 14:27:43,118 - experiment_ablation_minimal - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.361303
+2026-02-15 14:27:49,466 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 55: sync_weight=0.1, desync_weight=0.1, loss_sync=0.376712
+2026-02-15 14:27:49,833 - experiment_ablation_minimal - INFO - Epoch 55: Train Loss: 0.4402, Train Acc: 0.9799, Val Loss: 0.5098, Val Acc: 0.8764
+2026-02-15 14:27:50,494 - experiment_ablation_minimal - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.339406
+2026-02-15 14:27:56,845 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 56: sync_weight=0.1, desync_weight=0.1, loss_sync=0.393457
+2026-02-15 14:27:57,195 - experiment_ablation_minimal - INFO - Epoch 56: Train Loss: 0.4978, Train Acc: 0.9621, Val Loss: 0.7431, Val Acc: 0.8427
+2026-02-15 14:27:57,852 - experiment_ablation_minimal - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.369918
+2026-02-15 14:27:58,457 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.058, max_norm=3.7, min_std=0.007
+2026-02-15 14:28:04,213 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 57: sync_weight=0.1, desync_weight=0.1, loss_sync=0.389274
+2026-02-15 14:28:04,580 - experiment_ablation_minimal - INFO - Epoch 57: Train Loss: 0.4432, Train Acc: 0.9844, Val Loss: 0.5981, Val Acc: 0.8427
+2026-02-15 14:28:05,237 - experiment_ablation_minimal - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.387578
+2026-02-15 14:28:11,602 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 58: sync_weight=0.1, desync_weight=0.1, loss_sync=0.361668
+2026-02-15 14:28:11,959 - experiment_ablation_minimal - INFO - Epoch 58: Train Loss: 0.4442, Train Acc: 0.9732, Val Loss: 0.4846, Val Acc: 0.8315
+2026-02-15 14:28:12,653 - experiment_ablation_minimal - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.417466
+2026-02-15 14:28:18,987 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 59: sync_weight=0.1, desync_weight=0.1, loss_sync=0.408151
+2026-02-15 14:28:19,330 - experiment_ablation_minimal - INFO - Epoch 59: Train Loss: 0.4777, Train Acc: 0.9777, Val Loss: 0.4530, Val Acc: 0.8876
+2026-02-15 14:28:20,003 - experiment_ablation_minimal - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.505060
+2026-02-15 14:28:26,355 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 60: sync_weight=0.1, desync_weight=0.1, loss_sync=0.404485
+2026-02-15 14:28:26,700 - experiment_ablation_minimal - INFO - Epoch 60: Train Loss: 0.5271, Train Acc: 0.9576, Val Loss: 0.6620, Val Acc: 0.9101
+2026-02-15 14:28:27,436 - experiment_ablation_minimal - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.423888
+2026-02-15 14:28:33,772 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 61: sync_weight=0.1, desync_weight=0.1, loss_sync=0.375757
+2026-02-15 14:28:34,134 - experiment_ablation_minimal - INFO - Epoch 61: Train Loss: 0.4473, Train Acc: 0.9777, Val Loss: 0.2425, Val Acc: 0.9213
+2026-02-15 14:28:34,789 - experiment_ablation_minimal - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.349163
+2026-02-15 14:28:41,126 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 62: sync_weight=0.1, desync_weight=0.1, loss_sync=0.407677
+2026-02-15 14:28:41,474 - experiment_ablation_minimal - INFO - Epoch 62: Train Loss: 0.4737, Train Acc: 0.9754, Val Loss: 0.8299, Val Acc: 0.8202
+2026-02-15 14:28:42,151 - experiment_ablation_minimal - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.418055
+2026-02-15 14:28:48,477 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 63: sync_weight=0.1, desync_weight=0.1, loss_sync=0.369890
+2026-02-15 14:28:48,829 - experiment_ablation_minimal - INFO - Epoch 63: Train Loss: 0.4331, Train Acc: 0.9844, Val Loss: 0.3244, Val Acc: 0.8989
+2026-02-15 14:28:49,493 - experiment_ablation_minimal - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.502416
+2026-02-15 14:28:51,049 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.056, max_norm=3.8, min_std=0.018
+2026-02-15 14:28:55,831 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 64: sync_weight=0.1, desync_weight=0.1, loss_sync=0.396304
+2026-02-15 14:28:56,181 - experiment_ablation_minimal - INFO - Epoch 64: Train Loss: 0.4940, Train Acc: 0.9732, Val Loss: 0.3937, Val Acc: 0.9101
+2026-02-15 14:28:56,853 - experiment_ablation_minimal - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.442328
+2026-02-15 14:29:03,338 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 65: sync_weight=0.1, desync_weight=0.1, loss_sync=0.367076
+2026-02-15 14:29:03,703 - experiment_ablation_minimal - INFO - Epoch 65: Train Loss: 0.4404, Train Acc: 0.9799, Val Loss: 0.2735, Val Acc: 0.8876
+2026-02-15 14:29:04,360 - experiment_ablation_minimal - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.556027
+2026-02-15 14:29:10,643 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 66: sync_weight=0.1, desync_weight=0.1, loss_sync=0.384376
+2026-02-15 14:29:10,999 - experiment_ablation_minimal - INFO - Epoch 66: Train Loss: 0.4699, Train Acc: 0.9688, Val Loss: 0.9569, Val Acc: 0.8202
+2026-02-15 14:29:11,674 - experiment_ablation_minimal - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.424514
+2026-02-15 14:29:18,010 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 67: sync_weight=0.1, desync_weight=0.1, loss_sync=0.368648
+2026-02-15 14:29:18,363 - experiment_ablation_minimal - INFO - Epoch 67: Train Loss: 0.4659, Train Acc: 0.9777, Val Loss: 0.4301, Val Acc: 0.8876
+2026-02-15 14:29:19,034 - experiment_ablation_minimal - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.389040
+2026-02-15 14:29:25,316 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 68: sync_weight=0.1, desync_weight=0.1, loss_sync=0.434389
+2026-02-15 14:29:25,666 - experiment_ablation_minimal - INFO - Epoch 68: Train Loss: 0.5102, Train Acc: 0.9732, Val Loss: 0.5133, Val Acc: 0.8764
+2026-02-15 14:29:26,335 - experiment_ablation_minimal - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.515701
+2026-02-15 14:29:32,655 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 69: sync_weight=0.1, desync_weight=0.1, loss_sync=0.370302
+2026-02-15 14:29:33,016 - experiment_ablation_minimal - INFO - Epoch 69: Train Loss: 0.4484, Train Acc: 0.9732, Val Loss: 0.2971, Val Acc: 0.9213
+2026-02-15 14:29:33,696 - experiment_ablation_minimal - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.400177
+2026-02-15 14:29:40,051 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 70: sync_weight=0.1, desync_weight=0.1, loss_sync=0.384302
+2026-02-15 14:29:40,449 - experiment_ablation_minimal - INFO - Epoch 70: Train Loss: 0.4397, Train Acc: 0.9821, Val Loss: 0.4303, Val Acc: 0.9101
+2026-02-15 14:29:41,455 - experiment_ablation_minimal - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.494150
+2026-02-15 14:29:43,980 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.058, max_norm=3.9, min_std=0.046
+2026-02-15 14:29:47,790 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 71: sync_weight=0.1, desync_weight=0.1, loss_sync=0.368150
+2026-02-15 14:29:48,278 - experiment_ablation_minimal - INFO - Epoch 71: Train Loss: 0.4660, Train Acc: 0.9598, Val Loss: 0.4930, Val Acc: 0.8989
+2026-02-15 14:29:49,068 - experiment_ablation_minimal - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.629301
+2026-02-15 14:29:55,422 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 72: sync_weight=0.1, desync_weight=0.1, loss_sync=0.393192
+2026-02-15 14:29:55,895 - experiment_ablation_minimal - INFO - Epoch 72: Train Loss: 0.4812, Train Acc: 0.9732, Val Loss: 0.3096, Val Acc: 0.9101
+2026-02-15 14:29:56,690 - experiment_ablation_minimal - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.363629
+2026-02-15 14:30:03,055 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 73: sync_weight=0.1, desync_weight=0.1, loss_sync=0.351392
+2026-02-15 14:30:03,526 - experiment_ablation_minimal - INFO - Epoch 73: Train Loss: 0.4397, Train Acc: 0.9732, Val Loss: 0.2306, Val Acc: 0.9438
+2026-02-15 14:30:03,632 - experiment_ablation_minimal - INFO - Saved new best model at epoch 73
+2026-02-15 14:30:04,492 - experiment_ablation_minimal - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.485341
+2026-02-15 14:30:10,841 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 74: sync_weight=0.1, desync_weight=0.1, loss_sync=0.383948
+2026-02-15 14:30:11,322 - experiment_ablation_minimal - INFO - Epoch 74: Train Loss: 0.4603, Train Acc: 0.9710, Val Loss: 0.6665, Val Acc: 0.8764
+2026-02-15 14:30:12,127 - experiment_ablation_minimal - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.370479
+2026-02-15 14:30:18,457 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 75: sync_weight=0.1, desync_weight=0.1, loss_sync=0.371369
+2026-02-15 14:30:18,805 - experiment_ablation_minimal - INFO - Epoch 75: Train Loss: 0.4236, Train Acc: 0.9799, Val Loss: 0.2896, Val Acc: 0.9326
+2026-02-15 14:30:19,459 - experiment_ablation_minimal - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.531074
+2026-02-15 14:30:25,800 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 76: sync_weight=0.1, desync_weight=0.1, loss_sync=0.362480
+2026-02-15 14:30:26,162 - experiment_ablation_minimal - INFO - Epoch 76: Train Loss: 0.4464, Train Acc: 0.9732, Val Loss: 0.2651, Val Acc: 0.9326
+2026-02-15 14:30:26,826 - experiment_ablation_minimal - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.359588
+2026-02-15 14:30:33,188 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 77: sync_weight=0.1, desync_weight=0.1, loss_sync=0.385974
+2026-02-15 14:30:33,544 - experiment_ablation_minimal - INFO - Epoch 77: Train Loss: 0.4532, Train Acc: 0.9754, Val Loss: 0.4336, Val Acc: 0.8764
+2026-02-15 14:30:34,199 - experiment_ablation_minimal - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.417007
+2026-02-15 14:30:37,693 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.055, max_norm=4.1, min_std=0.028
+2026-02-15 14:30:40,731 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 78: sync_weight=0.1, desync_weight=0.1, loss_sync=0.381164
+2026-02-15 14:30:41,081 - experiment_ablation_minimal - INFO - Epoch 78: Train Loss: 0.4928, Train Acc: 0.9665, Val Loss: 0.4485, Val Acc: 0.8876
+2026-02-15 14:30:41,740 - experiment_ablation_minimal - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.566708
+2026-02-15 14:30:48,078 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 79: sync_weight=0.1, desync_weight=0.1, loss_sync=0.367484
+2026-02-15 14:30:48,432 - experiment_ablation_minimal - INFO - Epoch 79: Train Loss: 0.4563, Train Acc: 0.9732, Val Loss: 0.5218, Val Acc: 0.9101
+2026-02-15 14:30:49,100 - experiment_ablation_minimal - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.438681
+2026-02-15 14:30:55,447 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 80: sync_weight=0.1, desync_weight=0.1, loss_sync=0.336449
+2026-02-15 14:30:55,803 - experiment_ablation_minimal - INFO - Epoch 80: Train Loss: 0.3797, Train Acc: 0.9866, Val Loss: 0.5015, Val Acc: 0.8539
+2026-02-15 14:30:56,539 - experiment_ablation_minimal - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.366202
+2026-02-15 14:31:02,870 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 81: sync_weight=0.1, desync_weight=0.1, loss_sync=0.387610
+2026-02-15 14:31:03,217 - experiment_ablation_minimal - INFO - Epoch 81: Train Loss: 0.4673, Train Acc: 0.9732, Val Loss: 0.3591, Val Acc: 0.8989
+2026-02-15 14:31:03,902 - experiment_ablation_minimal - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.534611
+2026-02-15 14:31:10,151 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 82: sync_weight=0.1, desync_weight=0.1, loss_sync=0.397032
+2026-02-15 14:31:10,488 - experiment_ablation_minimal - INFO - Epoch 82: Train Loss: 0.4776, Train Acc: 0.9732, Val Loss: 0.4518, Val Acc: 0.8764
+2026-02-15 14:31:11,162 - experiment_ablation_minimal - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.378432
+2026-02-15 14:31:17,503 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 83: sync_weight=0.1, desync_weight=0.1, loss_sync=0.417848
+2026-02-15 14:31:17,865 - experiment_ablation_minimal - INFO - Epoch 83: Train Loss: 0.4700, Train Acc: 0.9955, Val Loss: 0.7462, Val Acc: 0.8539
+2026-02-15 14:31:18,530 - experiment_ablation_minimal - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.418567
+2026-02-15 14:31:24,812 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 84: sync_weight=0.1, desync_weight=0.1, loss_sync=0.370491
+2026-02-15 14:31:25,157 - experiment_ablation_minimal - INFO - Epoch 84: Train Loss: 0.4563, Train Acc: 0.9754, Val Loss: 0.4256, Val Acc: 0.8876
+2026-02-15 14:31:25,835 - experiment_ablation_minimal - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.437901
+2026-02-15 14:31:30,273 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.056, max_norm=4.4, min_std=0.162
+2026-02-15 14:31:32,126 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 85: sync_weight=0.1, desync_weight=0.1, loss_sync=0.391644
+2026-02-15 14:31:32,494 - experiment_ablation_minimal - INFO - Epoch 85: Train Loss: 0.4498, Train Acc: 0.9799, Val Loss: 0.3521, Val Acc: 0.8876
+2026-02-15 14:31:33,157 - experiment_ablation_minimal - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.346489
+2026-02-15 14:31:39,417 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 86: sync_weight=0.1, desync_weight=0.1, loss_sync=0.363167
+2026-02-15 14:31:39,761 - experiment_ablation_minimal - INFO - Epoch 86: Train Loss: 0.3845, Train Acc: 0.9955, Val Loss: 0.4209, Val Acc: 0.9101
+2026-02-15 14:31:40,425 - experiment_ablation_minimal - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.329246
+2026-02-15 14:31:46,759 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 87: sync_weight=0.1, desync_weight=0.1, loss_sync=0.339678
+2026-02-15 14:31:47,137 - experiment_ablation_minimal - INFO - Epoch 87: Train Loss: 0.3957, Train Acc: 0.9799, Val Loss: 0.5330, Val Acc: 0.8764
+2026-02-15 14:31:47,787 - experiment_ablation_minimal - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.341527
+2026-02-15 14:31:54,127 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 88: sync_weight=0.1, desync_weight=0.1, loss_sync=0.339250
+2026-02-15 14:31:54,474 - experiment_ablation_minimal - INFO - Epoch 88: Train Loss: 0.3593, Train Acc: 0.9955, Val Loss: 0.2494, Val Acc: 0.9551
+2026-02-15 14:31:54,553 - experiment_ablation_minimal - INFO - Saved new best model at epoch 88
+2026-02-15 14:31:55,253 - experiment_ablation_minimal - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.629180
+2026-02-15 14:32:01,793 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 89: sync_weight=0.1, desync_weight=0.1, loss_sync=0.370231
+2026-02-15 14:32:02,143 - experiment_ablation_minimal - INFO - Epoch 89: Train Loss: 0.3906, Train Acc: 0.9933, Val Loss: 0.3164, Val Acc: 0.9326
+2026-02-15 14:32:02,802 - experiment_ablation_minimal - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.320239
+2026-02-15 14:32:09,091 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 90: sync_weight=0.1, desync_weight=0.1, loss_sync=0.407785
+2026-02-15 14:32:09,437 - experiment_ablation_minimal - INFO - Epoch 90: Train Loss: 0.4407, Train Acc: 0.9933, Val Loss: 0.4160, Val Acc: 0.9213
+2026-02-15 14:32:10,216 - experiment_ablation_minimal - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.276047
+2026-02-15 14:32:16,578 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 91: sync_weight=0.1, desync_weight=0.1, loss_sync=0.352418
+2026-02-15 14:32:16,946 - experiment_ablation_minimal - INFO - Epoch 91: Train Loss: 0.3866, Train Acc: 0.9866, Val Loss: 0.4541, Val Acc: 0.9101
+2026-02-15 14:32:17,593 - experiment_ablation_minimal - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.353252
+2026-02-15 14:32:23,027 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.051, max_norm=5.0, min_std=0.006
+2026-02-15 14:32:23,942 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 92: sync_weight=0.1, desync_weight=0.1, loss_sync=0.329584
+2026-02-15 14:32:24,290 - experiment_ablation_minimal - INFO - Epoch 92: Train Loss: 0.3592, Train Acc: 0.9955, Val Loss: 0.2930, Val Acc: 0.9551
+2026-02-15 14:32:24,968 - experiment_ablation_minimal - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.444362
+2026-02-15 14:32:31,303 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 93: sync_weight=0.1, desync_weight=0.1, loss_sync=0.397034
+2026-02-15 14:32:31,656 - experiment_ablation_minimal - INFO - Epoch 93: Train Loss: 0.4495, Train Acc: 0.9821, Val Loss: 0.4963, Val Acc: 0.8764
+2026-02-15 14:32:32,313 - experiment_ablation_minimal - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.429697
+2026-02-15 14:32:38,656 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 94: sync_weight=0.1, desync_weight=0.1, loss_sync=0.374016
+2026-02-15 14:32:39,003 - experiment_ablation_minimal - INFO - Epoch 94: Train Loss: 0.4115, Train Acc: 0.9911, Val Loss: 0.2789, Val Acc: 0.9326
+2026-02-15 14:32:39,671 - experiment_ablation_minimal - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.361490
+2026-02-15 14:32:46,025 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 95: sync_weight=0.1, desync_weight=0.1, loss_sync=0.360440
+2026-02-15 14:32:46,382 - experiment_ablation_minimal - INFO - Epoch 95: Train Loss: 0.4056, Train Acc: 0.9911, Val Loss: 0.2335, Val Acc: 0.9438
+2026-02-15 14:32:47,065 - experiment_ablation_minimal - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.448391
+2026-02-15 14:32:53,335 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 96: sync_weight=0.1, desync_weight=0.1, loss_sync=0.375454
+2026-02-15 14:32:53,680 - experiment_ablation_minimal - INFO - Epoch 96: Train Loss: 0.4118, Train Acc: 0.9933, Val Loss: 0.4739, Val Acc: 0.8427
+2026-02-15 14:32:54,333 - experiment_ablation_minimal - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.334624
+2026-02-15 14:33:00,665 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 97: sync_weight=0.1, desync_weight=0.1, loss_sync=0.391141
+2026-02-15 14:33:01,015 - experiment_ablation_minimal - INFO - Epoch 97: Train Loss: 0.4572, Train Acc: 0.9754, Val Loss: 0.8168, Val Acc: 0.8315
+2026-02-15 14:33:01,674 - experiment_ablation_minimal - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.464467
+2026-02-15 14:33:08,013 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 98: sync_weight=0.1, desync_weight=0.1, loss_sync=0.439153
+2026-02-15 14:33:08,365 - experiment_ablation_minimal - INFO - Epoch 98: Train Loss: 0.5107, Train Acc: 0.9866, Val Loss: 0.3911, Val Acc: 0.9101
+2026-02-15 14:33:09,028 - experiment_ablation_minimal - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.361422
+2026-02-15 14:33:15,295 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 99: sync_weight=0.1, desync_weight=0.1, loss_sync=0.373012
+2026-02-15 14:33:15,639 - experiment_ablation_minimal - INFO - Epoch 99: Train Loss: 0.4209, Train Acc: 0.9911, Val Loss: 0.3513, Val Acc: 0.9326
+2026-02-15 14:33:15,643 - experiment_ablation_minimal - INFO - Running final test evaluation...
+2026-02-15 14:33:16,046 - experiment_ablation_minimal - INFO - Test Results:
+2026-02-15 14:33:16,046 - experiment_ablation_minimal - INFO -   loss: 0.3627
+2026-02-15 14:33:16,046 - experiment_ablation_minimal - INFO -   accuracy: 0.9492
+2026-02-15 14:33:16,048 - experiment_ablation_minimal - INFO - Training completed
+2026-02-20 04:17:36,687 - experiment_ablation_minimal - INFO - Initialized experiment: ablation_minimal
+2026-02-20 04:17:36,708 - experiment_ablation_minimal - INFO - Device: cuda
+2026-02-20 04:17:36,708 - experiment_ablation_minimal - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal
+2026-02-20 04:17:36,708 - experiment_ablation_minimal - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-20 04:17:36,708 - experiment_ablation_minimal - INFO - [SYNC LOSS] Warmup epochs: 20
+2026-02-20 04:17:36,708 - experiment_ablation_minimal - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-20 04:17:36,708 - experiment_ablation_minimal - INFO - Setting up experiment components...
+2026-02-20 04:17:36,708 - experiment_ablation_minimal - INFO - Creating dataloaders...
+2026-02-20 04:17:37,109 - experiment_ablation_minimal - INFO - Detected 26 speakers in dataset
+2026-02-20 04:17:37,109 - experiment_ablation_minimal - INFO - Dataloaders created:
+2026-02-20 04:17:37,109 - experiment_ablation_minimal - INFO -   Train: 14 batches
+2026-02-20 04:17:37,109 - experiment_ablation_minimal - INFO -   Val: 3 batches
+2026-02-20 04:17:37,109 - experiment_ablation_minimal - INFO -   Test: 4 batches
+2026-02-20 04:17:37,109 - experiment_ablation_minimal - INFO - Creating model...
+2026-02-20 04:17:37,109 - experiment_ablation_minimal - INFO - Using actual num_speakers from dataset: 26
+2026-02-20 04:18:42,894 - experiment_ablation_minimal - INFO - Total parameters: 565,119
+2026-02-20 04:18:42,895 - experiment_ablation_minimal - INFO - Trainable parameters: 565,119
+2026-02-20 04:18:42,895 - experiment_ablation_minimal - INFO - Creating optimizer...
+2026-02-20 04:18:42,895 - experiment_ablation_minimal - INFO - Optimizer: AdamW
+2026-02-20 04:18:42,895 - experiment_ablation_minimal - INFO - Creating scheduler...
+2026-02-20 04:18:42,895 - experiment_ablation_minimal - INFO - Creating criterion...
+2026-02-20 04:18:42,895 - experiment_ablation_minimal - INFO - Criterion: CrossEntropyLoss
+2026-02-20 04:18:42,975 - experiment_ablation_minimal - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/minimal/ablation_minimal/config.json
+2026-02-20 04:18:42,975 - experiment_ablation_minimal - INFO - Experiment setup completed
+2026-02-20 04:18:42,976 - experiment_ablation_minimal - INFO - Starting training for 100 epochs
+2026-02-20 04:18:43,155 - experiment_ablation_minimal - INFO - 
+================================================================================
+2026-02-20 04:18:43,156 - experiment_ablation_minimal - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-20 04:18:43,156 - experiment_ablation_minimal - INFO - ================================================================================
+2026-02-20 04:18:43,156 - experiment_ablation_minimal - INFO - Batch Info:
+2026-02-20 04:18:43,156 - experiment_ablation_minimal - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-20 04:18:43,156 - experiment_ablation_minimal - INFO -   Targets shape: torch.Size([32])
+2026-02-20 04:18:43,157 - experiment_ablation_minimal - INFO -   Targets (first 8): tensor([20,  0, 14, 25, 24, 15,  3, 10], device='cuda:0')
+2026-02-20 04:18:43,213 - experiment_ablation_minimal - INFO - ================================================================================
+
+2026-02-20 04:18:43,333 - experiment_ablation_minimal - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-20 04:18:43,335 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.079, max_norm=41.4, min_std=0.177
+2026-02-20 04:18:43,693 - experiment_ablation_minimal - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 5.909770
+2026-02-20 04:18:49,930 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:18:50,295 - experiment_ablation_minimal - INFO - Epoch 0: Train Loss: 5.3908, Train Acc: 0.0469, Val Loss: 5.1332, Val Acc: 0.0337
+2026-02-20 04:18:50,364 - experiment_ablation_minimal - INFO - Saved new best model at epoch 0
+2026-02-20 04:18:51,131 - experiment_ablation_minimal - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.600168
+2026-02-20 04:18:57,362 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:18:57,721 - experiment_ablation_minimal - INFO - Epoch 1: Train Loss: 4.5825, Train Acc: 0.0692, Val Loss: 3.8669, Val Acc: 0.0899
+2026-02-20 04:18:57,799 - experiment_ablation_minimal - INFO - Saved new best model at epoch 1
+2026-02-20 04:18:58,514 - experiment_ablation_minimal - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 4.436390
+2026-02-20 04:19:04,747 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:05,103 - experiment_ablation_minimal - INFO - Epoch 2: Train Loss: 4.1424, Train Acc: 0.1027, Val Loss: 3.3356, Val Acc: 0.1236
+2026-02-20 04:19:05,173 - experiment_ablation_minimal - INFO - Saved new best model at epoch 2
+2026-02-20 04:19:05,871 - experiment_ablation_minimal - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.924868
+2026-02-20 04:19:12,102 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:12,459 - experiment_ablation_minimal - INFO - Epoch 3: Train Loss: 3.5244, Train Acc: 0.1607, Val Loss: 2.4760, Val Acc: 0.2809
+2026-02-20 04:19:12,536 - experiment_ablation_minimal - INFO - Saved new best model at epoch 3
+2026-02-20 04:19:13,241 - experiment_ablation_minimal - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 3.223756
+2026-02-20 04:19:19,525 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:19,884 - experiment_ablation_minimal - INFO - Epoch 4: Train Loss: 3.0078, Train Acc: 0.2076, Val Loss: 2.0372, Val Acc: 0.3933
+2026-02-20 04:19:19,957 - experiment_ablation_minimal - INFO - Saved new best model at epoch 4
+2026-02-20 04:19:20,667 - experiment_ablation_minimal - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.579876
+2026-02-20 04:19:26,934 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:27,299 - experiment_ablation_minimal - INFO - Epoch 5: Train Loss: 2.5107, Train Acc: 0.3013, Val Loss: 1.4603, Val Acc: 0.4944
+2026-02-20 04:19:27,372 - experiment_ablation_minimal - INFO - Saved new best model at epoch 5
+2026-02-20 04:19:28,090 - experiment_ablation_minimal - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.942018
+2026-02-20 04:19:34,362 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:34,720 - experiment_ablation_minimal - INFO - Epoch 6: Train Loss: 2.1416, Train Acc: 0.3884, Val Loss: 1.3666, Val Acc: 0.5843
+2026-02-20 04:19:34,794 - experiment_ablation_minimal - INFO - Saved new best model at epoch 6
+2026-02-20 04:19:35,490 - experiment_ablation_minimal - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.643783
+2026-02-20 04:19:36,088 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.044, max_norm=47.1, min_std=9.945
+2026-02-20 04:19:41,779 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:42,130 - experiment_ablation_minimal - INFO - Epoch 7: Train Loss: 1.8070, Train Acc: 0.4330, Val Loss: 1.1555, Val Acc: 0.6067
+2026-02-20 04:19:42,206 - experiment_ablation_minimal - INFO - Saved new best model at epoch 7
+2026-02-20 04:19:42,922 - experiment_ablation_minimal - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.566850
+2026-02-20 04:19:49,178 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:49,534 - experiment_ablation_minimal - INFO - Epoch 8: Train Loss: 1.5049, Train Acc: 0.5246, Val Loss: 0.8119, Val Acc: 0.7303
+2026-02-20 04:19:49,608 - experiment_ablation_minimal - INFO - Saved new best model at epoch 8
+2026-02-20 04:19:50,329 - experiment_ablation_minimal - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.594867
+2026-02-20 04:19:56,671 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:19:57,048 - experiment_ablation_minimal - INFO - Epoch 9: Train Loss: 1.3926, Train Acc: 0.5737, Val Loss: 1.0399, Val Acc: 0.6517
+2026-02-20 04:19:57,742 - experiment_ablation_minimal - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.052154
+2026-02-20 04:20:03,980 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:20:04,340 - experiment_ablation_minimal - INFO - Epoch 10: Train Loss: 1.1839, Train Acc: 0.6250, Val Loss: 1.2046, Val Acc: 0.6404
+2026-02-20 04:20:05,285 - experiment_ablation_minimal - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.359038
+2026-02-20 04:20:11,553 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:20:11,910 - experiment_ablation_minimal - INFO - Epoch 11: Train Loss: 1.0509, Train Acc: 0.6674, Val Loss: 0.8911, Val Acc: 0.7191
+2026-02-20 04:20:12,575 - experiment_ablation_minimal - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.659368
+2026-02-20 04:20:18,800 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:20:19,161 - experiment_ablation_minimal - INFO - Epoch 12: Train Loss: 0.8780, Train Acc: 0.7143, Val Loss: 0.7603, Val Acc: 0.7303
+2026-02-20 04:20:19,161 - experiment_ablation_minimal - INFO - [SYNC LOSS] Dynamic activation triggered at epoch 13
+2026-02-20 04:20:19,161 - experiment_ablation_minimal - INFO - [SYNC LOSS] Train accuracy 71.43% >= threshold 70.00%
+2026-02-20 04:20:19,835 - experiment_ablation_minimal - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.881077
+2026-02-20 04:20:26,138 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.01, desync_weight=0.01, loss_sync=0.067895
+2026-02-20 04:20:26,499 - experiment_ablation_minimal - INFO - Epoch 13: Train Loss: 0.8035, Train Acc: 0.7812, Val Loss: 0.4782, Val Acc: 0.8315
+2026-02-20 04:20:26,575 - experiment_ablation_minimal - INFO - Saved new best model at epoch 13
+2026-02-20 04:20:27,284 - experiment_ablation_minimal - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.547200
+2026-02-20 04:20:28,841 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.018, max_norm=49.6, min_std=11.117
+2026-02-20 04:20:33,553 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.01, desync_weight=0.01, loss_sync=0.055208
+2026-02-20 04:20:33,918 - experiment_ablation_minimal - INFO - Epoch 14: Train Loss: 0.7305, Train Acc: 0.7902, Val Loss: 0.8209, Val Acc: 0.7303
+2026-02-20 04:20:34,606 - experiment_ablation_minimal - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.649269
+2026-02-20 04:20:40,857 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050079
+2026-02-20 04:20:41,214 - experiment_ablation_minimal - INFO - Epoch 15: Train Loss: 0.7351, Train Acc: 0.7924, Val Loss: 0.5007, Val Acc: 0.8315
+2026-02-20 04:20:41,889 - experiment_ablation_minimal - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.627301
+2026-02-20 04:20:48,241 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.01, desync_weight=0.01, loss_sync=0.052200
+2026-02-20 04:20:48,603 - experiment_ablation_minimal - INFO - Epoch 16: Train Loss: 0.6906, Train Acc: 0.7790, Val Loss: 0.8796, Val Acc: 0.6966
+2026-02-20 04:20:49,278 - experiment_ablation_minimal - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.475144
+2026-02-20 04:20:55,645 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048488
+2026-02-20 04:20:56,012 - experiment_ablation_minimal - INFO - Epoch 17: Train Loss: 0.5471, Train Acc: 0.8482, Val Loss: 0.3801, Val Acc: 0.8876
+2026-02-20 04:20:56,084 - experiment_ablation_minimal - INFO - Saved new best model at epoch 17
+2026-02-20 04:20:56,811 - experiment_ablation_minimal - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.834118
+2026-02-20 04:21:03,139 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050713
+2026-02-20 04:21:03,487 - experiment_ablation_minimal - INFO - Epoch 18: Train Loss: 0.5590, Train Acc: 0.8125, Val Loss: 0.8892, Val Acc: 0.7079
+2026-02-20 04:21:04,171 - experiment_ablation_minimal - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.324903
+2026-02-20 04:21:10,462 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047735
+2026-02-20 04:21:10,816 - experiment_ablation_minimal - INFO - Epoch 19: Train Loss: 0.5474, Train Acc: 0.8438, Val Loss: 0.3158, Val Acc: 0.8764
+2026-02-20 04:21:11,492 - experiment_ablation_minimal - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.504615
+2026-02-20 04:21:17,752 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050877
+2026-02-20 04:21:18,110 - experiment_ablation_minimal - INFO - Epoch 20: Train Loss: 0.5235, Train Acc: 0.8371, Val Loss: 0.4392, Val Acc: 0.8539
+2026-02-20 04:21:18,856 - experiment_ablation_minimal - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.474456
+2026-02-20 04:21:21,385 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.015, max_norm=49.9, min_std=11.141
+2026-02-20 04:21:25,137 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048661
+2026-02-20 04:21:25,504 - experiment_ablation_minimal - INFO - Epoch 21: Train Loss: 0.3915, Train Acc: 0.8973, Val Loss: 0.4229, Val Acc: 0.8652
+2026-02-20 04:21:26,171 - experiment_ablation_minimal - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.281855
+2026-02-20 04:21:32,447 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049089
+2026-02-20 04:21:32,798 - experiment_ablation_minimal - INFO - Epoch 22: Train Loss: 0.3570, Train Acc: 0.8929, Val Loss: 0.3424, Val Acc: 0.8539
+2026-02-20 04:21:33,473 - experiment_ablation_minimal - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.354789
+2026-02-20 04:21:39,976 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049050
+2026-02-20 04:21:40,332 - experiment_ablation_minimal - INFO - Epoch 23: Train Loss: 0.3482, Train Acc: 0.9129, Val Loss: 0.6668, Val Acc: 0.8539
+2026-02-20 04:21:40,998 - experiment_ablation_minimal - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.361261
+2026-02-20 04:21:47,311 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 24: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048264
+2026-02-20 04:21:47,666 - experiment_ablation_minimal - INFO - Epoch 24: Train Loss: 0.3209, Train Acc: 0.9241, Val Loss: 0.4826, Val Acc: 0.8989
+2026-02-20 04:21:47,741 - experiment_ablation_minimal - INFO - Saved new best model at epoch 24
+2026-02-20 04:21:48,447 - experiment_ablation_minimal - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.218538
+2026-02-20 04:21:54,714 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 25: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049749
+2026-02-20 04:21:55,069 - experiment_ablation_minimal - INFO - Epoch 25: Train Loss: 0.3375, Train Acc: 0.9129, Val Loss: 0.6062, Val Acc: 0.8090
+2026-02-20 04:21:55,754 - experiment_ablation_minimal - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.226175
+2026-02-20 04:22:02,074 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 26: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048051
+2026-02-20 04:22:02,433 - experiment_ablation_minimal - INFO - Epoch 26: Train Loss: 0.3072, Train Acc: 0.9196, Val Loss: 0.4189, Val Acc: 0.8427
+2026-02-20 04:22:03,100 - experiment_ablation_minimal - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.347615
+2026-02-20 04:22:09,370 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 27: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049817
+2026-02-20 04:22:09,725 - experiment_ablation_minimal - INFO - Epoch 27: Train Loss: 0.3199, Train Acc: 0.9263, Val Loss: 0.4619, Val Acc: 0.8539
+2026-02-20 04:22:10,395 - experiment_ablation_minimal - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.142277
+2026-02-20 04:22:13,865 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.015, max_norm=49.4, min_std=11.099
+2026-02-20 04:22:16,673 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 28: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047568
+2026-02-20 04:22:17,033 - experiment_ablation_minimal - INFO - Epoch 28: Train Loss: 0.2996, Train Acc: 0.9152, Val Loss: 0.3344, Val Acc: 0.9213
+2026-02-20 04:22:17,104 - experiment_ablation_minimal - INFO - Saved new best model at epoch 28
+2026-02-20 04:22:17,829 - experiment_ablation_minimal - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.247628
+2026-02-20 04:22:24,085 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 29: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046536
+2026-02-20 04:22:24,442 - experiment_ablation_minimal - INFO - Epoch 29: Train Loss: 0.2594, Train Acc: 0.9397, Val Loss: 0.6241, Val Acc: 0.8315
+2026-02-20 04:22:25,110 - experiment_ablation_minimal - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.190094
+2026-02-20 04:22:31,383 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 30: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047046
+2026-02-20 04:22:31,733 - experiment_ablation_minimal - INFO - Epoch 30: Train Loss: 0.2581, Train Acc: 0.9397, Val Loss: 2.1436, Val Acc: 0.5843
+2026-02-20 04:22:32,474 - experiment_ablation_minimal - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.197242
+2026-02-20 04:22:38,827 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 31: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046706
+2026-02-20 04:22:39,193 - experiment_ablation_minimal - INFO - Epoch 31: Train Loss: 0.3139, Train Acc: 0.9263, Val Loss: 1.3408, Val Acc: 0.7079
+2026-02-20 04:22:39,879 - experiment_ablation_minimal - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.367000
+2026-02-20 04:22:46,141 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 32: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047553
+2026-02-20 04:22:46,494 - experiment_ablation_minimal - INFO - Epoch 32: Train Loss: 0.2952, Train Acc: 0.9241, Val Loss: 0.9980, Val Acc: 0.7079
+2026-02-20 04:22:47,168 - experiment_ablation_minimal - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.118843
+2026-02-20 04:22:53,434 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 33: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047494
+2026-02-20 04:22:53,793 - experiment_ablation_minimal - INFO - Epoch 33: Train Loss: 0.1992, Train Acc: 0.9598, Val Loss: 0.3951, Val Acc: 0.8876
+2026-02-20 04:22:54,461 - experiment_ablation_minimal - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.189403
+2026-02-20 04:23:00,745 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 34: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046376
+2026-02-20 04:23:01,099 - experiment_ablation_minimal - INFO - Epoch 34: Train Loss: 0.2982, Train Acc: 0.9085, Val Loss: 0.6375, Val Acc: 0.7865
+2026-02-20 04:23:01,781 - experiment_ablation_minimal - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.212426
+2026-02-20 04:23:06,385 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.015, max_norm=49.6, min_std=11.103
+2026-02-20 04:23:08,241 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 35: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043544
+2026-02-20 04:23:08,597 - experiment_ablation_minimal - INFO - Epoch 35: Train Loss: 0.2484, Train Acc: 0.9330, Val Loss: 0.9717, Val Acc: 0.7753
+2026-02-20 04:23:09,281 - experiment_ablation_minimal - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.293083
+2026-02-20 04:23:15,548 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 36: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044478
+2026-02-20 04:23:15,910 - experiment_ablation_minimal - INFO - Epoch 36: Train Loss: 0.2020, Train Acc: 0.9554, Val Loss: 0.8792, Val Acc: 0.7865
+2026-02-20 04:23:16,585 - experiment_ablation_minimal - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.099396
+2026-02-20 04:23:22,859 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 37: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044226
+2026-02-20 04:23:23,217 - experiment_ablation_minimal - INFO - Epoch 37: Train Loss: 0.2136, Train Acc: 0.9554, Val Loss: 0.5321, Val Acc: 0.8652
+2026-02-20 04:23:23,894 - experiment_ablation_minimal - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.100985
+2026-02-20 04:23:30,171 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 38: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042871
+2026-02-20 04:23:30,530 - experiment_ablation_minimal - INFO - Epoch 38: Train Loss: 0.2351, Train Acc: 0.9576, Val Loss: 0.6580, Val Acc: 0.8764
+2026-02-20 04:23:31,197 - experiment_ablation_minimal - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.144933
+2026-02-20 04:23:37,561 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 39: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043067
+2026-02-20 04:23:37,920 - experiment_ablation_minimal - INFO - Epoch 39: Train Loss: 0.2158, Train Acc: 0.9464, Val Loss: 0.5152, Val Acc: 0.8539
+2026-02-20 04:23:38,593 - experiment_ablation_minimal - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.294667
+2026-02-20 04:23:44,967 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 40: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042251
+2026-02-20 04:23:45,329 - experiment_ablation_minimal - INFO - Epoch 40: Train Loss: 0.1885, Train Acc: 0.9531, Val Loss: 0.5566, Val Acc: 0.8539
+2026-02-20 04:23:46,081 - experiment_ablation_minimal - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.138681
+2026-02-20 04:23:52,370 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 41: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043465
+2026-02-20 04:23:52,727 - experiment_ablation_minimal - INFO - Epoch 41: Train Loss: 0.1297, Train Acc: 0.9732, Val Loss: 0.4957, Val Acc: 0.8202
+2026-02-20 04:23:53,402 - experiment_ablation_minimal - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.067891
+2026-02-20 04:23:58,763 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.016, max_norm=49.4, min_std=11.021
+2026-02-20 04:23:59,664 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 42: sync_weight=0.01, desync_weight=0.01, loss_sync=0.041815
+2026-02-20 04:24:00,020 - experiment_ablation_minimal - INFO - Epoch 42: Train Loss: 0.1578, Train Acc: 0.9665, Val Loss: 0.6282, Val Acc: 0.8539
+2026-02-20 04:24:00,707 - experiment_ablation_minimal - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.121002
+2026-02-20 04:24:06,978 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 43: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042563
+2026-02-20 04:24:07,344 - experiment_ablation_minimal - INFO - Epoch 43: Train Loss: 0.1862, Train Acc: 0.9531, Val Loss: 0.6880, Val Acc: 0.8202
+2026-02-20 04:24:08,014 - experiment_ablation_minimal - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.249213
+2026-02-20 04:24:14,309 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 44: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039137
+2026-02-20 04:24:14,677 - experiment_ablation_minimal - INFO - Epoch 44: Train Loss: 0.1719, Train Acc: 0.9576, Val Loss: 0.9127, Val Acc: 0.7865
+2026-02-20 04:24:15,369 - experiment_ablation_minimal - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.082920
+2026-02-20 04:24:21,652 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 45: sync_weight=0.01, desync_weight=0.01, loss_sync=0.041852
+2026-02-20 04:24:22,009 - experiment_ablation_minimal - INFO - Epoch 45: Train Loss: 0.2373, Train Acc: 0.9397, Val Loss: 1.2511, Val Acc: 0.7416
+2026-02-20 04:24:22,678 - experiment_ablation_minimal - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.275540
+2026-02-20 04:24:29,039 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 46: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042839
+2026-02-20 04:24:29,399 - experiment_ablation_minimal - INFO - Epoch 46: Train Loss: 0.1825, Train Acc: 0.9576, Val Loss: 0.3446, Val Acc: 0.8764
+2026-02-20 04:24:30,074 - experiment_ablation_minimal - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.197245
+2026-02-20 04:24:36,419 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 47: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043000
+2026-02-20 04:24:36,784 - experiment_ablation_minimal - INFO - Epoch 47: Train Loss: 0.1479, Train Acc: 0.9688, Val Loss: 0.5028, Val Acc: 0.8876
+2026-02-20 04:24:37,463 - experiment_ablation_minimal - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.064629
+2026-02-20 04:24:43,918 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 48: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038963
+2026-02-20 04:24:44,269 - experiment_ablation_minimal - INFO - Epoch 48: Train Loss: 0.1555, Train Acc: 0.9732, Val Loss: 0.2538, Val Acc: 0.8764
+2026-02-20 04:24:44,943 - experiment_ablation_minimal - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.099595
+2026-02-20 04:24:51,204 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 49: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039509
+2026-02-20 04:24:51,564 - experiment_ablation_minimal - INFO - Epoch 49: Train Loss: 0.1423, Train Acc: 0.9710, Val Loss: 0.3329, Val Acc: 0.8989
+2026-02-20 04:24:51,869 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.015, max_norm=49.3, min_std=11.036
+2026-02-20 04:24:52,226 - experiment_ablation_minimal - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.133563
+2026-02-20 04:24:58,501 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 50: sync_weight=0.01, desync_weight=0.01, loss_sync=0.040786
+2026-02-20 04:24:58,863 - experiment_ablation_minimal - INFO - Epoch 50: Train Loss: 0.1632, Train Acc: 0.9576, Val Loss: 0.3240, Val Acc: 0.8989
+2026-02-20 04:24:59,610 - experiment_ablation_minimal - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.151222
+2026-02-20 04:25:05,928 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 51: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039757
+2026-02-20 04:25:06,280 - experiment_ablation_minimal - INFO - Epoch 51: Train Loss: 0.1447, Train Acc: 0.9665, Val Loss: 0.5102, Val Acc: 0.8539
+2026-02-20 04:25:06,962 - experiment_ablation_minimal - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.065226
+2026-02-20 04:25:13,337 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 52: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038738
+2026-02-20 04:25:13,705 - experiment_ablation_minimal - INFO - Epoch 52: Train Loss: 0.1724, Train Acc: 0.9576, Val Loss: 0.6430, Val Acc: 0.8427
+2026-02-20 04:25:14,378 - experiment_ablation_minimal - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.089649
+2026-02-20 04:25:20,729 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 53: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039663
+2026-02-20 04:25:21,092 - experiment_ablation_minimal - INFO - Epoch 53: Train Loss: 0.1721, Train Acc: 0.9643, Val Loss: 0.2186, Val Acc: 0.9213
+2026-02-20 04:25:21,755 - experiment_ablation_minimal - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.112108
+2026-02-20 04:25:28,049 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 54: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043108
+2026-02-20 04:25:28,406 - experiment_ablation_minimal - INFO - Epoch 54: Train Loss: 0.1381, Train Acc: 0.9665, Val Loss: 0.4667, Val Acc: 0.8652
+2026-02-20 04:25:29,097 - experiment_ablation_minimal - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.117957
+2026-02-20 04:25:35,340 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 55: sync_weight=0.01, desync_weight=0.01, loss_sync=0.040192
+2026-02-20 04:25:35,696 - experiment_ablation_minimal - INFO - Epoch 55: Train Loss: 0.1284, Train Acc: 0.9732, Val Loss: 0.3011, Val Acc: 0.9213
+2026-02-20 04:25:36,363 - experiment_ablation_minimal - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.098258
+2026-02-20 04:25:42,627 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 56: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043954
+2026-02-20 04:25:42,978 - experiment_ablation_minimal - INFO - Epoch 56: Train Loss: 0.1613, Train Acc: 0.9621, Val Loss: 0.2825, Val Acc: 0.9213
+2026-02-20 04:25:43,670 - experiment_ablation_minimal - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.073481
+2026-02-20 04:25:44,274 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.016, max_norm=49.2, min_std=10.977
+2026-02-20 04:25:49,945 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 57: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042416
+2026-02-20 04:25:50,313 - experiment_ablation_minimal - INFO - Epoch 57: Train Loss: 0.1048, Train Acc: 0.9844, Val Loss: 0.3272, Val Acc: 0.9213
+2026-02-20 04:25:50,987 - experiment_ablation_minimal - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.129559
+2026-02-20 04:25:57,232 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 58: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036182
+2026-02-20 04:25:57,588 - experiment_ablation_minimal - INFO - Epoch 58: Train Loss: 0.1267, Train Acc: 0.9754, Val Loss: 0.4794, Val Acc: 0.8764
+2026-02-20 04:25:58,260 - experiment_ablation_minimal - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.069356
+2026-02-20 04:26:04,702 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 59: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043601
+2026-02-20 04:26:05,068 - experiment_ablation_minimal - INFO - Epoch 59: Train Loss: 0.1186, Train Acc: 0.9799, Val Loss: 0.4320, Val Acc: 0.8989
+2026-02-20 04:26:05,743 - experiment_ablation_minimal - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.100335
+2026-02-20 04:26:12,014 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 60: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038275
+2026-02-20 04:26:12,366 - experiment_ablation_minimal - INFO - Epoch 60: Train Loss: 0.1221, Train Acc: 0.9688, Val Loss: 0.7875, Val Acc: 0.8427
+2026-02-20 04:26:13,112 - experiment_ablation_minimal - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.085939
+2026-02-20 04:26:19,400 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 61: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047098
+2026-02-20 04:26:19,754 - experiment_ablation_minimal - INFO - Epoch 61: Train Loss: 0.1518, Train Acc: 0.9710, Val Loss: 0.1982, Val Acc: 0.9438
+2026-02-20 04:26:19,829 - experiment_ablation_minimal - INFO - Saved new best model at epoch 61
+2026-02-20 04:26:20,540 - experiment_ablation_minimal - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.117031
+2026-02-20 04:26:26,802 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 62: sync_weight=0.01, desync_weight=0.01, loss_sync=0.041057
+2026-02-20 04:26:27,160 - experiment_ablation_minimal - INFO - Epoch 62: Train Loss: 0.1026, Train Acc: 0.9888, Val Loss: 0.5118, Val Acc: 0.8652
+2026-02-20 04:26:27,849 - experiment_ablation_minimal - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.105406
+2026-02-20 04:26:34,097 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 63: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043288
+2026-02-20 04:26:34,465 - experiment_ablation_minimal - INFO - Epoch 63: Train Loss: 0.1413, Train Acc: 0.9665, Val Loss: 0.4761, Val Acc: 0.8202
+2026-02-20 04:26:35,129 - experiment_ablation_minimal - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.061787
+2026-02-20 04:26:36,701 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.016, max_norm=48.9, min_std=10.951
+2026-02-20 04:26:41,480 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 64: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039371
+2026-02-20 04:26:41,842 - experiment_ablation_minimal - INFO - Epoch 64: Train Loss: 0.1382, Train Acc: 0.9665, Val Loss: 0.5625, Val Acc: 0.8652
+2026-02-20 04:26:42,536 - experiment_ablation_minimal - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.056592
+2026-02-20 04:26:48,805 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 65: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039093
+2026-02-20 04:26:49,163 - experiment_ablation_minimal - INFO - Epoch 65: Train Loss: 0.1366, Train Acc: 0.9732, Val Loss: 0.5671, Val Acc: 0.8876
+2026-02-20 04:26:49,828 - experiment_ablation_minimal - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.240852
+2026-02-20 04:26:56,083 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 66: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038853
+2026-02-20 04:26:56,437 - experiment_ablation_minimal - INFO - Epoch 66: Train Loss: 0.1124, Train Acc: 0.9799, Val Loss: 0.7168, Val Acc: 0.7753
+2026-02-20 04:26:57,119 - experiment_ablation_minimal - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.276755
+2026-02-20 04:27:03,416 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 67: sync_weight=0.01, desync_weight=0.01, loss_sync=0.035776
+2026-02-20 04:27:03,767 - experiment_ablation_minimal - INFO - Epoch 67: Train Loss: 0.1367, Train Acc: 0.9665, Val Loss: 0.5373, Val Acc: 0.8652
+2026-02-20 04:27:04,442 - experiment_ablation_minimal - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.052199
+2026-02-20 04:27:10,711 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 68: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038120
+2026-02-20 04:27:11,080 - experiment_ablation_minimal - INFO - Epoch 68: Train Loss: 0.1089, Train Acc: 0.9754, Val Loss: 0.3395, Val Acc: 0.9101
+2026-02-20 04:27:11,765 - experiment_ablation_minimal - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.142282
+2026-02-20 04:27:18,116 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 69: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036198
+2026-02-20 04:27:18,483 - experiment_ablation_minimal - INFO - Epoch 69: Train Loss: 0.1189, Train Acc: 0.9688, Val Loss: 0.3952, Val Acc: 0.9101
+2026-02-20 04:27:19,151 - experiment_ablation_minimal - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.087667
+2026-02-20 04:27:25,424 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 70: sync_weight=0.01, desync_weight=0.01, loss_sync=0.041559
+2026-02-20 04:27:25,780 - experiment_ablation_minimal - INFO - Epoch 70: Train Loss: 0.1264, Train Acc: 0.9665, Val Loss: 0.3565, Val Acc: 0.8989
+2026-02-20 04:27:26,534 - experiment_ablation_minimal - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.117990
+2026-02-20 04:27:29,053 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.015, max_norm=48.7, min_std=10.967
+2026-02-20 04:27:32,832 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 71: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044132
+2026-02-20 04:27:33,199 - experiment_ablation_minimal - INFO - Epoch 71: Train Loss: 0.1011, Train Acc: 0.9888, Val Loss: 0.7966, Val Acc: 0.8090
+2026-02-20 04:27:33,871 - experiment_ablation_minimal - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.259410
+2026-02-20 04:27:40,353 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 72: sync_weight=0.01, desync_weight=0.01, loss_sync=0.041964
+2026-02-20 04:27:40,727 - experiment_ablation_minimal - INFO - Epoch 72: Train Loss: 0.1278, Train Acc: 0.9732, Val Loss: 0.7349, Val Acc: 0.8539
+2026-02-20 04:27:41,413 - experiment_ablation_minimal - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.072675
+2026-02-20 04:27:47,677 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 73: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036134
+2026-02-20 04:27:48,041 - experiment_ablation_minimal - INFO - Epoch 73: Train Loss: 0.0983, Train Acc: 0.9821, Val Loss: 0.5475, Val Acc: 0.8539
+2026-02-20 04:27:48,725 - experiment_ablation_minimal - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.053559
+2026-02-20 04:27:55,040 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 74: sync_weight=0.01, desync_weight=0.01, loss_sync=0.037184
+2026-02-20 04:27:55,400 - experiment_ablation_minimal - INFO - Epoch 74: Train Loss: 0.1168, Train Acc: 0.9799, Val Loss: 0.4380, Val Acc: 0.8876
+2026-02-20 04:27:56,077 - experiment_ablation_minimal - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.169845
+2026-02-20 04:28:02,373 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 75: sync_weight=0.01, desync_weight=0.01, loss_sync=0.037088
+2026-02-20 04:28:02,736 - experiment_ablation_minimal - INFO - Epoch 75: Train Loss: 0.1100, Train Acc: 0.9732, Val Loss: 0.7051, Val Acc: 0.8202
+2026-02-20 04:28:03,428 - experiment_ablation_minimal - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.314491
+2026-02-20 04:28:09,704 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 76: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038240
+2026-02-20 04:28:10,072 - experiment_ablation_minimal - INFO - Epoch 76: Train Loss: 0.1151, Train Acc: 0.9799, Val Loss: 0.8044, Val Acc: 0.8427
+2026-02-20 04:28:10,761 - experiment_ablation_minimal - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.076583
+2026-02-20 04:28:17,015 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 77: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048985
+2026-02-20 04:28:17,370 - experiment_ablation_minimal - INFO - Epoch 77: Train Loss: 0.1046, Train Acc: 0.9866, Val Loss: 0.5463, Val Acc: 0.8989
+2026-02-20 04:28:18,044 - experiment_ablation_minimal - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.167795
+2026-02-20 04:28:21,510 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.016, max_norm=48.4, min_std=10.749
+2026-02-20 04:28:24,309 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 78: sync_weight=0.01, desync_weight=0.01, loss_sync=0.037613
+2026-02-20 04:28:24,675 - experiment_ablation_minimal - INFO - Epoch 78: Train Loss: 0.1156, Train Acc: 0.9844, Val Loss: 0.3017, Val Acc: 0.9213
+2026-02-20 04:28:25,349 - experiment_ablation_minimal - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.064250
+2026-02-20 04:28:31,624 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 79: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036503
+2026-02-20 04:28:31,980 - experiment_ablation_minimal - INFO - Epoch 79: Train Loss: 0.0848, Train Acc: 0.9888, Val Loss: 0.7322, Val Acc: 0.8539
+2026-02-20 04:28:32,654 - experiment_ablation_minimal - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.210452
+2026-02-20 04:28:39,008 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 80: sync_weight=0.01, desync_weight=0.01, loss_sync=0.037016
+2026-02-20 04:28:39,366 - experiment_ablation_minimal - INFO - Epoch 80: Train Loss: 0.0934, Train Acc: 0.9821, Val Loss: 0.3820, Val Acc: 0.8989
+2026-02-20 04:28:40,120 - experiment_ablation_minimal - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.047290
+2026-02-20 04:28:46,376 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 81: sync_weight=0.01, desync_weight=0.01, loss_sync=0.033372
+2026-02-20 04:28:46,731 - experiment_ablation_minimal - INFO - Epoch 81: Train Loss: 0.1000, Train Acc: 0.9777, Val Loss: 0.3395, Val Acc: 0.9213
+2026-02-20 04:28:47,401 - experiment_ablation_minimal - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.106979
+2026-02-20 04:28:53,695 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 82: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039115
+2026-02-20 04:28:54,045 - experiment_ablation_minimal - INFO - Epoch 82: Train Loss: 0.1166, Train Acc: 0.9688, Val Loss: 0.3115, Val Acc: 0.8989
+2026-02-20 04:28:54,726 - experiment_ablation_minimal - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.052892
+2026-02-20 04:29:01,033 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 83: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038968
+2026-02-20 04:29:01,395 - experiment_ablation_minimal - INFO - Epoch 83: Train Loss: 0.0837, Train Acc: 0.9844, Val Loss: 0.3734, Val Acc: 0.9101
+2026-02-20 04:29:02,060 - experiment_ablation_minimal - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.082830
+2026-02-20 04:29:08,414 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 84: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036370
+2026-02-20 04:29:08,775 - experiment_ablation_minimal - INFO - Epoch 84: Train Loss: 0.0824, Train Acc: 0.9888, Val Loss: 0.5698, Val Acc: 0.8652
+2026-02-20 04:29:09,471 - experiment_ablation_minimal - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.053357
+2026-02-20 04:29:14,168 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.016, max_norm=48.1, min_std=10.750
+2026-02-20 04:29:16,055 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 85: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036683
+2026-02-20 04:29:16,425 - experiment_ablation_minimal - INFO - Epoch 85: Train Loss: 0.1241, Train Acc: 0.9732, Val Loss: 0.6930, Val Acc: 0.8764
+2026-02-20 04:29:17,099 - experiment_ablation_minimal - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.030638
+2026-02-20 04:29:23,393 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 86: sync_weight=0.01, desync_weight=0.01, loss_sync=0.037220
+2026-02-20 04:29:23,765 - experiment_ablation_minimal - INFO - Epoch 86: Train Loss: 0.1005, Train Acc: 0.9866, Val Loss: 0.2520, Val Acc: 0.9213
+2026-02-20 04:29:24,440 - experiment_ablation_minimal - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.133735
+2026-02-20 04:29:30,735 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 87: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036507
+2026-02-20 04:29:31,089 - experiment_ablation_minimal - INFO - Epoch 87: Train Loss: 0.0899, Train Acc: 0.9799, Val Loss: 1.0141, Val Acc: 0.8202
+2026-02-20 04:29:31,763 - experiment_ablation_minimal - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.044353
+2026-02-20 04:29:38,058 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 88: sync_weight=0.01, desync_weight=0.01, loss_sync=0.038821
+2026-02-20 04:29:38,426 - experiment_ablation_minimal - INFO - Epoch 88: Train Loss: 0.1366, Train Acc: 0.9710, Val Loss: 0.4939, Val Acc: 0.9101
+2026-02-20 04:29:39,116 - experiment_ablation_minimal - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.053590
+2026-02-20 04:29:45,402 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 89: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039077
+2026-02-20 04:29:45,757 - experiment_ablation_minimal - INFO - Epoch 89: Train Loss: 0.0671, Train Acc: 0.9955, Val Loss: 0.5733, Val Acc: 0.8539
+2026-02-20 04:29:46,445 - experiment_ablation_minimal - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.064154
+2026-02-20 04:29:52,805 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 90: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039179
+2026-02-20 04:29:53,168 - experiment_ablation_minimal - INFO - Epoch 90: Train Loss: 0.0823, Train Acc: 0.9866, Val Loss: 0.5110, Val Acc: 0.8764
+2026-02-20 04:29:53,909 - experiment_ablation_minimal - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.045147
+2026-02-20 04:30:00,178 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 91: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036809
+2026-02-20 04:30:00,545 - experiment_ablation_minimal - INFO - Epoch 91: Train Loss: 0.0785, Train Acc: 0.9888, Val Loss: 0.3849, Val Acc: 0.9326
+2026-02-20 04:30:01,213 - experiment_ablation_minimal - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.048917
+2026-02-20 04:30:06,591 - experiment_ablation_minimal - DEBUG - [STABILITY] lyap=0.017, max_norm=47.8, min_std=10.623
+2026-02-20 04:30:07,488 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 92: sync_weight=0.01, desync_weight=0.01, loss_sync=0.034773
+2026-02-20 04:30:07,856 - experiment_ablation_minimal - INFO - Epoch 92: Train Loss: 0.0673, Train Acc: 0.9911, Val Loss: 0.4000, Val Acc: 0.8764
+2026-02-20 04:30:08,534 - experiment_ablation_minimal - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.058711
+2026-02-20 04:30:14,789 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 93: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039594
+2026-02-20 04:30:15,144 - experiment_ablation_minimal - INFO - Epoch 93: Train Loss: 0.0725, Train Acc: 0.9911, Val Loss: 0.3812, Val Acc: 0.9213
+2026-02-20 04:30:15,821 - experiment_ablation_minimal - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.262906
+2026-02-20 04:30:22,127 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 94: sync_weight=0.01, desync_weight=0.01, loss_sync=0.034798
+2026-02-20 04:30:22,489 - experiment_ablation_minimal - INFO - Epoch 94: Train Loss: 0.0810, Train Acc: 0.9888, Val Loss: 0.3690, Val Acc: 0.9213
+2026-02-20 04:30:23,165 - experiment_ablation_minimal - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.046570
+2026-02-20 04:30:29,525 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 95: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036077
+2026-02-20 04:30:29,885 - experiment_ablation_minimal - INFO - Epoch 95: Train Loss: 0.0690, Train Acc: 0.9866, Val Loss: 0.5497, Val Acc: 0.8876
+2026-02-20 04:30:30,569 - experiment_ablation_minimal - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.053256
+2026-02-20 04:30:36,844 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 96: sync_weight=0.01, desync_weight=0.01, loss_sync=0.035464
+2026-02-20 04:30:37,196 - experiment_ablation_minimal - INFO - Epoch 96: Train Loss: 0.0949, Train Acc: 0.9844, Val Loss: 0.4292, Val Acc: 0.9101
+2026-02-20 04:30:37,865 - experiment_ablation_minimal - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.040296
+2026-02-20 04:30:44,142 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 97: sync_weight=0.01, desync_weight=0.01, loss_sync=0.034954
+2026-02-20 04:30:44,496 - experiment_ablation_minimal - INFO - Epoch 97: Train Loss: 0.1201, Train Acc: 0.9754, Val Loss: 0.5078, Val Acc: 0.8539
+2026-02-20 04:30:45,181 - experiment_ablation_minimal - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.061525
+2026-02-20 04:30:51,464 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 98: sync_weight=0.01, desync_weight=0.01, loss_sync=0.037862
+2026-02-20 04:30:51,826 - experiment_ablation_minimal - INFO - Epoch 98: Train Loss: 0.1025, Train Acc: 0.9799, Val Loss: 0.4142, Val Acc: 0.8989
+2026-02-20 04:30:52,502 - experiment_ablation_minimal - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.041079
+2026-02-20 04:30:58,957 - experiment_ablation_minimal - INFO - [SYNC DEBUG] Epoch 99: sync_weight=0.01, desync_weight=0.01, loss_sync=0.036565
+2026-02-20 04:30:59,311 - experiment_ablation_minimal - INFO - Epoch 99: Train Loss: 0.0776, Train Acc: 0.9821, Val Loss: 0.1739, Val Acc: 0.9326
+2026-02-20 04:30:59,315 - experiment_ablation_minimal - INFO - Running final test evaluation...
+2026-02-20 04:30:59,727 - experiment_ablation_minimal - INFO - Test Results:
+2026-02-20 04:30:59,727 - experiment_ablation_minimal - INFO -   loss: 0.2599
+2026-02-20 04:30:59,727 - experiment_ablation_minimal - INFO -   accuracy: 0.9322
+2026-02-20 04:30:59,729 - experiment_ablation_minimal - INFO - Training completed

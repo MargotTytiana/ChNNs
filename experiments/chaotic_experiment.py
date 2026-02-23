@@ -328,6 +328,9 @@ class ChaoticExperiment(BaseExperiment):
                     # Classification
                     num_speakers=num_speakers,
                     classifier_type=self.config['classifier_type'],
+                    use_bifurcation_control=self.config.get('optional_modules', {})
+                                     .get('bifurcation_control', {})
+                                     .get('enabled', False),
                     
                     device=self.device
                 )

@@ -1,3 +1,8 @@
 Ablation Study Summary
-Baseline: 0.0000
+Baseline: 0.9775
 
+no_phase_space: 0.9775 (drop: 0.0000)
+no_chaotic_features: 0.9663 (drop: 0.0112)
+no_chaotic_embedding: 0.9663 (drop: 0.0112)
+no_attractor_pooling: 0.9551 (drop: 0.0225)
+minimal: 0.9438 (drop: 0.0337)

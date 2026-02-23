@@ -1,0 +1,2256 @@
+2026-02-20 03:13:59,803 - chaotic_trainer - INFO - ============================================================
+2026-02-20 03:13:59,804 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2026-02-20 03:13:59,804 - chaotic_trainer - INFO - ============================================================
+2026-02-20 03:13:59,804 - chaotic_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off
+2026-02-20 03:13:59,805 - chaotic_trainer - INFO - Configuration: {
+  "_nested": {
+    "experiment": {
+      "name": "bifurcation_off",
+      "author": "C-HiLAP Project"
+    },
+    "data": {
+      "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+      "train_split": 0.7,
+      "val_split": 0.15,
+      "test_split": 0.15,
+      "num_workers": 4,
+      "pin_memory": true,
+      "prefetch_factor": 2,
+      "cache_features": false,
+      "cache_dir": "./cache"
+    },
+    "audio": {
+      "sample_rate": 16000,
+      "max_audio_length": 3.0,
+      "min_audio_length": 0.5,
+      "frame_length": 400,
+      "hop_length": 160,
+      "normalize": true,
+      "remove_silence": false,
+      "augmentation": {
+        "enabled": false,
+        "noise_injection": 0.005,
+        "time_stretch_range": [
+          0.9,
+          1.1
+        ],
+        "pitch_shift_range": [
+          -2,
+          2
+        ]
+      }
+    },
+    "model": {
+      "type": "full_chaotic",
+      "num_speakers": 251,
+      "phase_space": {
+        "embedding_dim": 10,
+        "delay_method": "autocorr",
+        "dimension_method": "false_neighbors",
+        "fixed_delay": 10
+      },
+      "chaotic_features": {
+        "mlsa": {
+          "scales": 5,
+          "max_lyapunov_steps": 1000
+        },
+        "rqa": {
+          "radius_ratio": 0.1,
+          "min_line_length": 2
+        }
+      },
+      "chaotic_embedding": {
+        "system_type": "lorenz",
+        "evolution_time": 0.5,
+        "time_step": 0.01,
+        "coupling_strength": 1.0,
+        "noise_level": 0.001,
+        "lorenz": {
+          "sigma": 10.0,
+          "rho": 28.0,
+          "beta": 2.6667
+        },
+        "rossler": {
+          "a": 0.2,
+          "b": 0.2,
+          "c": 5.7
+        }
+      },
+      "attractor_pooling": {
+        "type": "comprehensive",
+        "correlation_dimension": {
+          "num_radii": 50
+        }
+      },
+      "speaker_embedding": {
+        "dim": 256,
+        "hidden_dims": [
+          512,
+          256,
+          128
+        ],
+        "dropout_rate": 0.3,
+        "use_batch_norm": true
+      },
+      "classifier": {
+        "type": "plda",
+        "temperature": 30.0,
+        "margin": 0.35,
+        "plda": {
+          "latent_dim": 128,
+          "use_length_norm": true
+        }
+      }
+    },
+    "optional_modules": {
+      "bifurcation_control": {
+        "enabled": false
+      },
+      "differentiable_features": {
+        "enabled": true,
+        "lyapunov_dim": 8,
+        "rqa_dim": 6,
+        "additional_stats": true
+      }
+    },
+    "loss": {
+      "classification": {
+        "type": "cross_entropy",
+        "label_smoothing": 0.0
+      },
+      "stability": {
+        "enabled": true,
+        "weight": 0.1,
+        "target_lyapunov_range": [
+          0.1,
+          2.0
+        ],
+        "trajectory_bound": 50.0,
+        "collapse_threshold": 0.1,
+        "diversity_weight": 0.05
+      },
+      "synchronization": {
+        "enabled": false,
+        "sync_weight": 0.1,
+        "desync_weight": 0.1,
+        "margin": 1.0,
+        "sample_ratio": 0.3,
+        "distance_type": "euclidean"
+      },
+      "adversarial": {
+        "enabled": true,
+        "warmup_epochs": 5,
+        "perturbation_scale": 0.1,
+        "parameter_noise": true,
+        "trajectory_noise": true,
+        "weight": 0.3
+      }
+    },
+    "training": {
+      "batch_size": 32,
+      "num_epochs": 100,
+      "gradient_clipping": 1.0,
+      "gradient_accumulation_steps": 1,
+      "mixed_precision": false,
+      "optimizer": {
+        "type": "adamw",
+        "learning_rate": 0.0005,
+        "weight_decay": 0.0001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "momentum": 0.9,
+        "nesterov": true
+      },
+      "scheduler": {
+        "type": "cosine",
+        "T_max": 100,
+        "eta_min": 1e-06,
+        "step_size": 30,
+        "gamma": 0.1,
+        "patience": 10,
+        "factor": 0.5,
+        "min_lr": 1e-07,
+        "warmup_epochs": 5,
+        "warmup_start_lr": 1e-06
+      },
+      "early_stopping": {
+        "enabled": true,
+        "patience": 30,
+        "min_delta": 0.001,
+        "monitor": "val_accuracy",
+        "mode": "max"
+      },
+      "checkpoint": {
+        "save_best_only": true,
+        "save_frequency": 10,
+        "max_to_keep": 3
+      }
+    },
+    "evaluation": {
+      "metrics": [
+        "accuracy",
+        "top5_accuracy",
+        "eer",
+        "dcf"
+      ],
+      "eval_frequency": 1,
+      "visualization": {
+        "enabled": true,
+        "plot_confusion_matrix": true,
+        "plot_embeddings": true,
+        "plot_attractors": true
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "tensorboard": {
+        "enabled": true,
+        "log_dir": "./runs"
+      },
+      "wandb": {
+        "enabled": false,
+        "project": "chaotic-speaker-recognition",
+        "entity": null
+      },
+      "log_frequency": 50
+    },
+    "output": {
+      "base_dir": "./experiments/outputs",
+      "save_predictions": true,
+      "save_embeddings": true,
+      "save_analysis": true
+    },
+    "hardware": {
+      "device": "auto",
+      "seed": 42,
+      "deterministic": false,
+      "benchmark": true
+    },
+    "presets": {
+      "fast_debug": {
+        "training": {
+          "batch_size": 8,
+          "num_epochs": 5
+        },
+        "model": {
+          "speaker_embedding": {
+            "hidden_dims": [
+              128,
+              64
+            ]
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": false
+          },
+          "synchronization": {
+            "enabled": false
+          }
+        }
+      },
+      "baseline": {
+        "model": {
+          "classifier": {
+            "type": "linear"
+          }
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": false
+          }
+        }
+      },
+      "high_performance": {
+        "model": {
+          "speaker_embedding": {
+            "dim": 512,
+            "hidden_dims": [
+              1024,
+              512,
+              256
+            ]
+          },
+          "classifier": {
+            "type": "cosine"
+          }
+        },
+        "training": {
+          "num_epochs": 200,
+          "batch_size": 64
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": true,
+            "warmup_epochs": 10
+          }
+        }
+      },
+      "robust": {
+        "model": {
+          "chaotic_embedding": {
+            "noise_level": 0.01
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": true,
+            "perturbation_scale": 0.15,
+            "warmup_epochs": 3
+          }
+        },
+        "audio": {
+          "augmentation": {
+            "enabled": true,
+            "noise_injection": 0.01
+          }
+        }
+      }
+    }
+  },
+  "num_speakers": 251,
+  "model_type": "full_chaotic",
+  "embedding_dim": 10,
+  "delay_method": "autocorr",
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "chaotic_system": "lorenz",
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "plda",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.0001,
+  "gradient_clipping": 1.0,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "T_max": 100,
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 30
+  },
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "frame_length": 400,
+  "hop_length": 160,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "loss_config": {
+    "classification": {
+      "type": "cross_entropy",
+      "label_smoothing": 0.0
+    },
+    "stability": {
+      "enabled": true,
+      "weight": 0.1,
+      "target_lyapunov_range": [
+        0.1,
+        2.0
+      ],
+      "trajectory_bound": 50.0,
+      "collapse_threshold": 0.1,
+      "diversity_weight": 0.05
+    },
+    "synchronization": {
+      "enabled": false,
+      "sync_weight": 0.1,
+      "desync_weight": 0.1,
+      "margin": 1.0,
+      "sample_ratio": 0.3,
+      "distance_type": "euclidean"
+    },
+    "adversarial": {
+      "enabled": true,
+      "warmup_epochs": 5,
+      "perturbation_scale": 0.1,
+      "parameter_noise": true,
+      "trajectory_noise": true,
+      "weight": 0.3
+    }
+  },
+  "optional_modules": {
+    "bifurcation_control": {
+      "enabled": false
+    },
+    "differentiable_features": {
+      "enabled": true,
+      "lyapunov_dim": 8,
+      "rqa_dim": 6,
+      "additional_stats": true
+    }
+  },
+  "epochs": 100,
+  "optimize_parameters": true
+}
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 508985458688, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '799b8c2069de765fb1cb2a2a54a61d3883986433', 'branch': 'origin', 'is_dirty': True}}
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - Systems: ['lorenz']
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - 
+============================================================
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - ============================================================
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 03:13:59,881 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2026-02-20 03:13:59,894 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 03:15:07,066 - chaotic_trainer - ERROR - Failed to train chaotic_lorenz_full_chaotic_run_0: Unknown classifier type: plda
+2026-02-20 03:15:07,068 - chaotic_trainer - ERROR - Traceback: Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_chaotic.py", line 418, in train_single_experiment
+    experiment.setup()
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 314, in setup
+    self.model = self.create_model()
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/experiments/chaotic_experiment.py", line 303, in create_model
+    model = ChaoticSpeakerRecognitionNetwork(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 298, in __init__
+    self._initialize_components()
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 482, in _initialize_components
+    self.classifier = EnhancedChaoticClassifier(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project_2003370/yueyao/Model/models/chaotic_network.py", line 176, in __init__
+    raise ValueError(f"Unknown classifier type: {classifier_type}")
+ValueError: Unknown classifier type: plda
+
+2026-02-20 03:15:07,069 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2026-02-20 03:15:07,069 - chaotic_trainer - WARNING - No successful runs for lorenz + full_chaotic
+2026-02-20 03:15:07,069 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2026-02-20 03:15:07,069 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2026-02-20 03:15:07,153 - chaotic_trainer - INFO - Visualizations saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/visualizations
+2026-02-20 03:15:07,153 - chaotic_trainer - INFO - Reports generated:
+2026-02-20 03:15:07,153 - chaotic_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/chaotic_training_report.txt
+2026-02-20 03:15:07,153 - chaotic_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/chaotic_training_results.json
+2026-02-20 03:15:07,153 - chaotic_trainer - INFO - Chaotic training completed.
+2026-02-20 03:15:07,153 - chaotic_trainer - INFO - ============================================================
+2026-02-20 03:34:41,682 - chaotic_trainer - INFO - ============================================================
+2026-02-20 03:34:41,682 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2026-02-20 03:34:41,682 - chaotic_trainer - INFO - ============================================================
+2026-02-20 03:34:41,682 - chaotic_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off
+2026-02-20 03:34:41,683 - chaotic_trainer - INFO - Configuration: {
+  "_nested": {
+    "experiment": {
+      "name": "bifurcation_off",
+      "author": "C-HiLAP Project"
+    },
+    "data": {
+      "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+      "train_split": 0.7,
+      "val_split": 0.15,
+      "test_split": 0.15,
+      "num_workers": 4,
+      "pin_memory": true,
+      "prefetch_factor": 2,
+      "cache_features": false,
+      "cache_dir": "./cache"
+    },
+    "audio": {
+      "sample_rate": 16000,
+      "max_audio_length": 3.0,
+      "min_audio_length": 0.5,
+      "frame_length": 400,
+      "hop_length": 160,
+      "normalize": true,
+      "remove_silence": false,
+      "augmentation": {
+        "enabled": false,
+        "noise_injection": 0.005,
+        "time_stretch_range": [
+          0.9,
+          1.1
+        ],
+        "pitch_shift_range": [
+          -2,
+          2
+        ]
+      }
+    },
+    "model": {
+      "type": "full_chaotic",
+      "num_speakers": 251,
+      "phase_space": {
+        "embedding_dim": 10,
+        "delay_method": "autocorr",
+        "dimension_method": "false_neighbors",
+        "fixed_delay": 10
+      },
+      "chaotic_features": {
+        "mlsa": {
+          "scales": 5,
+          "max_lyapunov_steps": 1000
+        },
+        "rqa": {
+          "radius_ratio": 0.1,
+          "min_line_length": 2
+        }
+      },
+      "chaotic_embedding": {
+        "system_type": "lorenz",
+        "evolution_time": 0.5,
+        "time_step": 0.01,
+        "coupling_strength": 1.0,
+        "noise_level": 0.001,
+        "lorenz": {
+          "sigma": 10.0,
+          "rho": 28.0,
+          "beta": 2.6667
+        },
+        "rossler": {
+          "a": 0.2,
+          "b": 0.2,
+          "c": 5.7
+        }
+      },
+      "attractor_pooling": {
+        "type": "comprehensive",
+        "correlation_dimension": {
+          "num_radii": 50
+        }
+      },
+      "speaker_embedding": {
+        "dim": 256,
+        "hidden_dims": [
+          512,
+          256,
+          128
+        ],
+        "dropout_rate": 0.3,
+        "use_batch_norm": true
+      },
+      "classifier": {
+        "type": "cosine",
+        "temperature": 30.0,
+        "margin": 0.35,
+        "plda": {
+          "latent_dim": 128,
+          "use_length_norm": true
+        }
+      }
+    },
+    "optional_modules": {
+      "bifurcation_control": {
+        "enabled": false
+      },
+      "differentiable_features": {
+        "enabled": true,
+        "lyapunov_dim": 8,
+        "rqa_dim": 6,
+        "additional_stats": true
+      }
+    },
+    "loss": {
+      "classification": {
+        "type": "cross_entropy",
+        "label_smoothing": 0.0
+      },
+      "stability": {
+        "enabled": true,
+        "weight": 0.1,
+        "target_lyapunov_range": [
+          0.1,
+          2.0
+        ],
+        "trajectory_bound": 50.0,
+        "collapse_threshold": 0.1,
+        "diversity_weight": 0.05
+      },
+      "synchronization": {
+        "enabled": false,
+        "sync_weight": 0.1,
+        "desync_weight": 0.1,
+        "margin": 1.0,
+        "sample_ratio": 0.3,
+        "distance_type": "euclidean"
+      },
+      "adversarial": {
+        "enabled": true,
+        "warmup_epochs": 5,
+        "perturbation_scale": 0.1,
+        "parameter_noise": true,
+        "trajectory_noise": true,
+        "weight": 0.3
+      }
+    },
+    "training": {
+      "batch_size": 32,
+      "num_epochs": 100,
+      "gradient_clipping": 1.0,
+      "gradient_accumulation_steps": 1,
+      "mixed_precision": false,
+      "optimizer": {
+        "type": "adamw",
+        "learning_rate": 0.0005,
+        "weight_decay": 0.0001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "momentum": 0.9,
+        "nesterov": true
+      },
+      "scheduler": {
+        "type": "cosine",
+        "T_max": 100,
+        "eta_min": 1e-06,
+        "step_size": 30,
+        "gamma": 0.1,
+        "patience": 10,
+        "factor": 0.5,
+        "min_lr": 1e-07,
+        "warmup_epochs": 5,
+        "warmup_start_lr": 1e-06
+      },
+      "early_stopping": {
+        "enabled": true,
+        "patience": 30,
+        "min_delta": 0.001,
+        "monitor": "val_accuracy",
+        "mode": "max"
+      },
+      "checkpoint": {
+        "save_best_only": true,
+        "save_frequency": 10,
+        "max_to_keep": 3
+      }
+    },
+    "evaluation": {
+      "metrics": [
+        "accuracy",
+        "top5_accuracy",
+        "eer",
+        "dcf"
+      ],
+      "eval_frequency": 1,
+      "visualization": {
+        "enabled": true,
+        "plot_confusion_matrix": true,
+        "plot_embeddings": true,
+        "plot_attractors": true
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "tensorboard": {
+        "enabled": true,
+        "log_dir": "./runs"
+      },
+      "wandb": {
+        "enabled": false,
+        "project": "chaotic-speaker-recognition",
+        "entity": null
+      },
+      "log_frequency": 50
+    },
+    "output": {
+      "base_dir": "./experiments/outputs",
+      "save_predictions": true,
+      "save_embeddings": true,
+      "save_analysis": true
+    },
+    "hardware": {
+      "device": "auto",
+      "seed": 42,
+      "deterministic": false,
+      "benchmark": true
+    },
+    "presets": {
+      "fast_debug": {
+        "training": {
+          "batch_size": 8,
+          "num_epochs": 5
+        },
+        "model": {
+          "speaker_embedding": {
+            "hidden_dims": [
+              128,
+              64
+            ]
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": false
+          },
+          "synchronization": {
+            "enabled": false
+          }
+        }
+      },
+      "baseline": {
+        "model": {
+          "classifier": {
+            "type": "linear"
+          }
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": false
+          }
+        }
+      },
+      "high_performance": {
+        "model": {
+          "speaker_embedding": {
+            "dim": 512,
+            "hidden_dims": [
+              1024,
+              512,
+              256
+            ]
+          },
+          "classifier": {
+            "type": "cosine"
+          }
+        },
+        "training": {
+          "num_epochs": 200,
+          "batch_size": 64
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": true,
+            "warmup_epochs": 10
+          }
+        }
+      },
+      "robust": {
+        "model": {
+          "chaotic_embedding": {
+            "noise_level": 0.01
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": true,
+            "perturbation_scale": 0.15,
+            "warmup_epochs": 3
+          }
+        },
+        "audio": {
+          "augmentation": {
+            "enabled": true,
+            "noise_injection": 0.01
+          }
+        }
+      }
+    }
+  },
+  "num_speakers": 251,
+  "model_type": "full_chaotic",
+  "embedding_dim": 10,
+  "delay_method": "autocorr",
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "chaotic_system": "lorenz",
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.0001,
+  "gradient_clipping": 1.0,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "T_max": 100,
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 30
+  },
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "frame_length": 400,
+  "hop_length": 160,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "loss_config": {
+    "classification": {
+      "type": "cross_entropy",
+      "label_smoothing": 0.0
+    },
+    "stability": {
+      "enabled": true,
+      "weight": 0.1,
+      "target_lyapunov_range": [
+        0.1,
+        2.0
+      ],
+      "trajectory_bound": 50.0,
+      "collapse_threshold": 0.1,
+      "diversity_weight": 0.05
+    },
+    "synchronization": {
+      "enabled": false,
+      "sync_weight": 0.1,
+      "desync_weight": 0.1,
+      "margin": 1.0,
+      "sample_ratio": 0.3,
+      "distance_type": "euclidean"
+    },
+    "adversarial": {
+      "enabled": true,
+      "warmup_epochs": 5,
+      "perturbation_scale": 0.1,
+      "parameter_noise": true,
+      "trajectory_noise": true,
+      "weight": 0.3
+    }
+  },
+  "optional_modules": {
+    "bifurcation_control": {
+      "enabled": false
+    },
+    "differentiable_features": {
+      "enabled": true,
+      "lyapunov_dim": 8,
+      "rqa_dim": 6,
+      "additional_stats": true
+    }
+  },
+  "epochs": 100,
+  "optimize_parameters": true
+}
+2026-02-20 03:34:41,765 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 509251424256, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '799b8c2069de765fb1cb2a2a54a61d3883986433', 'branch': 'origin', 'is_dirty': True}}
+2026-02-20 03:34:41,765 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2026-02-20 03:34:41,765 - chaotic_trainer - INFO - Systems: ['lorenz']
+2026-02-20 03:34:41,765 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2026-02-20 03:34:41,765 - chaotic_trainer - INFO - 
+============================================================
+2026-02-20 03:34:41,766 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2026-02-20 03:34:41,766 - chaotic_trainer - INFO - ============================================================
+2026-02-20 03:34:41,766 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 03:34:41,766 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2026-02-20 03:34:41,799 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 03:35:50,358 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2026-02-20 03:35:50,358 - chaotic_trainer - INFO - Model parameters: 584,959 (trainable: 584,959)
+2026-02-20 03:35:50,358 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2026-02-20 03:35:50,359 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2026-02-20 03:49:42,446 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 03:49:43,595 - chaotic_trainer - INFO - Running chaotic analysis...
+2026-02-20 03:49:47,553 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.9746, Loss: 0.1746, Time: 900.6s
+2026-02-20 03:49:47,562 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2026-02-20 03:49:47,562 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.9746 ± 0.0000
+2026-02-20 03:49:47,562 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2026-02-20 03:49:47,564 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2026-02-20 03:49:49,307 - chaotic_trainer - INFO - Visualizations saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/visualizations
+2026-02-20 03:49:49,307 - chaotic_trainer - INFO - Reports generated:
+2026-02-20 03:49:49,307 - chaotic_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/chaotic_training_report.txt
+2026-02-20 03:49:49,308 - chaotic_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/chaotic_training_results.json
+2026-02-20 03:49:49,308 - chaotic_trainer - INFO - Chaotic training completed.
+2026-02-20 03:49:49,308 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:33:26,408 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:33:26,408 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2026-02-20 04:33:26,408 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:33:26,408 - chaotic_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off
+2026-02-20 04:33:26,409 - chaotic_trainer - INFO - Configuration: {
+  "_nested": {
+    "experiment": {
+      "name": "bifurcation_off",
+      "author": "C-HiLAP Project"
+    },
+    "data": {
+      "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+      "train_split": 0.7,
+      "val_split": 0.15,
+      "test_split": 0.15,
+      "num_workers": 4,
+      "pin_memory": true,
+      "prefetch_factor": 2,
+      "cache_features": false,
+      "cache_dir": "./cache"
+    },
+    "audio": {
+      "sample_rate": 16000,
+      "max_audio_length": 3.0,
+      "min_audio_length": 0.5,
+      "frame_length": 400,
+      "hop_length": 160,
+      "normalize": true,
+      "remove_silence": false,
+      "augmentation": {
+        "enabled": false,
+        "noise_injection": 0.005,
+        "time_stretch_range": [
+          0.9,
+          1.1
+        ],
+        "pitch_shift_range": [
+          -2,
+          2
+        ]
+      }
+    },
+    "model": {
+      "type": "full_chaotic",
+      "num_speakers": 251,
+      "phase_space": {
+        "embedding_dim": 10,
+        "delay_method": "autocorr",
+        "dimension_method": "false_neighbors",
+        "fixed_delay": 10
+      },
+      "chaotic_features": {
+        "mlsa": {
+          "scales": 5,
+          "max_lyapunov_steps": 1000
+        },
+        "rqa": {
+          "radius_ratio": 0.1,
+          "min_line_length": 2
+        }
+      },
+      "chaotic_embedding": {
+        "system_type": "lorenz",
+        "evolution_time": 0.5,
+        "time_step": 0.01,
+        "coupling_strength": 1.0,
+        "noise_level": 0.001,
+        "lorenz": {
+          "sigma": 10.0,
+          "rho": 28.0,
+          "beta": 2.6667
+        },
+        "rossler": {
+          "a": 0.2,
+          "b": 0.2,
+          "c": 5.7
+        }
+      },
+      "attractor_pooling": {
+        "type": "comprehensive",
+        "correlation_dimension": {
+          "num_radii": 50
+        }
+      },
+      "speaker_embedding": {
+        "dim": 256,
+        "hidden_dims": [
+          512,
+          256,
+          128
+        ],
+        "dropout_rate": 0.3,
+        "use_batch_norm": true
+      },
+      "classifier": {
+        "type": "cosine",
+        "temperature": 30.0,
+        "margin": 0.35,
+        "plda": {
+          "latent_dim": 128,
+          "use_length_norm": true
+        }
+      }
+    },
+    "optional_modules": {
+      "bifurcation_control": {
+        "enabled": false
+      },
+      "differentiable_features": {
+        "enabled": true,
+        "lyapunov_dim": 8,
+        "rqa_dim": 6,
+        "additional_stats": true
+      }
+    },
+    "loss": {
+      "classification": {
+        "type": "cross_entropy",
+        "label_smoothing": 0.0
+      },
+      "stability": {
+        "enabled": true,
+        "weight": 0.1,
+        "target_lyapunov_range": [
+          0.1,
+          2.0
+        ],
+        "trajectory_bound": 50.0,
+        "collapse_threshold": 0.1,
+        "diversity_weight": 0.05
+      },
+      "synchronization": {
+        "enabled": false,
+        "sync_weight": 0.1,
+        "desync_weight": 0.1,
+        "margin": 1.0,
+        "sample_ratio": 0.3,
+        "distance_type": "euclidean"
+      },
+      "adversarial": {
+        "enabled": true,
+        "warmup_epochs": 5,
+        "perturbation_scale": 0.1,
+        "parameter_noise": true,
+        "trajectory_noise": true,
+        "weight": 0.3
+      }
+    },
+    "training": {
+      "batch_size": 32,
+      "num_epochs": 100,
+      "gradient_clipping": 1.0,
+      "gradient_accumulation_steps": 1,
+      "mixed_precision": false,
+      "optimizer": {
+        "type": "adamw",
+        "learning_rate": 0.0005,
+        "weight_decay": 0.0001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "momentum": 0.9,
+        "nesterov": true
+      },
+      "scheduler": {
+        "type": "cosine",
+        "T_max": 100,
+        "eta_min": 1e-06,
+        "step_size": 30,
+        "gamma": 0.1,
+        "patience": 10,
+        "factor": 0.5,
+        "min_lr": 1e-07,
+        "warmup_epochs": 5,
+        "warmup_start_lr": 1e-06
+      },
+      "early_stopping": {
+        "enabled": true,
+        "patience": 30,
+        "min_delta": 0.001,
+        "monitor": "val_accuracy",
+        "mode": "max"
+      },
+      "checkpoint": {
+        "save_best_only": true,
+        "save_frequency": 10,
+        "max_to_keep": 3
+      }
+    },
+    "evaluation": {
+      "metrics": [
+        "accuracy",
+        "top5_accuracy",
+        "eer",
+        "dcf"
+      ],
+      "eval_frequency": 1,
+      "visualization": {
+        "enabled": true,
+        "plot_confusion_matrix": true,
+        "plot_embeddings": true,
+        "plot_attractors": true
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "tensorboard": {
+        "enabled": true,
+        "log_dir": "./runs"
+      },
+      "wandb": {
+        "enabled": false,
+        "project": "chaotic-speaker-recognition",
+        "entity": null
+      },
+      "log_frequency": 50
+    },
+    "output": {
+      "base_dir": "./experiments/outputs",
+      "save_predictions": true,
+      "save_embeddings": true,
+      "save_analysis": true
+    },
+    "hardware": {
+      "device": "auto",
+      "seed": 42,
+      "deterministic": false,
+      "benchmark": true
+    },
+    "presets": {
+      "fast_debug": {
+        "training": {
+          "batch_size": 8,
+          "num_epochs": 5
+        },
+        "model": {
+          "speaker_embedding": {
+            "hidden_dims": [
+              128,
+              64
+            ]
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": false
+          },
+          "synchronization": {
+            "enabled": false
+          }
+        }
+      },
+      "baseline": {
+        "model": {
+          "classifier": {
+            "type": "linear"
+          }
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": false
+          }
+        }
+      },
+      "high_performance": {
+        "model": {
+          "speaker_embedding": {
+            "dim": 512,
+            "hidden_dims": [
+              1024,
+              512,
+              256
+            ]
+          },
+          "classifier": {
+            "type": "cosine"
+          }
+        },
+        "training": {
+          "num_epochs": 200,
+          "batch_size": 64
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": true,
+            "warmup_epochs": 10
+          }
+        }
+      },
+      "robust": {
+        "model": {
+          "chaotic_embedding": {
+            "noise_level": 0.01
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": true,
+            "perturbation_scale": 0.15,
+            "warmup_epochs": 3
+          }
+        },
+        "audio": {
+          "augmentation": {
+            "enabled": true,
+            "noise_injection": 0.01
+          }
+        }
+      }
+    }
+  },
+  "num_speakers": 251,
+  "model_type": "full_chaotic",
+  "embedding_dim": 10,
+  "delay_method": "autocorr",
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "chaotic_system": "lorenz",
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.0001,
+  "gradient_clipping": 1.0,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "T_max": 100,
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 30
+  },
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "frame_length": 400,
+  "hop_length": 160,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "loss_config": {
+    "classification": {
+      "type": "cross_entropy",
+      "label_smoothing": 0.0
+    },
+    "stability": {
+      "enabled": true,
+      "weight": 0.1,
+      "target_lyapunov_range": [
+        0.1,
+        2.0
+      ],
+      "trajectory_bound": 50.0,
+      "collapse_threshold": 0.1,
+      "diversity_weight": 0.05
+    },
+    "synchronization": {
+      "enabled": false,
+      "sync_weight": 0.1,
+      "desync_weight": 0.1,
+      "margin": 1.0,
+      "sample_ratio": 0.3,
+      "distance_type": "euclidean"
+    },
+    "adversarial": {
+      "enabled": true,
+      "warmup_epochs": 5,
+      "perturbation_scale": 0.1,
+      "parameter_noise": true,
+      "trajectory_noise": true,
+      "weight": 0.3
+    }
+  },
+  "optional_modules": {
+    "bifurcation_control": {
+      "enabled": false
+    },
+    "differentiable_features": {
+      "enabled": true,
+      "lyapunov_dim": 8,
+      "rqa_dim": 6,
+      "additional_stats": true
+    }
+  },
+  "epochs": 100,
+  "optimize_parameters": true
+}
+2026-02-20 04:33:26,482 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 511089750016, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '799b8c2069de765fb1cb2a2a54a61d3883986433', 'branch': 'origin', 'is_dirty': True}}
+2026-02-20 04:33:26,482 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2026-02-20 04:33:26,482 - chaotic_trainer - INFO - Systems: ['lorenz']
+2026-02-20 04:33:26,483 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2026-02-20 04:33:26,483 - chaotic_trainer - INFO - 
+============================================================
+2026-02-20 04:33:26,483 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2026-02-20 04:33:26,483 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:33:26,483 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 04:33:26,483 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2026-02-20 04:33:26,493 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 04:34:33,466 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2026-02-20 04:34:33,466 - chaotic_trainer - INFO - Model parameters: 584,959 (trainable: 584,959)
+2026-02-20 04:34:33,466 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2026-02-20 04:34:33,466 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2026-02-20 04:38:52,906 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:38:52,906 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2026-02-20 04:38:52,906 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:38:52,906 - chaotic_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off
+2026-02-20 04:38:52,907 - chaotic_trainer - INFO - Configuration: {
+  "_nested": {
+    "experiment": {
+      "name": "bifurcation_off",
+      "author": "C-HiLAP Project"
+    },
+    "data": {
+      "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+      "train_split": 0.7,
+      "val_split": 0.15,
+      "test_split": 0.15,
+      "num_workers": 4,
+      "pin_memory": true,
+      "prefetch_factor": 2,
+      "cache_features": false,
+      "cache_dir": "./cache"
+    },
+    "audio": {
+      "sample_rate": 16000,
+      "max_audio_length": 3.0,
+      "min_audio_length": 0.5,
+      "frame_length": 400,
+      "hop_length": 160,
+      "normalize": true,
+      "remove_silence": false,
+      "augmentation": {
+        "enabled": false,
+        "noise_injection": 0.005,
+        "time_stretch_range": [
+          0.9,
+          1.1
+        ],
+        "pitch_shift_range": [
+          -2,
+          2
+        ]
+      }
+    },
+    "model": {
+      "type": "full_chaotic",
+      "num_speakers": 251,
+      "phase_space": {
+        "embedding_dim": 10,
+        "delay_method": "autocorr",
+        "dimension_method": "false_neighbors",
+        "fixed_delay": 10
+      },
+      "chaotic_features": {
+        "mlsa": {
+          "scales": 5,
+          "max_lyapunov_steps": 1000
+        },
+        "rqa": {
+          "radius_ratio": 0.1,
+          "min_line_length": 2
+        }
+      },
+      "chaotic_embedding": {
+        "system_type": "lorenz",
+        "evolution_time": 0.5,
+        "time_step": 0.01,
+        "coupling_strength": 1.0,
+        "noise_level": 0.001,
+        "lorenz": {
+          "sigma": 10.0,
+          "rho": 28.0,
+          "beta": 2.6667
+        },
+        "rossler": {
+          "a": 0.2,
+          "b": 0.2,
+          "c": 5.7
+        }
+      },
+      "attractor_pooling": {
+        "type": "comprehensive",
+        "correlation_dimension": {
+          "num_radii": 50
+        }
+      },
+      "speaker_embedding": {
+        "dim": 256,
+        "hidden_dims": [
+          512,
+          256,
+          128
+        ],
+        "dropout_rate": 0.3,
+        "use_batch_norm": true
+      },
+      "classifier": {
+        "type": "cosine",
+        "temperature": 30.0,
+        "margin": 0.35,
+        "plda": {
+          "latent_dim": 128,
+          "use_length_norm": true
+        }
+      }
+    },
+    "optional_modules": {
+      "bifurcation_control": {
+        "enabled": false
+      },
+      "differentiable_features": {
+        "enabled": true,
+        "lyapunov_dim": 8,
+        "rqa_dim": 6,
+        "additional_stats": true
+      }
+    },
+    "loss": {
+      "classification": {
+        "type": "cross_entropy",
+        "label_smoothing": 0.0
+      },
+      "stability": {
+        "enabled": true,
+        "weight": 0.1,
+        "target_lyapunov_range": [
+          0.1,
+          2.0
+        ],
+        "trajectory_bound": 50.0,
+        "collapse_threshold": 0.1,
+        "diversity_weight": 0.05
+      },
+      "synchronization": {
+        "enabled": false,
+        "sync_weight": 0.1,
+        "desync_weight": 0.1,
+        "margin": 1.0,
+        "sample_ratio": 0.3,
+        "distance_type": "euclidean"
+      },
+      "adversarial": {
+        "enabled": true,
+        "warmup_epochs": 5,
+        "perturbation_scale": 0.1,
+        "parameter_noise": true,
+        "trajectory_noise": true,
+        "weight": 0.3
+      }
+    },
+    "training": {
+      "batch_size": 32,
+      "num_epochs": 100,
+      "gradient_clipping": 1.0,
+      "gradient_accumulation_steps": 1,
+      "mixed_precision": false,
+      "optimizer": {
+        "type": "adamw",
+        "learning_rate": 0.0005,
+        "weight_decay": 0.0001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "momentum": 0.9,
+        "nesterov": true
+      },
+      "scheduler": {
+        "type": "cosine",
+        "T_max": 100,
+        "eta_min": 1e-06,
+        "step_size": 30,
+        "gamma": 0.1,
+        "patience": 10,
+        "factor": 0.5,
+        "min_lr": 1e-07,
+        "warmup_epochs": 5,
+        "warmup_start_lr": 1e-06
+      },
+      "early_stopping": {
+        "enabled": true,
+        "patience": 30,
+        "min_delta": 0.001,
+        "monitor": "val_accuracy",
+        "mode": "max"
+      },
+      "checkpoint": {
+        "save_best_only": true,
+        "save_frequency": 10,
+        "max_to_keep": 3
+      }
+    },
+    "evaluation": {
+      "metrics": [
+        "accuracy",
+        "top5_accuracy",
+        "eer",
+        "dcf"
+      ],
+      "eval_frequency": 1,
+      "visualization": {
+        "enabled": true,
+        "plot_confusion_matrix": true,
+        "plot_embeddings": true,
+        "plot_attractors": true
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "tensorboard": {
+        "enabled": true,
+        "log_dir": "./runs"
+      },
+      "wandb": {
+        "enabled": false,
+        "project": "chaotic-speaker-recognition",
+        "entity": null
+      },
+      "log_frequency": 50
+    },
+    "output": {
+      "base_dir": "./experiments/outputs",
+      "save_predictions": true,
+      "save_embeddings": true,
+      "save_analysis": true
+    },
+    "hardware": {
+      "device": "auto",
+      "seed": 42,
+      "deterministic": false,
+      "benchmark": true
+    },
+    "presets": {
+      "fast_debug": {
+        "training": {
+          "batch_size": 8,
+          "num_epochs": 5
+        },
+        "model": {
+          "speaker_embedding": {
+            "hidden_dims": [
+              128,
+              64
+            ]
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": false
+          },
+          "synchronization": {
+            "enabled": false
+          }
+        }
+      },
+      "baseline": {
+        "model": {
+          "classifier": {
+            "type": "linear"
+          }
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": false
+          }
+        }
+      },
+      "high_performance": {
+        "model": {
+          "speaker_embedding": {
+            "dim": 512,
+            "hidden_dims": [
+              1024,
+              512,
+              256
+            ]
+          },
+          "classifier": {
+            "type": "cosine"
+          }
+        },
+        "training": {
+          "num_epochs": 200,
+          "batch_size": 64
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": true,
+            "warmup_epochs": 10
+          }
+        }
+      },
+      "robust": {
+        "model": {
+          "chaotic_embedding": {
+            "noise_level": 0.01
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": true,
+            "perturbation_scale": 0.15,
+            "warmup_epochs": 3
+          }
+        },
+        "audio": {
+          "augmentation": {
+            "enabled": true,
+            "noise_injection": 0.01
+          }
+        }
+      }
+    }
+  },
+  "num_speakers": 251,
+  "model_type": "full_chaotic",
+  "embedding_dim": 10,
+  "delay_method": "autocorr",
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "chaotic_system": "lorenz",
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.0001,
+  "gradient_clipping": 1.0,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "T_max": 100,
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 30
+  },
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "frame_length": 400,
+  "hop_length": 160,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "loss_config": {
+    "classification": {
+      "type": "cross_entropy",
+      "label_smoothing": 0.0
+    },
+    "stability": {
+      "enabled": true,
+      "weight": 0.1,
+      "target_lyapunov_range": [
+        0.1,
+        2.0
+      ],
+      "trajectory_bound": 50.0,
+      "collapse_threshold": 0.1,
+      "diversity_weight": 0.05
+    },
+    "synchronization": {
+      "enabled": false,
+      "sync_weight": 0.1,
+      "desync_weight": 0.1,
+      "margin": 1.0,
+      "sample_ratio": 0.3,
+      "distance_type": "euclidean"
+    },
+    "adversarial": {
+      "enabled": true,
+      "warmup_epochs": 5,
+      "perturbation_scale": 0.1,
+      "parameter_noise": true,
+      "trajectory_noise": true,
+      "weight": 0.3
+    }
+  },
+  "optional_modules": {
+    "bifurcation_control": {
+      "enabled": false
+    },
+    "differentiable_features": {
+      "enabled": true,
+      "lyapunov_dim": 8,
+      "rqa_dim": 6,
+      "additional_stats": true
+    }
+  },
+  "epochs": 100,
+  "optimize_parameters": true
+}
+2026-02-20 04:38:52,980 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 511089352704, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '799b8c2069de765fb1cb2a2a54a61d3883986433', 'branch': 'origin', 'is_dirty': True}}
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - Systems: ['lorenz']
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - 
+============================================================
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 04:38:52,981 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2026-02-20 04:38:52,991 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 04:39:59,911 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2026-02-20 04:39:59,912 - chaotic_trainer - INFO - Model parameters: 584,959 (trainable: 584,959)
+2026-02-20 04:39:59,912 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2026-02-20 04:39:59,912 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2026-02-20 04:53:32,054 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:53:32,054 - chaotic_trainer - INFO - CHAOTIC NEURAL NETWORKS TRAINING
+2026-02-20 04:53:32,054 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:53:32,054 - chaotic_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off
+2026-02-20 04:53:32,055 - chaotic_trainer - INFO - Configuration: {
+  "_nested": {
+    "experiment": {
+      "name": "bifurcation_off",
+      "author": "C-HiLAP Project"
+    },
+    "data": {
+      "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+      "train_split": 0.7,
+      "val_split": 0.15,
+      "test_split": 0.15,
+      "num_workers": 4,
+      "pin_memory": true,
+      "prefetch_factor": 2,
+      "cache_features": false,
+      "cache_dir": "./cache"
+    },
+    "audio": {
+      "sample_rate": 16000,
+      "max_audio_length": 3.0,
+      "min_audio_length": 0.5,
+      "frame_length": 400,
+      "hop_length": 160,
+      "normalize": true,
+      "remove_silence": false,
+      "augmentation": {
+        "enabled": false,
+        "noise_injection": 0.005,
+        "time_stretch_range": [
+          0.9,
+          1.1
+        ],
+        "pitch_shift_range": [
+          -2,
+          2
+        ]
+      }
+    },
+    "model": {
+      "type": "full_chaotic",
+      "num_speakers": 251,
+      "phase_space": {
+        "embedding_dim": 10,
+        "delay_method": "autocorr",
+        "dimension_method": "false_neighbors",
+        "fixed_delay": 10
+      },
+      "chaotic_features": {
+        "mlsa": {
+          "scales": 5,
+          "max_lyapunov_steps": 1000
+        },
+        "rqa": {
+          "radius_ratio": 0.1,
+          "min_line_length": 2
+        }
+      },
+      "chaotic_embedding": {
+        "system_type": "lorenz",
+        "evolution_time": 0.5,
+        "time_step": 0.01,
+        "coupling_strength": 1.0,
+        "noise_level": 0.001,
+        "lorenz": {
+          "sigma": 10.0,
+          "rho": 28.0,
+          "beta": 2.6667
+        },
+        "rossler": {
+          "a": 0.2,
+          "b": 0.2,
+          "c": 5.7
+        }
+      },
+      "attractor_pooling": {
+        "type": "comprehensive",
+        "correlation_dimension": {
+          "num_radii": 50
+        }
+      },
+      "speaker_embedding": {
+        "dim": 256,
+        "hidden_dims": [
+          512,
+          256,
+          128
+        ],
+        "dropout_rate": 0.3,
+        "use_batch_norm": true
+      },
+      "classifier": {
+        "type": "cosine",
+        "temperature": 30.0,
+        "margin": 0.35,
+        "plda": {
+          "latent_dim": 128,
+          "use_length_norm": true
+        }
+      }
+    },
+    "optional_modules": {
+      "bifurcation_control": {
+        "enabled": false
+      },
+      "differentiable_features": {
+        "enabled": true,
+        "lyapunov_dim": 8,
+        "rqa_dim": 6,
+        "additional_stats": true
+      }
+    },
+    "loss": {
+      "classification": {
+        "type": "cross_entropy",
+        "label_smoothing": 0.0
+      },
+      "stability": {
+        "enabled": true,
+        "weight": 0.1,
+        "target_lyapunov_range": [
+          0.1,
+          2.0
+        ],
+        "trajectory_bound": 50.0,
+        "collapse_threshold": 0.1,
+        "diversity_weight": 0.05
+      },
+      "synchronization": {
+        "enabled": false,
+        "sync_weight": 0.1,
+        "desync_weight": 0.1,
+        "margin": 1.0,
+        "sample_ratio": 0.3,
+        "distance_type": "euclidean"
+      },
+      "adversarial": {
+        "enabled": true,
+        "warmup_epochs": 5,
+        "perturbation_scale": 0.1,
+        "parameter_noise": true,
+        "trajectory_noise": true,
+        "weight": 0.3
+      }
+    },
+    "training": {
+      "batch_size": 32,
+      "num_epochs": 100,
+      "gradient_clipping": 1.0,
+      "gradient_accumulation_steps": 1,
+      "mixed_precision": false,
+      "optimizer": {
+        "type": "adamw",
+        "learning_rate": 0.0005,
+        "weight_decay": 0.0001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "momentum": 0.9,
+        "nesterov": true
+      },
+      "scheduler": {
+        "type": "cosine",
+        "T_max": 100,
+        "eta_min": 1e-06,
+        "step_size": 30,
+        "gamma": 0.1,
+        "patience": 10,
+        "factor": 0.5,
+        "min_lr": 1e-07,
+        "warmup_epochs": 5,
+        "warmup_start_lr": 1e-06
+      },
+      "early_stopping": {
+        "enabled": true,
+        "patience": 30,
+        "min_delta": 0.001,
+        "monitor": "val_accuracy",
+        "mode": "max"
+      },
+      "checkpoint": {
+        "save_best_only": true,
+        "save_frequency": 10,
+        "max_to_keep": 3
+      }
+    },
+    "evaluation": {
+      "metrics": [
+        "accuracy",
+        "top5_accuracy",
+        "eer",
+        "dcf"
+      ],
+      "eval_frequency": 1,
+      "visualization": {
+        "enabled": true,
+        "plot_confusion_matrix": true,
+        "plot_embeddings": true,
+        "plot_attractors": true
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "tensorboard": {
+        "enabled": true,
+        "log_dir": "./runs"
+      },
+      "wandb": {
+        "enabled": false,
+        "project": "chaotic-speaker-recognition",
+        "entity": null
+      },
+      "log_frequency": 50
+    },
+    "output": {
+      "base_dir": "./experiments/outputs",
+      "save_predictions": true,
+      "save_embeddings": true,
+      "save_analysis": true
+    },
+    "hardware": {
+      "device": "auto",
+      "seed": 42,
+      "deterministic": false,
+      "benchmark": true
+    },
+    "presets": {
+      "fast_debug": {
+        "training": {
+          "batch_size": 8,
+          "num_epochs": 5
+        },
+        "model": {
+          "speaker_embedding": {
+            "hidden_dims": [
+              128,
+              64
+            ]
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": false
+          },
+          "synchronization": {
+            "enabled": false
+          }
+        }
+      },
+      "baseline": {
+        "model": {
+          "classifier": {
+            "type": "linear"
+          }
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": false
+          }
+        }
+      },
+      "high_performance": {
+        "model": {
+          "speaker_embedding": {
+            "dim": 512,
+            "hidden_dims": [
+              1024,
+              512,
+              256
+            ]
+          },
+          "classifier": {
+            "type": "cosine"
+          }
+        },
+        "training": {
+          "num_epochs": 200,
+          "batch_size": 64
+        },
+        "loss": {
+          "stability": {
+            "enabled": true
+          },
+          "synchronization": {
+            "enabled": false
+          },
+          "adversarial": {
+            "enabled": true,
+            "warmup_epochs": 10
+          }
+        }
+      },
+      "robust": {
+        "model": {
+          "chaotic_embedding": {
+            "noise_level": 0.01
+          }
+        },
+        "loss": {
+          "adversarial": {
+            "enabled": true,
+            "perturbation_scale": 0.15,
+            "warmup_epochs": 3
+          }
+        },
+        "audio": {
+          "augmentation": {
+            "enabled": true,
+            "noise_injection": 0.01
+          }
+        }
+      }
+    }
+  },
+  "num_speakers": 251,
+  "model_type": "full_chaotic",
+  "embedding_dim": 10,
+  "delay_method": "autocorr",
+  "mlsa_scales": 5,
+  "rqa_radius_ratio": 0.1,
+  "chaotic_system": "lorenz",
+  "evolution_time": 0.5,
+  "time_step": 0.01,
+  "coupling_strength": 1.0,
+  "noise_level": 0.001,
+  "pooling_type": "comprehensive",
+  "speaker_embedding_dim": 256,
+  "embedding_hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "classifier_type": "cosine",
+  "temperature": 30.0,
+  "margin": 0.35,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.0001,
+  "gradient_clipping": 1.0,
+  "optimizer": {
+    "type": "adamw",
+    "params": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cosine",
+    "params": {
+      "T_max": 100,
+      "eta_min": 1e-06
+    }
+  },
+  "early_stopping": {
+    "patience": 30
+  },
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "frame_length": 400,
+  "hop_length": 160,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "loss_config": {
+    "classification": {
+      "type": "cross_entropy",
+      "label_smoothing": 0.0
+    },
+    "stability": {
+      "enabled": true,
+      "weight": 0.1,
+      "target_lyapunov_range": [
+        0.1,
+        2.0
+      ],
+      "trajectory_bound": 50.0,
+      "collapse_threshold": 0.1,
+      "diversity_weight": 0.05
+    },
+    "synchronization": {
+      "enabled": false,
+      "sync_weight": 0.1,
+      "desync_weight": 0.1,
+      "margin": 1.0,
+      "sample_ratio": 0.3,
+      "distance_type": "euclidean"
+    },
+    "adversarial": {
+      "enabled": true,
+      "warmup_epochs": 5,
+      "perturbation_scale": 0.1,
+      "parameter_noise": true,
+      "trajectory_noise": true,
+      "weight": 0.3
+    }
+  },
+  "optional_modules": {
+    "bifurcation_control": {
+      "enabled": false
+    },
+    "differentiable_features": {
+      "enabled": true,
+      "lyapunov_dim": 8,
+      "rqa_dim": 6,
+      "additional_stats": true
+    }
+  },
+  "epochs": 100,
+  "optimize_parameters": true
+}
+2026-02-20 04:53:32,129 - chaotic_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 511103078400, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '799b8c2069de765fb1cb2a2a54a61d3883986433', 'branch': 'origin', 'is_dirty': True}}
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - Training 1 systems × 1 types × 1 runs...
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - Systems: ['lorenz']
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - Model types: ['full_chaotic']
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - 
+============================================================
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - TRAINING: LORENZ + FULL_CHAOTIC
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - ============================================================
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - Training chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 04:53:32,130 - chaotic_trainer - INFO - Optimizing parameters for lorenz system...
+2026-02-20 04:53:32,141 - chaotic_trainer - INFO - Setting up chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 04:54:39,162 - chaotic_trainer - INFO - 🚀 No checkpoint specified, starting from scratch
+2026-02-20 04:54:39,163 - chaotic_trainer - INFO - Model parameters: 584,959 (trainable: 584,959)
+2026-02-20 04:54:39,163 - chaotic_trainer - INFO - Training with chaotic dynamics monitoring...
+2026-02-20 04:54:39,163 - chaotic_trainer - INFO - Starting training from epoch 0 for 100 more epochs...
+2026-02-20 05:05:52,402 - chaotic_trainer - INFO - Evaluating chaotic_lorenz_full_chaotic_run_0...
+2026-02-20 05:05:53,229 - chaotic_trainer - INFO - Running chaotic analysis...
+2026-02-20 05:05:56,292 - chaotic_trainer - INFO - Completed chaotic_lorenz_full_chaotic_run_0: Accuracy: 0.9407, Loss: 0.1247, Time: 740.3s
+2026-02-20 05:05:56,301 - chaotic_trainer - INFO - Progress: 1/1 (100.0%)
+2026-02-20 05:05:56,301 - chaotic_trainer - INFO - lorenz + full_chaotic Summary: 0.9407 ± 0.0000
+2026-02-20 05:05:56,301 - chaotic_trainer - INFO - Analyzing chaotic training results...
+2026-02-20 05:05:56,302 - chaotic_trainer - INFO - Generating comprehensive chaotic training report...
+2026-02-20 05:05:58,154 - chaotic_trainer - INFO - Visualizations saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/visualizations
+2026-02-20 05:05:58,154 - chaotic_trainer - INFO - Reports generated:
+2026-02-20 05:05:58,154 - chaotic_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/chaotic_training_report.txt
+2026-02-20 05:05:58,154 - chaotic_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/experiments/configs/4.3_bifurcation_control/Off/chaotic_training_results.json
+2026-02-20 05:05:58,154 - chaotic_trainer - INFO - Chaotic training completed.
+2026-02-20 05:05:58,154 - chaotic_trainer - INFO - ============================================================

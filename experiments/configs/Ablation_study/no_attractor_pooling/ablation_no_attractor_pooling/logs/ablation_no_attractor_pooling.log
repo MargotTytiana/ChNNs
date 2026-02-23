@@ -1928,3 +1928,746 @@
 2026-02-15 12:58:23,976 - experiment_ablation_no_attractor_pooling - INFO - Initialized experiment: ablation_no_attractor_pooling
 2026-02-15 12:58:23,986 - experiment_ablation_no_attractor_pooling - INFO - Device: cuda
 2026-02-15 12:58:23,986 - experiment_ablation_no_attractor_pooling - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/no_attractor_pooling/ablation_no_attractor_pooling
+2026-02-15 14:04:29,102 - experiment_ablation_no_attractor_pooling - INFO - Initialized experiment: ablation_no_attractor_pooling
+2026-02-15 14:04:29,102 - experiment_ablation_no_attractor_pooling - INFO - Device: cuda
+2026-02-15 14:04:29,102 - experiment_ablation_no_attractor_pooling - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/no_attractor_pooling/ablation_no_attractor_pooling
+2026-02-15 14:04:29,102 - experiment_ablation_no_attractor_pooling - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-15 14:04:29,102 - experiment_ablation_no_attractor_pooling - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-15 14:04:29,102 - experiment_ablation_no_attractor_pooling - INFO - Setting up experiment components...
+2026-02-15 14:04:29,102 - experiment_ablation_no_attractor_pooling - INFO - Creating dataloaders...
+2026-02-15 14:04:29,485 - experiment_ablation_no_attractor_pooling - INFO - Detected 26 speakers in dataset
+2026-02-15 14:04:29,486 - experiment_ablation_no_attractor_pooling - INFO - Dataloaders created:
+2026-02-15 14:04:29,486 - experiment_ablation_no_attractor_pooling - INFO -   Train: 14 batches
+2026-02-15 14:04:29,486 - experiment_ablation_no_attractor_pooling - INFO -   Val: 3 batches
+2026-02-15 14:04:29,486 - experiment_ablation_no_attractor_pooling - INFO -   Test: 4 batches
+2026-02-15 14:04:29,486 - experiment_ablation_no_attractor_pooling - INFO - Creating model...
+2026-02-15 14:04:29,486 - experiment_ablation_no_attractor_pooling - INFO - Using actual num_speakers from dataset: 26
+2026-02-15 14:05:34,751 - experiment_ablation_no_attractor_pooling - INFO - Total parameters: 565,119
+2026-02-15 14:05:34,752 - experiment_ablation_no_attractor_pooling - INFO - Trainable parameters: 565,119
+2026-02-15 14:05:34,752 - experiment_ablation_no_attractor_pooling - INFO - Creating optimizer...
+2026-02-15 14:05:34,752 - experiment_ablation_no_attractor_pooling - INFO - Optimizer: AdamW
+2026-02-15 14:05:34,752 - experiment_ablation_no_attractor_pooling - INFO - Creating scheduler...
+2026-02-15 14:05:34,752 - experiment_ablation_no_attractor_pooling - INFO - Creating criterion...
+2026-02-15 14:05:34,752 - experiment_ablation_no_attractor_pooling - INFO - Criterion: CrossEntropyLoss
+2026-02-15 14:05:34,835 - experiment_ablation_no_attractor_pooling - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/no_attractor_pooling/ablation_no_attractor_pooling/config.json
+2026-02-15 14:05:34,835 - experiment_ablation_no_attractor_pooling - INFO - Experiment setup completed
+2026-02-15 14:05:34,836 - experiment_ablation_no_attractor_pooling - INFO - Starting training for 100 epochs
+2026-02-15 14:05:34,836 - experiment_ablation_no_attractor_pooling - INFO - [SYNC LOSS] Warmup complete, synchronization loss activated!
+2026-02-15 14:05:34,996 - experiment_ablation_no_attractor_pooling - INFO - 
+================================================================================
+2026-02-15 14:05:34,997 - experiment_ablation_no_attractor_pooling - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-15 14:05:34,997 - experiment_ablation_no_attractor_pooling - INFO - ================================================================================
+2026-02-15 14:05:34,997 - experiment_ablation_no_attractor_pooling - INFO - Batch Info:
+2026-02-15 14:05:34,997 - experiment_ablation_no_attractor_pooling - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-15 14:05:34,997 - experiment_ablation_no_attractor_pooling - INFO -   Targets shape: torch.Size([32])
+2026-02-15 14:05:34,998 - experiment_ablation_no_attractor_pooling - INFO -   Targets (first 8): tensor([20,  0, 14, 25, 24, 15,  3, 10], device='cuda:0')
+2026-02-15 14:05:35,116 - experiment_ablation_no_attractor_pooling - INFO - ================================================================================
+
+2026-02-15 14:05:35,308 - experiment_ablation_no_attractor_pooling - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-15 14:05:35,310 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.078, max_norm=42.1, min_std=0.142
+2026-02-15 14:05:35,670 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 12.246385
+2026-02-15 14:05:42,924 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.1, desync_weight=0.1, loss_sync=2.858460
+2026-02-15 14:05:43,436 - experiment_ablation_no_attractor_pooling - INFO - Epoch 0: Train Loss: 8.0838, Train Acc: 0.0536, Val Loss: 5.5917, Val Acc: 0.0337
+2026-02-15 14:05:43,506 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 0
+2026-02-15 14:05:44,389 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 5.830325
+2026-02-15 14:05:51,631 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.1, desync_weight=0.1, loss_sync=1.568204
+2026-02-15 14:05:52,120 - experiment_ablation_no_attractor_pooling - INFO - Epoch 1: Train Loss: 5.6831, Train Acc: 0.1183, Val Loss: 3.7293, Val Acc: 0.0674
+2026-02-15 14:05:52,200 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 1
+2026-02-15 14:05:53,006 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 6.967569
+2026-02-15 14:06:00,181 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.1, desync_weight=0.1, loss_sync=1.189912
+2026-02-15 14:06:00,655 - experiment_ablation_no_attractor_pooling - INFO - Epoch 2: Train Loss: 4.8004, Train Acc: 0.1652, Val Loss: 2.5796, Val Acc: 0.2921
+2026-02-15 14:06:00,725 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 2
+2026-02-15 14:06:01,550 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.878870
+2026-02-15 14:06:08,824 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.1, desync_weight=0.1, loss_sync=1.109079
+2026-02-15 14:06:09,320 - experiment_ablation_no_attractor_pooling - INFO - Epoch 3: Train Loss: 4.0977, Train Acc: 0.2478, Val Loss: 2.1328, Val Acc: 0.4382
+2026-02-15 14:06:09,396 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 3
+2026-02-15 14:06:10,200 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 4.280304
+2026-02-15 14:06:17,464 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.1, desync_weight=0.1, loss_sync=0.821674
+2026-02-15 14:06:17,971 - experiment_ablation_no_attractor_pooling - INFO - Epoch 4: Train Loss: 3.5584, Train Acc: 0.2902, Val Loss: 1.6981, Val Acc: 0.5843
+2026-02-15 14:06:18,045 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 4
+2026-02-15 14:06:18,872 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 3.412102
+2026-02-15 14:06:26,279 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.1, desync_weight=0.1, loss_sync=0.790649
+2026-02-15 14:06:26,763 - experiment_ablation_no_attractor_pooling - INFO - Epoch 5: Train Loss: 2.9788, Train Acc: 0.3728, Val Loss: 1.5425, Val Acc: 0.5169
+2026-02-15 14:06:27,560 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 2.836203
+2026-02-15 14:06:34,839 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.1, desync_weight=0.1, loss_sync=0.923516
+2026-02-15 14:06:35,318 - experiment_ablation_no_attractor_pooling - INFO - Epoch 6: Train Loss: 2.8149, Train Acc: 0.4688, Val Loss: 1.2405, Val Acc: 0.6517
+2026-02-15 14:06:35,393 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 6
+2026-02-15 14:06:36,194 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 2.342510
+2026-02-15 14:06:36,932 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.075, max_norm=47.2, min_std=9.614
+2026-02-15 14:06:43,438 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.1, desync_weight=0.1, loss_sync=0.736838
+2026-02-15 14:06:43,962 - experiment_ablation_no_attractor_pooling - INFO - Epoch 7: Train Loss: 2.3810, Train Acc: 0.5134, Val Loss: 1.0711, Val Acc: 0.6180
+2026-02-15 14:06:44,731 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 2.530861
+2026-02-15 14:06:51,986 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.1, desync_weight=0.1, loss_sync=0.755700
+2026-02-15 14:06:52,475 - experiment_ablation_no_attractor_pooling - INFO - Epoch 8: Train Loss: 2.1938, Train Acc: 0.5781, Val Loss: 0.7640, Val Acc: 0.7753
+2026-02-15 14:06:52,551 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 8
+2026-02-15 14:06:53,351 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.575509
+2026-02-15 14:07:00,601 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.1, desync_weight=0.1, loss_sync=0.693076
+2026-02-15 14:07:01,113 - experiment_ablation_no_attractor_pooling - INFO - Epoch 9: Train Loss: 1.9651, Train Acc: 0.5938, Val Loss: 0.9836, Val Acc: 0.6517
+2026-02-15 14:07:01,899 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.715829
+2026-02-15 14:07:09,081 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.1, desync_weight=0.1, loss_sync=0.695046
+2026-02-15 14:07:09,564 - experiment_ablation_no_attractor_pooling - INFO - Epoch 10: Train Loss: 1.7569, Train Acc: 0.6674, Val Loss: 0.9121, Val Acc: 0.7303
+2026-02-15 14:07:10,405 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.900751
+2026-02-15 14:07:17,687 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.1, desync_weight=0.1, loss_sync=0.618999
+2026-02-15 14:07:18,194 - experiment_ablation_no_attractor_pooling - INFO - Epoch 11: Train Loss: 1.5694, Train Acc: 0.7031, Val Loss: 0.8065, Val Acc: 0.7416
+2026-02-15 14:07:18,987 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 1.128133
+2026-02-15 14:07:26,247 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.1, desync_weight=0.1, loss_sync=0.652794
+2026-02-15 14:07:26,735 - experiment_ablation_no_attractor_pooling - INFO - Epoch 12: Train Loss: 1.5461, Train Acc: 0.7232, Val Loss: 0.5565, Val Acc: 0.8315
+2026-02-15 14:07:26,811 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 12
+2026-02-15 14:07:27,614 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 1.658309
+2026-02-15 14:07:34,802 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.1, desync_weight=0.1, loss_sync=0.543884
+2026-02-15 14:07:35,305 - experiment_ablation_no_attractor_pooling - INFO - Epoch 13: Train Loss: 1.3222, Train Acc: 0.7723, Val Loss: 0.6492, Val Acc: 0.8090
+2026-02-15 14:07:36,073 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 1.055800
+2026-02-15 14:07:37,924 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.074, max_norm=49.6, min_std=10.716
+2026-02-15 14:07:43,321 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.1, desync_weight=0.1, loss_sync=0.600049
+2026-02-15 14:07:43,806 - experiment_ablation_no_attractor_pooling - INFO - Epoch 14: Train Loss: 1.2898, Train Acc: 0.7924, Val Loss: 0.7560, Val Acc: 0.7416
+2026-02-15 14:07:44,566 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 1.224642
+2026-02-15 14:07:51,807 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.1, desync_weight=0.1, loss_sync=0.555514
+2026-02-15 14:07:52,294 - experiment_ablation_no_attractor_pooling - INFO - Epoch 15: Train Loss: 1.2560, Train Acc: 0.7634, Val Loss: 0.5823, Val Acc: 0.8090
+2026-02-15 14:07:53,051 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 1.267228
+2026-02-15 14:08:00,243 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.1, desync_weight=0.1, loss_sync=0.605785
+2026-02-15 14:08:00,724 - experiment_ablation_no_attractor_pooling - INFO - Epoch 16: Train Loss: 1.2509, Train Acc: 0.7946, Val Loss: 0.7591, Val Acc: 0.7865
+2026-02-15 14:08:01,466 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.919694
+2026-02-15 14:08:08,659 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.1, desync_weight=0.1, loss_sync=0.544996
+2026-02-15 14:08:09,136 - experiment_ablation_no_attractor_pooling - INFO - Epoch 17: Train Loss: 1.0254, Train Acc: 0.8482, Val Loss: 0.4893, Val Acc: 0.8315
+2026-02-15 14:08:09,936 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 1.183582
+2026-02-15 14:08:17,401 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.1, desync_weight=0.1, loss_sync=0.531214
+2026-02-15 14:08:17,879 - experiment_ablation_no_attractor_pooling - INFO - Epoch 18: Train Loss: 1.0256, Train Acc: 0.8192, Val Loss: 0.6377, Val Acc: 0.7640
+2026-02-15 14:08:18,641 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.976492
+2026-02-15 14:08:25,917 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.1, desync_weight=0.1, loss_sync=0.578658
+2026-02-15 14:08:26,390 - experiment_ablation_no_attractor_pooling - INFO - Epoch 19: Train Loss: 1.0366, Train Acc: 0.8549, Val Loss: 0.7753, Val Acc: 0.7640
+2026-02-15 14:08:27,155 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.982132
+2026-02-15 14:08:34,403 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.1, desync_weight=0.1, loss_sync=0.509091
+2026-02-15 14:08:34,882 - experiment_ablation_no_attractor_pooling - INFO - Epoch 20: Train Loss: 0.9316, Train Acc: 0.8661, Val Loss: 0.9003, Val Acc: 0.7191
+2026-02-15 14:08:35,718 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 1.043187
+2026-02-15 14:08:38,669 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.072, max_norm=49.6, min_std=10.758
+2026-02-15 14:08:42,973 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.1, desync_weight=0.1, loss_sync=0.533205
+2026-02-15 14:08:43,472 - experiment_ablation_no_attractor_pooling - INFO - Epoch 21: Train Loss: 0.8989, Train Acc: 0.8929, Val Loss: 0.4400, Val Acc: 0.8539
+2026-02-15 14:08:43,549 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 21
+2026-02-15 14:08:44,336 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.929175
+2026-02-15 14:08:51,598 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.1, desync_weight=0.1, loss_sync=0.565011
+2026-02-15 14:08:52,093 - experiment_ablation_no_attractor_pooling - INFO - Epoch 22: Train Loss: 0.9457, Train Acc: 0.8839, Val Loss: 0.3486, Val Acc: 0.8764
+2026-02-15 14:08:52,166 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 22
+2026-02-15 14:08:52,962 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 1.213537
+2026-02-15 14:09:00,198 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.1, desync_weight=0.1, loss_sync=0.548387
+2026-02-15 14:09:00,690 - experiment_ablation_no_attractor_pooling - INFO - Epoch 23: Train Loss: 0.8867, Train Acc: 0.9062, Val Loss: 0.6004, Val Acc: 0.8315
+2026-02-15 14:09:01,477 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 1.177653
+2026-02-15 14:09:08,732 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 24: sync_weight=0.1, desync_weight=0.1, loss_sync=0.575509
+2026-02-15 14:09:09,229 - experiment_ablation_no_attractor_pooling - INFO - Epoch 24: Train Loss: 0.8335, Train Acc: 0.9219, Val Loss: 0.5803, Val Acc: 0.7865
+2026-02-15 14:09:10,014 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.929525
+2026-02-15 14:09:17,256 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 25: sync_weight=0.1, desync_weight=0.1, loss_sync=0.516405
+2026-02-15 14:09:17,741 - experiment_ablation_no_attractor_pooling - INFO - Epoch 25: Train Loss: 0.7348, Train Acc: 0.9219, Val Loss: 0.4424, Val Acc: 0.8764
+2026-02-15 14:09:18,530 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.659397
+2026-02-15 14:09:25,711 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 26: sync_weight=0.1, desync_weight=0.1, loss_sync=0.503559
+2026-02-15 14:09:26,191 - experiment_ablation_no_attractor_pooling - INFO - Epoch 26: Train Loss: 0.7484, Train Acc: 0.9286, Val Loss: 1.0305, Val Acc: 0.7528
+2026-02-15 14:09:26,979 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.756481
+2026-02-15 14:09:34,237 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 27: sync_weight=0.1, desync_weight=0.1, loss_sync=0.528387
+2026-02-15 14:09:34,716 - experiment_ablation_no_attractor_pooling - INFO - Epoch 27: Train Loss: 0.7554, Train Acc: 0.9219, Val Loss: 0.3906, Val Acc: 0.8652
+2026-02-15 14:09:35,476 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.608220
+2026-02-15 14:09:39,532 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.072, max_norm=49.3, min_std=10.639
+2026-02-15 14:09:42,731 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 28: sync_weight=0.1, desync_weight=0.1, loss_sync=0.508184
+2026-02-15 14:09:43,204 - experiment_ablation_no_attractor_pooling - INFO - Epoch 28: Train Loss: 0.7320, Train Acc: 0.9308, Val Loss: 0.8585, Val Acc: 0.7416
+2026-02-15 14:09:43,968 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.682616
+2026-02-15 14:09:51,230 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 29: sync_weight=0.1, desync_weight=0.1, loss_sync=0.512862
+2026-02-15 14:09:51,723 - experiment_ablation_no_attractor_pooling - INFO - Epoch 29: Train Loss: 0.7496, Train Acc: 0.9241, Val Loss: 0.5096, Val Acc: 0.8764
+2026-02-15 14:09:52,492 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.787947
+2026-02-15 14:09:59,939 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 30: sync_weight=0.1, desync_weight=0.1, loss_sync=0.540676
+2026-02-15 14:10:00,418 - experiment_ablation_no_attractor_pooling - INFO - Epoch 30: Train Loss: 0.8077, Train Acc: 0.9085, Val Loss: 0.6705, Val Acc: 0.8202
+2026-02-15 14:10:01,291 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.689393
+2026-02-15 14:10:08,549 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 31: sync_weight=0.1, desync_weight=0.1, loss_sync=0.483305
+2026-02-15 14:10:09,034 - experiment_ablation_no_attractor_pooling - INFO - Epoch 31: Train Loss: 0.7457, Train Acc: 0.9152, Val Loss: 0.8931, Val Acc: 0.7753
+2026-02-15 14:10:09,794 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.872731
+2026-02-15 14:10:17,062 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 32: sync_weight=0.1, desync_weight=0.1, loss_sync=0.533645
+2026-02-15 14:10:17,541 - experiment_ablation_no_attractor_pooling - INFO - Epoch 32: Train Loss: 0.8399, Train Acc: 0.8996, Val Loss: 2.0885, Val Acc: 0.5393
+2026-02-15 14:10:18,303 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.847654
+2026-02-15 14:10:25,561 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 33: sync_weight=0.1, desync_weight=0.1, loss_sync=0.520406
+2026-02-15 14:10:26,063 - experiment_ablation_no_attractor_pooling - INFO - Epoch 33: Train Loss: 0.7820, Train Acc: 0.9085, Val Loss: 0.5715, Val Acc: 0.8539
+2026-02-15 14:10:26,817 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.697430
+2026-02-15 14:10:34,013 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 34: sync_weight=0.1, desync_weight=0.1, loss_sync=0.496307
+2026-02-15 14:10:34,495 - experiment_ablation_no_attractor_pooling - INFO - Epoch 34: Train Loss: 0.6993, Train Acc: 0.9330, Val Loss: 0.9202, Val Acc: 0.7303
+2026-02-15 14:10:35,249 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.874870
+2026-02-15 14:10:40,361 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.066, max_norm=48.7, min_std=10.711
+2026-02-15 14:10:42,424 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 35: sync_weight=0.1, desync_weight=0.1, loss_sync=0.512111
+2026-02-15 14:10:42,918 - experiment_ablation_no_attractor_pooling - INFO - Epoch 35: Train Loss: 0.7941, Train Acc: 0.9085, Val Loss: 1.1866, Val Acc: 0.6742
+2026-02-15 14:10:43,671 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.751511
+2026-02-15 14:10:50,922 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 36: sync_weight=0.1, desync_weight=0.1, loss_sync=0.505709
+2026-02-15 14:10:51,403 - experiment_ablation_no_attractor_pooling - INFO - Epoch 36: Train Loss: 0.7348, Train Acc: 0.9308, Val Loss: 0.6936, Val Acc: 0.7978
+2026-02-15 14:10:52,178 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.656698
+2026-02-15 14:10:59,426 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 37: sync_weight=0.1, desync_weight=0.1, loss_sync=0.519664
+2026-02-15 14:10:59,907 - experiment_ablation_no_attractor_pooling - INFO - Epoch 37: Train Loss: 0.7587, Train Acc: 0.9085, Val Loss: 1.1916, Val Acc: 0.7528
+2026-02-15 14:11:00,661 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.557752
+2026-02-15 14:11:07,843 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 38: sync_weight=0.1, desync_weight=0.1, loss_sync=0.524567
+2026-02-15 14:11:08,319 - experiment_ablation_no_attractor_pooling - INFO - Epoch 38: Train Loss: 0.7245, Train Acc: 0.9442, Val Loss: 0.5965, Val Acc: 0.8315
+2026-02-15 14:11:09,067 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.577412
+2026-02-15 14:11:16,255 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 39: sync_weight=0.1, desync_weight=0.1, loss_sync=0.521729
+2026-02-15 14:11:16,731 - experiment_ablation_no_attractor_pooling - INFO - Epoch 39: Train Loss: 0.6747, Train Acc: 0.9487, Val Loss: 0.3650, Val Acc: 0.8764
+2026-02-15 14:11:17,491 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.567188
+2026-02-15 14:11:24,741 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 40: sync_weight=0.1, desync_weight=0.1, loss_sync=0.504020
+2026-02-15 14:11:25,248 - experiment_ablation_no_attractor_pooling - INFO - Epoch 40: Train Loss: 0.7109, Train Acc: 0.9308, Val Loss: 0.7510, Val Acc: 0.8202
+2026-02-15 14:11:26,084 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.840900
+2026-02-15 14:11:33,329 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 41: sync_weight=0.1, desync_weight=0.1, loss_sync=0.494178
+2026-02-15 14:11:33,822 - experiment_ablation_no_attractor_pooling - INFO - Epoch 41: Train Loss: 0.6767, Train Acc: 0.9375, Val Loss: 0.7070, Val Acc: 0.8090
+2026-02-15 14:11:34,588 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.463935
+2026-02-15 14:11:40,855 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.065, max_norm=48.5, min_std=10.623
+2026-02-15 14:11:41,832 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 42: sync_weight=0.1, desync_weight=0.1, loss_sync=0.504317
+2026-02-15 14:11:42,313 - experiment_ablation_no_attractor_pooling - INFO - Epoch 42: Train Loss: 0.6288, Train Acc: 0.9643, Val Loss: 0.4743, Val Acc: 0.8315
+2026-02-15 14:11:43,262 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.506523
+2026-02-15 14:11:50,442 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 43: sync_weight=0.1, desync_weight=0.1, loss_sync=0.528903
+2026-02-15 14:11:50,920 - experiment_ablation_no_attractor_pooling - INFO - Epoch 43: Train Loss: 0.6748, Train Acc: 0.9531, Val Loss: 0.5179, Val Acc: 0.8876
+2026-02-15 14:11:50,995 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 43
+2026-02-15 14:11:51,791 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.587439
+2026-02-15 14:11:58,964 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 44: sync_weight=0.1, desync_weight=0.1, loss_sync=0.487765
+2026-02-15 14:11:59,442 - experiment_ablation_no_attractor_pooling - INFO - Epoch 44: Train Loss: 0.6396, Train Acc: 0.9509, Val Loss: 0.9679, Val Acc: 0.7528
+2026-02-15 14:12:00,204 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.453371
+2026-02-15 14:12:07,454 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 45: sync_weight=0.1, desync_weight=0.1, loss_sync=0.511072
+2026-02-15 14:12:07,928 - experiment_ablation_no_attractor_pooling - INFO - Epoch 45: Train Loss: 0.6234, Train Acc: 0.9621, Val Loss: 0.2722, Val Acc: 0.9213
+2026-02-15 14:12:08,004 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 45
+2026-02-15 14:12:08,799 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.772355
+2026-02-15 14:12:16,058 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 46: sync_weight=0.1, desync_weight=0.1, loss_sync=0.509251
+2026-02-15 14:12:16,534 - experiment_ablation_no_attractor_pooling - INFO - Epoch 46: Train Loss: 0.6293, Train Acc: 0.9643, Val Loss: 0.5093, Val Acc: 0.8652
+2026-02-15 14:12:17,292 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.564283
+2026-02-15 14:12:24,479 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 47: sync_weight=0.1, desync_weight=0.1, loss_sync=0.520547
+2026-02-15 14:12:24,976 - experiment_ablation_no_attractor_pooling - INFO - Epoch 47: Train Loss: 0.6642, Train Acc: 0.9665, Val Loss: 0.8310, Val Acc: 0.8090
+2026-02-15 14:12:25,743 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.741713
+2026-02-15 14:12:33,000 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 48: sync_weight=0.1, desync_weight=0.1, loss_sync=0.517999
+2026-02-15 14:12:33,491 - experiment_ablation_no_attractor_pooling - INFO - Epoch 48: Train Loss: 0.6636, Train Acc: 0.9531, Val Loss: 0.2764, Val Acc: 0.9101
+2026-02-15 14:12:34,251 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.503489
+2026-02-15 14:12:41,517 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 49: sync_weight=0.1, desync_weight=0.1, loss_sync=0.503421
+2026-02-15 14:12:42,003 - experiment_ablation_no_attractor_pooling - INFO - Epoch 49: Train Loss: 0.6382, Train Acc: 0.9688, Val Loss: 0.9886, Val Acc: 0.7753
+2026-02-15 14:12:42,404 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.064, max_norm=48.1, min_std=10.577
+2026-02-15 14:12:42,763 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.582855
+2026-02-15 14:12:50,006 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 50: sync_weight=0.1, desync_weight=0.1, loss_sync=0.508109
+2026-02-15 14:12:50,493 - experiment_ablation_no_attractor_pooling - INFO - Epoch 50: Train Loss: 0.6046, Train Acc: 0.9732, Val Loss: 0.4093, Val Acc: 0.8764
+2026-02-15 14:12:51,342 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.674291
+2026-02-15 14:12:58,534 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 51: sync_weight=0.1, desync_weight=0.1, loss_sync=0.540873
+2026-02-15 14:12:59,051 - experiment_ablation_no_attractor_pooling - INFO - Epoch 51: Train Loss: 0.6893, Train Acc: 0.9509, Val Loss: 0.8016, Val Acc: 0.7978
+2026-02-15 14:12:59,821 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.570955
+2026-02-15 14:13:07,011 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 52: sync_weight=0.1, desync_weight=0.1, loss_sync=0.464871
+2026-02-15 14:13:07,537 - experiment_ablation_no_attractor_pooling - INFO - Epoch 52: Train Loss: 0.5698, Train Acc: 0.9643, Val Loss: 0.8476, Val Acc: 0.8202
+2026-02-15 14:13:08,312 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.745372
+2026-02-15 14:13:15,570 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 53: sync_weight=0.1, desync_weight=0.1, loss_sync=0.525525
+2026-02-15 14:13:16,048 - experiment_ablation_no_attractor_pooling - INFO - Epoch 53: Train Loss: 0.6151, Train Acc: 0.9799, Val Loss: 0.8221, Val Acc: 0.8202
+2026-02-15 14:13:16,834 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.622800
+2026-02-15 14:13:24,039 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 54: sync_weight=0.1, desync_weight=0.1, loss_sync=0.516597
+2026-02-15 14:13:24,521 - experiment_ablation_no_attractor_pooling - INFO - Epoch 54: Train Loss: 0.6430, Train Acc: 0.9621, Val Loss: 0.3320, Val Acc: 0.8876
+2026-02-15 14:13:25,285 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.550682
+2026-02-15 14:13:32,724 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 55: sync_weight=0.1, desync_weight=0.1, loss_sync=0.488239
+2026-02-15 14:13:33,230 - experiment_ablation_no_attractor_pooling - INFO - Epoch 55: Train Loss: 0.6015, Train Acc: 0.9688, Val Loss: 0.8217, Val Acc: 0.7978
+2026-02-15 14:13:33,993 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.586052
+2026-02-15 14:13:41,241 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 56: sync_weight=0.1, desync_weight=0.1, loss_sync=0.550279
+2026-02-15 14:13:41,750 - experiment_ablation_no_attractor_pooling - INFO - Epoch 56: Train Loss: 0.6586, Train Acc: 0.9710, Val Loss: 0.4341, Val Acc: 0.8989
+2026-02-15 14:13:42,508 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.498515
+2026-02-15 14:13:43,241 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.060, max_norm=48.0, min_std=10.687
+2026-02-15 14:13:49,691 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 57: sync_weight=0.1, desync_weight=0.1, loss_sync=0.531000
+2026-02-15 14:13:50,173 - experiment_ablation_no_attractor_pooling - INFO - Epoch 57: Train Loss: 0.6140, Train Acc: 0.9710, Val Loss: 0.5942, Val Acc: 0.8539
+2026-02-15 14:13:50,950 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.501533
+2026-02-15 14:13:58,110 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 58: sync_weight=0.1, desync_weight=0.1, loss_sync=0.496274
+2026-02-15 14:13:58,601 - experiment_ablation_no_attractor_pooling - INFO - Epoch 58: Train Loss: 0.6035, Train Acc: 0.9665, Val Loss: 1.3119, Val Acc: 0.7303
+2026-02-15 14:13:59,363 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.562760
+2026-02-15 14:14:06,567 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 59: sync_weight=0.1, desync_weight=0.1, loss_sync=0.509183
+2026-02-15 14:14:07,063 - experiment_ablation_no_attractor_pooling - INFO - Epoch 59: Train Loss: 0.6880, Train Acc: 0.9442, Val Loss: 1.2211, Val Acc: 0.7640
+2026-02-15 14:14:07,822 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.676129
+2026-02-15 14:14:15,018 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 60: sync_weight=0.1, desync_weight=0.1, loss_sync=0.516088
+2026-02-15 14:14:15,502 - experiment_ablation_no_attractor_pooling - INFO - Epoch 60: Train Loss: 0.6073, Train Acc: 0.9754, Val Loss: 1.2470, Val Acc: 0.7865
+2026-02-15 14:14:16,340 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.759088
+2026-02-15 14:14:23,596 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 61: sync_weight=0.1, desync_weight=0.1, loss_sync=0.522176
+2026-02-15 14:14:24,094 - experiment_ablation_no_attractor_pooling - INFO - Epoch 61: Train Loss: 0.6070, Train Acc: 0.9688, Val Loss: 0.5388, Val Acc: 0.8876
+2026-02-15 14:14:24,850 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.554690
+2026-02-15 14:14:32,120 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 62: sync_weight=0.1, desync_weight=0.1, loss_sync=0.518403
+2026-02-15 14:14:32,600 - experiment_ablation_no_attractor_pooling - INFO - Epoch 62: Train Loss: 0.6129, Train Acc: 0.9643, Val Loss: 0.3731, Val Acc: 0.8764
+2026-02-15 14:14:33,359 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.538181
+2026-02-15 14:14:40,618 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 63: sync_weight=0.1, desync_weight=0.1, loss_sync=0.498027
+2026-02-15 14:14:41,104 - experiment_ablation_no_attractor_pooling - INFO - Epoch 63: Train Loss: 0.5939, Train Acc: 0.9710, Val Loss: 0.5325, Val Acc: 0.8652
+2026-02-15 14:14:41,876 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.650662
+2026-02-15 14:14:43,713 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=48.7, min_std=10.721
+2026-02-15 14:14:49,069 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 64: sync_weight=0.1, desync_weight=0.1, loss_sync=0.547503
+2026-02-15 14:14:49,561 - experiment_ablation_no_attractor_pooling - INFO - Epoch 64: Train Loss: 0.6395, Train Acc: 0.9665, Val Loss: 0.4963, Val Acc: 0.9213
+2026-02-15 14:14:50,320 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.425183
+2026-02-15 14:14:57,504 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 65: sync_weight=0.1, desync_weight=0.1, loss_sync=0.483408
+2026-02-15 14:14:57,984 - experiment_ablation_no_attractor_pooling - INFO - Epoch 65: Train Loss: 0.5452, Train Acc: 0.9754, Val Loss: 0.2706, Val Acc: 0.8989
+2026-02-15 14:14:58,735 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.603079
+2026-02-15 14:15:05,994 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 66: sync_weight=0.1, desync_weight=0.1, loss_sync=0.496234
+2026-02-15 14:15:06,509 - experiment_ablation_no_attractor_pooling - INFO - Epoch 66: Train Loss: 0.5952, Train Acc: 0.9710, Val Loss: 0.2733, Val Acc: 0.9326
+2026-02-15 14:15:06,585 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 66
+2026-02-15 14:15:07,381 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.594369
+2026-02-15 14:15:14,836 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 67: sync_weight=0.1, desync_weight=0.1, loss_sync=0.524297
+2026-02-15 14:15:15,333 - experiment_ablation_no_attractor_pooling - INFO - Epoch 67: Train Loss: 0.6156, Train Acc: 0.9688, Val Loss: 0.4980, Val Acc: 0.8764
+2026-02-15 14:15:16,096 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.553210
+2026-02-15 14:15:23,258 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 68: sync_weight=0.1, desync_weight=0.1, loss_sync=0.505196
+2026-02-15 14:15:23,754 - experiment_ablation_no_attractor_pooling - INFO - Epoch 68: Train Loss: 0.5778, Train Acc: 0.9821, Val Loss: 0.3623, Val Acc: 0.8764
+2026-02-15 14:15:24,515 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.573398
+2026-02-15 14:15:31,701 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 69: sync_weight=0.1, desync_weight=0.1, loss_sync=0.488378
+2026-02-15 14:15:32,188 - experiment_ablation_no_attractor_pooling - INFO - Epoch 69: Train Loss: 0.5520, Train Acc: 0.9821, Val Loss: 0.3894, Val Acc: 0.8989
+2026-02-15 14:15:32,956 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.524233
+2026-02-15 14:15:40,204 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 70: sync_weight=0.1, desync_weight=0.1, loss_sync=0.511229
+2026-02-15 14:15:40,700 - experiment_ablation_no_attractor_pooling - INFO - Epoch 70: Train Loss: 0.5740, Train Acc: 0.9844, Val Loss: 0.2952, Val Acc: 0.9438
+2026-02-15 14:15:40,776 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 70
+2026-02-15 14:15:41,648 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.517041
+2026-02-15 14:15:44,594 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=47.5, min_std=10.603
+2026-02-15 14:15:48,853 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 71: sync_weight=0.1, desync_weight=0.1, loss_sync=0.516312
+2026-02-15 14:15:49,358 - experiment_ablation_no_attractor_pooling - INFO - Epoch 71: Train Loss: 0.5775, Train Acc: 0.9777, Val Loss: 0.3350, Val Acc: 0.9326
+2026-02-15 14:15:50,141 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.659028
+2026-02-15 14:15:57,332 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 72: sync_weight=0.1, desync_weight=0.1, loss_sync=0.486384
+2026-02-15 14:15:57,809 - experiment_ablation_no_attractor_pooling - INFO - Epoch 72: Train Loss: 0.5764, Train Acc: 0.9665, Val Loss: 0.5232, Val Acc: 0.8764
+2026-02-15 14:15:58,577 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.509456
+2026-02-15 14:16:05,770 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 73: sync_weight=0.1, desync_weight=0.1, loss_sync=0.502496
+2026-02-15 14:16:06,247 - experiment_ablation_no_attractor_pooling - INFO - Epoch 73: Train Loss: 0.5703, Train Acc: 0.9799, Val Loss: 0.6211, Val Acc: 0.8539
+2026-02-15 14:16:07,011 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.417224
+2026-02-15 14:16:14,259 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 74: sync_weight=0.1, desync_weight=0.1, loss_sync=0.486205
+2026-02-15 14:16:14,734 - experiment_ablation_no_attractor_pooling - INFO - Epoch 74: Train Loss: 0.5686, Train Acc: 0.9754, Val Loss: 0.6343, Val Acc: 0.8539
+2026-02-15 14:16:15,495 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.644092
+2026-02-15 14:16:22,751 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 75: sync_weight=0.1, desync_weight=0.1, loss_sync=0.526293
+2026-02-15 14:16:23,224 - experiment_ablation_no_attractor_pooling - INFO - Epoch 75: Train Loss: 0.6174, Train Acc: 0.9732, Val Loss: 0.5631, Val Acc: 0.9101
+2026-02-15 14:16:23,978 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.803332
+2026-02-15 14:16:31,231 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 76: sync_weight=0.1, desync_weight=0.1, loss_sync=0.502547
+2026-02-15 14:16:31,713 - experiment_ablation_no_attractor_pooling - INFO - Epoch 76: Train Loss: 0.5530, Train Acc: 0.9911, Val Loss: 0.3100, Val Acc: 0.9326
+2026-02-15 14:16:32,496 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.575456
+2026-02-15 14:16:39,692 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 77: sync_weight=0.1, desync_weight=0.1, loss_sync=0.522606
+2026-02-15 14:16:40,185 - experiment_ablation_no_attractor_pooling - INFO - Epoch 77: Train Loss: 0.5828, Train Acc: 0.9844, Val Loss: 0.2252, Val Acc: 0.9213
+2026-02-15 14:16:40,983 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.503539
+2026-02-15 14:16:45,036 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.054, max_norm=47.2, min_std=10.552
+2026-02-15 14:16:48,230 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 78: sync_weight=0.1, desync_weight=0.1, loss_sync=0.480137
+2026-02-15 14:16:48,732 - experiment_ablation_no_attractor_pooling - INFO - Epoch 78: Train Loss: 0.5556, Train Acc: 0.9821, Val Loss: 0.7893, Val Acc: 0.8652
+2026-02-15 14:16:49,498 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.485776
+2026-02-15 14:16:56,886 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 79: sync_weight=0.1, desync_weight=0.1, loss_sync=0.503355
+2026-02-15 14:16:57,365 - experiment_ablation_no_attractor_pooling - INFO - Epoch 79: Train Loss: 0.5548, Train Acc: 0.9888, Val Loss: 0.3888, Val Acc: 0.9101
+2026-02-15 14:16:58,123 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.635340
+2026-02-15 14:17:05,388 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 80: sync_weight=0.1, desync_weight=0.1, loss_sync=0.497295
+2026-02-15 14:17:05,892 - experiment_ablation_no_attractor_pooling - INFO - Epoch 80: Train Loss: 0.5791, Train Acc: 0.9732, Val Loss: 0.5952, Val Acc: 0.8427
+2026-02-15 14:17:06,736 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.492274
+2026-02-15 14:17:13,933 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 81: sync_weight=0.1, desync_weight=0.1, loss_sync=0.522439
+2026-02-15 14:17:14,412 - experiment_ablation_no_attractor_pooling - INFO - Epoch 81: Train Loss: 0.6361, Train Acc: 0.9621, Val Loss: 0.3220, Val Acc: 0.9101
+2026-02-15 14:17:15,174 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.443384
+2026-02-15 14:17:22,335 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 82: sync_weight=0.1, desync_weight=0.1, loss_sync=0.491230
+2026-02-15 14:17:22,832 - experiment_ablation_no_attractor_pooling - INFO - Epoch 82: Train Loss: 0.5487, Train Acc: 0.9821, Val Loss: 0.5364, Val Acc: 0.8989
+2026-02-15 14:17:23,630 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.633422
+2026-02-15 14:17:30,851 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 83: sync_weight=0.1, desync_weight=0.1, loss_sync=0.507622
+2026-02-15 14:17:31,340 - experiment_ablation_no_attractor_pooling - INFO - Epoch 83: Train Loss: 0.5530, Train Acc: 0.9911, Val Loss: 0.5487, Val Acc: 0.8652
+2026-02-15 14:17:32,113 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.574235
+2026-02-15 14:17:39,300 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 84: sync_weight=0.1, desync_weight=0.1, loss_sync=0.514588
+2026-02-15 14:17:39,793 - experiment_ablation_no_attractor_pooling - INFO - Epoch 84: Train Loss: 0.5767, Train Acc: 0.9732, Val Loss: 0.7648, Val Acc: 0.8315
+2026-02-15 14:17:40,556 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.552947
+2026-02-15 14:17:45,733 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.053, max_norm=47.0, min_std=10.533
+2026-02-15 14:17:47,827 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 85: sync_weight=0.1, desync_weight=0.1, loss_sync=0.497954
+2026-02-15 14:17:48,328 - experiment_ablation_no_attractor_pooling - INFO - Epoch 85: Train Loss: 0.5699, Train Acc: 0.9844, Val Loss: 0.4168, Val Acc: 0.9213
+2026-02-15 14:17:49,098 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.571349
+2026-02-15 14:17:56,350 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 86: sync_weight=0.1, desync_weight=0.1, loss_sync=0.505234
+2026-02-15 14:17:56,837 - experiment_ablation_no_attractor_pooling - INFO - Epoch 86: Train Loss: 0.5550, Train Acc: 0.9844, Val Loss: 0.2430, Val Acc: 0.9213
+2026-02-15 14:17:57,600 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.616782
+2026-02-15 14:18:04,797 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 87: sync_weight=0.1, desync_weight=0.1, loss_sync=0.488242
+2026-02-15 14:18:05,281 - experiment_ablation_no_attractor_pooling - INFO - Epoch 87: Train Loss: 0.5502, Train Acc: 0.9777, Val Loss: 0.3742, Val Acc: 0.9213
+2026-02-15 14:18:06,042 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.545898
+2026-02-15 14:18:13,304 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 88: sync_weight=0.1, desync_weight=0.1, loss_sync=0.489715
+2026-02-15 14:18:13,803 - experiment_ablation_no_attractor_pooling - INFO - Epoch 88: Train Loss: 0.5458, Train Acc: 0.9777, Val Loss: 0.4611, Val Acc: 0.8539
+2026-02-15 14:18:14,563 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.574034
+2026-02-15 14:18:21,829 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 89: sync_weight=0.1, desync_weight=0.1, loss_sync=0.529646
+2026-02-15 14:18:22,314 - experiment_ablation_no_attractor_pooling - INFO - Epoch 89: Train Loss: 0.5973, Train Acc: 0.9754, Val Loss: 0.4321, Val Acc: 0.8539
+2026-02-15 14:18:23,065 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.512936
+2026-02-15 14:18:30,332 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 90: sync_weight=0.1, desync_weight=0.1, loss_sync=0.524022
+2026-02-15 14:18:30,825 - experiment_ablation_no_attractor_pooling - INFO - Epoch 90: Train Loss: 0.5550, Train Acc: 0.9933, Val Loss: 0.3479, Val Acc: 0.9326
+2026-02-15 14:18:31,660 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.463031
+2026-02-15 14:18:39,115 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 91: sync_weight=0.1, desync_weight=0.1, loss_sync=0.474691
+2026-02-15 14:18:39,621 - experiment_ablation_no_attractor_pooling - INFO - Epoch 91: Train Loss: 0.5321, Train Acc: 0.9844, Val Loss: 0.4707, Val Acc: 0.8652
+2026-02-15 14:18:40,388 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.495252
+2026-02-15 14:18:46,668 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.055, max_norm=46.6, min_std=10.423
+2026-02-15 14:18:47,655 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 92: sync_weight=0.1, desync_weight=0.1, loss_sync=0.512037
+2026-02-15 14:18:48,146 - experiment_ablation_no_attractor_pooling - INFO - Epoch 92: Train Loss: 0.5435, Train Acc: 0.9933, Val Loss: 0.2244, Val Acc: 0.9438
+2026-02-15 14:18:48,899 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.492298
+2026-02-15 14:18:56,137 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 93: sync_weight=0.1, desync_weight=0.1, loss_sync=0.480344
+2026-02-15 14:18:56,622 - experiment_ablation_no_attractor_pooling - INFO - Epoch 93: Train Loss: 0.5380, Train Acc: 0.9821, Val Loss: 0.3021, Val Acc: 0.9326
+2026-02-15 14:18:57,390 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.494826
+2026-02-15 14:19:04,657 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 94: sync_weight=0.1, desync_weight=0.1, loss_sync=0.503759
+2026-02-15 14:19:05,142 - experiment_ablation_no_attractor_pooling - INFO - Epoch 94: Train Loss: 0.5448, Train Acc: 0.9911, Val Loss: 0.1777, Val Acc: 0.9551
+2026-02-15 14:19:05,217 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 94
+2026-02-15 14:19:06,011 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.495854
+2026-02-15 14:19:13,271 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 95: sync_weight=0.1, desync_weight=0.1, loss_sync=0.480759
+2026-02-15 14:19:13,757 - experiment_ablation_no_attractor_pooling - INFO - Epoch 95: Train Loss: 0.4962, Train Acc: 0.9978, Val Loss: 0.4416, Val Acc: 0.8876
+2026-02-15 14:19:14,527 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.502661
+2026-02-15 14:19:21,773 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 96: sync_weight=0.1, desync_weight=0.1, loss_sync=0.514398
+2026-02-15 14:19:22,259 - experiment_ablation_no_attractor_pooling - INFO - Epoch 96: Train Loss: 0.5594, Train Acc: 0.9844, Val Loss: 0.4276, Val Acc: 0.8989
+2026-02-15 14:19:23,024 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.500048
+2026-02-15 14:19:30,277 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 97: sync_weight=0.1, desync_weight=0.1, loss_sync=0.477534
+2026-02-15 14:19:30,777 - experiment_ablation_no_attractor_pooling - INFO - Epoch 97: Train Loss: 0.5139, Train Acc: 0.9844, Val Loss: 0.3456, Val Acc: 0.9213
+2026-02-15 14:19:31,539 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.666370
+2026-02-15 14:19:38,791 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 98: sync_weight=0.1, desync_weight=0.1, loss_sync=0.502947
+2026-02-15 14:19:39,284 - experiment_ablation_no_attractor_pooling - INFO - Epoch 98: Train Loss: 0.5622, Train Acc: 0.9844, Val Loss: 0.4992, Val Acc: 0.9101
+2026-02-15 14:19:40,054 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.464641
+2026-02-15 14:19:47,316 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 99: sync_weight=0.1, desync_weight=0.1, loss_sync=0.500303
+2026-02-15 14:19:47,814 - experiment_ablation_no_attractor_pooling - INFO - Epoch 99: Train Loss: 0.5320, Train Acc: 0.9888, Val Loss: 0.3728, Val Acc: 0.8539
+2026-02-15 14:19:47,817 - experiment_ablation_no_attractor_pooling - INFO - Running final test evaluation...
+2026-02-15 14:19:48,404 - experiment_ablation_no_attractor_pooling - INFO - Test Results:
+2026-02-15 14:19:48,405 - experiment_ablation_no_attractor_pooling - INFO -   loss: 0.7712
+2026-02-15 14:19:48,405 - experiment_ablation_no_attractor_pooling - INFO -   accuracy: 0.8390
+2026-02-15 14:19:48,406 - experiment_ablation_no_attractor_pooling - INFO - Training completed
+2026-02-20 04:02:14,276 - experiment_ablation_no_attractor_pooling - INFO - Initialized experiment: ablation_no_attractor_pooling
+2026-02-20 04:02:14,291 - experiment_ablation_no_attractor_pooling - INFO - Device: cuda
+2026-02-20 04:02:14,291 - experiment_ablation_no_attractor_pooling - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/no_attractor_pooling/ablation_no_attractor_pooling
+2026-02-20 04:02:14,291 - experiment_ablation_no_attractor_pooling - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-20 04:02:14,291 - experiment_ablation_no_attractor_pooling - INFO - [SYNC LOSS] Warmup epochs: 20
+2026-02-20 04:02:14,291 - experiment_ablation_no_attractor_pooling - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-20 04:02:14,291 - experiment_ablation_no_attractor_pooling - INFO - Setting up experiment components...
+2026-02-20 04:02:14,291 - experiment_ablation_no_attractor_pooling - INFO - Creating dataloaders...
+2026-02-20 04:02:14,680 - experiment_ablation_no_attractor_pooling - INFO - Detected 26 speakers in dataset
+2026-02-20 04:02:14,680 - experiment_ablation_no_attractor_pooling - INFO - Dataloaders created:
+2026-02-20 04:02:14,680 - experiment_ablation_no_attractor_pooling - INFO -   Train: 14 batches
+2026-02-20 04:02:14,680 - experiment_ablation_no_attractor_pooling - INFO -   Val: 3 batches
+2026-02-20 04:02:14,681 - experiment_ablation_no_attractor_pooling - INFO -   Test: 4 batches
+2026-02-20 04:02:14,681 - experiment_ablation_no_attractor_pooling - INFO - Creating model...
+2026-02-20 04:02:14,681 - experiment_ablation_no_attractor_pooling - INFO - Using actual num_speakers from dataset: 26
+2026-02-20 04:03:20,394 - experiment_ablation_no_attractor_pooling - INFO - Total parameters: 565,119
+2026-02-20 04:03:20,394 - experiment_ablation_no_attractor_pooling - INFO - Trainable parameters: 565,119
+2026-02-20 04:03:20,394 - experiment_ablation_no_attractor_pooling - INFO - Creating optimizer...
+2026-02-20 04:03:20,394 - experiment_ablation_no_attractor_pooling - INFO - Optimizer: AdamW
+2026-02-20 04:03:20,395 - experiment_ablation_no_attractor_pooling - INFO - Creating scheduler...
+2026-02-20 04:03:20,395 - experiment_ablation_no_attractor_pooling - INFO - Creating criterion...
+2026-02-20 04:03:20,395 - experiment_ablation_no_attractor_pooling - INFO - Criterion: CrossEntropyLoss
+2026-02-20 04:03:20,480 - experiment_ablation_no_attractor_pooling - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/no_attractor_pooling/ablation_no_attractor_pooling/config.json
+2026-02-20 04:03:20,480 - experiment_ablation_no_attractor_pooling - INFO - Experiment setup completed
+2026-02-20 04:03:20,480 - experiment_ablation_no_attractor_pooling - INFO - Starting training for 100 epochs
+2026-02-20 04:03:20,663 - experiment_ablation_no_attractor_pooling - INFO - 
+================================================================================
+2026-02-20 04:03:20,663 - experiment_ablation_no_attractor_pooling - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-20 04:03:20,663 - experiment_ablation_no_attractor_pooling - INFO - ================================================================================
+2026-02-20 04:03:20,663 - experiment_ablation_no_attractor_pooling - INFO - Batch Info:
+2026-02-20 04:03:20,663 - experiment_ablation_no_attractor_pooling - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-20 04:03:20,663 - experiment_ablation_no_attractor_pooling - INFO -   Targets shape: torch.Size([32])
+2026-02-20 04:03:20,664 - experiment_ablation_no_attractor_pooling - INFO -   Targets (first 8): tensor([20,  0, 14, 25, 24, 15,  3, 10], device='cuda:0')
+2026-02-20 04:03:20,780 - experiment_ablation_no_attractor_pooling - INFO - ================================================================================
+
+2026-02-20 04:03:20,968 - experiment_ablation_no_attractor_pooling - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-20 04:03:20,970 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.078, max_norm=42.1, min_std=0.142
+2026-02-20 04:03:21,326 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 5.965048
+2026-02-20 04:03:28,495 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:03:28,991 - experiment_ablation_no_attractor_pooling - INFO - Epoch 0: Train Loss: 5.3530, Train Acc: 0.0402, Val Loss: 4.5973, Val Acc: 0.0449
+2026-02-20 04:03:29,059 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 0
+2026-02-20 04:03:29,943 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 5.019058
+2026-02-20 04:03:37,105 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:03:37,623 - experiment_ablation_no_attractor_pooling - INFO - Epoch 1: Train Loss: 4.4070, Train Acc: 0.0804, Val Loss: 3.6096, Val Acc: 0.1236
+2026-02-20 04:03:37,702 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 1
+2026-02-20 04:03:38,523 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 4.334112
+2026-02-20 04:03:45,804 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:03:46,309 - experiment_ablation_no_attractor_pooling - INFO - Epoch 2: Train Loss: 3.7852, Train Acc: 0.1094, Val Loss: 2.3783, Val Acc: 0.2584
+2026-02-20 04:03:46,378 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 2
+2026-02-20 04:03:47,189 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.983833
+2026-02-20 04:03:54,475 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:03:54,991 - experiment_ablation_no_attractor_pooling - INFO - Epoch 3: Train Loss: 3.4554, Train Acc: 0.1518, Val Loss: 2.0370, Val Acc: 0.3483
+2026-02-20 04:03:55,063 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 3
+2026-02-20 04:03:55,878 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 3.280704
+2026-02-20 04:04:03,052 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:04:03,555 - experiment_ablation_no_attractor_pooling - INFO - Epoch 4: Train Loss: 2.8231, Train Acc: 0.2589, Val Loss: 1.7239, Val Acc: 0.4494
+2026-02-20 04:04:03,629 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 4
+2026-02-20 04:04:04,446 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.385413
+2026-02-20 04:04:11,622 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:04:12,117 - experiment_ablation_no_attractor_pooling - INFO - Epoch 5: Train Loss: 2.4207, Train Acc: 0.3259, Val Loss: 1.4497, Val Acc: 0.5506
+2026-02-20 04:04:12,190 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 5
+2026-02-20 04:04:12,994 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.788235
+2026-02-20 04:04:20,177 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:04:20,677 - experiment_ablation_no_attractor_pooling - INFO - Epoch 6: Train Loss: 2.0310, Train Acc: 0.4219, Val Loss: 1.5157, Val Acc: 0.5169
+2026-02-20 04:04:21,450 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.755912
+2026-02-20 04:04:22,194 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.016, max_norm=4.7, min_std=0.029
+2026-02-20 04:04:28,643 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:04:29,151 - experiment_ablation_no_attractor_pooling - INFO - Epoch 7: Train Loss: 1.7284, Train Acc: 0.4844, Val Loss: 1.1393, Val Acc: 0.6067
+2026-02-20 04:04:29,227 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 7
+2026-02-20 04:04:30,045 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.167832
+2026-02-20 04:04:37,397 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:04:37,893 - experiment_ablation_no_attractor_pooling - INFO - Epoch 8: Train Loss: 1.2258, Train Acc: 0.6094, Val Loss: 0.8306, Val Acc: 0.7303
+2026-02-20 04:04:37,969 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 8
+2026-02-20 04:04:38,775 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.224129
+2026-02-20 04:04:46,013 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:04:46,513 - experiment_ablation_no_attractor_pooling - INFO - Epoch 9: Train Loss: 1.2610, Train Acc: 0.6205, Val Loss: 0.9853, Val Acc: 0.6742
+2026-02-20 04:04:47,290 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 0.932601
+2026-02-20 04:04:54,443 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:04:54,939 - experiment_ablation_no_attractor_pooling - INFO - Epoch 10: Train Loss: 1.0555, Train Acc: 0.6696, Val Loss: 1.0760, Val Acc: 0.6966
+2026-02-20 04:04:55,805 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 0.698074
+2026-02-20 04:05:03,217 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 04:05:03,728 - experiment_ablation_no_attractor_pooling - INFO - Epoch 11: Train Loss: 0.8933, Train Acc: 0.7254, Val Loss: 0.8461, Val Acc: 0.7303
+2026-02-20 04:05:03,728 - experiment_ablation_no_attractor_pooling - INFO - [SYNC LOSS] Dynamic activation triggered at epoch 12
+2026-02-20 04:05:03,729 - experiment_ablation_no_attractor_pooling - INFO - [SYNC LOSS] Train accuracy 72.54% >= threshold 70.00%
+2026-02-20 04:05:04,501 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.810270
+2026-02-20 04:05:11,697 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.01, desync_weight=0.01, loss_sync=0.051654
+2026-02-20 04:05:12,205 - experiment_ablation_no_attractor_pooling - INFO - Epoch 12: Train Loss: 0.8324, Train Acc: 0.7634, Val Loss: 0.8287, Val Acc: 0.7753
+2026-02-20 04:05:12,279 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 12
+2026-02-20 04:05:13,092 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.879741
+2026-02-20 04:05:20,310 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048683
+2026-02-20 04:05:20,819 - experiment_ablation_no_attractor_pooling - INFO - Epoch 13: Train Loss: 0.7047, Train Acc: 0.7902, Val Loss: 0.7815, Val Acc: 0.7528
+2026-02-20 04:05:21,604 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.441388
+2026-02-20 04:05:23,453 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.050, max_norm=3.7, min_std=0.183
+2026-02-20 04:05:28,901 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050946
+2026-02-20 04:05:29,426 - experiment_ablation_no_attractor_pooling - INFO - Epoch 14: Train Loss: 0.6954, Train Acc: 0.7969, Val Loss: 0.8881, Val Acc: 0.7416
+2026-02-20 04:05:30,205 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.629133
+2026-02-20 04:05:37,385 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049709
+2026-02-20 04:05:37,882 - experiment_ablation_no_attractor_pooling - INFO - Epoch 15: Train Loss: 0.5955, Train Acc: 0.8348, Val Loss: 0.7398, Val Acc: 0.7978
+2026-02-20 04:05:37,954 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 15
+2026-02-20 04:05:38,777 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.527726
+2026-02-20 04:05:45,995 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050827
+2026-02-20 04:05:46,491 - experiment_ablation_no_attractor_pooling - INFO - Epoch 16: Train Loss: 0.6367, Train Acc: 0.8058, Val Loss: 0.6101, Val Acc: 0.7753
+2026-02-20 04:05:47,269 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.491816
+2026-02-20 04:05:54,592 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050680
+2026-02-20 04:05:55,108 - experiment_ablation_no_attractor_pooling - INFO - Epoch 17: Train Loss: 0.5196, Train Acc: 0.8415, Val Loss: 0.8062, Val Acc: 0.7191
+2026-02-20 04:05:55,879 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.533800
+2026-02-20 04:06:03,064 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050890
+2026-02-20 04:06:03,555 - experiment_ablation_no_attractor_pooling - INFO - Epoch 18: Train Loss: 0.5141, Train Acc: 0.8683, Val Loss: 0.7786, Val Acc: 0.7640
+2026-02-20 04:06:04,328 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.362078
+2026-02-20 04:06:11,529 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.01, desync_weight=0.01, loss_sync=0.051462
+2026-02-20 04:06:12,034 - experiment_ablation_no_attractor_pooling - INFO - Epoch 19: Train Loss: 0.4367, Train Acc: 0.8772, Val Loss: 0.5164, Val Acc: 0.8202
+2026-02-20 04:06:12,108 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 19
+2026-02-20 04:06:12,913 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.325020
+2026-02-20 04:06:20,120 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049996
+2026-02-20 04:06:20,613 - experiment_ablation_no_attractor_pooling - INFO - Epoch 20: Train Loss: 0.4555, Train Acc: 0.8683, Val Loss: 0.6821, Val Acc: 0.7865
+2026-02-20 04:06:21,457 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.287683
+2026-02-20 04:06:24,404 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.056, max_norm=4.1, min_std=0.389
+2026-02-20 04:06:28,660 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050453
+2026-02-20 04:06:29,162 - experiment_ablation_no_attractor_pooling - INFO - Epoch 21: Train Loss: 0.3927, Train Acc: 0.8906, Val Loss: 0.4644, Val Acc: 0.8876
+2026-02-20 04:06:29,237 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 21
+2026-02-20 04:06:30,041 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.486315
+2026-02-20 04:06:37,431 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049188
+2026-02-20 04:06:37,936 - experiment_ablation_no_attractor_pooling - INFO - Epoch 22: Train Loss: 0.4109, Train Acc: 0.8839, Val Loss: 0.3933, Val Acc: 0.8652
+2026-02-20 04:06:38,719 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.289729
+2026-02-20 04:06:45,934 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050827
+2026-02-20 04:06:46,449 - experiment_ablation_no_attractor_pooling - INFO - Epoch 23: Train Loss: 0.3864, Train Acc: 0.8951, Val Loss: 0.5986, Val Acc: 0.8090
+2026-02-20 04:06:47,227 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.535261
+2026-02-20 04:06:54,520 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 24: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050488
+2026-02-20 04:06:55,022 - experiment_ablation_no_attractor_pooling - INFO - Epoch 24: Train Loss: 0.3345, Train Acc: 0.9219, Val Loss: 1.0864, Val Acc: 0.7416
+2026-02-20 04:06:55,801 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.256792
+2026-02-20 04:07:02,992 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 25: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050331
+2026-02-20 04:07:03,502 - experiment_ablation_no_attractor_pooling - INFO - Epoch 25: Train Loss: 0.2956, Train Acc: 0.9129, Val Loss: 0.5410, Val Acc: 0.8539
+2026-02-20 04:07:04,292 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.140617
+2026-02-20 04:07:11,509 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 26: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050142
+2026-02-20 04:07:12,009 - experiment_ablation_no_attractor_pooling - INFO - Epoch 26: Train Loss: 0.3377, Train Acc: 0.9107, Val Loss: 0.5009, Val Acc: 0.7978
+2026-02-20 04:07:12,783 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.287776
+2026-02-20 04:07:20,012 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 27: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050123
+2026-02-20 04:07:20,513 - experiment_ablation_no_attractor_pooling - INFO - Epoch 27: Train Loss: 0.3146, Train Acc: 0.9129, Val Loss: 0.3693, Val Acc: 0.8652
+2026-02-20 04:07:21,286 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.282101
+2026-02-20 04:07:25,316 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.059, max_norm=5.2, min_std=0.500
+2026-02-20 04:07:28,473 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 28: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049048
+2026-02-20 04:07:28,964 - experiment_ablation_no_attractor_pooling - INFO - Epoch 28: Train Loss: 0.3819, Train Acc: 0.8906, Val Loss: 0.2810, Val Acc: 0.8989
+2026-02-20 04:07:29,035 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 28
+2026-02-20 04:07:29,860 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.330256
+2026-02-20 04:07:37,174 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 29: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050379
+2026-02-20 04:07:37,670 - experiment_ablation_no_attractor_pooling - INFO - Epoch 29: Train Loss: 0.2543, Train Acc: 0.9308, Val Loss: 0.5586, Val Acc: 0.8315
+2026-02-20 04:07:38,445 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.129703
+2026-02-20 04:07:45,667 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 30: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049991
+2026-02-20 04:07:46,186 - experiment_ablation_no_attractor_pooling - INFO - Epoch 30: Train Loss: 0.2159, Train Acc: 0.9554, Val Loss: 0.5472, Val Acc: 0.8539
+2026-02-20 04:07:47,029 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.155248
+2026-02-20 04:07:54,213 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 31: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050469
+2026-02-20 04:07:54,723 - experiment_ablation_no_attractor_pooling - INFO - Epoch 31: Train Loss: 0.2723, Train Acc: 0.9330, Val Loss: 0.5001, Val Acc: 0.8876
+2026-02-20 04:07:55,502 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.301233
+2026-02-20 04:08:02,848 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 32: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050198
+2026-02-20 04:08:03,362 - experiment_ablation_no_attractor_pooling - INFO - Epoch 32: Train Loss: 0.2313, Train Acc: 0.9397, Val Loss: 0.4830, Val Acc: 0.8652
+2026-02-20 04:08:04,141 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.155869
+2026-02-20 04:08:11,448 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 33: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049297
+2026-02-20 04:08:11,961 - experiment_ablation_no_attractor_pooling - INFO - Epoch 33: Train Loss: 0.2323, Train Acc: 0.9442, Val Loss: 0.4264, Val Acc: 0.8427
+2026-02-20 04:08:12,730 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.083050
+2026-02-20 04:08:19,949 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 34: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049768
+2026-02-20 04:08:20,444 - experiment_ablation_no_attractor_pooling - INFO - Epoch 34: Train Loss: 0.2175, Train Acc: 0.9420, Val Loss: 0.5034, Val Acc: 0.8652
+2026-02-20 04:08:21,218 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.142967
+2026-02-20 04:08:26,366 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=4.0, min_std=0.409
+2026-02-20 04:08:28,649 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 35: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050266
+2026-02-20 04:08:29,177 - experiment_ablation_no_attractor_pooling - INFO - Epoch 35: Train Loss: 0.1993, Train Acc: 0.9531, Val Loss: 0.6286, Val Acc: 0.8202
+2026-02-20 04:08:29,953 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.123563
+2026-02-20 04:08:37,139 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 36: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049735
+2026-02-20 04:08:37,632 - experiment_ablation_no_attractor_pooling - INFO - Epoch 36: Train Loss: 0.2172, Train Acc: 0.9531, Val Loss: 0.4430, Val Acc: 0.8876
+2026-02-20 04:08:38,424 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.221618
+2026-02-20 04:08:45,654 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 37: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049207
+2026-02-20 04:08:46,154 - experiment_ablation_no_attractor_pooling - INFO - Epoch 37: Train Loss: 0.2583, Train Acc: 0.9464, Val Loss: 0.6088, Val Acc: 0.8764
+2026-02-20 04:08:46,943 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.253431
+2026-02-20 04:08:54,141 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 38: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048805
+2026-02-20 04:08:54,653 - experiment_ablation_no_attractor_pooling - INFO - Epoch 38: Train Loss: 0.2129, Train Acc: 0.9509, Val Loss: 0.9752, Val Acc: 0.7978
+2026-02-20 04:08:55,430 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.090109
+2026-02-20 04:09:02,635 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 39: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050286
+2026-02-20 04:09:03,163 - experiment_ablation_no_attractor_pooling - INFO - Epoch 39: Train Loss: 0.1814, Train Acc: 0.9487, Val Loss: 0.9628, Val Acc: 0.8090
+2026-02-20 04:09:03,940 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.132675
+2026-02-20 04:09:11,262 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 40: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048915
+2026-02-20 04:09:11,778 - experiment_ablation_no_attractor_pooling - INFO - Epoch 40: Train Loss: 0.1733, Train Acc: 0.9598, Val Loss: 0.5646, Val Acc: 0.8315
+2026-02-20 04:09:12,620 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.230737
+2026-02-20 04:09:19,842 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 41: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049933
+2026-02-20 04:09:20,343 - experiment_ablation_no_attractor_pooling - INFO - Epoch 41: Train Loss: 0.1621, Train Acc: 0.9643, Val Loss: 0.6827, Val Acc: 0.8427
+2026-02-20 04:09:21,133 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.111693
+2026-02-20 04:09:27,448 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=4.0, min_std=0.378
+2026-02-20 04:09:28,430 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 42: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048946
+2026-02-20 04:09:28,935 - experiment_ablation_no_attractor_pooling - INFO - Epoch 42: Train Loss: 0.1660, Train Acc: 0.9665, Val Loss: 0.7866, Val Acc: 0.8315
+2026-02-20 04:09:29,716 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.077766
+2026-02-20 04:09:36,905 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 43: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049429
+2026-02-20 04:09:37,402 - experiment_ablation_no_attractor_pooling - INFO - Epoch 43: Train Loss: 0.1826, Train Acc: 0.9531, Val Loss: 0.4678, Val Acc: 0.8989
+2026-02-20 04:09:38,179 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.099558
+2026-02-20 04:09:45,427 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 44: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050567
+2026-02-20 04:09:45,911 - experiment_ablation_no_attractor_pooling - INFO - Epoch 44: Train Loss: 0.2485, Train Acc: 0.9442, Val Loss: 0.7907, Val Acc: 0.8315
+2026-02-20 04:09:46,694 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.079775
+2026-02-20 04:09:53,906 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 45: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050049
+2026-02-20 04:09:54,406 - experiment_ablation_no_attractor_pooling - INFO - Epoch 45: Train Loss: 0.2143, Train Acc: 0.9375, Val Loss: 0.5344, Val Acc: 0.8539
+2026-02-20 04:09:55,180 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.314249
+2026-02-20 04:10:02,493 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 46: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050910
+2026-02-20 04:10:03,004 - experiment_ablation_no_attractor_pooling - INFO - Epoch 46: Train Loss: 0.1795, Train Acc: 0.9531, Val Loss: 0.4330, Val Acc: 0.8652
+2026-02-20 04:10:03,800 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.128468
+2026-02-20 04:10:11,106 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 47: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049871
+2026-02-20 04:10:11,619 - experiment_ablation_no_attractor_pooling - INFO - Epoch 47: Train Loss: 0.1514, Train Acc: 0.9732, Val Loss: 0.2853, Val Acc: 0.9101
+2026-02-20 04:10:11,693 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 47
+2026-02-20 04:10:12,509 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.100974
+2026-02-20 04:10:19,741 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 48: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049432
+2026-02-20 04:10:20,236 - experiment_ablation_no_attractor_pooling - INFO - Epoch 48: Train Loss: 0.1493, Train Acc: 0.9710, Val Loss: 0.4456, Val Acc: 0.8764
+2026-02-20 04:10:21,022 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.137112
+2026-02-20 04:10:28,432 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 49: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048557
+2026-02-20 04:10:28,951 - experiment_ablation_no_attractor_pooling - INFO - Epoch 49: Train Loss: 0.1445, Train Acc: 0.9643, Val Loss: 0.6187, Val Acc: 0.8764
+2026-02-20 04:10:29,369 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=3.3, min_std=0.246
+2026-02-20 04:10:29,729 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.223606
+2026-02-20 04:10:37,056 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 50: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049236
+2026-02-20 04:10:37,553 - experiment_ablation_no_attractor_pooling - INFO - Epoch 50: Train Loss: 0.1651, Train Acc: 0.9576, Val Loss: 0.6645, Val Acc: 0.8315
+2026-02-20 04:10:38,415 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.268998
+2026-02-20 04:10:45,716 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 51: sync_weight=0.01, desync_weight=0.01, loss_sync=0.051133
+2026-02-20 04:10:46,242 - experiment_ablation_no_attractor_pooling - INFO - Epoch 51: Train Loss: 0.2004, Train Acc: 0.9621, Val Loss: 0.4670, Val Acc: 0.8539
+2026-02-20 04:10:47,008 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.082939
+2026-02-20 04:10:54,245 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 52: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049428
+2026-02-20 04:10:54,765 - experiment_ablation_no_attractor_pooling - INFO - Epoch 52: Train Loss: 0.1655, Train Acc: 0.9531, Val Loss: 0.6043, Val Acc: 0.8764
+2026-02-20 04:10:55,563 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.168060
+2026-02-20 04:11:02,840 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 53: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050809
+2026-02-20 04:11:03,345 - experiment_ablation_no_attractor_pooling - INFO - Epoch 53: Train Loss: 0.1315, Train Acc: 0.9777, Val Loss: 0.3587, Val Acc: 0.9326
+2026-02-20 04:11:03,424 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 53
+2026-02-20 04:11:04,224 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.297297
+2026-02-20 04:11:11,417 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 54: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046966
+2026-02-20 04:11:11,922 - experiment_ablation_no_attractor_pooling - INFO - Epoch 54: Train Loss: 0.1666, Train Acc: 0.9665, Val Loss: 0.2924, Val Acc: 0.8989
+2026-02-20 04:11:12,702 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.094838
+2026-02-20 04:11:19,910 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 55: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046251
+2026-02-20 04:11:20,433 - experiment_ablation_no_attractor_pooling - INFO - Epoch 55: Train Loss: 0.1325, Train Acc: 0.9732, Val Loss: 0.5270, Val Acc: 0.9101
+2026-02-20 04:11:21,221 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.072948
+2026-02-20 04:11:28,549 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 56: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050251
+2026-02-20 04:11:29,040 - experiment_ablation_no_attractor_pooling - INFO - Epoch 56: Train Loss: 0.1221, Train Acc: 0.9754, Val Loss: 0.3256, Val Acc: 0.8652
+2026-02-20 04:11:29,831 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.174853
+2026-02-20 04:11:30,583 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=4.6, min_std=0.481
+2026-02-20 04:11:37,004 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 57: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050467
+2026-02-20 04:11:37,500 - experiment_ablation_no_attractor_pooling - INFO - Epoch 57: Train Loss: 0.1332, Train Acc: 0.9710, Val Loss: 0.4147, Val Acc: 0.8764
+2026-02-20 04:11:38,282 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.058059
+2026-02-20 04:11:45,596 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 58: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047482
+2026-02-20 04:11:46,106 - experiment_ablation_no_attractor_pooling - INFO - Epoch 58: Train Loss: 0.1118, Train Acc: 0.9821, Val Loss: 0.3734, Val Acc: 0.8876
+2026-02-20 04:11:46,889 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.068844
+2026-02-20 04:11:54,093 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 59: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048156
+2026-02-20 04:11:54,582 - experiment_ablation_no_attractor_pooling - INFO - Epoch 59: Train Loss: 0.1015, Train Acc: 0.9911, Val Loss: 0.5177, Val Acc: 0.8876
+2026-02-20 04:11:55,346 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.086874
+2026-02-20 04:12:02,556 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 60: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049984
+2026-02-20 04:12:03,053 - experiment_ablation_no_attractor_pooling - INFO - Epoch 60: Train Loss: 0.1330, Train Acc: 0.9754, Val Loss: 0.4099, Val Acc: 0.8876
+2026-02-20 04:12:03,902 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.136844
+2026-02-20 04:12:11,076 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 61: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048530
+2026-02-20 04:12:11,571 - experiment_ablation_no_attractor_pooling - INFO - Epoch 61: Train Loss: 0.1053, Train Acc: 0.9844, Val Loss: 0.4947, Val Acc: 0.9101
+2026-02-20 04:12:12,358 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.223759
+2026-02-20 04:12:19,740 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 62: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049146
+2026-02-20 04:12:20,237 - experiment_ablation_no_attractor_pooling - INFO - Epoch 62: Train Loss: 0.1258, Train Acc: 0.9777, Val Loss: 0.8752, Val Acc: 0.8202
+2026-02-20 04:12:21,023 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.088828
+2026-02-20 04:12:28,242 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 63: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048528
+2026-02-20 04:12:28,737 - experiment_ablation_no_attractor_pooling - INFO - Epoch 63: Train Loss: 0.1470, Train Acc: 0.9710, Val Loss: 1.2730, Val Acc: 0.7079
+2026-02-20 04:12:29,514 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.057360
+2026-02-20 04:12:31,407 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=2.9, min_std=0.261
+2026-02-20 04:12:36,859 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 64: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046228
+2026-02-20 04:12:37,364 - experiment_ablation_no_attractor_pooling - INFO - Epoch 64: Train Loss: 0.1072, Train Acc: 0.9866, Val Loss: 0.3500, Val Acc: 0.8652
+2026-02-20 04:12:38,137 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.144231
+2026-02-20 04:12:45,322 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 65: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046241
+2026-02-20 04:12:45,818 - experiment_ablation_no_attractor_pooling - INFO - Epoch 65: Train Loss: 0.1243, Train Acc: 0.9754, Val Loss: 0.4978, Val Acc: 0.8539
+2026-02-20 04:12:46,588 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.080066
+2026-02-20 04:12:53,759 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 66: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047436
+2026-02-20 04:12:54,264 - experiment_ablation_no_attractor_pooling - INFO - Epoch 66: Train Loss: 0.1032, Train Acc: 0.9888, Val Loss: 0.2927, Val Acc: 0.9326
+2026-02-20 04:12:55,024 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.127788
+2026-02-20 04:13:02,252 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 67: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047002
+2026-02-20 04:13:02,751 - experiment_ablation_no_attractor_pooling - INFO - Epoch 67: Train Loss: 0.1006, Train Acc: 0.9844, Val Loss: 0.7210, Val Acc: 0.8315
+2026-02-20 04:13:03,530 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.101264
+2026-02-20 04:13:10,714 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 68: sync_weight=0.01, desync_weight=0.01, loss_sync=0.045618
+2026-02-20 04:13:11,230 - experiment_ablation_no_attractor_pooling - INFO - Epoch 68: Train Loss: 0.1337, Train Acc: 0.9732, Val Loss: 0.7121, Val Acc: 0.9101
+2026-02-20 04:13:11,998 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.056402
+2026-02-20 04:13:19,160 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 69: sync_weight=0.01, desync_weight=0.01, loss_sync=0.045940
+2026-02-20 04:13:19,657 - experiment_ablation_no_attractor_pooling - INFO - Epoch 69: Train Loss: 0.1322, Train Acc: 0.9710, Val Loss: 0.5152, Val Acc: 0.8652
+2026-02-20 04:13:20,438 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.054181
+2026-02-20 04:13:27,620 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 70: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044099
+2026-02-20 04:13:28,116 - experiment_ablation_no_attractor_pooling - INFO - Epoch 70: Train Loss: 0.0920, Train Acc: 0.9888, Val Loss: 0.3068, Val Acc: 0.8989
+2026-02-20 04:13:28,970 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.273163
+2026-02-20 04:13:31,937 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=5.0, min_std=0.480
+2026-02-20 04:13:36,274 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 71: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047063
+2026-02-20 04:13:36,771 - experiment_ablation_no_attractor_pooling - INFO - Epoch 71: Train Loss: 0.0964, Train Acc: 0.9866, Val Loss: 1.2457, Val Acc: 0.7865
+2026-02-20 04:13:37,551 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.397865
+2026-02-20 04:13:44,761 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 72: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044547
+2026-02-20 04:13:45,257 - experiment_ablation_no_attractor_pooling - INFO - Epoch 72: Train Loss: 0.1112, Train Acc: 0.9777, Val Loss: 0.5775, Val Acc: 0.8764
+2026-02-20 04:13:46,034 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.200236
+2026-02-20 04:13:53,227 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 73: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047411
+2026-02-20 04:13:53,746 - experiment_ablation_no_attractor_pooling - INFO - Epoch 73: Train Loss: 0.1117, Train Acc: 0.9777, Val Loss: 0.4052, Val Acc: 0.9101
+2026-02-20 04:13:54,528 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.118533
+2026-02-20 04:14:02,016 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 74: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044041
+2026-02-20 04:14:02,540 - experiment_ablation_no_attractor_pooling - INFO - Epoch 74: Train Loss: 0.1321, Train Acc: 0.9754, Val Loss: 0.2090, Val Acc: 0.9213
+2026-02-20 04:14:03,316 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.159071
+2026-02-20 04:14:10,562 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 75: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048410
+2026-02-20 04:14:11,071 - experiment_ablation_no_attractor_pooling - INFO - Epoch 75: Train Loss: 0.1002, Train Acc: 0.9844, Val Loss: 0.7092, Val Acc: 0.8764
+2026-02-20 04:14:11,848 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.166049
+2026-02-20 04:14:19,038 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 76: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044242
+2026-02-20 04:14:19,538 - experiment_ablation_no_attractor_pooling - INFO - Epoch 76: Train Loss: 0.0890, Train Acc: 0.9844, Val Loss: 0.3550, Val Acc: 0.8989
+2026-02-20 04:14:20,308 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.201117
+2026-02-20 04:14:27,658 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 77: sync_weight=0.01, desync_weight=0.01, loss_sync=0.045927
+2026-02-20 04:14:28,143 - experiment_ablation_no_attractor_pooling - INFO - Epoch 77: Train Loss: 0.1391, Train Acc: 0.9710, Val Loss: 1.2493, Val Acc: 0.7416
+2026-02-20 04:14:28,914 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.148752
+2026-02-20 04:14:32,940 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.058, max_norm=5.5, min_std=0.181
+2026-02-20 04:14:36,118 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 78: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044914
+2026-02-20 04:14:36,634 - experiment_ablation_no_attractor_pooling - INFO - Epoch 78: Train Loss: 0.1220, Train Acc: 0.9710, Val Loss: 0.6109, Val Acc: 0.8876
+2026-02-20 04:14:37,407 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.077450
+2026-02-20 04:14:44,590 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 79: sync_weight=0.01, desync_weight=0.01, loss_sync=0.045972
+2026-02-20 04:14:45,083 - experiment_ablation_no_attractor_pooling - INFO - Epoch 79: Train Loss: 0.0957, Train Acc: 0.9866, Val Loss: 0.3970, Val Acc: 0.9101
+2026-02-20 04:14:45,879 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.094294
+2026-02-20 04:14:53,066 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 80: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044836
+2026-02-20 04:14:53,571 - experiment_ablation_no_attractor_pooling - INFO - Epoch 80: Train Loss: 0.0812, Train Acc: 0.9888, Val Loss: 0.2745, Val Acc: 0.9326
+2026-02-20 04:14:54,434 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.050345
+2026-02-20 04:15:01,630 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 81: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042394
+2026-02-20 04:15:02,123 - experiment_ablation_no_attractor_pooling - INFO - Epoch 81: Train Loss: 0.0816, Train Acc: 0.9888, Val Loss: 0.5367, Val Acc: 0.8989
+2026-02-20 04:15:02,914 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.228566
+2026-02-20 04:15:10,098 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 82: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044901
+2026-02-20 04:15:10,619 - experiment_ablation_no_attractor_pooling - INFO - Epoch 82: Train Loss: 0.1287, Train Acc: 0.9821, Val Loss: 0.4450, Val Acc: 0.9326
+2026-02-20 04:15:11,393 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.066893
+2026-02-20 04:15:18,587 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 83: sync_weight=0.01, desync_weight=0.01, loss_sync=0.046501
+2026-02-20 04:15:19,106 - experiment_ablation_no_attractor_pooling - INFO - Epoch 83: Train Loss: 0.0878, Train Acc: 0.9888, Val Loss: 0.2883, Val Acc: 0.9213
+2026-02-20 04:15:19,882 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.104433
+2026-02-20 04:15:27,092 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 84: sync_weight=0.01, desync_weight=0.01, loss_sync=0.043316
+2026-02-20 04:15:27,603 - experiment_ablation_no_attractor_pooling - INFO - Epoch 84: Train Loss: 0.1067, Train Acc: 0.9821, Val Loss: 0.6049, Val Acc: 0.8652
+2026-02-20 04:15:28,390 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.053184
+2026-02-20 04:15:33,609 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.059, max_norm=4.9, min_std=0.189
+2026-02-20 04:15:35,727 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 85: sync_weight=0.01, desync_weight=0.01, loss_sync=0.045310
+2026-02-20 04:15:36,238 - experiment_ablation_no_attractor_pooling - INFO - Epoch 85: Train Loss: 0.1173, Train Acc: 0.9799, Val Loss: 0.3422, Val Acc: 0.9101
+2026-02-20 04:15:37,007 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.197283
+2026-02-20 04:15:44,195 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 86: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042485
+2026-02-20 04:15:44,703 - experiment_ablation_no_attractor_pooling - INFO - Epoch 86: Train Loss: 0.0927, Train Acc: 0.9821, Val Loss: 0.4905, Val Acc: 0.8764
+2026-02-20 04:15:45,476 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.078377
+2026-02-20 04:15:52,883 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 87: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042836
+2026-02-20 04:15:53,398 - experiment_ablation_no_attractor_pooling - INFO - Epoch 87: Train Loss: 0.0822, Train Acc: 0.9844, Val Loss: 0.4684, Val Acc: 0.9326
+2026-02-20 04:15:54,173 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.111706
+2026-02-20 04:16:01,373 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 88: sync_weight=0.01, desync_weight=0.01, loss_sync=0.040306
+2026-02-20 04:16:01,873 - experiment_ablation_no_attractor_pooling - INFO - Epoch 88: Train Loss: 0.0685, Train Acc: 0.9933, Val Loss: 0.3270, Val Acc: 0.8989
+2026-02-20 04:16:02,657 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.049280
+2026-02-20 04:16:09,826 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 89: sync_weight=0.01, desync_weight=0.01, loss_sync=0.041499
+2026-02-20 04:16:10,318 - experiment_ablation_no_attractor_pooling - INFO - Epoch 89: Train Loss: 0.0973, Train Acc: 0.9844, Val Loss: 0.4024, Val Acc: 0.9213
+2026-02-20 04:16:11,090 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.053365
+2026-02-20 04:16:18,302 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 90: sync_weight=0.01, desync_weight=0.01, loss_sync=0.040808
+2026-02-20 04:16:18,803 - experiment_ablation_no_attractor_pooling - INFO - Epoch 90: Train Loss: 0.0722, Train Acc: 0.9911, Val Loss: 0.2468, Val Acc: 0.9213
+2026-02-20 04:16:19,647 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.066138
+2026-02-20 04:16:26,845 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 91: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044087
+2026-02-20 04:16:27,355 - experiment_ablation_no_attractor_pooling - INFO - Epoch 91: Train Loss: 0.0729, Train Acc: 0.9955, Val Loss: 0.5613, Val Acc: 0.8989
+2026-02-20 04:16:28,117 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.045164
+2026-02-20 04:16:34,327 - experiment_ablation_no_attractor_pooling - DEBUG - [STABILITY] lyap=0.059, max_norm=4.2, min_std=0.257
+2026-02-20 04:16:35,298 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 92: sync_weight=0.01, desync_weight=0.01, loss_sync=0.039468
+2026-02-20 04:16:35,817 - experiment_ablation_no_attractor_pooling - INFO - Epoch 92: Train Loss: 0.0797, Train Acc: 0.9911, Val Loss: 0.4220, Val Acc: 0.8989
+2026-02-20 04:16:36,581 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.049959
+2026-02-20 04:16:43,766 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 93: sync_weight=0.01, desync_weight=0.01, loss_sync=0.042694
+2026-02-20 04:16:44,272 - experiment_ablation_no_attractor_pooling - INFO - Epoch 93: Train Loss: 0.0773, Train Acc: 0.9911, Val Loss: 0.3951, Val Acc: 0.8876
+2026-02-20 04:16:45,036 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.083706
+2026-02-20 04:16:52,245 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 94: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044485
+2026-02-20 04:16:52,756 - experiment_ablation_no_attractor_pooling - INFO - Epoch 94: Train Loss: 0.1047, Train Acc: 0.9799, Val Loss: 0.2537, Val Acc: 0.9551
+2026-02-20 04:16:52,830 - experiment_ablation_no_attractor_pooling - INFO - Saved new best model at epoch 94
+2026-02-20 04:16:53,641 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.096026
+2026-02-20 04:17:00,832 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 95: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049762
+2026-02-20 04:17:01,333 - experiment_ablation_no_attractor_pooling - INFO - Epoch 95: Train Loss: 0.0838, Train Acc: 0.9888, Val Loss: 0.4196, Val Acc: 0.9326
+2026-02-20 04:17:02,110 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.055230
+2026-02-20 04:17:09,301 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 96: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049031
+2026-02-20 04:17:09,816 - experiment_ablation_no_attractor_pooling - INFO - Epoch 96: Train Loss: 0.0930, Train Acc: 0.9866, Val Loss: 0.4974, Val Acc: 0.8652
+2026-02-20 04:17:10,606 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.050398
+2026-02-20 04:17:17,795 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 97: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047313
+2026-02-20 04:17:18,283 - experiment_ablation_no_attractor_pooling - INFO - Epoch 97: Train Loss: 0.0832, Train Acc: 0.9866, Val Loss: 0.2412, Val Acc: 0.9326
+2026-02-20 04:17:19,060 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.061028
+2026-02-20 04:17:26,270 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 98: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044872
+2026-02-20 04:17:26,772 - experiment_ablation_no_attractor_pooling - INFO - Epoch 98: Train Loss: 0.1052, Train Acc: 0.9844, Val Loss: 0.6942, Val Acc: 0.8539
+2026-02-20 04:17:27,554 - experiment_ablation_no_attractor_pooling - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.077448
+2026-02-20 04:17:34,971 - experiment_ablation_no_attractor_pooling - INFO - [SYNC DEBUG] Epoch 99: sync_weight=0.01, desync_weight=0.01, loss_sync=0.044441
+2026-02-20 04:17:35,465 - experiment_ablation_no_attractor_pooling - INFO - Epoch 99: Train Loss: 0.1074, Train Acc: 0.9866, Val Loss: 0.4318, Val Acc: 0.9101
+2026-02-20 04:17:35,468 - experiment_ablation_no_attractor_pooling - INFO - Running final test evaluation...
+2026-02-20 04:17:36,044 - experiment_ablation_no_attractor_pooling - INFO - Test Results:
+2026-02-20 04:17:36,044 - experiment_ablation_no_attractor_pooling - INFO -   loss: 0.6608
+2026-02-20 04:17:36,045 - experiment_ablation_no_attractor_pooling - INFO -   accuracy: 0.8814
+2026-02-20 04:17:36,046 - experiment_ablation_no_attractor_pooling - INFO - Training completed

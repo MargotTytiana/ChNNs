@@ -43,11 +43,11 @@ loss:
     trajectory_bound: 50.0
     weight: 0.1
   synchronization:
-    desync_weight: 0.1
-    dynamic_warmup: false
+    desync_weight: 0.01
+    dynamic_warmup: true
     enabled: true
-    sync_weight: 0.1
-    warmup_epochs: 0
+    sync_weight: 0.01
+    warmup_epochs: 20
 model:
   attractor_pooling:
     type: comprehensive

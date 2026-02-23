@@ -98,15 +98,23 @@ class ChaoticEmbedding(nn.Module):
 
         # Add after self.param_adapter definition
         if use_bifurcation_control:
-            self.bifurcation_net = nn.Sequential(
-                nn.Linear(input_dim, 16),
+            self.num_regimes = 4
+            # Learnable rho centroids, all initialized in the chaotic regime (rho > 24.74)
+            # The model will learn which rho values best discriminate speakers
+            self.regime_rho_centroids = nn.Parameter(
+                torch.tensor([26.0, 30.0, 40.0, 55.0])
+            )
+            # Soft regime selector: features -> which dynamical regime
+            self.regime_selector = nn.Sequential(
+                nn.Linear(input_dim, 32),
                 nn.ReLU(),
-                nn.Linear(16, 1),
-                nn.Sigmoid()  # Output in [0, 1]
+                nn.Linear(32, self.num_regimes),
+                nn.Softmax(dim=-1)
             )
             self.use_bifurcation_control = True
         else:
-            self.bifurcation_net = None
+            self.regime_rho_centroids = None
+            self.regime_selector = None
             self.use_bifurcation_control = False
         
         # Feature mapping networks
@@ -469,25 +477,17 @@ class ChaoticEmbedding(nn.Module):
         param_scales = self.param_adapter(features)
         
         if self.system_type == 'lorenz':
-            # Scale parameters around typical Lorenz values
-            sigma = self.sigma * (0.5 + param_scales[:, 0])  # 5-15
-            rho = self.rho * (0.5 + param_scales[:, 1])      # 14-42
-            beta = self.beta * (0.5 + param_scales[:, 2])    # 1.3-4.0
-            
-            # FIX v2: Bifurcation control as MODULATION, not replacement
-            # This preserves the learned param_adapter mapping while adding
-            # bifurcation-aware adjustment
-            if self.use_bifurcation_control and self.bifurcation_net is not None:
-                regime_signal = self.bifurcation_net(features).squeeze(-1)  # [batch], in [0, 1]
-                
-                # Option A: Multiplicative modulation (±20%)
-                # modulation_factor in [0.8, 1.2]
-                modulation_factor = 0.8 + 0.4 * regime_signal
-                rho = rho * modulation_factor
-                
-                # Clamp to safe chaotic range
-                rho = torch.clamp(rho, min=20.0, max=50.0)
-            
+            param_scales = self.param_adapter(features)
+            sigma = self.sigma * (0.5 + param_scales[:, 0])
+            beta  = self.beta  * (0.5 + param_scales[:, 2])
+
+            if self.use_bifurcation_control and self.regime_selector is not None:
+                regime_weights = self.regime_selector(features)
+                rho = (regime_weights * self.regime_rho_centroids.unsqueeze(0)).sum(dim=1)
+                rho = torch.clamp(rho, min=24.74, max=100.0)
+            else:
+                rho = self.rho * (0.5 + param_scales[:, 1])
+
             return torch.stack([sigma, rho, beta], dim=1)
             
         elif self.system_type == 'rossler':
@@ -630,28 +630,16 @@ class AdaptiveChaoticEmbedding(ChaoticEmbedding):
         
         if self.system_type == 'lorenz':
             sigma = self.sigma_base * (0.5 + param_scales[:, 0])
-            rho = self.rho_base * (0.5 + param_scales[:, 1])
-            beta = self.beta_base * (0.5 + param_scales[:, 2])
-            
-            # FIX v2: Bifurcation control as MODULATION, not replacement
-            if self.use_bifurcation_control and self.bifurcation_net is not None:
-                regime_signal = self.bifurcation_net(features).squeeze(-1)  # [batch], in [0, 1]
-                
-                # Multiplicative modulation (±20%)
-                modulation_factor = 0.8 + 0.4 * regime_signal
-                rho = rho * modulation_factor
-                
-                # Clamp to safe chaotic range
-                rho = torch.clamp(rho, min=20.0, max=50.0)
-            
+            beta  = self.beta_base  * (0.5 + param_scales[:, 2])
+
+            if self.use_bifurcation_control and self.regime_selector is not None:
+                regime_weights = self.regime_selector(features)
+                rho = (regime_weights * self.regime_rho_centroids.unsqueeze(0)).sum(dim=1)
+                rho = torch.clamp(rho, min=24.74, max=100.0)
+            else:
+                rho = self.rho_base * (0.5 + param_scales[:, 1])
+
             return torch.stack([sigma, rho, beta], dim=1)
-            
-        else:
-            sigma = param_scales[:, 0]
-            rho = param_scales[:, 1] 
-            beta = param_scales[:, 2]
-            
-        return torch.stack([sigma, rho, beta], dim=1)
 
 
 # Factory function for easy instantiation

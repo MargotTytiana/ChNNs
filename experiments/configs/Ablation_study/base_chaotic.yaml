@@ -80,10 +80,10 @@ loss:
     
   synchronization:
     enabled: true
-    sync_weight: 0.1
-    desync_weight: 0.1
-    dynamic_warmup: false  # ← CRITICAL: disable this
-    warmup_epochs: 0       # ← Already warm from start
+    sync_weight: 0.01
+    desync_weight: 0.01
+    dynamic_warmup: True  # ← CRITICAL: disable this
+    warmup_epochs: 20       # ← Already warm from start
 
   adversarial:
     enabled: false

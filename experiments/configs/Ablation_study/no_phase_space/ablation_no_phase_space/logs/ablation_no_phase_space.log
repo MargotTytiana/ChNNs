@@ -1375,3 +1375,380 @@
 2026-02-15 13:40:38,724 - experiment_ablation_no_phase_space - INFO -   loss: 0.2851
 2026-02-15 13:40:38,724 - experiment_ablation_no_phase_space - INFO -   accuracy: 0.9237
 2026-02-15 13:40:38,725 - experiment_ablation_no_phase_space - INFO - Training completed
+2026-02-20 03:18:31,235 - experiment_ablation_no_phase_space - INFO - Initialized experiment: ablation_no_phase_space
+2026-02-20 03:18:31,256 - experiment_ablation_no_phase_space - INFO - Device: cuda
+2026-02-20 03:18:31,256 - experiment_ablation_no_phase_space - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/no_phase_space/ablation_no_phase_space
+2026-02-20 03:18:31,256 - experiment_ablation_no_phase_space - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-20 03:18:31,256 - experiment_ablation_no_phase_space - INFO - [SYNC LOSS] Warmup epochs: 20
+2026-02-20 03:18:31,256 - experiment_ablation_no_phase_space - INFO - Initialized chaotic network experiment with lorenz system
+2026-02-20 03:18:31,256 - experiment_ablation_no_phase_space - INFO - Setting up experiment components...
+2026-02-20 03:18:31,256 - experiment_ablation_no_phase_space - INFO - Creating dataloaders...
+2026-02-20 03:18:31,660 - experiment_ablation_no_phase_space - INFO - Detected 26 speakers in dataset
+2026-02-20 03:18:31,660 - experiment_ablation_no_phase_space - INFO - Dataloaders created:
+2026-02-20 03:18:31,660 - experiment_ablation_no_phase_space - INFO -   Train: 14 batches
+2026-02-20 03:18:31,660 - experiment_ablation_no_phase_space - INFO -   Val: 3 batches
+2026-02-20 03:18:31,660 - experiment_ablation_no_phase_space - INFO -   Test: 4 batches
+2026-02-20 03:18:31,660 - experiment_ablation_no_phase_space - INFO - Creating model...
+2026-02-20 03:18:31,660 - experiment_ablation_no_phase_space - INFO - Using actual num_speakers from dataset: 26
+2026-02-20 03:19:37,352 - experiment_ablation_no_phase_space - INFO - Total parameters: 565,119
+2026-02-20 03:19:37,353 - experiment_ablation_no_phase_space - INFO - Trainable parameters: 565,119
+2026-02-20 03:19:37,353 - experiment_ablation_no_phase_space - INFO - Creating optimizer...
+2026-02-20 03:19:37,353 - experiment_ablation_no_phase_space - INFO - Optimizer: AdamW
+2026-02-20 03:19:37,353 - experiment_ablation_no_phase_space - INFO - Creating scheduler...
+2026-02-20 03:19:37,353 - experiment_ablation_no_phase_space - INFO - Creating criterion...
+2026-02-20 03:19:37,353 - experiment_ablation_no_phase_space - INFO - Criterion: CrossEntropyLoss
+2026-02-20 03:19:37,432 - experiment_ablation_no_phase_space - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/Ablation_study/no_phase_space/ablation_no_phase_space/config.json
+2026-02-20 03:19:37,433 - experiment_ablation_no_phase_space - INFO - Experiment setup completed
+2026-02-20 03:19:37,433 - experiment_ablation_no_phase_space - INFO - Starting training for 100 epochs
+2026-02-20 03:19:37,601 - experiment_ablation_no_phase_space - INFO - 
+================================================================================
+2026-02-20 03:19:37,601 - experiment_ablation_no_phase_space - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-20 03:19:37,601 - experiment_ablation_no_phase_space - INFO - ================================================================================
+2026-02-20 03:19:37,602 - experiment_ablation_no_phase_space - INFO - Batch Info:
+2026-02-20 03:19:37,602 - experiment_ablation_no_phase_space - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-20 03:19:37,602 - experiment_ablation_no_phase_space - INFO -   Targets shape: torch.Size([32])
+2026-02-20 03:19:37,603 - experiment_ablation_no_phase_space - INFO -   Targets (first 8): tensor([20,  0, 14, 25, 24, 15,  3, 10], device='cuda:0')
+2026-02-20 03:19:37,690 - experiment_ablation_no_phase_space - INFO - ================================================================================
+
+2026-02-20 03:19:37,855 - experiment_ablation_no_phase_space - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-20 03:19:37,856 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.079, max_norm=41.4, min_std=0.177
+2026-02-20 03:19:38,240 - experiment_ablation_no_phase_space - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 5.922617
+2026-02-20 03:19:45,526 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 0: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:19:45,939 - experiment_ablation_no_phase_space - INFO - Epoch 0: Train Loss: 5.9956, Train Acc: 0.0290, Val Loss: 5.5690, Val Acc: 0.0562
+2026-02-20 03:19:46,007 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 0
+2026-02-20 03:19:46,850 - experiment_ablation_no_phase_space - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.656189
+2026-02-20 03:19:54,142 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 1: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:19:54,555 - experiment_ablation_no_phase_space - INFO - Epoch 1: Train Loss: 5.0278, Train Acc: 0.0513, Val Loss: 5.2496, Val Acc: 0.0112
+2026-02-20 03:19:55,285 - experiment_ablation_no_phase_space - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 4.683033
+2026-02-20 03:20:02,577 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 2: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:20:02,993 - experiment_ablation_no_phase_space - INFO - Epoch 2: Train Loss: 4.6574, Train Acc: 0.0491, Val Loss: 3.7942, Val Acc: 0.0337
+2026-02-20 03:20:03,735 - experiment_ablation_no_phase_space - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 4.728996
+2026-02-20 03:20:10,951 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 3: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:20:11,364 - experiment_ablation_no_phase_space - INFO - Epoch 3: Train Loss: 4.7002, Train Acc: 0.0335, Val Loss: 4.0354, Val Acc: 0.0674
+2026-02-20 03:20:11,444 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 3
+2026-02-20 03:20:12,235 - experiment_ablation_no_phase_space - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 5.299846
+2026-02-20 03:20:19,438 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 4: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:20:19,859 - experiment_ablation_no_phase_space - INFO - Epoch 4: Train Loss: 4.5740, Train Acc: 0.0357, Val Loss: 3.5787, Val Acc: 0.0449
+2026-02-20 03:20:20,620 - experiment_ablation_no_phase_space - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 3.905807
+2026-02-20 03:20:27,929 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 5: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:20:28,342 - experiment_ablation_no_phase_space - INFO - Epoch 5: Train Loss: 4.2483, Train Acc: 0.0580, Val Loss: 3.4218, Val Acc: 0.0562
+2026-02-20 03:20:29,100 - experiment_ablation_no_phase_space - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 4.016142
+2026-02-20 03:20:36,486 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 6: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:20:36,897 - experiment_ablation_no_phase_space - INFO - Epoch 6: Train Loss: 4.0885, Train Acc: 0.0469, Val Loss: 3.5038, Val Acc: 0.0449
+2026-02-20 03:20:37,663 - experiment_ablation_no_phase_space - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 4.294321
+2026-02-20 03:20:38,382 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.054, max_norm=29.0, min_std=1.385
+2026-02-20 03:20:45,143 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 7: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:20:45,572 - experiment_ablation_no_phase_space - INFO - Epoch 7: Train Loss: 3.9159, Train Acc: 0.0491, Val Loss: 3.7103, Val Acc: 0.0449
+2026-02-20 03:20:46,351 - experiment_ablation_no_phase_space - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 3.500501
+2026-02-20 03:20:53,671 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 8: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:20:54,097 - experiment_ablation_no_phase_space - INFO - Epoch 8: Train Loss: 3.8172, Train Acc: 0.0491, Val Loss: 3.1835, Val Acc: 0.0674
+2026-02-20 03:20:54,844 - experiment_ablation_no_phase_space - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 4.043917
+2026-02-20 03:21:02,137 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 9: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:21:02,601 - experiment_ablation_no_phase_space - INFO - Epoch 9: Train Loss: 3.7403, Train Acc: 0.0513, Val Loss: 3.1038, Val Acc: 0.1236
+2026-02-20 03:21:02,683 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 9
+2026-02-20 03:21:03,457 - experiment_ablation_no_phase_space - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 3.514863
+2026-02-20 03:21:11,108 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 10: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:21:11,528 - experiment_ablation_no_phase_space - INFO - Epoch 10: Train Loss: 3.4685, Train Acc: 0.0871, Val Loss: 2.8928, Val Acc: 0.1348
+2026-02-20 03:21:11,602 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 10
+2026-02-20 03:21:12,467 - experiment_ablation_no_phase_space - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 3.441618
+2026-02-20 03:21:19,851 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 11: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:21:20,267 - experiment_ablation_no_phase_space - INFO - Epoch 11: Train Loss: 3.1735, Train Acc: 0.1071, Val Loss: 2.5064, Val Acc: 0.2584
+2026-02-20 03:21:20,343 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 11
+2026-02-20 03:21:21,157 - experiment_ablation_no_phase_space - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 2.698299
+2026-02-20 03:21:28,547 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 12: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:21:28,976 - experiment_ablation_no_phase_space - INFO - Epoch 12: Train Loss: 2.9613, Train Acc: 0.1451, Val Loss: 2.4277, Val Acc: 0.2584
+2026-02-20 03:21:29,734 - experiment_ablation_no_phase_space - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 2.814216
+2026-02-20 03:21:37,046 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 13: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:21:37,470 - experiment_ablation_no_phase_space - INFO - Epoch 13: Train Loss: 2.7074, Train Acc: 0.1830, Val Loss: 2.3367, Val Acc: 0.2360
+2026-02-20 03:21:38,239 - experiment_ablation_no_phase_space - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 2.654252
+2026-02-20 03:21:40,058 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.027, max_norm=26.8, min_std=1.985
+2026-02-20 03:21:45,441 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 14: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:21:45,911 - experiment_ablation_no_phase_space - INFO - Epoch 14: Train Loss: 2.5746, Train Acc: 0.2143, Val Loss: 2.0008, Val Acc: 0.3258
+2026-02-20 03:21:45,996 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 14
+2026-02-20 03:21:46,783 - experiment_ablation_no_phase_space - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 2.642686
+2026-02-20 03:21:54,026 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 15: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:21:54,453 - experiment_ablation_no_phase_space - INFO - Epoch 15: Train Loss: 2.3230, Train Acc: 0.2746, Val Loss: 2.3739, Val Acc: 0.3146
+2026-02-20 03:21:55,226 - experiment_ablation_no_phase_space - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 2.053334
+2026-02-20 03:22:03,753 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 16: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:22:04,196 - experiment_ablation_no_phase_space - INFO - Epoch 16: Train Loss: 2.2855, Train Acc: 0.2679, Val Loss: 2.3848, Val Acc: 0.2472
+2026-02-20 03:22:05,036 - experiment_ablation_no_phase_space - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 2.293419
+2026-02-20 03:22:13,925 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 17: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:22:14,540 - experiment_ablation_no_phase_space - INFO - Epoch 17: Train Loss: 2.0021, Train Acc: 0.3304, Val Loss: 2.1212, Val Acc: 0.3258
+2026-02-20 03:22:15,461 - experiment_ablation_no_phase_space - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 2.166490
+2026-02-20 03:22:24,293 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 18: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:22:24,898 - experiment_ablation_no_phase_space - INFO - Epoch 18: Train Loss: 1.8036, Train Acc: 0.3862, Val Loss: 1.6298, Val Acc: 0.4382
+2026-02-20 03:22:24,977 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 18
+2026-02-20 03:22:25,919 - experiment_ablation_no_phase_space - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 1.422527
+2026-02-20 03:22:34,678 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 19: sync_weight=0.01, desync_weight=0.01, loss_sync=0.000000
+2026-02-20 03:22:35,292 - experiment_ablation_no_phase_space - INFO - Epoch 19: Train Loss: 1.5462, Train Acc: 0.4576, Val Loss: 1.0428, Val Acc: 0.6742
+2026-02-20 03:22:35,370 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 19
+2026-02-20 03:22:36,293 - experiment_ablation_no_phase_space - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 1.828249
+2026-02-20 03:22:45,185 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 20: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049212
+2026-02-20 03:22:45,821 - experiment_ablation_no_phase_space - INFO - Epoch 20: Train Loss: 1.4720, Train Acc: 0.5179, Val Loss: 0.9940, Val Acc: 0.6854
+2026-02-20 03:22:45,904 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 20
+2026-02-20 03:22:46,965 - experiment_ablation_no_phase_space - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 1.465690
+2026-02-20 03:22:50,636 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.002, max_norm=7.3, min_std=0.977
+2026-02-20 03:22:55,952 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 21: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049898
+2026-02-20 03:22:56,544 - experiment_ablation_no_phase_space - INFO - Epoch 21: Train Loss: 1.1949, Train Acc: 0.6027, Val Loss: 0.8039, Val Acc: 0.7303
+2026-02-20 03:22:56,625 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 21
+2026-02-20 03:22:57,538 - experiment_ablation_no_phase_space - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 1.170470
+2026-02-20 03:23:06,416 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 22: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050005
+2026-02-20 03:23:06,930 - experiment_ablation_no_phase_space - INFO - Epoch 22: Train Loss: 1.1545, Train Acc: 0.6094, Val Loss: 0.8275, Val Acc: 0.6629
+2026-02-20 03:23:07,717 - experiment_ablation_no_phase_space - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 1.111709
+2026-02-20 03:23:16,550 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 23: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049904
+2026-02-20 03:23:17,193 - experiment_ablation_no_phase_space - INFO - Epoch 23: Train Loss: 1.0135, Train Acc: 0.6696, Val Loss: 0.7357, Val Acc: 0.7865
+2026-02-20 03:23:17,276 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 23
+2026-02-20 03:23:18,376 - experiment_ablation_no_phase_space - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.982388
+2026-02-20 03:23:27,054 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 24: sync_weight=0.01, desync_weight=0.01, loss_sync=0.050002
+2026-02-20 03:23:27,646 - experiment_ablation_no_phase_space - INFO - Epoch 24: Train Loss: 0.9206, Train Acc: 0.7054, Val Loss: 0.6081, Val Acc: 0.7978
+2026-02-20 03:23:27,732 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 24
+2026-02-20 03:23:27,767 - experiment_ablation_no_phase_space - INFO - [SYNC LOSS] Dynamic activation triggered at epoch 25
+2026-02-20 03:23:27,768 - experiment_ablation_no_phase_space - INFO - [SYNC LOSS] Train accuracy 70.54% >= threshold 70.00%
+2026-02-20 03:23:28,643 - experiment_ablation_no_phase_space - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.873859
+2026-02-20 03:23:37,479 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 25: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049932
+2026-02-20 03:23:37,948 - experiment_ablation_no_phase_space - INFO - Epoch 25: Train Loss: 0.7771, Train Acc: 0.7723, Val Loss: 0.6835, Val Acc: 0.7640
+2026-02-20 03:23:38,804 - experiment_ablation_no_phase_space - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.412997
+2026-02-20 03:23:47,623 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 26: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049969
+2026-02-20 03:23:48,194 - experiment_ablation_no_phase_space - INFO - Epoch 26: Train Loss: 0.6895, Train Acc: 0.8170, Val Loss: 0.9051, Val Acc: 0.7079
+2026-02-20 03:23:49,099 - experiment_ablation_no_phase_space - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.684539
+2026-02-20 03:23:57,988 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 27: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049906
+2026-02-20 03:23:58,562 - experiment_ablation_no_phase_space - INFO - Epoch 27: Train Loss: 0.6786, Train Acc: 0.8058, Val Loss: 0.3898, Val Acc: 0.8427
+2026-02-20 03:23:58,637 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 27
+2026-02-20 03:23:59,527 - experiment_ablation_no_phase_space - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.476314
+2026-02-20 03:24:04,432 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.002, max_norm=7.2, min_std=0.985
+2026-02-20 03:24:08,295 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 28: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049908
+2026-02-20 03:24:08,800 - experiment_ablation_no_phase_space - INFO - Epoch 28: Train Loss: 0.6451, Train Acc: 0.8058, Val Loss: 0.3930, Val Acc: 0.8539
+2026-02-20 03:24:08,900 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 28
+2026-02-20 03:24:09,774 - experiment_ablation_no_phase_space - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.614133
+2026-02-20 03:24:18,559 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 29: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049903
+2026-02-20 03:24:19,196 - experiment_ablation_no_phase_space - INFO - Epoch 29: Train Loss: 0.4952, Train Acc: 0.8728, Val Loss: 0.3827, Val Acc: 0.8652
+2026-02-20 03:24:19,285 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 29
+2026-02-20 03:24:20,210 - experiment_ablation_no_phase_space - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.385390
+2026-02-20 03:24:29,078 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 30: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049743
+2026-02-20 03:24:29,691 - experiment_ablation_no_phase_space - INFO - Epoch 30: Train Loss: 0.5058, Train Acc: 0.8661, Val Loss: 0.7325, Val Acc: 0.7191
+2026-02-20 03:24:30,714 - experiment_ablation_no_phase_space - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.385609
+2026-02-20 03:24:39,479 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 31: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049650
+2026-02-20 03:24:39,982 - experiment_ablation_no_phase_space - INFO - Epoch 31: Train Loss: 0.5092, Train Acc: 0.8527, Val Loss: 0.8302, Val Acc: 0.7528
+2026-02-20 03:24:40,865 - experiment_ablation_no_phase_space - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.371307
+2026-02-20 03:24:49,633 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 32: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049608
+2026-02-20 03:24:50,220 - experiment_ablation_no_phase_space - INFO - Epoch 32: Train Loss: 0.4408, Train Acc: 0.8817, Val Loss: 0.4079, Val Acc: 0.8427
+2026-02-20 03:24:51,171 - experiment_ablation_no_phase_space - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.448610
+2026-02-20 03:25:00,060 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 33: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049694
+2026-02-20 03:25:00,657 - experiment_ablation_no_phase_space - INFO - Epoch 33: Train Loss: 0.4836, Train Acc: 0.8728, Val Loss: 0.2758, Val Acc: 0.8989
+2026-02-20 03:25:00,733 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 33
+2026-02-20 03:25:01,666 - experiment_ablation_no_phase_space - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.466480
+2026-02-20 03:25:10,538 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 34: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049682
+2026-02-20 03:25:11,031 - experiment_ablation_no_phase_space - INFO - Epoch 34: Train Loss: 0.4053, Train Acc: 0.8862, Val Loss: 0.2965, Val Acc: 0.9101
+2026-02-20 03:25:11,116 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 34
+2026-02-20 03:25:12,072 - experiment_ablation_no_phase_space - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.355004
+2026-02-20 03:25:18,452 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=-0.000, max_norm=6.7, min_std=0.891
+2026-02-20 03:25:21,032 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 35: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049558
+2026-02-20 03:25:21,626 - experiment_ablation_no_phase_space - INFO - Epoch 35: Train Loss: 0.3817, Train Acc: 0.9040, Val Loss: 0.3568, Val Acc: 0.9213
+2026-02-20 03:25:21,701 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 35
+2026-02-20 03:25:22,646 - experiment_ablation_no_phase_space - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.260970
+2026-02-20 03:25:31,551 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 36: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049414
+2026-02-20 03:25:32,155 - experiment_ablation_no_phase_space - INFO - Epoch 36: Train Loss: 0.3540, Train Acc: 0.9107, Val Loss: 0.7703, Val Acc: 0.7753
+2026-02-20 03:25:33,042 - experiment_ablation_no_phase_space - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.344343
+2026-02-20 03:25:41,767 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 37: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049552
+2026-02-20 03:25:42,318 - experiment_ablation_no_phase_space - INFO - Epoch 37: Train Loss: 0.4760, Train Acc: 0.8661, Val Loss: 0.5570, Val Acc: 0.8652
+2026-02-20 03:25:43,223 - experiment_ablation_no_phase_space - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.277015
+2026-02-20 03:25:51,986 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 38: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049369
+2026-02-20 03:25:52,620 - experiment_ablation_no_phase_space - INFO - Epoch 38: Train Loss: 0.4124, Train Acc: 0.8951, Val Loss: 0.4567, Val Acc: 0.7978
+2026-02-20 03:25:53,565 - experiment_ablation_no_phase_space - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.281934
+2026-02-20 03:26:02,569 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 39: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049529
+2026-02-20 03:26:03,203 - experiment_ablation_no_phase_space - INFO - Epoch 39: Train Loss: 0.3262, Train Acc: 0.9174, Val Loss: 0.1533, Val Acc: 0.9438
+2026-02-20 03:26:03,279 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 39
+2026-02-20 03:26:04,232 - experiment_ablation_no_phase_space - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 0.191438
+2026-02-20 03:26:13,116 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 40: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049723
+2026-02-20 03:26:13,608 - experiment_ablation_no_phase_space - INFO - Epoch 40: Train Loss: 0.3211, Train Acc: 0.9040, Val Loss: 0.4125, Val Acc: 0.8427
+2026-02-20 03:26:14,624 - experiment_ablation_no_phase_space - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 0.527712
+2026-02-20 03:26:23,455 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 41: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049485
+2026-02-20 03:26:24,071 - experiment_ablation_no_phase_space - INFO - Epoch 41: Train Loss: 0.3239, Train Acc: 0.9330, Val Loss: 0.6046, Val Acc: 0.8202
+2026-02-20 03:26:24,967 - experiment_ablation_no_phase_space - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 0.168698
+2026-02-20 03:26:32,628 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=-0.020, max_norm=3.5, min_std=0.522
+2026-02-20 03:26:33,768 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 42: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049027
+2026-02-20 03:26:34,349 - experiment_ablation_no_phase_space - INFO - Epoch 42: Train Loss: 0.2593, Train Acc: 0.9375, Val Loss: 0.2021, Val Acc: 0.9326
+2026-02-20 03:26:35,231 - experiment_ablation_no_phase_space - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.269201
+2026-02-20 03:26:43,906 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 43: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049497
+2026-02-20 03:26:44,415 - experiment_ablation_no_phase_space - INFO - Epoch 43: Train Loss: 0.3099, Train Acc: 0.9196, Val Loss: 0.3417, Val Acc: 0.8989
+2026-02-20 03:26:45,353 - experiment_ablation_no_phase_space - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 0.270733
+2026-02-20 03:26:54,288 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 44: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049775
+2026-02-20 03:26:54,913 - experiment_ablation_no_phase_space - INFO - Epoch 44: Train Loss: 0.3039, Train Acc: 0.9263, Val Loss: 0.5109, Val Acc: 0.8202
+2026-02-20 03:26:55,778 - experiment_ablation_no_phase_space - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.284399
+2026-02-20 03:27:04,586 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 45: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049849
+2026-02-20 03:27:05,184 - experiment_ablation_no_phase_space - INFO - Epoch 45: Train Loss: 0.3156, Train Acc: 0.9174, Val Loss: 0.3704, Val Acc: 0.8764
+2026-02-20 03:27:06,070 - experiment_ablation_no_phase_space - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.306224
+2026-02-20 03:27:15,058 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 46: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049772
+2026-02-20 03:27:15,589 - experiment_ablation_no_phase_space - INFO - Epoch 46: Train Loss: 0.2830, Train Acc: 0.9353, Val Loss: 0.4120, Val Acc: 0.8989
+2026-02-20 03:27:16,509 - experiment_ablation_no_phase_space - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.254591
+2026-02-20 03:27:25,307 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 47: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049746
+2026-02-20 03:27:25,878 - experiment_ablation_no_phase_space - INFO - Epoch 47: Train Loss: 0.2236, Train Acc: 0.9442, Val Loss: 0.5306, Val Acc: 0.8315
+2026-02-20 03:27:26,804 - experiment_ablation_no_phase_space - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.137765
+2026-02-20 03:27:35,718 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 48: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049558
+2026-02-20 03:27:36,353 - experiment_ablation_no_phase_space - INFO - Epoch 48: Train Loss: 0.2608, Train Acc: 0.9420, Val Loss: 0.4523, Val Acc: 0.8876
+2026-02-20 03:27:37,236 - experiment_ablation_no_phase_space - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.187760
+2026-02-20 03:27:46,561 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 49: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049764
+2026-02-20 03:27:47,202 - experiment_ablation_no_phase_space - INFO - Epoch 49: Train Loss: 0.2047, Train Acc: 0.9621, Val Loss: 0.2384, Val Acc: 0.9213
+2026-02-20 03:27:47,694 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=-0.016, max_norm=3.6, min_std=0.563
+2026-02-20 03:27:48,110 - experiment_ablation_no_phase_space - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.155024
+2026-02-20 03:27:57,029 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 50: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049237
+2026-02-20 03:27:57,593 - experiment_ablation_no_phase_space - INFO - Epoch 50: Train Loss: 0.2275, Train Acc: 0.9464, Val Loss: 0.3202, Val Acc: 0.9101
+2026-02-20 03:27:58,601 - experiment_ablation_no_phase_space - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.305927
+2026-02-20 03:28:07,355 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 51: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049213
+2026-02-20 03:28:07,912 - experiment_ablation_no_phase_space - INFO - Epoch 51: Train Loss: 0.2313, Train Acc: 0.9420, Val Loss: 0.4033, Val Acc: 0.8876
+2026-02-20 03:28:08,712 - experiment_ablation_no_phase_space - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.138307
+2026-02-20 03:28:17,381 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 52: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049427
+2026-02-20 03:28:18,000 - experiment_ablation_no_phase_space - INFO - Epoch 52: Train Loss: 0.2091, Train Acc: 0.9621, Val Loss: 0.4410, Val Acc: 0.8652
+2026-02-20 03:28:18,904 - experiment_ablation_no_phase_space - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 0.233468
+2026-02-20 03:28:27,660 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 53: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048787
+2026-02-20 03:28:28,231 - experiment_ablation_no_phase_space - INFO - Epoch 53: Train Loss: 0.2228, Train Acc: 0.9554, Val Loss: 0.3663, Val Acc: 0.8876
+2026-02-20 03:28:29,074 - experiment_ablation_no_phase_space - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.143997
+2026-02-20 03:28:37,868 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 54: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049064
+2026-02-20 03:28:38,483 - experiment_ablation_no_phase_space - INFO - Epoch 54: Train Loss: 0.2063, Train Acc: 0.9509, Val Loss: 0.4734, Val Acc: 0.9101
+2026-02-20 03:28:39,259 - experiment_ablation_no_phase_space - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.094272
+2026-02-20 03:28:48,124 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 55: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048570
+2026-02-20 03:28:48,787 - experiment_ablation_no_phase_space - INFO - Epoch 55: Train Loss: 0.1731, Train Acc: 0.9665, Val Loss: 0.4840, Val Acc: 0.8652
+2026-02-20 03:28:49,666 - experiment_ablation_no_phase_space - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.093352
+2026-02-20 03:28:58,430 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 56: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048657
+2026-02-20 03:28:59,033 - experiment_ablation_no_phase_space - INFO - Epoch 56: Train Loss: 0.2205, Train Acc: 0.9464, Val Loss: 1.8079, Val Acc: 0.4494
+2026-02-20 03:28:59,919 - experiment_ablation_no_phase_space - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.134606
+2026-02-20 03:29:00,879 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=-0.000, max_norm=6.8, min_std=0.886
+2026-02-20 03:29:08,914 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 57: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049270
+2026-02-20 03:29:09,441 - experiment_ablation_no_phase_space - INFO - Epoch 57: Train Loss: 0.1423, Train Acc: 0.9754, Val Loss: 0.4337, Val Acc: 0.8876
+2026-02-20 03:29:10,235 - experiment_ablation_no_phase_space - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.120511
+2026-02-20 03:29:19,018 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 58: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049412
+2026-02-20 03:29:19,667 - experiment_ablation_no_phase_space - INFO - Epoch 58: Train Loss: 0.1588, Train Acc: 0.9754, Val Loss: 0.6410, Val Acc: 0.8539
+2026-02-20 03:29:20,583 - experiment_ablation_no_phase_space - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.104001
+2026-02-20 03:29:29,400 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 59: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049681
+2026-02-20 03:29:29,971 - experiment_ablation_no_phase_space - INFO - Epoch 59: Train Loss: 0.1881, Train Acc: 0.9598, Val Loss: 0.2669, Val Acc: 0.9213
+2026-02-20 03:29:30,852 - experiment_ablation_no_phase_space - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 0.201478
+2026-02-20 03:29:39,800 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 60: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049879
+2026-02-20 03:29:40,310 - experiment_ablation_no_phase_space - INFO - Epoch 60: Train Loss: 0.1763, Train Acc: 0.9554, Val Loss: 0.6334, Val Acc: 0.8315
+2026-02-20 03:29:41,235 - experiment_ablation_no_phase_space - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.181383
+2026-02-20 03:29:50,126 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 61: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049860
+2026-02-20 03:29:50,731 - experiment_ablation_no_phase_space - INFO - Epoch 61: Train Loss: 0.1690, Train Acc: 0.9643, Val Loss: 0.2508, Val Acc: 0.9438
+2026-02-20 03:29:51,627 - experiment_ablation_no_phase_space - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.163537
+2026-02-20 03:30:00,409 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 62: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049796
+2026-02-20 03:30:00,999 - experiment_ablation_no_phase_space - INFO - Epoch 62: Train Loss: 0.2206, Train Acc: 0.9509, Val Loss: 0.1089, Val Acc: 0.9775
+2026-02-20 03:30:01,076 - experiment_ablation_no_phase_space - INFO - Saved new best model at epoch 62
+2026-02-20 03:30:01,994 - experiment_ablation_no_phase_space - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.186420
+2026-02-20 03:30:10,886 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 63: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049446
+2026-02-20 03:30:11,355 - experiment_ablation_no_phase_space - INFO - Epoch 63: Train Loss: 0.1704, Train Acc: 0.9665, Val Loss: 0.1582, Val Acc: 0.9213
+2026-02-20 03:30:12,181 - experiment_ablation_no_phase_space - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 0.216381
+2026-02-20 03:30:14,733 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.002, max_norm=7.1, min_std=0.957
+2026-02-20 03:30:21,326 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 64: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049416
+2026-02-20 03:30:21,903 - experiment_ablation_no_phase_space - INFO - Epoch 64: Train Loss: 0.1599, Train Acc: 0.9688, Val Loss: 0.4857, Val Acc: 0.8652
+2026-02-20 03:30:22,850 - experiment_ablation_no_phase_space - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.192961
+2026-02-20 03:30:31,892 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 65: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049350
+2026-02-20 03:30:32,504 - experiment_ablation_no_phase_space - INFO - Epoch 65: Train Loss: 0.2032, Train Acc: 0.9531, Val Loss: 0.3045, Val Acc: 0.9101
+2026-02-20 03:30:33,400 - experiment_ablation_no_phase_space - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.096848
+2026-02-20 03:30:42,229 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 66: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049309
+2026-02-20 03:30:42,720 - experiment_ablation_no_phase_space - INFO - Epoch 66: Train Loss: 0.1884, Train Acc: 0.9554, Val Loss: 0.3047, Val Acc: 0.9213
+2026-02-20 03:30:43,580 - experiment_ablation_no_phase_space - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.290161
+2026-02-20 03:30:52,497 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 67: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048476
+2026-02-20 03:30:53,073 - experiment_ablation_no_phase_space - INFO - Epoch 67: Train Loss: 0.2268, Train Acc: 0.9420, Val Loss: 0.2751, Val Acc: 0.9438
+2026-02-20 03:30:53,984 - experiment_ablation_no_phase_space - INFO - Train Epoch 68: [0/472 (0.0%)]	Loss: 0.098378
+2026-02-20 03:31:02,980 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 68: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047672
+2026-02-20 03:31:03,593 - experiment_ablation_no_phase_space - INFO - Epoch 68: Train Loss: 0.1198, Train Acc: 0.9888, Val Loss: 0.3002, Val Acc: 0.9101
+2026-02-20 03:31:04,468 - experiment_ablation_no_phase_space - INFO - Train Epoch 69: [0/472 (0.0%)]	Loss: 0.095787
+2026-02-20 03:31:13,390 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 69: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048999
+2026-02-20 03:31:13,917 - experiment_ablation_no_phase_space - INFO - Epoch 69: Train Loss: 0.1676, Train Acc: 0.9665, Val Loss: 0.3528, Val Acc: 0.9101
+2026-02-20 03:31:14,833 - experiment_ablation_no_phase_space - INFO - Train Epoch 70: [0/472 (0.0%)]	Loss: 0.133166
+2026-02-20 03:31:23,882 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 70: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049715
+2026-02-20 03:31:24,502 - experiment_ablation_no_phase_space - INFO - Epoch 70: Train Loss: 0.1429, Train Acc: 0.9665, Val Loss: 0.3669, Val Acc: 0.8989
+2026-02-20 03:31:25,525 - experiment_ablation_no_phase_space - INFO - Train Epoch 71: [0/472 (0.0%)]	Loss: 0.187717
+2026-02-20 03:31:29,090 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.002, max_norm=7.3, min_std=0.988
+2026-02-20 03:31:34,346 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 71: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049760
+2026-02-20 03:31:34,980 - experiment_ablation_no_phase_space - INFO - Epoch 71: Train Loss: 0.1932, Train Acc: 0.9509, Val Loss: 0.2955, Val Acc: 0.9326
+2026-02-20 03:31:35,868 - experiment_ablation_no_phase_space - INFO - Train Epoch 72: [0/472 (0.0%)]	Loss: 0.403116
+2026-02-20 03:31:44,637 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 72: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049350
+2026-02-20 03:31:45,218 - experiment_ablation_no_phase_space - INFO - Epoch 72: Train Loss: 0.1572, Train Acc: 0.9665, Val Loss: 0.4212, Val Acc: 0.8876
+2026-02-20 03:31:46,037 - experiment_ablation_no_phase_space - INFO - Train Epoch 73: [0/472 (0.0%)]	Loss: 0.095438
+2026-02-20 03:31:54,926 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 73: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047803
+2026-02-20 03:31:55,574 - experiment_ablation_no_phase_space - INFO - Epoch 73: Train Loss: 0.1235, Train Acc: 0.9821, Val Loss: 0.3485, Val Acc: 0.8989
+2026-02-20 03:31:56,466 - experiment_ablation_no_phase_space - INFO - Train Epoch 74: [0/472 (0.0%)]	Loss: 0.075679
+2026-02-20 03:32:05,365 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 74: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049743
+2026-02-20 03:32:05,951 - experiment_ablation_no_phase_space - INFO - Epoch 74: Train Loss: 0.1360, Train Acc: 0.9844, Val Loss: 0.2018, Val Acc: 0.9326
+2026-02-20 03:32:06,854 - experiment_ablation_no_phase_space - INFO - Train Epoch 75: [0/472 (0.0%)]	Loss: 0.133081
+2026-02-20 03:32:15,758 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 75: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049853
+2026-02-20 03:32:16,294 - experiment_ablation_no_phase_space - INFO - Epoch 75: Train Loss: 0.1502, Train Acc: 0.9799, Val Loss: 0.3242, Val Acc: 0.9213
+2026-02-20 03:32:17,282 - experiment_ablation_no_phase_space - INFO - Train Epoch 76: [0/472 (0.0%)]	Loss: 0.271044
+2026-02-20 03:32:26,365 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 76: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049776
+2026-02-20 03:32:26,997 - experiment_ablation_no_phase_space - INFO - Epoch 76: Train Loss: 0.1264, Train Acc: 0.9777, Val Loss: 0.0918, Val Acc: 0.9551
+2026-02-20 03:32:27,913 - experiment_ablation_no_phase_space - INFO - Train Epoch 77: [0/472 (0.0%)]	Loss: 0.093149
+2026-02-20 03:32:36,829 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 77: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049783
+2026-02-20 03:32:37,497 - experiment_ablation_no_phase_space - INFO - Epoch 77: Train Loss: 0.1387, Train Acc: 0.9754, Val Loss: 0.4646, Val Acc: 0.8652
+2026-02-20 03:32:38,313 - experiment_ablation_no_phase_space - INFO - Train Epoch 78: [0/472 (0.0%)]	Loss: 0.129697
+2026-02-20 03:32:43,328 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=0.002, max_norm=7.1, min_std=0.973
+2026-02-20 03:32:47,089 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 78: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049676
+2026-02-20 03:32:47,730 - experiment_ablation_no_phase_space - INFO - Epoch 78: Train Loss: 0.1677, Train Acc: 0.9643, Val Loss: 0.2359, Val Acc: 0.9213
+2026-02-20 03:32:48,640 - experiment_ablation_no_phase_space - INFO - Train Epoch 79: [0/472 (0.0%)]	Loss: 0.128434
+2026-02-20 03:32:57,320 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 79: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049317
+2026-02-20 03:32:57,921 - experiment_ablation_no_phase_space - INFO - Epoch 79: Train Loss: 0.1307, Train Acc: 0.9799, Val Loss: 0.4080, Val Acc: 0.9101
+2026-02-20 03:32:58,855 - experiment_ablation_no_phase_space - INFO - Train Epoch 80: [0/472 (0.0%)]	Loss: 0.148597
+2026-02-20 03:33:07,658 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 80: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048631
+2026-02-20 03:33:08,272 - experiment_ablation_no_phase_space - INFO - Epoch 80: Train Loss: 0.1084, Train Acc: 0.9821, Val Loss: 0.3521, Val Acc: 0.9326
+2026-02-20 03:33:09,190 - experiment_ablation_no_phase_space - INFO - Train Epoch 81: [0/472 (0.0%)]	Loss: 0.087474
+2026-02-20 03:33:18,032 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 81: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048787
+2026-02-20 03:33:18,663 - experiment_ablation_no_phase_space - INFO - Epoch 81: Train Loss: 0.1325, Train Acc: 0.9643, Val Loss: 0.2909, Val Acc: 0.9213
+2026-02-20 03:33:19,546 - experiment_ablation_no_phase_space - INFO - Train Epoch 82: [0/472 (0.0%)]	Loss: 0.217369
+2026-02-20 03:33:28,495 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 82: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048897
+2026-02-20 03:33:29,111 - experiment_ablation_no_phase_space - INFO - Epoch 82: Train Loss: 0.1733, Train Acc: 0.9487, Val Loss: 0.2670, Val Acc: 0.9438
+2026-02-20 03:33:30,107 - experiment_ablation_no_phase_space - INFO - Train Epoch 83: [0/472 (0.0%)]	Loss: 0.106603
+2026-02-20 03:33:39,050 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 83: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049181
+2026-02-20 03:33:39,574 - experiment_ablation_no_phase_space - INFO - Epoch 83: Train Loss: 0.1263, Train Acc: 0.9777, Val Loss: 0.1887, Val Acc: 0.9213
+2026-02-20 03:33:40,362 - experiment_ablation_no_phase_space - INFO - Train Epoch 84: [0/472 (0.0%)]	Loss: 0.273607
+2026-02-20 03:33:49,049 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 84: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048936
+2026-02-20 03:33:49,649 - experiment_ablation_no_phase_space - INFO - Epoch 84: Train Loss: 0.1422, Train Acc: 0.9754, Val Loss: 0.5713, Val Acc: 0.8876
+2026-02-20 03:33:50,554 - experiment_ablation_no_phase_space - INFO - Train Epoch 85: [0/472 (0.0%)]	Loss: 0.097009
+2026-02-20 03:33:56,991 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=-0.013, max_norm=4.5, min_std=0.583
+2026-02-20 03:33:59,563 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 85: sync_weight=0.01, desync_weight=0.01, loss_sync=0.047841
+2026-02-20 03:34:00,247 - experiment_ablation_no_phase_space - INFO - Epoch 85: Train Loss: 0.1513, Train Acc: 0.9732, Val Loss: 1.0275, Val Acc: 0.7528
+2026-02-20 03:34:01,135 - experiment_ablation_no_phase_space - INFO - Train Epoch 86: [0/472 (0.0%)]	Loss: 0.096306
+2026-02-20 03:34:09,979 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 86: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049365
+2026-02-20 03:34:10,515 - experiment_ablation_no_phase_space - INFO - Epoch 86: Train Loss: 0.1034, Train Acc: 0.9821, Val Loss: 0.2147, Val Acc: 0.9326
+2026-02-20 03:34:11,339 - experiment_ablation_no_phase_space - INFO - Train Epoch 87: [0/472 (0.0%)]	Loss: 0.084577
+2026-02-20 03:34:19,998 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 87: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049372
+2026-02-20 03:34:20,622 - experiment_ablation_no_phase_space - INFO - Epoch 87: Train Loss: 0.1237, Train Acc: 0.9799, Val Loss: 0.2434, Val Acc: 0.9101
+2026-02-20 03:34:21,511 - experiment_ablation_no_phase_space - INFO - Train Epoch 88: [0/472 (0.0%)]	Loss: 0.067267
+2026-02-20 03:34:30,155 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 88: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049625
+2026-02-20 03:34:30,607 - experiment_ablation_no_phase_space - INFO - Epoch 88: Train Loss: 0.1411, Train Acc: 0.9710, Val Loss: 0.2123, Val Acc: 0.9326
+2026-02-20 03:34:31,418 - experiment_ablation_no_phase_space - INFO - Train Epoch 89: [0/472 (0.0%)]	Loss: 0.258333
+2026-02-20 03:34:39,437 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 89: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049712
+2026-02-20 03:34:39,958 - experiment_ablation_no_phase_space - INFO - Epoch 89: Train Loss: 0.1279, Train Acc: 0.9777, Val Loss: 0.3896, Val Acc: 0.9326
+2026-02-20 03:34:40,690 - experiment_ablation_no_phase_space - INFO - Train Epoch 90: [0/472 (0.0%)]	Loss: 0.075326
+2026-02-20 03:34:48,015 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 90: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049745
+2026-02-20 03:34:48,445 - experiment_ablation_no_phase_space - INFO - Epoch 90: Train Loss: 0.1041, Train Acc: 0.9933, Val Loss: 0.1618, Val Acc: 0.9438
+2026-02-20 03:34:49,266 - experiment_ablation_no_phase_space - INFO - Train Epoch 91: [0/472 (0.0%)]	Loss: 0.183811
+2026-02-20 03:34:56,495 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 91: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049721
+2026-02-20 03:34:56,950 - experiment_ablation_no_phase_space - INFO - Epoch 91: Train Loss: 0.1172, Train Acc: 0.9821, Val Loss: 0.5118, Val Acc: 0.8989
+2026-02-20 03:34:57,707 - experiment_ablation_no_phase_space - INFO - Train Epoch 92: [0/472 (0.0%)]	Loss: 0.071259
+2026-02-20 03:35:03,922 - experiment_ablation_no_phase_space - DEBUG - [STABILITY] lyap=-0.014, max_norm=4.3, min_std=0.581
+2026-02-20 03:35:04,922 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 92: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049261
+2026-02-20 03:35:05,381 - experiment_ablation_no_phase_space - INFO - Epoch 92: Train Loss: 0.1092, Train Acc: 0.9821, Val Loss: 0.3179, Val Acc: 0.9438
+2026-02-20 03:35:06,142 - experiment_ablation_no_phase_space - INFO - Train Epoch 93: [0/472 (0.0%)]	Loss: 0.143323
+2026-02-20 03:35:13,485 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 93: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049441
+2026-02-20 03:35:13,954 - experiment_ablation_no_phase_space - INFO - Epoch 93: Train Loss: 0.1126, Train Acc: 0.9821, Val Loss: 0.3009, Val Acc: 0.9213
+2026-02-20 03:35:14,763 - experiment_ablation_no_phase_space - INFO - Train Epoch 94: [0/472 (0.0%)]	Loss: 0.088653
+2026-02-20 03:35:22,238 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 94: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049135
+2026-02-20 03:35:22,671 - experiment_ablation_no_phase_space - INFO - Epoch 94: Train Loss: 0.1114, Train Acc: 0.9866, Val Loss: 0.2804, Val Acc: 0.9101
+2026-02-20 03:35:23,443 - experiment_ablation_no_phase_space - INFO - Train Epoch 95: [0/472 (0.0%)]	Loss: 0.099587
+2026-02-20 03:35:30,732 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 95: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049518
+2026-02-20 03:35:31,183 - experiment_ablation_no_phase_space - INFO - Epoch 95: Train Loss: 0.1161, Train Acc: 0.9888, Val Loss: 0.1975, Val Acc: 0.9213
+2026-02-20 03:35:31,964 - experiment_ablation_no_phase_space - INFO - Train Epoch 96: [0/472 (0.0%)]	Loss: 0.100257
+2026-02-20 03:35:39,240 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 96: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048652
+2026-02-20 03:35:39,681 - experiment_ablation_no_phase_space - INFO - Epoch 96: Train Loss: 0.1393, Train Acc: 0.9754, Val Loss: 0.2051, Val Acc: 0.9438
+2026-02-20 03:35:40,468 - experiment_ablation_no_phase_space - INFO - Train Epoch 97: [0/472 (0.0%)]	Loss: 0.280628
+2026-02-20 03:35:47,857 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 97: sync_weight=0.01, desync_weight=0.01, loss_sync=0.048466
+2026-02-20 03:35:48,292 - experiment_ablation_no_phase_space - INFO - Epoch 97: Train Loss: 0.1408, Train Acc: 0.9732, Val Loss: 0.4919, Val Acc: 0.8876
+2026-02-20 03:35:49,062 - experiment_ablation_no_phase_space - INFO - Train Epoch 98: [0/472 (0.0%)]	Loss: 0.082978
+2026-02-20 03:35:57,363 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 98: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049110
+2026-02-20 03:35:57,836 - experiment_ablation_no_phase_space - INFO - Epoch 98: Train Loss: 0.1290, Train Acc: 0.9732, Val Loss: 0.3486, Val Acc: 0.8989
+2026-02-20 03:35:58,679 - experiment_ablation_no_phase_space - INFO - Train Epoch 99: [0/472 (0.0%)]	Loss: 0.070899
+2026-02-20 03:36:07,298 - experiment_ablation_no_phase_space - INFO - [SYNC DEBUG] Epoch 99: sync_weight=0.01, desync_weight=0.01, loss_sync=0.049163
+2026-02-20 03:36:07,909 - experiment_ablation_no_phase_space - INFO - Epoch 99: Train Loss: 0.1128, Train Acc: 0.9799, Val Loss: 0.2729, Val Acc: 0.9551
+2026-02-20 03:36:07,912 - experiment_ablation_no_phase_space - INFO - Running final test evaluation...
+2026-02-20 03:36:08,969 - experiment_ablation_no_phase_space - INFO - Test Results:
+2026-02-20 03:36:08,969 - experiment_ablation_no_phase_space - INFO -   loss: 0.2299
+2026-02-20 03:36:08,970 - experiment_ablation_no_phase_space - INFO -   accuracy: 0.9322
+2026-02-20 03:36:08,971 - experiment_ablation_no_phase_space - INFO - Training completed

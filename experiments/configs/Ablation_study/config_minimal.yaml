@@ -9,6 +9,7 @@ audio:
   normalize: true
   sample_rate: 16000
 batch_size: 32
+chaotic_system: lorenz
 data:
   data_dir: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
   num_workers: 4
@@ -42,11 +43,11 @@ loss:
     trajectory_bound: 50.0
     weight: 0.1
   synchronization:
-    desync_weight: 0.1
-    dynamic_warmup: false
+    desync_weight: 0.01
+    dynamic_warmup: true
     enabled: true
-    sync_weight: 0.1
-    warmup_epochs: 0
+    sync_weight: 0.01
+    warmup_epochs: 20
 model:
   attractor_pooling:
     type: comprehensive
