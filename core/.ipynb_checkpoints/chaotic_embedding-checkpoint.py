@@ -98,52 +98,37 @@ class ChaoticEmbedding(nn.Module):
 
         # Add after self.param_adapter definition
         if use_bifurcation_control:
-            self.num_regimes = 4
-            # Learnable rho centroids, all initialized in the chaotic regime (rho > 24.74)
-            # The model will learn which rho values best discriminate speakers
-            self.regime_rho_centroids = nn.Parameter(
-                torch.tensor([26.0, 30.0, 40.0, 55.0])
-            )
-            # Soft regime selector: features -> which dynamical regime
-            self.regime_selector = nn.Sequential(
-                nn.Linear(input_dim, 32),
+            self.bifurcation_net = nn.Sequential(
+                nn.Linear(input_dim, 16),
                 nn.ReLU(),
-                nn.Linear(32, self.num_regimes),
-                nn.Softmax(dim=-1)
+                nn.Linear(16, 1),
+                nn.Sigmoid()  # Output in [0, 1]
             )
             self.use_bifurcation_control = True
         else:
-            self.regime_rho_centroids = None
-            self.regime_selector = None
+            self.bifurcation_net = None
             self.use_bifurcation_control = False
         
         # Feature mapping networks
         self.initial_state_mapper = nn.Sequential(
-            nn.Linear(input_dim, 128),  # ← 从16增加到128
-            nn.ReLU(),
-            nn.Dropout(0.1),
-            nn.Linear(128, 64),
-            nn.ReLU(),
-            nn.Linear(64, self.state_dim),
+            nn.Linear(input_dim, 16),
+            nn.Tanh(),
+            nn.Linear(16, self.state_dim),
             nn.Tanh()
         )
         
         self.coupling_mapper = nn.Sequential(
-            nn.Linear(input_dim, 64),  # ← 从8增加到64
-            nn.ReLU(),
-            nn.Linear(64, 32),
-            nn.ReLU(),
-            nn.Linear(32, self.state_dim),
+            nn.Linear(input_dim, 8),
+            nn.Tanh(),
+            nn.Linear(8, self.state_dim),
             nn.Tanh()
         )
         
+        # Parameter adaptation network
         self.param_adapter = nn.Sequential(
-            nn.Linear(input_dim, 64),  # ← 从8增加到64
+            nn.Linear(input_dim, 8),
             nn.ReLU(),
-            nn.Dropout(0.1),
-            nn.Linear(64, 32),
-            nn.ReLU(),
-            nn.Linear(32, 3),
+            nn.Linear(8, 3),  # Adapt sigma, rho, beta
             nn.Sigmoid()
         )
         
@@ -213,7 +198,47 @@ class ChaoticEmbedding(nn.Module):
         dz_dt = b + z * (x - c) + coupling_z
         
         return torch.stack([dx_dt, dy_dt, dz_dt], dim=1)
-    
+
+    def _chua_dynamics(
+        self,
+        state: torch.Tensor,
+        coupling: torch.Tensor,
+        params: torch.Tensor
+    ) -> torch.Tensor:
+        """
+        Compute Chua's circuit dynamics.
+
+        Chua's equations:
+            dx/dt = alpha * (y - x - f(x))
+            dy/dt = x - y + z
+            dz/dt = -beta * y
+        where f(x) = m1*x + 0.5*(m0-m1)*(|x+1| - |x-1|) is the piecewise-linear nonlinearity.
+
+        Args:
+            state: Current state [batch_size, 3] - (x, y, z)
+            coupling: Coupling terms [batch_size, 3]
+            params: System parameters [batch_size, 3] - (alpha, beta, m0)
+                    m1 is fixed at a standard value relative to m0.
+
+        Returns:
+            State derivatives [batch_size, 3]
+        """
+        x, y, z = state[:, 0], state[:, 1], state[:, 2]
+        alpha, beta, m0 = params[:, 0], params[:, 1], params[:, 2]
+        coupling_x, coupling_y, coupling_z = coupling[:, 0], coupling[:, 1], coupling[:, 2]
+
+        # Standard Chua diode slope values: m1 = -0.5, m0 varies
+        m1 = torch.full_like(m0, -0.5)
+
+        # Piecewise-linear Chua diode nonlinearity
+        h_x = m1 * x + 0.5 * (m0 - m1) * (torch.abs(x + 1.0) - torch.abs(x - 1.0))
+
+        dx_dt = alpha * (y - x - h_x) + coupling_x
+        dy_dt = x - y + z + coupling_y
+        dz_dt = -beta * y + coupling_z
+
+        return torch.stack([dx_dt, dy_dt, dz_dt], dim=1)
+
     def _mackey_glass_dynamics(
         self,
         x_current: torch.Tensor,
@@ -277,6 +302,8 @@ class ChaoticEmbedding(nn.Module):
             dynamics_fn = self._lorenz_dynamics
         elif self.system_type == 'rossler':
             dynamics_fn = self._rossler_dynamics
+        elif self.system_type == 'chua':
+            dynamics_fn = self._chua_dynamics
         else:
             raise ValueError(f"Unsupported system type for RK4: {self.system_type}. "
                            f"Use _integrate_mackey_glass for mackey_glass system.")
@@ -477,17 +504,25 @@ class ChaoticEmbedding(nn.Module):
         param_scales = self.param_adapter(features)
         
         if self.system_type == 'lorenz':
-            param_scales = self.param_adapter(features)
-            sigma = self.sigma * (0.5 + param_scales[:, 0])
-            beta  = self.beta  * (0.5 + param_scales[:, 2])
-
-            if self.use_bifurcation_control and self.regime_selector is not None:
-                regime_weights = self.regime_selector(features)
-                rho = (regime_weights * self.regime_rho_centroids.unsqueeze(0)).sum(dim=1)
-                rho = torch.clamp(rho, min=24.74, max=100.0)
-            else:
-                rho = self.rho * (0.5 + param_scales[:, 1])
-
+            # Scale parameters around typical Lorenz values
+            sigma = self.sigma * (0.5 + param_scales[:, 0])  # 5-15
+            rho = self.rho * (0.5 + param_scales[:, 1])      # 14-42
+            beta = self.beta * (0.5 + param_scales[:, 2])    # 1.3-4.0
+            
+            # FIX v2: Bifurcation control as MODULATION, not replacement
+            # This preserves the learned param_adapter mapping while adding
+            # bifurcation-aware adjustment
+            if self.use_bifurcation_control and self.bifurcation_net is not None:
+                regime_signal = self.bifurcation_net(features).squeeze(-1)  # [batch], in [0, 1]
+                
+                # Option A: Multiplicative modulation (Â±20%)
+                # modulation_factor in [0.8, 1.2]
+                modulation_factor = 0.8 + 0.4 * regime_signal
+                rho = rho * modulation_factor
+                
+                # Clamp to safe chaotic range
+                rho = torch.clamp(rho, min=20.0, max=50.0)
+            
             return torch.stack([sigma, rho, beta], dim=1)
             
         elif self.system_type == 'rossler':
@@ -630,16 +665,28 @@ class AdaptiveChaoticEmbedding(ChaoticEmbedding):
         
         if self.system_type == 'lorenz':
             sigma = self.sigma_base * (0.5 + param_scales[:, 0])
-            beta  = self.beta_base  * (0.5 + param_scales[:, 2])
-
-            if self.use_bifurcation_control and self.regime_selector is not None:
-                regime_weights = self.regime_selector(features)
-                rho = (regime_weights * self.regime_rho_centroids.unsqueeze(0)).sum(dim=1)
-                rho = torch.clamp(rho, min=24.74, max=100.0)
-            else:
-                rho = self.rho_base * (0.5 + param_scales[:, 1])
-
+            rho = self.rho_base * (0.5 + param_scales[:, 1])
+            beta = self.beta_base * (0.5 + param_scales[:, 2])
+            
+            # FIX v2: Bifurcation control as MODULATION, not replacement
+            if self.use_bifurcation_control and self.bifurcation_net is not None:
+                regime_signal = self.bifurcation_net(features).squeeze(-1)  # [batch], in [0, 1]
+                
+                # Multiplicative modulation (Â±20%)
+                modulation_factor = 0.8 + 0.4 * regime_signal
+                rho = rho * modulation_factor
+                
+                # Clamp to safe chaotic range
+                rho = torch.clamp(rho, min=20.0, max=50.0)
+            
             return torch.stack([sigma, rho, beta], dim=1)
+            
+        else:
+            sigma = param_scales[:, 0]
+            rho = param_scales[:, 1] 
+            beta = param_scales[:, 2]
+            
+        return torch.stack([sigma, rho, beta], dim=1)
 
 
 # Factory function for easy instantiation

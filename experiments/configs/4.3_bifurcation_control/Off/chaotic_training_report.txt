@@ -1,6 +1,6 @@
 CHAOTIC NEURAL NETWORKS TRAINING REPORT
 ============================================================
-Generated: 2026-02-20 05:05:56
+Generated: 2026-02-23 09:50:33
 Configuration: {
   "_nested": {
     "experiment": {
@@ -435,7 +435,7 @@ CHAOTIC SYSTEMS COMPARISON
 ---------------------------
 LORENZ:
   Accuracy: 0.9407 ± 0.0000 [nan, nan]
-  Training Time: 740.3s ± 0.0s
+  Training Time: 730.5s ± 0.0s
   Success Rate: 100.0%
   Experiments: 1
 
@@ -446,12 +446,12 @@ full_chaotic: 0.9407 ± 0.0000
 CHAOTIC DYNAMICS ANALYSIS
 -------------------------
 Key dynamics trends observed during training:
-  divergence_rate: {'decreasing': 1}
   trajectory_std: {'increasing': 1}
+  divergence_rate: {'decreasing': 1}
+  trajectory_range: {'decreasing': 1}
   embedding_separation: {'increasing': 1}
   feature_magnitude: {'decreasing': 1}
   feature_diversity: {'increasing': 1}
-  trajectory_range: {'decreasing': 1}
 
 RECOMMENDATIONS
 ---------------

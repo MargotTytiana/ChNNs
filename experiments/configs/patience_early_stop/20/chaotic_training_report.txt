@@ -1,6 +1,6 @@
 CHAOTIC NEURAL NETWORKS TRAINING REPORT
 ============================================================
-Generated: 2026-01-12 13:19:58
+Generated: 2026-02-23 10:45:16
 Configuration: {
   "_nested": {
     "experiment": {
@@ -92,11 +92,10 @@ Configuration: {
       },
       "synchronization": {
         "enabled": true,
-        "sync_weight": 0.0,
-        "desync_weight": 0.1,
-        "margin": 5.0,
-        "sample_ratio": 0.3,
-        "distance_type": "euclidean"
+        "sync_weight": 0.01,
+        "desync_weight": 0.01,
+        "dynamic_warmup": true,
+        "warmup_epochs": 20
       },
       "adversarial": {
         "enabled": true,
@@ -213,11 +212,10 @@ Configuration: {
     },
     "synchronization": {
       "enabled": true,
-      "sync_weight": 0.0,
-      "desync_weight": 0.1,
-      "margin": 5.0,
-      "sample_ratio": 0.3,
-      "distance_type": "euclidean"
+      "sync_weight": 0.01,
+      "desync_weight": 0.01,
+      "dynamic_warmup": true,
+      "warmup_epochs": 20
     },
     "adversarial": {
       "enabled": true,
@@ -243,29 +241,29 @@ EXECUTIVE SUMMARY
 Total experiments: 1
 Successful experiments: 1
 Success rate: 100.0%
-Best configuration: lorenz + full_chaotic (0.9492)
+Best configuration: lorenz + full_chaotic (0.9746)
 
 CHAOTIC SYSTEMS COMPARISON
 ---------------------------
 LORENZ:
-  Accuracy: 0.9492 ± 0.0000 [nan, nan]
-  Training Time: 856.5s ± 0.0s
+  Accuracy: 0.9746 ± 0.0000 [nan, nan]
+  Training Time: 951.1s ± 0.0s
   Success Rate: 100.0%
   Experiments: 1
 
 MODEL TYPES COMPARISON
 ----------------------
-full_chaotic: 0.9492 ± 0.0000
+full_chaotic: 0.9746 ± 0.0000
 
 CHAOTIC DYNAMICS ANALYSIS
 -------------------------
 Key dynamics trends observed during training:
   trajectory_std: {'increasing': 1}
-  embedding_separation: {'increasing': 1}
-  divergence_rate: {'increasing': 1}
-  trajectory_range: {'decreasing': 1}
+  divergence_rate: {'decreasing': 1}
   feature_magnitude: {'decreasing': 1}
   feature_diversity: {'increasing': 1}
+  trajectory_range: {'increasing': 1}
+  embedding_separation: {'increasing': 1}
 
 RECOMMENDATIONS
 ---------------

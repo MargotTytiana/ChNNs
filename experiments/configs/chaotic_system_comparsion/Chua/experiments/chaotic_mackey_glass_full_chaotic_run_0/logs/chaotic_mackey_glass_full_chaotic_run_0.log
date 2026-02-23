@@ -1,0 +1,39 @@
+2026-02-23 10:10:23,981 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_mackey_glass_full_chaotic_run_0
+2026-02-23 10:10:23,982 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Device: cuda
+2026-02-23 10:10:23,982 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_mackey_glass_full_chaotic_run_0
+2026-02-23 10:10:23,983 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-23 10:10:23,983 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup epochs: 20
+2026-02-23 10:10:23,983 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with mackey_glass system
+2026-02-23 10:10:23,983 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-02-23 10:10:23,983 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-02-23 10:10:24,370 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-02-23 10:10:24,370 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-02-23 10:10:24,370 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-02-23 10:10:24,370 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-02-23 10:10:24,370 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-02-23 10:10:24,370 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Creating model...
+2026-02-23 10:10:24,370 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-02-23 10:11:30,348 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Total parameters: 584,959
+2026-02-23 10:11:30,348 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Trainable parameters: 584,959
+2026-02-23 10:11:30,348 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Creating optimizer...
+2026-02-23 10:11:31,476 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2026-02-23 10:11:31,476 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Creating scheduler...
+2026-02-23 10:11:31,476 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2026-02-23 10:11:31,476 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Creating criterion...
+2026-02-23 10:11:31,476 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-23 10:11:31,554 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_mackey_glass_full_chaotic_run_0/config.json
+2026-02-23 10:11:31,554 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Experiment setup completed
+2026-02-23 10:11:31,554 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2026-02-23 10:11:31,698 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - 
+================================================================================
+2026-02-23 10:11:31,698 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-23 10:11:31,698 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - ================================================================================
+2026-02-23 10:11:31,698 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Batch Info:
+2026-02-23 10:11:31,698 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-23 10:11:31,698 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-23 10:11:31,703 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([23, 10, 24, 14,  5, 17,  8,  0], device='cuda:0')
+2026-02-23 10:11:34,159 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - ================================================================================
+
+2026-02-23 10:11:37,017 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - [STABILITY] Initialized LyapunovStabilityLoss
+2026-02-23 10:11:37,025 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - DEBUG - [STABILITY] lyap=-0.001, max_norm=1.7, min_std=0.003
+2026-02-23 10:11:47,051 - experiment_chaotic_mackey_glass_full_chaotic_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.712539

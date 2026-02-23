@@ -80,11 +80,10 @@ loss:
     
   synchronization:
     enabled: true
-    sync_weight: 0.0       # DISABLED: don't pull same-speaker together
-    desync_weight: 0.1     # ENABLED: push different-speaker apart
-    margin: 5.0
-    sample_ratio: 0.3
-    distance_type: "euclidean"
+    sync_weight: 0.01
+    desync_weight: 0.01
+    dynamic_warmup: True
+    warmup_epochs: 20
     
   adversarial:
     enabled: true
@@ -110,7 +109,7 @@ training:
     
   early_stopping:
     enabled: true
-    patience: 19
+    patience: 5
     monitor: "val_accuracy"
     mode: "max"
     

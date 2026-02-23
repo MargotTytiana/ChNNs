@@ -1,0 +1,98 @@
+2026-02-23 09:55:59,839 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_chua_full_chaotic_run_0
+2026-02-23 09:55:59,839 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Device: cuda
+2026-02-23 09:55:59,840 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_chua_full_chaotic_run_0
+2026-02-23 09:55:59,840 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with chua system
+2026-02-23 09:55:59,840 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-02-23 09:55:59,840 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-02-23 09:56:00,226 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-02-23 09:56:00,226 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-02-23 09:56:00,226 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-02-23 09:56:00,226 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-02-23 09:56:00,226 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-02-23 09:56:00,226 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating model...
+2026-02-23 09:56:00,226 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-02-23 10:09:09,722 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_chua_full_chaotic_run_0
+2026-02-23 10:09:09,722 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Device: cuda
+2026-02-23 10:09:09,722 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_chua_full_chaotic_run_0
+2026-02-23 10:09:09,723 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-23 10:09:09,723 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup epochs: 20
+2026-02-23 10:09:09,723 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with chua system
+2026-02-23 10:09:09,724 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-02-23 10:09:09,724 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-02-23 10:09:10,110 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-02-23 10:09:10,110 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-02-23 10:09:10,110 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-02-23 10:09:10,110 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-02-23 10:09:10,111 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-02-23 10:09:10,111 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating model...
+2026-02-23 10:09:10,111 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-02-23 10:10:16,731 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Total parameters: 584,959
+2026-02-23 10:10:16,731 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Trainable parameters: 584,959
+2026-02-23 10:10:16,731 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating optimizer...
+2026-02-23 10:10:17,865 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2026-02-23 10:10:17,865 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating scheduler...
+2026-02-23 10:10:17,865 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2026-02-23 10:10:17,865 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating criterion...
+2026-02-23 10:10:17,865 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-23 10:10:17,939 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_chua_full_chaotic_run_0/config.json
+2026-02-23 10:10:17,939 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Experiment setup completed
+2026-02-23 10:10:17,940 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2026-02-23 10:10:18,078 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - 
+================================================================================
+2026-02-23 10:10:18,079 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-23 10:10:18,079 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - ================================================================================
+2026-02-23 10:10:18,079 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Batch Info:
+2026-02-23 10:10:18,079 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-23 10:10:18,079 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-23 10:10:18,083 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([23, 10, 24, 14,  5, 17,  8,  0], device='cuda:0')
+2026-02-23 10:10:18,461 - experiment_chaotic_chua_full_chaotic_run_0 - ERROR - Training failed with error: Unsupported system type for RK4: chua. Use _integrate_mackey_glass for mackey_glass system.
+2026-02-23 16:01:54,337 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_chua_full_chaotic_run_0
+2026-02-23 16:01:54,350 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Device: cuda
+2026-02-23 16:01:54,350 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_chua_full_chaotic_run_0
+2026-02-23 16:01:54,362 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-23 16:01:54,362 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup epochs: 20
+2026-02-23 16:01:54,362 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with chua system
+2026-02-23 16:01:54,362 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-02-23 16:01:54,362 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-02-23 16:01:58,031 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-02-23 16:01:58,031 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-02-23 16:01:58,031 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-02-23 16:01:58,031 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-02-23 16:01:58,031 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-02-23 16:01:58,031 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating model...
+2026-02-23 16:01:58,031 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
+2026-02-23 16:03:03,812 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Total parameters: 584,959
+2026-02-23 16:03:03,813 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Trainable parameters: 584,959
+2026-02-23 16:03:03,813 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating optimizer...
+2026-02-23 16:03:04,939 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Optimizer: AdamW
+2026-02-23 16:03:04,939 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating scheduler...
+2026-02-23 16:03:04,939 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Scheduler: CosineAnnealingLR
+2026-02-23 16:03:04,939 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating criterion...
+2026-02-23 16:03:04,939 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-23 16:03:05,013 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_chua_full_chaotic_run_0/config.json
+2026-02-23 16:03:05,013 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Experiment setup completed
+2026-02-23 16:03:05,014 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Starting training for 100 epochs
+2026-02-23 16:03:05,172 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - 
+================================================================================
+2026-02-23 16:03:05,172 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-23 16:03:05,172 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - ================================================================================
+2026-02-23 16:03:05,172 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Batch Info:
+2026-02-23 16:03:05,172 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-23 16:03:05,172 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-23 16:03:05,176 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Targets (first 8): tensor([23, 10, 24, 14,  5, 17,  8,  0], device='cuda:0')
+2026-02-23 16:03:05,551 - experiment_chaotic_chua_full_chaotic_run_0 - ERROR - Training failed with error: Unsupported system type for RK4: chua. Use _integrate_mackey_glass for mackey_glass system.
+2026-02-23 16:15:20,514 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized experiment: chaotic_chua_full_chaotic_run_0
+2026-02-23 16:15:20,514 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Device: cuda
+2026-02-23 16:15:20,514 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/experiments/configs/chaotic_system_comparsion/Chua/experiments/chaotic_chua_full_chaotic_run_0
+2026-02-23 16:15:20,516 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - [SYNC LOSS] Enabled with mode: standard
+2026-02-23 16:15:20,516 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - [SYNC LOSS] Warmup epochs: 20
+2026-02-23 16:15:20,516 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Initialized chaotic network experiment with chua system
+2026-02-23 16:15:20,516 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Setting up experiment components...
+2026-02-23 16:15:20,516 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating dataloaders...
+2026-02-23 16:15:20,916 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Detected 26 speakers in dataset
+2026-02-23 16:15:20,917 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Dataloaders created:
+2026-02-23 16:15:20,917 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Train: 14 batches
+2026-02-23 16:15:20,917 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Val: 3 batches
+2026-02-23 16:15:20,917 - experiment_chaotic_chua_full_chaotic_run_0 - INFO -   Test: 4 batches
+2026-02-23 16:15:20,917 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Creating model...
+2026-02-23 16:15:20,917 - experiment_chaotic_chua_full_chaotic_run_0 - INFO - Using actual num_speakers from dataset: 26
