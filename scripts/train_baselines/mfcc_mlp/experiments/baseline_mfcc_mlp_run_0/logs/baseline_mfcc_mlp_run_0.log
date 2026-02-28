@@ -231,3 +231,601 @@
 2026-01-13 13:35:31,609 - experiment_baseline_mfcc_mlp_run_0 - INFO - Training completed
 2026-01-13 13:35:32,219 - experiment_baseline_mfcc_mlp_run_0 - INFO - Running baseline analysis...
 2026-01-13 13:35:32,222 - experiment_baseline_mfcc_mlp_run_0 - INFO - Baseline analysis completed
+2026-02-28 04:46:22,092 - experiment_baseline_mfcc_mlp_run_0 - INFO - Initialized experiment: baseline_mfcc_mlp_run_0
+2026-02-28 04:46:22,106 - experiment_baseline_mfcc_mlp_run_0 - INFO - Device: cuda
+2026-02-28 04:46:22,106 - experiment_baseline_mfcc_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/experiments/baseline_mfcc_mlp_run_0
+2026-02-28 04:46:22,106 - experiment_baseline_mfcc_mlp_run_0 - INFO - Initialized mfcc_mlp baseline experiment
+2026-02-28 04:46:22,107 - experiment_baseline_mfcc_mlp_run_0 - INFO - Setting up experiment components...
+2026-02-28 04:46:22,173 - experiment_baseline_mfcc_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-02-28 04:46:22,173 - experiment_baseline_mfcc_mlp_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-02-28 04:46:22,392 - experiment_baseline_mfcc_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 04:46:22,392 - experiment_baseline_mfcc_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 04:46:22,392 - experiment_baseline_mfcc_mlp_run_0 - INFO - Total parameters: 15,876
+2026-02-28 04:46:22,392 - experiment_baseline_mfcc_mlp_run_0 - INFO - Trainable parameters: 15,876
+2026-02-28 04:46:40,773 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 04:46:41,766 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 04:46:42,714 - experiment_baseline_mfcc_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 0-25
+2026-02-28 04:46:52,062 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 04:46:54,203 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 04:46:57,113 - experiment_baseline_mfcc_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 04:46:57,113 - experiment_baseline_mfcc_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 04:46:57,113 - experiment_baseline_mfcc_mlp_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-02-28 04:46:57,113 - experiment_baseline_mfcc_mlp_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-02-28 04:46:57,113 - experiment_baseline_mfcc_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-02-28 04:46:57,113 - experiment_baseline_mfcc_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 04:46:57,114 - experiment_baseline_mfcc_mlp_run_0 - INFO - BASELINE TYPE: mfcc_mlp
+2026-02-28 04:46:57,114 - experiment_baseline_mfcc_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-02-28 04:46:57,500 - experiment_baseline_mfcc_mlp_run_0 - INFO - Dataloaders created:
+2026-02-28 04:46:57,501 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Train: 14 batches
+2026-02-28 04:46:57,501 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Val: 3 batches
+2026-02-28 04:46:57,501 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Test: 4 batches
+2026-02-28 04:47:00,309 - experiment_baseline_mfcc_mlp_run_0 - INFO - Optimizer: Adam
+2026-02-28 04:47:00,309 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scheduler: StepLR
+2026-02-28 04:47:00,309 - experiment_baseline_mfcc_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 04:47:00,393 - experiment_baseline_mfcc_mlp_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/experiments/baseline_mfcc_mlp_run_0/config.json
+2026-02-28 04:47:00,393 - experiment_baseline_mfcc_mlp_run_0 - INFO - Experiment setup completed
+2026-02-28 04:47:00,393 - experiment_baseline_mfcc_mlp_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 04:47:00,471 - experiment_baseline_mfcc_mlp_run_0 - INFO - 
+================================================================================
+2026-02-28 04:47:00,471 - experiment_baseline_mfcc_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 04:47:00,471 - experiment_baseline_mfcc_mlp_run_0 - INFO - ================================================================================
+2026-02-28 04:47:00,471 - experiment_baseline_mfcc_mlp_run_0 - INFO - Batch Info:
+2026-02-28 04:47:00,471 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 04:47:00,471 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 04:47:00,478 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Targets (first 8): tensor([ 1, 10,  7, 24, 25,  1,  5, 13], device='cuda:0')
+2026-02-28 04:47:03,978 - experiment_baseline_mfcc_mlp_run_0 - INFO - ================================================================================
+
+2026-02-28 04:47:04,806 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.854233
+2026-02-28 04:47:08,481 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 0: Train Loss: 4.6068, Train Acc: 0.0179, Val Loss: 4.4761, Val Acc: 0.0337
+2026-02-28 04:47:08,694 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 04:47:08,898 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.395479
+2026-02-28 04:47:11,891 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 1: Train Loss: 4.2935, Train Acc: 0.0692, Val Loss: 4.2129, Val Acc: 0.1798
+2026-02-28 04:47:12,069 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 04:47:12,255 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 4.037515
+2026-02-28 04:47:15,222 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 2: Train Loss: 4.0353, Train Acc: 0.1451, Val Loss: 3.9412, Val Acc: 0.3258
+2026-02-28 04:47:15,370 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 04:47:15,558 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.954504
+2026-02-28 04:47:18,553 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 3: Train Loss: 3.7567, Train Acc: 0.1719, Val Loss: 3.6882, Val Acc: 0.3596
+2026-02-28 04:47:18,681 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 04:47:18,868 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 3.557269
+2026-02-28 04:47:21,833 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 4: Train Loss: 3.5535, Train Acc: 0.2254, Val Loss: 3.4423, Val Acc: 0.4270
+2026-02-28 04:47:21,957 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 04:47:22,144 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 3.410331
+2026-02-28 04:47:25,106 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 5: Train Loss: 3.3162, Train Acc: 0.2656, Val Loss: 3.2356, Val Acc: 0.4607
+2026-02-28 04:47:25,225 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 04:47:25,413 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 3.087299
+2026-02-28 04:47:28,370 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 6: Train Loss: 3.2188, Train Acc: 0.2612, Val Loss: 3.0274, Val Acc: 0.4944
+2026-02-28 04:47:28,501 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 04:47:28,686 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 3.220518
+2026-02-28 04:47:31,643 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 7: Train Loss: 3.0146, Train Acc: 0.3304, Val Loss: 2.8772, Val Acc: 0.5618
+2026-02-28 04:47:31,765 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 7
+2026-02-28 04:47:31,952 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 2.863085
+2026-02-28 04:47:34,914 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 8: Train Loss: 2.8271, Train Acc: 0.3817, Val Loss: 2.6724, Val Acc: 0.5393
+2026-02-28 04:47:35,200 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 2.704650
+2026-02-28 04:47:38,220 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 9: Train Loss: 2.7650, Train Acc: 0.3661, Val Loss: 2.4798, Val Acc: 0.5618
+2026-02-28 04:47:38,529 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 2.522538
+2026-02-28 04:47:41,743 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 10: Train Loss: 2.5661, Train Acc: 0.3862, Val Loss: 2.3653, Val Acc: 0.5730
+2026-02-28 04:47:41,864 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 04:47:42,070 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 2.706641
+2026-02-28 04:47:45,090 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 11: Train Loss: 2.4723, Train Acc: 0.4375, Val Loss: 2.2160, Val Acc: 0.6067
+2026-02-28 04:47:45,213 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 11
+2026-02-28 04:47:45,403 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 2.345113
+2026-02-28 04:47:48,447 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 12: Train Loss: 2.3174, Train Acc: 0.4464, Val Loss: 2.0833, Val Acc: 0.6292
+2026-02-28 04:47:48,571 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 12
+2026-02-28 04:47:48,761 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 2.257797
+2026-02-28 04:47:51,750 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 13: Train Loss: 2.2460, Train Acc: 0.5290, Val Loss: 1.9781, Val Acc: 0.6517
+2026-02-28 04:47:51,872 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 13
+2026-02-28 04:47:52,061 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 2.379120
+2026-02-28 04:47:55,051 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 14: Train Loss: 2.1837, Train Acc: 0.4844, Val Loss: 1.8819, Val Acc: 0.6292
+2026-02-28 04:47:55,339 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 2.214669
+2026-02-28 04:47:58,349 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 15: Train Loss: 2.1652, Train Acc: 0.4777, Val Loss: 1.8019, Val Acc: 0.6742
+2026-02-28 04:47:58,470 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 15
+2026-02-28 04:47:58,659 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 1.990242
+2026-02-28 04:48:01,651 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 16: Train Loss: 2.0367, Train Acc: 0.4911, Val Loss: 1.7167, Val Acc: 0.7191
+2026-02-28 04:48:01,772 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 16
+2026-02-28 04:48:01,965 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 2.016618
+2026-02-28 04:48:04,984 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 17: Train Loss: 1.9153, Train Acc: 0.5625, Val Loss: 1.6287, Val Acc: 0.7303
+2026-02-28 04:48:05,107 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 17
+2026-02-28 04:48:05,294 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 1.809323
+2026-02-28 04:48:08,281 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 18: Train Loss: 1.9310, Train Acc: 0.5580, Val Loss: 1.5289, Val Acc: 0.7416
+2026-02-28 04:48:08,403 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 18
+2026-02-28 04:48:08,592 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 1.735083
+2026-02-28 04:48:11,577 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 19: Train Loss: 1.7328, Train Acc: 0.5893, Val Loss: 1.4517, Val Acc: 0.7191
+2026-02-28 04:48:11,868 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 1.639458
+2026-02-28 04:48:14,856 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 20: Train Loss: 1.7028, Train Acc: 0.5759, Val Loss: 1.3826, Val Acc: 0.7865
+2026-02-28 04:48:14,980 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 20
+2026-02-28 04:48:15,184 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 1.865077
+2026-02-28 04:48:18,167 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 21: Train Loss: 1.7021, Train Acc: 0.5893, Val Loss: 1.3243, Val Acc: 0.7753
+2026-02-28 04:48:18,465 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 1.726413
+2026-02-28 04:48:21,457 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 22: Train Loss: 1.6309, Train Acc: 0.6116, Val Loss: 1.2638, Val Acc: 0.7865
+2026-02-28 04:48:21,746 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 1.696756
+2026-02-28 04:48:24,749 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 23: Train Loss: 1.6215, Train Acc: 0.6027, Val Loss: 1.2001, Val Acc: 0.7640
+2026-02-28 04:48:25,037 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 1.532275
+2026-02-28 04:48:28,009 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 24: Train Loss: 1.4927, Train Acc: 0.6228, Val Loss: 1.1793, Val Acc: 0.7865
+2026-02-28 04:48:28,294 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 1.519977
+2026-02-28 04:48:31,302 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 25: Train Loss: 1.5203, Train Acc: 0.6429, Val Loss: 1.1356, Val Acc: 0.8090
+2026-02-28 04:48:31,423 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 25
+2026-02-28 04:48:31,611 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 1.507972
+2026-02-28 04:48:34,595 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 26: Train Loss: 1.3879, Train Acc: 0.6451, Val Loss: 1.0745, Val Acc: 0.8090
+2026-02-28 04:48:34,881 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 1.506789
+2026-02-28 04:48:37,867 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 27: Train Loss: 1.4455, Train Acc: 0.6384, Val Loss: 1.0331, Val Acc: 0.7978
+2026-02-28 04:48:38,158 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 1.430861
+2026-02-28 04:48:41,140 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 28: Train Loss: 1.3613, Train Acc: 0.6272, Val Loss: 0.9959, Val Acc: 0.8202
+2026-02-28 04:48:41,261 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 28
+2026-02-28 04:48:41,452 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 1.312425
+2026-02-28 04:48:44,466 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 29: Train Loss: 1.2573, Train Acc: 0.7165, Val Loss: 0.9805, Val Acc: 0.8202
+2026-02-28 04:48:44,754 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 1.051719
+2026-02-28 04:48:47,768 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 30: Train Loss: 1.2364, Train Acc: 0.6674, Val Loss: 0.9326, Val Acc: 0.8090
+2026-02-28 04:48:48,073 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 1.165259
+2026-02-28 04:48:51,077 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 31: Train Loss: 1.2426, Train Acc: 0.6920, Val Loss: 0.9139, Val Acc: 0.8315
+2026-02-28 04:48:51,197 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 31
+2026-02-28 04:48:51,384 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 1.052791
+2026-02-28 04:48:54,396 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 32: Train Loss: 1.1872, Train Acc: 0.7188, Val Loss: 0.9084, Val Acc: 0.8427
+2026-02-28 04:48:54,519 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 32
+2026-02-28 04:48:54,754 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 1.472892
+2026-02-28 04:48:57,773 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 33: Train Loss: 1.2131, Train Acc: 0.7054, Val Loss: 0.8757, Val Acc: 0.8539
+2026-02-28 04:48:57,894 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 33
+2026-02-28 04:48:58,084 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 1.137183
+2026-02-28 04:49:01,080 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 34: Train Loss: 1.2029, Train Acc: 0.6897, Val Loss: 0.8511, Val Acc: 0.8427
+2026-02-28 04:49:01,370 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 1.147167
+2026-02-28 04:49:04,394 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 35: Train Loss: 1.0823, Train Acc: 0.7522, Val Loss: 0.8491, Val Acc: 0.8539
+2026-02-28 04:49:04,686 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 1.066856
+2026-02-28 04:49:07,727 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 36: Train Loss: 1.1772, Train Acc: 0.6987, Val Loss: 0.8246, Val Acc: 0.8315
+2026-02-28 04:49:08,019 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 1.270523
+2026-02-28 04:49:11,015 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 37: Train Loss: 1.1280, Train Acc: 0.7054, Val Loss: 0.7995, Val Acc: 0.8315
+2026-02-28 04:49:11,306 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.995250
+2026-02-28 04:49:14,316 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 38: Train Loss: 1.1183, Train Acc: 0.7321, Val Loss: 0.7934, Val Acc: 0.8202
+2026-02-28 04:49:14,604 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 1.200468
+2026-02-28 04:49:17,572 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 39: Train Loss: 1.1313, Train Acc: 0.6987, Val Loss: 0.7690, Val Acc: 0.8427
+2026-02-28 04:49:17,860 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 1.154472
+2026-02-28 04:49:20,831 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 40: Train Loss: 1.1025, Train Acc: 0.7366, Val Loss: 0.7672, Val Acc: 0.8539
+2026-02-28 04:49:21,134 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 1.039754
+2026-02-28 04:49:24,091 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 41: Train Loss: 1.0873, Train Acc: 0.7031, Val Loss: 0.7433, Val Acc: 0.8539
+2026-02-28 04:49:24,378 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 1.064250
+2026-02-28 04:49:27,344 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 42: Train Loss: 1.1049, Train Acc: 0.6830, Val Loss: 0.7214, Val Acc: 0.8652
+2026-02-28 04:49:27,468 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 42
+2026-02-28 04:49:27,656 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.929126
+2026-02-28 04:49:30,623 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 43: Train Loss: 1.0262, Train Acc: 0.7589, Val Loss: 0.7093, Val Acc: 0.8652
+2026-02-28 04:49:30,922 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 1.057843
+2026-02-28 04:49:33,893 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 44: Train Loss: 1.0594, Train Acc: 0.7254, Val Loss: 0.7026, Val Acc: 0.8539
+2026-02-28 04:49:34,178 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.918734
+2026-02-28 04:49:37,179 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 45: Train Loss: 0.9849, Train Acc: 0.7612, Val Loss: 0.6818, Val Acc: 0.8652
+2026-02-28 04:49:37,471 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.899392
+2026-02-28 04:49:40,516 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 46: Train Loss: 1.0583, Train Acc: 0.7321, Val Loss: 0.6670, Val Acc: 0.8764
+2026-02-28 04:49:40,639 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 46
+2026-02-28 04:49:40,835 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.870805
+2026-02-28 04:49:44,276 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 47: Train Loss: 0.9841, Train Acc: 0.7612, Val Loss: 0.6769, Val Acc: 0.8764
+2026-02-28 04:49:44,570 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.685603
+2026-02-28 04:49:47,547 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 48: Train Loss: 0.9701, Train Acc: 0.7411, Val Loss: 0.6392, Val Acc: 0.8764
+2026-02-28 04:49:47,833 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.891381
+2026-02-28 04:49:50,802 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 49: Train Loss: 1.0023, Train Acc: 0.7478, Val Loss: 0.6344, Val Acc: 0.8764
+2026-02-28 04:49:51,090 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.693790
+2026-02-28 04:49:54,058 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 50: Train Loss: 0.9628, Train Acc: 0.7500, Val Loss: 0.6443, Val Acc: 0.8876
+2026-02-28 04:49:54,182 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 50
+2026-02-28 04:49:54,383 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.857043
+2026-02-28 04:49:57,356 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 51: Train Loss: 0.9780, Train Acc: 0.7321, Val Loss: 0.6194, Val Acc: 0.8876
+2026-02-28 04:49:57,643 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.888386
+2026-02-28 04:50:00,619 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 52: Train Loss: 0.9165, Train Acc: 0.7545, Val Loss: 0.6125, Val Acc: 0.9101
+2026-02-28 04:50:00,739 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 52
+2026-02-28 04:50:00,928 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 1.018971
+2026-02-28 04:50:03,923 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 53: Train Loss: 0.9518, Train Acc: 0.7388, Val Loss: 0.5946, Val Acc: 0.8989
+2026-02-28 04:50:04,213 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.944065
+2026-02-28 04:50:07,187 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 54: Train Loss: 0.9798, Train Acc: 0.7188, Val Loss: 0.5795, Val Acc: 0.9101
+2026-02-28 04:50:07,474 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.890104
+2026-02-28 04:50:10,463 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 55: Train Loss: 0.9326, Train Acc: 0.7589, Val Loss: 0.5878, Val Acc: 0.8876
+2026-02-28 04:50:10,760 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.905312
+2026-02-28 04:50:13,724 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 56: Train Loss: 0.9870, Train Acc: 0.7411, Val Loss: 0.5801, Val Acc: 0.9101
+2026-02-28 04:50:14,012 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.799924
+2026-02-28 04:50:16,981 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 57: Train Loss: 0.9073, Train Acc: 0.7656, Val Loss: 0.5717, Val Acc: 0.8989
+2026-02-28 04:50:17,268 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.661963
+2026-02-28 04:50:20,240 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 58: Train Loss: 0.9170, Train Acc: 0.7522, Val Loss: 0.5525, Val Acc: 0.8989
+2026-02-28 04:50:20,526 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.997115
+2026-02-28 04:50:23,499 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 59: Train Loss: 0.8980, Train Acc: 0.7589, Val Loss: 0.5438, Val Acc: 0.8989
+2026-02-28 04:50:23,786 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 1.042437
+2026-02-28 04:50:26,757 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 60: Train Loss: 0.9262, Train Acc: 0.7612, Val Loss: 0.5426, Val Acc: 0.8764
+2026-02-28 04:50:27,059 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.987831
+2026-02-28 04:50:30,028 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 61: Train Loss: 0.8839, Train Acc: 0.7701, Val Loss: 0.5463, Val Acc: 0.8876
+2026-02-28 04:50:30,313 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.821343
+2026-02-28 04:50:33,281 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 62: Train Loss: 0.8539, Train Acc: 0.7746, Val Loss: 0.5427, Val Acc: 0.8989
+2026-02-28 04:50:33,569 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.982947
+2026-02-28 04:50:36,549 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 63: Train Loss: 0.9052, Train Acc: 0.7500, Val Loss: 0.5234, Val Acc: 0.8989
+2026-02-28 04:50:36,836 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 1.013729
+2026-02-28 04:50:39,820 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 64: Train Loss: 0.8444, Train Acc: 0.7679, Val Loss: 0.5243, Val Acc: 0.8989
+2026-02-28 04:50:40,110 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.742026
+2026-02-28 04:50:43,101 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 65: Train Loss: 0.8457, Train Acc: 0.7768, Val Loss: 0.5317, Val Acc: 0.8989
+2026-02-28 04:50:43,390 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.813178
+2026-02-28 04:50:46,354 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 66: Train Loss: 0.8527, Train Acc: 0.7634, Val Loss: 0.5231, Val Acc: 0.8876
+2026-02-28 04:50:46,651 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.893792
+2026-02-28 04:50:49,621 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 67: Train Loss: 0.8946, Train Acc: 0.7589, Val Loss: 0.5094, Val Acc: 0.8876
+2026-02-28 04:50:49,729 - experiment_baseline_mfcc_mlp_run_0 - INFO - Early stopping triggered at epoch 67
+2026-02-28 04:50:49,753 - experiment_baseline_mfcc_mlp_run_0 - INFO - Running final test evaluation...
+2026-02-28 04:50:50,454 - experiment_baseline_mfcc_mlp_run_0 - INFO - Test Results:
+2026-02-28 04:50:50,454 - experiment_baseline_mfcc_mlp_run_0 - INFO -   loss: 0.4602
+2026-02-28 04:50:50,454 - experiment_baseline_mfcc_mlp_run_0 - INFO -   accuracy: 0.9407
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_macro: 0.9587
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_macro: 0.9256
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_macro: 0.9259
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_weighted: 0.9544
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_weighted: 0.9407
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_weighted: 0.9354
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_0: 1.0000
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_0: 1.0000
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_0: 1.0000
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_1: 0.8000
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_1: 0.8000
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_1: 0.8000
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_2: 1.0000
+2026-02-28 04:50:50,455 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_2: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_2: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_3: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_3: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_3: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_4: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_4: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_4: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_5: 0.6250
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_5: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_5: 0.7692
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_6: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_6: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_6: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_7: 1.0000
+2026-02-28 04:50:50,456 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_7: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_7: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_8: 0.8333
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_8: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_8: 0.9091
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_9: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_9: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_9: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_10: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_10: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_10: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_11: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_11: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_11: 1.0000
+2026-02-28 04:50:50,457 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_12: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_12: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_12: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_13: 0.8333
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_13: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_13: 0.9091
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_14: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_14: 0.8000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_14: 0.8889
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_15: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_15: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_15: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_16: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_16: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_16: 1.0000
+2026-02-28 04:50:50,458 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_17: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_17: 0.8000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_17: 0.8889
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_18: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_18: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_18: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_19: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_19: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_19: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_20: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_20: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_20: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_21: 0.8333
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_21: 1.0000
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_21: 0.9091
+2026-02-28 04:50:50,459 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_22: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_22: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_22: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_23: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_23: 0.3333
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_23: 0.5000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_24: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_24: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_24: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_25: 1.0000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_25: 0.3333
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_25: 0.5000
+2026-02-28 04:50:50,460 - experiment_baseline_mfcc_mlp_run_0 - INFO -   balanced_accuracy: 0.9256
+2026-02-28 04:50:50,470 - experiment_baseline_mfcc_mlp_run_0 - INFO - Training completed
+2026-02-28 04:50:51,169 - experiment_baseline_mfcc_mlp_run_0 - INFO - Running baseline analysis...
+2026-02-28 04:50:51,199 - experiment_baseline_mfcc_mlp_run_0 - INFO - Baseline analysis completed
+2026-02-28 06:21:14,000 - experiment_baseline_mfcc_mlp_run_0 - INFO - Initialized experiment: baseline_mfcc_mlp_run_0
+2026-02-28 06:21:14,013 - experiment_baseline_mfcc_mlp_run_0 - INFO - Device: cuda
+2026-02-28 06:21:14,014 - experiment_baseline_mfcc_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/experiments/baseline_mfcc_mlp_run_0
+2026-02-28 06:21:14,014 - experiment_baseline_mfcc_mlp_run_0 - INFO - Initialized mfcc_mlp baseline experiment
+2026-02-28 06:21:14,014 - experiment_baseline_mfcc_mlp_run_0 - INFO - Setting up experiment components...
+2026-02-28 06:21:14,048 - experiment_baseline_mfcc_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-02-28 06:21:14,048 - experiment_baseline_mfcc_mlp_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-02-28 06:21:14,151 - experiment_baseline_mfcc_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 06:21:14,151 - experiment_baseline_mfcc_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 06:21:14,151 - experiment_baseline_mfcc_mlp_run_0 - INFO - Total parameters: 15,876
+2026-02-28 06:21:14,151 - experiment_baseline_mfcc_mlp_run_0 - INFO - Trainable parameters: 15,876
+2026-02-28 06:21:15,893 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 06:21:15,925 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 06:21:15,950 - experiment_baseline_mfcc_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 0-25
+2026-02-28 06:21:16,280 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 06:21:16,347 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 06:21:16,442 - experiment_baseline_mfcc_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 06:21:16,442 - experiment_baseline_mfcc_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 06:21:16,442 - experiment_baseline_mfcc_mlp_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-02-28 06:21:16,443 - experiment_baseline_mfcc_mlp_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-02-28 06:21:16,443 - experiment_baseline_mfcc_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-02-28 06:21:16,443 - experiment_baseline_mfcc_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 06:21:16,443 - experiment_baseline_mfcc_mlp_run_0 - INFO - BASELINE TYPE: mfcc_mlp
+2026-02-28 06:21:16,443 - experiment_baseline_mfcc_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-02-28 06:21:16,833 - experiment_baseline_mfcc_mlp_run_0 - INFO - Dataloaders created:
+2026-02-28 06:21:16,833 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Train: 14 batches
+2026-02-28 06:21:16,834 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Val: 3 batches
+2026-02-28 06:21:16,834 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Test: 4 batches
+2026-02-28 06:21:17,969 - experiment_baseline_mfcc_mlp_run_0 - INFO - Optimizer: Adam
+2026-02-28 06:21:17,969 - experiment_baseline_mfcc_mlp_run_0 - INFO - Scheduler: StepLR
+2026-02-28 06:21:17,969 - experiment_baseline_mfcc_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 06:21:18,038 - experiment_baseline_mfcc_mlp_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/experiments/baseline_mfcc_mlp_run_0/config.json
+2026-02-28 06:21:18,038 - experiment_baseline_mfcc_mlp_run_0 - INFO - Experiment setup completed
+2026-02-28 06:21:18,038 - experiment_baseline_mfcc_mlp_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 06:21:18,073 - experiment_baseline_mfcc_mlp_run_0 - INFO - 
+================================================================================
+2026-02-28 06:21:18,073 - experiment_baseline_mfcc_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 06:21:18,074 - experiment_baseline_mfcc_mlp_run_0 - INFO - ================================================================================
+2026-02-28 06:21:18,074 - experiment_baseline_mfcc_mlp_run_0 - INFO - Batch Info:
+2026-02-28 06:21:18,074 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 06:21:18,074 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 06:21:18,077 - experiment_baseline_mfcc_mlp_run_0 - INFO -   Targets (first 8): tensor([ 1, 10,  7, 24, 25,  1,  5, 13], device='cuda:0')
+2026-02-28 06:21:19,253 - experiment_baseline_mfcc_mlp_run_0 - INFO - ================================================================================
+
+2026-02-28 06:21:19,586 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.854233
+2026-02-28 06:21:22,889 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 0: Train Loss: 4.6068, Train Acc: 0.0179, Val Loss: 4.4761, Val Acc: 0.0337
+2026-02-28 06:21:23,067 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 06:21:23,272 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.395479
+2026-02-28 06:21:26,246 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 1: Train Loss: 4.2935, Train Acc: 0.0692, Val Loss: 4.2129, Val Acc: 0.1798
+2026-02-28 06:21:26,397 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 06:21:26,584 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 4.037515
+2026-02-28 06:21:29,557 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 2: Train Loss: 4.0353, Train Acc: 0.1451, Val Loss: 3.9412, Val Acc: 0.3258
+2026-02-28 06:21:29,681 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 06:21:29,868 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.954504
+2026-02-28 06:21:32,845 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 3: Train Loss: 3.7567, Train Acc: 0.1719, Val Loss: 3.6882, Val Acc: 0.3596
+2026-02-28 06:21:32,956 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 06:21:33,145 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 3.557269
+2026-02-28 06:21:36,110 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 4: Train Loss: 3.5535, Train Acc: 0.2254, Val Loss: 3.4423, Val Acc: 0.4270
+2026-02-28 06:21:36,217 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 06:21:36,404 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 3.410331
+2026-02-28 06:21:39,367 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 5: Train Loss: 3.3162, Train Acc: 0.2656, Val Loss: 3.2356, Val Acc: 0.4607
+2026-02-28 06:21:39,472 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 06:21:39,661 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 3.087299
+2026-02-28 06:21:42,626 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 6: Train Loss: 3.2188, Train Acc: 0.2612, Val Loss: 3.0274, Val Acc: 0.4944
+2026-02-28 06:21:42,731 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 06:21:42,917 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 3.220518
+2026-02-28 06:21:45,887 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 7: Train Loss: 3.0146, Train Acc: 0.3304, Val Loss: 2.8772, Val Acc: 0.5618
+2026-02-28 06:21:45,992 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 7
+2026-02-28 06:21:46,180 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 2.863085
+2026-02-28 06:21:49,161 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 8: Train Loss: 2.8271, Train Acc: 0.3817, Val Loss: 2.6724, Val Acc: 0.5393
+2026-02-28 06:21:49,431 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 2.704650
+2026-02-28 06:21:52,404 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 9: Train Loss: 2.7650, Train Acc: 0.3661, Val Loss: 2.4798, Val Acc: 0.5618
+2026-02-28 06:21:52,684 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 2.522538
+2026-02-28 06:21:55,645 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 10: Train Loss: 2.5661, Train Acc: 0.3862, Val Loss: 2.3653, Val Acc: 0.5730
+2026-02-28 06:21:55,750 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 06:21:55,954 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 2.706641
+2026-02-28 06:21:58,935 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 11: Train Loss: 2.4723, Train Acc: 0.4375, Val Loss: 2.2160, Val Acc: 0.6067
+2026-02-28 06:21:59,039 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 11
+2026-02-28 06:21:59,229 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 2.345113
+2026-02-28 06:22:02,206 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 12: Train Loss: 2.3174, Train Acc: 0.4464, Val Loss: 2.0833, Val Acc: 0.6292
+2026-02-28 06:22:02,312 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 12
+2026-02-28 06:22:02,508 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 2.257797
+2026-02-28 06:22:05,514 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 13: Train Loss: 2.2460, Train Acc: 0.5290, Val Loss: 1.9781, Val Acc: 0.6517
+2026-02-28 06:22:05,620 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 13
+2026-02-28 06:22:05,808 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 2.379120
+2026-02-28 06:22:08,816 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 14: Train Loss: 2.1837, Train Acc: 0.4844, Val Loss: 1.8819, Val Acc: 0.6292
+2026-02-28 06:22:09,090 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 2.214669
+2026-02-28 06:22:12,097 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 15: Train Loss: 2.1652, Train Acc: 0.4777, Val Loss: 1.8019, Val Acc: 0.6742
+2026-02-28 06:22:12,204 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 15
+2026-02-28 06:22:12,391 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 1.990242
+2026-02-28 06:22:15,392 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 16: Train Loss: 2.0367, Train Acc: 0.4911, Val Loss: 1.7167, Val Acc: 0.7191
+2026-02-28 06:22:15,498 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 16
+2026-02-28 06:22:15,688 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 2.016618
+2026-02-28 06:22:18,703 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 17: Train Loss: 1.9153, Train Acc: 0.5625, Val Loss: 1.6287, Val Acc: 0.7303
+2026-02-28 06:22:18,808 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 17
+2026-02-28 06:22:18,997 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 1.809323
+2026-02-28 06:22:21,999 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 18: Train Loss: 1.9310, Train Acc: 0.5580, Val Loss: 1.5289, Val Acc: 0.7416
+2026-02-28 06:22:22,103 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 18
+2026-02-28 06:22:22,292 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 1.735083
+2026-02-28 06:22:25,287 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 19: Train Loss: 1.7328, Train Acc: 0.5893, Val Loss: 1.4517, Val Acc: 0.7191
+2026-02-28 06:22:25,560 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 1.639458
+2026-02-28 06:22:28,557 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 20: Train Loss: 1.7028, Train Acc: 0.5759, Val Loss: 1.3826, Val Acc: 0.7865
+2026-02-28 06:22:28,662 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 20
+2026-02-28 06:22:28,865 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 1.865077
+2026-02-28 06:22:31,844 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 21: Train Loss: 1.7021, Train Acc: 0.5893, Val Loss: 1.3243, Val Acc: 0.7753
+2026-02-28 06:22:32,126 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 1.726413
+2026-02-28 06:22:35,115 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 22: Train Loss: 1.6309, Train Acc: 0.6116, Val Loss: 1.2638, Val Acc: 0.7865
+2026-02-28 06:22:35,386 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 1.696756
+2026-02-28 06:22:38,394 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 23: Train Loss: 1.6215, Train Acc: 0.6027, Val Loss: 1.2001, Val Acc: 0.7640
+2026-02-28 06:22:38,667 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 1.532275
+2026-02-28 06:22:41,658 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 24: Train Loss: 1.4927, Train Acc: 0.6228, Val Loss: 1.1793, Val Acc: 0.7865
+2026-02-28 06:22:41,930 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 1.519977
+2026-02-28 06:22:44,922 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 25: Train Loss: 1.5203, Train Acc: 0.6429, Val Loss: 1.1356, Val Acc: 0.8090
+2026-02-28 06:22:45,028 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 25
+2026-02-28 06:22:45,216 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 1.507972
+2026-02-28 06:22:48,220 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 26: Train Loss: 1.3879, Train Acc: 0.6451, Val Loss: 1.0745, Val Acc: 0.8090
+2026-02-28 06:22:48,493 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 1.506789
+2026-02-28 06:22:51,581 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 27: Train Loss: 1.4455, Train Acc: 0.6384, Val Loss: 1.0331, Val Acc: 0.7978
+2026-02-28 06:22:51,883 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 1.430861
+2026-02-28 06:22:55,035 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 28: Train Loss: 1.3613, Train Acc: 0.6272, Val Loss: 0.9959, Val Acc: 0.8202
+2026-02-28 06:22:55,141 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 28
+2026-02-28 06:22:55,330 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 1.312425
+2026-02-28 06:22:58,307 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 29: Train Loss: 1.2573, Train Acc: 0.7165, Val Loss: 0.9805, Val Acc: 0.8202
+2026-02-28 06:22:58,579 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 1.051719
+2026-02-28 06:23:01,553 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 30: Train Loss: 1.2364, Train Acc: 0.6674, Val Loss: 0.9326, Val Acc: 0.8090
+2026-02-28 06:23:01,841 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 1.165259
+2026-02-28 06:23:04,817 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 31: Train Loss: 1.2426, Train Acc: 0.6920, Val Loss: 0.9139, Val Acc: 0.8315
+2026-02-28 06:23:04,922 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 31
+2026-02-28 06:23:05,110 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 1.052791
+2026-02-28 06:23:08,090 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 32: Train Loss: 1.1872, Train Acc: 0.7188, Val Loss: 0.9084, Val Acc: 0.8427
+2026-02-28 06:23:08,198 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 32
+2026-02-28 06:23:08,393 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 1.472892
+2026-02-28 06:23:11,375 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 33: Train Loss: 1.2131, Train Acc: 0.7054, Val Loss: 0.8757, Val Acc: 0.8539
+2026-02-28 06:23:11,481 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 33
+2026-02-28 06:23:11,670 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 1.137183
+2026-02-28 06:23:14,688 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 34: Train Loss: 1.2029, Train Acc: 0.6897, Val Loss: 0.8511, Val Acc: 0.8427
+2026-02-28 06:23:14,960 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 1.147167
+2026-02-28 06:23:17,939 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 35: Train Loss: 1.0823, Train Acc: 0.7522, Val Loss: 0.8491, Val Acc: 0.8539
+2026-02-28 06:23:18,213 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 1.066856
+2026-02-28 06:23:21,184 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 36: Train Loss: 1.1772, Train Acc: 0.6987, Val Loss: 0.8246, Val Acc: 0.8315
+2026-02-28 06:23:21,455 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 1.270523
+2026-02-28 06:23:24,431 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 37: Train Loss: 1.1280, Train Acc: 0.7054, Val Loss: 0.7995, Val Acc: 0.8315
+2026-02-28 06:23:24,705 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.995250
+2026-02-28 06:23:27,680 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 38: Train Loss: 1.1183, Train Acc: 0.7321, Val Loss: 0.7934, Val Acc: 0.8202
+2026-02-28 06:23:27,952 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 1.200468
+2026-02-28 06:23:30,927 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 39: Train Loss: 1.1313, Train Acc: 0.6987, Val Loss: 0.7690, Val Acc: 0.8427
+2026-02-28 06:23:31,198 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 40: [0/472 (0.0%)]	Loss: 1.154472
+2026-02-28 06:23:34,188 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 40: Train Loss: 1.1025, Train Acc: 0.7366, Val Loss: 0.7672, Val Acc: 0.8539
+2026-02-28 06:23:34,475 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 41: [0/472 (0.0%)]	Loss: 1.039754
+2026-02-28 06:23:37,449 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 41: Train Loss: 1.0873, Train Acc: 0.7031, Val Loss: 0.7433, Val Acc: 0.8539
+2026-02-28 06:23:37,719 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 42: [0/472 (0.0%)]	Loss: 1.064250
+2026-02-28 06:23:40,686 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 42: Train Loss: 1.1049, Train Acc: 0.6830, Val Loss: 0.7214, Val Acc: 0.8652
+2026-02-28 06:23:40,791 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 42
+2026-02-28 06:23:40,980 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 43: [0/472 (0.0%)]	Loss: 0.929126
+2026-02-28 06:23:43,953 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 43: Train Loss: 1.0262, Train Acc: 0.7589, Val Loss: 0.7093, Val Acc: 0.8652
+2026-02-28 06:23:44,234 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 44: [0/472 (0.0%)]	Loss: 1.057843
+2026-02-28 06:23:47,212 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 44: Train Loss: 1.0594, Train Acc: 0.7254, Val Loss: 0.7026, Val Acc: 0.8539
+2026-02-28 06:23:47,483 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 45: [0/472 (0.0%)]	Loss: 0.918734
+2026-02-28 06:23:50,464 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 45: Train Loss: 0.9849, Train Acc: 0.7612, Val Loss: 0.6818, Val Acc: 0.8652
+2026-02-28 06:23:50,734 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 46: [0/472 (0.0%)]	Loss: 0.899392
+2026-02-28 06:23:53,733 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 46: Train Loss: 1.0583, Train Acc: 0.7321, Val Loss: 0.6670, Val Acc: 0.8764
+2026-02-28 06:23:53,838 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 46
+2026-02-28 06:23:54,026 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 47: [0/472 (0.0%)]	Loss: 0.870805
+2026-02-28 06:23:57,003 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 47: Train Loss: 0.9841, Train Acc: 0.7612, Val Loss: 0.6769, Val Acc: 0.8764
+2026-02-28 06:23:57,275 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 48: [0/472 (0.0%)]	Loss: 0.685603
+2026-02-28 06:24:00,258 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 48: Train Loss: 0.9701, Train Acc: 0.7411, Val Loss: 0.6392, Val Acc: 0.8764
+2026-02-28 06:24:00,528 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 49: [0/472 (0.0%)]	Loss: 0.891381
+2026-02-28 06:24:03,517 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 49: Train Loss: 1.0023, Train Acc: 0.7478, Val Loss: 0.6344, Val Acc: 0.8764
+2026-02-28 06:24:03,789 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 50: [0/472 (0.0%)]	Loss: 0.693790
+2026-02-28 06:24:06,775 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 50: Train Loss: 0.9628, Train Acc: 0.7500, Val Loss: 0.6443, Val Acc: 0.8876
+2026-02-28 06:24:06,881 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 50
+2026-02-28 06:24:07,084 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 51: [0/472 (0.0%)]	Loss: 0.857043
+2026-02-28 06:24:10,070 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 51: Train Loss: 0.9780, Train Acc: 0.7321, Val Loss: 0.6194, Val Acc: 0.8876
+2026-02-28 06:24:10,341 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 52: [0/472 (0.0%)]	Loss: 0.888386
+2026-02-28 06:24:13,318 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 52: Train Loss: 0.9165, Train Acc: 0.7545, Val Loss: 0.6125, Val Acc: 0.9101
+2026-02-28 06:24:13,424 - experiment_baseline_mfcc_mlp_run_0 - INFO - Saved new best model at epoch 52
+2026-02-28 06:24:13,612 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 53: [0/472 (0.0%)]	Loss: 1.018971
+2026-02-28 06:24:16,598 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 53: Train Loss: 0.9518, Train Acc: 0.7388, Val Loss: 0.5946, Val Acc: 0.8989
+2026-02-28 06:24:16,872 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 54: [0/472 (0.0%)]	Loss: 0.944065
+2026-02-28 06:24:19,866 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 54: Train Loss: 0.9798, Train Acc: 0.7188, Val Loss: 0.5795, Val Acc: 0.9101
+2026-02-28 06:24:20,141 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 55: [0/472 (0.0%)]	Loss: 0.890104
+2026-02-28 06:24:23,140 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 55: Train Loss: 0.9326, Train Acc: 0.7589, Val Loss: 0.5878, Val Acc: 0.8876
+2026-02-28 06:24:23,421 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 56: [0/472 (0.0%)]	Loss: 0.905312
+2026-02-28 06:24:26,419 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 56: Train Loss: 0.9870, Train Acc: 0.7411, Val Loss: 0.5801, Val Acc: 0.9101
+2026-02-28 06:24:26,689 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 57: [0/472 (0.0%)]	Loss: 0.799924
+2026-02-28 06:24:29,693 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 57: Train Loss: 0.9073, Train Acc: 0.7656, Val Loss: 0.5717, Val Acc: 0.8989
+2026-02-28 06:24:29,964 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 58: [0/472 (0.0%)]	Loss: 0.661963
+2026-02-28 06:24:32,945 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 58: Train Loss: 0.9170, Train Acc: 0.7522, Val Loss: 0.5525, Val Acc: 0.8989
+2026-02-28 06:24:33,216 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 59: [0/472 (0.0%)]	Loss: 0.997115
+2026-02-28 06:24:36,191 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 59: Train Loss: 0.8980, Train Acc: 0.7589, Val Loss: 0.5438, Val Acc: 0.8989
+2026-02-28 06:24:36,464 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 60: [0/472 (0.0%)]	Loss: 1.042437
+2026-02-28 06:24:39,452 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 60: Train Loss: 0.9262, Train Acc: 0.7612, Val Loss: 0.5426, Val Acc: 0.8764
+2026-02-28 06:24:39,739 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 61: [0/472 (0.0%)]	Loss: 0.987831
+2026-02-28 06:24:42,730 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 61: Train Loss: 0.8839, Train Acc: 0.7701, Val Loss: 0.5463, Val Acc: 0.8876
+2026-02-28 06:24:43,000 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 62: [0/472 (0.0%)]	Loss: 0.821343
+2026-02-28 06:24:45,987 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 62: Train Loss: 0.8539, Train Acc: 0.7746, Val Loss: 0.5427, Val Acc: 0.8989
+2026-02-28 06:24:46,260 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 63: [0/472 (0.0%)]	Loss: 0.982947
+2026-02-28 06:24:49,243 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 63: Train Loss: 0.9052, Train Acc: 0.7500, Val Loss: 0.5234, Val Acc: 0.8989
+2026-02-28 06:24:49,513 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 64: [0/472 (0.0%)]	Loss: 1.013729
+2026-02-28 06:24:52,490 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 64: Train Loss: 0.8444, Train Acc: 0.7679, Val Loss: 0.5243, Val Acc: 0.8989
+2026-02-28 06:24:52,763 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 65: [0/472 (0.0%)]	Loss: 0.742026
+2026-02-28 06:24:55,747 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 65: Train Loss: 0.8457, Train Acc: 0.7768, Val Loss: 0.5317, Val Acc: 0.8989
+2026-02-28 06:24:56,016 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 66: [0/472 (0.0%)]	Loss: 0.813178
+2026-02-28 06:24:58,985 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 66: Train Loss: 0.8527, Train Acc: 0.7634, Val Loss: 0.5231, Val Acc: 0.8876
+2026-02-28 06:24:59,268 - experiment_baseline_mfcc_mlp_run_0 - INFO - Train Epoch 67: [0/472 (0.0%)]	Loss: 0.893792
+2026-02-28 06:25:02,247 - experiment_baseline_mfcc_mlp_run_0 - INFO - Epoch 67: Train Loss: 0.8946, Train Acc: 0.7589, Val Loss: 0.5094, Val Acc: 0.8876
+2026-02-28 06:25:02,337 - experiment_baseline_mfcc_mlp_run_0 - INFO - Early stopping triggered at epoch 67
+2026-02-28 06:25:02,347 - experiment_baseline_mfcc_mlp_run_0 - INFO - Running final test evaluation...
+2026-02-28 06:25:03,044 - experiment_baseline_mfcc_mlp_run_0 - INFO - Test Results:
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   loss: 0.4602
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   accuracy: 0.9407
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_macro: 0.9587
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_macro: 0.9256
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_macro: 0.9259
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_weighted: 0.9544
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_weighted: 0.9407
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_weighted: 0.9354
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_0: 1.0000
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_0: 1.0000
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_0: 1.0000
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_1: 0.8000
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_1: 0.8000
+2026-02-28 06:25:03,045 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_1: 0.8000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_2: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_2: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_2: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_3: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_3: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_3: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_4: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_4: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_4: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_5: 0.6250
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_5: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_5: 0.7692
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_6: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_6: 1.0000
+2026-02-28 06:25:03,046 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_6: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_7: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_7: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_7: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_8: 0.8333
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_8: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_8: 0.9091
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_9: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_9: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_9: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_10: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_10: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_10: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_11: 1.0000
+2026-02-28 06:25:03,047 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_11: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_11: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_12: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_12: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_12: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_13: 0.8333
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_13: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_13: 0.9091
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_14: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_14: 0.8000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_14: 0.8889
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_15: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_15: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_15: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_16: 1.0000
+2026-02-28 06:25:03,048 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_16: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_16: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_17: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_17: 0.8000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_17: 0.8889
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_18: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_18: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_18: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_19: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_19: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_19: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_20: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_20: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_20: 1.0000
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_21: 0.8333
+2026-02-28 06:25:03,049 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_21: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_21: 0.9091
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_22: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_22: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_22: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_23: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_23: 0.3333
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_23: 0.5000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_24: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_24: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_24: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   precision_class_25: 1.0000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   recall_class_25: 0.3333
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   f1_class_25: 0.5000
+2026-02-28 06:25:03,050 - experiment_baseline_mfcc_mlp_run_0 - INFO -   balanced_accuracy: 0.9256
+2026-02-28 06:25:03,053 - experiment_baseline_mfcc_mlp_run_0 - INFO - Training completed
+2026-02-28 06:25:03,753 - experiment_baseline_mfcc_mlp_run_0 - INFO - Running baseline analysis...
+2026-02-28 06:25:03,755 - experiment_baseline_mfcc_mlp_run_0 - INFO - Baseline analysis completed

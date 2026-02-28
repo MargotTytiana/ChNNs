@@ -1,0 +1,77 @@
+2026-02-28 05:25:22,263 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2026-02-28 05:25:22,263 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2026-02-28 05:25:22,264 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mel_mlp_run_0
+2026-02-28 05:25:22,264 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2026-02-28 05:25:22,264 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2026-02-28 05:25:22,850 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2026-02-28 05:25:22,850 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2026-02-28 05:25:23,488 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 05:25:23,488 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 05:25:23,488 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2026-02-28 05:25:23,488 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2026-02-28 06:37:17,675 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2026-02-28 06:37:17,685 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2026-02-28 06:37:17,685 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mel_mlp_run_0
+2026-02-28 06:37:17,685 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2026-02-28 06:37:17,685 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2026-02-28 06:37:18,286 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2026-02-28 06:37:18,286 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2026-02-28 06:37:18,936 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 06:37:18,936 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 06:37:18,936 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2026-02-28 06:37:18,936 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2026-02-28 06:37:28,341 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 06:37:28,386 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 06:37:28,428 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 3-98
+2026-02-28 06:37:29,964 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2026-02-28 06:37:30,379 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 06:37:30,742 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 99
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 100
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2026-02-28 06:37:32,349 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2026-02-28 06:37:32,350 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2026-02-28 06:37:37,548 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2026-02-28 06:37:37,548 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 65 batches
+2026-02-28 06:37:37,548 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 13 batches
+2026-02-28 06:37:37,548 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 16 batches
+2026-02-28 06:37:38,702 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2026-02-28 06:37:38,703 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2026-02-28 06:37:38,703 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 06:37:38,775 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mel_mlp_run_0/config.json
+2026-02-28 06:37:38,775 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2026-02-28 06:37:38,775 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 06:37:38,817 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2026-02-28 06:37:38,817 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 06:37:38,817 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2026-02-28 06:37:38,817 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2026-02-28 06:37:38,817 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 06:37:38,817 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 06:37:38,820 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([ 0, 72, 63, 44, 27,  1, 62, 85], device='cuda:0')
+2026-02-28 06:37:39,291 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+
+2026-02-28 06:37:39,591 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [0/2100 (0.0%)]	Loss: 4.849433
+2026-02-28 06:37:53,134 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 0: Train Loss: 4.4668, Train Acc: 0.0418, Val Loss: 4.0248, Val Acc: 0.2250
+2026-02-28 06:37:53,509 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 06:37:53,699 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [0/2100 (0.0%)]	Loss: 4.175679
+2026-02-28 06:38:09,326 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 1: Train Loss: 3.9131, Train Acc: 0.1567, Val Loss: 3.5432, Val Acc: 0.3700
+2026-02-28 06:38:09,707 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 06:38:09,871 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [0/2100 (0.0%)]	Loss: 3.585300
+2026-02-28 06:38:22,059 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 2: Train Loss: 3.4394, Train Acc: 0.2644, Val Loss: 3.0357, Val Acc: 0.4725
+2026-02-28 06:38:22,430 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 06:38:22,591 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [0/2100 (0.0%)]	Loss: 3.255998
+2026-02-28 06:38:34,722 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 3: Train Loss: 3.0154, Train Acc: 0.3481, Val Loss: 2.6603, Val Acc: 0.5750
+2026-02-28 06:38:35,095 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 06:38:35,267 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [0/2100 (0.0%)]	Loss: 2.657276
+2026-02-28 06:38:47,338 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 4: Train Loss: 2.7207, Train Acc: 0.3957, Val Loss: 2.2623, Val Acc: 0.6500
+2026-02-28 06:38:47,710 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 06:38:47,871 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [0/2100 (0.0%)]	Loss: 2.375535
+2026-02-28 06:39:00,040 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 5: Train Loss: 2.3792, Train Acc: 0.4817, Val Loss: 2.0049, Val Acc: 0.6900
+2026-02-28 06:39:00,427 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 06:39:00,589 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [0/2100 (0.0%)]	Loss: 2.285779

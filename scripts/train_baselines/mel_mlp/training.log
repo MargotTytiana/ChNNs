@@ -60,3 +60,147 @@
 2026-01-13 13:17:08,855 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/baseline_training_results.json
 2026-01-13 13:17:08,855 - baseline_trainer - INFO - Baseline training completed.
 2026-01-13 13:17:08,855 - baseline_trainer - INFO - ============================================================
+2026-02-28 04:50:57,193 - baseline_trainer - INFO - ============================================================
+2026-02-28 04:50:57,203 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-02-28 04:50:57,203 - baseline_trainer - INFO - ============================================================
+2026-02-28 04:50:57,203 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp
+2026-02-28 04:50:57,203 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-02-28 04:50:57,269 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 490416324608, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '3a6789040c2b61a400e5b45f2a7ac9568719da9a', 'branch': 'origin', 'is_dirty': True}}
+2026-02-28 04:50:57,269 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-02-28 04:50:57,270 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2026-02-28 04:50:57,270 - baseline_trainer - INFO - 
+==================================================
+2026-02-28 04:50:57,270 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2026-02-28 04:50:57,270 - baseline_trainer - INFO - ==================================================
+2026-02-28 04:50:57,270 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2026-02-28 04:50:57,294 - baseline_trainer - INFO - Setting up mel_mlp...
+2026-02-28 04:51:00,645 - baseline_trainer - INFO - Model parameters: 69,284 (trainable: 69,284)
+2026-02-28 04:51:00,645 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-02-28 04:52:50,897 - baseline_trainer - INFO - Evaluating mel_mlp...
+2026-02-28 04:52:51,493 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 1.0000, Loss: 0.0527, Time: 113.6s
+2026-02-28 04:52:51,493 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/models/mel_mlp_run_0.pth'
+2026-02-28 04:52:51,494 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 404, in train_single_method
+    experiment.save_checkpoint(str(model_save_path))
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 778, in save_checkpoint
+    checkpoint_name=f'checkpoint_epoch_{int(epoch):04d}'
+                                        ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/models/mel_mlp_run_0.pth'
+
+2026-02-28 04:52:51,496 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-02-28 04:52:51,496 - baseline_trainer - WARNING - No successful runs for mel_mlp
+2026-02-28 04:52:51,496 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-02-28 04:52:51,496 - baseline_trainer - INFO - Generating baseline training report...
+2026-02-28 04:52:51,596 - baseline_trainer - INFO - Reports saved:
+2026-02-28 04:52:51,596 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/baseline_training_report.txt
+2026-02-28 04:52:51,596 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/baseline_training_results.json
+2026-02-28 04:52:51,596 - baseline_trainer - INFO - Baseline training completed.
+2026-02-28 04:52:51,596 - baseline_trainer - INFO - ============================================================
+2026-02-28 06:19:04,338 - baseline_trainer - INFO - ============================================================
+2026-02-28 06:19:04,338 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-02-28 06:19:04,338 - baseline_trainer - INFO - ============================================================
+2026-02-28 06:19:04,338 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp
+2026-02-28 06:19:04,338 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-02-28 06:19:04,409 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 478059044864, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '3a6789040c2b61a400e5b45f2a7ac9568719da9a', 'branch': 'origin', 'is_dirty': True}}
+2026-02-28 06:19:04,409 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-02-28 06:19:04,409 - baseline_trainer - INFO - Methods: ['mel_mlp']
+2026-02-28 06:19:04,410 - baseline_trainer - INFO - 
+==================================================
+2026-02-28 06:19:04,410 - baseline_trainer - INFO - TRAINING METHOD: MEL_MLP
+2026-02-28 06:19:04,410 - baseline_trainer - INFO - ==================================================
+2026-02-28 06:19:04,410 - baseline_trainer - INFO - Training mel_mlp (Run 1)...
+2026-02-28 06:19:04,420 - baseline_trainer - INFO - Setting up mel_mlp...
+2026-02-28 06:19:15,517 - baseline_trainer - INFO - Model parameters: 69,284 (trainable: 69,284)
+2026-02-28 06:19:15,517 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-02-28 06:21:07,808 - baseline_trainer - INFO - Evaluating mel_mlp...
+2026-02-28 06:21:08,391 - baseline_trainer - INFO - Completed mel_mlp (Run 1): Accuracy: 1.0000, Loss: 0.0527, Time: 123.4s
+2026-02-28 06:21:08,391 - baseline_trainer - ERROR - Failed to train mel_mlp (Run 1): invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/models/mel_mlp_run_0.pth'
+2026-02-28 06:21:08,392 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 404, in train_single_method
+    experiment.save_checkpoint(str(model_save_path))
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 778, in save_checkpoint
+    checkpoint_name=f'checkpoint_epoch_{int(epoch):04d}'
+                                        ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/models/mel_mlp_run_0.pth'
+
+2026-02-28 06:21:08,394 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-02-28 06:21:08,394 - baseline_trainer - WARNING - No successful runs for mel_mlp
+2026-02-28 06:21:08,394 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-02-28 06:21:08,394 - baseline_trainer - INFO - Generating baseline training report...
+2026-02-28 06:21:08,511 - baseline_trainer - INFO - Reports saved:
+2026-02-28 06:21:08,511 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/baseline_training_report.txt
+2026-02-28 06:21:08,511 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/baseline_training_results.json
+2026-02-28 06:21:08,511 - baseline_trainer - INFO - Baseline training completed.
+2026-02-28 06:21:08,511 - baseline_trainer - INFO - ============================================================

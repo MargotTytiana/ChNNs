@@ -60,3 +60,147 @@
 2026-01-13 13:35:32,330 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/baseline_training_results.json
 2026-01-13 13:35:32,330 - baseline_trainer - INFO - Baseline training completed.
 2026-01-13 13:35:32,330 - baseline_trainer - INFO - ============================================================
+2026-02-28 04:46:20,233 - baseline_trainer - INFO - ============================================================
+2026-02-28 04:46:20,242 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-02-28 04:46:20,242 - baseline_trainer - INFO - ============================================================
+2026-02-28 04:46:20,242 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp
+2026-02-28 04:46:20,242 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-02-28 04:46:22,043 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 491135160320, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '3a6789040c2b61a400e5b45f2a7ac9568719da9a', 'branch': 'origin', 'is_dirty': True}}
+2026-02-28 04:46:22,043 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-02-28 04:46:22,043 - baseline_trainer - INFO - Methods: ['mfcc_mlp']
+2026-02-28 04:46:22,043 - baseline_trainer - INFO - 
+==================================================
+2026-02-28 04:46:22,043 - baseline_trainer - INFO - TRAINING METHOD: MFCC_MLP
+2026-02-28 04:46:22,043 - baseline_trainer - INFO - ==================================================
+2026-02-28 04:46:22,043 - baseline_trainer - INFO - Training mfcc_mlp (Run 1)...
+2026-02-28 04:46:22,106 - baseline_trainer - INFO - Setting up mfcc_mlp...
+2026-02-28 04:47:00,393 - baseline_trainer - INFO - Model parameters: 15,876 (trainable: 15,876)
+2026-02-28 04:47:00,393 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-02-28 04:50:50,470 - baseline_trainer - INFO - Evaluating mfcc_mlp...
+2026-02-28 04:50:51,199 - baseline_trainer - INFO - Completed mfcc_mlp (Run 1): Accuracy: 0.9407, Loss: 0.4602, Time: 268.4s
+2026-02-28 04:50:51,199 - baseline_trainer - ERROR - Failed to train mfcc_mlp (Run 1): invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/models/mfcc_mlp_run_0.pth'
+2026-02-28 04:50:51,200 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 404, in train_single_method
+    experiment.save_checkpoint(str(model_save_path))
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 778, in save_checkpoint
+    checkpoint_name=f'checkpoint_epoch_{int(epoch):04d}'
+                                        ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/models/mfcc_mlp_run_0.pth'
+
+2026-02-28 04:50:51,202 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-02-28 04:50:51,202 - baseline_trainer - WARNING - No successful runs for mfcc_mlp
+2026-02-28 04:50:51,202 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-02-28 04:50:51,202 - baseline_trainer - INFO - Generating baseline training report...
+2026-02-28 04:50:51,286 - baseline_trainer - INFO - Reports saved:
+2026-02-28 04:50:51,286 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/baseline_training_report.txt
+2026-02-28 04:50:51,286 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/baseline_training_results.json
+2026-02-28 04:50:51,286 - baseline_trainer - INFO - Baseline training completed.
+2026-02-28 04:50:51,286 - baseline_trainer - INFO - ============================================================
+2026-02-28 06:21:13,924 - baseline_trainer - INFO - ============================================================
+2026-02-28 06:21:13,925 - baseline_trainer - INFO - BASELINE MODELS TRAINING
+2026-02-28 06:21:13,925 - baseline_trainer - INFO - ============================================================
+2026-02-28 06:21:13,925 - baseline_trainer - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp
+2026-02-28 06:21:13,925 - baseline_trainer - INFO - Configuration: {
+  "num_speakers": 100,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "hidden_dims": [
+    256,
+    128,
+    64
+  ],
+  "dropout_rate": 0.3,
+  "use_batch_norm": true,
+  "n_mels": 80,
+  "n_mfcc": 13,
+  "num_workers": 0,
+  "sample_rate": 16000,
+  "max_audio_length": 3.0,
+  "data_dir": "/scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2",
+  "device": "auto",
+  "seed": 42,
+  "optimizer": {
+    "type": "adam",
+    "params": {}
+  },
+  "scheduler": {
+    "type": "step",
+    "params": {
+      "step_size": 30,
+      "gamma": 0.5
+    }
+  },
+  "early_stopping": {
+    "patience": 15
+  }
+}
+2026-02-28 06:21:13,989 - baseline_trainer - INFO - System info: {'platform': 'Linux-4.18.0-553.74.1.el8_10.x86_64-x86_64-with-glibc2.28', 'system': 'Linux', 'node': 'g1102.mahti.csc.fi', 'release': '4.18.0-553.74.1.el8_10.x86_64', 'version': '#1 SMP Sun Sep 7 09:23:35 EDT 2025', 'machine': 'x86_64', 'processor': 'x86_64', 'python_version': '3.12.10 (main, Jun  3 2025, 21:04:06) [GCC 8.5.0 20210514 (Red Hat 8.5.0-26)]', 'python_executable': '/usr/bin/python', 'cpu_count': 256, 'total_memory': 540285169664, 'available_memory': 477567328256, 'gpu_info': {'cuda_available': True, 'cuda_version': '12.6', 'gpu_count': 1, 'gpu_names': ['NVIDIA A100-SXM4-40GB MIG 1g.5gb']}, 'package_versions': {'numpy': '1.26.4', 'scipy': '1.13.1', 'scikit-learn': 'not installed', 'librosa': '0.11.0', 'soundfile': '0.13.1', 'torch': '2.7.1+cu126', 'tensorflow': 'not installed', 'matplotlib': '3.10.3', 'pandas': '2.3.0'}, 'git_info': {'commit_hash': '3a6789040c2b61a400e5b45f2a7ac9568719da9a', 'branch': 'origin', 'is_dirty': True}}
+2026-02-28 06:21:13,989 - baseline_trainer - INFO - Training 1 methods with 1 runs each...
+2026-02-28 06:21:13,990 - baseline_trainer - INFO - Methods: ['mfcc_mlp']
+2026-02-28 06:21:13,990 - baseline_trainer - INFO - 
+==================================================
+2026-02-28 06:21:13,990 - baseline_trainer - INFO - TRAINING METHOD: MFCC_MLP
+2026-02-28 06:21:13,990 - baseline_trainer - INFO - ==================================================
+2026-02-28 06:21:13,990 - baseline_trainer - INFO - Training mfcc_mlp (Run 1)...
+2026-02-28 06:21:14,014 - baseline_trainer - INFO - Setting up mfcc_mlp...
+2026-02-28 06:21:18,038 - baseline_trainer - INFO - Model parameters: 15,876 (trainable: 15,876)
+2026-02-28 06:21:18,038 - baseline_trainer - INFO - Starting training for 100 epochs...
+2026-02-28 06:25:03,053 - baseline_trainer - INFO - Evaluating mfcc_mlp...
+2026-02-28 06:25:03,755 - baseline_trainer - INFO - Completed mfcc_mlp (Run 1): Accuracy: 0.9407, Loss: 0.4602, Time: 229.0s
+2026-02-28 06:25:03,755 - baseline_trainer - ERROR - Failed to train mfcc_mlp (Run 1): invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/models/mfcc_mlp_run_0.pth'
+2026-02-28 06:25:03,756 - baseline_trainer - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "/scratch/project_2003370/yueyao/Model/scripts/train_baselines.py", line 404, in train_single_method
+    experiment.save_checkpoint(str(model_save_path))
+  File "/scratch/project_2003370/yueyao/Model/experiments/base_experiment.py", line 778, in save_checkpoint
+    checkpoint_name=f'checkpoint_epoch_{int(epoch):04d}'
+                                        ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/models/mfcc_mlp_run_0.pth'
+
+2026-02-28 06:25:03,759 - baseline_trainer - INFO - Progress: 1/1 (100.0%)
+2026-02-28 06:25:03,759 - baseline_trainer - WARNING - No successful runs for mfcc_mlp
+2026-02-28 06:25:03,759 - baseline_trainer - INFO - Analyzing baseline training results...
+2026-02-28 06:25:03,759 - baseline_trainer - INFO - Generating baseline training report...
+2026-02-28 06:25:03,875 - baseline_trainer - INFO - Reports saved:
+2026-02-28 06:25:03,875 - baseline_trainer - INFO -   Text report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/baseline_training_report.txt
+2026-02-28 06:25:03,875 - baseline_trainer - INFO -   JSON report: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_mlp/baseline_training_results.json
+2026-02-28 06:25:03,875 - baseline_trainer - INFO - Baseline training completed.
+2026-02-28 06:25:03,875 - baseline_trainer - INFO - ============================================================

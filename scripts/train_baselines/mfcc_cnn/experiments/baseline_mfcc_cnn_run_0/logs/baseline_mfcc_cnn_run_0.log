@@ -722,3 +722,784 @@
 2026-01-13 14:28:33,370 - experiment_baseline_mfcc_cnn_run_0 - INFO - Training completed
 2026-01-13 14:28:34,122 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running baseline analysis...
 2026-01-13 14:28:34,124 - experiment_baseline_mfcc_cnn_run_0 - INFO - Baseline analysis completed
+2026-02-28 04:54:39,502 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized experiment: baseline_mfcc_cnn_run_0
+2026-02-28 04:54:39,506 - experiment_baseline_mfcc_cnn_run_0 - INFO - Device: cuda
+2026-02-28 04:54:39,506 - experiment_baseline_mfcc_cnn_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0
+2026-02-28 04:54:39,506 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized mfcc_cnn baseline experiment
+2026-02-28 04:54:39,506 - experiment_baseline_mfcc_cnn_run_0 - INFO - Setting up experiment components...
+2026-02-28 04:54:39,540 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-02-28 04:54:39,540 - experiment_baseline_mfcc_cnn_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-02-28 04:54:39,647 - experiment_baseline_mfcc_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 04:54:39,647 - experiment_baseline_mfcc_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 04:54:39,647 - experiment_baseline_mfcc_cnn_run_0 - INFO - Total parameters: 172,516
+2026-02-28 04:54:39,647 - experiment_baseline_mfcc_cnn_run_0 - INFO - Trainable parameters: 172,516
+2026-02-28 04:54:40,034 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 04:54:40,066 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 04:54:40,091 - experiment_baseline_mfcc_cnn_run_0 - INFO - Finish Scan 1 batch, current label range: 0-25
+2026-02-28 04:54:40,414 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 04:54:40,480 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 04:54:40,576 - experiment_baseline_mfcc_cnn_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 04:54:40,576 - experiment_baseline_mfcc_cnn_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 04:54:40,576 - experiment_baseline_mfcc_cnn_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-02-28 04:54:40,576 - experiment_baseline_mfcc_cnn_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-02-28 04:54:40,576 - experiment_baseline_mfcc_cnn_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-02-28 04:54:40,577 - experiment_baseline_mfcc_cnn_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 04:54:40,577 - experiment_baseline_mfcc_cnn_run_0 - INFO - BASELINE TYPE: mfcc_cnn
+2026-02-28 04:54:40,577 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-02-28 04:54:40,962 - experiment_baseline_mfcc_cnn_run_0 - INFO - Dataloaders created:
+2026-02-28 04:54:40,962 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Train: 14 batches
+2026-02-28 04:54:40,962 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Val: 3 batches
+2026-02-28 04:54:40,963 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Test: 4 batches
+2026-02-28 04:54:42,100 - experiment_baseline_mfcc_cnn_run_0 - INFO - Optimizer: Adam
+2026-02-28 04:54:42,101 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scheduler: StepLR
+2026-02-28 04:54:42,101 - experiment_baseline_mfcc_cnn_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 04:54:42,187 - experiment_baseline_mfcc_cnn_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0/config.json
+2026-02-28 04:54:42,188 - experiment_baseline_mfcc_cnn_run_0 - INFO - Experiment setup completed
+2026-02-28 04:54:42,188 - experiment_baseline_mfcc_cnn_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 04:54:42,221 - experiment_baseline_mfcc_cnn_run_0 - INFO - 
+================================================================================
+2026-02-28 04:54:42,221 - experiment_baseline_mfcc_cnn_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 04:54:42,221 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+2026-02-28 04:54:42,221 - experiment_baseline_mfcc_cnn_run_0 - INFO - Batch Info:
+2026-02-28 04:54:42,221 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 04:54:42,221 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 04:54:42,224 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets (first 8): tensor([ 8,  7,  0, 19, 15, 18, 16, 24], device='cuda:0')
+2026-02-28 04:54:43,482 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+
+2026-02-28 04:54:43,852 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.644036
+2026-02-28 04:54:46,934 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 0: Train Loss: 4.4574, Train Acc: 0.0513, Val Loss: 4.3920, Val Acc: 0.1685
+2026-02-28 04:54:47,079 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 04:54:47,293 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.300114
+2026-02-28 04:54:50,249 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 1: Train Loss: 3.9971, Train Acc: 0.0938, Val Loss: 3.8722, Val Acc: 0.1798
+2026-02-28 04:54:50,367 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 04:54:50,560 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 3.584574
+2026-02-28 04:54:53,512 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 2: Train Loss: 3.3825, Train Acc: 0.1540, Val Loss: 3.1385, Val Acc: 0.2135
+2026-02-28 04:54:53,625 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 04:54:53,816 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.271813
+2026-02-28 04:54:56,767 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 3: Train Loss: 2.9541, Train Acc: 0.1763, Val Loss: 2.6744, Val Acc: 0.3483
+2026-02-28 04:54:56,881 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 04:54:57,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 2.624375
+2026-02-28 04:55:00,029 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 4: Train Loss: 2.5912, Train Acc: 0.3237, Val Loss: 2.3427, Val Acc: 0.4607
+2026-02-28 04:55:00,143 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 04:55:00,333 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.653688
+2026-02-28 04:55:03,271 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 5: Train Loss: 2.3400, Train Acc: 0.4062, Val Loss: 2.0667, Val Acc: 0.5393
+2026-02-28 04:55:03,385 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 04:55:03,578 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 2.476542
+2026-02-28 04:55:06,513 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 6: Train Loss: 2.1135, Train Acc: 0.4576, Val Loss: 1.8318, Val Acc: 0.6067
+2026-02-28 04:55:06,627 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 04:55:06,818 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.896674
+2026-02-28 04:55:09,765 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 7: Train Loss: 1.8713, Train Acc: 0.5000, Val Loss: 1.6235, Val Acc: 0.6629
+2026-02-28 04:55:09,880 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 7
+2026-02-28 04:55:10,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.497508
+2026-02-28 04:55:13,015 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 8: Train Loss: 1.7191, Train Acc: 0.5290, Val Loss: 1.4493, Val Acc: 0.6629
+2026-02-28 04:55:13,283 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.504063
+2026-02-28 04:55:16,225 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 9: Train Loss: 1.5276, Train Acc: 0.5804, Val Loss: 1.3049, Val Acc: 0.6854
+2026-02-28 04:55:16,338 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 9
+2026-02-28 04:55:16,529 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.444538
+2026-02-28 04:55:19,469 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 10: Train Loss: 1.4058, Train Acc: 0.6496, Val Loss: 1.1777, Val Acc: 0.7753
+2026-02-28 04:55:19,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 04:55:19,802 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.384835
+2026-02-28 04:55:22,763 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 11: Train Loss: 1.2744, Train Acc: 0.6451, Val Loss: 1.0514, Val Acc: 0.7528
+2026-02-28 04:55:23,043 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.869241
+2026-02-28 04:55:25,992 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 12: Train Loss: 1.0944, Train Acc: 0.7455, Val Loss: 0.9063, Val Acc: 0.8764
+2026-02-28 04:55:26,106 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 12
+2026-02-28 04:55:26,297 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.982953
+2026-02-28 04:55:29,238 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 13: Train Loss: 1.0158, Train Acc: 0.7455, Val Loss: 0.8572, Val Acc: 0.8090
+2026-02-28 04:55:29,506 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.928492
+2026-02-28 04:55:32,464 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 14: Train Loss: 0.9211, Train Acc: 0.7790, Val Loss: 0.7483, Val Acc: 0.8427
+2026-02-28 04:55:32,733 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.957932
+2026-02-28 04:55:35,673 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 15: Train Loss: 0.7952, Train Acc: 0.8214, Val Loss: 0.6718, Val Acc: 0.8427
+2026-02-28 04:55:35,942 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.618533
+2026-02-28 04:55:38,884 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 16: Train Loss: 0.7579, Train Acc: 0.8058, Val Loss: 0.5785, Val Acc: 0.8764
+2026-02-28 04:55:39,153 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.885461
+2026-02-28 04:55:42,101 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 17: Train Loss: 0.7139, Train Acc: 0.8259, Val Loss: 0.5158, Val Acc: 0.9101
+2026-02-28 04:55:42,210 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 17
+2026-02-28 04:55:42,401 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.536127
+2026-02-28 04:55:45,349 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 18: Train Loss: 0.6197, Train Acc: 0.8460, Val Loss: 0.4692, Val Acc: 0.8989
+2026-02-28 04:55:45,617 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.586434
+2026-02-28 04:55:48,562 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 19: Train Loss: 0.5578, Train Acc: 0.8929, Val Loss: 0.4786, Val Acc: 0.8876
+2026-02-28 04:55:48,831 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.605457
+2026-02-28 04:55:51,984 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 20: Train Loss: 0.5302, Train Acc: 0.8728, Val Loss: 0.4195, Val Acc: 0.9101
+2026-02-28 04:55:52,299 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.647354
+2026-02-28 04:55:55,268 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 21: Train Loss: 0.4681, Train Acc: 0.8839, Val Loss: 0.3982, Val Acc: 0.9213
+2026-02-28 04:55:55,381 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 21
+2026-02-28 04:55:55,572 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.359600
+2026-02-28 04:55:58,524 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 22: Train Loss: 0.4335, Train Acc: 0.9129, Val Loss: 0.3348, Val Acc: 0.9213
+2026-02-28 04:55:58,806 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.420441
+2026-02-28 04:56:01,765 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 23: Train Loss: 0.4282, Train Acc: 0.9085, Val Loss: 0.2722, Val Acc: 0.9663
+2026-02-28 04:56:01,877 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 23
+2026-02-28 04:56:02,069 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.635658
+2026-02-28 04:56:05,018 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 24: Train Loss: 0.3636, Train Acc: 0.9330, Val Loss: 0.2817, Val Acc: 0.9438
+2026-02-28 04:56:05,289 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.381163
+2026-02-28 04:56:08,239 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 25: Train Loss: 0.3285, Train Acc: 0.9219, Val Loss: 0.3012, Val Acc: 0.9213
+2026-02-28 04:56:08,509 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.250336
+2026-02-28 04:56:11,462 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 26: Train Loss: 0.3311, Train Acc: 0.9330, Val Loss: 0.2370, Val Acc: 0.9438
+2026-02-28 04:56:11,731 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.365351
+2026-02-28 04:56:14,683 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 27: Train Loss: 0.2953, Train Acc: 0.9330, Val Loss: 0.2368, Val Acc: 0.9551
+2026-02-28 04:56:14,954 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.260298
+2026-02-28 04:56:17,991 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 28: Train Loss: 0.2678, Train Acc: 0.9487, Val Loss: 0.2388, Val Acc: 0.9213
+2026-02-28 04:56:18,300 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.290123
+2026-02-28 04:56:21,291 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 29: Train Loss: 0.2488, Train Acc: 0.9375, Val Loss: 0.2122, Val Acc: 0.9438
+2026-02-28 04:56:21,561 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.287916
+2026-02-28 04:56:24,507 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 30: Train Loss: 0.2450, Train Acc: 0.9576, Val Loss: 0.1994, Val Acc: 0.9551
+2026-02-28 04:56:24,802 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.197999
+2026-02-28 04:56:27,749 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 31: Train Loss: 0.2201, Train Acc: 0.9554, Val Loss: 0.1781, Val Acc: 0.9551
+2026-02-28 04:56:28,017 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.225444
+2026-02-28 04:56:30,969 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 32: Train Loss: 0.2486, Train Acc: 0.9353, Val Loss: 0.1923, Val Acc: 0.9551
+2026-02-28 04:56:31,240 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.176371
+2026-02-28 04:56:34,197 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 33: Train Loss: 0.1916, Train Acc: 0.9643, Val Loss: 0.2097, Val Acc: 0.9326
+2026-02-28 04:56:34,478 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.202949
+2026-02-28 04:56:37,424 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 34: Train Loss: 0.2018, Train Acc: 0.9554, Val Loss: 0.1888, Val Acc: 0.9326
+2026-02-28 04:56:37,694 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.117308
+2026-02-28 04:56:40,636 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 35: Train Loss: 0.1954, Train Acc: 0.9598, Val Loss: 0.1704, Val Acc: 0.9326
+2026-02-28 04:56:40,905 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.136429
+2026-02-28 04:56:43,880 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 36: Train Loss: 0.1786, Train Acc: 0.9598, Val Loss: 0.1688, Val Acc: 0.9326
+2026-02-28 04:56:44,150 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.141679
+2026-02-28 04:56:47,107 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 37: Train Loss: 0.1511, Train Acc: 0.9665, Val Loss: 0.1698, Val Acc: 0.9551
+2026-02-28 04:56:47,380 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.139851
+2026-02-28 04:56:50,334 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 38: Train Loss: 0.1856, Train Acc: 0.9621, Val Loss: 0.1733, Val Acc: 0.9438
+2026-02-28 04:56:50,423 - experiment_baseline_mfcc_cnn_run_0 - INFO - Early stopping triggered at epoch 38
+2026-02-28 04:56:50,445 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running final test evaluation...
+2026-02-28 04:56:51,139 - experiment_baseline_mfcc_cnn_run_0 - INFO - Test Results:
+2026-02-28 04:56:51,139 - experiment_baseline_mfcc_cnn_run_0 - INFO -   loss: 0.1113
+2026-02-28 04:56:51,139 - experiment_baseline_mfcc_cnn_run_0 - INFO -   accuracy: 0.9831
+2026-02-28 04:56:51,139 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_macro: 0.9840
+2026-02-28 04:56:51,139 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_macro: 0.9846
+2026-02-28 04:56:51,139 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_macro: 0.9825
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_weighted: 0.9866
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_weighted: 0.9831
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_weighted: 0.9831
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_0: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_0: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_0: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_1: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_1: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_1: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_2: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_2: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_2: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_3: 1.0000
+2026-02-28 04:56:51,140 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_3: 0.8000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_3: 0.8889
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_4: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_4: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_4: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_5: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_5: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_5: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_6: 0.7500
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_6: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_6: 0.8571
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_7: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_7: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_7: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_8: 1.0000
+2026-02-28 04:56:51,141 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_8: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_8: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_9: 0.8333
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_9: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_9: 0.9091
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_10: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_10: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_10: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_11: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_11: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_11: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_12: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_12: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_12: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_13: 1.0000
+2026-02-28 04:56:51,142 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_13: 0.8000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_13: 0.8889
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_14: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_14: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_14: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_15: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_15: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_15: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_16: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_16: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_16: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_17: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_17: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_17: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_18: 1.0000
+2026-02-28 04:56:51,143 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_18: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_18: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_19: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_19: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_19: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_20: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_20: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_20: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_21: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_21: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_21: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_22: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_22: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_22: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_23: 1.0000
+2026-02-28 04:56:51,144 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_23: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_23: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_24: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_24: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_24: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_25: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_25: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_25: 1.0000
+2026-02-28 04:56:51,145 - experiment_baseline_mfcc_cnn_run_0 - INFO -   balanced_accuracy: 0.9846
+2026-02-28 04:56:51,160 - experiment_baseline_mfcc_cnn_run_0 - INFO - Training completed
+2026-02-28 04:56:51,854 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running baseline analysis...
+2026-02-28 04:56:51,896 - experiment_baseline_mfcc_cnn_run_0 - INFO - Baseline analysis completed
+2026-02-28 05:23:48,170 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized experiment: baseline_mfcc_cnn_run_0
+2026-02-28 05:23:48,170 - experiment_baseline_mfcc_cnn_run_0 - INFO - Device: cuda
+2026-02-28 05:23:48,170 - experiment_baseline_mfcc_cnn_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0
+2026-02-28 05:23:48,170 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized mfcc_cnn baseline experiment
+2026-02-28 05:23:48,170 - experiment_baseline_mfcc_cnn_run_0 - INFO - Setting up experiment components...
+2026-02-28 05:23:49,564 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2026-02-28 05:23:49,565 - experiment_baseline_mfcc_cnn_run_0 - INFO - FOUND FLAC FILES: 28539
+2026-02-28 05:23:49,674 - experiment_baseline_mfcc_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 05:23:49,674 - experiment_baseline_mfcc_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 05:23:49,675 - experiment_baseline_mfcc_cnn_run_0 - INFO - Total parameters: 172,516
+2026-02-28 05:23:49,675 - experiment_baseline_mfcc_cnn_run_0 - INFO - Trainable parameters: 172,516
+2026-02-28 06:26:53,571 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized experiment: baseline_mfcc_cnn_run_0
+2026-02-28 06:26:53,571 - experiment_baseline_mfcc_cnn_run_0 - INFO - Device: cuda
+2026-02-28 06:26:53,571 - experiment_baseline_mfcc_cnn_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0
+2026-02-28 06:26:53,571 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized mfcc_cnn baseline experiment
+2026-02-28 06:26:53,571 - experiment_baseline_mfcc_cnn_run_0 - INFO - Setting up experiment components...
+2026-02-28 06:26:53,606 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-02-28 06:26:53,606 - experiment_baseline_mfcc_cnn_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-02-28 06:26:53,712 - experiment_baseline_mfcc_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 06:26:53,712 - experiment_baseline_mfcc_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 06:26:53,712 - experiment_baseline_mfcc_cnn_run_0 - INFO - Total parameters: 172,516
+2026-02-28 06:26:53,712 - experiment_baseline_mfcc_cnn_run_0 - INFO - Trainable parameters: 172,516
+2026-02-28 06:26:54,555 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 06:26:54,589 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 06:26:54,614 - experiment_baseline_mfcc_cnn_run_0 - INFO - Finish Scan 1 batch, current label range: 0-25
+2026-02-28 06:26:54,952 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 06:26:55,022 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - BASELINE TYPE: mfcc_cnn
+2026-02-28 06:26:55,121 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-02-28 06:26:55,512 - experiment_baseline_mfcc_cnn_run_0 - INFO - Dataloaders created:
+2026-02-28 06:26:55,513 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Train: 14 batches
+2026-02-28 06:26:55,513 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Val: 3 batches
+2026-02-28 06:26:55,513 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Test: 4 batches
+2026-02-28 06:26:56,656 - experiment_baseline_mfcc_cnn_run_0 - INFO - Optimizer: Adam
+2026-02-28 06:26:56,656 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scheduler: StepLR
+2026-02-28 06:26:56,656 - experiment_baseline_mfcc_cnn_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 06:26:56,726 - experiment_baseline_mfcc_cnn_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0/config.json
+2026-02-28 06:26:56,727 - experiment_baseline_mfcc_cnn_run_0 - INFO - Experiment setup completed
+2026-02-28 06:26:56,727 - experiment_baseline_mfcc_cnn_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 06:26:56,760 - experiment_baseline_mfcc_cnn_run_0 - INFO - 
+================================================================================
+2026-02-28 06:26:56,760 - experiment_baseline_mfcc_cnn_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 06:26:56,761 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+2026-02-28 06:26:56,761 - experiment_baseline_mfcc_cnn_run_0 - INFO - Batch Info:
+2026-02-28 06:26:56,761 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 06:26:56,761 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 06:26:56,764 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets (first 8): tensor([ 8,  7,  0, 19, 15, 18, 16, 24], device='cuda:0')
+2026-02-28 06:26:58,017 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+
+2026-02-28 06:26:58,386 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.644036
+2026-02-28 06:27:01,449 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 0: Train Loss: 4.4574, Train Acc: 0.0513, Val Loss: 4.3920, Val Acc: 0.1685
+2026-02-28 06:27:01,591 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 06:27:01,807 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.300114
+2026-02-28 06:27:04,782 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 1: Train Loss: 3.9971, Train Acc: 0.0938, Val Loss: 3.8722, Val Acc: 0.1798
+2026-02-28 06:27:04,903 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 06:27:05,097 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 3.584574
+2026-02-28 06:27:08,059 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 2: Train Loss: 3.3825, Train Acc: 0.1540, Val Loss: 3.1385, Val Acc: 0.2135
+2026-02-28 06:27:08,171 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 06:27:08,362 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.271813
+2026-02-28 06:27:11,329 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 3: Train Loss: 2.9541, Train Acc: 0.1763, Val Loss: 2.6744, Val Acc: 0.3483
+2026-02-28 06:27:11,445 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 06:27:11,637 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 2.624375
+2026-02-28 06:27:14,606 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 4: Train Loss: 2.5912, Train Acc: 0.3237, Val Loss: 2.3427, Val Acc: 0.4607
+2026-02-28 06:27:14,721 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 06:27:14,912 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.653688
+2026-02-28 06:27:17,881 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 5: Train Loss: 2.3400, Train Acc: 0.4062, Val Loss: 2.0667, Val Acc: 0.5393
+2026-02-28 06:27:17,995 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 06:27:18,187 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 2.476542
+2026-02-28 06:27:21,167 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 6: Train Loss: 2.1135, Train Acc: 0.4576, Val Loss: 1.8318, Val Acc: 0.6067
+2026-02-28 06:27:21,281 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 06:27:21,471 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.896674
+2026-02-28 06:27:25,253 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 7: Train Loss: 1.8713, Train Acc: 0.5000, Val Loss: 1.6235, Val Acc: 0.6629
+2026-02-28 06:27:25,367 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 7
+2026-02-28 06:27:25,560 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.497508
+2026-02-28 06:27:28,650 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 8: Train Loss: 1.7191, Train Acc: 0.5290, Val Loss: 1.4493, Val Acc: 0.6629
+2026-02-28 06:27:28,926 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.504063
+2026-02-28 06:27:31,948 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 9: Train Loss: 1.5276, Train Acc: 0.5804, Val Loss: 1.3049, Val Acc: 0.6854
+2026-02-28 06:27:32,063 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 9
+2026-02-28 06:27:32,254 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.444538
+2026-02-28 06:27:35,221 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 10: Train Loss: 1.4058, Train Acc: 0.6496, Val Loss: 1.1777, Val Acc: 0.7753
+2026-02-28 06:27:35,337 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 06:27:35,556 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.384835
+2026-02-28 06:27:38,528 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 11: Train Loss: 1.2744, Train Acc: 0.6451, Val Loss: 1.0514, Val Acc: 0.7528
+2026-02-28 06:27:38,809 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.869241
+2026-02-28 06:27:41,789 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 12: Train Loss: 1.0944, Train Acc: 0.7455, Val Loss: 0.9063, Val Acc: 0.8764
+2026-02-28 06:27:41,909 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 12
+2026-02-28 06:27:42,101 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.982953
+2026-02-28 06:27:45,075 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 13: Train Loss: 1.0158, Train Acc: 0.7455, Val Loss: 0.8572, Val Acc: 0.8090
+2026-02-28 06:27:45,346 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.928492
+2026-02-28 06:27:48,313 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 14: Train Loss: 0.9211, Train Acc: 0.7790, Val Loss: 0.7483, Val Acc: 0.8427
+2026-02-28 06:27:48,583 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.957932
+2026-02-28 06:27:51,550 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 15: Train Loss: 0.7952, Train Acc: 0.8214, Val Loss: 0.6718, Val Acc: 0.8427
+2026-02-28 06:27:51,822 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.618533
+2026-02-28 06:27:54,787 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 16: Train Loss: 0.7579, Train Acc: 0.8058, Val Loss: 0.5785, Val Acc: 0.8764
+2026-02-28 06:27:55,058 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.885461
+2026-02-28 06:27:58,029 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 17: Train Loss: 0.7139, Train Acc: 0.8259, Val Loss: 0.5158, Val Acc: 0.9101
+2026-02-28 06:27:58,142 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 17
+2026-02-28 06:27:58,333 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.536127
+2026-02-28 06:28:01,295 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 18: Train Loss: 0.6197, Train Acc: 0.8460, Val Loss: 0.4692, Val Acc: 0.8989
+2026-02-28 06:28:01,566 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.586434
+2026-02-28 06:28:04,526 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 19: Train Loss: 0.5578, Train Acc: 0.8929, Val Loss: 0.4786, Val Acc: 0.8876
+2026-02-28 06:28:04,799 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.605457
+2026-02-28 06:28:07,759 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 20: Train Loss: 0.5302, Train Acc: 0.8728, Val Loss: 0.4195, Val Acc: 0.9101
+2026-02-28 06:28:08,054 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.647354
+2026-02-28 06:28:11,023 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 21: Train Loss: 0.4681, Train Acc: 0.8839, Val Loss: 0.3982, Val Acc: 0.9213
+2026-02-28 06:28:11,137 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 21
+2026-02-28 06:28:11,330 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.359600
+2026-02-28 06:28:14,311 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 22: Train Loss: 0.4335, Train Acc: 0.9129, Val Loss: 0.3348, Val Acc: 0.9213
+2026-02-28 06:28:14,593 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.420441
+2026-02-28 06:28:17,568 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 23: Train Loss: 0.4282, Train Acc: 0.9085, Val Loss: 0.2722, Val Acc: 0.9663
+2026-02-28 06:28:17,682 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 23
+2026-02-28 06:28:17,874 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.635658
+2026-02-28 06:28:20,845 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 24: Train Loss: 0.3636, Train Acc: 0.9330, Val Loss: 0.2817, Val Acc: 0.9438
+2026-02-28 06:28:21,120 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.381163
+2026-02-28 06:28:24,090 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 25: Train Loss: 0.3285, Train Acc: 0.9219, Val Loss: 0.3012, Val Acc: 0.9213
+2026-02-28 06:28:24,361 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.250336
+2026-02-28 06:28:27,337 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 26: Train Loss: 0.3311, Train Acc: 0.9330, Val Loss: 0.2370, Val Acc: 0.9438
+2026-02-28 06:28:27,607 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.365351
+2026-02-28 06:28:30,593 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 27: Train Loss: 0.2953, Train Acc: 0.9330, Val Loss: 0.2368, Val Acc: 0.9551
+2026-02-28 06:28:30,865 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.260298
+2026-02-28 06:28:33,832 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 28: Train Loss: 0.2678, Train Acc: 0.9487, Val Loss: 0.2388, Val Acc: 0.9213
+2026-02-28 06:28:34,103 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.290123
+2026-02-28 06:28:37,065 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 29: Train Loss: 0.2488, Train Acc: 0.9375, Val Loss: 0.2122, Val Acc: 0.9438
+2026-02-28 06:28:37,334 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.287916
+2026-02-28 06:28:40,293 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 30: Train Loss: 0.2450, Train Acc: 0.9576, Val Loss: 0.1994, Val Acc: 0.9551
+2026-02-28 06:28:40,589 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.197999
+2026-02-28 06:28:43,561 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 31: Train Loss: 0.2201, Train Acc: 0.9554, Val Loss: 0.1781, Val Acc: 0.9551
+2026-02-28 06:28:43,832 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.225444
+2026-02-28 06:28:46,795 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 32: Train Loss: 0.2486, Train Acc: 0.9353, Val Loss: 0.1923, Val Acc: 0.9551
+2026-02-28 06:28:47,067 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.176371
+2026-02-28 06:28:50,027 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 33: Train Loss: 0.1916, Train Acc: 0.9643, Val Loss: 0.2097, Val Acc: 0.9326
+2026-02-28 06:28:50,312 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.202949
+2026-02-28 06:28:53,276 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 34: Train Loss: 0.2018, Train Acc: 0.9554, Val Loss: 0.1888, Val Acc: 0.9326
+2026-02-28 06:28:53,548 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.117308
+2026-02-28 06:28:56,518 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 35: Train Loss: 0.1954, Train Acc: 0.9598, Val Loss: 0.1704, Val Acc: 0.9326
+2026-02-28 06:28:56,791 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.136429
+2026-02-28 06:28:59,749 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 36: Train Loss: 0.1786, Train Acc: 0.9598, Val Loss: 0.1688, Val Acc: 0.9326
+2026-02-28 06:29:00,020 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.141679
+2026-02-28 06:29:02,997 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 37: Train Loss: 0.1511, Train Acc: 0.9665, Val Loss: 0.1698, Val Acc: 0.9551
+2026-02-28 06:29:03,267 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.139851
+2026-02-28 06:29:06,235 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 38: Train Loss: 0.1856, Train Acc: 0.9621, Val Loss: 0.1733, Val Acc: 0.9438
+2026-02-28 06:29:06,325 - experiment_baseline_mfcc_cnn_run_0 - INFO - Early stopping triggered at epoch 38
+2026-02-28 06:29:06,331 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running final test evaluation...
+2026-02-28 06:29:07,027 - experiment_baseline_mfcc_cnn_run_0 - INFO - Test Results:
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   loss: 0.1113
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   accuracy: 0.9831
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_macro: 0.9840
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_macro: 0.9846
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_macro: 0.9825
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_weighted: 0.9866
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_weighted: 0.9831
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_weighted: 0.9831
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_0: 1.0000
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_0: 1.0000
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_0: 1.0000
+2026-02-28 06:29:07,028 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_1: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_1: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_1: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_2: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_2: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_2: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_3: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_3: 0.8000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_3: 0.8889
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_4: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_4: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_4: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_5: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_5: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_5: 1.0000
+2026-02-28 06:29:07,029 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_6: 0.7500
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_6: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_6: 0.8571
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_7: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_7: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_7: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_8: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_8: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_8: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_9: 0.8333
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_9: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_9: 0.9091
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_10: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_10: 1.0000
+2026-02-28 06:29:07,030 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_10: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_11: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_11: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_11: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_12: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_12: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_12: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_13: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_13: 0.8000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_13: 0.8889
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_14: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_14: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_14: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_15: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_15: 1.0000
+2026-02-28 06:29:07,031 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_15: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_16: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_16: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_16: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_17: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_17: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_17: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_18: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_18: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_18: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_19: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_19: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_19: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_20: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_20: 1.0000
+2026-02-28 06:29:07,032 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_20: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_21: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_21: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_21: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_22: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_22: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_22: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_23: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_23: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_23: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_24: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_24: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_24: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_25: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_25: 1.0000
+2026-02-28 06:29:07,033 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_25: 1.0000
+2026-02-28 06:29:07,034 - experiment_baseline_mfcc_cnn_run_0 - INFO -   balanced_accuracy: 0.9846
+2026-02-28 06:29:07,035 - experiment_baseline_mfcc_cnn_run_0 - INFO - Training completed
+2026-02-28 06:29:07,732 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running baseline analysis...
+2026-02-28 06:29:07,734 - experiment_baseline_mfcc_cnn_run_0 - INFO - Baseline analysis completed
+2026-02-28 06:29:13,306 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized experiment: baseline_mfcc_cnn_run_0
+2026-02-28 06:29:13,306 - experiment_baseline_mfcc_cnn_run_0 - INFO - Device: cuda
+2026-02-28 06:29:13,306 - experiment_baseline_mfcc_cnn_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0
+2026-02-28 06:29:13,307 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized mfcc_cnn baseline experiment
+2026-02-28 06:29:13,307 - experiment_baseline_mfcc_cnn_run_0 - INFO - Setting up experiment components...
+2026-02-28 06:29:14,198 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2026-02-28 06:29:14,198 - experiment_baseline_mfcc_cnn_run_0 - INFO - FOUND FLAC FILES: 28539
+2026-02-28 06:29:14,309 - experiment_baseline_mfcc_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 06:29:14,309 - experiment_baseline_mfcc_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 06:29:14,310 - experiment_baseline_mfcc_cnn_run_0 - INFO - Total parameters: 172,516
+2026-02-28 06:29:14,310 - experiment_baseline_mfcc_cnn_run_0 - INFO - Trainable parameters: 172,516
+2026-02-28 06:32:57,328 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 06:32:57,740 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 06:32:57,887 - experiment_baseline_mfcc_cnn_run_0 - INFO - Finish Scan 1 batch, current label range: 7-98
+2026-02-28 06:33:09,277 - experiment_baseline_mfcc_cnn_run_0 - INFO - Finish Scan 51 batch, current label range: 0-99
+2026-02-28 06:33:12,671 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 06:33:15,383 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - LABEL RANGE: 0 to 99
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - ACTUAL SPEAKERS: 100
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - UNIQUE LABEL NUMBER: 100
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - BASELINE TYPE: mfcc_cnn
+2026-02-28 06:33:18,889 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 99] in 100 category
+2026-02-28 06:33:23,991 - experiment_baseline_mfcc_cnn_run_0 - INFO - Dataloaders created:
+2026-02-28 06:33:23,992 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Train: 65 batches
+2026-02-28 06:33:23,992 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Val: 13 batches
+2026-02-28 06:33:23,992 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Test: 16 batches
+2026-02-28 06:33:25,243 - experiment_baseline_mfcc_cnn_run_0 - INFO - Optimizer: Adam
+2026-02-28 06:33:25,243 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scheduler: StepLR
+2026-02-28 06:33:25,243 - experiment_baseline_mfcc_cnn_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 06:33:25,316 - experiment_baseline_mfcc_cnn_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0/config.json
+2026-02-28 06:33:25,317 - experiment_baseline_mfcc_cnn_run_0 - INFO - Experiment setup completed
+2026-02-28 06:33:25,317 - experiment_baseline_mfcc_cnn_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 06:33:25,359 - experiment_baseline_mfcc_cnn_run_0 - INFO - 
+================================================================================
+2026-02-28 06:33:25,359 - experiment_baseline_mfcc_cnn_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 06:33:25,359 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+2026-02-28 06:33:25,359 - experiment_baseline_mfcc_cnn_run_0 - INFO - Batch Info:
+2026-02-28 06:33:25,359 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 06:33:25,359 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 06:33:25,362 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets (first 8): tensor([93, 84,  5, 91,  1, 90, 77, 60], device='cuda:0')
+2026-02-28 06:33:26,532 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+
+2026-02-28 06:33:26,907 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 0: [0/2100 (0.0%)]	Loss: 4.592112
+2026-02-28 06:33:44,631 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 0: Train Loss: 4.5605, Train Acc: 0.0216, Val Loss: 4.4235, Val Acc: 0.0825
+2026-02-28 06:33:44,930 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 06:33:45,191 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 1: [0/2100 (0.0%)]	Loss: 4.433375
+2026-02-28 06:34:02,881 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 1: Train Loss: 4.2246, Train Acc: 0.0553, Val Loss: 3.9465, Val Acc: 0.1875
+2026-02-28 06:34:03,195 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 06:34:03,420 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 2: [0/2100 (0.0%)]	Loss: 3.771006
+2026-02-28 06:34:18,777 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 2: Train Loss: 3.7613, Train Acc: 0.1226, Val Loss: 3.4646, Val Acc: 0.2825
+2026-02-28 06:34:19,082 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 06:34:19,281 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 3: [0/2100 (0.0%)]	Loss: 3.476829
+2026-02-28 06:34:34,120 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 3: Train Loss: 3.3358, Train Acc: 0.1692, Val Loss: 3.0696, Val Acc: 0.3275
+2026-02-28 06:34:34,431 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 06:34:34,643 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 4: [0/2100 (0.0%)]	Loss: 3.141503
+2026-02-28 06:34:49,427 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 4: Train Loss: 3.0010, Train Acc: 0.2351, Val Loss: 2.7758, Val Acc: 0.3675
+2026-02-28 06:34:49,732 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 06:34:49,932 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 5: [0/2100 (0.0%)]	Loss: 3.097090
+2026-02-28 06:35:04,876 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 5: Train Loss: 2.7288, Train Acc: 0.2683, Val Loss: 2.4745, Val Acc: 0.4150
+2026-02-28 06:35:05,185 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 06:35:05,387 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 6: [0/2100 (0.0%)]	Loss: 2.399011
+2026-02-28 06:35:20,118 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 6: Train Loss: 2.4741, Train Acc: 0.3260, Val Loss: 2.1189, Val Acc: 0.5500
+2026-02-28 06:35:20,434 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 06:35:20,644 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 7: [0/2100 (0.0%)]	Loss: 2.152309
+2026-02-28 06:35:35,397 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 7: Train Loss: 2.2388, Train Acc: 0.3846, Val Loss: 1.9386, Val Acc: 0.5475
+2026-02-28 06:35:35,869 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 8: [0/2100 (0.0%)]	Loss: 1.802875
+2026-02-28 06:35:50,672 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 8: Train Loss: 2.0595, Train Acc: 0.4346, Val Loss: 1.7709, Val Acc: 0.5725
+2026-02-28 06:35:50,980 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 8
+2026-02-28 06:35:51,178 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 9: [0/2100 (0.0%)]	Loss: 2.266236
+2026-02-28 06:36:05,891 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 9: Train Loss: 1.8868, Train Acc: 0.4663, Val Loss: 1.6308, Val Acc: 0.6000
+2026-02-28 06:36:06,203 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 9
+2026-02-28 06:36:06,413 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 10: [0/2100 (0.0%)]	Loss: 1.629001
+2026-02-28 06:36:20,973 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 10: Train Loss: 1.7346, Train Acc: 0.5139, Val Loss: 1.5343, Val Acc: 0.6125
+2026-02-28 06:36:21,284 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 06:36:21,509 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 11: [0/2100 (0.0%)]	Loss: 1.289788
+2026-02-28 06:36:36,097 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 11: Train Loss: 1.6124, Train Acc: 0.5399, Val Loss: 1.3312, Val Acc: 0.6925
+2026-02-28 06:36:36,410 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 11
+2026-02-28 06:36:36,606 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 12: [0/2100 (0.0%)]	Loss: 1.425666
+2026-02-28 06:36:51,173 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 12: Train Loss: 1.5240, Train Acc: 0.5563, Val Loss: 1.2850, Val Acc: 0.6675
+2026-02-28 06:36:51,663 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 13: [0/2100 (0.0%)]	Loss: 1.490973
+2026-02-28 06:39:11,156 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized experiment: baseline_mfcc_cnn_run_0
+2026-02-28 06:39:11,156 - experiment_baseline_mfcc_cnn_run_0 - INFO - Device: cuda
+2026-02-28 06:39:11,156 - experiment_baseline_mfcc_cnn_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0
+2026-02-28 06:39:11,156 - experiment_baseline_mfcc_cnn_run_0 - INFO - Initialized mfcc_cnn baseline experiment
+2026-02-28 06:39:11,156 - experiment_baseline_mfcc_cnn_run_0 - INFO - Setting up experiment components...
+2026-02-28 06:39:11,190 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-02-28 06:39:11,190 - experiment_baseline_mfcc_cnn_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-02-28 06:39:11,294 - experiment_baseline_mfcc_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 06:39:11,295 - experiment_baseline_mfcc_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 06:39:11,295 - experiment_baseline_mfcc_cnn_run_0 - INFO - Total parameters: 172,516
+2026-02-28 06:39:11,295 - experiment_baseline_mfcc_cnn_run_0 - INFO - Trainable parameters: 172,516
+2026-02-28 06:39:13,912 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 06:39:14,037 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 06:39:14,197 - experiment_baseline_mfcc_cnn_run_0 - INFO - Finish Scan 1 batch, current label range: 0-25
+2026-02-28 06:39:15,391 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 06:39:15,680 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - BASELINE TYPE: mfcc_cnn
+2026-02-28 06:39:16,073 - experiment_baseline_mfcc_cnn_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-02-28 06:39:16,474 - experiment_baseline_mfcc_cnn_run_0 - INFO - Dataloaders created:
+2026-02-28 06:39:16,474 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Train: 14 batches
+2026-02-28 06:39:16,474 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Val: 3 batches
+2026-02-28 06:39:16,474 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Test: 4 batches
+2026-02-28 06:39:17,596 - experiment_baseline_mfcc_cnn_run_0 - INFO - Optimizer: Adam
+2026-02-28 06:39:17,596 - experiment_baseline_mfcc_cnn_run_0 - INFO - Scheduler: StepLR
+2026-02-28 06:39:17,597 - experiment_baseline_mfcc_cnn_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 06:39:17,667 - experiment_baseline_mfcc_cnn_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_cnn_run_0/config.json
+2026-02-28 06:39:17,667 - experiment_baseline_mfcc_cnn_run_0 - INFO - Experiment setup completed
+2026-02-28 06:39:17,668 - experiment_baseline_mfcc_cnn_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 06:39:17,716 - experiment_baseline_mfcc_cnn_run_0 - INFO - 
+================================================================================
+2026-02-28 06:39:17,716 - experiment_baseline_mfcc_cnn_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 06:39:17,716 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+2026-02-28 06:39:17,716 - experiment_baseline_mfcc_cnn_run_0 - INFO - Batch Info:
+2026-02-28 06:39:17,716 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 06:39:17,716 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 06:39:17,719 - experiment_baseline_mfcc_cnn_run_0 - INFO -   Targets (first 8): tensor([ 8,  7,  0, 19, 15, 18, 16, 24], device='cuda:0')
+2026-02-28 06:39:18,972 - experiment_baseline_mfcc_cnn_run_0 - INFO - ================================================================================
+
+2026-02-28 06:39:19,343 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.644036
+2026-02-28 06:39:22,460 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 0: Train Loss: 4.4574, Train Acc: 0.0513, Val Loss: 4.3920, Val Acc: 0.1685
+2026-02-28 06:39:22,605 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 06:39:22,828 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.300114
+2026-02-28 06:39:25,838 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 1: Train Loss: 3.9971, Train Acc: 0.0938, Val Loss: 3.8722, Val Acc: 0.1798
+2026-02-28 06:39:25,960 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 06:39:26,153 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 3.584574
+2026-02-28 06:39:29,163 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 2: Train Loss: 3.3825, Train Acc: 0.1540, Val Loss: 3.1385, Val Acc: 0.2135
+2026-02-28 06:39:29,275 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 06:39:29,469 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 3.271813
+2026-02-28 06:39:32,499 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 3: Train Loss: 2.9541, Train Acc: 0.1763, Val Loss: 2.6744, Val Acc: 0.3483
+2026-02-28 06:39:32,613 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 06:39:32,808 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 2.624375
+2026-02-28 06:39:35,805 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 4: Train Loss: 2.5912, Train Acc: 0.3237, Val Loss: 2.3427, Val Acc: 0.4607
+2026-02-28 06:39:35,920 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 06:39:36,114 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 2.653688
+2026-02-28 06:39:39,100 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 5: Train Loss: 2.3400, Train Acc: 0.4062, Val Loss: 2.0667, Val Acc: 0.5393
+2026-02-28 06:39:39,215 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 06:39:39,410 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 2.476542
+2026-02-28 06:39:42,422 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 6: Train Loss: 2.1135, Train Acc: 0.4576, Val Loss: 1.8318, Val Acc: 0.6067
+2026-02-28 06:39:42,538 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 06:39:42,734 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.896674
+2026-02-28 06:39:45,759 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 7: Train Loss: 1.8713, Train Acc: 0.5000, Val Loss: 1.6235, Val Acc: 0.6629
+2026-02-28 06:39:45,874 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 7
+2026-02-28 06:39:46,072 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.497508
+2026-02-28 06:39:49,083 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 8: Train Loss: 1.7191, Train Acc: 0.5290, Val Loss: 1.4493, Val Acc: 0.6629
+2026-02-28 06:39:49,357 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.504063
+2026-02-28 06:39:52,371 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 9: Train Loss: 1.5276, Train Acc: 0.5804, Val Loss: 1.3049, Val Acc: 0.6854
+2026-02-28 06:39:52,485 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 9
+2026-02-28 06:39:52,680 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.444538
+2026-02-28 06:39:55,688 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 10: Train Loss: 1.4058, Train Acc: 0.6496, Val Loss: 1.1777, Val Acc: 0.7753
+2026-02-28 06:39:55,803 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 06:39:56,024 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.384835
+2026-02-28 06:39:59,033 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 11: Train Loss: 1.2744, Train Acc: 0.6451, Val Loss: 1.0514, Val Acc: 0.7528
+2026-02-28 06:39:59,313 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.869241
+2026-02-28 06:40:02,303 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 12: Train Loss: 1.0944, Train Acc: 0.7455, Val Loss: 0.9063, Val Acc: 0.8764
+2026-02-28 06:40:02,417 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 12
+2026-02-28 06:40:02,610 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.982953
+2026-02-28 06:40:05,595 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 13: Train Loss: 1.0158, Train Acc: 0.7455, Val Loss: 0.8572, Val Acc: 0.8090
+2026-02-28 06:40:05,868 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.928492
+2026-02-28 06:40:08,858 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 14: Train Loss: 0.9211, Train Acc: 0.7790, Val Loss: 0.7483, Val Acc: 0.8427
+2026-02-28 06:40:09,136 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.957932
+2026-02-28 06:40:12,119 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 15: Train Loss: 0.7952, Train Acc: 0.8214, Val Loss: 0.6718, Val Acc: 0.8427
+2026-02-28 06:40:12,392 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.618533
+2026-02-28 06:40:15,376 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 16: Train Loss: 0.7579, Train Acc: 0.8058, Val Loss: 0.5785, Val Acc: 0.8764
+2026-02-28 06:40:15,647 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.885461
+2026-02-28 06:40:18,646 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 17: Train Loss: 0.7139, Train Acc: 0.8259, Val Loss: 0.5158, Val Acc: 0.9101
+2026-02-28 06:40:18,759 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 17
+2026-02-28 06:40:18,952 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.536127
+2026-02-28 06:40:21,935 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 18: Train Loss: 0.6197, Train Acc: 0.8460, Val Loss: 0.4692, Val Acc: 0.8989
+2026-02-28 06:40:22,207 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.586434
+2026-02-28 06:40:25,192 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 19: Train Loss: 0.5578, Train Acc: 0.8929, Val Loss: 0.4786, Val Acc: 0.8876
+2026-02-28 06:40:25,463 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.605457
+2026-02-28 06:40:28,445 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 20: Train Loss: 0.5302, Train Acc: 0.8728, Val Loss: 0.4195, Val Acc: 0.9101
+2026-02-28 06:40:28,743 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.647354
+2026-02-28 06:40:31,728 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 21: Train Loss: 0.4681, Train Acc: 0.8839, Val Loss: 0.3982, Val Acc: 0.9213
+2026-02-28 06:40:31,840 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 21
+2026-02-28 06:40:32,033 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.359600
+2026-02-28 06:40:35,024 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 22: Train Loss: 0.4335, Train Acc: 0.9129, Val Loss: 0.3348, Val Acc: 0.9213
+2026-02-28 06:40:35,305 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.420441
+2026-02-28 06:40:38,301 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 23: Train Loss: 0.4282, Train Acc: 0.9085, Val Loss: 0.2722, Val Acc: 0.9663
+2026-02-28 06:40:38,414 - experiment_baseline_mfcc_cnn_run_0 - INFO - Saved new best model at epoch 23
+2026-02-28 06:40:38,606 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.635658
+2026-02-28 06:40:41,588 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 24: Train Loss: 0.3636, Train Acc: 0.9330, Val Loss: 0.2817, Val Acc: 0.9438
+2026-02-28 06:40:41,860 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.381163
+2026-02-28 06:40:44,834 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 25: Train Loss: 0.3285, Train Acc: 0.9219, Val Loss: 0.3012, Val Acc: 0.9213
+2026-02-28 06:40:45,105 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.250336
+2026-02-28 06:40:48,084 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 26: Train Loss: 0.3311, Train Acc: 0.9330, Val Loss: 0.2370, Val Acc: 0.9438
+2026-02-28 06:40:48,355 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.365351
+2026-02-28 06:40:51,709 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 27: Train Loss: 0.2953, Train Acc: 0.9330, Val Loss: 0.2368, Val Acc: 0.9551
+2026-02-28 06:40:51,980 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.260298
+2026-02-28 06:40:54,961 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 28: Train Loss: 0.2678, Train Acc: 0.9487, Val Loss: 0.2388, Val Acc: 0.9213
+2026-02-28 06:40:55,233 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.290123
+2026-02-28 06:40:58,229 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 29: Train Loss: 0.2488, Train Acc: 0.9375, Val Loss: 0.2122, Val Acc: 0.9438
+2026-02-28 06:40:58,502 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.287916
+2026-02-28 06:41:01,484 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 30: Train Loss: 0.2450, Train Acc: 0.9576, Val Loss: 0.1994, Val Acc: 0.9551
+2026-02-28 06:41:01,782 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.197999
+2026-02-28 06:41:04,967 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 31: Train Loss: 0.2201, Train Acc: 0.9554, Val Loss: 0.1781, Val Acc: 0.9551
+2026-02-28 06:41:05,229 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.225444
+2026-02-28 06:41:08,315 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 32: Train Loss: 0.2486, Train Acc: 0.9353, Val Loss: 0.1923, Val Acc: 0.9551
+2026-02-28 06:41:08,595 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.176371
+2026-02-28 06:41:11,972 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 33: Train Loss: 0.1916, Train Acc: 0.9643, Val Loss: 0.2097, Val Acc: 0.9326
+2026-02-28 06:41:12,256 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.202949
+2026-02-28 06:41:15,229 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 34: Train Loss: 0.2018, Train Acc: 0.9554, Val Loss: 0.1888, Val Acc: 0.9326
+2026-02-28 06:41:15,503 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.117308
+2026-02-28 06:41:18,483 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 35: Train Loss: 0.1954, Train Acc: 0.9598, Val Loss: 0.1704, Val Acc: 0.9326
+2026-02-28 06:41:18,755 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.136429
+2026-02-28 06:41:21,732 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 36: Train Loss: 0.1786, Train Acc: 0.9598, Val Loss: 0.1688, Val Acc: 0.9326
+2026-02-28 06:41:22,003 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.141679
+2026-02-28 06:41:24,976 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 37: Train Loss: 0.1511, Train Acc: 0.9665, Val Loss: 0.1698, Val Acc: 0.9551
+2026-02-28 06:41:25,246 - experiment_baseline_mfcc_cnn_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.139851
+2026-02-28 06:41:28,224 - experiment_baseline_mfcc_cnn_run_0 - INFO - Epoch 38: Train Loss: 0.1856, Train Acc: 0.9621, Val Loss: 0.1733, Val Acc: 0.9438
+2026-02-28 06:41:28,313 - experiment_baseline_mfcc_cnn_run_0 - INFO - Early stopping triggered at epoch 38
+2026-02-28 06:41:28,319 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running final test evaluation...
+2026-02-28 06:41:29,111 - experiment_baseline_mfcc_cnn_run_0 - INFO - Test Results:
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   loss: 0.1113
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   accuracy: 0.9831
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_macro: 0.9840
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_macro: 0.9846
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_macro: 0.9825
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_weighted: 0.9866
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_weighted: 0.9831
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_weighted: 0.9831
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_0: 1.0000
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_0: 1.0000
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_0: 1.0000
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_1: 1.0000
+2026-02-28 06:41:29,112 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_1: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_1: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_2: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_2: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_2: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_3: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_3: 0.8000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_3: 0.8889
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_4: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_4: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_4: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_5: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_5: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_5: 1.0000
+2026-02-28 06:41:29,113 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_6: 0.7500
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_6: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_6: 0.8571
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_7: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_7: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_7: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_8: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_8: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_8: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_9: 0.8333
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_9: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_9: 0.9091
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_10: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_10: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_10: 1.0000
+2026-02-28 06:41:29,114 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_11: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_11: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_11: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_12: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_12: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_12: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_13: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_13: 0.8000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_13: 0.8889
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_14: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_14: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_14: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_15: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_15: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_15: 1.0000
+2026-02-28 06:41:29,115 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_16: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_16: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_16: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_17: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_17: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_17: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_18: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_18: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_18: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_19: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_19: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_19: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_20: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_20: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_20: 1.0000
+2026-02-28 06:41:29,116 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_21: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_21: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_21: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_22: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_22: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_22: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_23: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_23: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_23: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_24: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_24: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_24: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   precision_class_25: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   recall_class_25: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   f1_class_25: 1.0000
+2026-02-28 06:41:29,117 - experiment_baseline_mfcc_cnn_run_0 - INFO -   balanced_accuracy: 0.9846
+2026-02-28 06:41:29,119 - experiment_baseline_mfcc_cnn_run_0 - INFO - Training completed
+2026-02-28 06:41:29,815 - experiment_baseline_mfcc_cnn_run_0 - INFO - Running baseline analysis...
+2026-02-28 06:41:29,817 - experiment_baseline_mfcc_cnn_run_0 - INFO - Baseline analysis completed

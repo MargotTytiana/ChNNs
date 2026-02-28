@@ -1,0 +1,11 @@
+2026-02-28 05:24:25,059 - experiment_baseline_mel_cnn_run_0 - INFO - Initialized experiment: baseline_mel_cnn_run_0
+2026-02-28 05:24:25,060 - experiment_baseline_mel_cnn_run_0 - INFO - Device: cuda
+2026-02-28 05:24:25,060 - experiment_baseline_mel_cnn_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mel_cnn_run_0
+2026-02-28 05:24:25,060 - experiment_baseline_mel_cnn_run_0 - INFO - Initialized mel_cnn baseline experiment
+2026-02-28 05:24:25,060 - experiment_baseline_mel_cnn_run_0 - INFO - Setting up experiment components...
+2026-02-28 05:24:25,633 - experiment_baseline_mel_cnn_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2026-02-28 05:24:25,634 - experiment_baseline_mel_cnn_run_0 - INFO - FOUND FLAC FILES: 28539
+2026-02-28 05:24:26,286 - experiment_baseline_mel_cnn_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 05:24:26,287 - experiment_baseline_mel_cnn_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 05:24:26,287 - experiment_baseline_mel_cnn_run_0 - INFO - Total parameters: 185,380
+2026-02-28 05:24:26,287 - experiment_baseline_mel_cnn_run_0 - INFO - Trainable parameters: 185,380

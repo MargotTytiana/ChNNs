@@ -233,3 +233,467 @@
 2026-01-13 13:17:08,150 - experiment_baseline_mel_mlp_run_0 - INFO - Training completed
 2026-01-13 13:17:08,747 - experiment_baseline_mel_mlp_run_0 - INFO - Running baseline analysis...
 2026-01-13 13:17:08,749 - experiment_baseline_mel_mlp_run_0 - INFO - Baseline analysis completed
+2026-02-28 04:50:57,280 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2026-02-28 04:50:57,294 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2026-02-28 04:50:57,294 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/experiments/baseline_mel_mlp_run_0
+2026-02-28 04:50:57,294 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2026-02-28 04:50:57,294 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2026-02-28 04:50:57,327 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-02-28 04:50:57,327 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-02-28 04:50:58,069 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 04:50:58,069 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 04:50:58,069 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2026-02-28 04:50:58,069 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2026-02-28 04:50:58,457 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 04:50:58,489 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 04:50:58,515 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-02-28 04:50:58,831 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 04:50:58,899 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 04:50:58,989 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2026-02-28 04:50:58,990 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-02-28 04:50:59,379 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2026-02-28 04:50:59,379 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 14 batches
+2026-02-28 04:50:59,379 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 3 batches
+2026-02-28 04:50:59,379 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 4 batches
+2026-02-28 04:51:00,570 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2026-02-28 04:51:00,570 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2026-02-28 04:51:00,571 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 04:51:00,645 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/experiments/baseline_mel_mlp_run_0/config.json
+2026-02-28 04:51:00,645 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2026-02-28 04:51:00,645 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 04:51:00,676 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2026-02-28 04:51:00,676 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 04:51:00,676 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2026-02-28 04:51:00,676 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2026-02-28 04:51:00,677 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 04:51:00,677 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 04:51:00,680 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([22, 23, 21,  3, 19, 10,  3, 18], device='cuda:0')
+2026-02-28 04:51:01,113 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+
+2026-02-28 04:51:01,413 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.756074
+2026-02-28 04:51:04,026 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 0: Train Loss: 4.4244, Train Acc: 0.0759, Val Loss: 4.1571, Val Acc: 0.3483
+2026-02-28 04:51:04,222 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 04:51:04,400 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.042659
+2026-02-28 04:51:06,845 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 1: Train Loss: 3.7348, Train Acc: 0.2478, Val Loss: 3.4662, Val Acc: 0.5281
+2026-02-28 04:51:06,977 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 04:51:07,135 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 3.205643
+2026-02-28 04:51:09,591 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 2: Train Loss: 3.1344, Train Acc: 0.4420, Val Loss: 2.8992, Val Acc: 0.6517
+2026-02-28 04:51:09,697 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 04:51:09,853 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.864031
+2026-02-28 04:51:12,295 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 3: Train Loss: 2.6929, Train Acc: 0.5469, Val Loss: 2.4543, Val Acc: 0.7640
+2026-02-28 04:51:12,403 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 04:51:12,558 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 2.599771
+2026-02-28 04:51:15,001 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 4: Train Loss: 2.3341, Train Acc: 0.5982, Val Loss: 2.0655, Val Acc: 0.8090
+2026-02-28 04:51:15,107 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 04:51:15,262 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 1.843044
+2026-02-28 04:51:17,715 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 5: Train Loss: 1.9856, Train Acc: 0.7054, Val Loss: 1.8033, Val Acc: 0.8427
+2026-02-28 04:51:17,823 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 04:51:17,979 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.959361
+2026-02-28 04:51:20,435 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 6: Train Loss: 1.8062, Train Acc: 0.7210, Val Loss: 1.4780, Val Acc: 0.9101
+2026-02-28 04:51:20,542 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 04:51:20,704 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.719954
+2026-02-28 04:51:23,153 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 7: Train Loss: 1.5882, Train Acc: 0.7612, Val Loss: 1.2762, Val Acc: 0.9101
+2026-02-28 04:51:23,390 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.322170
+2026-02-28 04:51:25,831 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 8: Train Loss: 1.3720, Train Acc: 0.8170, Val Loss: 1.0907, Val Acc: 0.9326
+2026-02-28 04:51:25,938 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 8
+2026-02-28 04:51:26,095 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.429666
+2026-02-28 04:51:28,532 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 9: Train Loss: 1.2702, Train Acc: 0.8192, Val Loss: 0.9131, Val Acc: 0.9326
+2026-02-28 04:51:28,768 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.093966
+2026-02-28 04:51:31,210 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 10: Train Loss: 1.0827, Train Acc: 0.8326, Val Loss: 0.7663, Val Acc: 0.9551
+2026-02-28 04:51:31,320 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 04:51:31,500 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.255136
+2026-02-28 04:51:33,943 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 11: Train Loss: 1.0203, Train Acc: 0.8482, Val Loss: 0.6955, Val Acc: 0.9101
+2026-02-28 04:51:34,180 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.974729
+2026-02-28 04:51:36,618 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 12: Train Loss: 0.9372, Train Acc: 0.8482, Val Loss: 0.5928, Val Acc: 0.9663
+2026-02-28 04:51:36,726 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 12
+2026-02-28 04:51:36,881 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.649237
+2026-02-28 04:51:39,322 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 13: Train Loss: 0.8138, Train Acc: 0.8862, Val Loss: 0.5376, Val Acc: 0.9551
+2026-02-28 04:51:39,560 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.806526
+2026-02-28 04:51:42,012 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 14: Train Loss: 0.7888, Train Acc: 0.8839, Val Loss: 0.4634, Val Acc: 0.9775
+2026-02-28 04:51:42,119 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 14
+2026-02-28 04:51:42,276 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.800504
+2026-02-28 04:51:45,194 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 15: Train Loss: 0.6723, Train Acc: 0.9174, Val Loss: 0.4272, Val Acc: 0.9663
+2026-02-28 04:51:45,435 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.658619
+2026-02-28 04:51:47,890 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 16: Train Loss: 0.6058, Train Acc: 0.9263, Val Loss: 0.3604, Val Acc: 0.9775
+2026-02-28 04:51:48,131 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.544666
+2026-02-28 04:51:50,583 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 17: Train Loss: 0.5526, Train Acc: 0.9442, Val Loss: 0.3706, Val Acc: 0.9551
+2026-02-28 04:51:50,821 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.379083
+2026-02-28 04:51:53,290 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 18: Train Loss: 0.5606, Train Acc: 0.9174, Val Loss: 0.3097, Val Acc: 0.9888
+2026-02-28 04:51:53,399 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 18
+2026-02-28 04:51:53,557 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.806385
+2026-02-28 04:51:56,012 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 19: Train Loss: 0.4969, Train Acc: 0.9241, Val Loss: 0.2815, Val Acc: 0.9663
+2026-02-28 04:51:56,253 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.386036
+2026-02-28 04:51:58,699 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 20: Train Loss: 0.4487, Train Acc: 0.9442, Val Loss: 0.2479, Val Acc: 0.9888
+2026-02-28 04:51:58,954 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.533409
+2026-02-28 04:52:01,398 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 21: Train Loss: 0.4823, Train Acc: 0.9174, Val Loss: 0.2541, Val Acc: 0.9663
+2026-02-28 04:52:01,643 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.433800
+2026-02-28 04:52:04,105 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 22: Train Loss: 0.3963, Train Acc: 0.9375, Val Loss: 0.2043, Val Acc: 0.9888
+2026-02-28 04:52:04,343 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.237429
+2026-02-28 04:52:06,797 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 23: Train Loss: 0.4097, Train Acc: 0.9241, Val Loss: 0.1857, Val Acc: 0.9663
+2026-02-28 04:52:07,036 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.327313
+2026-02-28 04:52:09,481 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 24: Train Loss: 0.3650, Train Acc: 0.9375, Val Loss: 0.1644, Val Acc: 1.0000
+2026-02-28 04:52:09,588 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 24
+2026-02-28 04:52:09,745 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.362282
+2026-02-28 04:52:12,202 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 25: Train Loss: 0.3623, Train Acc: 0.9397, Val Loss: 0.1929, Val Acc: 0.9663
+2026-02-28 04:52:12,440 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.319984
+2026-02-28 04:52:14,905 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 26: Train Loss: 0.3395, Train Acc: 0.9464, Val Loss: 0.1393, Val Acc: 0.9888
+2026-02-28 04:52:15,142 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.342739
+2026-02-28 04:52:17,607 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 27: Train Loss: 0.3345, Train Acc: 0.9353, Val Loss: 0.1410, Val Acc: 0.9663
+2026-02-28 04:52:17,844 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.254823
+2026-02-28 04:52:20,294 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 28: Train Loss: 0.3702, Train Acc: 0.9286, Val Loss: 0.1606, Val Acc: 0.9775
+2026-02-28 04:52:20,535 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.223762
+2026-02-28 04:52:22,990 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 29: Train Loss: 0.3420, Train Acc: 0.9286, Val Loss: 0.0966, Val Acc: 1.0000
+2026-02-28 04:52:23,227 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.457189
+2026-02-28 04:52:25,702 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 30: Train Loss: 0.2934, Train Acc: 0.9420, Val Loss: 0.1082, Val Acc: 0.9888
+2026-02-28 04:52:25,954 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.213290
+2026-02-28 04:52:28,420 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 31: Train Loss: 0.2254, Train Acc: 0.9710, Val Loss: 0.1250, Val Acc: 0.9888
+2026-02-28 04:52:28,660 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.169209
+2026-02-28 04:52:31,126 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 32: Train Loss: 0.2826, Train Acc: 0.9621, Val Loss: 0.0788, Val Acc: 1.0000
+2026-02-28 04:52:31,373 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.305099
+2026-02-28 04:52:33,818 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 33: Train Loss: 0.2580, Train Acc: 0.9531, Val Loss: 0.0767, Val Acc: 1.0000
+2026-02-28 04:52:34,057 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.202717
+2026-02-28 04:52:36,498 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 34: Train Loss: 0.2156, Train Acc: 0.9710, Val Loss: 0.1107, Val Acc: 0.9888
+2026-02-28 04:52:36,736 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.169062
+2026-02-28 04:52:39,213 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 35: Train Loss: 0.2210, Train Acc: 0.9688, Val Loss: 0.0945, Val Acc: 0.9775
+2026-02-28 04:52:39,452 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.274964
+2026-02-28 04:52:41,927 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 36: Train Loss: 0.2203, Train Acc: 0.9598, Val Loss: 0.0639, Val Acc: 1.0000
+2026-02-28 04:52:42,165 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.351930
+2026-02-28 04:52:44,631 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 37: Train Loss: 0.2188, Train Acc: 0.9754, Val Loss: 0.0832, Val Acc: 0.9888
+2026-02-28 04:52:44,870 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.155772
+2026-02-28 04:52:47,334 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 38: Train Loss: 0.1772, Train Acc: 0.9732, Val Loss: 0.0801, Val Acc: 0.9775
+2026-02-28 04:52:47,574 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.094697
+2026-02-28 04:52:50,085 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 39: Train Loss: 0.1756, Train Acc: 0.9821, Val Loss: 0.0750, Val Acc: 0.9888
+2026-02-28 04:52:50,177 - experiment_baseline_mel_mlp_run_0 - INFO - Early stopping triggered at epoch 39
+2026-02-28 04:52:50,195 - experiment_baseline_mel_mlp_run_0 - INFO - Running final test evaluation...
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO - Test Results:
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   loss: 0.0527
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   accuracy: 1.0000
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_macro: 1.0000
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_macro: 1.0000
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_macro: 1.0000
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_weighted: 1.0000
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_weighted: 1.0000
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_weighted: 1.0000
+2026-02-28 04:52:50,888 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_0: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_0: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_0: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_1: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_1: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_1: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_2: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_2: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_2: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_3: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_3: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_3: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_4: 1.0000
+2026-02-28 04:52:50,889 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_4: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_4: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_5: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_5: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_5: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_6: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_6: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_6: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_7: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_7: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_7: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_8: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_8: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_8: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_9: 1.0000
+2026-02-28 04:52:50,890 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_9: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_9: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_10: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_10: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_10: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_11: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_11: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_11: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_12: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_12: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_12: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_13: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_13: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_13: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_14: 1.0000
+2026-02-28 04:52:50,891 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_14: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_14: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_15: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_15: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_15: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_16: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_16: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_16: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_17: 1.0000
+2026-02-28 04:52:50,892 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_17: 1.0000
+2026-02-28 04:52:50,893 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_17: 1.0000
+2026-02-28 04:52:50,893 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_18: 1.0000
+2026-02-28 04:52:50,893 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_18: 1.0000
+2026-02-28 04:52:50,893 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_18: 1.0000
+2026-02-28 04:52:50,893 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_19: 1.0000
+2026-02-28 04:52:50,893 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_19: 1.0000
+2026-02-28 04:52:50,893 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_19: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_20: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_20: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_20: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_21: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_21: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_21: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_22: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_22: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_22: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_23: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_23: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_23: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_24: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_24: 1.0000
+2026-02-28 04:52:50,894 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_24: 1.0000
+2026-02-28 04:52:50,895 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_25: 1.0000
+2026-02-28 04:52:50,895 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_25: 1.0000
+2026-02-28 04:52:50,895 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_25: 1.0000
+2026-02-28 04:52:50,895 - experiment_baseline_mel_mlp_run_0 - INFO -   balanced_accuracy: 1.0000
+2026-02-28 04:52:50,897 - experiment_baseline_mel_mlp_run_0 - INFO - Training completed
+2026-02-28 04:52:51,475 - experiment_baseline_mel_mlp_run_0 - INFO - Running baseline analysis...
+2026-02-28 04:52:51,493 - experiment_baseline_mel_mlp_run_0 - INFO - Baseline analysis completed
+2026-02-28 06:19:04,420 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized experiment: baseline_mel_mlp_run_0
+2026-02-28 06:19:04,420 - experiment_baseline_mel_mlp_run_0 - INFO - Device: cuda
+2026-02-28 06:19:04,420 - experiment_baseline_mel_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/experiments/baseline_mel_mlp_run_0
+2026-02-28 06:19:04,420 - experiment_baseline_mel_mlp_run_0 - INFO - Initialized mel_mlp baseline experiment
+2026-02-28 06:19:04,420 - experiment_baseline_mel_mlp_run_0 - INFO - Setting up experiment components...
+2026-02-28 06:19:04,453 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/mini_librispeech/LibriSpeech/dev-clean-2
+2026-02-28 06:19:04,454 - experiment_baseline_mel_mlp_run_0 - INFO - FOUND FLAC FILES: 1089
+2026-02-28 06:19:05,196 - experiment_baseline_mel_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 06:19:05,197 - experiment_baseline_mel_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 06:19:05,197 - experiment_baseline_mel_mlp_run_0 - INFO - Total parameters: 69,284
+2026-02-28 06:19:05,197 - experiment_baseline_mel_mlp_run_0 - INFO - Trainable parameters: 69,284
+2026-02-28 06:19:05,616 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning Every Data to verify the real Label Range...
+2026-02-28 06:19:06,014 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Training Dataset...
+2026-02-28 06:19:06,409 - experiment_baseline_mel_mlp_run_0 - INFO - Finish Scan 1 batch, current label range: 0-24
+2026-02-28 06:19:11,416 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Val Dataset...
+2026-02-28 06:19:12,402 - experiment_baseline_mel_mlp_run_0 - INFO - Scanning the Test Dataset...
+2026-02-28 06:19:13,730 - experiment_baseline_mel_mlp_run_0 - INFO - ===== Dataset Labels Analysis =====
+2026-02-28 06:19:13,730 - experiment_baseline_mel_mlp_run_0 - INFO - INPUT SHAPE: torch.Size([32, 48000])
+2026-02-28 06:19:13,730 - experiment_baseline_mel_mlp_run_0 - INFO - LABEL RANGE: 0 to 25
+2026-02-28 06:19:13,730 - experiment_baseline_mel_mlp_run_0 - INFO - ACTUAL SPEAKERS: 26
+2026-02-28 06:19:13,730 - experiment_baseline_mel_mlp_run_0 - INFO - UNIQUE LABEL NUMBER: 26
+2026-02-28 06:19:13,731 - experiment_baseline_mel_mlp_run_0 - INFO - SPEAKER NUMBER IN CONFIG: 100
+2026-02-28 06:19:13,731 - experiment_baseline_mel_mlp_run_0 - INFO - BASELINE TYPE: mel_mlp
+2026-02-28 06:19:13,731 - experiment_baseline_mel_mlp_run_0 - WARNING - Detect original dataset: torch.Size([32, 48000])，but baseline type is mel_mlp
+2026-02-28 06:19:13,731 - experiment_baseline_mel_mlp_run_0 - WARNING - Probably will lead to dim unmatch，model will auto-fit in
+2026-02-28 06:19:13,731 - experiment_baseline_mel_mlp_run_0 - INFO - ✅ FALL LABEL RANGE VERIFICATION PASS: [0, 25] in 100 category
+2026-02-28 06:19:14,121 - experiment_baseline_mel_mlp_run_0 - INFO - Dataloaders created:
+2026-02-28 06:19:14,121 - experiment_baseline_mel_mlp_run_0 - INFO -   Train: 14 batches
+2026-02-28 06:19:14,121 - experiment_baseline_mel_mlp_run_0 - INFO -   Val: 3 batches
+2026-02-28 06:19:14,121 - experiment_baseline_mel_mlp_run_0 - INFO -   Test: 4 batches
+2026-02-28 06:19:15,445 - experiment_baseline_mel_mlp_run_0 - INFO - Optimizer: Adam
+2026-02-28 06:19:15,445 - experiment_baseline_mel_mlp_run_0 - INFO - Scheduler: StepLR
+2026-02-28 06:19:15,445 - experiment_baseline_mel_mlp_run_0 - INFO - Criterion: CrossEntropyLoss
+2026-02-28 06:19:15,516 - experiment_baseline_mel_mlp_run_0 - INFO - Configuration saved to: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mel_mlp/experiments/baseline_mel_mlp_run_0/config.json
+2026-02-28 06:19:15,517 - experiment_baseline_mel_mlp_run_0 - INFO - Experiment setup completed
+2026-02-28 06:19:15,517 - experiment_baseline_mel_mlp_run_0 - INFO - Starting training for 100 epochs
+2026-02-28 06:19:15,603 - experiment_baseline_mel_mlp_run_0 - INFO - 
+================================================================================
+2026-02-28 06:19:15,603 - experiment_baseline_mel_mlp_run_0 - INFO - COMPREHENSIVE DEBUG - FIRST BATCH
+2026-02-28 06:19:15,603 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+2026-02-28 06:19:15,603 - experiment_baseline_mel_mlp_run_0 - INFO - Batch Info:
+2026-02-28 06:19:15,603 - experiment_baseline_mel_mlp_run_0 - INFO -   Audio shape: torch.Size([32, 48000])
+2026-02-28 06:19:15,603 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets shape: torch.Size([32])
+2026-02-28 06:19:15,606 - experiment_baseline_mel_mlp_run_0 - INFO -   Targets (first 8): tensor([22, 23, 21,  3, 19, 10,  3, 18], device='cuda:0')
+2026-02-28 06:19:16,043 - experiment_baseline_mel_mlp_run_0 - INFO - ================================================================================
+
+2026-02-28 06:19:16,345 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 0: [0/472 (0.0%)]	Loss: 4.756074
+2026-02-28 06:19:19,437 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 0: Train Loss: 4.4244, Train Acc: 0.0759, Val Loss: 4.1571, Val Acc: 0.3483
+2026-02-28 06:19:19,667 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 0
+2026-02-28 06:19:19,901 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 1: [0/472 (0.0%)]	Loss: 4.042659
+2026-02-28 06:19:22,801 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 1: Train Loss: 3.7348, Train Acc: 0.2478, Val Loss: 3.4662, Val Acc: 0.5281
+2026-02-28 06:19:22,957 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 1
+2026-02-28 06:19:23,116 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 2: [0/472 (0.0%)]	Loss: 3.205643
+2026-02-28 06:19:25,635 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 2: Train Loss: 3.1344, Train Acc: 0.4420, Val Loss: 2.8992, Val Acc: 0.6517
+2026-02-28 06:19:25,761 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 2
+2026-02-28 06:19:25,917 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 3: [0/472 (0.0%)]	Loss: 2.864031
+2026-02-28 06:19:28,402 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 3: Train Loss: 2.6929, Train Acc: 0.5469, Val Loss: 2.4543, Val Acc: 0.7640
+2026-02-28 06:19:28,529 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 3
+2026-02-28 06:19:28,687 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 4: [0/472 (0.0%)]	Loss: 2.599771
+2026-02-28 06:19:31,165 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 4: Train Loss: 2.3341, Train Acc: 0.5982, Val Loss: 2.0655, Val Acc: 0.8090
+2026-02-28 06:19:31,289 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 4
+2026-02-28 06:19:31,446 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 5: [0/472 (0.0%)]	Loss: 1.843044
+2026-02-28 06:19:33,906 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 5: Train Loss: 1.9856, Train Acc: 0.7054, Val Loss: 1.8033, Val Acc: 0.8427
+2026-02-28 06:19:34,031 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 5
+2026-02-28 06:19:34,187 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 6: [0/472 (0.0%)]	Loss: 1.959361
+2026-02-28 06:19:36,647 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 6: Train Loss: 1.8062, Train Acc: 0.7210, Val Loss: 1.4780, Val Acc: 0.9101
+2026-02-28 06:19:36,771 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 6
+2026-02-28 06:19:36,928 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 7: [0/472 (0.0%)]	Loss: 1.719954
+2026-02-28 06:19:39,389 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 7: Train Loss: 1.5882, Train Acc: 0.7612, Val Loss: 1.2762, Val Acc: 0.9101
+2026-02-28 06:19:39,646 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 8: [0/472 (0.0%)]	Loss: 1.322170
+2026-02-28 06:19:42,111 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 8: Train Loss: 1.3720, Train Acc: 0.8170, Val Loss: 1.0907, Val Acc: 0.9326
+2026-02-28 06:19:42,236 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 8
+2026-02-28 06:19:42,394 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 9: [0/472 (0.0%)]	Loss: 1.429666
+2026-02-28 06:19:44,859 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 9: Train Loss: 1.2702, Train Acc: 0.8192, Val Loss: 0.9131, Val Acc: 0.9326
+2026-02-28 06:19:45,114 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 10: [0/472 (0.0%)]	Loss: 1.093966
+2026-02-28 06:19:47,575 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 10: Train Loss: 1.0827, Train Acc: 0.8326, Val Loss: 0.7663, Val Acc: 0.9551
+2026-02-28 06:19:47,700 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 10
+2026-02-28 06:19:47,880 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 11: [0/472 (0.0%)]	Loss: 1.255136
+2026-02-28 06:19:50,349 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 11: Train Loss: 1.0203, Train Acc: 0.8482, Val Loss: 0.6955, Val Acc: 0.9101
+2026-02-28 06:19:50,607 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 12: [0/472 (0.0%)]	Loss: 0.974729
+2026-02-28 06:19:53,078 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 12: Train Loss: 0.9372, Train Acc: 0.8482, Val Loss: 0.5928, Val Acc: 0.9663
+2026-02-28 06:19:53,203 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 12
+2026-02-28 06:19:53,360 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 13: [0/472 (0.0%)]	Loss: 0.649237
+2026-02-28 06:19:55,821 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 13: Train Loss: 0.8138, Train Acc: 0.8862, Val Loss: 0.5376, Val Acc: 0.9551
+2026-02-28 06:19:56,077 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 14: [0/472 (0.0%)]	Loss: 0.806526
+2026-02-28 06:19:58,543 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 14: Train Loss: 0.7888, Train Acc: 0.8839, Val Loss: 0.4634, Val Acc: 0.9775
+2026-02-28 06:19:58,668 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 14
+2026-02-28 06:19:58,824 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 15: [0/472 (0.0%)]	Loss: 0.800504
+2026-02-28 06:20:01,291 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 15: Train Loss: 0.6723, Train Acc: 0.9174, Val Loss: 0.4272, Val Acc: 0.9663
+2026-02-28 06:20:01,548 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 16: [0/472 (0.0%)]	Loss: 0.658619
+2026-02-28 06:20:04,045 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 16: Train Loss: 0.6058, Train Acc: 0.9263, Val Loss: 0.3604, Val Acc: 0.9775
+2026-02-28 06:20:04,301 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 17: [0/472 (0.0%)]	Loss: 0.544666
+2026-02-28 06:20:06,799 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 17: Train Loss: 0.5526, Train Acc: 0.9442, Val Loss: 0.3706, Val Acc: 0.9551
+2026-02-28 06:20:07,057 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 18: [0/472 (0.0%)]	Loss: 0.379083
+2026-02-28 06:20:09,522 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 18: Train Loss: 0.5606, Train Acc: 0.9174, Val Loss: 0.3097, Val Acc: 0.9888
+2026-02-28 06:20:09,649 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 18
+2026-02-28 06:20:09,808 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 19: [0/472 (0.0%)]	Loss: 0.806385
+2026-02-28 06:20:12,281 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 19: Train Loss: 0.4969, Train Acc: 0.9241, Val Loss: 0.2815, Val Acc: 0.9663
+2026-02-28 06:20:12,539 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 20: [0/472 (0.0%)]	Loss: 0.386036
+2026-02-28 06:20:15,003 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 20: Train Loss: 0.4487, Train Acc: 0.9442, Val Loss: 0.2479, Val Acc: 0.9888
+2026-02-28 06:20:15,279 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 21: [0/472 (0.0%)]	Loss: 0.533409
+2026-02-28 06:20:17,754 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 21: Train Loss: 0.4823, Train Acc: 0.9174, Val Loss: 0.2541, Val Acc: 0.9663
+2026-02-28 06:20:18,019 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 22: [0/472 (0.0%)]	Loss: 0.433800
+2026-02-28 06:20:20,479 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 22: Train Loss: 0.3963, Train Acc: 0.9375, Val Loss: 0.2043, Val Acc: 0.9888
+2026-02-28 06:20:20,738 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 23: [0/472 (0.0%)]	Loss: 0.237429
+2026-02-28 06:20:23,205 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 23: Train Loss: 0.4097, Train Acc: 0.9241, Val Loss: 0.1857, Val Acc: 0.9663
+2026-02-28 06:20:23,463 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 24: [0/472 (0.0%)]	Loss: 0.327313
+2026-02-28 06:20:25,958 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 24: Train Loss: 0.3650, Train Acc: 0.9375, Val Loss: 0.1644, Val Acc: 1.0000
+2026-02-28 06:20:26,083 - experiment_baseline_mel_mlp_run_0 - INFO - Saved new best model at epoch 24
+2026-02-28 06:20:26,240 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 25: [0/472 (0.0%)]	Loss: 0.362282
+2026-02-28 06:20:28,709 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 25: Train Loss: 0.3623, Train Acc: 0.9397, Val Loss: 0.1929, Val Acc: 0.9663
+2026-02-28 06:20:28,965 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 26: [0/472 (0.0%)]	Loss: 0.319984
+2026-02-28 06:20:31,435 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 26: Train Loss: 0.3395, Train Acc: 0.9464, Val Loss: 0.1393, Val Acc: 0.9888
+2026-02-28 06:20:31,691 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 27: [0/472 (0.0%)]	Loss: 0.342739
+2026-02-28 06:20:34,169 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 27: Train Loss: 0.3345, Train Acc: 0.9353, Val Loss: 0.1410, Val Acc: 0.9663
+2026-02-28 06:20:34,427 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 28: [0/472 (0.0%)]	Loss: 0.254823
+2026-02-28 06:20:36,891 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 28: Train Loss: 0.3702, Train Acc: 0.9286, Val Loss: 0.1606, Val Acc: 0.9775
+2026-02-28 06:20:37,148 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 29: [0/472 (0.0%)]	Loss: 0.223762
+2026-02-28 06:20:39,604 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 29: Train Loss: 0.3420, Train Acc: 0.9286, Val Loss: 0.0966, Val Acc: 1.0000
+2026-02-28 06:20:39,859 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 30: [0/472 (0.0%)]	Loss: 0.457189
+2026-02-28 06:20:42,332 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 30: Train Loss: 0.2934, Train Acc: 0.9420, Val Loss: 0.1082, Val Acc: 0.9888
+2026-02-28 06:20:42,609 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 31: [0/472 (0.0%)]	Loss: 0.213290
+2026-02-28 06:20:45,080 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 31: Train Loss: 0.2254, Train Acc: 0.9710, Val Loss: 0.1250, Val Acc: 0.9888
+2026-02-28 06:20:45,340 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 32: [0/472 (0.0%)]	Loss: 0.169209
+2026-02-28 06:20:47,801 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 32: Train Loss: 0.2826, Train Acc: 0.9621, Val Loss: 0.0788, Val Acc: 1.0000
+2026-02-28 06:20:48,066 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 33: [0/472 (0.0%)]	Loss: 0.305099
+2026-02-28 06:20:50,529 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 33: Train Loss: 0.2580, Train Acc: 0.9531, Val Loss: 0.0767, Val Acc: 1.0000
+2026-02-28 06:20:50,789 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 34: [0/472 (0.0%)]	Loss: 0.202717
+2026-02-28 06:20:53,248 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 34: Train Loss: 0.2156, Train Acc: 0.9710, Val Loss: 0.1107, Val Acc: 0.9888
+2026-02-28 06:20:53,505 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 35: [0/472 (0.0%)]	Loss: 0.169062
+2026-02-28 06:20:55,964 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 35: Train Loss: 0.2210, Train Acc: 0.9688, Val Loss: 0.0945, Val Acc: 0.9775
+2026-02-28 06:20:56,222 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 36: [0/472 (0.0%)]	Loss: 0.274964
+2026-02-28 06:20:58,692 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 36: Train Loss: 0.2203, Train Acc: 0.9598, Val Loss: 0.0639, Val Acc: 1.0000
+2026-02-28 06:20:58,948 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 37: [0/472 (0.0%)]	Loss: 0.351930
+2026-02-28 06:21:01,431 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 37: Train Loss: 0.2188, Train Acc: 0.9754, Val Loss: 0.0832, Val Acc: 0.9888
+2026-02-28 06:21:01,686 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 38: [0/472 (0.0%)]	Loss: 0.155772
+2026-02-28 06:21:04,158 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 38: Train Loss: 0.1772, Train Acc: 0.9732, Val Loss: 0.0801, Val Acc: 0.9775
+2026-02-28 06:21:04,414 - experiment_baseline_mel_mlp_run_0 - INFO - Train Epoch 39: [0/472 (0.0%)]	Loss: 0.094697
+2026-02-28 06:21:06,897 - experiment_baseline_mel_mlp_run_0 - INFO - Epoch 39: Train Loss: 0.1756, Train Acc: 0.9821, Val Loss: 0.0750, Val Acc: 0.9888
+2026-02-28 06:21:07,006 - experiment_baseline_mel_mlp_run_0 - INFO - Early stopping triggered at epoch 39
+2026-02-28 06:21:07,013 - experiment_baseline_mel_mlp_run_0 - INFO - Running final test evaluation...
+2026-02-28 06:21:07,799 - experiment_baseline_mel_mlp_run_0 - INFO - Test Results:
+2026-02-28 06:21:07,799 - experiment_baseline_mel_mlp_run_0 - INFO -   loss: 0.0527
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   accuracy: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_macro: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_macro: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_macro: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_weighted: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_weighted: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_weighted: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_0: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_0: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_0: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_1: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_1: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_1: 1.0000
+2026-02-28 06:21:07,800 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_2: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_2: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_2: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_3: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_3: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_3: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_4: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_4: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_4: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_5: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_5: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_5: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_6: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_6: 1.0000
+2026-02-28 06:21:07,801 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_6: 1.0000
+2026-02-28 06:21:07,802 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_7: 1.0000
+2026-02-28 06:21:07,802 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_7: 1.0000
+2026-02-28 06:21:07,802 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_7: 1.0000
+2026-02-28 06:21:07,802 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_8: 1.0000
+2026-02-28 06:21:07,802 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_8: 1.0000
+2026-02-28 06:21:07,802 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_8: 1.0000
+2026-02-28 06:21:07,802 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_9: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_9: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_9: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_10: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_10: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_10: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_11: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_11: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_11: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_12: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_12: 1.0000
+2026-02-28 06:21:07,803 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_12: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_13: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_13: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_13: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_14: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_14: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_14: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_15: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_15: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_15: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_16: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_16: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_16: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_17: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_17: 1.0000
+2026-02-28 06:21:07,804 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_17: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_18: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_18: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_18: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_19: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_19: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_19: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_20: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_20: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_20: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_21: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_21: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_21: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_22: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_22: 1.0000
+2026-02-28 06:21:07,805 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_22: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_23: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_23: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_23: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_24: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_24: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_24: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   precision_class_25: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   recall_class_25: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   f1_class_25: 1.0000
+2026-02-28 06:21:07,806 - experiment_baseline_mel_mlp_run_0 - INFO -   balanced_accuracy: 1.0000
+2026-02-28 06:21:07,808 - experiment_baseline_mel_mlp_run_0 - INFO - Training completed
+2026-02-28 06:21:08,389 - experiment_baseline_mel_mlp_run_0 - INFO - Running baseline analysis...
+2026-02-28 06:21:08,391 - experiment_baseline_mel_mlp_run_0 - INFO - Baseline analysis completed

@@ -1,0 +1,11 @@
+2026-02-28 05:24:56,588 - experiment_baseline_mfcc_mlp_run_0 - INFO - Initialized experiment: baseline_mfcc_mlp_run_0
+2026-02-28 05:24:56,589 - experiment_baseline_mfcc_mlp_run_0 - INFO - Device: cuda
+2026-02-28 05:24:56,589 - experiment_baseline_mfcc_mlp_run_0 - INFO - Output directory: /scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/experiments/baseline_mfcc_mlp_run_0
+2026-02-28 05:24:56,589 - experiment_baseline_mfcc_mlp_run_0 - INFO - Initialized mfcc_mlp baseline experiment
+2026-02-28 05:24:56,589 - experiment_baseline_mfcc_mlp_run_0 - INFO - Setting up experiment components...
+2026-02-28 05:24:57,179 - experiment_baseline_mfcc_mlp_run_0 - INFO - ✅ DATA PATH VARIFICATION SUCCESS: /scratch/project_2003370/yueyao/dataset/train-clean-100/LibriSpeech/train-clean-100
+2026-02-28 05:24:57,180 - experiment_baseline_mfcc_mlp_run_0 - INFO - FOUND FLAC FILES: 28539
+2026-02-28 05:24:57,288 - experiment_baseline_mfcc_mlp_run_0 - ERROR - Model device mismatch: cuda:0 vs cuda
+2026-02-28 05:24:57,288 - experiment_baseline_mfcc_mlp_run_0 - INFO - Model created and moved to device: cuda:0
+2026-02-28 05:24:57,288 - experiment_baseline_mfcc_mlp_run_0 - INFO - Total parameters: 15,876
+2026-02-28 05:24:57,288 - experiment_baseline_mfcc_mlp_run_0 - INFO - Trainable parameters: 15,876

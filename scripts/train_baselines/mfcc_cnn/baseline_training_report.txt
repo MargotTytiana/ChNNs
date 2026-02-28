@@ -1,6 +1,6 @@
 BASELINE MODELS TRAINING REPORT
 ==================================================
-Generated: 2026-01-13 14:28:34
+Generated: 2026-02-28 06:41:29
 Configuration: {
   "num_speakers": 100,
   "batch_size": 32,
@@ -40,21 +40,19 @@ Configuration: {
 
 SUMMARY STATISTICS
 --------------------
-Total experiments: 1
-Successful experiments: 1
-Failed experiments: 0
-Total training time: 167.7s (0.05h)
+Total experiments: 0
+Successful experiments: 0
+Failed experiments: 1
+Total training time: 0.0s (0.00h)
 
 METHOD RESULTS
 ---------------
 
-MFCC_CNN:
-  Accuracy: 0.9831 ± 0.0000 [nan, nan]
-  Loss: 0.1113 ± 0.0000
-  Training Time: 167.7s ± 0.0s
-  Number of runs: 1
-
 BEST METHODS
 ------------
-Best Accuracy: mfcc_cnn (0.9831)
-Most Efficient: mfcc_cnn (167.7s)
+FAILED EXPERIMENTS
+------------------
+Method: mfcc_cnn, Run: 0
+Error: invalid literal for int() with base 10: '/scratch/project_2003370/yueyao/Model/scripts/train_baselines/mfcc_cnn/models/mfcc_cnn_run_0.pth'
+Time: 2026-02-28T06:41:29.818761
+
