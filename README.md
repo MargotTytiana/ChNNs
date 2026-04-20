@@ -660,12 +660,12 @@ Experiments were run on **CSC Mahti** (NVIDIA A100-SXM4-40GB, CUDA 12.6, PyTorch
 If you use ChaoNet in your research, please cite:
 
 ```bibtex
-@mastersthesis{tian2025chaonet,
+@mastersthesis{tian2026chaonet,
   author    = {Tian, Yueyao},
   title     = {{ChaoNet}: Chaotic Hierarchical Network for Speaker Recognition},
   school    = {Tampere University},
-  year      = {2025},
-  month     = {December},
+  year      = {2026},
+  month     = {March},
 }
 ```
 
